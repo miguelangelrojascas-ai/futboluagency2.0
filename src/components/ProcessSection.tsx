@@ -1,69 +1,126 @@
-import { ClipboardCheck, UserCircle, Send } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ClipboardCheck, Video, Users, Trophy } from "lucide-react";
+
+const steps = [
+  {
+    icon: ClipboardCheck,
+    title: "Evaluación Inicial",
+    description: "Analizamos tu perfil deportivo y académico para identificar las mejores oportunidades.",
+  },
+  {
+    icon: Video,
+    title: "Preparación de Material",
+    description: "Creamos tu video destacado y perfil profesional que impresionará a los entrenadores.",
+  },
+  {
+    icon: Users,
+    title: "Contacto con Universidades",
+    description: "Nos comunicamos directamente con entrenadores y coordinadores de admisiones.",
+  },
+  {
+    icon: Trophy,
+    title: "Aceptación y Beca",
+    description: "Te guiamos hasta obtener tu oferta oficial y comenzar tu aventura universitaria.",
+  },
+];
 
 const ProcessSection = () => {
-  const steps = [
-    {
-      number: "01",
-      icon: ClipboardCheck,
-      title: "Aplicación y Evaluación",
-      description: "Analizamos tu perfil deportivo y académico de forma gratuita.",
-    },
-    {
-      number: "02",
-      icon: UserCircle,
-      title: "Preparación y Perfil Deportivo",
-      description: "Desarrollamos tu perfil profesional y video de highlights.",
-    },
-    {
-      number: "03",
-      icon: Send,
-      title: "Contacto con Universidades y Becas",
-      description: "Contactamos entrenadores en universidades que encajen contigo.",
-    },
-  ];
+  const [activeStep, setActiveStep] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      stepsRef.current.forEach((stepEl, index) => {
+        if (!stepEl) return;
+        const rect = stepEl.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        
+        if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+          setActiveStep(index);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <section className="section-padding bg-background">
-      <div className="container-wide">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-primary font-body text-sm tracking-[0.2em] uppercase mb-4 block">
-            Nuestro Proceso
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold">
-            Cómo <span className="text-primary italic">funciona</span>
-          </h2>
-        </div>
+    <section ref={sectionRef} className="relative bg-background">
+      {/* Warm gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5 pointer-events-none" />
 
-        {/* Steps */}
-        <div className="max-w-4xl mx-auto space-y-8">
-          {steps.map((step, index) => (
-            <div
-              key={step.number}
-              className="flex items-start gap-6 md:gap-10 p-6 rounded-xl border border-border bg-card/30 hover:bg-card/50 transition-colors animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              {/* Number */}
-              <div className="flex-shrink-0">
-                <span className="font-display text-4xl md:text-5xl font-bold text-primary/30 italic">
-                  {step.number}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <step.icon className="w-5 h-5 text-secondary" />
-                  <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground">
-                    {step.title}
-                  </h3>
-                </div>
+      <div className="container-wide relative">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+          {/* Sticky Title Card */}
+          <div className="lg:w-[380px] lg:flex-shrink-0">
+            <div className="lg:sticky lg:top-32">
+              <div className="rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm p-8 text-center">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-primary italic mb-3">
+                  Así es como funciona
+                </h2>
                 <p className="font-body text-muted-foreground">
-                  {step.description}
+                  Nuestro Proceso para conseguir tu Beca Deportiva
                 </p>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Timeline */}
+          <div className="flex-1 py-16 lg:py-32">
+            <div className="relative">
+              {/* Vertical Line */}
+              <div className="absolute left-6 lg:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
+
+              {/* Steps */}
+              <div className="space-y-32 lg:space-y-48">
+                {steps.map((step, index) => (
+                  <div
+                    key={index}
+                    ref={(el) => (stepsRef.current[index] = el)}
+                    className="relative flex gap-8 lg:gap-12"
+                  >
+                    {/* Icon on Timeline */}
+                    <div className="relative z-10 flex-shrink-0">
+                      <div
+                        className={`w-12 h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                          activeStep >= index
+                            ? "bg-primary/20 border-primary"
+                            : "bg-card border-border"
+                        }`}
+                      >
+                        <step.icon
+                          className={`w-5 h-5 lg:w-7 lg:h-7 transition-colors duration-500 ${
+                            activeStep >= index ? "text-primary" : "text-muted-foreground"
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div
+                      className={`flex-1 pt-2 transition-all duration-500 ${
+                        activeStep >= index
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-30 translate-y-4"
+                      }`}
+                    >
+                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-foreground mb-3">
+                        Fase {index + 1} - {step.title}
+                      </h3>
+                      <p className="font-body text-muted-foreground text-base lg:text-lg leading-relaxed max-w-md">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
