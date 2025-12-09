@@ -1,16 +1,20 @@
-import ncaaLogo from "@/assets/ncaa-logo.png";
-import njcaaLogo from "@/assets/njcaa-logo.jpg";
-import naiaLogo from "@/assets/naia-logo.jpg";
-import clemsonLogo from "@/assets/clemson-logo.png";
-import wakeforestLogo from "@/assets/wakeforest-logo.png";
+import ncaaLogo from "@/assets/ncaa-new.png";
+import naiaLogo from "@/assets/naia-new.png";
+import clemsonLogo from "@/assets/clemson-new.png";
+import wakeforestLogo from "@/assets/wakeforest-new.png";
+import uclaLogo from "@/assets/ucla.png";
+import williamPennLogo from "@/assets/william-penn.png";
+import stMarysLogo from "@/assets/st-marys.svg";
 
 const LogoCarousel = () => {
   const logos = [
     { name: "NCAA", logo: ncaaLogo },
-    { name: "NJCAA", logo: njcaaLogo },
     { name: "NAIA", logo: naiaLogo },
     { name: "Clemson", logo: clemsonLogo },
     { name: "Wake Forest", logo: wakeforestLogo },
+    { name: "UCLA", logo: uclaLogo },
+    { name: "William Penn", logo: williamPennLogo },
+    { name: "St. Mary's", logo: stMarysLogo },
   ];
 
   // Duplicate logos for seamless infinite scroll
