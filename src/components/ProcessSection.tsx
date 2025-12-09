@@ -95,7 +95,7 @@ const ProcessSection = () => {
           <div className="flex-1 py-12 sm:py-16 lg:py-32">
             <div className="relative">
               {/* Vertical Line */}
-              <div className="absolute left-5 sm:left-6 lg:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
+              <div className="absolute left-5 sm:left-6 lg:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[hsl(210,100%,50%)]/50 via-[hsl(210,100%,50%)] to-[hsl(210,100%,50%)]/50" />
 
               {/* Steps */}
               <div className="space-y-20 sm:space-y-32 lg:space-y-48">
