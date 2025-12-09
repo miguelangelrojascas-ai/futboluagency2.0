@@ -74,8 +74,8 @@ const CTASection = () => {
               <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
                 {/* Icon */}
                 <div className="mb-3 sm:mb-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center backdrop-blur-sm">
-                    <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[hsl(210,100%,50%)]/20 border border-[hsl(210,100%,50%)]/40 flex items-center justify-center backdrop-blur-sm">
+                    <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(210,100%,50%)]" />
                   </div>
                 </div>
 
