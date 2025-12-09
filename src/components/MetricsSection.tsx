@@ -20,7 +20,9 @@ const MetricsSection = () => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <section className="py-6 sm:py-8 md:py-12 bg-background/50 backdrop-blur-sm border-y border-border/20 cursor-pointer">
+          <section className="relative py-6 sm:py-8 md:py-12 bg-background/50 backdrop-blur-sm cursor-pointer">
+            {/* Fade transition to next section */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-background-alt pointer-events-none" />
             <div className="container-wide px-4">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-12">
                 {metrics.map((metric, index) => (
