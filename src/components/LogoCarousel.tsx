@@ -17,6 +17,7 @@ import ucfLogo from "@/assets/ucf-logo.png";
 import usfLogo from "@/assets/usf-logo.png";
 import notreDameLogo from "@/assets/notre-dame-logo.png";
 import dukeLogo from "@/assets/duke-logo.png";
+import jmuLogo from "@/assets/jmu-logo.png";
 
 const LogoCarousel = () => {
   const logos = [
@@ -39,35 +40,25 @@ const LogoCarousel = () => {
     { name: "USF", logo: usfLogo },
     { name: "Notre Dame", logo: notreDameLogo },
     { name: "Duke", logo: dukeLogo },
+    { name: "JMU", logo: jmuLogo },
   ];
+
+  // Duplicate logos for seamless infinite scroll
+  const duplicatedLogos = [...logos, ...logos];
 
   return (
     <section className="py-12 bg-background-alt overflow-hidden">
-      <div className="relative flex">
-        <div className="flex animate-scroll">
-          {logos.map((item, index) => (
+      <div className="relative">
+        <div className="flex animate-scroll w-fit">
+          {duplicatedLogos.map((item, index) => (
             <div
-              key={`first-${item.name}-${index}`}
-              className="flex-shrink-0 mx-8 md:mx-12 lg:mx-16"
+              key={`${item.name}-${index}`}
+              className="flex-shrink-0 px-8 md:px-12 lg:px-16"
             >
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-12 md:h-16 w-auto object-contain brightness-100 contrast-100"
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex animate-scroll">
-          {logos.map((item, index) => (
-            <div
-              key={`second-${item.name}-${index}`}
-              className="flex-shrink-0 mx-8 md:mx-12 lg:mx-16"
-            >
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="h-12 md:h-16 w-auto object-contain brightness-100 contrast-100"
+                className="h-12 md:h-16 w-auto object-contain"
               />
             </div>
           ))}
