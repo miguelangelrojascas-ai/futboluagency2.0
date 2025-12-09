@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
+import { openCalendly } from "@/hooks/useCalendly";
 
 const VideoSection = () => {
   const { t } = useLanguage();
@@ -34,12 +33,10 @@ const VideoSection = () => {
               variant="ctaLarge"
               size="ctaXl"
               className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-              asChild
+              onClick={openCalendly}
             >
-              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-                <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
-                <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
-              </a>
+              <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
+              <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
             </Button>
           </div>
         </div>

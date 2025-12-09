@@ -1,17 +1,13 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { openCalendly } from "@/hooks/useCalendly";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo-new.png";
+
 const HeroSection = () => {
-  const {
-    t
-  } = useLanguage();
-  const scrollToVideo = () => {
-    document.getElementById("video-section")?.scrollIntoView({
-      behavior: "smooth"
-    });
-  };
+  const { t } = useLanguage();
+
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
@@ -50,7 +46,7 @@ const HeroSection = () => {
         <div className="animate-fade-in-up px-4" style={{
         animationDelay: "0.4s"
       }}>
-          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={scrollToVideo}>
+          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={openCalendly}>
             {t("hero.cta")}
             <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
