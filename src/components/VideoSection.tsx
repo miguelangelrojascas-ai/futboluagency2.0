@@ -18,9 +18,9 @@ const VideoSection = () => {
         {/* Video Container */}
         <div className="max-w-4xl mx-auto px-2">
           <div className="relative">
-            {/* Glow effect */}
-            <div className="absolute -inset-4 bg-primary/20 rounded-2xl blur-xl opacity-60" />
-            <div className="relative aspect-video rounded-xl border-2 border-primary/30 overflow-hidden bg-card shadow-2xl shadow-primary/20">
+            {/* Blue glow effect */}
+            <div className="absolute -inset-4 bg-[hsl(210,100%,50%)]/25 rounded-2xl blur-xl opacity-70" />
+            <div className="relative aspect-video rounded-xl border-2 border-[hsl(210,100%,50%)]/40 overflow-hidden bg-card shadow-2xl shadow-[hsl(210,100%,50%)]/20">
               <iframe
                 src="https://www.youtube.com/embed/0-dWsUxiYkI"
                 title="FutbolUAgency - Video explicativo"
