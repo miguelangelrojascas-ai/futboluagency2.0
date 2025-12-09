@@ -77,11 +77,11 @@ const Footer = () => {
                 futboluagency@gmail.com
               </a>
               <a 
-                href="tel:+18327411634" 
+                href="tel:+34603331990" 
                 className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +1 (832) 741-1634
+                +34 603 331 990
               </a>
               <div className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
