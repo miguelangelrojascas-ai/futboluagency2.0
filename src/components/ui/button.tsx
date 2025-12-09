@@ -17,6 +17,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         hero: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg hover:shadow-glow transform hover:scale-105 font-semibold tracking-wide",
         cta: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-xl hover:shadow-glow transform hover:scale-[1.02] font-bold tracking-wide",
+        ctaLarge: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-xl hover:shadow-glow transform hover:scale-[1.02] whitespace-normal text-center flex-col gap-1 rounded-xl",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -24,6 +25,7 @@ const buttonVariants = cva(
         lg: "h-12 px-8 text-base",
         xl: "h-14 px-10 text-lg",
         icon: "h-10 w-10",
+        ctaXl: "min-h-[80px] px-16 py-5",
       },
     },
     defaultVariants: {
