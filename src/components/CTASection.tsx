@@ -1,8 +1,11 @@
 import { ClipboardCheck, Video, Users, FileCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import cardBgEvaluation from "@/assets/card-bg-evaluation.jpg";
 import cardBgProfile from "@/assets/card-bg-profile.jpg";
 import cardBgCoaches from "@/assets/card-bg-coaches.jpg";
 import cardBgVisas from "@/assets/card-bg-visas.jpg";
+
+const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
 
 const services = [
   {
@@ -82,6 +85,19 @@ const CTASection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center mt-12">
+          <Button
+            variant="cta"
+            size="xl"
+            asChild
+          >
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              Agenda tu llamada. Sesión 1-1 para evaluar tu caso
+            </a>
+          </Button>
         </div>
       </div>
     </section>
