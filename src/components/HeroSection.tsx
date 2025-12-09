@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
+import logo from "@/assets/logo.png";
 
 const HeroSection = () => {
   const scrollToVideo = () => {
@@ -16,11 +17,20 @@ const HeroSection = () => {
           alt="Soccer team huddle"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background" />
+      </div>
+
+      {/* Centered Logo at Top */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+        <img 
+          src={logo} 
+          alt="FutbolUAgency" 
+          className="h-16 md:h-20 w-auto"
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-wide section-padding text-center">
+      <div className="relative z-10 container-wide section-padding text-center pt-24">
         {/* Tag */}
         <span className="inline-block mb-6 text-primary font-body text-sm tracking-[0.2em] uppercase animate-fade-in">
           Agencia de fútbol internacional
@@ -28,15 +38,15 @@ const HeroSection = () => {
 
         {/* Main Headline */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up">
-          Convierte tu talento en una
+          Convierte tu sueño de estudiar y jugar fútbol
           <br />
-          <span className="text-primary italic">beca deportiva en Estados Unidos</span>
+          <span className="text-primary italic">en Estados Unidos en un plan real.</span>
         </h1>
 
         {/* Subheadline */}
         <p className="font-body text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-          Ayudamos a futbolistas internacionales a obtener becas en universidades{" "}
-          <span className="font-semibold text-foreground">NCAA, NAIA y JUCO</span>.
+          Creamos tu perfil, te conectamos con coaches y te guiamos hasta conseguir tu{" "}
+          <span className="font-semibold text-foreground">beca deportiva</span>.
         </p>
 
         {/* CTA Button */}
