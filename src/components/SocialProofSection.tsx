@@ -1,32 +1,38 @@
+import ncaaLogo from "@/assets/ncaa-logo.png";
+import njcaaLogo from "@/assets/njcaa-logo.jpg";
+import naiaLogo from "@/assets/naia-logo.jpg";
+import clemsonLogo from "@/assets/clemson-logo.png";
+import wakeforestLogo from "@/assets/wakeforest-logo.png";
+
 const SocialProofSection = () => {
-  const organizations = ["NCAA", "NJCAA", "NAIA", "MLS"];
-  
+  const organizations = [
+    { name: "NCAA", logo: ncaaLogo },
+    { name: "NJCAA", logo: njcaaLogo },
+    { name: "NAIA", logo: naiaLogo },
+  ];
+
   const universities = [
-    "Kentucky", "Wisconsin", "UCLA", "Stanford",
-    "Duke", "North Carolina", "Indiana", "Syracuse"
+    { name: "Clemson", logo: clemsonLogo },
+    { name: "Wake Forest", logo: wakeforestLogo },
   ];
 
   return (
     <section className="section-padding bg-surface-light">
       <div className="container-wide">
         {/* Organizations */}
-        <div className="text-center mb-16">
-          <p className="text-secondary font-body text-sm tracking-[0.15em] uppercase mb-8">
-            Organizaciones donde colocamos jugadores
-          </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {organizations.map((org) => (
-              <div
-                key={org}
-                className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100 flex items-center justify-center hover:shadow-md transition-shadow"
-              >
-                <span className="font-display text-2xl md:text-3xl font-bold text-secondary">
-                  {org}
-                </span>
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-16">
+          {organizations.map((org) => (
+            <div
+              key={org.name}
+              className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100 flex items-center justify-center hover:shadow-md transition-shadow"
+            >
+              <img
+                src={org.logo}
+                alt={org.name}
+                className="h-16 md:h-20 w-auto object-contain"
+              />
+            </div>
+          ))}
         </div>
 
         {/* Universities */}
@@ -35,15 +41,17 @@ const SocialProofSection = () => {
             Universidades Partner
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-5xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-4xl mx-auto">
             {universities.map((uni) => (
               <div
-                key={uni}
-                className="bg-white rounded-lg px-6 py-3 shadow-sm border border-gray-100 hover:border-primary/30 transition-colors"
+                key={uni.name}
+                className="bg-white rounded-lg px-8 py-4 shadow-sm border border-gray-100 hover:border-primary/30 transition-colors flex items-center justify-center"
               >
-                <span className="font-body text-secondary font-medium">
-                  {uni}
-                </span>
+                <img
+                  src={uni.logo}
+                  alt={uni.name}
+                  className="h-12 md:h-16 w-auto object-contain"
+                />
               </div>
             ))}
           </div>
