@@ -1,45 +1,13 @@
-import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
+import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
 
 const CalendlySection = () => {
   const { t } = useLanguage();
-
-  useEffect(() => {
-    // Load Calendly CSS
-    const link = document.createElement("link");
-    link.href = "https://assets.calendly.com/assets/external/widget.css";
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
-
-    // Load Calendly JS
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.head.removeChild(link);
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  const openCalendly = () => {
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/miguelangelrojascas/new-meeting?hide_event_type_details=1&hide_gdpr_banner=1'
-      });
-    }
-  };
+  
+  // Load Calendly scripts once here
+  useCalendlyLoader();
 
   return (
     <section id="calendly-section" className="section-padding bg-muted/30">

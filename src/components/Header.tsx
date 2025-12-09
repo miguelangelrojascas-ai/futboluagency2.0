@@ -1,10 +1,7 @@
 import logo from "@/assets/logo-new.png";
+import { openCalendly } from "@/hooks/useCalendly";
 
 const Header = () => {
-  const scrollToVideo = () => {
-    document.getElementById("video-section")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container-wide flex flex-col items-center py-4">
@@ -15,7 +12,7 @@ const Header = () => {
         />
         
         <button
-          onClick={scrollToVideo}
+          onClick={openCalendly}
           className="bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-6 py-2.5 rounded-lg transition-colors text-sm"
         >
           Evaluación Gratuita
