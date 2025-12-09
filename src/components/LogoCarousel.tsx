@@ -12,6 +12,11 @@ import kentuckyLogo from "@/assets/kentucky-logo.png";
 import indianaLogo from "@/assets/indiana-logo.png";
 import pennWesternLogo from "@/assets/penn-western-logo.svg";
 import charlestonLogo from "@/assets/charleston-logo.png";
+import smuLogo from "@/assets/smu-logo.png";
+import ucfLogo from "@/assets/ucf-logo.png";
+import usfLogo from "@/assets/usf-logo.png";
+import notreDameLogo from "@/assets/notre-dame-logo.png";
+import dukeLogo from "@/assets/duke-logo.png";
 
 const LogoCarousel = () => {
   const logos = [
@@ -29,18 +34,34 @@ const LogoCarousel = () => {
     { name: "Indiana", logo: indianaLogo },
     { name: "Penn Western", logo: pennWesternLogo },
     { name: "Charleston", logo: charlestonLogo },
+    { name: "SMU", logo: smuLogo },
+    { name: "UCF", logo: ucfLogo },
+    { name: "USF", logo: usfLogo },
+    { name: "Notre Dame", logo: notreDameLogo },
+    { name: "Duke", logo: dukeLogo },
   ];
-
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...logos, ...logos, ...logos];
 
   return (
     <section className="py-12 bg-background-alt overflow-hidden">
-      <div className="relative">
+      <div className="relative flex">
         <div className="flex animate-scroll">
-          {duplicatedLogos.map((item, index) => (
+          {logos.map((item, index) => (
             <div
-              key={`${item.name}-${index}`}
+              key={`first-${item.name}-${index}`}
+              className="flex-shrink-0 mx-8 md:mx-12 lg:mx-16"
+            >
+              <img
+                src={item.logo}
+                alt={item.name}
+                className="h-12 md:h-16 w-auto object-contain brightness-100 contrast-100"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="flex animate-scroll">
+          {logos.map((item, index) => (
+            <div
+              key={`second-${item.name}-${index}`}
               className="flex-shrink-0 mx-8 md:mx-12 lg:mx-16"
             >
               <img
