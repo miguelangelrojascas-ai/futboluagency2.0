@@ -64,11 +64,11 @@ const ProcessSection = () => {
           {/* Sticky Title Card */}
           <div className="lg:w-[380px] lg:flex-shrink-0">
             <div className="lg:sticky lg:top-32">
-              <div className="rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm p-6 sm:p-8 text-center">
+              <div className="rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-card/50 to-primary/5 backdrop-blur-sm p-6 sm:p-8 text-center shadow-lg shadow-primary/10">
                 <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-primary italic mb-2 sm:mb-3">
                   {t("process.title")}
                 </h2>
-                <p className="font-body text-muted-foreground text-sm sm:text-base">
+                <p className="font-body text-foreground/80 text-sm sm:text-base">
                   {t("process.subtitle")}
                 </p>
               </div>
