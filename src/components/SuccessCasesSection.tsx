@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import successZak from "@/assets/success-zak.jpg";
 import successVictor from "@/assets/success-victor.jpg";
 import successBentchey from "@/assets/success-bentchey.jpg";
@@ -22,6 +23,7 @@ const successCases = [
 ];
 
 const SuccessCasesSection = () => {
+  const { t, language } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,15 +56,15 @@ const SuccessCasesSection = () => {
 
   return (
     <section className="section-padding bg-background overflow-hidden">
-      <div className="container-wide">
+      <div className="container-wide px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <span className="text-primary font-body text-sm tracking-[0.2em] uppercase mb-4 block">
-            Más de 250 casos de éxito construidos
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
+            {language === "es" ? "Más de 250 casos de éxito construidos" : "Over 250 success stories built"}
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold">
-            Algunos resultados de trabajar{" "}
-            <span className="text-primary italic">juntos...</span>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-2">
+            {language === "es" ? "Algunos resultados de trabajar" : "Some results from working"}{" "}
+            <span className="text-primary italic">{language === "es" ? "juntos..." : "together..."}</span>
           </h2>
         </div>
       </div>
@@ -70,14 +72,14 @@ const SuccessCasesSection = () => {
       {/* Full-width Carousel */}
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-hidden"
+        className="flex gap-4 sm:gap-6 overflow-hidden px-4"
       >
         {allCases.map((successCase, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-[280px] md:w-[320px]"
+            className="flex-shrink-0 w-[200px] sm:w-[280px] md:w-[320px]"
           >
-            <div className="relative overflow-hidden rounded-2xl bg-card aspect-[3/4]">
+            <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-card aspect-[3/4]">
               <img
                 src={successCase.image}
                 alt={successCase.name}

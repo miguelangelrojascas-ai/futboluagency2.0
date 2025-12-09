@@ -1,14 +1,20 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo.png";
+
 const HeroSection = () => {
+  const { t } = useLanguage();
+  
   const scrollToVideo = () => {
     document.getElementById("video-section")?.scrollIntoView({
       behavior: "smooth"
     });
   };
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
@@ -19,46 +25,48 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
       {/* Centered Logo at Top */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-        <img src={logo} alt="FutbolUAgency" className="h-16 md:h-20 w-auto" />
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+        <img src={logo} alt="FutbolUAgency" className="h-12 sm:h-16 md:h-20 w-auto" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-wide section-padding text-center pt-24">
+      <div className="relative z-10 container-wide section-padding text-center pt-20 sm:pt-24">
         {/* Tag */}
-        <span className="inline-block mb-6 text-primary font-body text-sm tracking-[0.2em] uppercase animate-fade-in"></span>
+        <span className="inline-block mb-4 sm:mb-6 text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase animate-fade-in"></span>
 
         {/* Main Headline */}
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up">
-          Convierte tu talento en una{" "}
-          <span className="text-primary italic">beca deportiva en Estados Unidos</span>
+        <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up px-2">
+          {t("hero.headline")}{" "}
+          <span className="text-primary italic">{t("hero.headline.highlight")}</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="font-body text-foreground/90 text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{
-        animationDelay: "0.2s"
-      }}>
-          Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos con una{" "}
-          <span className="font-semibold text-foreground">oportunidad deportiva real</span>.
+        <p className="font-body text-foreground/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4" style={{
+          animationDelay: "0.2s"
+        }}>
+          {t("hero.subheadline")}{" "}
+          <span className="font-semibold text-foreground">{t("hero.subheadline.highlight")}</span>.
         </p>
 
         {/* CTA Button */}
-        <div className="animate-fade-in-up" style={{
-        animationDelay: "0.4s"
-      }}>
-          <Button variant="hero" size="xl" onClick={scrollToVideo}>
-            Comenzar mi Evaluación Gratuita
-            <ArrowRight className="ml-2 h-5 w-5" />
+        <div className="animate-fade-in-up px-4" style={{
+          animationDelay: "0.4s"
+        }}>
+          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={scrollToVideo}>
+            {t("hero.cta")}
+            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+      {/* Scroll Indicator - hidden on mobile */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float hidden sm:block">
         <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;

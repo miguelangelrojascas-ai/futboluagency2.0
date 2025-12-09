@@ -4,32 +4,35 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const MetricsSection = () => {
+  const { t } = useLanguage();
+  
   const metrics = [
-    { value: "350+", label: "Universidades Aliadas" },
+    { value: "350+", label: t("metrics.universities") },
     { value: "40+", label: "Estados Cubiertos" },
-    { value: "$10M+", label: "En Becas Gestionadas" },
-    { value: "98%", label: "Tasa de Éxito" },
+    { value: "$10M+", label: t("metrics.scholarships") },
+    { value: "98%", label: t("metrics.satisfaction") },
   ];
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <section className="py-8 md:py-12 bg-background/50 backdrop-blur-sm border-y border-border/20 cursor-pointer">
-            <div className="container-wide">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12">
+          <section className="py-6 sm:py-8 md:py-12 bg-background/50 backdrop-blur-sm border-y border-border/20 cursor-pointer">
+            <div className="container-wide px-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-12">
                 {metrics.map((metric, index) => (
                   <div
                     key={metric.label}
                     className="text-center animate-fade-in-up"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary italic mb-1">
+                    <div className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary italic mb-1">
                       {metric.value}
                     </div>
-                    <p className="font-body text-muted-foreground text-xs md:text-sm">
+                    <p className="font-body text-muted-foreground text-[10px] sm:text-xs md:text-sm">
                       {metric.label}
                     </p>
                   </div>
