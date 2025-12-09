@@ -7,11 +7,11 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container-wide flex items-center justify-between py-4">
+      <div className="container-wide flex flex-col items-center py-4">
         <img 
           src={logo} 
           alt="FutbolUAgency" 
-          className="h-12 md:h-14 w-auto"
+          className="h-14 md:h-16 w-auto mb-3"
         />
         
         <button
