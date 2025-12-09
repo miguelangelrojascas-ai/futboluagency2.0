@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import VideoSection from "@/components/VideoSection";
-import SocialProofSection from "@/components/SocialProofSection";
+import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
 import CTASection from "@/components/CTASection";
 import ProcessSection from "@/components/ProcessSection";
@@ -12,8 +12,8 @@ const Index = () => {
     <main className="min-h-screen">
       <HeroSection />
       <MetricsSection />
+      <LogoCarousel />
       <VideoSection />
-      <SocialProofSection />
       <CTASection />
       <ProcessSection />
       <TestimonialsSection />
