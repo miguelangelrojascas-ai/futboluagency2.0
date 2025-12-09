@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-new.png";
 const HeroSection = () => {
   const {
     t
@@ -23,12 +23,12 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
       {/* Centered Logo at Top */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
-        
+      <div className="absolute top-6 sm:top-8 left-1/2 -translate-x-1/2 z-20">
+        <img src={logo} alt="FutbolUAgency" className="h-24 sm:h-28 md:h-32 w-auto" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-wide section-padding text-center pt-20 sm:pt-24">
+      <div className="relative z-10 container-wide section-padding text-center pt-28 sm:pt-36">
         {/* Tag */}
         <span className="inline-block mb-4 sm:mb-6 text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase animate-fade-in"></span>
 
