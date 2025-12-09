@@ -30,17 +30,16 @@ const HeroSection = () => {
 
         {/* Main Headline */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up">
-          Convierte tu talento en una
-          <br />
+          Convierte tu talento en una{" "}
           <span className="text-primary italic">beca deportiva en Estados Unidos</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="font-body text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{
+        <p className="font-body text-foreground/90 text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{
         animationDelay: "0.2s"
       }}>
-          Creamos tu perfil, te conectamos con coaches y te guiamos hasta conseguir tu{" "}
-          <span className="font-semibold text-foreground">beca deportiva</span>.
+          Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos con una{" "}
+          <span className="font-semibold text-foreground">oportunidad deportiva real</span>.
         </p>
 
         {/* CTA Button */}
