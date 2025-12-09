@@ -17,14 +17,18 @@ const VideoSection = () => {
 
         {/* Video Container */}
         <div className="max-w-4xl mx-auto px-2">
-          <div className="relative aspect-video rounded-xl border border-border overflow-hidden bg-card shadow-card">
-            <iframe
-              src="https://www.youtube.com/embed/0-dWsUxiYkI"
-              title="FutbolUAgency - Video explicativo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
+          <div className="relative">
+            {/* Glow effect */}
+            <div className="absolute -inset-4 bg-primary/20 rounded-2xl blur-xl opacity-60" />
+            <div className="relative aspect-video rounded-xl border-2 border-primary/30 overflow-hidden bg-card shadow-2xl shadow-primary/20">
+              <iframe
+                src="https://www.youtube.com/embed/0-dWsUxiYkI"
+                title="FutbolUAgency - Video explicativo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
           </div>
 
           {/* CTA Button */}
