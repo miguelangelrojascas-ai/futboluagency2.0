@@ -47,15 +47,15 @@ const TeamSection = () => {
             >
               {/* Image */}
               <div className="w-full lg:w-2/5 flex justify-center">
-                <div className="relative">
+                <div className="relative group cursor-pointer">
                   {/* Glow effect */}
-                  <div className="absolute -inset-1 bg-gradient-to-b from-primary/50 to-primary/20 rounded-2xl blur-xl opacity-50" />
+                  <div className="absolute -inset-1 bg-gradient-to-b from-primary/50 to-primary/20 rounded-2xl blur-xl opacity-50 transition-all duration-500 group-hover:opacity-80 group-hover:blur-2xl group-hover:from-primary/70" />
                   {/* Border frame */}
-                  <div className="relative p-1 bg-gradient-to-b from-primary/60 to-primary/20 rounded-2xl">
+                  <div className="relative p-1 bg-gradient-to-b from-primary/60 to-primary/20 rounded-2xl transition-all duration-500 group-hover:from-primary/80 group-hover:to-primary/40">
                     <img
                       src={founder.image}
                       alt={founder.name}
-                      className="w-72 h-80 md:w-80 md:h-96 object-cover object-top rounded-xl"
+                      className="w-72 h-80 md:w-80 md:h-96 object-cover object-top rounded-xl transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                 </div>
