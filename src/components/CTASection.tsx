@@ -1,25 +1,33 @@
 import { ClipboardCheck, Video, Users, FileCheck } from "lucide-react";
+import cardBgEvaluation from "@/assets/card-bg-evaluation.jpg";
+import cardBgProfile from "@/assets/card-bg-profile.jpg";
+import cardBgCoaches from "@/assets/card-bg-coaches.jpg";
+import cardBgVisas from "@/assets/card-bg-visas.jpg";
 
 const services = [
   {
     icon: ClipboardCheck,
     title: "Evaluación deportiva profesional",
-    description: "Analizamos tu nivel de juego, tu perfil académico y tu potencial para identificar las mejores oportunidades reales para ti."
+    description: "Analizamos tu nivel de juego, tu perfil académico y tu potencial para identificar las mejores oportunidades reales para ti.",
+    bgImage: cardBgEvaluation
   },
   {
     icon: Video,
     title: "Creación de tu perfil para becas",
-    description: "Editamos tu video highlight, tus estadísticas, y diseñamos un perfil profesional que atrae a entrenadores de NCAA, NAIA y JUCO."
+    description: "Editamos tu video highlight, tus estadísticas, y diseñamos un perfil profesional que atrae a entrenadores de NCAA, NAIA y JUCO.",
+    bgImage: cardBgProfile
   },
   {
     icon: Users,
     title: "Representación y contacto directo con entrenadores",
-    description: "Nos encargamos de hablar con los coaches, presentar tu perfil y conseguir respuestas reales y ofertas concretas."
+    description: "Nos encargamos de hablar con los coaches, presentar tu perfil y conseguir respuestas reales y ofertas concretas.",
+    bgImage: cardBgCoaches
   },
   {
     icon: FileCheck,
     title: "Guía completa en visas, becas y admisiones",
-    description: "Te acompañamos paso a paso hasta que estés aceptado y con beca asegurada. Admisiones, TOEFL, FAFSA, DS-160, I-20."
+    description: "Te acompañamos paso a paso hasta que estés aceptado y con beca asegurada. Admisiones, TOEFL, FAFSA, DS-160, I-20.",
+    bgImage: cardBgVisas
   }
 ];
 
@@ -45,21 +53,27 @@ const CTASection = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="relative overflow-hidden rounded-xl bg-card/50 border border-border/30 p-8 transition-all duration-300 hover:border-primary/50 hover:bg-card/70 group"
+              className="relative overflow-hidden rounded-xl min-h-[280px] group"
             >
-              {/* Background gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={{ backgroundImage: `url(${service.bgImage})` }}
+              />
               
-              {/* Icon */}
-              <div className="relative mb-6">
-                <div className="w-14 h-14 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center">
-                  <service.icon className="w-7 h-7 text-primary" />
-                </div>
-              </div>
-
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+              
               {/* Content */}
-              <div className="relative">
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
+              <div className="relative h-full flex flex-col justify-end p-8">
+                {/* Icon */}
+                <div className="mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center backdrop-blur-sm">
+                    <service.icon className="w-6 h-6 text-primary" />
+                  </div>
+                </div>
+
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
                   {service.title}
                 </h3>
                 <p className="font-body text-muted-foreground text-sm leading-relaxed">
