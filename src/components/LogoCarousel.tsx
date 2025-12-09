@@ -33,7 +33,7 @@ const LogoCarousel = () => {
   const duplicatedLogos = [...logos, ...logos, ...logos];
 
   return (
-    <section className="py-12 bg-background overflow-hidden">
+    <section className="py-12 bg-background-alt overflow-hidden">
       <div className="relative">
         <div className="flex animate-scroll">
           {duplicatedLogos.map((item, index) => (
