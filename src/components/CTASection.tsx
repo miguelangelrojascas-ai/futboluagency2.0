@@ -1,9 +1,9 @@
 import { ClipboardCheck, Video, Users, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import cardBgEvaluation from "@/assets/card-bg-evaluation.jpg";
+import cardBgEvaluation from "@/assets/card-bg-evaluation-new.jpg";
 import cardBgProfile from "@/assets/card-bg-profile.jpg";
-import cardBgCoaches from "@/assets/card-bg-coaches.jpg";
+import cardBgCoaches from "@/assets/card-bg-coaches-new.jpg";
 import cardBgVisas from "@/assets/card-bg-visas.jpg";
 
 const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
