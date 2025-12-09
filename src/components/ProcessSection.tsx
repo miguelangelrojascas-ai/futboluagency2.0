@@ -127,12 +127,13 @@ const ProcessSection = () => {
             {/* CTA Button */}
             <div className="text-center mt-20">
               <Button
-                variant="cta"
-                size="xl"
+                variant="ctaLarge"
+                size="ctaXl"
                 asChild
               >
                 <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-                  Agenda tu llamada. Sesión 1-1 para evaluar tu caso
+                  <span className="text-lg md:text-xl font-bold uppercase tracking-wider">Agendar Llamada Estratégica</span>
+                  <span className="text-sm md:text-base font-normal opacity-90">Sesión 1 a 1 para evaluar tu caso</span>
                 </a>
               </Button>
             </div>
