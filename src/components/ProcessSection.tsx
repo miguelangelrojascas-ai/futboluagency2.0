@@ -55,9 +55,25 @@ const ProcessSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-background">
-      {/* Warm gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5 pointer-events-none" />
+    <section ref={sectionRef} className="relative bg-background overflow-hidden">
+      {/* Textured gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-[hsl(210,100%,50%)]/5 pointer-events-none" />
+      
+      {/* Grid texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      {/* Radial glow accents */}
+      <div className="absolute top-1/4 -left-32 w-64 h-64 bg-[hsl(210,100%,50%)]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-wide relative px-4">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
