@@ -3,18 +3,16 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo.png";
-
 const HeroSection = () => {
-  const { t } = useLanguage();
-  
+  const {
+    t
+  } = useLanguage();
   const scrollToVideo = () => {
     document.getElementById("video-section")?.scrollIntoView({
       behavior: "smooth"
     });
   };
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
@@ -26,7 +24,7 @@ const HeroSection = () => {
 
       {/* Centered Logo at Top */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
-        <img src={logo} alt="FutbolUAgency" className="h-12 sm:h-16 md:h-20 w-auto" />
+        
       </div>
 
       {/* Content */}
@@ -42,16 +40,16 @@ const HeroSection = () => {
 
         {/* Subheadline */}
         <p className="font-body text-foreground/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4" style={{
-          animationDelay: "0.2s"
-        }}>
+        animationDelay: "0.2s"
+      }}>
           {t("hero.subheadline")}{" "}
           <span className="font-semibold text-foreground">{t("hero.subheadline.highlight")}</span>.
         </p>
 
         {/* CTA Button */}
         <div className="animate-fade-in-up px-4" style={{
-          animationDelay: "0.4s"
-        }}>
+        animationDelay: "0.4s"
+      }}>
           <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={scrollToVideo}>
             {t("hero.cta")}
             <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -65,8 +63,6 @@ const HeroSection = () => {
           <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
