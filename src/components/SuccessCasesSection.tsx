@@ -59,7 +59,7 @@ const SuccessCasesSection = () => {
       <div className="container-wide px-4">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
+          <span className="text-[hsl(210,100%,50%)] font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
             {language === "es" ? "Más de 250 casos de éxito construidos" : "Over 250 success stories built"}
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-2">
