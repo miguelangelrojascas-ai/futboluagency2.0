@@ -4,7 +4,7 @@ import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
 import CTASection from "@/components/CTASection";
 import ProcessSection from "@/components/ProcessSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import SuccessCasesSection from "@/components/SuccessCasesSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -16,7 +16,7 @@ const Index = () => {
       <LogoCarousel />
       <CTASection />
       <ProcessSection />
-      <TestimonialsSection />
+      <SuccessCasesSection />
       <Footer />
     </main>
   );
