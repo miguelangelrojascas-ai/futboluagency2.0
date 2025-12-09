@@ -2,31 +2,22 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo.png";
-
 const HeroSection = () => {
   const scrollToVideo = () => {
-    document.getElementById("video-section")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("video-section")?.scrollIntoView({
+      behavior: "smooth"
+    });
   };
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Soccer team huddle"
-          className="w-full h-full object-cover"
-        />
+        <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background" />
       </div>
 
       {/* Centered Logo at Top */}
       <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-        <img 
-          src={logo} 
-          alt="FutbolUAgency" 
-          className="h-16 md:h-20 w-auto"
-        />
+        <img src={logo} alt="FutbolUAgency" className="h-16 md:h-20 w-auto" />
       </div>
 
       {/* Content */}
@@ -38,19 +29,24 @@ const HeroSection = () => {
 
         {/* Main Headline */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up">
-          Convierte tu sueño de estudiar y jugar fútbol
+          Convierte tu talento en una
+beca deportiva en Estados Unidos
           <br />
           <span className="text-primary italic">en Estados Unidos en un plan real.</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="font-body text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+        <p className="font-body text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{
+        animationDelay: "0.2s"
+      }}>
           Creamos tu perfil, te conectamos con coaches y te guiamos hasta conseguir tu{" "}
           <span className="font-semibold text-foreground">beca deportiva</span>.
         </p>
 
         {/* CTA Button */}
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+        <div className="animate-fade-in-up" style={{
+        animationDelay: "0.4s"
+      }}>
           <Button variant="hero" size="xl" onClick={scrollToVideo}>
             Comenzar mi Evaluación Gratuita
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -64,8 +60,6 @@ const HeroSection = () => {
           <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
