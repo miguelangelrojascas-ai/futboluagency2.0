@@ -12,7 +12,7 @@ const HeroSection = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background opacity-10 border-dashed" />
       </div>
 
       {/* Centered Logo at Top */}
@@ -23,9 +23,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container-wide section-padding text-center pt-24">
         {/* Tag */}
-        <span className="inline-block mb-6 text-primary font-body text-sm tracking-[0.2em] uppercase animate-fade-in">
-          Futbolistas y Padres
-        </span>
+        <span className="inline-block mb-6 text-primary font-body text-sm tracking-[0.2em] uppercase animate-fade-in"></span>
 
         {/* Main Headline */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up">
@@ -39,8 +37,8 @@ beca deportiva en Estados Unidos
         <p className="font-body text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{
         animationDelay: "0.2s"
       }}>
-          Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos con una{" "}
-          <span className="font-semibold text-foreground">oportunidad deportiva real</span>.
+          Creamos tu perfil, te conectamos con coaches y te guiamos hasta conseguir tu{" "}
+          <span className="font-semibold text-foreground">beca deportiva</span>.
         </p>
 
         {/* CTA Button */}
