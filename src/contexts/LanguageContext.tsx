@@ -69,6 +69,10 @@ const translations: Record<Language, Record<string, string>> = {
     "metrics.universities": "Universidades Partner",
     "metrics.satisfaction": "Satisfacción",
     "metrics.experience": "Años de Experiencia",
+    
+    // Calendly
+    "calendly.title": "Agenda tu Evaluación Gratuita",
+    "calendly.subtitle": "Selecciona un horario que te convenga para hablar con nuestro equipo sobre tu futuro deportivo.",
   },
   en: {
     // Hero
@@ -130,6 +134,10 @@ const translations: Record<Language, Record<string, string>> = {
     "metrics.universities": "Partner Universities",
     "metrics.satisfaction": "Satisfaction",
     "metrics.experience": "Years of Experience",
+    
+    // Calendly
+    "calendly.title": "Schedule Your Free Evaluation",
+    "calendly.subtitle": "Select a time that works for you to talk with our team about your athletic future.",
   },
 };
 
