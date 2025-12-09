@@ -12,8 +12,11 @@ const HeroSection = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background opacity-10 border-dashed" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/30" />
       </div>
+      
+      {/* Bottom fade transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
       {/* Centered Logo at Top */}
       <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
@@ -28,9 +31,8 @@ const HeroSection = () => {
         {/* Main Headline */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up">
           Convierte tu talento en una
-beca deportiva en Estados Unidos
           <br />
-          <span className="text-primary italic">en Estados Unidos en un plan real.</span>
+          <span className="text-primary italic">beca deportiva en Estados Unidos</span>
         </h1>
 
         {/* Subheadline */}
