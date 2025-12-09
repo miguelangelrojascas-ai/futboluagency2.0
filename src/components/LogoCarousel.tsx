@@ -43,16 +43,29 @@ const LogoCarousel = () => {
     { name: "JMU", logo: jmuLogo },
   ];
 
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...logos, ...logos];
-
   return (
-    <section className="py-12 bg-background-alt overflow-hidden">
-      <div className="relative">
-        <div className="flex animate-scroll w-fit">
-          {duplicatedLogos.map((item, index) => (
+    <section className="py-8 bg-gradient-to-b from-background-alt to-background overflow-hidden">
+      <div className="relative flex overflow-hidden">
+        {/* First set - animates */}
+        <div className="flex animate-scroll whitespace-nowrap">
+          {logos.map((item, index) => (
             <div
-              key={`${item.name}-${index}`}
+              key={`first-${item.name}-${index}`}
+              className="flex-shrink-0 px-8 md:px-12 lg:px-16"
+            >
+              <img
+                src={item.logo}
+                alt={item.name}
+                className="h-12 md:h-16 w-auto object-contain"
+              />
+            </div>
+          ))}
+        </div>
+        {/* Second set - follows seamlessly */}
+        <div className="flex animate-scroll whitespace-nowrap">
+          {logos.map((item, index) => (
+            <div
+              key={`second-${item.name}-${index}`}
               className="flex-shrink-0 px-8 md:px-12 lg:px-16"
             >
               <img
