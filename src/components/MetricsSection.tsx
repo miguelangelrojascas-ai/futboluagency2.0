@@ -1,3 +1,10 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 const MetricsSection = () => {
   const metrics = [
     { value: "350+", label: "Universidades Aliadas" },
@@ -7,26 +14,35 @@ const MetricsSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-background">
-      <div className="container-wide">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {metrics.map((metric, index) => (
-            <div
-              key={metric.label}
-              className="text-center animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary italic mb-2">
-                {metric.value}
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <section className="py-8 md:py-12 bg-background/50 backdrop-blur-sm border-y border-border/20 cursor-pointer">
+            <div className="container-wide">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12">
+                {metrics.map((metric, index) => (
+                  <div
+                    key={metric.label}
+                    className="text-center animate-fade-in-up"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary italic mb-1">
+                      {metric.value}
+                    </div>
+                    <p className="font-body text-muted-foreground text-xs md:text-sm">
+                      {metric.label}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <p className="font-body text-muted-foreground text-sm md:text-base">
-                {metric.label}
-              </p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
+          </section>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" className="max-w-sm text-center">
+          <p>Nuestra red de contactos incluye universidades en todas las divisiones: NCAA, NAIA y JUCO.</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 
