@@ -39,8 +39,8 @@ beca deportiva en Estados Unidos
         <p className="font-body text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 animate-fade-in-up" style={{
         animationDelay: "0.2s"
       }}>
-          Creamos tu perfil, te conectamos con coaches y te guiamos hasta conseguir tu{" "}
-          <span className="font-semibold text-foreground">beca deportiva</span>.
+          Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos con una{" "}
+          <span className="font-semibold text-foreground">oportunidad deportiva real</span>.
         </p>
 
         {/* CTA Button */}
