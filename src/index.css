@@ -24,6 +24,8 @@
     --secondary: 220 26% 16%; /* #14213D - Corporate Blue */
     --secondary-foreground: 0 0% 100%;
     
+    --accent-blue: 210 100% 50%; /* Bright blue for glows */
+    
     --muted: 210 8% 7%;
     --muted-foreground: 210 12% 67%; /* #A8B0B8 */
     
