@@ -7,7 +7,7 @@ const TeamSection = () => {
 
   const founders = [
     {
-      name: "Ignacio Pérez",
+      name: "Ignacio De Bejar",
       role: "Co-founder y CEO",
       image: ceoIgnacio,
       bio: language === "es" ? [
