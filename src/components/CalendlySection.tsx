@@ -29,7 +29,7 @@ const CalendlySection = () => {
         
         <div 
           className="calendly-inline-widget rounded-xl overflow-hidden" 
-          data-url="https://calendly.com/miguelangelrojascas"
+          data-url="https://calendly.com/miguelangelrojascas/new-meeting"
           style={{ minWidth: "320px", height: "700px" }}
         />
       </div>
