@@ -1,27 +1,32 @@
-import { useEffect, useRef, useState } from "react";
-import success1 from "@/assets/success-1.jpg";
-import success2 from "@/assets/success-2.jpg";
-import success3 from "@/assets/success-3.jpg";
-import success4 from "@/assets/success-4.jpg";
-import success5 from "@/assets/success-5.jpg";
-import success6 from "@/assets/success-6.jpg";
+import { useEffect, useRef } from "react";
+import successZak from "@/assets/success-zak.jpg";
+import successVictor from "@/assets/success-victor.jpg";
+import successBentchey from "@/assets/success-bentchey.jpg";
+import successEduardo from "@/assets/success-eduardo.jpg";
+import successPablo from "@/assets/success-pablo.jpg";
+import successSimone from "@/assets/success-simone.jpg";
+import successMiguel from "@/assets/success-miguel.jpg";
+import successChase from "@/assets/success-chase.jpg";
+import successDaniel from "@/assets/success-daniel.jpg";
 
 const successCases = [
-  { image: success1, name: "Carlos M.", university: "University of Kentucky" },
-  { image: success2, name: "Ana G.", university: "UCLA" },
-  { image: success3, name: "Diego F.", university: "Stanford University" },
-  { image: success4, name: "María L.", university: "Wake Forest" },
-  { image: success5, name: "Javier R.", university: "Clemson University" },
-  { image: success6, name: "Laura S.", university: "Penn State" },
+  { image: successZak, name: "Zak McGall", university: "Seward County CC" },
+  { image: successVictor, name: "Victor Paz", university: "Illinois Central College" },
+  { image: successBentchey, name: "Bentchey Dominguez", university: "East Mississippi CC" },
+  { image: successEduardo, name: "Eduardo Larsen", university: "Beloit College" },
+  { image: successPablo, name: "Pablo Exposito", university: "Crowder College" },
+  { image: successSimone, name: "Simone Pitale", university: "Seward County CC" },
+  { image: successMiguel, name: "Miguel Arnaiz", university: "NIACC" },
+  { image: successChase, name: "Chase Nasir", university: "Lake Erie College" },
+  { image: successDaniel, name: "Daniel Abreu", university: "East Mississippi CC" },
 ];
 
 const SuccessCasesSection = () => {
-  const [isPaused, setIsPaused] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isPaused) return;
+    if (!scrollContainer) return;
 
     let animationId: number;
     let scrollPosition = 0;
@@ -42,7 +47,7 @@ const SuccessCasesSection = () => {
     animationId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationId);
-  }, [isPaused]);
+  }, []);
 
   // Duplicate images for infinite scroll
   const allCases = [...successCases, ...successCases];
@@ -65,34 +70,19 @@ const SuccessCasesSection = () => {
       {/* Full-width Carousel */}
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-hidden cursor-grab"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        className="flex gap-6 overflow-hidden"
       >
         {allCases.map((successCase, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-[280px] md:w-[320px] group"
+            className="flex-shrink-0 w-[280px] md:w-[320px]"
           >
             <div className="relative overflow-hidden rounded-2xl bg-card aspect-[3/4]">
               <img
                 src={successCase.image}
                 alt={successCase.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover"
               />
-              
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              {/* Info on hover */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <h4 className="font-display text-lg font-semibold text-foreground">
-                  {successCase.name}
-                </h4>
-                <p className="font-body text-sm text-primary">
-                  {successCase.university}
-                </p>
-              </div>
             </div>
           </div>
         ))}
