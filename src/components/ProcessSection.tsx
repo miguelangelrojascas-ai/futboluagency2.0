@@ -125,22 +125,22 @@ const ProcessSection = () => {
                 ))}
               </div>
             </div>
-
-            {/* CTA Button */}
-            <div className="text-center mt-16 sm:mt-20">
-              <Button
-                variant="ctaLarge"
-                size="ctaXl"
-                className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-                asChild
-              >
-                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-                  <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
-                  <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
-                </a>
-              </Button>
-            </div>
           </div>
+        </div>
+
+        {/* CTA Button - Centered */}
+        <div className="text-center py-12 sm:py-16">
+          <Button
+            variant="ctaLarge"
+            size="ctaXl"
+            className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
+            asChild
+          >
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
+              <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+            </a>
+          </Button>
         </div>
       </div>
     </section>
