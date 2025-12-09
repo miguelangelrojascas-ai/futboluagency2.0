@@ -11,6 +11,7 @@ import pennstateLogo from "@/assets/pennstate-logo.png";
 import kentuckyLogo from "@/assets/kentucky-logo.png";
 import indianaLogo from "@/assets/indiana-logo.png";
 import pennWesternLogo from "@/assets/penn-western-logo.svg";
+import charlestonLogo from "@/assets/charleston-logo.png";
 
 const LogoCarousel = () => {
   const logos = [
@@ -27,6 +28,7 @@ const LogoCarousel = () => {
     { name: "Kentucky", logo: kentuckyLogo },
     { name: "Indiana", logo: indianaLogo },
     { name: "Penn Western", logo: pennWesternLogo },
+    { name: "Charleston", logo: charlestonLogo },
   ];
 
   // Duplicate logos for seamless infinite scroll
