@@ -7,9 +7,11 @@ const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
 
 const ProcessSection = () => {
   const { t } = useLanguage();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(-1);
+  const [lineProgress, setLineProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   const steps = [
     {
@@ -36,14 +38,26 @@ const ProcessSection = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !timelineRef.current) return;
 
+      // Calculate line progress based on timeline visibility
+      const timelineRect = timelineRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const timelineTop = timelineRect.top;
+      const timelineHeight = timelineRect.height;
+      
+      // Calculate how much of the timeline has been scrolled through
+      const scrollStart = viewportHeight * 0.6;
+      const scrollProgress = Math.max(0, Math.min(1, (scrollStart - timelineTop) / timelineHeight));
+      setLineProgress(scrollProgress * 100);
+
+      // Update active step
       stepsRef.current.forEach((stepEl, index) => {
         if (!stepEl) return;
         const rect = stepEl.getBoundingClientRect();
-        const viewportCenter = window.innerHeight / 2;
+        const viewportCenter = viewportHeight * 0.6;
         
-        if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+        if (rect.top <= viewportCenter) {
           setActiveStep(index);
         }
       });
@@ -93,9 +107,15 @@ const ProcessSection = () => {
 
           {/* Timeline */}
           <div className="flex-1 py-12 sm:py-16 lg:py-32">
-            <div className="relative">
-              {/* Vertical Line */}
-              <div className="absolute left-5 sm:left-6 lg:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[hsl(210,100%,50%)]/50 via-[hsl(210,100%,50%)] to-[hsl(210,100%,50%)]/50" />
+            <div className="relative" ref={timelineRef}>
+              {/* Vertical Line Background (dim) */}
+              <div className="absolute left-5 sm:left-6 lg:left-8 top-0 bottom-0 w-px bg-[hsl(210,100%,50%)]/10" />
+              
+              {/* Vertical Line Progress (animated) */}
+              <div 
+                className="absolute left-5 sm:left-6 lg:left-8 top-0 w-px bg-gradient-to-b from-[hsl(210,100%,50%)] via-[hsl(210,100%,50%)] to-[hsl(210,100%,50%)]/80 transition-all duration-300"
+                style={{ height: `${lineProgress}%` }}
+              />
 
               {/* Steps */}
               <div className="space-y-20 sm:space-y-32 lg:space-y-48">
@@ -110,13 +130,13 @@ const ProcessSection = () => {
                       <div
                         className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
                           activeStep >= index
-                            ? "bg-primary/20 border-primary"
-                            : "bg-card border-border"
+                            ? "bg-[hsl(210,100%,50%)]/20 border-[hsl(210,100%,50%)] scale-110"
+                            : "bg-card border-border scale-100 opacity-40"
                         }`}
                       >
                         <step.icon
-                          className={`w-4 h-4 sm:w-5 sm:h-5 lg:w-7 lg:h-7 transition-colors duration-500 ${
-                            activeStep >= index ? "text-primary" : "text-muted-foreground"
+                          className={`w-4 h-4 sm:w-5 sm:h-5 lg:w-7 lg:h-7 transition-all duration-500 ${
+                            activeStep >= index ? "text-[hsl(210,100%,50%)]" : "text-muted-foreground"
                           }`}
                         />
                       </div>
