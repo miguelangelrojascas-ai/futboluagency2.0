@@ -1,36 +1,38 @@
 import { useEffect, useRef, useState } from "react";
 import { ClipboardCheck, Video, Users, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
 
-const steps = [
-  {
-    icon: ClipboardCheck,
-    title: "Evaluación Inicial",
-    description: "Analizamos tu perfil deportivo y académico para identificar las mejores oportunidades.",
-  },
-  {
-    icon: Video,
-    title: "Preparación de Material",
-    description: "Creamos tu video destacado y perfil profesional que impresionará a los entrenadores.",
-  },
-  {
-    icon: Users,
-    title: "Contacto con Universidades",
-    description: "Nos comunicamos directamente con entrenadores y coordinadores de admisiones.",
-  },
-  {
-    icon: Trophy,
-    title: "Aceptación y Beca",
-    description: "Te guiamos hasta obtener tu oferta oficial y comenzar tu aventura universitaria.",
-  },
-];
-
 const ProcessSection = () => {
+  const { t } = useLanguage();
   const [activeStep, setActiveStep] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const steps = [
+    {
+      icon: ClipboardCheck,
+      title: t("process.step1.title"),
+      description: t("process.step1.desc"),
+    },
+    {
+      icon: Video,
+      title: t("process.step2.title"),
+      description: t("process.step2.desc"),
+    },
+    {
+      icon: Users,
+      title: t("process.step3.title"),
+      description: t("process.step3.desc"),
+    },
+    {
+      icon: Trophy,
+      title: t("process.step4.title"),
+      description: t("process.step4.desc"),
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,47 +59,47 @@ const ProcessSection = () => {
       {/* Warm gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5 pointer-events-none" />
 
-      <div className="container-wide relative">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+      <div className="container-wide relative px-4">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16">
           {/* Sticky Title Card */}
           <div className="lg:w-[380px] lg:flex-shrink-0">
             <div className="lg:sticky lg:top-32">
-              <div className="rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm p-8 text-center">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-primary italic mb-3">
-                  Así es como funciona
+              <div className="rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm p-6 sm:p-8 text-center">
+                <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-primary italic mb-2 sm:mb-3">
+                  {t("process.title")}
                 </h2>
-                <p className="font-body text-muted-foreground">
-                  Nuestro Proceso para conseguir tu Beca Deportiva
+                <p className="font-body text-muted-foreground text-sm sm:text-base">
+                  {t("process.subtitle")}
                 </p>
               </div>
             </div>
           </div>
 
           {/* Timeline */}
-          <div className="flex-1 py-16 lg:py-32">
+          <div className="flex-1 py-12 sm:py-16 lg:py-32">
             <div className="relative">
               {/* Vertical Line */}
-              <div className="absolute left-6 lg:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
+              <div className="absolute left-5 sm:left-6 lg:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
 
               {/* Steps */}
-              <div className="space-y-32 lg:space-y-48">
+              <div className="space-y-20 sm:space-y-32 lg:space-y-48">
                 {steps.map((step, index) => (
                   <div
                     key={index}
                     ref={(el) => (stepsRef.current[index] = el)}
-                    className="relative flex gap-8 lg:gap-12"
+                    className="relative flex gap-6 sm:gap-8 lg:gap-12"
                   >
                     {/* Icon on Timeline */}
                     <div className="relative z-10 flex-shrink-0">
                       <div
-                        className={`w-12 h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                        className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
                           activeStep >= index
                             ? "bg-primary/20 border-primary"
                             : "bg-card border-border"
                         }`}
                       >
                         <step.icon
-                          className={`w-5 h-5 lg:w-7 lg:h-7 transition-colors duration-500 ${
+                          className={`w-4 h-4 sm:w-5 sm:h-5 lg:w-7 lg:h-7 transition-colors duration-500 ${
                             activeStep >= index ? "text-primary" : "text-muted-foreground"
                           }`}
                         />
@@ -106,16 +108,16 @@ const ProcessSection = () => {
 
                     {/* Content */}
                     <div
-                      className={`flex-1 pt-2 transition-all duration-500 ${
+                      className={`flex-1 pt-1 sm:pt-2 transition-all duration-500 ${
                         activeStep >= index
                           ? "opacity-100 translate-y-0"
                           : "opacity-30 translate-y-4"
                       }`}
                     >
-                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-foreground mb-3">
-                        Fase {index + 1} - {step.title}
+                      <h3 className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-3">
+                        {t("process.phase")} {index + 1} - {step.title}
                       </h3>
-                      <p className="font-body text-muted-foreground text-base lg:text-lg leading-relaxed max-w-md">
+                      <p className="font-body text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed max-w-md">
                         {step.description}
                       </p>
                     </div>
@@ -125,15 +127,16 @@ const ProcessSection = () => {
             </div>
 
             {/* CTA Button */}
-            <div className="text-center mt-20">
+            <div className="text-center mt-16 sm:mt-20">
               <Button
                 variant="ctaLarge"
                 size="ctaXl"
+                className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
                 asChild
               >
                 <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-                  <span className="text-lg md:text-xl font-bold uppercase tracking-wider">Agendar Llamada Estratégica</span>
-                  <span className="text-sm md:text-base font-normal opacity-90">Sesión 1 a 1 para evaluar tu caso</span>
+                  <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
+                  <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
                 </a>
               </Button>
             </div>
