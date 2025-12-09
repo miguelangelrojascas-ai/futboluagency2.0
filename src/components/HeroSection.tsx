@@ -33,7 +33,7 @@ const HeroSection = () => {
       <div className="relative z-10 container-wide section-padding text-center pt-24">
         {/* Tag */}
         <span className="inline-block mb-6 text-primary font-body text-sm tracking-[0.2em] uppercase animate-fade-in">
-          Agencia de fútbol internacional
+          Futbolistas y Padres
         </span>
 
         {/* Main Headline */}
