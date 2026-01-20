@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { openCalendly } from "@/hooks/useCalendly";
 import heroBg from "@/assets/hero-bg.jpg";
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-fua.png";
 
 const HeroSection = () => {
   const { t } = useLanguage();
