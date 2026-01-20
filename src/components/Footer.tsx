@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-fua.png";
 
 // Social media icons as inline SVGs since lucide doesn't have TikTok
 const TikTokIcon = ({ className }: { className?: string }) => (
