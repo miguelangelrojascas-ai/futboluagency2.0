@@ -6,7 +6,7 @@ import cardBgProfile from "@/assets/card-bg-profile.jpg";
 import cardBgCoaches from "@/assets/card-bg-coaches-new.jpg";
 import cardBgVisas from "@/assets/card-bg-visas.jpg";
 
-const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
+const FORM_URL = "https://share.hsforms.com/1FqcfpDYYQgq3VQq_9sNHWQu7wo3";
 
 const CTASection = () => {
   const { t } = useLanguage();
@@ -98,7 +98,7 @@ const CTASection = () => {
             className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
             asChild
           >
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+            <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
               <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
               <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
             </a>

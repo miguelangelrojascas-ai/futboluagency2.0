@@ -1,9 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { openCalendly } from "@/hooks/useCalendly";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo-fua.png";
+
+const FORM_URL = "https://share.hsforms.com/1FqcfpDYYQgq3VQq_9sNHWQu7wo3";
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -46,9 +47,11 @@ const HeroSection = () => {
         <div className="animate-fade-in-up px-4" style={{
         animationDelay: "0.4s"
       }}>
-          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={openCalendly}>
-            {t("hero.cta")}
-            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" asChild>
+            <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
+              {t("hero.cta")}
+              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+            </a>
           </Button>
         </div>
       </div>

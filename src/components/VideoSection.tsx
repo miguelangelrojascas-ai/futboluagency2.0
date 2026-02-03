@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { openCalendly } from "@/hooks/useCalendly";
+
+const FORM_URL = "https://share.hsforms.com/1FqcfpDYYQgq3VQq_9sNHWQu7wo3";
 
 const VideoSection = () => {
   const { t } = useLanguage();
@@ -37,10 +38,12 @@ const VideoSection = () => {
               variant="ctaLarge"
               size="ctaXl"
               className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-              onClick={openCalendly}
+              asChild
             >
-              <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
-              <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+              <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
+                <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
+                <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+              </a>
             </Button>
           </div>
         </div>
