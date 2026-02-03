@@ -1,5 +1,6 @@
 import logo from "@/assets/logo-fua.png";
-import { openCalendly } from "@/hooks/useCalendly";
+
+const FORM_URL = "https://share.hsforms.com/1FqcfpDYYQgq3VQq_9sNHWQu7wo3";
 
 const Header = () => {
   return (
@@ -11,12 +12,14 @@ const Header = () => {
           className="h-14 md:h-16 w-auto mb-3"
         />
         
-        <button
-          onClick={openCalendly}
+        <a
+          href={FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-6 py-2.5 rounded-lg transition-colors text-sm"
         >
           Evaluación Gratuita
-        </button>
+        </a>
       </div>
     </header>
   );
