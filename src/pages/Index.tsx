@@ -8,20 +8,25 @@ import SuccessCasesSection from "@/components/SuccessCasesSection";
 import TeamSection from "@/components/TeamSection";
 import CalendlySection from "@/components/CalendlySection";
 import Footer from "@/components/Footer";
+import HubSpotFormModal from "@/components/HubSpotFormModal";
+import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
 const Index = () => {
+  const { isOpen, openForm, setIsOpen } = useHubSpotForm();
+
   return (
     <main className="min-h-screen">
-      <HeroSection />
+      <HeroSection onOpenForm={openForm} />
       <MetricsSection />
-      <VideoSection />
+      <VideoSection onOpenForm={openForm} />
       <LogoCarousel />
-      <CTASection />
+      <CTASection onOpenForm={openForm} />
       <ProcessSection />
       <SuccessCasesSection />
       <TeamSection />
-      <CalendlySection />
+      <CalendlySection onOpenForm={openForm} />
       <Footer />
+      <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
     </main>
   );
 };
