@@ -4,11 +4,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo-fua.png";
 
-const FORM_URL = "https://share.hsforms.com/1FqcfpDYYQgq3VQq_9sNHWQu7wo3";
+interface HeroSectionProps {
+  onOpenForm: () => void;
+}
 
-const HeroSection = () => {
+const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const { t } = useLanguage();
-
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
@@ -47,11 +48,9 @@ const HeroSection = () => {
         <div className="animate-fade-in-up px-4" style={{
         animationDelay: "0.4s"
       }}>
-          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" asChild>
-            <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
-              {t("hero.cta")}
-              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-            </a>
+          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={onOpenForm}>
+            {t("hero.cta")}
+            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
       </div>

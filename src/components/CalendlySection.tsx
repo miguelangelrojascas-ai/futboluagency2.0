@@ -1,14 +1,13 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
-import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
 
-const CalendlySection = () => {
+interface CalendlySectionProps {
+  onOpenForm: () => void;
+}
+
+const CalendlySection = ({ onOpenForm }: CalendlySectionProps) => {
   const { t } = useLanguage();
-  
-  // Load Calendly scripts once here
-  useCalendlyLoader();
-
   return (
     <section id="calendly-section" className="section-padding bg-muted/30">
       <div className="container-wide">
@@ -20,7 +19,7 @@ const CalendlySection = () => {
             {t("calendly.subtitle")}
           </p>
           <Button 
-            onClick={openCalendly}
+            onClick={onOpenForm}
             size="lg"
             className="gap-2"
           >
