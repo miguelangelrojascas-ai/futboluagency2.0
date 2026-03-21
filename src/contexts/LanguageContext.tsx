@@ -95,6 +95,11 @@ const translations: Record<Language, Record<string, string>> = {
     "calendly.subtitle": "Selecciona un horario que te convenga para hablar con nuestro equipo sobre tu futuro deportivo.",
     "calendly.button": "Agendar Reunión",
 
+    // Other Sports
+    "othersports.title": "Otros Deportes — Próximamente",
+    "othersports.desc": "Estamos expandiendo nuestro programa a otros deportes. Si eres atleta de basketball, tenis u otros deportes, pronto tendremos oportunidades para ti.",
+    "othersports.coming": "Próximamente disponible — Regístrate para ser notificado",
+
     // USA Page
     "usa.tag": "Programa Estados Unidos",
     "usa.hero.title": "Cómo Conseguir una",
