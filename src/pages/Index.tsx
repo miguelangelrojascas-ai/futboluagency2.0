@@ -3,7 +3,7 @@ import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
 
-import ProcessSection from "@/components/ProcessSection";
+import CTASection from "@/components/CTASection";
 import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import TeamSection from "@/components/TeamSection";
@@ -29,7 +29,7 @@ const Index = () => {
         <LogoCarousel />
         
         <PathSelectionSection />
-        <ProcessSection />
+        <CTASection onOpenForm={openForm} />
         <PlayerSuccessStorySection />
         <SpainAcademiesSection />
         <SuccessCasesSection />
