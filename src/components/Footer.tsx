@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo-fua.png";
@@ -111,30 +112,17 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links Column */}
+          {/* Navigation Column */}
           <div className="text-center md:text-left">
             <h4 className="font-display text-base font-semibold text-foreground mb-4">
-              Legal
+              {t("nav.home")}
             </h4>
             <nav className="space-y-3">
-              <a
-                href="#"
-                className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Política de Privacidad
-              </a>
-              <a
-                href="#"
-                className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Términos y Condiciones
-              </a>
-              <a
-                href="#"
-                className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Política de Cookies
-              </a>
+              <Link to="/" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.home")}</Link>
+              <Link to="/usa" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.usa")}</Link>
+              <Link to="/spain" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.spain")}</Link>
+              <Link to="/players" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.players")}</Link>
+              <Link to="/apply" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.apply")}</Link>
             </nav>
           </div>
         </div>
