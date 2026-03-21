@@ -217,11 +217,12 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Turn your talent into a",
-    "hero.headline.highlight": "sports scholarship in the United States",
-    "hero.subheadline": "We help international soccer players study and play at American universities with a",
+    "hero.headline": "Get Recruited to Play Soccer in the",
+    "hero.headline.highlight": "U.S. or Spain",
+    "hero.subheadline": "We help international soccer players study and play at American universities or top academies in Spain with a",
     "hero.subheadline.highlight": "real athletic opportunity",
-    "hero.cta": "Start My Free Evaluation",
+    "hero.cta": "Apply Now",
+    "hero.cta2": "Explore Programs",
 
     // Video Section
     "video.title": "Watch the",
