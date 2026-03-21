@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, Dollar
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ProcessSection from "@/components/ProcessSection";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
