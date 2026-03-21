@@ -13,6 +13,7 @@ const PlayerSuccessStorySection = () => {
       headline: "El Camino de",
       headlineHighlight: "Ander González",
       subtitle: "De México a España, y de España a una beca NCAA Division 1 en St. John's University.",
+      videoTitle: "Mira su historia",
       timeline: [
         {
           year: "2024",
@@ -40,6 +41,7 @@ const PlayerSuccessStorySection = () => {
       headline: "The Journey of",
       headlineHighlight: "Ander González",
       subtitle: "From Mexico to Spain, and from Spain to an NCAA Division 1 scholarship at St. John's University.",
+      videoTitle: "Watch his story",
       timeline: [
         {
           year: "2024",
@@ -86,15 +88,33 @@ const PlayerSuccessStorySection = () => {
           </p>
         </div>
 
-        {/* Hero Image */}
-        <div className="max-w-sm mx-auto mb-12 sm:mb-16">
-          <div className="relative rounded-2xl overflow-hidden aspect-square shadow-2xl border border-border">
+        {/* Hero Image - full photo visible */}
+        <div className="max-w-md mx-auto mb-12 sm:mb-16">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
             <img
               src={anderMeet}
               alt="Ander González"
-              className="w-full h-full object-cover"
+              className="w-full h-auto object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+          </div>
+        </div>
+
+        {/* Video */}
+        <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
+          <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground text-center mb-6">
+            🎬 {t.videoTitle}
+          </h3>
+          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full h-auto"
+              poster={anderMeet}
+            >
+              <source src="/videos/ander-highlights.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
 
@@ -127,13 +147,13 @@ const PlayerSuccessStorySection = () => {
                   </p>
                 </div>
 
-                {/* Image */}
+                {/* Image - full photo visible */}
                 <div className={`pl-16 sm:pl-0 sm:w-1/2 ${index % 2 === 0 ? "sm:pl-16" : "sm:pr-16"}`}>
-                  <div className="rounded-xl overflow-hidden border border-border shadow-lg aspect-video">
+                  <div className="rounded-xl overflow-hidden border border-border shadow-lg">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto object-contain"
                     />
                   </div>
                 </div>

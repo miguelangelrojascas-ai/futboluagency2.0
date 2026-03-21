@@ -1,10 +1,5 @@
-import { MapPin, Trophy, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MapPin, Trophy, Star, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-interface SpainAcademiesSectionProps {
-  onOpenForm: () => void;
-}
 
 const clubs = [
   "Real Valladolid CF",
@@ -15,7 +10,7 @@ const clubs = [
   "CF Fuenlabrada",
 ];
 
-const SpainAcademiesSection = ({ onOpenForm }: SpainAcademiesSectionProps) => {
+const SpainAcademiesSection = () => {
   const { language } = useLanguage();
 
   const content = {
@@ -25,7 +20,10 @@ const SpainAcademiesSection = ({ onOpenForm }: SpainAcademiesSectionProps) => {
       headlineHighlight: "en España",
       description: "España es uno de los mejores entornos del mundo para desarrollarte como futbolista. Nuestro programa ofrece a jugadores internacionales la oportunidad de entrenar, competir y crecer en academias de alto nivel durante toda la temporada.",
       placement: "Los jugadores son ubicados en clubes según su nivel, edad y rendimiento, asegurando la mejor experiencia de desarrollo posible.",
-      clubsTitle: "Trabajamos con academias y clubes competitivos en toda España:",
+      featuredTitle: "Programa Destacado",
+      featuredClub: "Talavera CF",
+      featuredDesc: "Nuestro programa principal en Talavera CF ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador.",
+      clubsTitle: "También colaboramos con otros clubes de alto nivel:",
       moreClubs: "Y muchas otras academias según el nivel y disponibilidad del jugador.",
       cta: "Comienza Tu Camino",
     },
@@ -35,7 +33,10 @@ const SpainAcademiesSection = ({ onOpenForm }: SpainAcademiesSectionProps) => {
       headlineHighlight: "in Spain",
       description: "Spain is one of the best environments in the world to develop as a football player. Our program gives international players the opportunity to train, compete, and grow in high-level football academies throughout the full season.",
       placement: "Players are placed in clubs based on their level, age, and performance, ensuring the best possible development experience.",
-      clubsTitle: "We work with competitive academies and clubs across Spain:",
+      featuredTitle: "Featured Program",
+      featuredClub: "Talavera CF",
+      featuredDesc: "Our flagship program at Talavera CF offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player.",
+      clubsTitle: "We also collaborate with other top-level clubs:",
       moreClubs: "And many other academies depending on the player's level and availability.",
       cta: "Start Your Journey",
     },
@@ -78,43 +79,64 @@ const SpainAcademiesSection = ({ onOpenForm }: SpainAcademiesSectionProps) => {
           </div>
         </div>
 
+        {/* Featured: Talavera CF */}
+        <div className="max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="bg-gradient-to-br from-primary/10 via-card to-card border-2 border-primary/40 rounded-2xl p-6 sm:p-10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center">
+                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div>
+                  <span className="text-primary font-body text-xs tracking-[0.15em] uppercase block">{t.featuredTitle}</span>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground">{t.featuredClub}</h3>
+                </div>
+              </div>
+              <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
+                {t.featuredDesc}
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Clubs Grid */}
         <div className="max-w-4xl mx-auto mb-8">
-          <p className="font-body text-foreground text-sm sm:text-base font-medium text-center mb-6">
+          <p className="font-body text-muted-foreground text-xs sm:text-sm font-medium text-center mb-6">
             {t.clubsTitle}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
             {clubs.map((club, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-lg p-4 sm:p-5 text-center group hover:border-primary/50 transition-all duration-300"
+                className="bg-card border border-border rounded-lg p-3 sm:p-4 text-center group hover:border-border transition-all duration-300"
               >
                 <div className="flex items-center justify-center gap-2">
-                  <Trophy className="w-4 h-4 text-primary opacity-70" />
-                  <span className="font-body text-foreground text-xs sm:text-sm font-medium">
+                  <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
+                  <span className="font-body text-muted-foreground text-xs sm:text-sm">
                     {club}
                   </span>
                 </div>
               </div>
             ))}
           </div>
-          <p className="font-body text-muted-foreground text-xs sm:text-sm text-center mt-4 italic">
+          <p className="font-body text-muted-foreground text-xs text-center mt-4 italic">
             {t.moreClubs}
           </p>
         </div>
 
-        {/* CTA */}
+        {/* CTA - links to Google Form */}
         <div className="text-center mt-10 sm:mt-14">
-          <Button
-            variant="ctaLarge"
-            size="ctaXl"
-            className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-            onClick={onOpenForm}
+          <a
+            href="https://forms.gle/Qy9vdJ5jZtyKPVKf6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 whitespace-normal text-center flex-col gap-1 rounded-xl bg-primary text-primary-foreground hover:bg-primary-hover shadow-xl hover:shadow-glow transform hover:scale-[1.02] font-bold tracking-wide transition-all duration-300 min-h-[70px] sm:min-h-[80px] px-8 sm:px-16 py-5"
           >
             <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">
               {t.cta}
             </span>
-          </Button>
+          </a>
         </div>
       </div>
     </section>
