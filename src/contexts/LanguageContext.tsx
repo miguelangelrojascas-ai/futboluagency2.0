@@ -38,12 +38,12 @@ const translations: Record<Language, Record<string, string>> = {
     "cta.subheadline": "Lo que obtienes al aplicar con nosotros:",
     "cta.service1.title": "Evaluación deportiva profesional",
     "cta.service1.desc": "Analizamos tu nivel de juego, tu perfil académico y tu potencial para identificar las mejores oportunidades reales para ti.",
-    "cta.service2.title": "Creación de tu perfil para becas",
-    "cta.service2.desc": "Editamos tu video highlight, tus estadísticas, y diseñamos un perfil profesional que atrae a entrenadores de NCAA, NAIA y JUCO.",
-    "cta.service3.title": "Representación y contacto directo con entrenadores",
-    "cta.service3.desc": "Nos encargamos de hablar con los coaches, presentar tu perfil y conseguir respuestas reales y ofertas concretas.",
-    "cta.service4.title": "Guía completa en visas, becas y admisiones",
-    "cta.service4.desc": "Te acompañamos paso a paso hasta que estés aceptado y con beca asegurada. Admisiones, TOEFL, FAFSA, DS-160, I-20.",
+    "cta.service2.title": "Construcción de tu perfil",
+    "cta.service2.desc": "Creamos tu perfil profesional, incluyendo video highlight y presentación optimizada para entrenadores y clubes.",
+    "cta.service3.title": "Representación y contacto directo",
+    "cta.service3.desc": "Presentamos tu perfil a entrenadores y clubes, generando oportunidades reales y respuestas concretas.",
+    "cta.service4.title": "Acompañamiento hasta tu destino",
+    "cta.service4.desc": "Te guiamos en todo el proceso hasta asegurar tu lugar, ya sea en una universidad o en un club en Europa.",
 
     // Path Selection
     "path.title": "Elige tu",
