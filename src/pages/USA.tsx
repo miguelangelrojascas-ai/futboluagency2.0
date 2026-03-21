@@ -176,6 +176,9 @@ const USA = () => {
           </div>
         </section>
 
+        {/* Services CTA Section */}
+        <CTASection onOpenForm={openForm} />
+
         {/* CTA */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4 text-center">
@@ -195,6 +198,7 @@ const USA = () => {
         </section>
 
         <Footer />
+        <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
       </main>
     </>
   );
