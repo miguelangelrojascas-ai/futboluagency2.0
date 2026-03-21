@@ -3,9 +3,13 @@ import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, Dollar
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
+import HubSpotFormModal from "@/components/HubSpotFormModal";
+import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
 const USA = () => {
   const { t } = useLanguage();
+  const { isOpen, openForm, setIsOpen } = useHubSpotForm();
 
   const divisions = [
     { name: "NCAA Division I", desc: t("usa.ncaa.d1"), level: t("usa.level.highest") },
@@ -172,6 +176,9 @@ const USA = () => {
           </div>
         </section>
 
+        {/* Services CTA Section */}
+        <CTASection onOpenForm={openForm} />
+
         {/* CTA */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4 text-center">
@@ -191,6 +198,7 @@ const USA = () => {
         </section>
 
         <Footer />
+        <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
       </main>
     </>
   );
