@@ -22,10 +22,9 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.tag": "",
     "hero.headline": "Consigue que te recluten para jugar fútbol en",
     "hero.headline.highlight": "EE.UU. o España",
-    "hero.subheadline": "Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos o en academias de alto nivel en España con una",
-    "hero.subheadline.highlight": "oportunidad deportiva real",
-    "hero.cta": "Aplica Ahora",
-    "hero.cta2": "Explorar Programas",
+    "hero.subheadline": "Ayudamos a futbolistas internacionales a conseguir oportunidades en los mejores programas",
+    "hero.cta.usa": "Explorar Becas en EE.UU.",
+    "hero.cta.spain": "Explorar Programa en España",
 
     // Video Section
     "video.title": "Mira el",
@@ -224,10 +223,9 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.tag": "",
     "hero.headline": "Get Recruited to Play Soccer in the",
     "hero.headline.highlight": "U.S. or Spain",
-    "hero.subheadline": "We help international soccer players study and play at American universities or top academies in Spain with a",
-    "hero.subheadline.highlight": "real athletic opportunity",
-    "hero.cta": "Apply Now",
-    "hero.cta2": "Explore Programs",
+    "hero.subheadline": "We help international players get opportunities in top programs",
+    "hero.cta.usa": "Explore USA Scholarships",
+    "hero.cta.spain": "Explore Spain Program",
 
     // Video Section
     "video.title": "Watch the",
