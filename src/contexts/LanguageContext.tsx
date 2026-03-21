@@ -239,12 +239,12 @@ const translations: Record<Language, Record<string, string>> = {
     "cta.subheadline": "What you get when you apply with us:",
     "cta.service1.title": "Professional athletic evaluation",
     "cta.service1.desc": "We analyze your playing level, academic profile, and potential to identify the best real opportunities for you.",
-    "cta.service2.title": "Scholarship profile creation",
-    "cta.service2.desc": "We edit your highlight video, your stats, and design a professional profile that attracts NCAA, NAIA, and JUCO coaches.",
-    "cta.service3.title": "Direct representation and coach contact",
-    "cta.service3.desc": "We handle talking to coaches, presenting your profile, and getting real responses and concrete offers.",
-    "cta.service4.title": "Complete visa, scholarship, and admissions guidance",
-    "cta.service4.desc": "We accompany you step by step until you're accepted with a secured scholarship. Admissions, TOEFL, FAFSA, DS-160, I-20.",
+    "cta.service2.title": "Profile building",
+    "cta.service2.desc": "We create your professional profile, including highlight video and presentation optimized for coaches and clubs.",
+    "cta.service3.title": "Direct representation and contact",
+    "cta.service3.desc": "We present your profile to coaches and clubs, generating real opportunities and concrete responses.",
+    "cta.service4.title": "Support to your destination",
+    "cta.service4.desc": "We guide you through the entire process to secure your spot, whether at a university or a club in Europe.",
 
     // Path Selection
     "path.title": "Choose Your",
