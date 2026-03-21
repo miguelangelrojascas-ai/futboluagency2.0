@@ -46,7 +46,7 @@ const HeroSection = () => {
           </Link>
           <Link
             to="/spain"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg border border-foreground/20 bg-foreground/5 hover:bg-foreground/10 text-foreground/90 transition-all duration-300 backdrop-blur-sm"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg hover:shadow-glow transform hover:scale-105 transition-all duration-300"
           >
             {t("hero.cta.spain")}
             <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
