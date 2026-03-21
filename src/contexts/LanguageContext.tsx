@@ -20,11 +20,12 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Convierte tu talento en una",
-    "hero.headline.highlight": "beca deportiva en Estados Unidos",
-    "hero.subheadline": "Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos con una",
+    "hero.headline": "Consigue que te recluten para jugar fútbol en",
+    "hero.headline.highlight": "EE.UU. o España",
+    "hero.subheadline": "Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos o en academias de alto nivel en España con una",
     "hero.subheadline.highlight": "oportunidad deportiva real",
-    "hero.cta": "Comenzar mi Evaluación Gratuita",
+    "hero.cta": "Aplica Ahora",
+    "hero.cta2": "Explorar Programas",
 
     // Video Section
     "video.title": "Mira el",
