@@ -20,8 +20,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Consigue que te recluten para jugar fútbol en",
-    "hero.headline.highlight": "EE.UU. o España",
+    "hero.headline": "Transforma tu talento en",
+    "hero.headline.highlight": "oportunidades.",
     "hero.subheadline": "Ayudamos a futbolistas internacionales a conseguir oportunidades en los mejores programas",
     "hero.cta.usa": "Explorar Becas en EE.UU.",
     "hero.cta.spain": "Explorar Programa en España",
@@ -221,8 +221,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Get Recruited to Play Soccer in the",
-    "hero.headline.highlight": "U.S. or Spain",
+    "hero.headline": "Transform Your Talent Into",
+    "hero.headline.highlight": "Opportunities.",
     "hero.subheadline": "We help international players get opportunities in top programs",
     "hero.cta.usa": "Explore USA Scholarships",
     "hero.cta.spain": "Explore Spain Program",
