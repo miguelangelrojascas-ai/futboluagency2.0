@@ -176,8 +176,8 @@ const USA = () => {
           </div>
         </section>
 
-        {/* Services CTA Section */}
-        <CTASection onOpenForm={openForm} />
+        {/* Process Section */}
+        <ProcessSection />
 
         {/* CTA */}
         <section className="section-padding bg-background">
