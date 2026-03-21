@@ -19,6 +19,8 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <HeroSection onOpenForm={openForm} />
+      <SpainAcademiesSection />
+      <PlayerSuccessStorySection />
       <MetricsSection />
       <VideoSection onOpenForm={openForm} />
       <LogoCarousel />
@@ -27,8 +29,6 @@ const Index = () => {
       <SuccessCasesSection />
       <TeamSection />
       <CalendlySection onOpenForm={openForm} />
-      <SpainAcademiesSection onOpenForm={openForm} />
-      <PlayerSuccessStorySection />
       <Footer />
       <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
     </main>
