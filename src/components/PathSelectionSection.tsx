@@ -6,7 +6,7 @@ const PathSelectionSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="section-padding bg-background">
+    <section id="path-selection" className="section-padding bg-background">
       <div className="container-wide px-4">
         <div className="text-center mb-10 sm:mb-14">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
