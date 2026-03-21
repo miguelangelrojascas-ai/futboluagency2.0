@@ -7,6 +7,8 @@ import ProcessSection from "@/components/ProcessSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import TeamSection from "@/components/TeamSection";
 import CalendlySection from "@/components/CalendlySection";
+import SpainAcademiesSection from "@/components/SpainAcademiesSection";
+import PlayerSuccessStorySection from "@/components/PlayerSuccessStorySection";
 import Footer from "@/components/Footer";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
