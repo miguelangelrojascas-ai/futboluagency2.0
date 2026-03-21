@@ -297,6 +297,11 @@ const translations: Record<Language, Record<string, string>> = {
     "calendly.subtitle": "Select a time that works for you to talk with our team about your athletic future.",
     "calendly.button": "Schedule Meeting",
 
+    // Other Sports
+    "othersports.title": "Other Sports — Coming Soon",
+    "othersports.desc": "We're expanding our program to other sports. If you're a basketball, tennis or other sport athlete, we'll have opportunities for you soon.",
+    "othersports.coming": "Coming soon — Register to be notified",
+
     // USA Page
     "usa.tag": "USA Program",
     "usa.hero.title": "How to Get a",
