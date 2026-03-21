@@ -10,7 +10,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const { t } = useLanguage();
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
