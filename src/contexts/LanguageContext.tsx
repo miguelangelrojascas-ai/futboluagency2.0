@@ -20,11 +20,12 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Convierte tu talento en una",
-    "hero.headline.highlight": "beca deportiva en Estados Unidos",
-    "hero.subheadline": "Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos con una",
+    "hero.headline": "Consigue que te recluten para jugar fútbol en",
+    "hero.headline.highlight": "EE.UU. o España",
+    "hero.subheadline": "Ayudamos a futbolistas internacionales a estudiar y jugar fútbol en universidades de Estados Unidos o en academias de alto nivel en España con una",
     "hero.subheadline.highlight": "oportunidad deportiva real",
-    "hero.cta": "Comenzar mi Evaluación Gratuita",
+    "hero.cta": "Aplica Ahora",
+    "hero.cta2": "Explorar Programas",
 
     // Video Section
     "video.title": "Mira el",
@@ -93,6 +94,11 @@ const translations: Record<Language, Record<string, string>> = {
     "calendly.title": "Agenda tu Evaluación Gratuita",
     "calendly.subtitle": "Selecciona un horario que te convenga para hablar con nuestro equipo sobre tu futuro deportivo.",
     "calendly.button": "Agendar Reunión",
+
+    // Other Sports
+    "othersports.title": "Otros Deportes — Próximamente",
+    "othersports.desc": "Estamos expandiendo nuestro programa a otros deportes. Si eres atleta de basketball, tenis u otros deportes, pronto tendremos oportunidades para ti.",
+    "othersports.coming": "Próximamente disponible — Regístrate para ser notificado",
 
     // USA Page
     "usa.tag": "Programa Estados Unidos",
@@ -216,11 +222,12 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Turn your talent into a",
-    "hero.headline.highlight": "sports scholarship in the United States",
-    "hero.subheadline": "We help international soccer players study and play at American universities with a",
+    "hero.headline": "Get Recruited to Play Soccer in the",
+    "hero.headline.highlight": "U.S. or Spain",
+    "hero.subheadline": "We help international soccer players study and play at American universities or top academies in Spain with a",
     "hero.subheadline.highlight": "real athletic opportunity",
-    "hero.cta": "Start My Free Evaluation",
+    "hero.cta": "Apply Now",
+    "hero.cta2": "Explore Programs",
 
     // Video Section
     "video.title": "Watch the",
@@ -289,6 +296,11 @@ const translations: Record<Language, Record<string, string>> = {
     "calendly.title": "Schedule Your Free Evaluation",
     "calendly.subtitle": "Select a time that works for you to talk with our team about your athletic future.",
     "calendly.button": "Schedule Meeting",
+
+    // Other Sports
+    "othersports.title": "Other Sports — Coming Soon",
+    "othersports.desc": "We're expanding our program to other sports. If you're a basketball, tennis or other sport athlete, we'll have opportunities for you soon.",
+    "othersports.coming": "Coming soon — Register to be notified",
 
     // USA Page
     "usa.tag": "USA Program",

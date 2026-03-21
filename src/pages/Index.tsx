@@ -10,6 +10,7 @@ import TeamSection from "@/components/TeamSection";
 import CalendlySection from "@/components/CalendlySection";
 import SpainAcademiesSection from "@/components/SpainAcademiesSection";
 import PlayerSuccessStorySection from "@/components/PlayerSuccessStorySection";
+import OtherSportsSection from "@/components/OtherSportsSection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
@@ -32,6 +33,7 @@ const Index = () => {
         <PlayerSuccessStorySection />
         <SpainAcademiesSection />
         <SuccessCasesSection />
+        <OtherSportsSection />
         <TeamSection />
         <CalendlySection onOpenForm={openForm} />
         <Footer />

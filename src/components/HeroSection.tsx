@@ -21,7 +21,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
       {/* Centered Logo at Top */}
-      <div className="absolute top-6 sm:top-8 left-1/2 -translate-x-1/2 z-20">
+      <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-20">
         <img src={logo} alt="FutbolUAgency" className="h-24 sm:h-28 md:h-32 w-auto" />
       </div>
 
@@ -45,13 +45,19 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
         </p>
 
         {/* CTA Button */}
-        <div className="animate-fade-in-up px-4" style={{
+        <div className="animate-fade-in-up px-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4" style={{
         animationDelay: "0.4s"
       }}>
           <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={onOpenForm}>
             {t("hero.cta")}
             <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
+          <a
+            href="#path-selection"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg border border-foreground/20 bg-foreground/5 hover:bg-foreground/10 text-foreground/90 transition-all duration-300 backdrop-blur-sm"
+          >
+            {t("hero.cta2")}
+          </a>
         </div>
       </div>
 
