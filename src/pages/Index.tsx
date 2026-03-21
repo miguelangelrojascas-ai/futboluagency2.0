@@ -27,6 +27,8 @@ const Index = () => {
       <SuccessCasesSection />
       <TeamSection />
       <CalendlySection onOpenForm={openForm} />
+      <SpainAcademiesSection onOpenForm={openForm} />
+      <PlayerSuccessStorySection />
       <Footer />
       <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
     </main>
