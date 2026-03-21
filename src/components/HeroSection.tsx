@@ -45,13 +45,19 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
         </p>
 
         {/* CTA Button */}
-        <div className="animate-fade-in-up px-4" style={{
+        <div className="animate-fade-in-up px-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4" style={{
         animationDelay: "0.4s"
       }}>
           <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={onOpenForm}>
             {t("hero.cta")}
             <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
+          <a
+            href="#path-selection"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg border border-foreground/20 bg-foreground/5 hover:bg-foreground/10 text-foreground/90 transition-all duration-300 backdrop-blur-sm"
+          >
+            {t("hero.cta2")}
+          </a>
         </div>
       </div>
 
