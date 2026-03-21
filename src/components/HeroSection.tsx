@@ -1,22 +1,19 @@
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo-fua.png";
 
-interface HeroSectionProps {
-  onOpenForm: () => void;
-}
-
-const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
+const HeroSection = () => {
   const { t } = useLanguage();
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/30" />
       </div>
-      
+
       {/* Bottom fade transition */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
@@ -27,9 +24,6 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
 
       {/* Content */}
       <div className="relative z-10 container-wide section-padding text-center pt-28 sm:pt-36">
-        {/* Tag */}
-        <span className="inline-block mb-4 sm:mb-6 text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase animate-fade-in"></span>
-
         {/* Main Headline */}
         <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up px-2">
           {t("hero.headline")}{" "}
@@ -37,27 +31,26 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
         </h1>
 
         {/* Subheadline */}
-        <p className="font-body text-foreground/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4" style={{
-        animationDelay: "0.2s"
-      }}>
-          {t("hero.subheadline")}{" "}
-          <span className="font-semibold text-foreground">{t("hero.subheadline.highlight")}</span>.
+        <p className="font-body text-foreground/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4" style={{ animationDelay: "0.2s" }}>
+          {t("hero.subheadline")}
         </p>
 
-        {/* CTA Button */}
-        <div className="animate-fade-in-up px-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4" style={{
-        animationDelay: "0.4s"
-      }}>
-          <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base" onClick={onOpenForm}>
-            {t("hero.cta")}
-            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-          </Button>
-          <a
-            href="#path-selection"
+        {/* CTA Buttons */}
+        <div className="animate-fade-in-up px-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4" style={{ animationDelay: "0.4s" }}>
+          <Link
+            to="/usa"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg hover:shadow-glow transform hover:scale-105 transition-all duration-300"
+          >
+            {t("hero.cta.usa")}
+            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+          </Link>
+          <Link
+            to="/spain"
             className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg border border-foreground/20 bg-foreground/5 hover:bg-foreground/10 text-foreground/90 transition-all duration-300 backdrop-blur-sm"
           >
-            {t("hero.cta2")}
-          </a>
+            {t("hero.cta.spain")}
+            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+          </Link>
         </div>
       </div>
 
@@ -67,6 +60,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
           <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 export default HeroSection;
