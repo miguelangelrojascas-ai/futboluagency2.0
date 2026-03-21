@@ -27,7 +27,7 @@ const Index = () => {
         <VideoSection onOpenForm={openForm} />
         <MetricsSection />
         <LogoCarousel />
-        <CTASection onOpenForm={openForm} />
+        
         <PathSelectionSection />
         <ProcessSection />
         <PlayerSuccessStorySection />
