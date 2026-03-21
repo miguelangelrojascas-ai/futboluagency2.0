@@ -223,10 +223,9 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.tag": "",
     "hero.headline": "Get Recruited to Play Soccer in the",
     "hero.headline.highlight": "U.S. or Spain",
-    "hero.subheadline": "We help international soccer players study and play at American universities or top academies in Spain with a",
-    "hero.subheadline.highlight": "real athletic opportunity",
-    "hero.cta": "Apply Now",
-    "hero.cta2": "Explore Programs",
+    "hero.subheadline": "We help international players get opportunities in top programs",
+    "hero.cta.usa": "Explore USA Scholarships",
+    "hero.cta.spain": "Explore Spain Program",
 
     // Video Section
     "video.title": "Watch the",
