@@ -69,7 +69,7 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
               />
               
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background/60" />
+              <div className="absolute inset-0 bg-background/85" />
               
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
@@ -80,10 +80,10 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
                   </div>
                 </div>
 
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2">
+                <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mb-2">
                   {service.title}
                 </h3>
-                <p className="font-body text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                <p className="font-body text-foreground/70 text-xs sm:text-sm leading-relaxed">
                   {service.description}
                 </p>
               </div>
