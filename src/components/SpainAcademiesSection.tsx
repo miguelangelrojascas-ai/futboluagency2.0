@@ -83,7 +83,7 @@ const SpainAcademiesSection = () => {
       placement: "Players are placed in clubs based on their level, age, and performance, ensuring the best possible development experience.",
       featuredTitle: "Featured Program",
       featuredClub: "Talavera CF",
-      featuredDesc: "Our flagship program at Talavera CF offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player.",
+      featuredDesc: "Our flagship program at Talavera CF offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player. A competitive club in Spanish semi-professional football — a great platform to earn minutes and develop in Europe.",
       clubsTitle: "We also collaborate with other top-level clubs:",
       moreClubs: "And many other academies depending on the player's level and availability.",
       cta: "Start Your Journey",
