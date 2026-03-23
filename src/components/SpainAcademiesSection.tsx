@@ -1,13 +1,19 @@
 import { MapPin, Trophy, Star, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import valladolidImg from "@/assets/spain-clubs/valladolid.jpg";
+import oviedoImg from "@/assets/spain-clubs/oviedo.jpg";
+import badalonaImg from "@/assets/spain-clubs/badalona.jpg";
+import gramaImg from "@/assets/spain-clubs/grama.jpg";
+import sabadellImg from "@/assets/spain-clubs/sabadell.jpg";
+import fuenlabradaImg from "@/assets/spain-clubs/fuenlabrada.jpg";
 
 const clubs = [
-  "Real Valladolid CF",
-  "Real Oviedo",
-  "CF Badalona",
-  "Fundació Esportiva Grama",
-  "CE Sabadell FC",
-  "CF Fuenlabrada",
+  { name: "Real Valladolid CF", img: valladolidImg },
+  { name: "Real Oviedo", img: oviedoImg },
+  { name: "CF Badalona", img: badalonaImg },
+  { name: "Fundació Esportiva Grama", img: gramaImg },
+  { name: "CE Sabadell FC", img: sabadellImg },
+  { name: "CF Fuenlabrada", img: fuenlabradaImg },
 ];
 
 const SpainAcademiesSection = () => {
@@ -109,13 +115,23 @@ const SpainAcademiesSection = () => {
             {clubs.map((club, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-lg p-3 sm:p-4 text-center group hover:border-border transition-all duration-300"
+                className="bg-card border border-border rounded-lg overflow-hidden group hover:border-primary/40 transition-all duration-300"
               >
-                <div className="flex items-center justify-center gap-2">
-                  <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
-                  <span className="font-body text-muted-foreground text-xs sm:text-sm">
-                    {club}
-                  </span>
+                <div className="relative h-32 sm:h-40 overflow-hidden">
+                  <img
+                    src={club.img}
+                    alt={club.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-background/40" />
+                </div>
+                <div className="p-3 sm:p-4 text-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
+                    <span className="font-body text-muted-foreground text-xs sm:text-sm">
+                      {club.name}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
