@@ -8,12 +8,54 @@ import sabadellImg from "@/assets/spain-clubs/sabadell.jpg";
 import fuenlabradaImg from "@/assets/spain-clubs/fuenlabrada.jpg";
 
 const clubs = [
-  { name: "Real Valladolid CF", img: valladolidImg },
-  { name: "Real Oviedo", img: oviedoImg },
-  { name: "CF Badalona", img: badalonaImg },
-  { name: "Fundació Esportiva Grama", img: gramaImg },
-  { name: "CE Sabadell FC", img: sabadellImg },
-  { name: "CF Fuenlabrada", img: fuenlabradaImg },
+  {
+    name: "Real Valladolid CF",
+    img: valladolidImg,
+    desc: {
+      es: "Club profesional con presencia en LaLiga y Segunda División. Formación en un entorno de alto nivel con exposición real al fútbol competitivo.",
+      en: "Professional club with presence in LaLiga and Segunda División. Training in a high-level environment with real exposure to competitive football.",
+    },
+  },
+  {
+    name: "Real Oviedo",
+    img: oviedoImg,
+    desc: {
+      es: "Histórico club español con gran tradición. Desarrollo en un entorno competitivo con enfoque en progresión y oportunidades reales.",
+      en: "Historic Spanish club with great tradition. Development in a competitive environment focused on progression and real opportunities.",
+    },
+  },
+  {
+    name: "CF Badalona",
+    img: badalonaImg,
+    desc: {
+      es: "Club catalán enfocado en el desarrollo de talento. Entorno ideal para crecer competitivamente dentro del sistema español.",
+      en: "Catalan club focused on talent development. Ideal environment to grow competitively within the Spanish system.",
+    },
+  },
+  {
+    name: "Fundació Esportiva Grama",
+    img: gramaImg,
+    desc: {
+      es: "Academia reconocida por su formación técnica. Perfecto para jugadores que buscan evolución constante y minutos de juego.",
+      en: "Academy recognized for its technical training. Perfect for players seeking constant evolution and playing time.",
+    },
+  },
+  {
+    name: "CE Sabadell FC",
+    img: sabadellImg,
+    desc: {
+      es: "Club histórico con experiencia en categorías profesionales. Ambiente competitivo con enfoque en rendimiento y proyección.",
+      en: "Historic club with experience in professional categories. Competitive environment focused on performance and projection.",
+    },
+  },
+  {
+    name: "CF Fuenlabrada",
+    img: fuenlabradaImg,
+    desc: {
+      es: "Club de Madrid con experiencia reciente en Segunda División. Alta exposición y nivel competitivo en una de las zonas más fuertes de España.",
+      en: "Madrid-based club with recent experience in Segunda División. High exposure and competitive level in one of Spain's strongest areas.",
+    },
+  },
 ];
 
 const SpainAcademiesSection = () => {
