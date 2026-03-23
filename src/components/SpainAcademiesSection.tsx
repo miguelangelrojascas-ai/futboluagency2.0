@@ -157,23 +157,21 @@ const SpainAcademiesSection = () => {
             {clubs.map((club, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-xl overflow-hidden group hover:border-primary/40 transition-all duration-300"
+                className="relative rounded-xl overflow-hidden group cursor-pointer border border-border hover:border-primary/40 transition-all duration-300 h-56 sm:h-64"
               >
-                <div className="relative h-48 sm:h-56 overflow-hidden">
-                  <img
-                    src={club.img}
-                    alt={club.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-background/60" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-foreground text-center px-4 uppercase tracking-wide drop-shadow-lg">
-                      {club.name}
-                    </h3>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-5">
-                  <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
+                <img
+                  src={club.img}
+                  alt={club.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Default overlay with name */}
+                <div className="absolute inset-0 bg-background/50 group-hover:bg-background/80 transition-all duration-300" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-5 transition-all duration-300">
+                  <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-foreground text-center uppercase tracking-wide drop-shadow-lg">
+                    {club.name}
+                  </h3>
+                  {/* Description - hidden by default, shown on hover */}
+                  <p className="font-body text-muted-foreground text-sm leading-relaxed text-center mt-3 max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 overflow-hidden">
                     {club.desc[language]}
                   </p>
                 </div>
