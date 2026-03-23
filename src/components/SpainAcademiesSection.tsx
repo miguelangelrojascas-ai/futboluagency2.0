@@ -129,22 +129,29 @@ const SpainAcademiesSection = () => {
         </div>
 
         {/* Featured: Talavera CF */}
-        <div className="max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="bg-gradient-to-br from-primary/10 via-card to-card border-2 border-primary/40 rounded-2xl p-6 sm:p-10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center">
-                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+        <div className="max-w-5xl mx-auto mb-10 sm:mb-14">
+          <div className="rounded-2xl overflow-hidden border-2 border-primary/40 relative">
+            <div className="relative h-72 sm:h-96 overflow-hidden">
+              <img
+                src={talaveraImg}
+                alt="CF Talavera"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center backdrop-blur-sm">
+                    <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                  </div>
+                  <div>
+                    <span className="text-primary font-body text-xs tracking-[0.15em] uppercase block">{t.featuredTitle}</span>
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground">{t.featuredClub}</h3>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-primary font-body text-xs tracking-[0.15em] uppercase block">{t.featuredTitle}</span>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground">{t.featuredClub}</h3>
-                </div>
+                <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl">
+                  {t.featuredDesc}
+                </p>
               </div>
-              <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
-                {t.featuredDesc}
-              </p>
             </div>
           </div>
         </div>
