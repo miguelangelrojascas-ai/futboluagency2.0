@@ -149,7 +149,7 @@ const SpainAcademiesSection = () => {
         </div>
 
         {/* Clubs Grid */}
-        <div className="max-w-4xl mx-auto mb-8">
+        <div className="max-w-6xl mx-auto mb-8">
           <p className="font-body text-muted-foreground text-xs sm:text-sm font-medium text-center mb-6">
             {t.clubsTitle}
           </p>
