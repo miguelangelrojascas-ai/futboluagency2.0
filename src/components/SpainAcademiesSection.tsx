@@ -131,26 +131,27 @@ const SpainAcademiesSection = () => {
 
         {/* Featured: Talavera CF */}
         <div className="max-w-5xl mx-auto mb-10 sm:mb-14">
-          <div className="rounded-xl overflow-hidden border-2 border-primary/40 relative h-64 sm:h-80 group">
-            <img
-              src={talaveraImg}
-              alt="CF Talavera"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-background/65" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-5 sm:p-8">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center backdrop-blur-sm">
-                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                </div>
+          <div className="rounded-xl overflow-hidden border-2 border-primary/40 bg-card grid grid-cols-1 md:grid-cols-2">
+            {/* Left: Info */}
+            <div className="p-6 sm:p-8 flex flex-col justify-center">
+              <div className="flex items-center gap-3 mb-4">
+                <img src={talaveraLogo} alt="CF Talavera Logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-primary/50" />
                 <div>
                   <span className="text-primary font-body text-xs tracking-[0.15em] uppercase block">{t.featuredTitle}</span>
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground">{t.featuredClub}</h3>
                 </div>
               </div>
-              <p className="font-body text-muted-foreground text-sm leading-relaxed max-w-2xl text-center">
+              <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
                 {t.featuredDesc}
               </p>
+            </div>
+            {/* Right: Image */}
+            <div className="relative h-56 md:h-auto overflow-hidden">
+              <img
+                src={talaveraImg}
+                alt="CF Talavera"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
