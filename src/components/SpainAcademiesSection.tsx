@@ -70,7 +70,7 @@ const SpainAcademiesSection = () => {
       placement: "Los jugadores son ubicados en clubes según su nivel, edad y rendimiento, asegurando la mejor experiencia de desarrollo posible.",
       featuredTitle: "Programa Destacado",
       featuredClub: "Talavera CF",
-      featuredDesc: "Nuestro programa principal en Talavera CF ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador.",
+      featuredDesc: "Nuestro programa principal en Talavera CF ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador. Club competitivo en el fútbol semiprofesional español. Buena plataforma para ganar minutos y desarrollarse en Europa.",
       clubsTitle: "También colaboramos con otros clubes de alto nivel:",
       moreClubs: "Y muchas otras academias según el nivel y disponibilidad del jugador.",
       cta: "Comienza Tu Camino",
