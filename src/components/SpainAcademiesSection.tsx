@@ -8,12 +8,54 @@ import sabadellImg from "@/assets/spain-clubs/sabadell.jpg";
 import fuenlabradaImg from "@/assets/spain-clubs/fuenlabrada.jpg";
 
 const clubs = [
-  { name: "Real Valladolid CF", img: valladolidImg },
-  { name: "Real Oviedo", img: oviedoImg },
-  { name: "CF Badalona", img: badalonaImg },
-  { name: "Fundació Esportiva Grama", img: gramaImg },
-  { name: "CE Sabadell FC", img: sabadellImg },
-  { name: "CF Fuenlabrada", img: fuenlabradaImg },
+  {
+    name: "Real Valladolid CF",
+    img: valladolidImg,
+    desc: {
+      es: "Club profesional con presencia en LaLiga y Segunda División. Formación en un entorno de alto nivel con exposición real al fútbol competitivo.",
+      en: "Professional club with presence in LaLiga and Segunda División. Training in a high-level environment with real exposure to competitive football.",
+    },
+  },
+  {
+    name: "Real Oviedo",
+    img: oviedoImg,
+    desc: {
+      es: "Histórico club español con gran tradición. Desarrollo en un entorno competitivo con enfoque en progresión y oportunidades reales.",
+      en: "Historic Spanish club with great tradition. Development in a competitive environment focused on progression and real opportunities.",
+    },
+  },
+  {
+    name: "CF Badalona",
+    img: badalonaImg,
+    desc: {
+      es: "Club catalán enfocado en el desarrollo de talento. Entorno ideal para crecer competitivamente dentro del sistema español.",
+      en: "Catalan club focused on talent development. Ideal environment to grow competitively within the Spanish system.",
+    },
+  },
+  {
+    name: "Fundació Esportiva Grama",
+    img: gramaImg,
+    desc: {
+      es: "Academia reconocida por su formación técnica. Perfecto para jugadores que buscan evolución constante y minutos de juego.",
+      en: "Academy recognized for its technical training. Perfect for players seeking constant evolution and playing time.",
+    },
+  },
+  {
+    name: "CE Sabadell FC",
+    img: sabadellImg,
+    desc: {
+      es: "Club histórico con experiencia en categorías profesionales. Ambiente competitivo con enfoque en rendimiento y proyección.",
+      en: "Historic club with experience in professional categories. Competitive environment focused on performance and projection.",
+    },
+  },
+  {
+    name: "CF Fuenlabrada",
+    img: fuenlabradaImg,
+    desc: {
+      es: "Club de Madrid con experiencia reciente en Segunda División. Alta exposición y nivel competitivo en una de las zonas más fuertes de España.",
+      en: "Madrid-based club with recent experience in Segunda División. High exposure and competitive level in one of Spain's strongest areas.",
+    },
+  },
 ];
 
 const SpainAcademiesSection = () => {
@@ -28,7 +70,7 @@ const SpainAcademiesSection = () => {
       placement: "Los jugadores son ubicados en clubes según su nivel, edad y rendimiento, asegurando la mejor experiencia de desarrollo posible.",
       featuredTitle: "Programa Destacado",
       featuredClub: "Talavera CF",
-      featuredDesc: "Nuestro programa principal en Talavera CF ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador.",
+      featuredDesc: "Nuestro programa principal en Talavera CF ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador. Club competitivo en el fútbol semiprofesional español. Buena plataforma para ganar minutos y desarrollarse en Europa.",
       clubsTitle: "También colaboramos con otros clubes de alto nivel:",
       moreClubs: "Y muchas otras academias según el nivel y disponibilidad del jugador.",
       cta: "Comienza Tu Camino",
@@ -41,7 +83,7 @@ const SpainAcademiesSection = () => {
       placement: "Players are placed in clubs based on their level, age, and performance, ensuring the best possible development experience.",
       featuredTitle: "Featured Program",
       featuredClub: "Talavera CF",
-      featuredDesc: "Our flagship program at Talavera CF offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player.",
+      featuredDesc: "Our flagship program at Talavera CF offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player. A competitive club in Spanish semi-professional football — a great platform to earn minutes and develop in Europe.",
       clubsTitle: "We also collaborate with other top-level clubs:",
       moreClubs: "And many other academies depending on the player's level and availability.",
       cta: "Start Your Journey",
@@ -125,13 +167,16 @@ const SpainAcademiesSection = () => {
                   />
                   <div className="absolute inset-0 bg-background/40" />
                 </div>
-                <div className="p-3 sm:p-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
-                    <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
-                    <span className="font-body text-muted-foreground text-xs sm:text-sm">
+                <div className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Trophy className="w-3 h-3 text-primary flex-shrink-0" />
+                    <span className="font-display text-foreground text-xs sm:text-sm font-semibold">
                       {club.name}
                     </span>
                   </div>
+                  <p className="font-body text-muted-foreground text-[11px] sm:text-xs leading-relaxed">
+                    {club.desc[language]}
+                  </p>
                 </div>
               </div>
             ))}
