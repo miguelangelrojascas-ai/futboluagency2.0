@@ -1,3 +1,4 @@
+// Spain page
 import { Link } from "react-router-dom";
 import { ArrowRight, Trophy, Sun, Users, Target, Zap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
