@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Spain = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const benefits = [
     { icon: Trophy, title: t("spain.benefit1.title"), desc: t("spain.benefit1.desc") },
