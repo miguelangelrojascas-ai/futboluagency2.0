@@ -115,13 +115,23 @@ const SpainAcademiesSection = () => {
             {clubs.map((club, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-lg p-3 sm:p-4 text-center group hover:border-border transition-all duration-300"
+                className="bg-card border border-border rounded-lg overflow-hidden group hover:border-primary/40 transition-all duration-300"
               >
-                <div className="flex items-center justify-center gap-2">
-                  <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
-                  <span className="font-body text-muted-foreground text-xs sm:text-sm">
-                    {club}
-                  </span>
+                <div className="relative h-32 sm:h-40 overflow-hidden">
+                  <img
+                    src={club.img}
+                    alt={club.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-background/40" />
+                </div>
+                <div className="p-3 sm:p-4 text-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
+                    <span className="font-body text-muted-foreground text-xs sm:text-sm">
+                      {club.name}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
