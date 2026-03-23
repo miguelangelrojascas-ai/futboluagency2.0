@@ -1,13 +1,19 @@
 import { MapPin, Trophy, Star, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import valladolidImg from "@/assets/spain-clubs/valladolid.jpg";
+import oviedoImg from "@/assets/spain-clubs/oviedo.jpg";
+import badalonaImg from "@/assets/spain-clubs/badalona.jpg";
+import gramaImg from "@/assets/spain-clubs/grama.jpg";
+import sabadellImg from "@/assets/spain-clubs/sabadell.jpg";
+import fuenlabradaImg from "@/assets/spain-clubs/fuenlabrada.jpg";
 
 const clubs = [
-  "Real Valladolid CF",
-  "Real Oviedo",
-  "CF Badalona",
-  "Fundació Esportiva Grama",
-  "CE Sabadell FC",
-  "CF Fuenlabrada",
+  { name: "Real Valladolid CF", img: valladolidImg },
+  { name: "Real Oviedo", img: oviedoImg },
+  { name: "CF Badalona", img: badalonaImg },
+  { name: "Fundació Esportiva Grama", img: gramaImg },
+  { name: "CE Sabadell FC", img: sabadellImg },
+  { name: "CF Fuenlabrada", img: fuenlabradaImg },
 ];
 
 const SpainAcademiesSection = () => {
