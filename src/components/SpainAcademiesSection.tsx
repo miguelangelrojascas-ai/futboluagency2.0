@@ -1,4 +1,4 @@
-import { MapPin, Trophy, Star, Crown } from "lucide-react";
+import { MapPin, Trophy, Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import valladolidImg from "@/assets/spain-clubs/valladolid.jpg";
 import oviedoImg from "@/assets/spain-clubs/oviedo.jpg";
