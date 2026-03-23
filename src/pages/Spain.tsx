@@ -27,10 +27,18 @@ const Spain = () => {
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
         {/* Hero */}
-        <section className="section-padding bg-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(355,77%,56%,0.08),transparent_60%)]" />
+        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/videos/spain-hero.mp4"
+          />
+          <div className="absolute inset-0 bg-background/85" />
           <div className="container-wide px-4 relative">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto text-center section-padding">
               <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.2em] uppercase">
                 {t("spain.tag")}
               </span>
