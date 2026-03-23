@@ -36,7 +36,7 @@ const Spain = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src="/videos/spain-hero.mp4"
           />
-          <div className="absolute inset-0 bg-background/85" />
+          <div className="absolute inset-0 bg-background/70" />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
               <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.2em] uppercase">
