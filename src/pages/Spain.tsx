@@ -34,10 +34,13 @@ const Spain = () => {
                 {t("spain.tag")}
               </span>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                {t("spain.hero.title")} <span className="text-primary italic">{t("spain.hero.highlight")}</span>
+                {language === "es" ? "Juega en las Mejores Academias de Fútbol" : "Play in Top Football Academies"}{" "}
+                <span className="text-primary italic">{language === "es" ? "en España" : "in Spain"}</span>
               </h1>
               <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
-                {t("spain.hero.desc")}
+                {language === "es"
+                  ? "España es uno de los mejores entornos del mundo para desarrollarte como futbolista. Nuestro programa ofrece a jugadores internacionales la oportunidad de entrenar, competir y crecer en academias de alto nivel durante toda la temporada."
+                  : "Spain is one of the best environments in the world to develop as a football player. Our program gives international players the opportunity to train, compete, and grow in high-level football academies throughout the full season."}
               </p>
               <Link
                 to="/apply"
