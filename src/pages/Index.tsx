@@ -8,7 +8,7 @@ import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import TeamSection from "@/components/TeamSection";
 import CalendlySection from "@/components/CalendlySection";
-import SpainAcademiesSection from "@/components/SpainAcademiesSection";
+
 import OtherSportsSection from "@/components/OtherSportsSection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -30,7 +30,7 @@ const Index = () => {
         <PathSelectionSection />
         <CTASection onOpenForm={openForm} />
         
-        <SpainAcademiesSection />
+        
         <SuccessCasesSection />
         <OtherSportsSection />
         <TeamSection />
