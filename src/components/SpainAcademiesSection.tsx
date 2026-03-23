@@ -167,13 +167,16 @@ const SpainAcademiesSection = () => {
                   />
                   <div className="absolute inset-0 bg-background/40" />
                 </div>
-                <div className="p-3 sm:p-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
-                    <Trophy className="w-3 h-3 text-muted-foreground opacity-50" />
-                    <span className="font-body text-muted-foreground text-xs sm:text-sm">
+                <div className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Trophy className="w-3 h-3 text-primary flex-shrink-0" />
+                    <span className="font-display text-foreground text-xs sm:text-sm font-semibold">
                       {club.name}
                     </span>
                   </div>
+                  <p className="font-body text-muted-foreground text-[11px] sm:text-xs leading-relaxed">
+                    {club.desc[language]}
+                  </p>
                 </div>
               </div>
             ))}
