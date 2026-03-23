@@ -6,6 +6,7 @@ import badalonaImg from "@/assets/spain-clubs/badalona.jpg";
 import gramaImg from "@/assets/spain-clubs/grama.jpg";
 import sabadellImg from "@/assets/spain-clubs/sabadell.jpg";
 import fuenlabradaImg from "@/assets/spain-clubs/fuenlabrada.jpg";
+import talaveraImg from "@/assets/spain-clubs/talavera.jpg";
 
 const clubs = [
   {
