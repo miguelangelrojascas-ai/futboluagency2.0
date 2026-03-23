@@ -149,32 +149,31 @@ const SpainAcademiesSection = () => {
         </div>
 
         {/* Clubs Grid */}
-        <div className="max-w-4xl mx-auto mb-8">
+        <div className="max-w-6xl mx-auto mb-8">
           <p className="font-body text-muted-foreground text-xs sm:text-sm font-medium text-center mb-6">
             {t.clubsTitle}
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {clubs.map((club, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-lg overflow-hidden group hover:border-primary/40 transition-all duration-300"
+                className="bg-card border border-border rounded-xl overflow-hidden group hover:border-primary/40 transition-all duration-300"
               >
-                <div className="relative h-32 sm:h-40 overflow-hidden">
+                <div className="relative h-48 sm:h-56 overflow-hidden">
                   <img
                     src={club.img}
                     alt={club.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-background/40" />
-                </div>
-                <div className="p-3 sm:p-4">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Trophy className="w-3 h-3 text-primary flex-shrink-0" />
-                    <span className="font-display text-foreground text-xs sm:text-sm font-semibold">
+                  <div className="absolute inset-0 bg-background/60" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-foreground text-center px-4 uppercase tracking-wide drop-shadow-lg">
                       {club.name}
-                    </span>
+                    </h3>
                   </div>
-                  <p className="font-body text-muted-foreground text-[11px] sm:text-xs leading-relaxed">
+                </div>
+                <div className="p-4 sm:p-5">
+                  <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
                     {club.desc[language]}
                   </p>
                 </div>
