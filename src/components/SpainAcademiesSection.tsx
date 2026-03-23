@@ -7,6 +7,7 @@ import gramaImg from "@/assets/spain-clubs/grama.jpg";
 import sabadellImg from "@/assets/spain-clubs/sabadell.jpg";
 import fuenlabradaImg from "@/assets/spain-clubs/fuenlabrada.jpg";
 import talaveraImg from "@/assets/spain-clubs/talavera.jpg";
+import talaveraLogo from "@/assets/spain-clubs/talavera-logo.png";
 
 const clubs = [
   {
