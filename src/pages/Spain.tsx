@@ -128,23 +128,8 @@ const Spain = () => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4 text-center">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-              {t("spain.cta.title")}
-            </h2>
-            <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-8">
-              {t("spain.cta.desc")}
-            </p>
-            <Link
-              to="/apply"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-bold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
-            >
-              {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </section>
+        {/* Academies Section */}
+        <SpainAcademiesSection />
 
         <Footer />
       </main>

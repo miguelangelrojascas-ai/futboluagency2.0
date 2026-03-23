@@ -30,7 +30,7 @@ const Index = () => {
         <PathSelectionSection />
         <CTASection onOpenForm={openForm} />
         
-        <SpainAcademiesSection />
+        
         <SuccessCasesSection />
         <OtherSportsSection />
         <TeamSection />
