@@ -35,7 +35,7 @@ const Spain = () => {
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            src="/videos/spain-hero.mp4"
+            src="/videos/spain-hero-new.mov"
           />
           <div className="absolute inset-0 bg-background/70" />
           <div className="container-wide px-4 relative">
