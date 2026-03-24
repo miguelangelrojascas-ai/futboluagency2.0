@@ -62,29 +62,6 @@ const Spain = () => {
           </div>
         </section>
 
-        {/* Spanish System */}
-        <section className="section-padding bg-background-alt">
-          <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">
-              {t("spain.system.title")}
-            </h2>
-            <p className="font-body text-muted-foreground text-base sm:text-lg text-center max-w-3xl mx-auto mb-10">
-              {t("spain.system.desc")}
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-              <div className="rounded-xl border border-border bg-card p-6">
-                <Zap className="w-8 h-8 text-primary mb-3" />
-                <h3 className="font-display text-lg font-bold mb-2">{t("spain.leagues.title")}</h3>
-                <p className="font-body text-muted-foreground text-sm">{t("spain.leagues.desc")}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-card p-6">
-                <GraduationCapIcon className="w-8 h-8 text-[hsl(210,100%,50%)] mb-3" />
-                <h3 className="font-display text-lg font-bold mb-2">{t("spain.universities.title")}</h3>
-                <p className="font-body text-muted-foreground text-sm">{t("spain.universities.desc")}</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Benefits */}
         <section className="section-padding bg-background">
