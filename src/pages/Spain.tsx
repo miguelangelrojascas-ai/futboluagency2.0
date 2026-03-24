@@ -62,6 +62,61 @@ const Spain = () => {
           </div>
         </section>
 
+        {/* ¿Por qué España? */}
+        <section className="section-padding bg-background">
+          <div className="container-wide px-4">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">
+              {language === "es" ? "¿Por qué España?" : "Why Spain?"}
+            </h2>
+            <p className="font-body text-muted-foreground text-base sm:text-lg text-center max-w-2xl mx-auto mb-12">
+              {language === "es"
+                ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
+                : "One of the most demanding environments in the world to compete, improve, and get noticed."}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+              {[
+                {
+                  emoji: "⚽",
+                  title: language === "es" ? "Nivel competitivo real" : "Real competitive level",
+                  desc: language === "es"
+                    ? "Entrena y compite en un entorno donde el ritmo y la exigencia son de alto nivel."
+                    : "Train and compete in an environment where pace and demands are top-tier.",
+                },
+                {
+                  emoji: "👀",
+                  title: language === "es" ? "Visibilidad ante entrenadores" : "Visibility to coaches",
+                  desc: language === "es"
+                    ? "Muéstrate frente a academias y entrenadores que buscan talento."
+                    : "Showcase yourself to academies and coaches scouting for talent.",
+                },
+                {
+                  emoji: "🔥",
+                  title: language === "es" ? "Experiencia intensiva" : "Intensive experience",
+                  desc: language === "es"
+                    ? "Semanas de alto nivel donde cada entrenamiento y partido cuenta."
+                    : "High-level weeks where every training session and match counts.",
+                },
+                {
+                  emoji: "🏟️",
+                  title: language === "es" ? "Entorno profesional" : "Professional environment",
+                  desc: language === "es"
+                    ? "Vive el día a día del fútbol competitivo en España."
+                    : "Experience day-to-day competitive football life in Spain.",
+                },
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl border border-border bg-card p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                >
+                  <span className="text-3xl mb-4 block">{card.emoji}</span>
+                  <h3 className="font-display text-base font-bold mb-2">{card.title}</h3>
+                  <p className="font-body text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         {/* Benefits */}
         <section className="section-padding bg-background">
