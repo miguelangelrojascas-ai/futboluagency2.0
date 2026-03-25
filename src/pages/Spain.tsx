@@ -1,7 +1,7 @@
 // Spain page
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,7 +14,12 @@ import spainAcademy from "@/assets/spain-academy.jpg";
 
 const Spain = () => {
   const { t, language } = useLanguage();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const carouselCards = [
     {
@@ -44,11 +49,45 @@ const Spain = () => {
     },
   ];
 
-  const visibleCards = 3;
-  const maxIndex = carouselCards.length - visibleCards;
+  const updateScrollButtons = () => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
 
-  const scrollPrev = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
-  const scrollNext = () => setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", updateScrollButtons);
+    updateScrollButtons();
+    return () => el.removeEventListener("scroll", updateScrollButtons);
+  }, []);
+
+  const scrollBy = (direction: number) => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * 320, behavior: "smooth" });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    setStartX(e.pageX - el.offsetLeft);
+    setScrollLeft(el.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const x = e.pageX - el.offsetLeft;
+    el.scrollLeft = scrollLeft - (x - startX);
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
 
   const steps = [
     { num: "01", title: t("spain.step1.title"), desc: t("spain.step1.desc") },
@@ -112,15 +151,15 @@ const Spain = () => {
               </div>
               <div className="hidden sm:flex items-center gap-2">
                 <button
-                  onClick={scrollPrev}
-                  disabled={currentIndex === 0}
+                  onClick={() => scrollBy(-1)}
+                  disabled={!canScrollLeft}
                   className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
-                  onClick={scrollNext}
-                  disabled={currentIndex >= maxIndex}
+                  onClick={() => scrollBy(1)}
+                  disabled={!canScrollRight}
                   className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -128,48 +167,52 @@ const Spain = () => {
               </div>
             </div>
 
-            {/* Cards carousel */}
-            <div className="overflow-hidden">
-              <div
-                className="flex gap-4 transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${currentIndex * (100 / visibleCards + 1.35)}%)` }}
-              >
-                {carouselCards.map((card, i) => (
-                  <div
-                    key={i}
-                    className="flex-shrink-0 w-[80%] sm:w-[calc(33.333%-11px)] rounded-2xl overflow-hidden relative aspect-[3/4] group cursor-pointer"
-                  >
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                      <span className="inline-block font-body text-[10px] sm:text-xs tracking-[0.15em] uppercase text-primary mb-2">
-                        {card.label}
-                      </span>
-                      <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight">
-                        {card.title}
-                      </h3>
-                    </div>
+            {/* Cards carousel — draggable */}
+            <div
+              ref={scrollContainerRef}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              className={`flex gap-4 overflow-x-auto scrollbar-hide pb-2 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {carouselCards.map((card, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 w-[75%] sm:w-[280px] md:w-[300px] lg:w-[320px] rounded-2xl overflow-hidden relative aspect-[3/4] group"
+                >
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
+                    <span className="font-body text-[10px] sm:text-xs tracking-[0.2em] uppercase text-primary/90 mb-2">
+                      {card.label}
+                    </span>
+                    <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-lg">
+                      {card.title}
+                    </h3>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
             {/* Mobile arrows */}
             <div className="flex sm:hidden items-center justify-center gap-3 mt-6">
               <button
-                onClick={scrollPrev}
-                disabled={currentIndex === 0}
+                onClick={() => scrollBy(-1)}
+                disabled={!canScrollLeft}
                 className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
-                onClick={scrollNext}
-                disabled={currentIndex >= carouselCards.length - 1}
+                onClick={() => scrollBy(1)}
+                disabled={!canScrollRight}
                 className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -177,36 +220,6 @@ const Spain = () => {
             </div>
           </div>
         </section>
-        {/* Next Step */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className="container-wide px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                {language === "es" ? "Da el siguiente paso en tu carrera" : "Take the next step in your career"}
-              </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-12">
-                {language === "es"
-                  ? "Entrena en academias profesionales, compite en ligas exigentes y gana visibilidad dentro del sistema español."
-                  : "Train at professional academies, compete in demanding leagues, and gain visibility within the Spanish system."}
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
-                {[
-                  { icon: Dumbbell, label: language === "es" ? "Entrenamiento profesional" : "Professional training" },
-                  { icon: Swords, label: language === "es" ? "Competición real" : "Real competition" },
-                  { icon: ScanEye, label: language === "es" ? "Exposición ante entrenadores" : "Exposure to coaches" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
-                    </div>
-                    <span className="font-body text-sm font-semibold text-foreground">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
 
 
         {/* Process */}
