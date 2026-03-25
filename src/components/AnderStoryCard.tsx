@@ -55,16 +55,16 @@ const AnderStoryCard = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-center p-8 sm:p-10 md:p-14 max-w-2xl">
-              <span className="font-display text-lg sm:text-2xl md:text-3xl font-bold text-white/90 mb-3 leading-snug" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
+              <span className="font-body font-medium text-base sm:text-lg md:text-xl text-white/90 mb-3 leading-snug" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
                 {isEs ? "De México a una beca NCAA D1" : "From Mexico to an NCAA D1 scholarship"}
               </span>
-              <h3 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
+              <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
                 Ander González
               </h3>
-              <p className="font-body text-sm sm:text-lg text-primary font-semibold mb-6">
+              <p className="font-body text-sm sm:text-base text-primary font-medium mb-6">
                 St. John's University — NCAA Division 1
               </p>
-              <span className="inline-flex items-center gap-2 font-body text-base sm:text-lg font-semibold text-white/80 group-hover:text-white transition-colors">
+              <span className="inline-flex items-center gap-2 font-body text-base sm:text-lg font-medium text-white/80 group-hover:text-white transition-colors">
                 {isEs ? "Ver su historia" : "See his story"} <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </span>
             </div>
