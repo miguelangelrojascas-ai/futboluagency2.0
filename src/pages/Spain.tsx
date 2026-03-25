@@ -5,6 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SpainAcademiesSection from "@/components/SpainAcademiesSection";
 
 import spainTraining from "@/assets/spain-training.jpg";
 import spainCompetition from "@/assets/spain-competition.jpg";
@@ -246,6 +247,8 @@ const Spain = () => {
           </div>
         </section>
 
+
+        <SpainAcademiesSection />
 
         <Footer />
       </main>
