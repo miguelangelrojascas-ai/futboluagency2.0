@@ -41,7 +41,7 @@ const TeamSection = () => {
       <div className="container-wide px-4">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 md:mb-24">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-foreground mb-4 px-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-foreground mb-4 px-2">
             {t("team.title")}{" "}
             <span className="text-gradient">{t("team.title.highlight")}</span>
           </h2>
