@@ -65,10 +65,10 @@ const SpainAcademiesSection = () => {
 
   const content = {
     es: {
-      tag: "Oportunidad Internacional",
-      headline: "Juega en las Mejores Academias de Fútbol",
-      headlineHighlight: "en España",
-      description: "España es uno de los mejores entornos del mundo para desarrollarte como futbolista. Nuestro programa ofrece a jugadores internacionales la oportunidad de entrenar, competir y crecer en academias de alto nivel durante toda la temporada.",
+      tag: "",
+      headline: "",
+      headlineHighlight: "",
+      description: "",
       placement: "Los jugadores son ubicados en clubes según su nivel, edad y rendimiento, asegurando la mejor experiencia de desarrollo posible.",
       featuredTitle: "Programa Destacado",
       featuredClub: "Talavera CF",
@@ -78,10 +78,10 @@ const SpainAcademiesSection = () => {
       cta: "Comienza Tu Camino",
     },
     en: {
-      tag: "International Opportunity",
-      headline: "Play in Top Football Academies",
-      headlineHighlight: "in Spain",
-      description: "Spain is one of the best environments in the world to develop as a football player. Our program gives international players the opportunity to train, compete, and grow in high-level football academies throughout the full season.",
+      tag: "",
+      headline: "",
+      headlineHighlight: "",
+      description: "",
       placement: "Players are placed in clubs based on their level, age, and performance, ensuring the best possible development experience.",
       featuredTitle: "Featured Program",
       featuredClub: "Talavera CF",
