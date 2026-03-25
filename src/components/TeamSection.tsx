@@ -75,7 +75,7 @@ const TeamSection = () => {
               {/* Content */}
               <div className="w-full lg:w-3/5 space-y-4 sm:space-y-6 text-center lg:text-left">
                 {/* Role Badge */}
-                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/20 text-primary text-xs sm:text-sm font-semibold rounded-full uppercase tracking-wider">
+                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/20 text-primary text-xs sm:text-sm font-medium rounded-full uppercase tracking-[0.15em]">
                   {founder.role}
                 </span>
 
