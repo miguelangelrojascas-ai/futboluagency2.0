@@ -27,6 +27,41 @@ const Spain = () => {
     <>
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
+        {/* Hero */}
+        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/videos/spain-hero-new.mov"
+          />
+          <div className="absolute inset-0 bg-background/70" />
+          <div className="container-wide px-4 relative">
+            <div className="max-w-4xl mx-auto text-center section-padding">
+              <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.2em] uppercase">
+                {t("spain.tag")}
+              </span>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                {language === "es" ? "Juega en las Mejores Academias de Fútbol" : "Play in Top Football Academies"}{" "}
+                <span className="text-primary italic">{language === "es" ? "en España" : "in Spain"}</span>
+              </h1>
+              <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
+                {language === "es"
+                  ? "España es uno de los mejores entornos del mundo para desarrollarte como futbolista. Nuestro programa ofrece a jugadores internacionales la oportunidad de entrenar, competir y crecer en academias de alto nivel durante toda la temporada."
+                  : "Spain is one of the best environments in the world to develop as a football player. Our program gives international players the opportunity to train, compete, and grow in high-level football academies throughout the full season."}
+              </p>
+              <Link
+                to="/apply"
+                className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
+              >
+                {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* ¿Por qué España? */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4">
