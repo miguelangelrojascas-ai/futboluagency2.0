@@ -89,26 +89,6 @@ const About = () => {
     <>
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
-        {/* Hero */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.2em] uppercase">
-                {isEs ? "Sobre Nosotros" : "About Us"}
-              </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                {isEs ? "Somos " : "We are "}
-                <span className="text-primary italic">FutbolU Agency</span>
-              </h1>
-              <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto">
-                {isEs
-                  ? "Conectamos futbolistas internacionales con las mejores oportunidades académicas y deportivas en Estados Unidos y España. Nuestro equipo combina experiencia en scouting, gestión deportiva y procesos de admisión para transformar el talento en resultados concretos."
-                  : "We connect international football players with the best academic and athletic opportunities in the United States and Spain. Our team combines experience in scouting, sports management, and admissions processes to turn talent into real results."}
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* Photo Carousel */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4">
