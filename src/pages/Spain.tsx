@@ -141,8 +141,6 @@ const Spain = () => {
           </div>
         </section>
 
-        {/* Academies Section */}
-        <SpainAcademiesSection />
 
         <Footer />
       </main>
