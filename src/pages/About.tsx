@@ -192,8 +192,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Values / Mission */}
-        <TeamSection />
+        <TeamProfileCards />
 
         {/* Values / Mission */}
         <section className="section-padding bg-background-alt">
