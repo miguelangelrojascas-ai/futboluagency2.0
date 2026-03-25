@@ -115,6 +115,16 @@ const Spain = () => {
               <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.2em] uppercase">
                 {t("spain.tag")}
               </span>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.08]">
+                {language === "es"
+                  ? "Juega en las Mejores Academias de Fútbol en España"
+                  : "Play at the Best Football Academies in Spain"}
+              </h1>
+              <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+                {language === "es"
+                  ? "Entrena, compite y desarrolla tu carrera en uno de los entornos futbolísticos más exigentes del mundo."
+                  : "Train, compete, and develop your career in one of the most demanding football environments in the world."}
+              </p>
               <Link
                 to="/apply"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
