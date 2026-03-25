@@ -102,7 +102,7 @@ const PlayerSuccessStorySection = () => {
 
         {/* Video */}
         <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
-          <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground text-center mb-6">
+          <h3 className="font-display text-lg sm:text-xl font-bold text-foreground text-center mb-6">
             🎬 {t.videoTitle}
           </h3>
           <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
