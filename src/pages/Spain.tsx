@@ -195,7 +195,7 @@ const Spain = () => {
                     </span>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                    <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-lg">
+                    <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-tight drop-shadow-lg">
                       {card.title}
                     </h3>
                   </div>

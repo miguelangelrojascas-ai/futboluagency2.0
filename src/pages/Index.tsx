@@ -6,6 +6,7 @@ import MetricsSection from "@/components/MetricsSection";
 import CTASection from "@/components/CTASection";
 import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
+import AnderStoryCard from "@/components/AnderStoryCard";
 import TeamSection from "@/components/TeamSection";
 import CalendlySection from "@/components/CalendlySection";
 
@@ -30,7 +31,7 @@ const Index = () => {
         <PathSelectionSection />
         <CTASection onOpenForm={openForm} />
         
-        
+        <AnderStoryCard />
         <SuccessCasesSection />
         <OtherSportsSection />
         <TeamSection />
