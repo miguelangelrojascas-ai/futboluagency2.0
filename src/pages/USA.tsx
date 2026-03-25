@@ -112,7 +112,7 @@ const USA = () => {
                   </div>
                   <div>
                     <h3 className="font-display text-lg font-bold mb-1">{step.title}</h3>
-                    <p className="font-body text-muted-foreground text-sm">{step.desc}</p>
+                    <p className="font-body text-muted-foreground text-base leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
