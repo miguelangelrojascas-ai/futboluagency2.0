@@ -145,13 +145,13 @@ const USA = () => {
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {t("usa.scholarship.title")}
               </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg mb-6">
+              <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
                 {t("usa.scholarship.desc")}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="rounded-xl border border-border bg-card p-6">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">{t("usa.scholarship.partial")}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{t("usa.scholarship.partial.desc")}</p>
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">{t("usa.scholarship.partial.desc")}</p>
                 </div>
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-6">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">{t("usa.scholarship.full")}</h3>
