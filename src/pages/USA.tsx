@@ -155,7 +155,7 @@ const USA = () => {
                 </div>
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-6">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">{t("usa.scholarship.full")}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{t("usa.scholarship.full.desc")}</p>
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">{t("usa.scholarship.full.desc")}</p>
                 </div>
               </div>
             </div>
