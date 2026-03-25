@@ -13,7 +13,7 @@ const Navbar = () => {
     { to: "/", label: t("nav.home") },
     { to: "/usa", label: t("nav.usa") },
     { to: "/spain", label: t("nav.spain") },
-    { to: "/players", label: t("nav.players") },
+    { to: "/about", label: t("nav.about") },
     { to: "/apply", label: t("nav.apply") },
   ];
 

@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import USA from "./pages/USA";
 import Spain from "./pages/Spain";
 import Players from "./pages/Players";
+import About from "./pages/About";
 import Apply from "./pages/Apply";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/usa" element={<USA />} />
             <Route path="/spain" element={<Spain />} />
             <Route path="/players" element={<Players />} />
+            <Route path="/about" element={<About />} />
             <Route path="/apply" element={<Apply />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
