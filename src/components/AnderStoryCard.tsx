@@ -102,17 +102,6 @@ const AnderStoryCard = () => {
               </p>
             </div>
 
-            {/* Hero Image */}
-            <div className="max-w-md mx-auto mb-12 sm:mb-16">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
-                <img
-                  src={anderMeet}
-                  alt="Ander González"
-                  className="w-full h-auto object-contain"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-              </div>
-            </div>
 
             {/* Video */}
             <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
