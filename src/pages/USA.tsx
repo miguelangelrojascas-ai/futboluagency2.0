@@ -59,13 +59,13 @@ const USA = () => {
           <div className="absolute inset-0 bg-background/70" />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
-              <span className="inline-block mb-4 text-[hsl(210,100%,50%)] font-body text-xs tracking-[0.2em] uppercase">
+              <span className="inline-block mb-4 text-[hsl(210,100%,50%)] font-body text-xs tracking-[0.15em] uppercase">
                 {t("usa.tag")}
               </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
                 {t("usa.hero.title")} <span className="text-[hsl(210,100%,50%)] italic">{t("usa.hero.highlight")}</span>
               </h1>
-              <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
+              <p className="font-body font-medium text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
                 {t("usa.hero.desc")}
               </p>
               <Link
