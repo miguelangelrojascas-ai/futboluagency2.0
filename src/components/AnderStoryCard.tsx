@@ -64,8 +64,8 @@ const AnderStoryCard = () => {
               <p className="font-body text-sm sm:text-lg text-primary font-semibold mb-6">
                 St. John's University — NCAA Division 1
               </p>
-              <span className="inline-flex items-center gap-2 font-body text-sm sm:text-base text-white/80 group-hover:text-white transition-colors">
-                {isEs ? "Ver su historia" : "See his story"} <ArrowRight className="w-5 h-5" />
+              <span className="inline-flex items-center gap-2 font-body text-base sm:text-lg font-semibold text-white/80 group-hover:text-white transition-colors">
+                {isEs ? "Ver su historia" : "See his story"} <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </span>
             </div>
           </div>
