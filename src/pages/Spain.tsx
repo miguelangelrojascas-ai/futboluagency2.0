@@ -248,6 +248,8 @@ const Spain = () => {
         </section>
 
 
+        <SpainAcademiesSection />
+
         <Footer />
       </main>
     </>
