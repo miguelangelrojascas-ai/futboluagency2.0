@@ -4,6 +4,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TeamSection from "@/components/TeamSection";
 
 import spainTraining from "@/assets/spain-training.jpg";
 import spainCompetition from "@/assets/spain-competition.jpg";
@@ -190,6 +191,9 @@ const About = () => {
             </div>
           </div>
         </section>
+
+        {/* Values / Mission */}
+        <TeamSection />
 
         {/* Values / Mission */}
         <section className="section-padding bg-background-alt">
