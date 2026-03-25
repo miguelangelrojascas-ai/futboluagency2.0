@@ -1,20 +1,54 @@
 // Spain page
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Trophy, Sun, Users, Target, Zap, Circle, Eye, Timer, Building2, Dumbbell, Swords, ScanEye } from "lucide-react";
+import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+import spainTraining from "@/assets/spain-training.jpg";
+import spainCompetition from "@/assets/spain-competition.jpg";
+import spainWarmup from "@/assets/spain-warmup.jpg";
+import spainStadium from "@/assets/spain-stadium.jpg";
+import spainAcademy from "@/assets/spain-academy.jpg";
 
 const Spain = () => {
   const { t, language } = useLanguage();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const benefits = [
-    { icon: Trophy, title: t("spain.benefit1.title"), desc: t("spain.benefit1.desc") },
-    { icon: Sun, title: t("spain.benefit2.title"), desc: t("spain.benefit2.desc") },
-    { icon: Users, title: t("spain.benefit3.title"), desc: t("spain.benefit3.desc") },
-    { icon: Target, title: t("spain.benefit4.title"), desc: t("spain.benefit4.desc") },
+  const carouselCards = [
+    {
+      image: spainTraining,
+      label: language === "es" ? "Entrenamiento" : "Training",
+      title: language === "es" ? "Nivel competitivo real" : "Real competitive level",
+    },
+    {
+      image: spainCompetition,
+      label: language === "es" ? "Competición" : "Competition",
+      title: language === "es" ? "Visibilidad ante entrenadores" : "Visibility to coaches",
+    },
+    {
+      image: spainWarmup,
+      label: language === "es" ? "Intensidad" : "Intensity",
+      title: language === "es" ? "Experiencia intensiva" : "Intensive experience",
+    },
+    {
+      image: spainStadium,
+      label: language === "es" ? "Profesionalismo" : "Professionalism",
+      title: language === "es" ? "Entorno profesional" : "Professional environment",
+    },
+    {
+      image: spainAcademy,
+      label: language === "es" ? "Academia" : "Academy",
+      title: language === "es" ? "Academias de élite" : "Elite academies",
+    },
   ];
+
+  const visibleCards = 3;
+  const maxIndex = carouselCards.length - visibleCards;
+
+  const scrollPrev = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
+  const scrollNext = () => setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
 
   const steps = [
     { num: "01", title: t("spain.step1.title"), desc: t("spain.step1.desc") },
@@ -62,66 +96,87 @@ const Spain = () => {
           </div>
         </section>
 
-        {/* ¿Por qué España? */}
+        {/* ¿Por qué España? — Carousel */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">
-              {language === "es" ? "¿Por qué España?" : "Why Spain?"}
-            </h2>
-            <p className="font-body text-muted-foreground text-base sm:text-lg text-center max-w-2xl mx-auto mb-12">
-              {language === "es"
-                ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
-                : "One of the most demanding environments in the world to compete, improve, and get noticed."}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {[
-                {
-                  icon: Circle,
-                  title: language === "es" ? "Nivel competitivo real" : "Real competitive level",
-                  desc: language === "es"
-                    ? "Entrena y compite en un entorno donde el ritmo y la exigencia son de alto nivel."
-                    : "Train and compete in an environment where pace and demands are top-tier.",
-                },
-                {
-                  icon: Eye,
-                  title: language === "es" ? "Visibilidad ante entrenadores" : "Visibility to coaches",
-                  desc: language === "es"
-                    ? "Muéstrate frente a academias y entrenadores que buscan talento."
-                    : "Showcase yourself to academies and coaches scouting for talent.",
-                },
-                {
-                  icon: Timer,
-                  title: language === "es" ? "Experiencia intensiva" : "Intensive experience",
-                  desc: language === "es"
-                    ? "Semanas de alto nivel donde cada entrenamiento y partido cuenta."
-                    : "High-level weeks where every training session and match counts.",
-                },
-                {
-                  icon: Building2,
-                  title: language === "es" ? "Entorno profesional" : "Professional environment",
-                  desc: language === "es"
-                    ? "Vive el día a día del fútbol competitivo en España."
-                    : "Experience day-to-day competitive football life in Spain.",
-                },
-              ].map((card, i) => {
-                const IconComponent = card.icon;
-                return (
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">
+                  {language === "es" ? "¿Por qué España?" : "Why Spain?"}
+                </h2>
+                <p className="font-body text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
+                  {language === "es"
+                    ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
+                    : "One of the most demanding environments in the world to compete, improve, and get noticed."}
+                </p>
+              </div>
+              <div className="hidden sm:flex items-center gap-2">
+                <button
+                  onClick={scrollPrev}
+                  disabled={currentIndex === 0}
+                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={scrollNext}
+                  disabled={currentIndex >= maxIndex}
+                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Cards carousel */}
+            <div className="overflow-hidden">
+              <div
+                className="flex gap-4 transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentIndex * (100 / visibleCards + 1.35)}%)` }}
+              >
+                {carouselCards.map((card, i) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-border bg-card p-7 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                    className="flex-shrink-0 w-[80%] sm:w-[calc(33.333%-11px)] rounded-2xl overflow-hidden relative aspect-[3/4] group cursor-pointer"
                   >
-                    <div className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-5">
-                      <IconComponent className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                      <span className="inline-block font-body text-[10px] sm:text-xs tracking-[0.15em] uppercase text-primary mb-2">
+                        {card.label}
+                      </span>
+                      <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight">
+                        {card.title}
+                      </h3>
                     </div>
-                    <h3 className="font-display text-base font-bold mb-2 text-foreground">{card.title}</h3>
-                    <p className="font-body text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
                   </div>
-                );
-              })}
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile arrows */}
+            <div className="flex sm:hidden items-center justify-center gap-3 mt-6">
+              <button
+                onClick={scrollPrev}
+                disabled={currentIndex === 0}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={scrollNext}
+                disabled={currentIndex >= carouselCards.length - 1}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </section>
-
         {/* Next Step */}
         <section className="py-16 md:py-20 bg-background">
           <div className="container-wide px-4">
