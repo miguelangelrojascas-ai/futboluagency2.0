@@ -69,7 +69,7 @@ const PlayerSuccessStorySection = () => {
   const t = content[language];
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
 
