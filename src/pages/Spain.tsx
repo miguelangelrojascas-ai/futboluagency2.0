@@ -138,33 +138,33 @@ const Spain = () => {
         {/* ¿Por qué España? — Carousel */}
         <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
           <div className="container-wide px-4">
-            <div className="flex items-end justify-between mb-8">
-              <div>
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-2">
                 <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">
                   {language === "es" ? "¿Por qué España?" : "Why Spain?"}
                 </h2>
-                <p className="font-body text-muted-foreground text-base leading-relaxed mt-2 max-w-xl">
-                  {language === "es"
-                    ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
-                    : "One of the most demanding environments in the world to compete, improve, and get noticed."}
-                </p>
+                <div className="hidden sm:flex items-center gap-2">
+                  <button
+                    onClick={() => scrollBy(-1)}
+                    disabled={!canScrollLeft}
+                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => scrollBy(1)}
+                    disabled={!canScrollRight}
+                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
-              <div className="hidden sm:flex items-center gap-2">
-                <button
-                  onClick={() => scrollBy(-1)}
-                  disabled={!canScrollLeft}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => scrollBy(1)}
-                  disabled={!canScrollRight}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+              <p className="font-body text-muted-foreground text-base leading-relaxed mt-2 max-w-xl">
+                {language === "es"
+                  ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
+                  : "One of the most demanding environments in the world to compete, improve, and get noticed."}
+              </p>
             </div>
 
             {/* Cards carousel — draggable */}
@@ -195,7 +195,7 @@ const Spain = () => {
                     </span>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                    <h3 className="font-display text-base sm:text-lg md:text-xl font-bold text-white leading-tight" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
+                    <h3 className="font-display text-base sm:text-lg font-bold text-white leading-tight" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
                       {card.title}
                     </h3>
                   </div>
