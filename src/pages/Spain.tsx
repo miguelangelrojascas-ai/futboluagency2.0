@@ -225,28 +225,6 @@ const Spain = () => {
         </section>
 
 
-        {/* Process */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
-              {t("spain.process.title")}
-            </h2>
-            <div className="max-w-3xl mx-auto space-y-6">
-              {steps.map((step) => (
-                <div key={step.num} className="flex gap-5 items-start">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center font-display font-bold text-primary text-sm">
-                    {step.num}
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg font-bold mb-1">{step.title}</h3>
-                    <p className="font-body text-muted-foreground text-sm">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
 
         <SpainAcademiesSection />
 
