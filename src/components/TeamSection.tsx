@@ -80,7 +80,7 @@ const TeamSection = () => {
                 </span>
 
                 {/* Name */}
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-foreground">
+                <h3 className="text-2xl sm:text-3xl font-display font-bold text-foreground">
                   {founder.name}
                 </h3>
 
