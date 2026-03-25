@@ -9,7 +9,7 @@ interface CalendlySectionProps {
 const CalendlySection = ({ onOpenForm }: CalendlySectionProps) => {
   const { t } = useLanguage();
   return (
-    <section id="calendly-section" className="section-padding bg-muted/30">
+    <section id="calendly-section" className="section-padding bg-background">
       <div className="container-wide">
         <div className="text-center">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">

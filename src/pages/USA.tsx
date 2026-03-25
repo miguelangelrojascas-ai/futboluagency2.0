@@ -79,7 +79,7 @@ const USA = () => {
         </section>
 
         {/* U.S. System Explained */}
-        <section className="section-padding bg-background-alt">
+        <section className="section-padding bg-background">
           <div className="container-wide px-4">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
               {t("usa.system.title")}
@@ -121,7 +121,7 @@ const USA = () => {
         </section>
 
         {/* Requirements */}
-        <section className="section-padding bg-background-alt">
+        <section className="section-padding bg-background">
           <div className="container-wide px-4">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
               {t("usa.req.title")}
@@ -163,7 +163,7 @@ const USA = () => {
         </section>
 
         {/* Timeline */}
-        <section className="section-padding bg-background-alt">
+        <section className="section-padding bg-background">
           <div className="container-wide px-4">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
               {t("usa.timeline.title")}

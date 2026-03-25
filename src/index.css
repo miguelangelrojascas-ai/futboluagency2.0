@@ -7,14 +7,14 @@
 @layer base {
   :root {
     /* FutbolUAgency Premium Dark Theme */
-    --background: 210 12% 4%; /* #0B0D0E */
-    --background-alt: 210 8% 7%; /* #111315 */
+    --background: 0 0% 6%; /* #0f0f0f */
+    --background-alt: 0 0% 6%; /* #0f0f0f - same as background for seamless sections */
     --foreground: 0 0% 100%; /* #FFFFFF */
     
-    --card: 210 8% 7%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 100%;
     
-    --popover: 210 8% 7%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 100%;
     
     --primary: 355 77% 56%; /* #E63946 */
@@ -26,7 +26,7 @@
     
     --accent-blue: 210 100% 50%; /* Bright blue for glows */
     
-    --muted: 210 8% 7%;
+    --muted: 0 0% 6%;
     --muted-foreground: 210 12% 67%; /* #A8B0B8 */
     
     --accent: 355 77% 56%;
@@ -35,8 +35,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 210 6% 12%; /* #1D1F21 */
-    --input: 210 6% 12%;
+    --border: 0 0% 100% / 0.04;
+    --input: 0 0% 12%;
     --ring: 355 77% 56%;
     
     --radius: 0.5rem;
@@ -55,7 +55,7 @@
   }
 
   .dark {
-    --background: 210 12% 4%;
+    --background: 0 0% 6%;
     --foreground: 0 0% 100%;
   }
 }
