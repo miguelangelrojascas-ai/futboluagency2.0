@@ -87,11 +87,11 @@ const USA = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {divisions.map((div) => (
                 <div key={div.name} className="rounded-xl border border-border bg-card p-6 hover:border-[hsl(210,100%,50%)]/40 transition-colors">
-                  <span className="inline-block text-xs font-body font-medium text-[hsl(210,100%,50%)] bg-[hsl(210,100%,50%)]/10 px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block text-xs font-body font-medium tracking-[0.15em] uppercase text-[hsl(210,100%,50%)] bg-[hsl(210,100%,50%)]/10 px-3 py-1 rounded-full mb-3">
                     {div.level}
                   </span>
                   <h3 className="font-display text-lg font-bold mb-2">{div.name}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{div.desc}</p>
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">{div.desc}</p>
                 </div>
               ))}
             </div>
