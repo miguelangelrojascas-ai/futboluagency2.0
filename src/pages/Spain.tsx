@@ -1,6 +1,6 @@
 // Spain page
 import { Link } from "react-router-dom";
-import { ArrowRight, Trophy, Sun, Users, Target, Zap, Circle, Eye, Timer, Building2 } from "lucide-react";
+import { ArrowRight, Trophy, Sun, Users, Target, Zap, Circle, Eye, Timer, Building2, Dumbbell, Swords, ScanEye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
