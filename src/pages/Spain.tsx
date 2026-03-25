@@ -226,7 +226,7 @@ const Spain = () => {
 
 
         {/* Process */}
-        <section className="section-padding bg-background-alt">
+        <section className="section-padding bg-background">
           <div className="container-wide px-4">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
               {t("spain.process.title")}

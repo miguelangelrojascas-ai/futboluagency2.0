@@ -92,7 +92,7 @@ const About = () => {
         <TeamProfileCards />
 
         {/* Values / Mission */}
-        <section className="section-padding bg-background-alt">
+        <section className="section-padding bg-background">
           <div className="container-wide px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
