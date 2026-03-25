@@ -1,7 +1,7 @@
 // Spain page
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -90,12 +90,8 @@ const Spain = () => {
 
   const handleMouseUp = () => setIsDragging(false);
 
-  const steps = [
-    { num: "01", title: t("spain.step1.title"), desc: t("spain.step1.desc") },
-    { num: "02", title: t("spain.step2.title"), desc: t("spain.step2.desc") },
-    { num: "03", title: t("spain.step3.title"), desc: t("spain.step3.desc") },
-    { num: "04", title: t("spain.step4.title"), desc: t("spain.step4.desc") },
-  ];
+
+
 
   return (
     <>
