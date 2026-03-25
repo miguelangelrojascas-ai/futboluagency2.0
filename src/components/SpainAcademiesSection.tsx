@@ -21,7 +21,7 @@ const SpainAcademiesSection = () => {
       featuredDesc: "Nuestro programa principal en Talavera CF ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador.",
       applyBtn: "Aplicar al programa",
       partnersLabel: "También colaboramos con:",
-      cta: "Comienza Tu Camino",
+      cta: "\n\n",
     },
     en: {
       badge: "Main Program",
@@ -29,7 +29,7 @@ const SpainAcademiesSection = () => {
       featuredDesc: "Our flagship program at Talavera CF offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player.",
       applyBtn: "Apply to program",
       partnersLabel: "We also collaborate with:",
-      cta: "Start Your Journey",
+      cta: "\n\n",
     },
   };
 
