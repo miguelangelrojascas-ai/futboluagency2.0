@@ -142,10 +142,10 @@ const AnderStoryCard = () => {
                     {/* Content */}
                     <div className={`pl-16 sm:pl-0 sm:w-1/2 ${index % 2 === 0 ? "sm:pr-16 sm:text-right" : "sm:pl-16"}`}>
                       <span className="text-primary font-display text-2xl sm:text-3xl font-bold">{item.year}</span>
-                      <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mt-1 mb-2">
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mt-1 mb-2">
                         {item.title}
                       </h3>
-                      <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
+                      <p className="font-body text-muted-foreground text-base leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
