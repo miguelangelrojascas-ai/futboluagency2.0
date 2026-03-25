@@ -74,7 +74,7 @@ const HubSpotFormModal = ({ open, onOpenChange }: HubSpotFormModalProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="font-display text-xl sm:text-2xl text-center">
+          <DialogTitle className="font-display text-2xl sm:text-3xl text-center font-bold">
             {t("hero.cta")}
           </DialogTitle>
         </DialogHeader>

@@ -70,7 +70,7 @@ const SpainAcademiesSection = () => {
                 href="https://forms.gle/Qy9vdJ5jZtyKPVKf6"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-body text-sm font-semibold text-primary hover:text-primary-foreground hover:bg-primary px-4 py-2 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300"
+                className="inline-flex items-center gap-2 font-body text-sm font-medium text-primary hover:text-primary-foreground hover:bg-primary px-4 py-2 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300"
               >
                 {t.applyBtn} <ArrowRight className="w-4 h-4" />
               </a>

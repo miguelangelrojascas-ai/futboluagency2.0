@@ -12,7 +12,7 @@ const VideoSection = ({ onOpenForm }: VideoSectionProps) => {
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-2">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold px-2">
             {t("video.title")} <span className="text-primary italic">{t("video.title.highlight")}</span>
           </h2>
         </div>

@@ -197,12 +197,12 @@ const USA = () => {
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               {t("usa.cta.title")}
             </h2>
-            <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-8">
+            <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
               {t("usa.cta.desc")}
             </p>
             <Link
               to="/apply"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-bold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
             >
               {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
             </Link>

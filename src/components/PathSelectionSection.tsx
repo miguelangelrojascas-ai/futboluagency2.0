@@ -53,7 +53,7 @@ const PathSelectionSection = () => {
               <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-3">
                 {t("path.spain.title")}
               </h3>
-              <p className="font-body text-muted-foreground text-sm sm:text-base mb-6 leading-relaxed">
+              <p className="font-body text-muted-foreground text-base mb-6 leading-relaxed">
                 {t("path.spain.desc")}
               </p>
               <span className="inline-flex items-center gap-2 font-body text-sm font-semibold text-primary group-hover:gap-3 transition-all">

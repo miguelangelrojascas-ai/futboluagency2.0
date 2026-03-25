@@ -126,7 +126,7 @@ const About = () => {
                 ].map((value, i) => (
                   <div key={i} className="rounded-xl border border-border bg-card p-6">
                     <h3 className="font-display text-lg font-bold text-foreground mb-2">{value.title}</h3>
-                    <p className="font-body text-muted-foreground text-sm leading-relaxed">{value.desc}</p>
+                    <p className="font-body text-muted-foreground text-base leading-relaxed">{value.desc}</p>
                   </div>
                 ))}
               </div>

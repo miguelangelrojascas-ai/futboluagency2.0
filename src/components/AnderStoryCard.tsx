@@ -172,7 +172,7 @@ const AnderStoryCard = () => {
                   ? "El trabajo duro y el entorno adecuado pueden transformar tu carrera."
                   : "Hard work and the right environment can transform your career."}"
               </blockquote>
-              <p className="font-body text-primary font-semibold mt-3">— Ander González Vergara</p>
+              <p className="font-body text-primary font-medium mt-3">— Ander González Vergara</p>
             </div>
           </div>
         </div>

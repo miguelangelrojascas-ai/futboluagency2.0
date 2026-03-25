@@ -150,7 +150,7 @@ const ProcessSection = () => {
                           : "opacity-30 translate-y-4"
                       }`}
                     >
-                      <h3 className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-3">
+                      <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 sm:mb-3">
                         {t("process.phase")} {index + 1} - {step.title}
                       </h3>
                       <p className="font-body text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed max-w-md">

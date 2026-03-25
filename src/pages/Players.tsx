@@ -31,7 +31,7 @@ const Players = () => {
         <section className="section-padding bg-background relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(355,77%,56%,0.06),transparent_60%)]" />
           <div className="container-wide px-4 relative text-center">
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4" >
               {t("players.title")} <span className="text-primary italic">{t("players.title.highlight")}</span>
             </h1>
             <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">

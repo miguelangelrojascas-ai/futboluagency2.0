@@ -83,7 +83,7 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
                 <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mb-2">
                   {service.title}
                 </h3>
-                <p className="font-body text-foreground/70 text-xs sm:text-sm leading-relaxed">
+                <p className="font-body text-foreground/70 text-sm sm:text-base leading-relaxed">
                   {service.description}
                 </p>
               </div>

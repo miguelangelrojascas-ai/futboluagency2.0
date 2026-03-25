@@ -186,7 +186,7 @@ const TeamProfileCards = () => {
                   />
                 )}
                 <div className="flex flex-col justify-center">
-                  <span className="inline-block w-fit font-body text-[10px] sm:text-xs tracking-[0.12em] uppercase font-semibold text-primary-foreground bg-primary px-3 py-1 rounded-full mb-2">
+                  <span className="inline-block w-fit font-body text-[10px] sm:text-xs tracking-[0.15em] uppercase font-medium text-primary-foreground bg-primary px-3 py-1 rounded-full mb-2">
                     {selected.role}
                   </span>
                   <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground">

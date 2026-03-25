@@ -89,7 +89,7 @@ const TeamSection = () => {
                   {founder.bio.map((paragraph, pIndex) => (
                     <p
                       key={pIndex}
-                      className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed"
+                      className="font-body text-muted-foreground text-base leading-relaxed"
                     >
                       {paragraph}
                     </p>

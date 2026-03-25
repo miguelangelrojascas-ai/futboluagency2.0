@@ -167,7 +167,7 @@ const PlayerSuccessStorySection = () => {
           <blockquote className="font-display text-xl sm:text-2xl italic text-foreground/80">
             "{t.quote}"
           </blockquote>
-          <p className="font-body text-primary font-semibold mt-3">— Ander González Vergara</p>
+          <p className="font-body text-primary font-medium mt-3">— Ander González Vergara</p>
         </div>
       </div>
     </section>
