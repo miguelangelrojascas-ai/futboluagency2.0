@@ -9,10 +9,10 @@ const PathSelectionSection = () => {
     <section id="path-selection" className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4">
         <div className="text-center mb-10 sm:mb-14">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             {t("path.title")} <span className="text-primary italic">{t("path.title.highlight")}</span>
           </h2>
-          <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             {t("path.subtitle")}
           </p>
         </div>
