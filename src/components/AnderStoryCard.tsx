@@ -88,14 +88,14 @@ const AnderStoryCard = () => {
           <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20">
             {/* Header */}
             <div className="text-center mb-12 sm:mb-16">
-              <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
+              <span className="text-primary font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
                 {isEs ? "⭐ Historia de Éxito" : "⭐ Success Story"}
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {isEs ? "El Camino de " : "The Journey of "}
                 <span className="text-primary italic">Ander González</span>
               </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+              <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                 {isEs
                   ? "De México a España, y de España a una beca NCAA Division 1 en St. John's University."
                   : "From Mexico to Spain, and from Spain to an NCAA Division 1 scholarship at St. John's University."}
