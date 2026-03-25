@@ -176,7 +176,7 @@ const USA = () => {
                     {i < timeline.length - 1 && <div className="w-0.5 h-12 bg-border mt-1" />}
                   </div>
                   <div className="-mt-1">
-                    <span className="font-body text-xs text-primary font-semibold uppercase tracking-wider">{item.month}</span>
+                    <span className="font-body text-xs text-primary font-semibold uppercase tracking-[0.15em]">{item.month}</span>
                     <p className="font-body text-foreground text-sm mt-1">{item.task}</p>
                   </div>
                 </div>
