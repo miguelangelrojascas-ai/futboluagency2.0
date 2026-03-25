@@ -36,7 +36,7 @@ const SpainAcademiesSection = () => {
   const t = content[language];
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4 relative z-10">
 
         {/* Talavera CF Hero Card */}

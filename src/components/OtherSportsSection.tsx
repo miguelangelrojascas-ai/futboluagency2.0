@@ -12,7 +12,7 @@ const OtherSportsSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
+    <section className="section-padding relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(210,100%,50%,0.04),transparent_60%)]" />
       <div className="container-wide px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">

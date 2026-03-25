@@ -15,7 +15,7 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom fade transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #0f0f0f)" }} />
 
       {/* Centered Logo at Top */}
       <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-20">

@@ -66,7 +66,7 @@ const SuccessCasesSection = () => {
   const allCases = [...successCases, ...successCases];
 
   return (
-    <section className="section-padding bg-background overflow-hidden">
+    <section className="section-padding overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">

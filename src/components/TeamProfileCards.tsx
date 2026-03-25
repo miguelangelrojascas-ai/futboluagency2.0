@@ -95,7 +95,7 @@ const TeamProfileCards = () => {
 
   return (
     <>
-      <section className="section-padding bg-background">
+      <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
         <div className="container-wide px-4">
           <div className="text-center mb-10">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
