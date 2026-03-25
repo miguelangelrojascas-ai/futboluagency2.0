@@ -73,46 +73,51 @@ const Spain = () => {
                 ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
                 : "One of the most demanding environments in the world to compete, improve, and get noticed."}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
               {[
                 {
-                  emoji: "⚽",
+                  icon: Circle,
                   title: language === "es" ? "Nivel competitivo real" : "Real competitive level",
                   desc: language === "es"
                     ? "Entrena y compite en un entorno donde el ritmo y la exigencia son de alto nivel."
                     : "Train and compete in an environment where pace and demands are top-tier.",
                 },
                 {
-                  emoji: "👀",
+                  icon: Eye,
                   title: language === "es" ? "Visibilidad ante entrenadores" : "Visibility to coaches",
                   desc: language === "es"
                     ? "Muéstrate frente a academias y entrenadores que buscan talento."
                     : "Showcase yourself to academies and coaches scouting for talent.",
                 },
                 {
-                  emoji: "🔥",
+                  icon: Timer,
                   title: language === "es" ? "Experiencia intensiva" : "Intensive experience",
                   desc: language === "es"
                     ? "Semanas de alto nivel donde cada entrenamiento y partido cuenta."
                     : "High-level weeks where every training session and match counts.",
                 },
                 {
-                  emoji: "🏟️",
+                  icon: Building2,
                   title: language === "es" ? "Entorno profesional" : "Professional environment",
                   desc: language === "es"
                     ? "Vive el día a día del fútbol competitivo en España."
                     : "Experience day-to-day competitive football life in Spain.",
                 },
-              ].map((card, i) => (
-                <div
-                  key={i}
-                  className="rounded-xl border border-border bg-card p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-                >
-                  <span className="text-3xl mb-4 block">{card.emoji}</span>
-                  <h3 className="font-display text-base font-bold mb-2">{card.title}</h3>
-                  <p className="font-body text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
-                </div>
-              ))}
+              ].map((card, i) => {
+                const IconComponent = card.icon;
+                return (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-border bg-card p-7 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-5">
+                      <IconComponent className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="font-display text-base font-bold mb-2 text-foreground">{card.title}</h3>
+                    <p className="font-body text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
