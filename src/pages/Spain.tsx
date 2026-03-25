@@ -112,15 +112,15 @@ const Spain = () => {
           <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #0f0f0f)" }} />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
-              <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.2em] uppercase">
+              <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
                 {t("spain.tag")}
               </span>
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.08]">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-[1.08]">
                 {language === "es"
                   ? "Juega en las Mejores Academias de Fútbol en España"
                   : "Play at the Best Football Academies in Spain"}
               </h1>
-              <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+              <p className="font-body font-medium text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
                 {language === "es"
                   ? "Entrena, compite y desarrolla tu carrera en uno de los entornos futbolísticos más exigentes del mundo."
                   : "Train, compete, and develop your career in one of the most demanding football environments in the world."}
