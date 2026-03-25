@@ -14,7 +14,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Inicio",
     "nav.usa": "EE.UU.",
     "nav.spain": "España",
-    "nav.players": "Jugadores",
+    "nav.about": "Nosotros",
     "nav.apply": "Aplicar",
     "nav.applyCta": "Aplica Ahora",
 
