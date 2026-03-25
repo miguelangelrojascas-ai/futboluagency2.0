@@ -102,7 +102,7 @@ const TeamProfileCards = () => {
               {isEs ? "Nuestro " : "Our "}
               <span className="text-primary italic">{isEs ? "Equipo" : "Team"}</span>
             </h2>
-            <p className="font-body text-muted-foreground text-sm sm:text-base max-w-xl mx-auto">
+            <p className="font-body text-muted-foreground text-base leading-relaxed max-w-xl mx-auto">
               {isEs
                 ? "Las personas detrás de cada oportunidad que creamos."
                 : "The people behind every opportunity we create."}
