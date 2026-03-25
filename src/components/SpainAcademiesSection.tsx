@@ -53,7 +53,7 @@ const SpainAcademiesSection = () => {
 
             {/* Top-left badge */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
-              <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold bg-primary text-primary-foreground px-3 py-1 rounded-full">
+              <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.15em] uppercase font-medium bg-primary text-primary-foreground px-3 py-1 rounded-full">
                 {t.badge}
               </span>
             </div>
