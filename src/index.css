@@ -35,8 +35,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 210 6% 12%; /* #1D1F21 */
-    --input: 210 6% 12%;
+    --border: 0 0% 100% / 0.04;
+    --input: 0 0% 12%;
     --ring: 355 77% 56%;
     
     --radius: 0.5rem;
