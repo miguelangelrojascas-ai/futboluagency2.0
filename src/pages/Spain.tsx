@@ -188,11 +188,13 @@ const Spain = () => {
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
-                    <span className="font-body text-[10px] sm:text-xs tracking-[0.2em] uppercase text-white/80 mb-2 drop-shadow-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
+                  <div className="absolute top-4 left-4 sm:top-5 sm:left-5">
+                    <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.15em] uppercase text-white font-semibold bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full drop-shadow-lg">
                       {card.label}
                     </span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                     <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-lg">
                       {card.title}
                     </h3>
