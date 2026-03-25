@@ -65,10 +65,10 @@ const SpainAcademiesSection = () => {
 
   const content = {
     es: {
-      tag: "Oportunidad Internacional",
-      headline: "Juega en las Mejores Academias de Fútbol",
-      headlineHighlight: "en España",
-      description: "España es uno de los mejores entornos del mundo para desarrollarte como futbolista. Nuestro programa ofrece a jugadores internacionales la oportunidad de entrenar, competir y crecer en academias de alto nivel durante toda la temporada.",
+      tag: "",
+      headline: "",
+      headlineHighlight: "",
+      description: "",
       placement: "Los jugadores son ubicados en clubes según su nivel, edad y rendimiento, asegurando la mejor experiencia de desarrollo posible.",
       featuredTitle: "Programa Destacado",
       featuredClub: "Talavera CF",
