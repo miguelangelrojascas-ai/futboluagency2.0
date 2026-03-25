@@ -91,7 +91,7 @@ const AnderStoryCard = () => {
               <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
                 {isEs ? "⭐ Historia de Éxito" : "⭐ Success Story"}
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                 {isEs ? "El Camino de " : "The Journey of "}
                 <span className="text-primary italic">Ander González</span>
               </h2>
@@ -102,22 +102,11 @@ const AnderStoryCard = () => {
               </p>
             </div>
 
-            {/* Hero Image */}
-            <div className="max-w-md mx-auto mb-12 sm:mb-16">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
-                <img
-                  src={anderMeet}
-                  alt="Ander González"
-                  className="w-full h-auto object-contain"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-              </div>
-            </div>
 
             {/* Video */}
             <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
-              <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground text-center mb-6">
-                🎬 {isEs ? "Mira su historia" : "Watch his story"}
+              <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground text-center mb-6">
+                {isEs ? "Mira su historia" : "Watch his story"}
               </h3>
               <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
                 <video
