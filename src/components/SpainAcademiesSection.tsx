@@ -60,10 +60,10 @@ const SpainAcademiesSection = () => {
 
             {/* Bottom content */}
             <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-              <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
                 {t.featuredClub}
               </h3>
-              <p className="font-body text-white/75 text-sm sm:text-base max-w-xl leading-relaxed mb-5 line-clamp-2">
+              <p className="font-body text-white/75 text-base max-w-xl leading-relaxed mb-5 line-clamp-2">
                 {t.featuredDesc}
               </p>
               <a
