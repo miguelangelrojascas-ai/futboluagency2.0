@@ -7,7 +7,6 @@ import CTASection from "@/components/CTASection";
 import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import AnderStoryCard from "@/components/AnderStoryCard";
-import TeamSection from "@/components/TeamSection";
 import CalendlySection from "@/components/CalendlySection";
 
 import OtherSportsSection from "@/components/OtherSportsSection";
@@ -34,7 +33,6 @@ const Index = () => {
         <AnderStoryCard />
         <SuccessCasesSection />
         <OtherSportsSection />
-        <TeamSection />
         <CalendlySection onOpenForm={openForm} />
         <Footer />
         <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
