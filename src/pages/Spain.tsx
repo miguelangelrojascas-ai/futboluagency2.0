@@ -190,7 +190,7 @@ const Spain = () => {
                   />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0) 100%)" }} />
                   <div className="absolute top-4 left-4 sm:top-5 sm:left-5">
-                    <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.15em] uppercase text-white font-semibold bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full drop-shadow-lg">
+                    <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.15em] uppercase text-white font-medium bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full drop-shadow-lg">
                       {card.label}
                     </span>
                   </div>
