@@ -9,10 +9,10 @@ const PathSelectionSection = () => {
     <section id="path-selection" className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4">
         <div className="text-center mb-10 sm:mb-14">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             {t("path.title")} <span className="text-primary italic">{t("path.title.highlight")}</span>
           </h2>
-          <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             {t("path.subtitle")}
           </p>
         </div>
@@ -31,7 +31,7 @@ const PathSelectionSection = () => {
               <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-3">
                 {t("path.usa.title")}
               </h3>
-              <p className="font-body text-muted-foreground text-sm sm:text-base mb-6 leading-relaxed">
+              <p className="font-body text-muted-foreground text-base mb-6 leading-relaxed">
                 {t("path.usa.desc")}
               </p>
               <span className="inline-flex items-center gap-2 font-body text-sm font-semibold text-[hsl(210,100%,50%)] group-hover:gap-3 transition-all">
@@ -53,7 +53,7 @@ const PathSelectionSection = () => {
               <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-3">
                 {t("path.spain.title")}
               </h3>
-              <p className="font-body text-muted-foreground text-sm sm:text-base mb-6 leading-relaxed">
+              <p className="font-body text-muted-foreground text-base mb-6 leading-relaxed">
                 {t("path.spain.desc")}
               </p>
               <span className="inline-flex items-center gap-2 font-body text-sm font-semibold text-primary group-hover:gap-3 transition-all">

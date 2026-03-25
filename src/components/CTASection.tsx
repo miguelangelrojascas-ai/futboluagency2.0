@@ -44,7 +44,7 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
       <div className="container-wide px-4">
         <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-12">
           {/* Headline */}
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-2">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 px-2">
             {t("cta.headline")}{" "}
             <span className="text-primary italic">{t("cta.headline.highlight")}</span>
           </h2>
@@ -83,7 +83,7 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
                 <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mb-2">
                   {service.title}
                 </h3>
-                <p className="font-body text-foreground/70 text-xs sm:text-sm leading-relaxed">
+                <p className="font-body text-foreground/70 text-sm sm:text-base leading-relaxed">
                   {service.description}
                 </p>
               </div>

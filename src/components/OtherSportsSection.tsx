@@ -22,7 +22,7 @@ const OtherSportsSection = () => {
           <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold mb-3">
             {t("othersports.title")}
           </h2>
-          <p className="font-body text-muted-foreground text-sm sm:text-base max-w-xl mx-auto mb-8">
+          <p className="font-body text-muted-foreground text-base leading-relaxed max-w-xl mx-auto mb-8">
             {t("othersports.desc")}
           </p>
           <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">

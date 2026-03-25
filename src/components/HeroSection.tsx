@@ -25,13 +25,13 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container-wide section-padding text-center pt-28 sm:pt-36">
         {/* Main Headline */}
-        <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up px-2">
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up px-2">
           {t("hero.headline")}{" "}
           <span className="text-primary italic">{t("hero.headline.highlight")}</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="font-body text-foreground/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4" style={{ animationDelay: "0.2s" }}>
+        <p className="font-body font-medium text-foreground/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4" style={{ animationDelay: "0.2s" }}>
           {t("hero.subheadline")}
         </p>
 

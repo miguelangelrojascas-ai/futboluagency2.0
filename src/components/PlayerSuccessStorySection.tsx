@@ -76,14 +76,14 @@ const PlayerSuccessStorySection = () => {
       <div className="container-wide px-4 relative z-10">
         {/* Header */}
         <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16">
-          <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
+          <span className="text-primary font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
             ⭐ {t.tag}
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-2">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 px-2">
             {t.headline}{" "}
             <span className="text-primary italic">{t.headlineHighlight}</span>
           </h2>
-          <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             {t.subtitle}
           </p>
         </div>
@@ -102,7 +102,7 @@ const PlayerSuccessStorySection = () => {
 
         {/* Video */}
         <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
-          <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground text-center mb-6">
+          <h3 className="font-display text-lg sm:text-xl font-bold text-foreground text-center mb-6">
             🎬 {t.videoTitle}
           </h3>
           <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
@@ -139,10 +139,10 @@ const PlayerSuccessStorySection = () => {
                 {/* Content */}
                 <div className={`pl-16 sm:pl-0 sm:w-1/2 ${index % 2 === 0 ? "sm:pr-16 sm:text-right" : "sm:pl-16"}`}>
                   <span className="text-primary font-display text-2xl sm:text-3xl font-bold">{item.year}</span>
-                  <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mt-1 mb-2">
+                  <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mt-1 mb-2">
                     {item.title}
                   </h3>
-                  <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -167,7 +167,7 @@ const PlayerSuccessStorySection = () => {
           <blockquote className="font-display text-xl sm:text-2xl italic text-foreground/80">
             "{t.quote}"
           </blockquote>
-          <p className="font-body text-primary font-semibold mt-3">— Ander González Vergara</p>
+          <p className="font-body text-primary font-medium mt-3">— Ander González Vergara</p>
         </div>
       </div>
     </section>

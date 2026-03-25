@@ -102,7 +102,7 @@ const TeamProfileCards = () => {
               {isEs ? "Nuestro " : "Our "}
               <span className="text-primary italic">{isEs ? "Equipo" : "Team"}</span>
             </h2>
-            <p className="font-body text-muted-foreground text-sm sm:text-base max-w-xl mx-auto">
+            <p className="font-body text-muted-foreground text-base leading-relaxed max-w-xl mx-auto">
               {isEs
                 ? "Las personas detrás de cada oportunidad que creamos."
                 : "The people behind every opportunity we create."}
@@ -134,11 +134,11 @@ const TeamProfileCards = () => {
                   }}
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                  <span className="inline-block font-body text-[10px] sm:text-xs tracking-[0.12em] uppercase font-semibold text-primary-foreground bg-primary px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block font-body text-[10px] sm:text-xs tracking-[0.15em] uppercase font-medium text-primary-foreground bg-primary px-3 py-1 rounded-full mb-3">
                     {member.role}
                   </span>
                   <h3
-                    className="font-display text-xl sm:text-2xl font-bold text-white leading-tight mb-2"
+                    className="font-display text-lg sm:text-xl font-bold text-white leading-tight mb-2"
                     style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}
                   >
                     {member.name}
@@ -186,7 +186,7 @@ const TeamProfileCards = () => {
                   />
                 )}
                 <div className="flex flex-col justify-center">
-                  <span className="inline-block w-fit font-body text-[10px] sm:text-xs tracking-[0.12em] uppercase font-semibold text-primary-foreground bg-primary px-3 py-1 rounded-full mb-2">
+                  <span className="inline-block w-fit font-body text-[10px] sm:text-xs tracking-[0.15em] uppercase font-medium text-primary-foreground bg-primary px-3 py-1 rounded-full mb-2">
                     {selected.role}
                   </span>
                   <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground">

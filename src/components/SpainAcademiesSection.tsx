@@ -53,24 +53,24 @@ const SpainAcademiesSection = () => {
 
             {/* Top-left badge */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
-              <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold bg-primary text-primary-foreground px-3 py-1 rounded-full">
+              <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.15em] uppercase font-medium bg-primary text-primary-foreground px-3 py-1 rounded-full">
                 {t.badge}
               </span>
             </div>
 
             {/* Bottom content */}
             <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-              <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
                 {t.featuredClub}
               </h3>
-              <p className="font-body text-white/75 text-sm sm:text-base max-w-xl leading-relaxed mb-5 line-clamp-2">
+              <p className="font-body text-white/75 text-base max-w-xl leading-relaxed mb-5 line-clamp-2">
                 {t.featuredDesc}
               </p>
               <a
                 href="https://forms.gle/Qy9vdJ5jZtyKPVKf6"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-body text-sm font-semibold text-primary hover:text-primary-foreground hover:bg-primary px-4 py-2 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300"
+                className="inline-flex items-center gap-2 font-body text-sm font-medium text-primary hover:text-primary-foreground hover:bg-primary px-4 py-2 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300"
               >
                 {t.applyBtn} <ArrowRight className="w-4 h-4" />
               </a>

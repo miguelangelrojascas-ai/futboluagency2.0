@@ -55,16 +55,16 @@ const AnderStoryCard = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-center p-8 sm:p-10 md:p-14 max-w-2xl">
-              <span className="font-display text-lg sm:text-2xl md:text-3xl font-bold text-white/90 mb-3 leading-snug" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
+              <span className="font-body font-medium text-base sm:text-lg md:text-xl text-white/90 mb-3 leading-snug" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
                 {isEs ? "De México a una beca NCAA D1" : "From Mexico to an NCAA D1 scholarship"}
               </span>
-              <h3 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
+              <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
                 Ander González
               </h3>
-              <p className="font-body text-sm sm:text-lg text-primary font-semibold mb-6">
+              <p className="font-body text-sm sm:text-base text-primary font-medium mb-6">
                 St. John's University — NCAA Division 1
               </p>
-              <span className="inline-flex items-center gap-2 font-body text-base sm:text-lg font-semibold text-white/80 group-hover:text-white transition-colors">
+              <span className="inline-flex items-center gap-2 font-body text-base sm:text-lg font-medium text-white/80 group-hover:text-white transition-colors">
                 {isEs ? "Ver su historia" : "See his story"} <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </span>
             </div>
@@ -88,14 +88,14 @@ const AnderStoryCard = () => {
           <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20">
             {/* Header */}
             <div className="text-center mb-12 sm:mb-16">
-              <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
+              <span className="text-primary font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
                 {isEs ? "⭐ Historia de Éxito" : "⭐ Success Story"}
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {isEs ? "El Camino de " : "The Journey of "}
                 <span className="text-primary italic">Ander González</span>
               </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+              <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                 {isEs
                   ? "De México a España, y de España a una beca NCAA Division 1 en St. John's University."
                   : "From Mexico to Spain, and from Spain to an NCAA Division 1 scholarship at St. John's University."}
@@ -105,7 +105,7 @@ const AnderStoryCard = () => {
 
             {/* Video */}
             <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
-              <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground text-center mb-6">
+              <h3 className="font-display text-lg sm:text-xl font-bold text-foreground text-center mb-6">
                 {isEs ? "Mira su historia" : "Watch his story"}
               </h3>
               <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
@@ -142,10 +142,10 @@ const AnderStoryCard = () => {
                     {/* Content */}
                     <div className={`pl-16 sm:pl-0 sm:w-1/2 ${index % 2 === 0 ? "sm:pr-16 sm:text-right" : "sm:pl-16"}`}>
                       <span className="text-primary font-display text-2xl sm:text-3xl font-bold">{item.year}</span>
-                      <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mt-1 mb-2">
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mt-1 mb-2">
                         {item.title}
                       </h3>
-                      <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
+                      <p className="font-body text-muted-foreground text-base leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -172,7 +172,7 @@ const AnderStoryCard = () => {
                   ? "El trabajo duro y el entorno adecuado pueden transformar tu carrera."
                   : "Hard work and the right environment can transform your career."}"
               </blockquote>
-              <p className="font-body text-primary font-semibold mt-3">— Ander González Vergara</p>
+              <p className="font-body text-primary font-medium mt-3">— Ander González Vergara</p>
             </div>
           </div>
         </div>

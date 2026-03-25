@@ -59,13 +59,13 @@ const USA = () => {
           <div className="absolute inset-0 bg-background/70" />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
-              <span className="inline-block mb-4 text-[hsl(210,100%,50%)] font-body text-xs tracking-[0.2em] uppercase">
+              <span className="inline-block mb-4 text-[hsl(210,100%,50%)] font-body text-xs tracking-[0.15em] uppercase">
                 {t("usa.tag")}
               </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
                 {t("usa.hero.title")} <span className="text-[hsl(210,100%,50%)] italic">{t("usa.hero.highlight")}</span>
               </h1>
-              <p className="font-body text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
+              <p className="font-body font-medium text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
                 {t("usa.hero.desc")}
               </p>
               <Link
@@ -87,11 +87,11 @@ const USA = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {divisions.map((div) => (
                 <div key={div.name} className="rounded-xl border border-border bg-card p-6 hover:border-[hsl(210,100%,50%)]/40 transition-colors">
-                  <span className="inline-block text-xs font-body font-medium text-[hsl(210,100%,50%)] bg-[hsl(210,100%,50%)]/10 px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block text-xs font-body font-medium tracking-[0.15em] uppercase text-[hsl(210,100%,50%)] bg-[hsl(210,100%,50%)]/10 px-3 py-1 rounded-full mb-3">
                     {div.level}
                   </span>
                   <h3 className="font-display text-lg font-bold mb-2">{div.name}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{div.desc}</p>
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">{div.desc}</p>
                 </div>
               ))}
             </div>
@@ -112,7 +112,7 @@ const USA = () => {
                   </div>
                   <div>
                     <h3 className="font-display text-lg font-bold mb-1">{step.title}</h3>
-                    <p className="font-body text-muted-foreground text-sm">{step.desc}</p>
+                    <p className="font-body text-muted-foreground text-base leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -145,17 +145,17 @@ const USA = () => {
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {t("usa.scholarship.title")}
               </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg mb-6">
+              <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
                 {t("usa.scholarship.desc")}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="rounded-xl border border-border bg-card p-6">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">{t("usa.scholarship.partial")}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{t("usa.scholarship.partial.desc")}</p>
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">{t("usa.scholarship.partial.desc")}</p>
                 </div>
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-6">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">{t("usa.scholarship.full")}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{t("usa.scholarship.full.desc")}</p>
+                  <p className="font-body text-muted-foreground text-base leading-relaxed">{t("usa.scholarship.full.desc")}</p>
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@ const USA = () => {
                     {i < timeline.length - 1 && <div className="w-0.5 h-12 bg-border mt-1" />}
                   </div>
                   <div className="-mt-1">
-                    <span className="font-body text-xs text-primary font-semibold uppercase tracking-wider">{item.month}</span>
+                    <span className="font-body text-xs text-primary font-semibold uppercase tracking-[0.15em]">{item.month}</span>
                     <p className="font-body text-foreground text-sm mt-1">{item.task}</p>
                   </div>
                 </div>
@@ -197,12 +197,12 @@ const USA = () => {
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               {t("usa.cta.title")}
             </h2>
-            <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-8">
+            <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
               {t("usa.cta.desc")}
             </p>
             <Link
               to="/apply"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-bold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
             >
               {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
             </Link>

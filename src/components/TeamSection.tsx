@@ -41,7 +41,7 @@ const TeamSection = () => {
       <div className="container-wide px-4">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 md:mb-24">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-foreground mb-4 px-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-foreground mb-4 px-2">
             {t("team.title")}{" "}
             <span className="text-gradient">{t("team.title.highlight")}</span>
           </h2>
@@ -75,12 +75,12 @@ const TeamSection = () => {
               {/* Content */}
               <div className="w-full lg:w-3/5 space-y-4 sm:space-y-6 text-center lg:text-left">
                 {/* Role Badge */}
-                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/20 text-primary text-xs sm:text-sm font-semibold rounded-full uppercase tracking-wider">
+                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/20 text-primary text-xs sm:text-sm font-medium rounded-full uppercase tracking-[0.15em]">
                   {founder.role}
                 </span>
 
                 {/* Name */}
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-foreground">
+                <h3 className="text-2xl sm:text-3xl font-display font-bold text-foreground">
                   {founder.name}
                 </h3>
 
@@ -89,7 +89,7 @@ const TeamSection = () => {
                   {founder.bio.map((paragraph, pIndex) => (
                     <p
                       key={pIndex}
-                      className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed"
+                      className="font-body text-muted-foreground text-base leading-relaxed"
                     >
                       {paragraph}
                     </p>

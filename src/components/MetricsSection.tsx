@@ -34,7 +34,7 @@ const MetricsSection = () => {
                     <div className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary italic mb-1">
                       {metric.value}
                     </div>
-                    <p className="font-body text-muted-foreground text-[10px] sm:text-xs md:text-sm">
+                    <p className="font-body text-muted-foreground text-xs sm:text-sm">
                       {metric.label}
                     </p>
                   </div>

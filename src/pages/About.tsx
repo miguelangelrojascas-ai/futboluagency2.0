@@ -98,7 +98,7 @@ const About = () => {
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
                 {isEs ? "Lo que nos mueve" : "What drives us"}
               </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed mb-10">
+              <p className="font-body font-normal text-muted-foreground text-base sm:text-lg leading-relaxed mb-10">
                 {isEs
                   ? "Creemos que cada jugador merece la oportunidad de demostrar su talento en el entorno correcto. Trabajamos con compromiso, transparencia y conocimiento profundo del ecosistema deportivo y académico para abrir puertas que de otra forma permanecerían cerradas."
                   : "We believe every player deserves the chance to prove their talent in the right environment. We work with commitment, transparency, and deep knowledge of the sports and academic ecosystem to open doors that would otherwise remain closed."}
@@ -126,7 +126,7 @@ const About = () => {
                 ].map((value, i) => (
                   <div key={i} className="rounded-xl border border-border bg-card p-6">
                     <h3 className="font-display text-lg font-bold text-foreground mb-2">{value.title}</h3>
-                    <p className="font-body text-muted-foreground text-sm leading-relaxed">{value.desc}</p>
+                    <p className="font-body text-muted-foreground text-base leading-relaxed">{value.desc}</p>
                   </div>
                 ))}
               </div>
