@@ -118,25 +118,6 @@ const Spain = () => {
         </section>
 
 
-        {/* Benefits */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
-              {t("spain.benefits.title")}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-              {benefits.map((b, i) => (
-                <div key={i} className="rounded-xl border border-border bg-card p-6 text-center hover:border-primary/40 transition-colors">
-                  <div className="w-12 h-12 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center mx-auto mb-4">
-                    <b.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="font-display text-base font-bold mb-2">{b.title}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{b.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Process */}
         <section className="section-padding bg-background-alt">
