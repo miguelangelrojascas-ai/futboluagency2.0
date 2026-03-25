@@ -47,7 +47,7 @@ const LogoCarousel = () => {
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <section className="py-8 bg-background overflow-hidden">
+    <section className="py-8 overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="relative">
         {/* Fade overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />

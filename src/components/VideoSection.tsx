@@ -8,7 +8,7 @@ interface VideoSectionProps {
 const VideoSection = ({ onOpenForm }: VideoSectionProps) => {
   const { t } = useLanguage();
   return (
-    <section id="video-section" className="bg-background section-padding">
+    <section id="video-section" className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">

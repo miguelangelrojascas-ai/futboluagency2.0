@@ -139,7 +139,7 @@ const Spain = () => {
         </section>
 
         {/* ¿Por qué España? — Carousel */}
-        <section className="section-padding bg-background">
+        <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
           <div className="container-wide px-4">
             <div className="flex items-end justify-between mb-8">
               <div>
