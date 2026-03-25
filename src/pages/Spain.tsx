@@ -1,6 +1,6 @@
 // Spain page
 import { Link } from "react-router-dom";
-import { ArrowRight, Trophy, Sun, Users, Target, Zap, Circle, Eye, Timer, Building2 } from "lucide-react";
+import { ArrowRight, Trophy, Sun, Users, Target, Zap, Circle, Eye, Timer, Building2, Dumbbell, Swords, ScanEye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -118,6 +118,36 @@ const Spain = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Next Step */}
+        <section className="py-16 md:py-20 bg-background">
+          <div className="container-wide px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-foreground">
+                {language === "es" ? "Da el siguiente paso en tu carrera" : "Take the next step in your career"}
+              </h2>
+              <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-12">
+                {language === "es"
+                  ? "Entrena en academias profesionales, compite en ligas exigentes y gana visibilidad dentro del sistema español."
+                  : "Train at professional academies, compete in demanding leagues, and gain visibility within the Spanish system."}
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+                {[
+                  { icon: Dumbbell, label: language === "es" ? "Entrenamiento profesional" : "Professional training" },
+                  { icon: Swords, label: language === "es" ? "Competición real" : "Real competition" },
+                  { icon: ScanEye, label: language === "es" ? "Exposición ante entrenadores" : "Exposure to coaches" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <span className="font-body text-sm font-semibold text-foreground">{item.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
