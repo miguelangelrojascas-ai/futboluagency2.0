@@ -75,37 +75,51 @@ const AnderStoryCard = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-          onClick={() => setIsModalOpen(false)}
+          className="fixed inset-0 z-50 bg-background overflow-y-auto"
         >
-          <div
-            className="relative bg-card border border-border rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+          {/* Close button */}
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors"
           >
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <X className="w-5 h-5" />
+          </button>
 
-            <div className="p-6 sm:p-8">
-              {/* Header */}
-              <span className="font-body text-xs tracking-[0.15em] uppercase text-primary mb-2 block">
-                {isEs ? "Historia de Éxito" : "Success Story"}
+          <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20">
+            {/* Header */}
+            <div className="text-center mb-12 sm:mb-16">
+              <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
+                {isEs ? "⭐ Historia de Éxito" : "⭐ Success Story"}
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-1">
-                {isEs ? "El camino de " : "The journey of "}
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                {isEs ? "El Camino de " : "The Journey of "}
                 <span className="text-primary italic">Ander González</span>
               </h2>
-              <p className="font-body text-muted-foreground text-sm sm:text-base mb-6">
+              <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
                 {isEs
                   ? "De México a España, y de España a una beca NCAA Division 1 en St. John's University."
                   : "From Mexico to Spain, and from Spain to an NCAA Division 1 scholarship at St. John's University."}
               </p>
+            </div>
 
-              {/* Video */}
-              <div className="rounded-xl overflow-hidden border border-border mb-8">
+            {/* Hero Image */}
+            <div className="max-w-md mx-auto mb-12 sm:mb-16">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
+                <img
+                  src={anderMeet}
+                  alt="Ander González"
+                  className="w-full h-auto object-contain"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+              </div>
+            </div>
+
+            {/* Video */}
+            <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
+              <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground text-center mb-6">
+                🎬 {isEs ? "Mira su historia" : "Watch his story"}
+              </h3>
+              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
                 <video
                   controls
                   playsInline
@@ -116,31 +130,60 @@ const AnderStoryCard = () => {
                   <source src="/videos/ander-highlights.mp4" type="video/mp4" />
                 </video>
               </div>
+            </div>
 
-              {/* Timeline */}
-              <div className="space-y-6 mb-8">
-                {timeline.map((item, i) => (
-                  <div key={i} className="flex gap-4 items-start">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center">
-                      <span className="font-display font-bold text-primary text-sm">{item.year}</span>
+            {/* Timeline */}
+            <div className="max-w-5xl mx-auto">
+              <div className="relative">
+                {/* Vertical line */}
+                <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent sm:-translate-x-px" />
+
+                {timeline.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`relative flex flex-col sm:flex-row items-start gap-6 sm:gap-12 mb-12 sm:mb-16 last:mb-0 ${
+                      index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
+                    }`}
+                  >
+                    {/* Year dot */}
+                    <div className="absolute left-4 sm:left-1/2 w-8 h-8 -translate-x-1/2 bg-primary rounded-full flex items-center justify-center z-10 shadow-lg shadow-primary/30">
+                      <span className="text-primary-foreground text-[10px] font-bold">{item.year.slice(-2)}</span>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-display text-base font-bold text-foreground mb-1">{item.title}</h4>
-                      <p className="font-body text-muted-foreground text-sm">{item.desc}</p>
+
+                    {/* Content */}
+                    <div className={`pl-16 sm:pl-0 sm:w-1/2 ${index % 2 === 0 ? "sm:pr-16 sm:text-right" : "sm:pl-16"}`}>
+                      <span className="text-primary font-display text-2xl sm:text-3xl font-bold">{item.year}</span>
+                      <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mt-1 mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    {/* Image */}
+                    <div className={`pl-16 sm:pl-0 sm:w-1/2 ${index % 2 === 0 ? "sm:pl-16" : "sm:pr-16"}`}>
+                      <div className="rounded-xl overflow-hidden border border-border shadow-lg">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-auto object-contain"
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
 
-              {/* Quote */}
-              <div className="border-t border-border pt-6 text-center">
-                <blockquote className="font-display text-lg sm:text-xl italic text-foreground/80">
-                  "{isEs
-                    ? "El trabajo duro y el entorno adecuado pueden transformar tu carrera."
-                    : "Hard work and the right environment can transform your career."}"
-                </blockquote>
-                <p className="font-body text-primary font-semibold mt-2 text-sm">— Ander González Vergara</p>
-              </div>
+            {/* Quote */}
+            <div className="max-w-2xl mx-auto mt-12 sm:mt-16 text-center">
+              <blockquote className="font-display text-xl sm:text-2xl italic text-foreground/80">
+                "{isEs
+                  ? "El trabajo duro y el entorno adecuado pueden transformar tu carrera."
+                  : "Hard work and the right environment can transform your career."}"
+              </blockquote>
+              <p className="font-body text-primary font-semibold mt-3">— Ander González Vergara</p>
             </div>
           </div>
         </div>
