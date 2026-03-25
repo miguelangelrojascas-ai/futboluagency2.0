@@ -91,7 +91,7 @@ const AnderStoryCard = () => {
               <span className="text-primary font-body text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
                 {isEs ? "⭐ Historia de Éxito" : "⭐ Success Story"}
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                 {isEs ? "El Camino de " : "The Journey of "}
                 <span className="text-primary italic">Ander González</span>
               </h2>
