@@ -14,7 +14,12 @@ import spainAcademy from "@/assets/spain-academy.jpg";
 
 const Spain = () => {
   const { t, language } = useLanguage();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const carouselCards = [
     {
@@ -44,11 +49,45 @@ const Spain = () => {
     },
   ];
 
-  const visibleCards = 3;
-  const maxIndex = carouselCards.length - visibleCards;
+  const updateScrollButtons = () => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
 
-  const scrollPrev = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
-  const scrollNext = () => setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", updateScrollButtons);
+    updateScrollButtons();
+    return () => el.removeEventListener("scroll", updateScrollButtons);
+  }, []);
+
+  const scrollBy = (direction: number) => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * 320, behavior: "smooth" });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    setStartX(e.pageX - el.offsetLeft);
+    setScrollLeft(el.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const x = e.pageX - el.offsetLeft;
+    el.scrollLeft = scrollLeft - (x - startX);
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
 
   const steps = [
     { num: "01", title: t("spain.step1.title"), desc: t("spain.step1.desc") },
