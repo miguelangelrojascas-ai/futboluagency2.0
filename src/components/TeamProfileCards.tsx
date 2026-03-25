@@ -134,7 +134,7 @@ const TeamProfileCards = () => {
                   }}
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                  <span className="inline-block font-body text-[10px] sm:text-xs tracking-[0.12em] uppercase font-semibold text-primary-foreground bg-primary px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block font-body text-[10px] sm:text-xs tracking-[0.15em] uppercase font-medium text-primary-foreground bg-primary px-3 py-1 rounded-full mb-3">
                     {member.role}
                   </span>
                   <h3
