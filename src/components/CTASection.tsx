@@ -69,7 +69,7 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
               />
               
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-background/95" />
+              <div className="absolute inset-0 bg-background/60" />
               
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
