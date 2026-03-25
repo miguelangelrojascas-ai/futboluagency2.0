@@ -190,7 +190,7 @@ const Spain = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
-                    <span className="font-body text-[10px] sm:text-xs tracking-[0.2em] uppercase text-primary/90 mb-2">
+                    <span className="font-body text-[10px] sm:text-xs tracking-[0.2em] uppercase text-white/80 mb-2 drop-shadow-md">
                       {card.label}
                     </span>
                     <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-lg">
