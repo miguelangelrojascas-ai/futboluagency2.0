@@ -193,6 +193,9 @@ const About = () => {
         </section>
 
         {/* Values / Mission */}
+        <TeamSection />
+
+        {/* Values / Mission */}
         <section className="section-padding bg-background-alt">
           <div className="container-wide px-4">
             <div className="max-w-3xl mx-auto text-center">
