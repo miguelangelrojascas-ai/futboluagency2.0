@@ -40,7 +40,7 @@ const SpainAcademiesSection = () => {
       <div className="container-wide px-4 relative z-10">
 
         {/* Talavera CF Hero Card */}
-        <div className="max-w-[900px] mx-auto mb-12 sm:mb-16">
+        <div className="max-w-[1100px] w-full mx-auto mb-12 sm:mb-16">
           <div className="relative rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-colors duration-300" style={{ aspectRatio: "16/7" }}>
             {/* Background photo */}
             <img
@@ -49,7 +49,7 @@ const SpainAcademiesSection = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 45%, rgba(0,0,0,0.35) 100%)" }} />
 
             {/* Top-left badge */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
@@ -60,10 +60,10 @@ const SpainAcademiesSection = () => {
 
             {/* Bottom content */}
             <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}>
                 {t.featuredClub}
               </h3>
-              <p className="font-body text-white/75 text-base max-w-xl leading-relaxed mb-5 line-clamp-2">
+              <p className="font-body text-white/80 text-base max-w-xl leading-relaxed mb-5 line-clamp-2" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}>
                 {t.featuredDesc}
               </p>
               <a
@@ -79,15 +79,16 @@ const SpainAcademiesSection = () => {
         </div>
 
         {/* Partner Clubs — minimal pills */}
-        <div className="max-w-[900px] mx-auto mb-12 sm:mb-16">
+        <div className="max-w-[1100px] w-full mx-auto mb-12 sm:mb-16">
           <p className="font-body text-muted-foreground text-xs tracking-[0.15em] uppercase text-center mb-5">
             {t.partnersLabel}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
             {partnerClubs.map((club) => (
               <span
                 key={club}
-                className="font-body text-xs sm:text-sm text-foreground/80 bg-card border border-border rounded-full px-4 py-2"
+                className="font-body text-[12px] text-foreground/80 rounded-full px-3.5 py-1.5 whitespace-nowrap"
+                style={{ border: "1px solid rgba(255,255,255,0.15)" }}
               >
                 {club}
               </span>
