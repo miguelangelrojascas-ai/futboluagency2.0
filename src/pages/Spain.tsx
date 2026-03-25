@@ -1,7 +1,7 @@
 // Spain page
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Dumbbell, Swords, ScanEye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
