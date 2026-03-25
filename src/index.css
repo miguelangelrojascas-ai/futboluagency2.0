@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* FutbolUAgency Premium Dark Theme */
-    --background: 210 12% 4%; /* #0B0D0E */
-    --background-alt: 210 8% 7%; /* #111315 */
+    --background: 0 0% 6%; /* #0f0f0f */
+    --background-alt: 0 0% 6%; /* #0f0f0f - same as background for seamless sections */
     --foreground: 0 0% 100%; /* #FFFFFF */
     
     --card: 210 8% 7%;
