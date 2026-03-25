@@ -143,7 +143,7 @@ const Spain = () => {
                 <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">
                   {language === "es" ? "¿Por qué España?" : "Why Spain?"}
                 </h2>
-                <p className="font-body text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
+                <p className="font-body text-muted-foreground text-base leading-relaxed mt-2 max-w-xl">
                   {language === "es"
                     ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
                     : "One of the most demanding environments in the world to compete, improve, and get noticed."}
