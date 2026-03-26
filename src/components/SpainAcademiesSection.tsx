@@ -49,7 +49,7 @@ const SpainAcademiesSection = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Dark gradient overlay */}
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 45%, rgba(0,0,0,0.35) 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.93) 45%, rgba(0,0,0,0.3) 100%)" }} />
 
             {/* Top-left badge */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
