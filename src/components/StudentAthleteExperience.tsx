@@ -1,10 +1,11 @@
 import { useState } from "react";
+import coachHandshake from "@/assets/card-bg-coaches-new.jpg";
 
 const items = [
   {
     title: "Fútbol de Alta Competencia",
     text: "Compite en ligas universitarias televisadas (NCAA, NAIA) frente a ojeadores de la MLS y equipos internacionales. Tu vitrina hacia el profesionalismo.",
-    img: "https://images.unsplash.com/photo-1518605368461-1eb47b2c5890?q=80&w=2070&auto=format&fit=crop",
+    img: coachHandshake,
   },
   {
     title: "Excelencia Académica",
