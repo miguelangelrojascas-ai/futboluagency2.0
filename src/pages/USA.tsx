@@ -25,13 +25,6 @@ const USA = () => {
     { icon: Clock, text: t("usa.req.age") },
   ];
 
-  const steps = [
-    { num: "01", title: t("usa.step1.title"), desc: t("usa.step1.desc") },
-    { num: "02", title: t("usa.step2.title"), desc: t("usa.step2.desc") },
-    { num: "03", title: t("usa.step3.title"), desc: t("usa.step3.desc") },
-    { num: "04", title: t("usa.step4.title"), desc: t("usa.step4.desc") },
-    { num: "05", title: t("usa.step5.title"), desc: t("usa.step5.desc") },
-  ];
 
 
   return (
@@ -90,27 +83,6 @@ const USA = () => {
           </div>
         </section>
 
-        {/* Recruitment Process Steps */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
-              {t("usa.process.title")}
-            </h2>
-            <div className="max-w-3xl mx-auto space-y-6">
-              {steps.map((step) => (
-                <div key={step.num} className="flex gap-5 items-start">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-600/15 border border-blue-500/30 flex items-center justify-center font-display font-bold text-blue-500 text-sm">
-                    {step.num}
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg font-bold mb-1">{step.title}</h3>
-                    <p className="font-body text-muted-foreground text-base leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Requirements */}
         <section className="section-padding bg-background">
