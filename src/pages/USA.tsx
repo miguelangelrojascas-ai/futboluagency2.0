@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign, TrendingUp, Trophy, Languages, Video } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,10 +20,34 @@ const USA = () => {
   ];
 
   const requirements = [
-    { icon: Shield, text: t("usa.req.level") },
-    { icon: BookOpen, text: t("usa.req.english") },
-    { icon: GraduationCap, text: t("usa.req.academics") },
-    { icon: Clock, text: t("usa.req.age") },
+    {
+      icon: BookOpen,
+      num: "01",
+      label: "BACHILLER O GRADO SUPERIOR",
+      value: "16 — 26 años",
+      desc: "Tener el título o estar en proceso de conseguirlo. Aplicable también para aquellos graduados que deseen cursar un Máster en EE.UU.",
+    },
+    {
+      icon: Trophy,
+      num: "02",
+      label: "NIVEL FUTBOLÍSTICO COMPETITIVO",
+      value: "Nivel de Élite",
+      desc: "Jugar a un nivel competitivo (Liga Preferente, Nacional, División de Honor, Regional o equivalentes). Se requiere un currículum deportivo y videos de respaldo.",
+    },
+    {
+      icon: Languages,
+      num: "03",
+      label: "NIVEL DE INGLÉS",
+      value: "Intermedio — Alto",
+      desc: "No es necesario ser experto inicialmente, pero se requiere obtener un nivel intermedio-alto para superar las pruebas exigidas (TOEFL o DUOLINGO).",
+    },
+    {
+      icon: Video,
+      num: "04",
+      label: "VIDEO MEJORES JUGADAS",
+      value: "6 — 7 Minutos",
+      desc: "Capacidad de preparar un video de calidad con tus mejores jugadas y disponer de partidos completos para el análisis de los coaches universitarios.",
+    },
   ];
 
 
@@ -164,14 +188,29 @@ const USA = () => {
             <div className="absolute inset-0 bg-background/80" />
           </div>
             <div className="container-wide px-4 relative z-10">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
-              {t("usa.req.title")}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div className="max-w-3xl mb-12">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Perfil de Admisión
+              </h2>
+              <p className="font-body text-muted-foreground text-base leading-relaxed">
+                Evaluamos cuatro áreas técnicas críticas para determinar la elegibilidad y el potencial de beca de cada prospecto.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px max-w-6xl mx-auto rounded-xl overflow-hidden border border-border">
               {requirements.map((req, i) => (
-                <div key={i} className="flex items-center gap-4 rounded-xl border border-border bg-[#141414] p-5 ring-1 ring-blue-500/10 shadow-[0_0_20px_rgba(37,99,235,0.08)]">
-                  <req.icon className="w-6 h-6 text-blue-500 flex-shrink-0" />
-                  <span className="font-body text-sm text-foreground">{req.text}</span>
+                <div key={i} className="bg-[#141414] p-8 flex flex-col gap-6">
+                  <req.icon className="w-8 h-8 text-blue-500" />
+                  <div>
+                    <span className="font-body text-[11px] tracking-[0.15em] uppercase text-muted-foreground block mb-2">
+                      {req.num} — {req.label}
+                    </span>
+                    <span className="font-display text-xl sm:text-2xl font-bold italic text-foreground block mb-3">
+                      {req.value}
+                    </span>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                      {req.desc}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
