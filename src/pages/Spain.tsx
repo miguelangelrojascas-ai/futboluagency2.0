@@ -12,7 +12,7 @@ import SpainMethodologySection from "@/components/spain/SpainMethodologySection"
 import SpainTargetProfileSection from "@/components/spain/SpainTargetProfileSection";
 import SpainDailyLifeSection from "@/components/spain/SpainDailyLifeSection";
 import SpainInclusionsSection from "@/components/spain/SpainInclusionsSection";
-import SpainAnderTestimonial from "@/components/spain/SpainAnderTestimonial";
+import AnderStoryCard from "@/components/AnderStoryCard";
 import SpainFinalCTA from "@/components/spain/SpainFinalCTA";
 
 import spainTraining from "@/assets/spain-training.jpg";
@@ -240,7 +240,7 @@ const Spain = () => {
         <SpainTargetProfileSection />
         <SpainDailyLifeSection />
         <SpainInclusionsSection />
-        <SpainAnderTestimonial />
+        <AnderStoryCard />
         <SpainFinalCTA />
 
         <Footer />
