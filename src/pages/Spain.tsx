@@ -10,7 +10,7 @@ import SpainAcademiesSection from "@/components/SpainAcademiesSection";
 import SpainMadridSection from "@/components/spain/SpainMadridSection";
 import SpainMethodologySection from "@/components/spain/SpainMethodologySection";
 import SpainTargetProfileSection from "@/components/spain/SpainTargetProfileSection";
-import SpainDailyLifeSection from "@/components/spain/SpainDailyLifeSection";
+
 import SpainInclusionsSection from "@/components/spain/SpainInclusionsSection";
 import AnderStoryCard from "@/components/AnderStoryCard";
 import SpainFinalCTA from "@/components/spain/SpainFinalCTA";
@@ -238,7 +238,7 @@ const Spain = () => {
         <SpainMadridSection />
         <SpainMethodologySection />
         <SpainTargetProfileSection />
-        <SpainDailyLifeSection />
+        
         <SpainInclusionsSection />
         <AnderStoryCard />
         <SpainFinalCTA />
