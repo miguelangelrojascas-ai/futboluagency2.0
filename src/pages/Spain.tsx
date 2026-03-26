@@ -5,7 +5,15 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SpainInfoBar from "@/components/spain/SpainInfoBar";
 import SpainAcademiesSection from "@/components/SpainAcademiesSection";
+import SpainMadridSection from "@/components/spain/SpainMadridSection";
+import SpainMethodologySection from "@/components/spain/SpainMethodologySection";
+import SpainTargetProfileSection from "@/components/spain/SpainTargetProfileSection";
+import SpainDailyLifeSection from "@/components/spain/SpainDailyLifeSection";
+import SpainInclusionsSection from "@/components/spain/SpainInclusionsSection";
+import SpainAnderTestimonial from "@/components/spain/SpainAnderTestimonial";
+import SpainFinalCTA from "@/components/spain/SpainFinalCTA";
 
 import spainTraining from "@/assets/spain-training.jpg";
 import spainCompetition from "@/assets/spain-competition.jpg";
@@ -90,9 +98,6 @@ const Spain = () => {
 
   const handleMouseUp = () => setIsDragging(false);
 
-
-
-
   return (
     <>
       <Navbar />
@@ -108,7 +113,6 @@ const Spain = () => {
             src="/videos/spain-hero-new.mov"
           />
           <div className="absolute inset-0 bg-background/70" />
-          {/* Bottom fade */}
           <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #0f0f0f)" }} />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
@@ -134,6 +138,9 @@ const Spain = () => {
             </div>
           </div>
         </section>
+
+        {/* Info bar */}
+        <SpainInfoBar />
 
         {/* ¿Por qué España? — Carousel */}
         <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
@@ -167,7 +174,6 @@ const Spain = () => {
               </p>
             </div>
 
-            {/* Cards carousel — draggable */}
             <div
               ref={scrollContainerRef}
               onMouseDown={handleMouseDown}
@@ -203,7 +209,6 @@ const Spain = () => {
               ))}
             </div>
 
-            {/* Mobile arrows */}
             <div className="flex sm:hidden items-center justify-center gap-3 mt-6">
               <button
                 onClick={() => scrollBy(-1)}
@@ -223,22 +228,22 @@ const Spain = () => {
           </div>
         </section>
 
-
-
+        {/* Talavera + partner clubs */}
         <SpainAcademiesSection />
+
+        {/* New sections */}
+        <SpainMadridSection />
+        <SpainMethodologySection />
+        <SpainTargetProfileSection />
+        <SpainDailyLifeSection />
+        <SpainInclusionsSection />
+        <SpainAnderTestimonial />
+        <SpainFinalCTA />
 
         <Footer />
       </main>
     </>
   );
 };
-
-// Small inline icon since we can't import GraduationCap twice with a different name
-const GraduationCapIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-    <path d="M6 12v5c3 3 9 3 12 0v-5" />
-  </svg>
-);
 
 export default Spain;

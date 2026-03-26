@@ -49,7 +49,7 @@ const SpainAcademiesSection = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Dark gradient overlay */}
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 45%, rgba(0,0,0,0.35) 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.93) 45%, rgba(0,0,0,0.3) 100%)" }} />
 
             {/* Top-left badge */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
@@ -96,19 +96,6 @@ const SpainAcademiesSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
-          <a
-            href="https://forms.gle/Qy9vdJ5jZtyKPVKf6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary-hover shadow-xl hover:shadow-glow transform hover:scale-[1.02] font-bold tracking-wide transition-all duration-300 min-h-[70px] sm:min-h-[80px] px-8 sm:px-16 py-5"
-          >
-            <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">
-              {t.cta}
-            </span>
-          </a>
-        </div>
       </div>
     </section>
   );
