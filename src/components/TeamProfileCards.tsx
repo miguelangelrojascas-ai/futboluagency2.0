@@ -122,7 +122,8 @@ const TeamProfileCards = () => {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover object-top aspect-square group-hover:scale-105 transition-transform duration-700"
+                    className="absolute inset-0 w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-700"
+                    style={{ objectPosition: "center 15%" }}
                   />
                 ) : (
                   <InitialsAvatar initials={member.initials} className="absolute inset-0 w-full h-full" />
