@@ -25,13 +25,6 @@ const USA = () => {
     { icon: Clock, text: t("usa.req.age") },
   ];
 
-  const steps = [
-    { num: "01", title: t("usa.step1.title"), desc: t("usa.step1.desc") },
-    { num: "02", title: t("usa.step2.title"), desc: t("usa.step2.desc") },
-    { num: "03", title: t("usa.step3.title"), desc: t("usa.step3.desc") },
-    { num: "04", title: t("usa.step4.title"), desc: t("usa.step4.desc") },
-    { num: "05", title: t("usa.step5.title"), desc: t("usa.step5.desc") },
-  ];
 
 
   return (
