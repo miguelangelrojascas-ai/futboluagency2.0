@@ -56,7 +56,7 @@ const SpainMethodologySection = () => {
             {cards.map((card, i) => (
               <div
                 key={i}
-                className="rounded-xl bg-card border border-border p-6 sm:p-7 border-t-2 border-t-primary hover:border-primary/30 transition-colors"
+                className="rounded-xl bg-[#141414] border border-border p-6 sm:p-7 border-t-2 border-t-primary hover:border-primary/30 transition-colors ring-1 ring-red-500/30 shadow-[0_0_40px_rgba(220,38,38,0.15)]"
               >
                 <card.icon className="w-6 h-6 text-primary mb-4" />
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">
