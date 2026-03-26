@@ -201,7 +201,7 @@ const USA = () => {
                 <div key={i} className="bg-[#141414] p-8 flex flex-col gap-6">
                   <req.icon className="w-8 h-8 text-blue-500" />
                   <div>
-                    <span className="font-body text-[11px] tracking-[0.15em] uppercase text-muted-foreground block mb-2">
+                    <span className="font-body text-[11px] tracking-[0.15em] uppercase text-foreground block mb-2">
                       {req.num} — {req.label}
                     </span>
                     <span className="font-display text-xl sm:text-2xl font-bold italic text-foreground block mb-3">
