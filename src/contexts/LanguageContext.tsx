@@ -59,14 +59,14 @@ const translations: Record<Language, Record<string, string>> = {
     // Process Section
     "process.title": "Así es como funciona",
     "process.subtitle": "Nuestro Proceso para conseguir tu Beca Deportiva",
-    "process.step1.title": "Evaluación Inicial",
-    "process.step1.desc": "Analizamos tu perfil deportivo y académico para identificar las mejores oportunidades.",
-    "process.step2.title": "Preparación de Material",
-    "process.step2.desc": "Creamos tu video destacado y perfil profesional que impresionará a los entrenadores.",
-    "process.step3.title": "Contacto con Universidades",
-    "process.step3.desc": "Nos comunicamos directamente con entrenadores y coordinadores de admisiones.",
-    "process.step4.title": "Aceptación y Beca",
-    "process.step4.desc": "Te guiamos hasta obtener tu oferta oficial y comenzar tu aventura universitaria.",
+    "process.step1.title": "Evaluación y Admisión",
+    "process.step1.desc": "Todo comienza con tu aplicación. Analizamos personalmente tu perfil deportivo y académico para darte una respuesta real sobre tus posibilidades. Al entrar en FutbolU, diseñamos tu hoja de ruta a medida con un agente personal y un video de alto impacto.",
+    "process.step2.title": "Búsqueda de Universidades",
+    "process.step2.desc": "Identificamos los programas y equipos que mejor encajan con lo que buscas. Buscamos el equilibrio perfecto entre tu nivel futbolístico, tus metas académicas y las expectativas de tu familia.",
+    "process.step3.title": "Negociación y Decisión",
+    "process.step3.desc": "Damos la cara por ti. Contactamos directamente con los coaches en EE.UU., presentamos tu talento y negociamos las mejores condiciones de beca. Te acompañamos en la elección final y en todos los trámites de admisión.",
+    "process.step4.title": "Visado y Tu Nueva Vida",
+    "process.step4.desc": "Te guiamos en la obtención de tu Visa F-1 y preparamos tu llegada al campus. FutbolU te acompaña durante los 4 años de carrera, apoyándote en cada paso de tu vida universitaria.",
     "process.phase": "Fase",
 
     // Team Section
