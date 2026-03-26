@@ -33,13 +33,6 @@ const USA = () => {
     { num: "05", title: t("usa.step5.title"), desc: t("usa.step5.desc") },
   ];
 
-  const timeline = [
-    { month: t("usa.timeline.m1"), task: t("usa.timeline.t1") },
-    { month: t("usa.timeline.m2"), task: t("usa.timeline.t2") },
-    { month: t("usa.timeline.m3"), task: t("usa.timeline.t3") },
-    { month: t("usa.timeline.m4"), task: t("usa.timeline.t4") },
-    { month: t("usa.timeline.m5"), task: t("usa.timeline.t5") },
-  ];
 
   return (
     <>
