@@ -15,12 +15,14 @@ const SpainFinalCTA = () => {
               ? "Plazas limitadas por temporada. El proceso comienza con una evaluación gratuita."
               : "Limited spots per season. The process starts with a free evaluation."}
           </p>
-          <Link
-            to="/apply"
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-bold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
           >
             {isEs ? "Comienza Tu Camino" : "Start Your Journey"} <ArrowRight className="w-5 h-5" />
-          </Link>
+          </a>
         </div>
       </div>
     </section>

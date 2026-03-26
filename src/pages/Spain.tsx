@@ -129,12 +129,14 @@ const Spain = () => {
                   ? "Vive, estudia y compite en un entorno profesional integrado. Un camino estructurado hacia la élite del fútbol europeo sin descuidar tu desarrollo académico."
                   : "Live, study and compete in an integrated professional environment. A structured path to elite European football without neglecting your academic development."}
               </p>
-              <Link
-                to="/apply"
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
               >
                 {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
-              </Link>
+              </a>
             </div>
           </div>
         </section>
