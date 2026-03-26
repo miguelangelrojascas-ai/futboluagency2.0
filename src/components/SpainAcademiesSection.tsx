@@ -38,7 +38,7 @@ const SpainAcademiesSection = () => {
 
         {/* Talavera CF Hero Card */}
         <div className="max-w-[1100px] w-full mx-auto mb-12 sm:mb-16">
-          <div className="relative rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-colors duration-300" style={{ aspectRatio: "16/7" }}>
+          <div className="relative rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-colors duration-300 ring-1 ring-red-500/30 shadow-[0_0_40px_rgba(220,38,38,0.15)]" style={{ aspectRatio: "16/7" }}>
             <img
               src={talaveraImg}
               alt="CF Talavera de la Reina"
