@@ -72,16 +72,16 @@ const USA = () => {
             {/* Left Column */}
             <div>
               <span className="text-blue-500 text-sm font-bold tracking-[0.15em] uppercase mb-4 block">
-                ANÁLISIS DE FINANCIAMIENTO
+                TIPOS DE BECAS
               </span>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Tipos de Becas y Viabilidad Económica
+                ¿Cuánto puedes conseguir realmente?
               </h2>
               <p className="font-body text-muted-foreground text-base leading-relaxed mb-8">
                 Determinamos el potencial de beca basándonos en un análisis técnico del perfil deportivo y académico.
               </p>
               <blockquote className="font-display text-lg sm:text-xl italic text-foreground leading-relaxed mb-8">
-                "The investment depends on your soccer level and the competitive material you can demonstrate. At FutbolU we make it clear from day one: we work to get you the best possible scholarship within your possibilities."
+                "La inversión depende de tu nivel futbolístico y del potencial competitivo que puedas demostrar. En FutbolUAgency lo dejamos claro desde el primer día: trabajamos para conseguirte la mejor beca posible dentro de tus posibilidades."
               </blockquote>
               <div className="flex items-center gap-3">
                 <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
