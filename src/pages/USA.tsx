@@ -20,10 +20,34 @@ const USA = () => {
   ];
 
   const requirements = [
-    { icon: Shield, text: t("usa.req.level") },
-    { icon: BookOpen, text: t("usa.req.english") },
-    { icon: GraduationCap, text: t("usa.req.academics") },
-    { icon: Clock, text: t("usa.req.age") },
+    {
+      icon: BookOpen,
+      num: "01",
+      label: "BACHILLER O GRADO SUPERIOR",
+      value: "16 — 26 años",
+      desc: "Tener el título o estar en proceso de conseguirlo. Aplicable también para aquellos graduados que deseen cursar un Máster en EE.UU.",
+    },
+    {
+      icon: Trophy,
+      num: "02",
+      label: "NIVEL FUTBOLÍSTICO COMPETITIVO",
+      value: "Nivel de Élite",
+      desc: "Jugar a un nivel competitivo (Liga Preferente, Nacional, División de Honor, Regional o equivalentes). Se requiere un currículum deportivo y videos de respaldo.",
+    },
+    {
+      icon: Languages,
+      num: "03",
+      label: "NIVEL DE INGLÉS",
+      value: "Intermedio — Alto",
+      desc: "No es necesario ser experto inicialmente, pero se requiere obtener un nivel intermedio-alto para superar las pruebas exigidas (TOEFL o DUOLINGO).",
+    },
+    {
+      icon: Video,
+      num: "04",
+      label: "VIDEO MEJORES JUGADAS",
+      value: "6 — 7 Minutos",
+      desc: "Capacidad de preparar un video de calidad con tus mejores jugadas y disponer de partidos completos para el análisis de los coaches universitarios.",
+    },
   ];
 
 
