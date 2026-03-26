@@ -213,12 +213,12 @@ const USA = () => {
             <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
               {t("usa.cta.desc")}
             </p>
-            <Link
-              to="/apply"
+            <button
+              onClick={openForm}
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-body font-semibold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
             >
               {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
-            </Link>
+            </button>
           </div>
         </section>
 
