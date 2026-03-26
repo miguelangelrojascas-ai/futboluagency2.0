@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ClipboardCheck, Search, Handshake, Plane } from "lucide-react";
+import { ClipboardCheck, UserCheck, Search, Handshake, FileCheck, Plane } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -20,19 +20,29 @@ const ProcessSection = () => {
       description: t("process.step1.desc"),
     },
     {
-      icon: Search,
+      icon: UserCheck,
       title: t("process.step2.title"),
       description: t("process.step2.desc"),
     },
     {
-      icon: Handshake,
+      icon: Search,
       title: t("process.step3.title"),
       description: t("process.step3.desc"),
     },
     {
-      icon: Plane,
+      icon: Handshake,
       title: t("process.step4.title"),
       description: t("process.step4.desc"),
+    },
+    {
+      icon: FileCheck,
+      title: t("process.step5.title"),
+      description: t("process.step5.desc"),
+    },
+    {
+      icon: Plane,
+      title: t("process.step6.title"),
+      description: t("process.step6.desc"),
     },
   ];
 
