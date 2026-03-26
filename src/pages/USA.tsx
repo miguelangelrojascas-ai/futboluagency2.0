@@ -184,8 +184,6 @@ const USA = () => {
           </div>
         </section>
 
-        {/* Player Success Story */}
-        <PlayerSuccessStorySection />
 
         {/* Process Section */}
         <ProcessSection />
