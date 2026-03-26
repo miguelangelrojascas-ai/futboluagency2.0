@@ -240,7 +240,7 @@ const Spain = () => {
         <SpainTargetProfileSection />
         <SpainDailyLifeSection />
         <SpainInclusionsSection />
-        <SpainAnderTestimonial />
+        <AnderStoryCard />
         <SpainFinalCTA />
 
         <Footer />
