@@ -96,19 +96,6 @@ const SpainAcademiesSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
-          <a
-            href="https://forms.gle/Qy9vdJ5jZtyKPVKf6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary-hover shadow-xl hover:shadow-glow transform hover:scale-[1.02] font-bold tracking-wide transition-all duration-300 min-h-[70px] sm:min-h-[80px] px-8 sm:px-16 py-5"
-          >
-            <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">
-              {t.cta}
-            </span>
-          </a>
-        </div>
       </div>
     </section>
   );
