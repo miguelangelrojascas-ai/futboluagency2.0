@@ -64,6 +64,8 @@ const USA = () => {
           </div>
         </section>
 
+        <StudentAthleteExperience />
+
         {/* U.S. System Explained */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4">
@@ -83,8 +85,6 @@ const USA = () => {
             </div>
           </div>
         </section>
-
-        <StudentAthleteExperience />
 
 
         {/* Requirements */}
