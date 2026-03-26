@@ -114,7 +114,7 @@ const TeamProfileCards = () => {
               <div
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer transition-all duration-500 hover:shadow-[0_0_25px_-5px_hsl(var(--primary)/0.4)] border border-transparent hover:border-primary/40"
+                className="relative rounded-2xl overflow-hidden h-full aspect-[3/4] group cursor-pointer transition-all duration-500 hover:shadow-[0_0_25px_-5px_hsl(var(--primary)/0.4)] border border-transparent hover:border-primary/40"
               >
                 {/* TODO: When photo is available, replace InitialsAvatar with:
                     <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" /> */}
