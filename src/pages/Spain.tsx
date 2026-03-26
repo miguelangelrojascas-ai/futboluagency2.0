@@ -238,7 +238,7 @@ const Spain = () => {
         <SpainMadridSection />
         <SpainMethodologySection />
         <SpainTargetProfileSection />
-        <SpainDailyLifeSection />
+        
         <SpainInclusionsSection />
         <AnderStoryCard />
         <SpainFinalCTA />
