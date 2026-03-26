@@ -101,9 +101,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // USA Page
     "usa.tag": "Programa Estados Unidos",
-    "usa.hero.title": "Cómo Conseguir una",
-    "usa.hero.highlight": "Beca de Fútbol en EE.UU.",
-    "usa.hero.desc": "Te guiamos paso a paso para conseguir tu beca deportiva en una universidad americana. NCAA, NAIA o JUCO.",
+    "usa.hero.title": "Consigue una Beca de Fútbol en Estados Unidos y",
+    "usa.hero.highlight": "Compite al Máximo Nivel",
+    "usa.hero.desc": "Te guiamos paso a paso para jugar, estudiar y desarrollarte en universidades americanas.",
     "usa.system.title": "El Sistema Universitario de EE.UU.",
     "usa.ncaa.d1": "El nivel más alto. Universidades con los mejores programas deportivos y becas completas.",
     "usa.ncaa.d2": "Nivel alto con buenas becas. Gran equilibrio entre deporte y estudios.",
