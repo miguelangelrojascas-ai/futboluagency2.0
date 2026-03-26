@@ -260,14 +260,14 @@ const translations: Record<Language, Record<string, string>> = {
     // Process Section
     "process.title": "This is how it works",
     "process.subtitle": "Our Process to get your Sports Scholarship",
-    "process.step1.title": "Initial Evaluation",
-    "process.step1.desc": "We analyze your athletic and academic profile to identify the best opportunities.",
-    "process.step2.title": "Material Preparation",
-    "process.step2.desc": "We create your highlight video and professional profile that will impress coaches.",
-    "process.step3.title": "University Contact",
-    "process.step3.desc": "We communicate directly with coaches and admissions coordinators.",
-    "process.step4.title": "Acceptance and Scholarship",
-    "process.step4.desc": "We guide you until you get your official offer and start your university adventure.",
+    "process.step1.title": "Evaluation & Admission",
+    "process.step1.desc": "It all starts with your application. We personally analyze your athletic and academic profile to give you a real answer about your scholarship possibilities. Once you join FutbolU, we design your custom roadmap with a personal agent and a high-impact highlight video.",
+    "process.step2.title": "University Search",
+    "process.step2.desc": "We identify the programs and teams that best fit what you're looking for. We seek the perfect balance between your soccer level, your academic goals, and your family's expectations.",
+    "process.step3.title": "Negotiation & Decision",
+    "process.step3.desc": "We go to bat for you. We contact coaches in the U.S. directly, present your talent, and negotiate the best scholarship terms possible. We guide you through your final choice and all admission paperwork.",
+    "process.step4.title": "Visa & Your New Life",
+    "process.step4.desc": "We guide you through obtaining your F-1 Visa and prepare your arrival on campus. FutbolU stays by your side for all 4 years, supporting you every step of your university life.",
     "process.phase": "Phase",
 
     // Team Section
