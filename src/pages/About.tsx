@@ -91,48 +91,6 @@ const About = () => {
       <main className="min-h-screen pt-16 md:pt-20">
         <TeamProfileCards />
 
-        {/* Values / Mission */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-                {isEs ? "Lo que nos mueve" : "What drives us"}
-              </h2>
-              <p className="font-body font-normal text-muted-foreground text-base sm:text-lg leading-relaxed mb-10">
-                {isEs
-                  ? "Creemos que cada jugador merece la oportunidad de demostrar su talento en el entorno correcto. Trabajamos con compromiso, transparencia y conocimiento profundo del ecosistema deportivo y académico para abrir puertas que de otra forma permanecerían cerradas."
-                  : "We believe every player deserves the chance to prove their talent in the right environment. We work with commitment, transparency, and deep knowledge of the sports and academic ecosystem to open doors that would otherwise remain closed."}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                  {
-                    title: isEs ? "Compromiso" : "Commitment",
-                    desc: isEs
-                      ? "Acompañamos a cada jugador desde el primer contacto hasta que llega a su destino."
-                      : "We support each player from first contact until they reach their destination.",
-                  },
-                  {
-                    title: isEs ? "Transparencia" : "Transparency",
-                    desc: isEs
-                      ? "Comunicación clara, expectativas reales y un proceso sin sorpresas."
-                      : "Clear communication, real expectations, and a process with no surprises.",
-                  },
-                  {
-                    title: isEs ? "Resultados" : "Results",
-                    desc: isEs
-                      ? "Más de 250 jugadores colocados en universidades y academias de alto nivel."
-                      : "Over 250 players placed in top universities and high-level academies.",
-                  },
-                ].map((value, i) => (
-                  <div key={i} className="rounded-xl border border-border bg-card p-6">
-                    <h3 className="font-display text-lg font-bold text-foreground mb-2">{value.title}</h3>
-                    <p className="font-body text-muted-foreground text-base leading-relaxed">{value.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* CTA */}
         <section className="py-16 md:py-20 bg-background">
