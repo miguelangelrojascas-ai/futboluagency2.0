@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign, TrendingUp, Trophy, Languages, Video } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
