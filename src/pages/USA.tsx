@@ -83,7 +83,7 @@ const USA = () => {
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
               >
                 {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
-              </Link>
+              </button>
             </div>
           </div>
         </section>
