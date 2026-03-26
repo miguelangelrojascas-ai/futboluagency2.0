@@ -65,7 +65,7 @@ const USA = () => {
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
                 {t("usa.hero.title")} <span className="text-[hsl(210,100%,50%)] italic">{t("usa.hero.highlight")}</span>
               </h1>
-              <p className="font-body font-medium text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">
+              <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
                 {t("usa.hero.desc")}
               </p>
               <Link

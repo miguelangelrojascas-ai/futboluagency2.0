@@ -8,28 +8,28 @@ const SpainMethodologySection = () => {
   const cards = [
     {
       icon: Target,
-      title: isEs ? "Entrenamiento táctico diario" : "Daily tactical training",
+      title: isEs ? "Entrenamiento Élite" : "Elite Training",
       desc: isEs
-        ? "Sesiones enfocadas en modelo de juego, posicionamiento y toma de decisiones bajo presión."
-        : "Sessions focused on game model, positioning and decision-making under pressure.",
-    },
-    {
-      icon: TrendingUp,
-      title: isEs ? "Desarrollo físico integral" : "Comprehensive physical development",
-      desc: isEs
-        ? "Planes de rendimiento individualizados con seguimiento de métricas clave de cada jugador."
-        : "Individualized performance plans tracking each player's key metrics.",
+        ? "Sesiones diarias enfocadas en modelo de juego, posicionamiento y toma de decisiones bajo presión real de competición."
+        : "Daily sessions focused on game model, positioning and decision-making under real competitive pressure.",
     },
     {
       icon: Users,
-      title: isEs ? "Competición oficial en liga" : "Official league competition",
+      title: isEs ? "Integración en Clubes Europeos" : "European Club Integration",
       desc: isEs
-        ? "Partidos semanales en competiciones federadas contra equipos de nivel profesional."
-        : "Weekly matches in federated competitions against professional-level teams.",
+        ? "Competición oficial en ligas federadas contra equipos de nivel profesional dentro de clubes reales."
+        : "Official competition in federated leagues against professional-level teams within real clubs.",
+    },
+    {
+      icon: TrendingUp,
+      title: isEs ? "Acondicionamiento de Alto Rendimiento" : "High-Performance Conditioning",
+      desc: isEs
+        ? "Planes de rendimiento individualizados con seguimiento de métricas clave y desarrollo físico integral."
+        : "Individualized performance plans with key metric tracking and comprehensive physical development.",
     },
     {
       icon: BarChart3,
-      title: isEs ? "Análisis de video y scouting" : "Video analysis & scouting",
+      title: isEs ? "Análisis de Video y Scouting" : "Video Analysis & Scouting",
       desc: isEs
         ? "Revisión de partidos, informes individuales y exposición directa a scouts de clubes profesionales."
         : "Match reviews, individual reports and direct exposure to professional club scouts.",
@@ -37,7 +37,7 @@ const SpainMethodologySection = () => {
   ];
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="py-24" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
