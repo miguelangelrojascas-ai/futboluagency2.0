@@ -1,4 +1,3 @@
-// Spain page
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -6,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SpainInfoBar from "@/components/spain/SpainInfoBar";
+import SpainDifferentiatorSection from "@/components/spain/SpainDifferentiatorSection";
 import SpainAcademiesSection from "@/components/SpainAcademiesSection";
 import SpainMadridSection from "@/components/spain/SpainMadridSection";
 import SpainMethodologySection from "@/components/spain/SpainMethodologySection";
@@ -112,7 +112,7 @@ const Spain = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src="/videos/spain-hero-new.mov"
           />
-          <div className="absolute inset-0 bg-background/70" />
+          <div className="absolute inset-0 bg-[#0f0f0f]/80" />
           <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #0f0f0f)" }} />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
@@ -121,13 +121,13 @@ const Spain = () => {
               </span>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-[1.08]">
                 {language === "es"
-                  ? "Juega en las Mejores Academias de Fútbol en España"
-                  : "Play at the Best Football Academies in Spain"}
+                  ? "Boarding School de Alto Rendimiento en Europa"
+                  : "High-Performance Boarding School in Europe"}
               </h1>
-              <p className="font-body font-medium text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+              <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
                 {language === "es"
-                  ? "Entrena, compite y desarrolla tu carrera en uno de los entornos futbolísticos más exigentes del mundo."
-                  : "Train, compete, and develop your career in one of the most demanding football environments in the world."}
+                  ? "Vive, estudia y compite en un entorno profesional integrado. Un camino estructurado hacia la élite del fútbol europeo sin descuidar tu desarrollo académico."
+                  : "Live, study and compete in an integrated professional environment. A structured path to elite European football without neglecting your academic development."}
               </p>
               <Link
                 to="/apply"
@@ -142,8 +142,11 @@ const Spain = () => {
         {/* Info bar */}
         <SpainInfoBar />
 
+        {/* El Diferenciador */}
+        <SpainDifferentiatorSection />
+
         {/* ¿Por qué España? — Carousel */}
-        <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+        <section className="py-24" style={{ backgroundColor: "#0f0f0f" }}>
           <div className="container-wide px-4">
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">
@@ -201,7 +204,7 @@ const Spain = () => {
                     </span>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                    <h3 className="font-display text-base sm:text-lg font-bold text-white leading-tight" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
+                    <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-tight" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
                       {card.title}
                     </h3>
                   </div>

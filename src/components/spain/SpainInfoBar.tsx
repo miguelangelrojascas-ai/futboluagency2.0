@@ -26,7 +26,7 @@ const SpainInfoBar = () => {
   return (
     <section style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border border border-border rounded-xl overflow-hidden">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border rounded-xl overflow-hidden">
           {items.map((item, i) => (
             <div key={i} className="flex items-center gap-4 px-6 py-5 sm:py-6 bg-card/50">
               <item.icon className="w-5 h-5 text-primary flex-shrink-0" />
