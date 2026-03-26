@@ -161,25 +161,6 @@ const USA = () => {
           </div>
         </section>
 
-        {/* U.S. System Explained */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
-              {t("usa.system.title")}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
-              {divisions.map((div) => (
-                <div key={div.name} className="rounded-xl border border-border bg-[#141414] p-6 hover:border-blue-500/40 transition-colors ring-1 ring-blue-500/30 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
-                  <span className="inline-block text-xs font-body font-medium tracking-[0.15em] uppercase text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full mb-3">
-                    {div.level}
-                  </span>
-                  <h3 className="font-display text-lg font-bold mb-2">{div.name}</h3>
-                  <p className="font-body text-muted-foreground text-base leading-relaxed">{div.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Requirements */}
         <section className="section-padding bg-background relative overflow-hidden">
