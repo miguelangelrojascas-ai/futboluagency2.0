@@ -154,28 +154,6 @@ const USA = () => {
           </div>
         </section>
 
-        {/* Timeline */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
-              {t("usa.timeline.title")}
-            </h2>
-            <div className="max-w-2xl mx-auto">
-              {timeline.map((item, i) => (
-                <div key={i} className="flex gap-4 items-start mb-6 last:mb-0">
-                  <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 rounded-full bg-blue-500" />
-                    {i < timeline.length - 1 && <div className="w-0.5 h-12 bg-border mt-1" />}
-                  </div>
-                  <div className="-mt-1">
-                    <span className="font-body text-xs text-blue-500 font-semibold uppercase tracking-[0.15em]">{item.month}</span>
-                    <p className="font-body text-foreground text-sm mt-1">{item.task}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Process Section */}
         <ProcessSection />
