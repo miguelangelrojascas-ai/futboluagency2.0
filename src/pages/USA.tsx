@@ -4,7 +4,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
-import PlayerSuccessStorySection from "@/components/PlayerSuccessStorySection";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
@@ -185,8 +184,6 @@ const USA = () => {
           </div>
         </section>
 
-        {/* Player Success Story */}
-        <PlayerSuccessStorySection />
 
         {/* Process Section */}
         <ProcessSection />
