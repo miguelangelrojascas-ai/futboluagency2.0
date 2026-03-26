@@ -1,3 +1,4 @@
+// USA Page
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
