@@ -66,6 +66,77 @@ const USA = () => {
 
         <StudentAthleteExperience />
 
+        {/* Scholarship / Financial Analysis */}
+        <section className="section-padding bg-background">
+          <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-start">
+            {/* Left Column */}
+            <div>
+              <span className="text-blue-500 text-sm font-bold tracking-[0.15em] uppercase mb-4 block">
+                ANÁLISIS DE FINANCIAMIENTO
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+                Tipos de Becas y Viabilidad Económica
+              </h2>
+              <p className="font-body text-muted-foreground text-base leading-relaxed mb-8">
+                Determinamos el potencial de beca basándonos en un análisis técnico del perfil deportivo y académico.
+              </p>
+              <blockquote className="font-display text-lg sm:text-xl italic text-foreground leading-relaxed mb-8">
+                "The investment depends on your soccer level and the competitive material you can demonstrate. At FutbolU we make it clear from day one: we work to get you the best possible scholarship within your possibilities."
+              </blockquote>
+              <div className="flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <span className="font-body text-sm text-muted-foreground tracking-[0.15em] uppercase">
+                  Gestión basada en transparencia
+                </span>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-4">
+              {/* Main stat card */}
+              <div className="rounded-xl border border-border bg-[#141414] p-8 ring-1 ring-blue-500/20 shadow-[0_0_40px_rgba(37,99,235,0.1)] relative overflow-hidden">
+                <TrendingUp className="absolute top-6 right-6 w-16 h-16 text-blue-500/10" />
+                <span className="font-body text-xs tracking-[0.15em] uppercase text-muted-foreground mb-4 block">
+                  Beca promedio de nuestros atletas
+                </span>
+                <div className="flex items-baseline gap-1 mb-3">
+                  <span className="font-display text-5xl sm:text-6xl font-bold text-foreground">$25,324</span>
+                  <span className="font-display text-xl italic text-blue-500">/año</span>
+                </div>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-sm">
+                  Monto anual promedio gestionado y asegurado para nuestra red de atletas en el sistema universitario americano.
+                </p>
+              </div>
+
+              {/* Two smaller cards */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border bg-[#141414] p-6">
+                  <span className="font-body text-xs tracking-[0.15em] uppercase text-blue-500 font-bold mb-3 block">
+                    Rango Estándar
+                  </span>
+                  <span className="font-display text-2xl sm:text-3xl font-bold text-foreground block mb-2">
+                    70% — 90%
+                  </span>
+                  <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                    Cobertura promedio lograda para el 85% de nuestros representados.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-blue-500/30 bg-blue-600/5 p-6 ring-1 ring-blue-500/30 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
+                  <span className="font-body text-xs tracking-[0.15em] uppercase text-blue-500 font-bold mb-3 block">
+                    Perfil Élite
+                  </span>
+                  <span className="font-display text-2xl sm:text-3xl font-bold text-foreground block mb-2">
+                    Hasta 100%
+                  </span>
+                  <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                    Reservado para atletas de Selección Nacional o perfiles de División 1.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* U.S. System Explained */}
         <section className="section-padding bg-background">
           <div className="container-wide px-4">
@@ -85,7 +156,6 @@ const USA = () => {
             </div>
           </div>
         </section>
-
 
         {/* Requirements */}
         <section className="section-padding bg-background">
