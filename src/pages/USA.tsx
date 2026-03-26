@@ -81,7 +81,7 @@ const USA = () => {
                 Determinamos el potencial de beca basándonos en un análisis técnico del perfil deportivo y académico.
               </p>
               <blockquote className="font-body text-base sm:text-lg italic text-muted-foreground leading-relaxed mb-8 border-l-2 border-blue-500/40 pl-5">
-                "La inversión depende de tu nivel futbolístico y del potencial competitivo que puedas demostrar. En FutbolUAgency lo dejamos claro desde el primer día: trabajamos para conseguirte la mejor beca posible dentro de tus posibilidades."
+                La inversión depende de tu nivel futbolístico y del potencial competitivo que puedas demostrar. En FutbolUAgency lo dejamos claro desde el primer día: trabajamos para conseguirte la mejor beca posible dentro de tus posibilidades.
               </blockquote>
               <div className="flex items-center gap-3">
                 <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
