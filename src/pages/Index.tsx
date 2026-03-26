@@ -23,8 +23,8 @@ const Index = () => {
       <Navbar />
       <main className="min-h-screen">
         <HeroSection />
-        <VideoSection onOpenForm={openForm} />
         <MetricsSection />
+        <VideoSection onOpenForm={openForm} />
         <LogoCarousel />
         
         <PathSelectionSection />
