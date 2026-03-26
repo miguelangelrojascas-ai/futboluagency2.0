@@ -163,7 +163,7 @@ const USA = () => {
             <img src="/images/college-cup.png" alt="" className="w-full h-full object-cover opacity-10" />
             <div className="absolute inset-0 bg-background/80" />
           </div>
-          <div className="container-wide px-4">
+            <div className="container-wide px-4 relative z-10">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
               {t("usa.req.title")}
             </h2>
