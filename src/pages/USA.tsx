@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign } from "lucide-react";
+import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -104,30 +104,7 @@ const USA = () => {
           </div>
         </section>
 
-        {/* Scholarship Info */}
-        <section className="section-padding bg-background">
-          <div className="container-wide px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <DollarSign className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                {t("usa.scholarship.title")}
-              </h2>
-              <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                {t("usa.scholarship.desc")}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-border bg-[#141414] p-6">
-                  <h3 className="font-display text-lg font-bold text-blue-500 mb-2">{t("usa.scholarship.partial")}</h3>
-                  <p className="font-body text-muted-foreground text-base leading-relaxed">{t("usa.scholarship.partial.desc")}</p>
-                </div>
-                <div className="rounded-xl border border-blue-500/30 bg-blue-600/5 p-6 ring-1 ring-blue-500/30 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
-                  <h3 className="font-display text-lg font-bold text-blue-500 mb-2">{t("usa.scholarship.full")}</h3>
-                  <p className="font-body text-muted-foreground text-base leading-relaxed">{t("usa.scholarship.full.desc")}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
 
         {/* Process Section */}
