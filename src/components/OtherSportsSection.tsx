@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const sports = [
-  { emoji: "🏀", name: "Basketball" },
+  { emoji: "⛳", name: "Golf" },
   { emoji: "🎾", name: "Tennis" },
   { emoji: "🏐", name: "Volleyball" },
   { emoji: "🏃", name: "Track & Field" },
