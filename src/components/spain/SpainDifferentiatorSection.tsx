@@ -31,8 +31,8 @@ const SpainDifferentiatorSection = () => {
                 </h3>
                 <p className="font-body text-gray-300 text-base leading-relaxed max-w-3xl">
                   {isEs
-                    ? "Una temporada completa compitiendo en el fútbol español. Mismo vestuario, misma liga, mismo nivel que los profesionales"
-                    : "A full season competing in Spanish football. Same locker room, same league, same level as the professionals."}
+                    ? "Mismo vestuario, misma liga, mismo nivel que los profesionales. Compites una temporada completa dentro de un club real, con scouts mirando cada partido"
+                    : "Same locker room, same league, same level as the professionals. You compete for a full season within a real club, with scouts watching every game."}
                 </p>
               </div>
             </div>
