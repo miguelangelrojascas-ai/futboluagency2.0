@@ -39,6 +39,11 @@ const SpainAcademiesSection = () => {
     <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4 relative z-10">
 
+        {/* Section Title */}
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-10">
+          {t.sectionTitle}
+        </h2>
+
         {/* Talavera CF Hero Card */}
         <div className="max-w-[1100px] w-full mx-auto mb-12 sm:mb-16">
           <div className="relative rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-colors duration-300 ring-1 ring-red-500/30 shadow-[0_0_40px_rgba(220,38,38,0.15)] aspect-[3/4] sm:aspect-[16/7]">
