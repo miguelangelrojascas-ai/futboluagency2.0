@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import talaveraImg from "@/assets/spain-clubs/talavera.jpg";
 
 const partnerClubs = [
+  "CE Sabadell FC",
   "Real Valladolid CF",
   "Real Oviedo",
   "CF Badalona",
@@ -15,15 +16,17 @@ const SpainAcademiesSection = () => {
 
   const content = {
     es: {
+      sectionTitle: "Nuestro Programa Principal",
       badge: "Programa Principal",
-      featuredTitle: "CF Talavera de la Reina · CE Sabadell FC",
+      featuredTitle: "CF Talavera de la Reina",
       featuredDesc: "Nuestra red base de clubes ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador.",
       applyBtn: "Aplicar al programa",
       partnersLabel: "También colaboramos con:",
     },
     en: {
+      sectionTitle: "Our Main Program",
       badge: "Main Program",
-      featuredTitle: "CF Talavera de la Reina · CE Sabadell FC",
+      featuredTitle: "CF Talavera de la Reina",
       featuredDesc: "Our core club network offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player.",
       applyBtn: "Apply to program",
       partnersLabel: "We also collaborate with:",
@@ -35,6 +38,11 @@ const SpainAcademiesSection = () => {
   return (
     <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4 relative z-10">
+
+        {/* Section Title */}
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-10">
+          {t.sectionTitle}
+        </h2>
 
         {/* Talavera CF Hero Card */}
         <div className="max-w-[1100px] w-full mx-auto mb-12 sm:mb-16">
