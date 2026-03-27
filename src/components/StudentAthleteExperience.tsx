@@ -1,5 +1,7 @@
 import { useState } from "react";
 import coachHandshake from "@/assets/card-bg-coaches-new.jpg";
+import usaFacilities from "@/assets/usa-facilities.png";
+import usaAcademic from "@/assets/usa-academic.png";
 
 const items = [
   {
@@ -10,12 +12,12 @@ const items = [
   {
     title: "Excelencia Académica",
     text: "Estudia la carrera de tus sueños en campus de primer nivel. Asegura tu futuro con un título universitario de prestigio internacional.",
-    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop",
+    img: usaAcademic,
   },
   {
     title: "Instalaciones de Nivel Profesional",
     text: "Accede a estadios de primer nivel, gimnasios de alto rendimiento, fisioterapia y nutrición deportiva 24/7. Vive y entrena como en la élite.",
-    img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop",
+    img: usaFacilities,
   },
 ];
 
