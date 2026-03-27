@@ -26,13 +26,13 @@ const SpainDifferentiatorSection = () => {
                 </span>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-4 leading-tight">
                   {isEs
-                    ? "Inmersión real en clubes europeos, no turismo deportivo"
-                    : "Real immersion in European clubs, not sports tourism"}
+                    ? "Una temporada completa en el fútbol español"
+                    : "A full season in Spanish football"}
                 </h3>
                 <p className="font-body text-gray-300 text-base leading-relaxed max-w-3xl">
                   {isEs
-                    ? "A diferencia del modelo universitario estadounidense, nuestro programa en España es una inmersión total en Clubes de Fútbol Reales. Competirás en sistemas oficiales de liga mientras mantienes la excelencia académica con programas convalidados de secundaria y universidad."
-                    : "Unlike the American university model, our program in Spain is a total immersion in Real Football Clubs. You'll compete in official league systems while maintaining academic excellence with accredited high school and university programs."}
+                    ? "Una temporada completa compitiendo en el fútbol español. Mismo vestuario, misma liga, mismo nivel que los profesionales"
+                    : "A full season competing in Spanish football. Same locker room, same league, same level as the professionals."}
                 </p>
               </div>
             </div>
