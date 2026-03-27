@@ -16,15 +16,17 @@ const SpainAcademiesSection = () => {
 
   const content = {
     es: {
+      sectionTitle: "Nuestro Programa Principal",
       badge: "Programa Principal",
-      featuredTitle: "CF Talavera de la Reina · CE Sabadell FC",
+      featuredTitle: "CF Talavera de la Reina",
       featuredDesc: "Nuestra red base de clubes ofrece una experiencia de desarrollo integral: entrenamiento diario de alto nivel, competición oficial en liga, residencia deportiva y seguimiento personalizado de cada jugador.",
       applyBtn: "Aplicar al programa",
       partnersLabel: "También colaboramos con:",
     },
     en: {
+      sectionTitle: "Our Main Program",
       badge: "Main Program",
-      featuredTitle: "CF Talavera de la Reina · CE Sabadell FC",
+      featuredTitle: "CF Talavera de la Reina",
       featuredDesc: "Our core club network offers a comprehensive development experience: daily high-level training, official league competition, sports residence, and personalized tracking for every player.",
       applyBtn: "Apply to program",
       partnersLabel: "We also collaborate with:",
