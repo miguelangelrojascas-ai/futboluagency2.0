@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dumbbell, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Dialog,
@@ -12,10 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const sports = [
-  { emoji: "⛳", name: "Golf" },
-  { emoji: "🎾", name: "Tennis" },
-  { emoji: "🏐", name: "Volleyball" },
-  { emoji: "🏃", name: "Track & Field" },
+  { es: "Béisbol", en: "Baseball" },
+  { es: "Volleyball", en: "Volleyball" },
+  { es: "Basketball", en: "Basketball" },
+  { es: "Tennis", en: "Tennis" },
 ];
 
 const OtherSportsSection = () => {
@@ -40,33 +40,34 @@ const OtherSportsSection = () => {
   return (
     <>
       <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(210,100%,50%,0.04),transparent_60%)]" />
         <div className="container-wide px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="w-12 h-12 rounded-xl bg-muted border border-border flex items-center justify-center mx-auto mb-5">
-              <Dumbbell className="w-6 h-6 text-muted-foreground" />
-            </div>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               {t("othersports.title")}
             </h2>
-            <p className="font-body text-muted-foreground text-base leading-relaxed max-w-xl mx-auto mb-8">
-              {t("othersports.desc")}
+            <p className="font-body text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              {isEs
+                ? "Estamos expandiendo nuestros programas a otros deportes. Pronto podrás acceder a las mismas oportunidades en más disciplinas."
+                : "We're expanding our programs to other sports. Soon you'll have access to the same opportunities in more disciplines."}
             </p>
-            <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
-              {sports.map((sport) => (
-                <button
-                  key={sport.name}
-                  onClick={() => setModalOpen(true)}
-                  className="flex items-center gap-2 bg-card border border-border rounded-lg px-4 py-2.5 opacity-60 hover:opacity-100 hover:border-primary/40 transition-all cursor-pointer"
-                >
-                  <span className="text-xl">{sport.emoji}</span>
-                  <span className="font-body text-sm text-muted-foreground">{sport.name}</span>
-                </button>
-              ))}
-            </div>
-            <p className="font-body text-xs text-muted-foreground mt-5 italic">
-              {t("othersports.coming")}
-            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
+            {sports.map((sport) => (
+              <button
+                key={sport.en}
+                onClick={() => setModalOpen(true)}
+                className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border/60 px-4 py-8 hover:border-primary/40 transition-all duration-300 cursor-pointer"
+                style={{ backgroundColor: "#141414" }}
+              >
+                <span className="font-display text-base sm:text-lg font-bold text-foreground">
+                  {isEs ? sport.es : sport.en}
+                </span>
+                <span className="font-body text-[11px] tracking-[0.12em] uppercase text-muted-foreground">
+                  {isEs ? "Próximamente" : "Coming Soon"}
+                </span>
+              </button>
+            ))}
           </div>
         </div>
       </section>
