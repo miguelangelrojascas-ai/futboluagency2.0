@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import talaveraImg from "@/assets/spain-clubs/talavera.jpg";
 
 const partnerClubs = [
+  "CE Sabadell FC",
   "Real Valladolid CF",
   "Real Oviedo",
   "CF Badalona",
