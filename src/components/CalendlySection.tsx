@@ -19,7 +19,7 @@ const CalendlySection = ({ onOpenForm }: CalendlySectionProps) => {
               ? "Agenda tu Evaluación Deportiva Gratuita"
               : "Schedule Your Free Athletic Evaluation"}
           </h2>
-          <p className="font-body text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="font-body text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             {isEs
               ? "Una llamada estratégica con nuestro equipo de admisiones para analizar tu perfil deportivo, definir tus opciones y trazar un plan personalizado hacia tu destino."
               : "A strategic call with our admissions team to analyze your athletic profile, define your options, and create a personalized plan toward your destination."}
