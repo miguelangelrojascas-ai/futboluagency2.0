@@ -112,7 +112,7 @@ const Spain = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src="/videos/spain-hero-new.mov"
           />
-          <div className="absolute inset-0 bg-[#ffffff]/80" />
+          <div className="absolute inset-0 bg-black/45" />
           <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #ffffff)" }} />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">

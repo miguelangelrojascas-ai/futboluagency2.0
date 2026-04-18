@@ -11,7 +11,7 @@ const HeroSection = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#ffffff]/80" />
+        <div className="absolute inset-0 bg-black/45" />
       </div>
 
       {/* Bottom fade transition */}
