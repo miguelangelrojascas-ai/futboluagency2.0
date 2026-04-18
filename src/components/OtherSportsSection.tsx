@@ -39,7 +39,7 @@ const OtherSportsSection = () => {
 
   return (
     <>
-      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
+      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
         <div className="container-wide px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
@@ -58,7 +58,7 @@ const OtherSportsSection = () => {
                 key={sport.en}
                 onClick={() => setModalOpen(true)}
                 className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border/60 px-4 py-8 hover:border-primary/40 transition-all duration-300 cursor-pointer"
-                style={{ backgroundColor: "#141414" }}
+                style={{ backgroundColor: "#ffffff" }}
               >
                 <span className="font-display text-base sm:text-lg font-bold text-foreground">
                   {isEs ? sport.es : sport.en}
@@ -73,7 +73,7 @@ const OtherSportsSection = () => {
       </section>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="bg-[#141414] border-border max-w-md">
+        <DialogContent className="bg-[#ffffff] border-border max-w-md">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl sm:text-3xl font-bold text-foreground">
               {isEs ? "Sé el primero en enterarte" : "Be the first to know"}

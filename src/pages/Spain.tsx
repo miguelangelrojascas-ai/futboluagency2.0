@@ -112,8 +112,8 @@ const Spain = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src="/videos/spain-hero-new.mov"
           />
-          <div className="absolute inset-0 bg-[#0f0f0f]/80" />
-          <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #0f0f0f)" }} />
+          <div className="absolute inset-0 bg-[#ffffff]/80" />
+          <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #ffffff)" }} />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
               <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
@@ -148,7 +148,7 @@ const Spain = () => {
         <SpainDifferentiatorSection />
 
         {/* ¿Por qué España? — Carousel */}
-        <section className="py-24" style={{ backgroundColor: "#0f0f0f" }}>
+        <section className="py-24" style={{ backgroundColor: "#ffffff" }}>
           <div className="container-wide px-4">
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">

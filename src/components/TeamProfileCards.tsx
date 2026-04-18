@@ -77,8 +77,8 @@ const teamMembers = [
 
 const InitialsAvatar = ({ initials, className = "" }: { initials: string; className?: string }) => (
   <div
-    className={`flex items-center justify-center bg-[#1a1a1a] ${className}`}
-    style={{ background: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)" }}
+    className={`flex items-center justify-center bg-[#ffffff] ${className}`}
+    style={{ background: "linear-gradient(135deg, #ffffff 0%, #2a2a2a 50%, #ffffff 100%)" }}
   >
     <span className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white/20">
       {initials}
@@ -95,7 +95,7 @@ const TeamProfileCards = () => {
 
   return (
     <>
-      <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+      <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
         <div className="container-wide px-4">
           <div className="text-center mb-10">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-3">

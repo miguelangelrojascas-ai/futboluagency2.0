@@ -6,13 +6,13 @@ const SpainDifferentiatorSection = () => {
   const isEs = language === "es";
 
   return (
-    <section className="py-24" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="py-24" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <div
             className="rounded-2xl p-8 sm:p-10"
             style={{
-              backgroundColor: "#141414",
+              backgroundColor: "#ffffff",
               border: "0.5px solid #222",
             }}
           >

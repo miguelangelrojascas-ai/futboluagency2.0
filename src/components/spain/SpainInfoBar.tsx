@@ -24,7 +24,7 @@ const SpainInfoBar = () => {
   ];
 
   return (
-    <section style={{ backgroundColor: "#0f0f0f" }}>
+    <section style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border rounded-xl overflow-hidden">
           {items.map((item, i) => (

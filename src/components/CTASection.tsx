@@ -40,7 +40,7 @@ const CTASection = ({ onOpenForm }: CTASectionProps) => {
   ];
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-12">
           {/* Headline */}
