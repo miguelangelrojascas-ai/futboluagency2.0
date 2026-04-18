@@ -78,7 +78,7 @@ const teamMembers = [
 const InitialsAvatar = ({ initials, className = "" }: { initials: string; className?: string }) => (
   <div
     className={`flex items-center justify-center bg-[#ffffff] ${className}`}
-    style={{ background: "linear-gradient(135deg, #ffffff 0%, #2a2a2a 50%, #ffffff 100%)" }}
+    style={{ background: "linear-gradient(135deg, #ffffff 0%, #e5e5e5 50%, #ffffff 100%)" }}
   >
     <span className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white/20">
       {initials}

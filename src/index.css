@@ -6,51 +6,50 @@
 
 @layer base {
   :root {
-    /* FutbolUAgency Premium Light Theme */
-    --background: 0 0% 100%; /* #ffffff */
-    --background-alt: 40 13% 96%; /* #f8f8f6 warm off-white */
-    --foreground: 0 0% 6%; /* #ffffff near black */
-    
+    --background: 0 0% 100%;
+    --foreground: 0 0% 6%;
+    --background-alt: 40 13% 96%;
+
     --card: 0 0% 100%;
     --card-foreground: 0 0% 6%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 6%;
-    
-    --primary: 350 78% 43%; /* #c8102e deeper premium red */
-    --primary-hover: 350 78% 36%;
+
+    --primary: 350 84% 42%;
+    --primary-hover: 350 84% 35%;
     --primary-foreground: 0 0% 100%;
-    
-    --secondary: 220 26% 16%; /* #14213D - Corporate Blue */
-    --secondary-foreground: 0 0% 100%;
-    
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 6%;
+
     --accent-blue: 210 100% 50%;
-    
-    --muted: 40 10% 95%; /* #f2f1ef subtle separation */
-    --muted-foreground: 0 0% 42%; /* #6b6b6b */
-    
-    --accent: 350 78% 43%;
-    --accent-foreground: 0 0% 100%;
-    
+
+    --muted: 40 10% 95%;
+    --muted-foreground: 0 0% 42%;
+
+    --accent: 40 10% 95%;
+    --accent-foreground: 0 0% 6%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    
-    --border: 0 0% 90%; /* rgba(0,0,0,0.08-ish) */
-    --input: 0 0% 92%;
-    --ring: 350 78% 43%;
-    
-    --radius: 0.75rem; /* 12px cards */
-    
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 350 84% 42%;
+
+    --radius: 0.75rem;
+
     /* Custom tokens */
     --text-secondary: 0 0% 42%;
     --surface-light: 40 13% 96%;
-    
+
     /* Fonts */
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
-    
+
     /* Shadows */
-    --shadow-glow: 0 0 60px hsl(350 78% 43% / 0.15);
+    --shadow-glow: 0 0 60px hsl(350 84% 42% / 0.15);
     --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.06);
   }
 
