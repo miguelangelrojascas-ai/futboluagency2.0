@@ -66,7 +66,7 @@ const USA = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src="/videos/spain-hero.mp4"
           />
-          <div className="absolute inset-0 bg-[#0f0f0f]/80" />
+          <div className="absolute inset-0 bg-black/45" />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
               <span className="inline-block mb-4 text-blue-500 font-body text-xs tracking-[0.15em] uppercase">
@@ -118,7 +118,7 @@ const USA = () => {
             {/* Right Column */}
             <div className="space-y-4">
               {/* Main stat card */}
-              <div className="rounded-xl border border-border bg-[#141414] p-8 ring-1 ring-blue-500/20 shadow-[0_0_40px_rgba(37,99,235,0.1)] relative overflow-hidden">
+              <div className="rounded-xl border border-border bg-[#ffffff] p-8 ring-1 ring-blue-500/20 shadow-[0_0_40px_rgba(37,99,235,0.1)] relative overflow-hidden">
                 <TrendingUp className="absolute top-6 right-6 w-16 h-16 text-blue-500/10" />
                 <span className="font-body text-xs tracking-[0.15em] uppercase text-muted-foreground mb-4 block">
                   Beca promedio de nuestros atletas
@@ -134,7 +134,7 @@ const USA = () => {
 
               {/* Two smaller cards */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-xl border border-border bg-[#141414] p-6">
+                <div className="rounded-xl border border-border bg-[#ffffff] p-6">
                   <span className="font-body text-xs tracking-[0.15em] uppercase text-blue-500 font-bold mb-3 block">
                     Rango Estándar
                   </span>
@@ -179,7 +179,7 @@ const USA = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px max-w-6xl mx-auto rounded-xl overflow-hidden border border-border">
               {requirements.map((req, i) => (
-                <div key={i} className="bg-[#141414] p-8 flex flex-col gap-6">
+                <div key={i} className="bg-[#ffffff] p-8 flex flex-col gap-6">
                   <req.icon className="w-8 h-8 text-blue-500" />
                   <div>
                     <span className="font-body text-xs sm:text-sm tracking-[0.15em] uppercase text-foreground block mb-2">

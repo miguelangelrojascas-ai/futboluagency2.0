@@ -16,7 +16,7 @@ const SpainMadridSection = () => {
   const isEs = language === "es";
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
@@ -45,7 +45,7 @@ const SpainMadridSection = () => {
               {madridClubs.map((club) => (
                 <div
                   key={club.name}
-                  className="rounded-xl border border-border bg-[#141414] p-5 flex flex-col items-center justify-center text-center min-h-[120px] hover:border-primary/30 transition-colors ring-1 ring-red-500/10 shadow-[0_0_30px_rgba(220,38,38,0.08)]"
+                  className="rounded-xl border border-border bg-[#ffffff] p-5 flex flex-col items-center justify-center text-center min-h-[120px] hover:border-primary/30 transition-colors ring-1 ring-red-500/10 shadow-[0_0_30px_rgba(220,38,38,0.08)]"
                 >
                   <img
                     src={club.logo}

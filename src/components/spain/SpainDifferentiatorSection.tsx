@@ -6,13 +6,13 @@ const SpainDifferentiatorSection = () => {
   const isEs = language === "es";
 
   return (
-    <section className="py-24" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="py-24" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <div
             className="rounded-2xl p-8 sm:p-10"
             style={{
-              backgroundColor: "#141414",
+              backgroundColor: "#ffffff",
               border: "0.5px solid #222",
             }}
           >
@@ -29,7 +29,7 @@ const SpainDifferentiatorSection = () => {
                     ? "Una temporada completa en el fútbol español"
                     : "A full season in Spanish football"}
                 </h3>
-                <p className="font-body text-gray-300 text-base leading-relaxed max-w-3xl">
+                <p className="font-body text-muted-foreground text-base leading-relaxed max-w-3xl">
                   {isEs
                     ? "Mismo vestuario, misma liga, mismo nivel que los profesionales. Compites una temporada completa dentro de un club real, con scouts mirando cada partido"
                     : "Same locker room, same league, same level as the professionals. You compete for a full season within a real club, with scouts watching every game."}

@@ -6,57 +6,57 @@
 
 @layer base {
   :root {
-    /* FutbolUAgency Premium Dark Theme */
-    --background: 0 0% 6%; /* #0f0f0f */
-    --background-alt: 0 0% 6%; /* #0f0f0f - same as background for seamless sections */
-    --foreground: 0 0% 100%; /* #FFFFFF */
+    /* FutbolUAgency Premium Light Theme */
+    --background: 0 0% 100%; /* #ffffff */
+    --background-alt: 40 13% 96%; /* #f8f8f6 warm off-white */
+    --foreground: 0 0% 6%; /* #ffffff near black */
     
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 6%;
     
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 6%;
     
-    --primary: 355 77% 56%; /* #E63946 */
-    --primary-hover: 355 65% 48%; /* #C5303A */
+    --primary: 350 78% 43%; /* #c8102e deeper premium red */
+    --primary-hover: 350 78% 36%;
     --primary-foreground: 0 0% 100%;
     
     --secondary: 220 26% 16%; /* #14213D - Corporate Blue */
     --secondary-foreground: 0 0% 100%;
     
-    --accent-blue: 210 100% 50%; /* Bright blue for glows */
+    --accent-blue: 210 100% 50%;
     
-    --muted: 0 0% 6%;
-    --muted-foreground: 210 12% 67%; /* #A8B0B8 */
+    --muted: 40 10% 95%; /* #f2f1ef subtle separation */
+    --muted-foreground: 0 0% 42%; /* #6b6b6b */
     
-    --accent: 355 77% 56%;
+    --accent: 350 78% 43%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 100% / 0.04;
-    --input: 0 0% 12%;
-    --ring: 355 77% 56%;
+    --border: 0 0% 90%; /* rgba(0,0,0,0.08-ish) */
+    --input: 0 0% 92%;
+    --ring: 350 78% 43%;
     
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* 12px cards */
     
     /* Custom tokens */
-    --text-secondary: 210 12% 67%;
-    --surface-light: 210 20% 97%; /* #F8F9FA */
+    --text-secondary: 0 0% 42%;
+    --surface-light: 40 13% 96%;
     
     /* Fonts */
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
     
     /* Shadows */
-    --shadow-glow: 0 0 60px hsl(355 77% 56% / 0.15);
-    --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 60px hsl(350 78% 43% / 0.15);
+    --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.06);
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 6%;
   }
 }
 

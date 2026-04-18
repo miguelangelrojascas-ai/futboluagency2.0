@@ -42,7 +42,7 @@ const MetricsSection = () => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-            <section className="relative py-6 sm:py-8 md:py-12 cursor-pointer" style={{ backgroundColor: "#0f0f0f" }}>
+            <section className="relative py-6 sm:py-8 md:py-12 cursor-pointer" style={{ backgroundColor: "#ffffff" }}>
               {/* Soft divider */}
               <div className="absolute top-0 left-0 right-0 h-px bg-foreground/[0.04]" />
             <div className="container-wide px-4">

@@ -36,7 +36,7 @@ const SpainAcademiesSection = () => {
   const t = content[language];
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4 relative z-10">
 
         {/* Section Title */}
@@ -88,7 +88,7 @@ const SpainAcademiesSection = () => {
             {partnerClubs.map((club) => (
               <span
                 key={club}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1a1a] border border-primary/20 text-sm font-body text-foreground/80 whitespace-nowrap"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ffffff] border border-primary/20 text-sm font-body text-foreground/80 whitespace-nowrap"
               >
                 {club}
               </span>

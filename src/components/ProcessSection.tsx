@@ -79,7 +79,7 @@ const ProcessSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
       {/* Textured gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[hsl(210,100%,50%)]/5 pointer-events-none" />
       

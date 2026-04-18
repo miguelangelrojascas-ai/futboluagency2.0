@@ -6,7 +6,7 @@ const SpainAnderTestimonial = () => {
   const isEs = language === "es";
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <div className="rounded-xl border border-border bg-card overflow-hidden flex flex-col sm:flex-row">

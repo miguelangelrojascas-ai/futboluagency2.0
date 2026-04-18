@@ -7,7 +7,7 @@ const SpainFinalCTA = () => {
   const isEs = language === "es";
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide px-4">
         <div className="max-w-[700px] mx-auto text-center">
           <p className="font-body text-muted-foreground text-base leading-relaxed mb-6">
