@@ -42,7 +42,7 @@ const AnderStoryCard = () => {
   return (
     <>
       {/* Card */}
-      <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
+      <section className="section-padding" style={{ backgroundColor: "#0f0f0f" }}>
         <div className="container-wide px-4">
           <div
             onClick={() => setIsModalOpen(true)}

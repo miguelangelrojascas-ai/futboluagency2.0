@@ -66,14 +66,14 @@ const SuccessCasesSection = () => {
   const allCases = [...successCases, ...successCases];
 
   return (
-    <section className="section-padding overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+    <section className="section-padding overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
       <div className="container-wide px-4">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <span className="text-[hsl(210,100%,50%)] font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
+          <span className="text-[hsl(210,100%,60%)] font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
             {language === "es" ? "Más de 250 casos de éxito construidos" : "Over 250 success stories built"}
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold px-2">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold px-2 text-white" style={{ color: "#ffffff" }}>
             {language === "es" ? "Algunos resultados de trabajar" : "Some results from working"}{" "}
             <span className="text-primary italic">{language === "es" ? "juntos..." : "together..."}</span>
           </h2>
