@@ -43,6 +43,8 @@
     /* Custom tokens */
     --text-secondary: 0 0% 42%;
     --surface-light: 40 13% 96%;
+    --section-alt: 40 11% 96%; /* #f5f4f2 warm light gray */
+    --footer-dark: 0 0% 6%;
 
     /* Fonts */
     --font-display: 'Playfair Display', serif;
@@ -79,6 +81,8 @@
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    color: #0a0a0a;
+    font-weight: 700;
   }
 }
 
@@ -97,6 +101,25 @@
   
   .glass-card {
     @apply bg-card/50 backdrop-blur-sm border border-border rounded-xl;
+  }
+
+  .section-alt {
+    background-color: #f5f4f2;
+  }
+
+  .premium-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .premium-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 0 0 1px rgba(200,16,46,0.25);
+  }
+
+  .navbar-shadow {
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
   }
 }
 
