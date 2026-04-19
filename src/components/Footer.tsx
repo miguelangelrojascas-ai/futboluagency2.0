@@ -45,7 +45,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background border-t border-border">
+    <footer className="bg-[#0f0f0f] text-white">
       <div className="container-wide section-padding py-12 sm:py-16 px-4">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-10">
@@ -56,35 +56,35 @@ const Footer = () => {
               alt="FutbolUAgency" 
               className="h-16 sm:h-20 w-auto mx-auto md:mx-0 mb-4"
             />
-            <h3 className="font-display text-lg font-bold text-foreground mb-2">
+            <h3 className="font-display text-lg font-bold text-white mb-2" style={{ color: "#ffffff" }}>
               FutbolUAgency
             </h3>
-            <p className="font-body text-sm text-muted-foreground max-w-xs mx-auto md:mx-0">
+            <p className="font-body text-sm text-white/70 max-w-xs mx-auto md:mx-0">
               Ayudamos a futbolistas internacionales a conseguir becas deportivas en universidades de Estados Unidos.
             </p>
           </div>
 
           {/* Contact Column */}
           <div className="text-center md:text-left">
-            <h4 className="font-display text-base font-semibold text-foreground mb-4">
+            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "#ffffff" }}>
               Contacto
             </h4>
             <div className="space-y-3">
               <a 
                 href="mailto:futboluagency@gmail.com" 
-                className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 futboluagency@gmail.com
               </a>
               <a 
                 href="tel:+34603331990" 
-                className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 +34 603 331 990
               </a>
-              <div className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-muted-foreground">
+              <div className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70">
                 <MapPin className="w-4 h-4" />
                 Houston, Texas, USA
               </div>
@@ -93,7 +93,7 @@ const Footer = () => {
 
           {/* Social Column */}
           <div className="text-center md:text-left">
-            <h4 className="font-display text-base font-semibold text-foreground mb-4">
+            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "#ffffff" }}>
               Síguenos
             </h4>
             <div className="flex items-center justify-center md:justify-start gap-4">
@@ -103,7 +103,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:bg-primary hover:text-primary-foreground transition-colors"
                   aria-label={social.name}
                 >
                   <social.icon className="w-5 h-5" />
@@ -114,26 +114,26 @@ const Footer = () => {
 
           {/* Navigation Column */}
           <div className="text-center md:text-left">
-            <h4 className="font-display text-base font-semibold text-foreground mb-4">
+            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "#ffffff" }}>
               {t("nav.home")}
             </h4>
             <nav className="space-y-3">
-              <Link to="/" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.home")}</Link>
-              <Link to="/usa" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.usa")}</Link>
-              <Link to="/spain" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.spain")}</Link>
+              <Link to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</Link>
+              <Link to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</Link>
+              <Link to="/spain" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.spain")}</Link>
               
-              <Link to="/apply" className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors">{t("nav.apply")}</Link>
+              <Link to="/apply" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.apply")}</Link>
             </nav>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-6">
+        <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
-            <p className="font-body text-xs text-muted-foreground">
+            <p className="font-body text-xs text-white/60">
               © {currentYear} FutbolUAgency. {t("footer.rights")}.
             </p>
-            <p className="font-body text-xs text-muted-foreground">
+            <p className="font-body text-xs text-white/60">
               Diseñado con pasión por el fútbol y la educación.
             </p>
           </div>
