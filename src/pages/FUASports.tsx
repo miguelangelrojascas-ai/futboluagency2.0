@@ -100,7 +100,7 @@ const FUASports = () => {
               src={fuaSportsLogo}
               alt="FUA Sports"
               className="h-32 sm:h-40 md:h-52 w-auto mx-auto mb-8"
-              style={{ mixBlendMode: "screen" }}
+              style={{ filter: "invert(1) brightness(1.1)", mixBlendMode: "screen" }}
             />
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl mx-auto mb-6 leading-tight">
               Becas Universitarias para{" "}
