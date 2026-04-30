@@ -9,7 +9,7 @@ import SuccessCasesSection from "@/components/SuccessCasesSection";
 import AnderStoryCard from "@/components/AnderStoryCard";
 import CalendlySection from "@/components/CalendlySection";
 
-import OtherSportsSection from "@/components/OtherSportsSection";
+import FUASportsTeaser from "@/components/FUASportsTeaser";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
@@ -32,7 +32,7 @@ const Index = () => {
         
         <AnderStoryCard />
         <SuccessCasesSection />
-        <OtherSportsSection />
+        <FUASportsTeaser />
         <CalendlySection onOpenForm={openForm} />
         <Footer />
         <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />

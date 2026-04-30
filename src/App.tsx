@@ -12,6 +12,7 @@ import Spain from "./pages/Spain";
 import Players from "./pages/Players";
 import About from "./pages/About";
 import Apply from "./pages/Apply";
+import FUASports from "./pages/FUASports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/players" element={<Players />} />
             <Route path="/about" element={<About />} />
             <Route path="/apply" element={<Apply />} />
+            <Route path="/sports" element={<FUASports />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
