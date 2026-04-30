@@ -15,7 +15,7 @@ const FUASportsTeaser = () => {
               src={fuaSportsLogo}
               alt="FUA Sports"
               className="h-32 sm:h-40 md:h-48 w-auto mx-auto md:mx-0 mb-6"
-              style={{ mixBlendMode: "screen" }}
+              style={{ filter: "invert(1) brightness(1.1)", mixBlendMode: "screen" }}
             />
             <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
               La misma metodología.
