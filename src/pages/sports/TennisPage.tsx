@@ -138,7 +138,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── WHY TENNIS ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: LIGHT }}>
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
