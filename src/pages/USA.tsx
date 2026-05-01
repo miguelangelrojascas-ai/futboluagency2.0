@@ -178,10 +178,13 @@ const USA = () => {
                 Evaluamos cuatro áreas técnicas críticas para determinar la elegibilidad y el potencial de beca de cada prospecto.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px max-w-6xl mx-auto rounded-xl overflow-hidden border border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px max-w-6xl mx-auto rounded-xl overflow-visible border border-border">
               {requirements.map((req, i) => (
-                <div key={i} className="bg-[#ffffff] p-8 flex flex-col gap-6">
-                  <req.icon className="w-8 h-8 text-blue-500" />
+                <div
+                  key={i}
+                  className="bg-[#ffffff] p-8 flex flex-col gap-6 transition-all duration-300 ease-out hover:scale-[1.04] hover:z-10 hover:shadow-[0_12px_40px_rgba(37,99,235,0.18)] hover:ring-1 hover:ring-blue-500/40 cursor-default relative"
+                >
+                  <req.icon className="w-8 h-8 text-blue-500 transition-transform duration-300 group-hover:scale-110" />
                   <div>
                     <span className="font-body text-xs sm:text-sm tracking-[0.15em] uppercase text-foreground block mb-2">
                       {req.num} — {req.label}
