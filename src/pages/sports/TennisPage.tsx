@@ -162,23 +162,27 @@ const TennisPage = () => {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-10 items-start">
-              {/* Image placeholder */}
+              {/* Tennis ball visual */}
               <div
-                className="rounded-2xl aspect-[4/5] flex flex-col items-center justify-center border-2 border-dashed"
-                style={{ backgroundColor: "#eef0f3", borderColor: "#d4d8df" }}
+                className="rounded-2xl aspect-[4/5] flex items-center justify-center relative overflow-hidden"
+                style={{ backgroundColor: NAVY }}
               >
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-4"
-                  style={{ backgroundColor: NAVY }}
-                >
-                  <Trophy className="w-10 h-10 text-white" />
-                </div>
-                <p className="font-display text-lg font-semibold" style={{ color: NAVY }}>
-                  {es ? "Foto del programa" : "Program photo"}
-                </p>
-                <p className="font-body text-sm text-muted-foreground">
-                  {es ? "Añadir imagen aquí" : "Add image here"}
-                </p>
+                  className="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-20 blur-3xl"
+                  style={{ background: RED }}
+                />
+                <svg viewBox="0 0 200 200" className="relative w-2/3 h-2/3 drop-shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="ballGrad" cx="35%" cy="35%" r="70%">
+                      <stop offset="0%" stopColor="#e8ff5a" />
+                      <stop offset="70%" stopColor="#c8e236" />
+                      <stop offset="100%" stopColor="#8da620" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="100" cy="100" r="90" fill="url(#ballGrad)" />
+                  <path d="M 18 70 Q 100 110 182 70" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.95" />
+                  <path d="M 18 130 Q 100 90 182 130" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.95" />
+                </svg>
               </div>
 
               <div className="space-y-5">
