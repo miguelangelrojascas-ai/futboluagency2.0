@@ -99,7 +99,7 @@ const PlayerProfilesSection = () => {
     <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
       <div className="container-wide px-4">
         <div className="max-w-3xl mb-12">
-          <span className="text-red-600 text-xs font-bold tracking-[0.15em] uppercase mb-4 block">
+          <span className="text-primary text-xs font-bold tracking-[0.15em] uppercase mb-4 block">
             {isEs ? "¿Puedes conseguir una beca?" : "Can you get a scholarship?"}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
