@@ -12,6 +12,10 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
+import sportVolleyball from "@/assets/sport-volleyball.png";
+import sportGolf from "@/assets/sport-golf.png";
+import sportTennis from "@/assets/sport-tennis.png";
+import sportTrack from "@/assets/sport-track.png";
 
 const sportsList = [
   {
@@ -160,29 +164,39 @@ const FUASports = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {[
-                { name: "Volleyball", tagline: "Becas NCAA para jugadoras de alto nivel.", to: "/sports/volleyball" },
-                { name: "Golf", tagline: "De tu club local a la élite universitaria americana.", to: "/sports/golf" },
-                { name: "Tenis", tagline: "Acompañamiento cercano para la beca que mereces.", to: "/sports/tennis" },
-                { name: "Track & Field", tagline: "+1,000 programas y $3.5B en becas disponibles.", to: "/sports/track" },
+                { name: "Volleyball", tagline: "Becas NCAA para jugadoras de alto nivel.", to: "/sports/volleyball", img: sportVolleyball },
+                { name: "Golf", tagline: "De tu club local a la élite universitaria americana.", to: "/sports/golf", img: sportGolf },
+                { name: "Tenis", tagline: "Acompañamiento cercano para la beca que mereces.", to: "/sports/tennis", img: sportTennis },
+                { name: "Track & Field", tagline: "+1,000 programas y $3.5B en becas disponibles.", to: "/sports/track", img: sportTrack },
               ].map((sport) => (
                 <a
                   key={sport.name}
                   href={sport.to}
-                  className="group rounded-2xl p-8 sm:p-10 flex flex-col justify-between min-h-[240px] transition-transform hover:-translate-y-1"
+                  className="group rounded-2xl overflow-hidden flex flex-col min-h-[360px] transition-transform hover:-translate-y-1"
                   style={{ backgroundColor: "#12213a" }}
                 >
-                  <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 leading-tight">
-                    {sport.name}
-                  </h3>
-                  <p className="font-body text-base sm:text-lg text-white/70 leading-relaxed mb-6">
-                    {sport.tagline}
-                  </p>
-                  <span
-                    className="font-body text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
-                    style={{ color: "#b00717" }}
-                  >
-                    Explorar programa →
-                  </span>
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={sport.img}
+                      alt={sport.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#12213a] to-transparent" />
+                  </div>
+                  <div className="p-8 sm:p-10 flex flex-col justify-between flex-1">
+                    <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 leading-tight">
+                      {sport.name}
+                    </h3>
+                    <p className="font-body text-base sm:text-lg text-white/70 leading-relaxed mb-6">
+                      {sport.tagline}
+                    </p>
+                    <span
+                      className="font-body text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
+                      style={{ color: "#b00717" }}
+                    >
+                      Explorar programa →
+                    </span>
+                  </div>
                 </a>
               ))}
             </div>
