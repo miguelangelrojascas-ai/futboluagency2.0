@@ -492,7 +492,7 @@ const UniversityMap = () => {
           {[
             { value: "250+", label: "Universidades" },
             { value: "40+", label: "Estados" },
-            { value: "D1 · D2 · D3 · NAIA", label: "Divisiones" },
+            { value: "45+", label: "Divisiones" },
           ].map((stat, i) => (
             <div
               key={i}
