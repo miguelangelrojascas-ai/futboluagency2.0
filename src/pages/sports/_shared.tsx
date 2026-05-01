@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar } from "lucide-react";
+import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 
 export const NAVY = "#12213a";
 export const RED = "#b00717";
