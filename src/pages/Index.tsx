@@ -3,7 +3,7 @@ import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
 
-import CTASection from "@/components/CTASection";
+
 import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import AnderStoryCard from "@/components/AnderStoryCard";
@@ -28,7 +28,6 @@ const Index = () => {
         <LogoCarousel />
         
         <PathSelectionSection />
-        <CTASection onOpenForm={openForm} />
         
         <AnderStoryCard />
         <SuccessCasesSection />
