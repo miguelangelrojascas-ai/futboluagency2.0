@@ -18,6 +18,7 @@ import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import campusDorm from "@/assets/campus-dorm.jpg";
 import campusDining from "@/assets/campus-dining.jpg";
 import campusMedical from "@/assets/campus-medical.jpg";
+import campusOffcampus from "@/assets/campus-offcampus.jpg";
 import tennisHeroImg from "@/assets/tennis-hero.jpg";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
