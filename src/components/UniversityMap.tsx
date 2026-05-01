@@ -488,25 +488,6 @@ const UniversityMap = () => {
           )}
         </div>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {[
-            { value: "250+", label: "Universidades" },
-            { value: "40+", label: "Estados" },
-            { value: "45+", label: "Divisiones" },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="text-center bg-white rounded-xl border border-border p-6 ring-1 ring-[#12213a]/10 shadow-[0_0_30px_rgba(18,33,58,0.06)]"
-            >
-              <div className="font-display text-2xl sm:text-3xl font-bold text-[#12213a] italic mb-2">
-                {stat.value}
-              </div>
-              <p className="font-body text-xs sm:text-sm tracking-[0.15em] uppercase text-muted-foreground">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Side panel */}
