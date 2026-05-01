@@ -16,10 +16,6 @@ interface Profile {
   plan: string;
   extraLink?: { label: string; to: string };
 }
-  universities: string;
-  plan: string;
-  extraLink?: { label: string; to: string };
-}
 
 const PlayerProfilesSection = () => {
   const { language } = useLanguage();
