@@ -606,8 +606,8 @@ const TennisPage = () => {
               ].map((card) => (
                 <div
                   key={card.title}
-                  className="group relative rounded-xl overflow-hidden flex flex-col min-h-[360px] bg-white border"
-                  style={{ borderColor: "#e5e5e5" }}
+                  className="group relative rounded-xl overflow-hidden flex flex-col min-h-[360px]"
+                  style={{ backgroundColor: NAVY }}
                 >
                   <img
                     src={card.image}
@@ -616,41 +616,31 @@ const TennisPage = () => {
                     loading="lazy"
                   />
                   <div
-                    className="absolute inset-0 transition-opacity duration-500 ease-out group-hover:opacity-40"
+                    className="absolute inset-0 transition-opacity duration-500 ease-out group-hover:opacity-30"
                     style={{
                       background:
-                        "linear-gradient(180deg, rgba(18,33,58,0.45) 0%, rgba(18,33,58,0.70) 60%, rgba(18,33,58,0.88) 100%)",
+                        "linear-gradient(180deg, rgba(18,33,58,0.45) 0%, rgba(18,33,58,0.70) 55%, rgba(18,33,58,0.92) 100%)",
                     }}
                   />
-                  <div className="relative p-5 flex flex-col h-full mt-auto">
-                    <div
-                      className="rounded-lg p-4 mt-auto"
-                      style={{
-                        backgroundColor: "rgba(255,255,255,0.94)",
-                        backdropFilter: "blur(2px)",
-                      }}
+                  <div className="relative p-6 flex flex-col h-full">
+                    <h3
+                      className="font-display text-base font-bold text-white"
+                      style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}
                     >
-                      <h3
-                        className="font-display text-base font-bold mb-3"
-                        style={{ color: NAVY }}
-                      >
-                        {card.title}
-                      </h3>
-                      <ul className="space-y-1.5">
-                        {card.items.map((it) => (
-                          <li
-                            key={it}
-                            className="flex gap-2 font-body text-xs leading-relaxed text-muted-foreground"
-                          >
-                            <CheckCircle
-                              className="w-3.5 h-3.5 shrink-0 mt-0.5"
-                              style={{ color: RED }}
-                            />
-                            <span>{it}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      {card.title}
+                    </h3>
+                    <ul className="space-y-2 mt-auto transition-opacity duration-300 ease-out group-hover:opacity-0">
+                      {card.items.map((it) => (
+                        <li
+                          key={it}
+                          className="flex gap-2 font-body text-xs sm:text-sm leading-relaxed text-white/90"
+                          style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
+                        >
+                          <CheckCircle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-white" />
+                          <span>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               ))}
