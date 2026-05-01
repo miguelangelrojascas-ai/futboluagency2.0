@@ -243,7 +243,10 @@ const TennisPage = () => {
         </section>
 
         {/* ── LEAGUE SYSTEM ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -253,11 +256,12 @@ const TennisPage = () => {
                 {es ? "Ligas universitarias" : "University leagues"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "El Sistema de Ligas en EE.UU." : "The US League System"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
               <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Hay una opción para cada perfil de jugador. Nuestro equipo te ayuda a encontrar la tuya."
