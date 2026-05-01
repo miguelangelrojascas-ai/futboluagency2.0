@@ -112,7 +112,12 @@ const UniversityMap = () => {
           >
             <Geographies geography={GEO_URL}>
               {({ geographies }) =>
-                geographies.map((geo) => {
+                geographies
+                  .filter((geo) => {
+                    const fips = String(geo.id).padStart(2, "0");
+                    return fips !== "02" && fips !== "15";
+                  })
+                  .map((geo) => {
                   const fips = String(geo.id).padStart(2, "0");
                   const state = FIPS_TO_STATE[fips];
                   const count = state ? STATE_DATA[state.abbr] : undefined;
