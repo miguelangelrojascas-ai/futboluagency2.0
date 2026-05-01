@@ -166,7 +166,7 @@ const PlayerProfilesSection = () => {
                 {p.extraLink && (
                   <Link
                     to={p.extraLink.to}
-                    className="inline-block mt-3 text-xs font-semibold text-red-600 hover:text-red-700 transition-colors"
+                    className="inline-block mt-3 text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
                   >
                     {p.extraLink.label}
                   </Link>
