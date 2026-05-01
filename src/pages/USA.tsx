@@ -202,6 +202,9 @@ const USA = () => {
 
 
 
+        {/* Player Profiles */}
+        <PlayerProfilesSection />
+
         {/* Process Section */}
         <ProcessSection />
 
