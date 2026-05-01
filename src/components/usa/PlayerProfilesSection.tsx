@@ -92,7 +92,8 @@ const PlayerProfilesSection = () => {
     },
   ];
 
-  const colLabel = "text-[10px] tracking-[0.15em] uppercase text-muted-foreground font-semibold mb-2 block";
+  const colLabel = "font-display text-base sm:text-lg font-bold mb-2 block";
+  const colLabelStyle = { color: "#12213a" };
 
   return (
     <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
@@ -148,19 +149,19 @@ const PlayerProfilesSection = () => {
 
               {/* Profile */}
               <div className="p-4 md:border-l" style={{ borderColor: "#f0f0f0" }}>
-                <span className={colLabel}>{isEs ? "Perfil del jugador" : "Player profile"}</span>
+                <span className={colLabel} style={colLabelStyle}>{isEs ? "Perfil del jugador" : "Player Profile"}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.profile}</p>
               </div>
 
               {/* Universities */}
               <div className="p-4 md:border-l" style={{ borderColor: "#f0f0f0" }}>
-                <span className={colLabel}>{isEs ? "Universidades objetivo" : "Target universities"}</span>
+                <span className={colLabel} style={colLabelStyle}>{isEs ? "Universidades objetivo" : "Target Universities"}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.universities}</p>
               </div>
 
               {/* Plan */}
               <div className="p-4 md:border-l" style={{ borderColor: "#f0f0f0" }}>
-                <span className={colLabel}>{isEs ? "Nuestro plan" : "Our plan"}</span>
+                <span className={colLabel} style={colLabelStyle}>{isEs ? "Nuestro plan" : "Our Plan"}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.plan}</p>
                 {p.extraLink && (
                   <Link
