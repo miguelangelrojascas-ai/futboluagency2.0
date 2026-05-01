@@ -628,14 +628,32 @@ const TennisPage = () => {
               ))}
             </div>
 
-            {/* Requirements */}
-            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "#e5e5e5" }}>
-              <h3
-                className="font-display text-2xl sm:text-3xl font-bold text-center mb-8"
+          </div>
+        </section>
+
+        {/* ── REQUIREMENTS ── */}
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
+          <div className="container-wide max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <span
+                className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 font-body"
+                style={{ color: RED }}
+              >
+                {es ? "Lo que necesitas" : "What you need"}
+              </span>
+              <h2
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "Requisitos para Aplicar" : "Requirements to Apply"}
-              </h3>
+              </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
+            </div>
+
+            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "#e5e5e5" }}>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
