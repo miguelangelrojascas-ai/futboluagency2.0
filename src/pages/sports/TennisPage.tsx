@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   CheckCircle,
@@ -14,6 +15,9 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import tennisPlayerImg from "@/assets/tennis-player.jpg";
+import tennisStudentsImg from "@/assets/tennis-students.jpg";
+import tennisTrophyImg from "@/assets/tennis-trophy.webp";
+import tennisFacilityImg from "@/assets/tennis-facility.jpg";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import campusDorm from "@/assets/campus-dorm.jpg";
 import campusDining from "@/assets/campus-dining.jpg";
@@ -37,6 +41,16 @@ const CALENDLY = "https://calendly.com/futbolu-agency";
 const TennisPage = () => {
   const { language } = useLanguage();
   const es = language === "es";
+
+  // Carrusel sincronizado de la sección "Por qué el tenis universitario"
+  const [activeWhy, setActiveWhy] = useState(0);
+  const whyPausedRef = useRef(false);
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      if (!whyPausedRef.current) setActiveWhy((i) => (i + 1) % 4);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <>
