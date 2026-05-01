@@ -370,13 +370,13 @@ const UniversityMap = () => {
           </p>
         </div>
 
-        <div className="hidden md:block relative max-w-5xl mx-auto">
+        <div className="hidden md:block relative w-full max-w-6xl mx-auto" style={{ minHeight: 400 }}>
           <ComposableMap
             projection="geoAlbersUsa"
-            projectionConfig={{ scale: 1000 }}
+            projectionConfig={{ scale: 1300 }}
             width={980}
             height={560}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", minHeight: 400 }}
           >
             <Geographies geography={GEO_URL}>
               {({ geographies }) =>
