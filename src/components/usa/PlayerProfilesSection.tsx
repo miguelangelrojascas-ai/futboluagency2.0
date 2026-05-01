@@ -24,8 +24,8 @@ const PlayerProfilesSection = () => {
   const profiles: Profile[] = [
     {
       level: "Élite",
-      badgeColor: "#7c3aed",
-      gradient: "linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%)",
+      badgeColor: "#1e3a6e",
+      gradient: "linear-gradient(135deg, #0f1f3d 0%, #1e3a6e 100%)",
       image: profileElite,
       imagePosition: "center 20%",
       profile: isEs
@@ -40,8 +40,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: "Alto",
-      badgeColor: "#dc2626",
-      gradient: "linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%)",
+      badgeColor: "#b00717",
+      gradient: "linear-gradient(135deg, #6b0410 0%, #b00717 100%)",
       image: profileAlto,
       imagePosition: "center center",
       profile: isEs
@@ -56,8 +56,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: "Medio",
-      badgeColor: "#12213a",
-      gradient: "linear-gradient(135deg, #0a1426 0%, #12213a 100%)",
+      badgeColor: "#1a6e3c",
+      gradient: "linear-gradient(135deg, #0e3d21 0%, #1a6e3c 100%)",
       image: profileMedio,
       imagePosition: "center 25%",
       profile: isEs
@@ -72,8 +72,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: isEs ? "Desarrollo" : "Development",
-      badgeColor: "#16a34a",
-      gradient: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
+      badgeColor: "#d97706",
+      gradient: "linear-gradient(135deg, #7c4406 0%, #d97706 100%)",
       image: profileDesarrollo,
       imagePosition: "center 30%",
       profile: isEs
@@ -99,7 +99,7 @@ const PlayerProfilesSection = () => {
     <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
       <div className="container-wide px-4">
         <div className="max-w-3xl mb-12">
-          <span className="text-red-600 text-xs font-bold tracking-[0.15em] uppercase mb-4 block">
+          <span className="text-primary text-xs font-bold tracking-[0.15em] uppercase mb-4 block">
             {isEs ? "¿Puedes conseguir una beca?" : "Can you get a scholarship?"}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
@@ -166,7 +166,7 @@ const PlayerProfilesSection = () => {
                 {p.extraLink && (
                   <Link
                     to={p.extraLink.to}
-                    className="inline-block mt-3 text-xs font-semibold text-red-600 hover:text-red-700 transition-colors"
+                    className="inline-block mt-3 text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
                   >
                     {p.extraLink.label}
                   </Link>
