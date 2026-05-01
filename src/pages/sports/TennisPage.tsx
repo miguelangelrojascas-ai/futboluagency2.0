@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import tennisPlayerImg from "@/assets/tennis-player.jpg";
+import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import tennisHeroImg from "@/assets/tennis-hero.jpg";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -71,8 +72,15 @@ const TennisPage = () => {
           </div>
 
           <div className="relative container-wide max-w-6xl mx-auto">
+            {/* FUA Sports logo */}
+            <div className="flex justify-center mb-6">
+              <Link to="/sports">
+                <img src={fuaSportsLogo} alt="FUA Sports" className="h-12 sm:h-14 md:h-16 w-auto" />
+              </Link>
+            </div>
+
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm text-white/60 mb-8 font-body">
+            <div className="flex items-center justify-center gap-2 text-sm text-white/60 mb-8 font-body">
               <Link to="/sports" className="hover:text-white transition-colors">
                 FUA Sports
               </Link>

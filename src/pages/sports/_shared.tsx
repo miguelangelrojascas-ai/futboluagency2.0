@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar } from "lucide-react";
+import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 
 export const NAVY = "#12213a";
 export const RED = "#b00717";
@@ -17,6 +18,9 @@ export const SportHero = ({
 }) => (
   <section className="py-24 md:py-32 px-4" style={{ backgroundColor: NAVY }}>
     <div className="container-wide max-w-5xl mx-auto text-center">
+      <Link to="/sports" className="inline-block mb-8">
+        <img src={fuaSportsLogo} alt="FUA Sports" className="h-12 sm:h-14 md:h-16 w-auto mx-auto" />
+      </Link>
       <h1
         className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
         style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
