@@ -576,6 +576,7 @@ const TennisPage = () => {
                 {
                   icon: Shield,
                   title: es ? "Vivir On Campus" : "Living On Campus",
+                  image: campusDorm,
                   items: es
                     ? ["Residencias dentro del campus", "Seguridad y supervisión 24/7", "Internet y servicios incluidos", "Lavandería y zonas de estudio", "Cercanía a pistas y clases"]
                     : ["Residences within campus", "24/7 security and supervision", "Internet and basic services included", "Laundry and study areas", "Close to courts and classes"],
@@ -590,6 +591,7 @@ const TennisPage = () => {
                 {
                   icon: Heart,
                   title: es ? "Alimentación (Meal Plan)" : "Meal Plan",
+                  image: campusDining,
                   items: es
                     ? ["Cafeterías en campus", "Desayuno, comida y cena incluidos", "Opciones para deportistas", "Meal Plan completo o parcial", "Opción de cocinar en casa"]
                     : ["University cafeterias on campus", "Breakfast, lunch and dinner included", "Options adapted for athletes", "Full or partial Meal Plan", "Option to cook at home"],
@@ -604,29 +606,36 @@ const TennisPage = () => {
               ].map((card) => (
                 <div
                   key={card.title}
-                  className="rounded-xl p-6 bg-white border"
+                  className="rounded-xl bg-white border overflow-hidden flex flex-col"
                   style={{ borderColor: "#e5e5e5" }}
                 >
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                    style={{ backgroundColor: `${RED}15` }}
-                  >
-                    <card.icon className="w-5 h-5" style={{ color: RED }} />
+                  {card.image && (
+                    <div className="aspect-[4/3] w-full overflow-hidden">
+                      <img src={card.image} alt={card.title} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div
+                      className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+                      style={{ backgroundColor: `${RED}15` }}
+                    >
+                      <card.icon className="w-5 h-5" style={{ color: RED }} />
+                    </div>
+                    <h3 className="font-display text-base font-bold mb-3" style={{ color: NAVY }}>
+                      {card.title}
+                    </h3>
+                    <ul className="space-y-2">
+                      {card.items.map((it) => (
+                        <li
+                          key={it}
+                          className="flex gap-2 font-body text-xs sm:text-sm leading-relaxed text-muted-foreground"
+                        >
+                          <CheckCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: RED }} />
+                          <span>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="font-display text-base font-bold mb-3" style={{ color: NAVY }}>
-                    {card.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {card.items.map((it) => (
-                      <li
-                        key={it}
-                        className="flex gap-2 font-body text-xs sm:text-sm leading-relaxed text-muted-foreground"
-                      >
-                        <CheckCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: RED }} />
-                        <span>{it}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               ))}
             </div>
