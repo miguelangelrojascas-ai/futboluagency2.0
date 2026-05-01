@@ -707,15 +707,19 @@ const TennisPage = () => {
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
           <div className="container-wide max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "Preguntas Frecuentes" : "Frequently Asked Questions"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
             </div>
             <Accordion type="single" collapsible className="space-y-3">
               {(es
