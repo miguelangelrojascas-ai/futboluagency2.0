@@ -420,23 +420,23 @@ const UniversityMap = () => {
                         }}
                         style={{
                           default: {
-                            fill: "#dce6f0",
+                            fill: "#c5d5e8",
                             stroke: "#ffffff",
-                            strokeWidth: 1,
+                            strokeWidth: 1.2,
                             outline: "none",
                             transition: "fill 0.2s",
                           },
                           hover: {
                             fill: "#b00717",
                             stroke: "#ffffff",
-                            strokeWidth: 1,
+                            strokeWidth: 1.2,
                             outline: "none",
                             cursor: data ? "pointer" : "default",
                           },
                           pressed: {
                             fill: "#b00717",
                             stroke: "#ffffff",
-                            strokeWidth: 1,
+                            strokeWidth: 1.2,
                             outline: "none",
                           },
                         }}
