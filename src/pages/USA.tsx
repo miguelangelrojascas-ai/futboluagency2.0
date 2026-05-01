@@ -46,7 +46,7 @@ const USA = () => {
       icon: Video,
       num: "04",
       label: "VIDEO MEJORES JUGADAS",
-      value: "6 — 7 Minutos",
+      value: "4 — 6 Minutos",
       desc: "Capacidad de preparar un video de calidad con tus mejores jugadas y disponer de partidos completos para el análisis de los coaches universitarios.",
     },
   ];
