@@ -370,13 +370,13 @@ const UniversityMap = () => {
           </p>
         </div>
 
-        <div className="hidden md:block relative max-w-5xl mx-auto">
+        <div className="hidden md:block relative w-full max-w-6xl mx-auto" style={{ minHeight: 400 }}>
           <ComposableMap
             projection="geoAlbersUsa"
-            projectionConfig={{ scale: 1000 }}
+            projectionConfig={{ scale: 1300 }}
             width={980}
             height={560}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", minHeight: 400 }}
           >
             <Geographies geography={GEO_URL}>
               {({ geographies }) =>
@@ -420,23 +420,23 @@ const UniversityMap = () => {
                         }}
                         style={{
                           default: {
-                            fill: "#dce6f0",
+                            fill: "#c5d5e8",
                             stroke: "#ffffff",
-                            strokeWidth: 1,
+                            strokeWidth: 1.2,
                             outline: "none",
                             transition: "fill 0.2s",
                           },
                           hover: {
                             fill: "#b00717",
                             stroke: "#ffffff",
-                            strokeWidth: 1,
+                            strokeWidth: 1.2,
                             outline: "none",
                             cursor: data ? "pointer" : "default",
                           },
                           pressed: {
                             fill: "#b00717",
                             stroke: "#ffffff",
-                            strokeWidth: 1,
+                            strokeWidth: 1.2,
                             outline: "none",
                           },
                         }}
@@ -450,29 +450,29 @@ const UniversityMap = () => {
               const coords = STATE_CENTROIDS[abbr];
               if (!coords) return null;
               const count = data.count;
-              const radius = count >= 20 ? 14 : count >= 10 ? 12 : count >= 5 ? 10 : 8;
+              const radius = count >= 20 ? 16 : count >= 10 ? 14 : 12;
               return (
                 <Marker key={abbr} coordinates={coords}>
-                  <circle
-                    r={radius}
-                    fill="#ffffff"
-                    stroke="#12213a"
-                    strokeWidth={1}
-                    style={{ pointerEvents: "none" }}
-                  />
-                  <text
-                    textAnchor="middle"
-                    dy={3}
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: count >= 10 ? 10 : 9,
-                      fontWeight: 700,
-                      fill: "#12213a",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    {count}
-                  </text>
+                  <g style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.25))", pointerEvents: "none" }}>
+                    <circle
+                      r={radius}
+                      fill="#ffffff"
+                      stroke="#12213a"
+                      strokeWidth={1.2}
+                    />
+                    <text
+                      textAnchor="middle"
+                      dy={3.5}
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: 10,
+                        fontWeight: 800,
+                        fill: "#12213a",
+                      }}
+                    >
+                      {count}
+                    </text>
+                  </g>
                 </Marker>
               );
             })}
