@@ -576,7 +576,6 @@ const TennisPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
               {[
                 {
-                  icon: Shield,
                   title: es ? "Vivir On Campus" : "Living On Campus",
                   image: campusDorm,
                   items: es
@@ -584,14 +583,13 @@ const TennisPage = () => {
                     : ["Residences within campus", "24/7 security and supervision", "Internet and basic services included", "Laundry and study areas", "Close to courts and classes"],
                 },
                 {
-                  icon: Users,
                   title: es ? "Vivir Off Campus" : "Living Off Campus",
+                  image: campusOffcampus,
                   items: es
                     ? ["Apartamentos compartidos", "Mayor independencia", "Cocina propia disponible", "A pocos minutos del campus", "Más económico en muchos casos"]
                     : ["Shared apartments", "Greater independence", "Own kitchen available", "Minutes from campus", "More economical in many cases"],
                 },
                 {
-                  icon: Heart,
                   title: es ? "Alimentación (Meal Plan)" : "Meal Plan",
                   image: campusDining,
                   items: es
@@ -599,85 +597,63 @@ const TennisPage = () => {
                     : ["University cafeterias on campus", "Breakfast, lunch and dinner included", "Options adapted for athletes", "Full or partial Meal Plan", "Option to cook at home"],
                 },
                 {
-                  icon: Shield,
                   title: es ? "Seguro Médico" : "Health Insurance",
                   image: campusMedical,
                   items: es
                     ? ["Obligatorio para internacionales", "Visitas médicas cubiertas", "Lesiones deportivas incluidas", "Fisioterapia del equipo", "Urgencias y hospitalización"]
                     : ["Mandatory for all internationals", "Medical visits covered", "Sports injuries included", "Team physiotherapy", "Emergencies and hospitalization"],
                 },
-              ].map((card) => {
-                const hasImage = !!card.image;
-                return (
+              ].map((card) => (
+                <div
+                  key={card.title}
+                  className="group relative rounded-xl overflow-hidden flex flex-col min-h-[360px] bg-white border"
+                  style={{ borderColor: "#e5e5e5" }}
+                >
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    loading="lazy"
+                  />
                   <div
-                    key={card.title}
-                    className="relative rounded-xl border overflow-hidden flex flex-col min-h-[360px]"
+                    className="absolute inset-0 transition-opacity duration-500 ease-out group-hover:opacity-40"
                     style={{
-                      borderColor: hasImage ? "transparent" : "#e5e5e5",
-                      backgroundColor: hasImage ? NAVY : "#ffffff",
+                      background:
+                        "linear-gradient(180deg, rgba(18,33,58,0.45) 0%, rgba(18,33,58,0.70) 60%, rgba(18,33,58,0.88) 100%)",
                     }}
-                  >
-                    {hasImage && (
-                      <>
-                        <img
-                          src={card.image}
-                          alt={card.title}
-                          className="absolute inset-0 w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            background:
-                              "linear-gradient(180deg, rgba(18,33,58,0.55) 0%, rgba(18,33,58,0.78) 55%, rgba(18,33,58,0.92) 100%)",
-                          }}
-                        />
-                      </>
-                    )}
-                    <div className="relative p-6 flex flex-col h-full">
-                      <div
-                        className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                        style={{
-                          backgroundColor: hasImage ? "rgba(255,255,255,0.12)" : `${RED}15`,
-                          backdropFilter: hasImage ? "blur(4px)" : undefined,
-                        }}
-                      >
-                        <card.icon
-                          className="w-5 h-5"
-                          style={{ color: hasImage ? "#ffffff" : RED }}
-                        />
-                      </div>
+                  />
+                  <div className="relative p-5 flex flex-col h-full mt-auto">
+                    <div
+                      className="rounded-lg p-4 mt-auto"
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.94)",
+                        backdropFilter: "blur(2px)",
+                      }}
+                    >
                       <h3
                         className="font-display text-base font-bold mb-3"
-                        style={{
-                          color: hasImage ? "#ffffff" : NAVY,
-                          textShadow: hasImage ? "0 2px 8px rgba(0,0,0,0.5)" : undefined,
-                        }}
+                        style={{ color: NAVY }}
                       >
                         {card.title}
                       </h3>
-                      <ul className="space-y-2 mt-auto">
+                      <ul className="space-y-1.5">
                         {card.items.map((it) => (
                           <li
                             key={it}
-                            className="flex gap-2 font-body text-xs sm:text-sm leading-relaxed"
-                            style={{
-                              color: hasImage ? "rgba(255,255,255,0.92)" : undefined,
-                              textShadow: hasImage ? "0 1px 4px rgba(0,0,0,0.4)" : undefined,
-                            }}
+                            className="flex gap-2 font-body text-xs leading-relaxed text-muted-foreground"
                           >
                             <CheckCircle
                               className="w-3.5 h-3.5 shrink-0 mt-0.5"
-                              style={{ color: hasImage ? "#ffffff" : RED }}
+                              style={{ color: RED }}
                             />
-                            <span className={hasImage ? "" : "text-muted-foreground"}>{it}</span>
+                            <span>{it}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
 
           </div>
