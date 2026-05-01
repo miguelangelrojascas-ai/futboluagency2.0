@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import tennisPlayerImg from "@/assets/tennis-player.jpg";
+import tennisHeroImg from "@/assets/tennis-hero.jpg";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -41,7 +42,23 @@ const TennisPage = () => {
           className="relative pt-28 md:pt-36 pb-20 md:pb-28 px-4 overflow-hidden"
           style={{ backgroundColor: NAVY }}
         >
-          {/* Decorative background */}
+          {/* Background image */}
+          <div className="absolute inset-0">
+            <img
+              src={tennisHeroImg}
+              alt={es ? "Pista de tenis universitaria UCLA" : "UCLA university tennis court"}
+              className="w-full h-full object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(18,33,58,0.85) 0%, rgba(18,33,58,0.78) 60%, rgba(18,33,58,0.92) 100%)",
+              }}
+            />
+          </div>
+
+          {/* Decorative accents */}
           <div className="absolute inset-0 pointer-events-none">
             <div
               className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl"
