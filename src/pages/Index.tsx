@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
+import UniversityMap from "@/components/UniversityMap";
 
 
 import PathSelectionSection from "@/components/PathSelectionSection";
@@ -24,6 +25,7 @@ const Index = () => {
       <main className="min-h-screen">
         <HeroSection />
         <MetricsSection />
+        <UniversityMap />
         <VideoSection onOpenForm={openForm} />
         <LogoCarousel />
         
