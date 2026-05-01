@@ -112,11 +112,11 @@ const PlayerProfilesSection = () => {
           </p>
         </div>
 
-        <div className="space-y-4 max-w-6xl">
+        <div className="space-y-4 max-w-6xl group/list">
           {profiles.map((p, i) => (
             <div
               key={i}
-              className="rounded-xl overflow-hidden bg-white grid grid-cols-1 md:grid-cols-[180px_1fr_1fr_1fr]"
+              className="rounded-xl overflow-hidden bg-white grid grid-cols-1 md:grid-cols-[180px_1fr_1fr_1fr] transition-all duration-300 ease-out cursor-default origin-center hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(18,33,58,0.18)] hover:ring-1 hover:ring-[#12213a]/30 hover:z-10 relative group-hover/list:opacity-50 group-hover/list:scale-[0.99] hover:!opacity-100"
               style={{ border: "1px solid #e5e5e5" }}
             >
               {/* Left column — level with photo background */}
