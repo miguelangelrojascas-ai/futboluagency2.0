@@ -214,7 +214,7 @@ const FUASports = () => {
                   <Link
                     key={s.name}
                     to={s.to}
-                    className="group relative rounded-2xl overflow-hidden flex flex-col aspect-video transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] border-2 border-transparent hover:shadow-2xl"
+                    className="group relative rounded-2xl overflow-hidden flex flex-col aspect-video transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.05] hover:z-10 border-2 border-transparent hover:shadow-[0_25px_60px_-15px_rgba(176,7,23,0.55)]"
                     style={{ backgroundColor: NAVY }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.borderColor = RED)
