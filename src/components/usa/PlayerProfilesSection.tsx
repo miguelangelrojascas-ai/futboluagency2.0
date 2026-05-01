@@ -56,8 +56,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: "Medio",
-      badgeColor: "#2563eb",
-      gradient: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)",
+      badgeColor: "#12213a",
+      gradient: "linear-gradient(135deg, #0a1426 0%, #12213a 100%)",
       image: profileMedio,
       imagePosition: "center 25%",
       profile: isEs
