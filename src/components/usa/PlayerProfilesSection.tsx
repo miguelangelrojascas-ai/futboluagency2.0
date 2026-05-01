@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import profileElite from "@/assets/profile-elite.png";
+import profileAlto from "@/assets/profile-alto.webp";
+import profileMedio from "@/assets/profile-medio.jpeg";
+import profileDesarrollo from "@/assets/profile-desarrollo.webp";
 
 interface Profile {
   level: string;
   badgeColor: string;
   gradient: string;
+  image: string;
+  imagePosition?: string;
   profile: string;
   universities: string;
   plan: string;
@@ -20,6 +26,8 @@ const PlayerProfilesSection = () => {
       level: "Élite",
       badgeColor: "#7c3aed",
       gradient: "linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%)",
+      image: profileElite,
+      imagePosition: "center 20%",
       profile: isEs
         ? "Academias top o selecciones nacionales. Historial en divisiones competitivas, Sub-17, Sub-20 o debut semiprofesional."
         : "Top academies or national teams. Background in competitive divisions, U-17, U-20 or semi-pro debut.",
@@ -34,6 +42,8 @@ const PlayerProfilesSection = () => {
       level: "Alto",
       badgeColor: "#dc2626",
       gradient: "linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%)",
+      image: profileAlto,
+      imagePosition: "center center",
       profile: isEs
         ? "Clubes competitivos, ligas regionales. Trayectoria sólida, buen nivel técnico y físico. Inglés intermedio o superior."
         : "Competitive clubs, regional leagues. Solid track record, good technical and physical level. Intermediate or higher English.",
@@ -48,6 +58,8 @@ const PlayerProfilesSection = () => {
       level: "Medio",
       badgeColor: "#2563eb",
       gradient: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)",
+      image: profileMedio,
+      imagePosition: "center 25%",
       profile: isEs
         ? "Perfil con potencial claro. Menos trayectoria pero con habilidades demostrables. Buen expediente académico."
         : "Profile with clear potential. Less track record but with demonstrable skills. Good academic record.",
@@ -62,6 +74,8 @@ const PlayerProfilesSection = () => {
       level: isEs ? "Desarrollo" : "Development",
       badgeColor: "#16a34a",
       gradient: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
+      image: profileDesarrollo,
+      imagePosition: "center 30%",
       profile: isEs
         ? "Jugador con ambición y compromiso. Considera el Gap Year en España para elevar su nivel antes de aplicar."
         : "Ambitious and committed player. Consider a Gap Year in Spain to raise your level before applying.",
@@ -104,18 +118,30 @@ const PlayerProfilesSection = () => {
               className="rounded-xl overflow-hidden bg-white grid grid-cols-1 md:grid-cols-[180px_1fr_1fr_1fr]"
               style={{ border: "1px solid #e5e5e5" }}
             >
-              {/* Left column — level */}
-              <div
-                className="p-5 flex flex-col justify-between min-h-[140px] md:min-h-0"
-                style={{ background: p.gradient }}
-              >
+              {/* Left column — level with photo background */}
+              <div className="relative p-5 flex flex-col justify-between min-h-[180px] md:min-h-[200px] overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={p.level}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: p.imagePosition || "center" }}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 60%, ${p.badgeColor}cc 100%)`,
+                  }}
+                />
                 <span
-                  className="inline-flex items-center self-start px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.12em] uppercase text-white"
-                  style={{ backgroundColor: p.badgeColor, boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }}
+                  className="relative inline-flex items-center self-start px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.12em] uppercase text-white"
+                  style={{ backgroundColor: p.badgeColor, boxShadow: "0 1px 4px rgba(0,0,0,0.3)" }}
                 >
                   {isEs ? "Nivel" : "Level"}
                 </span>
-                <span className="font-display text-2xl sm:text-3xl font-bold text-white mt-4">
+                <span
+                  className="relative font-display text-2xl sm:text-3xl font-bold text-white mt-4"
+                  style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}
+                >
                   {p.level}
                 </span>
               </div>
