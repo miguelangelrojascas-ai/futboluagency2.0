@@ -29,12 +29,12 @@ const StudentAthleteExperience = () => {
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         {/* Left Column */}
         <div>
-          <span className="text-blue-500 text-sm font-bold tracking-widest uppercase mb-4 block">
+          <span className="text-[#12213a] text-sm font-bold tracking-widest uppercase mb-4 block">
             EL SUEÑO AMERICANO
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-8">
             Vive la Verdadera Experiencia{" "}
-            <span className="italic text-blue-500">Student-Athlete</span>
+            <span className="italic text-[#12213a]">Student-Athlete</span>
           </h2>
           <div>
             {items.map((item, index) => (
@@ -42,7 +42,7 @@ const StudentAthleteExperience = () => {
                 key={index}
                 className={`relative cursor-pointer py-6 transition-all duration-500 ${
                   activeItem === index
-                    ? "opacity-100 border-l-2 border-blue-500 pl-6 shadow-[-4px_0_10px_-2px_rgba(37,99,235,0.5)]"
+                    ? "opacity-100 border-l-2 border-[#12213a] pl-6 shadow-[-4px_0_10px_-2px_rgba(18,33,58,0.5)]"
                     : "opacity-50 pl-6 border-l-2 border-transparent"
                 }`}
                 onMouseEnter={() => setActiveItem(index)}
@@ -68,8 +68,8 @@ const StudentAthleteExperience = () => {
         </div>
 
         {/* Right Column */}
-        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(37,99,235,0.15)]">
-          <div className="absolute inset-0 bg-blue-600/10 blur-3xl rounded-full" />
+        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(18,33,58,0.15)]">
+          <div className="absolute inset-0 bg-[#12213a]/10 blur-3xl rounded-full" />
           {items.map((item, index) => (
             <img
               key={index}
