@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
 import StudentAthleteExperience from "@/components/StudentAthleteExperience";
 import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
+import UniversityMap from "@/components/UniversityMap";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
@@ -162,6 +163,8 @@ const USA = () => {
           </div>
         </section>
 
+
+        <UniversityMap />
 
         {/* Requirements */}
         <section className="section-padding bg-background relative overflow-hidden">
