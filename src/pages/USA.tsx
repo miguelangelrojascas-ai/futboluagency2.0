@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
 import StudentAthleteExperience from "@/components/StudentAthleteExperience";
+import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
@@ -200,6 +201,9 @@ const USA = () => {
 
 
 
+
+        {/* Player Profiles */}
+        <PlayerProfilesSection />
 
         {/* Process Section */}
         <ProcessSection />
