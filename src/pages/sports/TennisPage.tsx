@@ -17,6 +17,7 @@ import tennisPlayerImg from "@/assets/tennis-player.jpg";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import campusDorm from "@/assets/campus-dorm.jpg";
 import campusDining from "@/assets/campus-dining.jpg";
+import campusMedical from "@/assets/campus-medical.jpg";
 import tennisHeroImg from "@/assets/tennis-hero.jpg";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -599,45 +600,83 @@ const TennisPage = () => {
                 {
                   icon: Shield,
                   title: es ? "Seguro Médico" : "Health Insurance",
+                  image: campusMedical,
                   items: es
                     ? ["Obligatorio para internacionales", "Visitas médicas cubiertas", "Lesiones deportivas incluidas", "Fisioterapia del equipo", "Urgencias y hospitalización"]
                     : ["Mandatory for all internationals", "Medical visits covered", "Sports injuries included", "Team physiotherapy", "Emergencies and hospitalization"],
                 },
-              ].map((card) => (
-                <div
-                  key={card.title}
-                  className="rounded-xl bg-white border overflow-hidden flex flex-col"
-                  style={{ borderColor: "#e5e5e5" }}
-                >
-                  {card.image && (
-                    <div className="aspect-[4/3] w-full overflow-hidden">
-                      <img src={card.image} alt={card.title} className="w-full h-full object-cover" loading="lazy" />
+              ].map((card) => {
+                const hasImage = !!card.image;
+                return (
+                  <div
+                    key={card.title}
+                    className="relative rounded-xl border overflow-hidden flex flex-col min-h-[360px]"
+                    style={{
+                      borderColor: hasImage ? "transparent" : "#e5e5e5",
+                      backgroundColor: hasImage ? NAVY : "#ffffff",
+                    }}
+                  >
+                    {hasImage && (
+                      <>
+                        <img
+                          src={card.image}
+                          alt={card.title}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              "linear-gradient(180deg, rgba(18,33,58,0.55) 0%, rgba(18,33,58,0.78) 55%, rgba(18,33,58,0.92) 100%)",
+                          }}
+                        />
+                      </>
+                    )}
+                    <div className="relative p-6 flex flex-col h-full">
+                      <div
+                        className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+                        style={{
+                          backgroundColor: hasImage ? "rgba(255,255,255,0.12)" : `${RED}15`,
+                          backdropFilter: hasImage ? "blur(4px)" : undefined,
+                        }}
+                      >
+                        <card.icon
+                          className="w-5 h-5"
+                          style={{ color: hasImage ? "#ffffff" : RED }}
+                        />
+                      </div>
+                      <h3
+                        className="font-display text-base font-bold mb-3"
+                        style={{
+                          color: hasImage ? "#ffffff" : NAVY,
+                          textShadow: hasImage ? "0 2px 8px rgba(0,0,0,0.5)" : undefined,
+                        }}
+                      >
+                        {card.title}
+                      </h3>
+                      <ul className="space-y-2 mt-auto">
+                        {card.items.map((it) => (
+                          <li
+                            key={it}
+                            className="flex gap-2 font-body text-xs sm:text-sm leading-relaxed"
+                            style={{
+                              color: hasImage ? "rgba(255,255,255,0.92)" : undefined,
+                              textShadow: hasImage ? "0 1px 4px rgba(0,0,0,0.4)" : undefined,
+                            }}
+                          >
+                            <CheckCircle
+                              className="w-3.5 h-3.5 shrink-0 mt-0.5"
+                              style={{ color: hasImage ? "#ffffff" : RED }}
+                            />
+                            <span className={hasImage ? "" : "text-muted-foreground"}>{it}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  )}
-                  <div className="p-6">
-                    <div
-                      className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                      style={{ backgroundColor: `${RED}15` }}
-                    >
-                      <card.icon className="w-5 h-5" style={{ color: RED }} />
-                    </div>
-                    <h3 className="font-display text-base font-bold mb-3" style={{ color: NAVY }}>
-                      {card.title}
-                    </h3>
-                    <ul className="space-y-2">
-                      {card.items.map((it) => (
-                        <li
-                          key={it}
-                          className="flex gap-2 font-body text-xs sm:text-sm leading-relaxed text-muted-foreground"
-                        >
-                          <CheckCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: RED }} />
-                          <span>{it}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
           </div>
