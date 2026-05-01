@@ -68,16 +68,22 @@ const USA = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src="/videos/spain-hero.mp4"
           />
-          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-black/60" />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
               <span className="inline-block mb-4 text-[#12213a] font-body text-xs tracking-[0.15em] uppercase">
                 {t("usa.tag")}
               </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-muted">
+              <h1
+                className="font-display text-3xl sm:text-4xl md:text-5xl mb-6 text-muted"
+                style={{ fontWeight: 800, textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
+              >
                 {t("usa.hero.title")} <span className="text-[#12213a] italic">{t("usa.hero.highlight")}</span>
               </h1>
-              <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+              <p
+                className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
+                style={{ textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}
+              >
                 {t("usa.hero.desc")}
               </p>
               <button
@@ -88,6 +94,10 @@ const USA = () => {
               </button>
             </div>
           </div>
+          <div
+            className="absolute bottom-0 left-0 right-0 pointer-events-none"
+            style={{ height: "80px", background: "linear-gradient(to bottom, transparent, #ffffff)" }}
+          />
         </section>
 
         <StudentAthleteExperience />
