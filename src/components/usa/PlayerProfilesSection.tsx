@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import profileElite from "@/assets/profile-elite.png";
+import profileAlto from "@/assets/profile-alto.webp";
+import profileMedio from "@/assets/profile-medio.jpeg";
+import profileDesarrollo from "@/assets/profile-desarrollo.webp";
 
 interface Profile {
   level: string;
   badgeColor: string;
   gradient: string;
+  image: string;
+  imagePosition?: string;
   profile: string;
+  universities: string;
+  plan: string;
+  extraLink?: { label: string; to: string };
+}
   universities: string;
   plan: string;
   extraLink?: { label: string; to: string };
