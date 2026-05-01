@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import tennisPlayerImg from "@/assets/tennis-player.jpg";
+import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
