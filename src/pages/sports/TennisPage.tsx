@@ -545,7 +545,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── STUDENT ATHLETE LIFE ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: LIGHT }}>
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -555,11 +555,12 @@ const TennisPage = () => {
                 {es ? "La experiencia" : "The experience"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "Vida del Estudiante-Atleta" : "Student-Athlete Life"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
               <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Todo lo que necesitas saber sobre cómo será la vida de tu hijo/a en una universidad americana."
