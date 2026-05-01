@@ -95,9 +95,11 @@ const FUASports = () => {
             <img
               src={fuaSportsLogo}
               alt="FUA Sports"
-              className="w-full h-auto mx-auto mb-10"
+              className="w-full h-auto mx-auto block"
               style={{
                 maxWidth: "480px",
+                marginTop: "-40px",
+                marginBottom: "-20px",
                 filter: "invert(1) brightness(1.1)",
                 mixBlendMode: "screen",
               }}
