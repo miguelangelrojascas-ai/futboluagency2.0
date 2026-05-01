@@ -11,7 +11,7 @@ const HeroSection = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.65)" }} />
       </div>
 
       {/* Bottom fade transition */}
@@ -25,13 +25,19 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container-wide section-padding text-center pt-28 sm:pt-36">
         {/* Main Headline */}
-        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up px-2">
+        <h1
+          className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up px-2 text-white"
+          style={{ textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
+        >
           {t("hero.headline")}{" "}
           <span className="text-primary italic">{t("hero.headline.highlight")}</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4 leading-relaxed" style={{ animationDelay: "0.2s" }}>
+        <p
+          className="font-body text-white text-lg max-w-2xl mx-auto mb-8 sm:mb-10 animate-fade-in-up px-4 leading-relaxed"
+          style={{ animationDelay: "0.2s", fontWeight: 500, textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
+        >
           {t("hero.subheadline")}
         </p>
 
