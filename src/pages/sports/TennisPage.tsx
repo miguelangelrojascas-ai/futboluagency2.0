@@ -13,6 +13,7 @@ import {
   Award,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import tennisPlayerImg from "@/assets/tennis-player.jpg";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -163,26 +164,13 @@ const TennisPage = () => {
 
             <div className="grid lg:grid-cols-2 gap-10 items-start">
               {/* Tennis ball visual */}
-              <div
-                className="rounded-2xl aspect-[4/5] flex items-center justify-center relative overflow-hidden"
-                style={{ backgroundColor: NAVY }}
-              >
-                <div
-                  className="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-20 blur-3xl"
-                  style={{ background: RED }}
+              <div className="rounded-2xl aspect-[4/5] relative overflow-hidden shadow-2xl">
+                <img
+                  src={tennisPlayerImg}
+                  alt={es ? "Jugador de tenis ejecutando un golpe" : "Tennis player executing a stroke"}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
                 />
-                <svg viewBox="0 0 200 200" className="relative w-2/3 h-2/3 drop-shadow-2xl" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <radialGradient id="ballGrad" cx="35%" cy="35%" r="70%">
-                      <stop offset="0%" stopColor="#e8ff5a" />
-                      <stop offset="70%" stopColor="#c8e236" />
-                      <stop offset="100%" stopColor="#8da620" />
-                    </radialGradient>
-                  </defs>
-                  <circle cx="100" cy="100" r="90" fill="url(#ballGrad)" />
-                  <path d="M 18 70 Q 100 110 182 70" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.95" />
-                  <path d="M 18 130 Q 100 90 182 130" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.95" />
-                </svg>
               </div>
 
               <div className="space-y-5">
