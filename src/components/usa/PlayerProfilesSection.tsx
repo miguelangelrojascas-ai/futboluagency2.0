@@ -24,8 +24,8 @@ const PlayerProfilesSection = () => {
   const profiles: Profile[] = [
     {
       level: "Élite",
-      badgeColor: "#7c3aed",
-      gradient: "linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%)",
+      badgeColor: "#1e3a6e",
+      gradient: "linear-gradient(135deg, #0f1f3d 0%, #1e3a6e 100%)",
       image: profileElite,
       imagePosition: "center 20%",
       profile: isEs
@@ -40,8 +40,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: "Alto",
-      badgeColor: "#dc2626",
-      gradient: "linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%)",
+      badgeColor: "#b00717",
+      gradient: "linear-gradient(135deg, #6b0410 0%, #b00717 100%)",
       image: profileAlto,
       imagePosition: "center center",
       profile: isEs
@@ -56,8 +56,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: "Medio",
-      badgeColor: "#12213a",
-      gradient: "linear-gradient(135deg, #0a1426 0%, #12213a 100%)",
+      badgeColor: "#1a6e3c",
+      gradient: "linear-gradient(135deg, #0e3d21 0%, #1a6e3c 100%)",
       image: profileMedio,
       imagePosition: "center 25%",
       profile: isEs
@@ -72,8 +72,8 @@ const PlayerProfilesSection = () => {
     },
     {
       level: isEs ? "Desarrollo" : "Development",
-      badgeColor: "#16a34a",
-      gradient: "linear-gradient(135deg, #14532d 0%, #16a34a 100%)",
+      badgeColor: "#d97706",
+      gradient: "linear-gradient(135deg, #7c4406 0%, #d97706 100%)",
       image: profileDesarrollo,
       imagePosition: "center 30%",
       profile: isEs
