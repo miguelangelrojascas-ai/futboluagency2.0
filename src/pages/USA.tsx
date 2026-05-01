@@ -25,7 +25,7 @@ const USA = () => {
       icon: BookOpen,
       num: "01",
       label: "BACHILLER O GRADO SUPERIOR",
-      value: "16 — 26 años",
+      value: "16 — 23 años",
       desc: "Tener el título o estar en proceso de conseguirlo. Aplicable también para aquellos graduados que deseen cursar un Máster en EE.UU.",
     },
     {
