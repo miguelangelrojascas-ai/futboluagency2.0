@@ -138,7 +138,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── WHY TENNIS ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: LIGHT }}>
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -148,11 +148,12 @@ const TennisPage = () => {
                 {es ? "La oportunidad" : "The opportunity"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "¿Por qué el Tenis Universitario en EE.UU.?" : "Why University Tennis in the USA?"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
               <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Estados Unidos ofrece el sistema deportivo y educativo más completo del mundo. Miles de familias ya han tomado esta decisión."
@@ -161,23 +162,27 @@ const TennisPage = () => {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-10 items-start">
-              {/* Image placeholder */}
+              {/* Tennis ball visual */}
               <div
-                className="rounded-2xl aspect-[4/5] flex flex-col items-center justify-center border-2 border-dashed"
-                style={{ backgroundColor: "#eef0f3", borderColor: "#d4d8df" }}
+                className="rounded-2xl aspect-[4/5] flex items-center justify-center relative overflow-hidden"
+                style={{ backgroundColor: NAVY }}
               >
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-4"
-                  style={{ backgroundColor: NAVY }}
-                >
-                  <Trophy className="w-10 h-10 text-white" />
-                </div>
-                <p className="font-display text-lg font-semibold" style={{ color: NAVY }}>
-                  {es ? "Foto del programa" : "Program photo"}
-                </p>
-                <p className="font-body text-sm text-muted-foreground">
-                  {es ? "Añadir imagen aquí" : "Add image here"}
-                </p>
+                  className="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-20 blur-3xl"
+                  style={{ background: RED }}
+                />
+                <svg viewBox="0 0 200 200" className="relative w-2/3 h-2/3 drop-shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="ballGrad" cx="35%" cy="35%" r="70%">
+                      <stop offset="0%" stopColor="#e8ff5a" />
+                      <stop offset="70%" stopColor="#c8e236" />
+                      <stop offset="100%" stopColor="#8da620" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="100" cy="100" r="90" fill="url(#ballGrad)" />
+                  <path d="M 18 70 Q 100 110 182 70" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.95" />
+                  <path d="M 18 130 Q 100 90 182 130" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.95" />
+                </svg>
               </div>
 
               <div className="space-y-5">
@@ -238,7 +243,10 @@ const TennisPage = () => {
         </section>
 
         {/* ── LEAGUE SYSTEM ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -248,11 +256,12 @@ const TennisPage = () => {
                 {es ? "Ligas universitarias" : "University leagues"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "El Sistema de Ligas en EE.UU." : "The US League System"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
               <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Hay una opción para cada perfil de jugador. Nuestro equipo te ayuda a encontrar la tuya."
@@ -347,7 +356,10 @@ const TennisPage = () => {
         </section>
 
         {/* ── FINANCIAL REALITY ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: LIGHT }}>
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -357,11 +369,12 @@ const TennisPage = () => {
                 {es ? "Realidad financiera" : "Financial reality"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "¿Cuánto puedes conseguir?" : "How much can you get?"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-10">
@@ -467,7 +480,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── PROCESS ── */}
-        <section id="process" className="py-20 md:py-28 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section id="process" className="py-24 md:py-32 px-4" style={{ backgroundColor: NAVY }}>
           <div className="container-wide max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -476,13 +489,11 @@ const TennisPage = () => {
               >
                 {es ? "Hoja de ruta" : "Roadmap"}
               </span>
-              <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
-                style={{ color: NAVY }}
-              >
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 text-white">
                 {es ? "El Proceso FUA — 6 Pasos" : "The FUA Process — 6 Steps"}
               </h2>
-              <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
+              <p className="font-body text-base sm:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Nuestro equipo acompaña al atleta y a la familia en cada paso, desde el primer contacto hasta la llegada a la universidad."
                   : "Our team accompanies the athlete and family at each step, from first contact to university arrival."}
@@ -493,7 +504,7 @@ const TennisPage = () => {
               {/* Vertical line */}
               <div
                 className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5"
-                style={{ backgroundColor: `${RED}30` }}
+                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
               />
 
               <div className="space-y-6">
@@ -513,13 +524,16 @@ const TennisPage = () => {
                       {step.num}
                     </div>
                     <div
-                      className="flex-1 rounded-xl p-5 sm:p-6 bg-white border"
-                      style={{ borderColor: "#e5e5e5" }}
+                      className="flex-1 rounded-xl p-5 sm:p-6"
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                      }}
                     >
-                      <h3 className="font-display text-lg sm:text-xl font-bold mb-2" style={{ color: NAVY }}>
+                      <h3 className="font-display text-lg sm:text-xl font-bold mb-2 text-white">
                         {step.title}
                       </h3>
-                      <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      <p className="font-body text-sm sm:text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
                         {step.desc}
                       </p>
                     </div>
@@ -531,7 +545,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── STUDENT ATHLETE LIFE ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: LIGHT }}>
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -541,11 +555,12 @@ const TennisPage = () => {
                 {es ? "La experiencia" : "The experience"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "Vida del Estudiante-Atleta" : "Student-Athlete Life"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
               <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Todo lo que necesitas saber sobre cómo será la vida de tu hijo/a en una universidad americana."
@@ -613,14 +628,32 @@ const TennisPage = () => {
               ))}
             </div>
 
-            {/* Requirements */}
-            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "#e5e5e5" }}>
-              <h3
-                className="font-display text-2xl sm:text-3xl font-bold text-center mb-8"
+          </div>
+        </section>
+
+        {/* ── REQUIREMENTS ── */}
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
+          <div className="container-wide max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <span
+                className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 font-body"
+                style={{ color: RED }}
+              >
+                {es ? "Lo que necesitas" : "What you need"}
+              </span>
+              <h2
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "Requisitos para Aplicar" : "Requirements to Apply"}
-              </h3>
+              </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
+            </div>
+
+            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "#e5e5e5" }}>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
@@ -674,15 +707,19 @@ const TennisPage = () => {
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
           <div className="container-wide max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "Preguntas Frecuentes" : "Frequently Asked Questions"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
             </div>
             <Accordion type="single" collapsible className="space-y-3">
               {(es
