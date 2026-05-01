@@ -13,6 +13,10 @@ import Players from "./pages/Players";
 import About from "./pages/About";
 import Apply from "./pages/Apply";
 import FUASports from "./pages/FUASports";
+import VolleyballPage from "./pages/sports/VolleyballPage";
+import GolfPage from "./pages/sports/GolfPage";
+import TennisPage from "./pages/sports/TennisPage";
+import TrackPage from "./pages/sports/TrackPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +37,10 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/apply" element={<Apply />} />
             <Route path="/sports" element={<FUASports />} />
+            <Route path="/sports/volleyball" element={<VolleyballPage />} />
+            <Route path="/sports/golf" element={<GolfPage />} />
+            <Route path="/sports/tennis" element={<TennisPage />} />
+            <Route path="/sports/track" element={<TrackPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

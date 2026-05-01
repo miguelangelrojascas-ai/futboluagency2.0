@@ -158,74 +158,37 @@ const FUASports = () => {
                 Nuestros Deportes
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
-              {sportsList.map((sport) => (
-                <div
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {[
+                { name: "Volleyball", tagline: "Becas NCAA para jugadoras de alto nivel.", to: "/sports/volleyball" },
+                { name: "Golf", tagline: "De tu club local a la élite universitaria americana.", to: "/sports/golf" },
+                { name: "Tenis", tagline: "Acompañamiento cercano para la beca que mereces.", to: "/sports/tennis" },
+                { name: "Track & Field", tagline: "+1,000 programas y $3.5B en becas disponibles.", to: "/sports/track" },
+              ].map((sport) => (
+                <a
                   key={sport.name}
-                  className="rounded-xl p-6 sm:p-8 flex flex-col"
-                  style={{ backgroundColor: "#0d0d1a" }}
+                  href={sport.to}
+                  className="group rounded-2xl p-8 sm:p-10 flex flex-col justify-between min-h-[240px] transition-transform hover:-translate-y-1"
+                  style={{ backgroundColor: "#12213a" }}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="font-display text-2xl sm:text-3xl font-bold text-white">
-                      {sport.name}
-                    </h3>
-                    <span
-                      className={`font-body text-[10px] tracking-[0.12em] uppercase font-semibold px-2.5 py-1 rounded-full ${
-                        sport.available
-                          ? "bg-primary/20 text-primary border border-primary/30"
-                          : "bg-white/10 text-white/60 border border-white/15"
-                      }`}
-                    >
-                      {sport.available ? "Disponible" : "Próximamente"}
-                    </span>
-                  </div>
-                  <p className="font-body text-sm sm:text-base text-white/70 leading-relaxed mb-6 flex-1">
-                    {sport.description}
+                  <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 leading-tight">
+                    {sport.name}
+                  </h3>
+                  <p className="font-body text-base sm:text-lg text-white/70 leading-relaxed mb-6">
+                    {sport.tagline}
                   </p>
-                  <button
-                    onClick={() => setModalSport(sport)}
-                    className="font-body text-sm font-semibold text-primary hover:text-primary-hover transition-colors text-left"
+                  <span
+                    className="font-body text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
+                    style={{ color: "#b00717" }}
                   >
-                    Saber más →
-                  </button>
-                </div>
+                    Explorar programa →
+                  </span>
+                </a>
               ))}
             </div>
           </div>
         </section>
 
-        {/* La Misma Metodología */}
-        <section className="py-24" style={{ backgroundColor: "#ffffff" }}>
-          <div className="container-wide px-4">
-            <div className="text-center mb-12">
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-                El mismo proceso que funciona
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {processSteps.map((step, i) => (
-                <div
-                  key={step.title}
-                  className="relative rounded-xl border border-border p-8 text-center"
-                  style={{ backgroundColor: "#ffffff" }}
-                >
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-5">
-                    <step.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="font-body text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
-                    Paso {i + 1}
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Final CTA */}
         <section className="py-24" style={{ backgroundColor: "#0d0d1a" }}>
