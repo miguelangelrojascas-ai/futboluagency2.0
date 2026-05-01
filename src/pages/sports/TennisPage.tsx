@@ -356,7 +356,10 @@ const TennisPage = () => {
         </section>
 
         {/* ── FINANCIAL REALITY ── */}
-        <section className="py-20 md:py-28 px-4" style={{ backgroundColor: LIGHT }}>
+        <section
+          className="py-24 md:py-32 px-4"
+          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+        >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -366,11 +369,12 @@ const TennisPage = () => {
                 {es ? "Realidad financiera" : "Financial reality"}
               </span>
               <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
                 style={{ color: NAVY }}
               >
                 {es ? "¿Cuánto puedes conseguir?" : "How much can you get?"}
               </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-10">
