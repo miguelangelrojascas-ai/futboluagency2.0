@@ -92,7 +92,8 @@ const PlayerProfilesSection = () => {
     },
   ];
 
-  const colLabel = "text-[10px] tracking-[0.15em] uppercase text-muted-foreground font-semibold mb-2 block";
+  const colLabel = "font-display text-base sm:text-lg font-bold mb-2 block";
+  const colLabelStyle = { color: "#12213a" };
 
   return (
     <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
