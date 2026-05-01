@@ -480,7 +480,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── PROCESS ── */}
-        <section id="process" className="py-20 md:py-28 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section id="process" className="py-24 md:py-32 px-4" style={{ backgroundColor: NAVY }}>
           <div className="container-wide max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -489,13 +489,11 @@ const TennisPage = () => {
               >
                 {es ? "Hoja de ruta" : "Roadmap"}
               </span>
-              <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
-                style={{ color: NAVY }}
-              >
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 text-white">
                 {es ? "El Proceso FUA — 6 Pasos" : "The FUA Process — 6 Steps"}
               </h2>
-              <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
+              <p className="font-body text-base sm:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
                 {es
                   ? "Nuestro equipo acompaña al atleta y a la familia en cada paso, desde el primer contacto hasta la llegada a la universidad."
                   : "Our team accompanies the athlete and family at each step, from first contact to university arrival."}
@@ -506,7 +504,7 @@ const TennisPage = () => {
               {/* Vertical line */}
               <div
                 className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5"
-                style={{ backgroundColor: `${RED}30` }}
+                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
               />
 
               <div className="space-y-6">
@@ -526,13 +524,16 @@ const TennisPage = () => {
                       {step.num}
                     </div>
                     <div
-                      className="flex-1 rounded-xl p-5 sm:p-6 bg-white border"
-                      style={{ borderColor: "#e5e5e5" }}
+                      className="flex-1 rounded-xl p-5 sm:p-6"
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                      }}
                     >
-                      <h3 className="font-display text-lg sm:text-xl font-bold mb-2" style={{ color: NAVY }}>
+                      <h3 className="font-display text-lg sm:text-xl font-bold mb-2 text-white">
                         {step.title}
                       </h3>
-                      <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      <p className="font-body text-sm sm:text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
                         {step.desc}
                       </p>
                     </div>
