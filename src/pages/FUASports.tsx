@@ -226,36 +226,28 @@ const FUASports = () => {
                     <img
                       src={s.img}
                       alt={s.name}
-                      className="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover opacity-75 transition-transform duration-500 group-hover:scale-105"
                     />
                     <div
                       className="absolute inset-0"
                       style={{
                         background:
-                          "linear-gradient(to top, rgba(18,33,58,0.95) 20%, rgba(18,33,58,0.55) 100%)",
+                          "linear-gradient(to top, rgba(18,33,58,0.92) 15%, rgba(18,33,58,0.25) 100%)",
                       }}
                     />
-                    <div className="relative z-10 flex flex-col justify-between flex-1 p-6 sm:p-8">
-                      <div
-                        className="w-12 h-12 rounded-lg flex items-center justify-center"
-                        style={{ backgroundColor: "rgba(176,7,23,0.15)" }}
+                    <div className="relative z-10 flex flex-col justify-end flex-1 p-6 sm:p-8">
+                      <h3 className="font-display text-3xl sm:text-4xl font-bold text-white mb-2 leading-tight">
+                        {s.name}
+                      </h3>
+                      <p className="font-body text-sm sm:text-base text-white/80 leading-relaxed mb-4">
+                        {s.tagline}
+                      </p>
+                      <span
+                        className="font-body text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
+                        style={{ color: "#ff4757" }}
                       >
-                        <Icon className="w-6 h-6" style={{ color: RED }} />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-3xl sm:text-4xl font-bold text-white mb-2 leading-tight">
-                          {s.name}
-                        </h3>
-                        <p className="font-body text-sm sm:text-base text-white/70 leading-relaxed mb-4">
-                          {s.tagline}
-                        </p>
-                        <span
-                          className="font-body text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
-                          style={{ color: RED }}
-                        >
-                          Explorar programa <ArrowRight className="w-4 h-4" />
-                        </span>
-                      </div>
+                        Explorar programa <ArrowRight className="w-4 h-4" />
+                      </span>
                     </div>
                   </Link>
                 );
