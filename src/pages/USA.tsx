@@ -74,7 +74,7 @@ const USA = () => {
               <span className="inline-block mb-4 text-[#12213a] font-body text-xs tracking-[0.15em] uppercase">
                 {t("usa.tag")}
               </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-muted">
                 {t("usa.hero.title")} <span className="text-[#12213a] italic">{t("usa.hero.highlight")}</span>
               </h1>
               <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
