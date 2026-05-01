@@ -181,21 +181,22 @@ const USA = () => {
                 Evaluamos cuatro áreas técnicas críticas para determinar la elegibilidad y el potencial de beca de cada prospecto.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px max-w-6xl mx-auto rounded-xl overflow-visible border border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {requirements.map((req, i) => (
                 <div
                   key={i}
-                  className="bg-[#ffffff] p-8 flex flex-col gap-6 transition-all duration-300 ease-out hover:scale-[1.04] hover:z-10 hover:shadow-[0_12px_40px_rgba(18,33,58,0.18)] hover:ring-1 hover:ring-[#12213a]/40 cursor-default relative"
+                  className="bg-white flex flex-col gap-5 transition-all duration-300 ease-out hover:scale-[1.04] hover:z-10 hover:shadow-[0_12px_40px_rgba(18,33,58,0.18)] hover:ring-1 hover:ring-[#12213a]/40 cursor-default relative"
+                  style={{ border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px" }}
                 >
-                  <req.icon className="w-8 h-8 text-[#12213a] transition-transform duration-300 group-hover:scale-110" />
+                  <req.icon className="w-8 h-8 text-[#12213a] transition-transform duration-300" />
                   <div>
                     <span className="font-body text-xs sm:text-sm tracking-[0.15em] uppercase text-foreground block mb-2">
-                      {req.num} — {req.label}
+                      <span className="text-[#b00717] font-bold">{req.num}</span> — {req.label}
                     </span>
-                    <span className="font-display text-base font-medium italic text-muted-foreground block mb-3">
+                    <span className="font-display text-base font-medium italic text-[#b00717] block mb-3">
                       {req.value}
                     </span>
-                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                    <p className="font-body text-sm text-foreground leading-relaxed">
                       {req.desc}
                     </p>
                   </div>
