@@ -80,19 +80,7 @@ const TennisPage = () => {
               <span className="text-white/90">{es ? "Tenis" : "Tennis"}</span>
             </div>
 
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 border"
-              style={{
-                borderColor: "rgba(176,7,23,0.4)",
-                backgroundColor: "rgba(176,7,23,0.12)",
-              }}
-            >
-              <Star className="w-4 h-4" style={{ color: RED }} fill={RED} />
-              <span className="text-xs sm:text-sm font-medium text-white font-body">
-                {es ? "100% de atletas con beca" : "100% of athletes with scholarship"}
-              </span>
-            </div>
+
 
             <h1
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight max-w-4xl"
