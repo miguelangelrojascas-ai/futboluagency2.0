@@ -193,7 +193,7 @@ const USA = () => {
                     <span className="font-body text-xs sm:text-sm tracking-[0.15em] uppercase text-foreground block mb-2">
                       <span className="text-[#b00717] font-bold">{req.num}</span> — {req.label}
                     </span>
-                    <span className="font-display text-base font-medium italic text-[#b00717] block mb-3">
+                    <span className="font-display text-base font-bold italic text-[#b00717] block mb-3">
                       {req.value}
                     </span>
                     <p className="font-body text-sm text-foreground leading-relaxed">
