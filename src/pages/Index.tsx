@@ -25,11 +25,11 @@ const Index = () => {
       <main className="min-h-screen">
         <HeroSection />
         <MetricsSection />
-        <UniversityMap />
         <VideoSection onOpenForm={openForm} />
         <LogoCarousel />
         
         <PathSelectionSection />
+        <UniversityMap />
         
         <AnderStoryCard />
         <SuccessCasesSection />
