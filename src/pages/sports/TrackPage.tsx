@@ -127,7 +127,7 @@ const TrackPage = () => {
 
         {/* FUA Method — dark navy */}
         <SportSection bg={NAVY}>
-          <SectionTitle dark>{es ? "El Método FUA" : "The FUA Method"}</SectionTitle>
+          <SectionTitle dark>{es ? "El Método FUA Sports" : "The FUA Sports Method"}</SectionTitle>
           <p className="font-body text-white/70 text-center max-w-2xl mx-auto mb-10 -mt-6">
             {es
               ? "Ingeniería de reclutamiento diseñada para maximizar tu beca."
