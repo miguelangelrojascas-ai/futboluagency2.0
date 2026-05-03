@@ -160,11 +160,11 @@ const FUASports = () => {
                   Nuestra Historia
                 </h2>
                 <p className="font-body text-base sm:text-lg leading-relaxed text-muted-foreground">
-                  FUA Sports nació de FutbolU Agency, la agencia líder en becas
-                  de fútbol universitario en Latinoamérica. Con años de
-                  experiencia y una red consolidada de universidades en EE.UU.,
-                  decidimos expandir nuestra metodología a otros deportes para
-                  que más atletas puedan vivir el sueño americano.
+                  FUA Sports nació de FutbolU Agency, agencia especializada en
+                  becas de fútbol universitario. Con años de experiencia y una
+                  red consolidada de universidades en EE.UU., decidimos expandir
+                  nuestra metodología a otros deportes para que más atletas
+                  puedan vivir el sueño americano.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
