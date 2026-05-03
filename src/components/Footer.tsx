@@ -53,11 +53,11 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <img 
               src={logo} 
-              alt="FutbolUAgency" 
+              alt="FutbolUAgency LLC." 
               className="h-16 sm:h-20 w-auto mx-auto md:mx-0 mb-4"
             />
             <h3 className="font-display text-lg font-bold text-white mb-2" style={{ color: "#ffffff" }}>
-              FutbolUAgency
+              FutbolUAgency LLC.
             </h3>
             <p className="font-body text-sm text-white/70 max-w-xs mx-auto md:mx-0">
               Ayudamos a futbolistas internacionales a conseguir becas deportivas en universidades de Estados Unidos.
