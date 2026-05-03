@@ -25,7 +25,7 @@ const VideoSection = ({ onOpenForm }: VideoSectionProps) => {
             <div className="relative aspect-video rounded-xl border-2 border-[hsl(210,100%,50%)]/40 overflow-hidden bg-card shadow-2xl shadow-[hsl(210,100%,50%)]/20">
               <iframe
                 src="https://www.youtube.com/embed/0-dWsUxiYkI"
-                title="FutbolUAgency - Video explicativo"
+                title="FutbolUAgency LLC. - Video explicativo"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
