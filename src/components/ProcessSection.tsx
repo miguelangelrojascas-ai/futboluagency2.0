@@ -77,7 +77,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#0a0a0a", color: "white", padding: "120px 0 80px" }}
+      style={{ background: "#ffffff", color: NAVY, padding: "120px 0 80px" }}
     >
       {/* Header */}
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px 80px", textAlign: "center" }}>
