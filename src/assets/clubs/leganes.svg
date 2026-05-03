@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" fill="none">
+  <!-- Shield -->
+  <path d="M50 4 L92 14 L92 60 C92 88 72 108 50 116 C28 108 8 88 8 60 L8 14 Z"
+        fill="#ffffff" stroke="#0a3d91" stroke-width="3"/>
+  <defs>
+    <clipPath id="legShield">
+      <path d="M50 7 L89 16 L89 60 C89 86 70 105 50 113 C30 105 11 86 11 60 L11 16 Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#legShield)">
+    <!-- Blue and white vertical stripes -->
+    <rect x="11" y="7" width="13" height="106" fill="#0a3d91"/>
+    <rect x="24" y="7" width="13" height="106" fill="#ffffff"/>
+    <rect x="37" y="7" width="13" height="106" fill="#0a3d91"/>
+    <rect x="50" y="7" width="13" height="106" fill="#ffffff"/>
+    <rect x="63" y="7" width="13" height="106" fill="#0a3d91"/>
+    <rect x="76" y="7" width="13" height="106" fill="#ffffff"/>
+    <!-- Top blue band -->
+    <rect x="11" y="7" width="78" height="22" fill="#0a3d91"/>
+    <!-- C.D. LEGANÉS text -->
+    <text x="50" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="9" fill="#ffffff">C.D.</text>
+    <!-- Pepino (cucumber) mascot — simplified centered circle -->
+    <g transform="translate(50 65)">
+      <ellipse cx="0" cy="0" rx="18" ry="22" fill="#ffffff" stroke="#0a3d91" stroke-width="2"/>
+      <!-- Cucumber shape -->
+      <ellipse cx="0" cy="2" rx="9" ry="14" fill="#3fa34d" stroke="#1f6b2e" stroke-width="1.2" transform="rotate(-15)"/>
+      <!-- Cucumber highlight -->
+      <ellipse cx="-3" cy="-2" rx="2" ry="6" fill="#7ec985" transform="rotate(-15)"/>
+      <!-- Stem -->
+      <path d="M-2 -12 Q-4 -16 -1 -17" stroke="#1f6b2e" stroke-width="1.5" fill="none"/>
+    </g>
+    <!-- Bottom text -->
+    <text x="50" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="7" fill="#ffffff">LEGANÉS</text>
+  </g>
+</svg>

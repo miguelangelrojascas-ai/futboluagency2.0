@@ -1,8 +1,8 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import realMadridLogo from "@/assets/clubs/real-madrid.svg";
-import atleticoLogo from "@/assets/clubs/atletico-madrid.png";
-import getafeLogo from "@/assets/clubs/getafe.png";
-import leganesLogo from "@/assets/clubs/leganes.png";
+import atleticoLogo from "@/assets/clubs/atletico-madrid.svg";
+import getafeLogo from "@/assets/clubs/getafe.svg";
+import leganesLogo from "@/assets/clubs/leganes.svg";
 
 const madridClubs = [
   { name: "Real Madrid", logo: realMadridLogo },
