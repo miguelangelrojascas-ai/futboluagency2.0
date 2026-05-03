@@ -339,6 +339,32 @@ const divisionColor = (div: string) => {
 const UniversityMap = () => {
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null);
   const [selected, setSelected] = useState<{ abbr: string; name: string } | null>(null);
+  const [popover, setPopover] = useState<{ x: number; y: number; abbr: string; name: string } | null>(null);
+  const [zoomTarget, setZoomTarget] = useState<{ abbr: string; name: string } | null>(null);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([-97, 38]);
+  const [mapZoom, setMapZoom] = useState<number>(1);
+
+  const handleViewState = (abbr: string, name: string) => {
+    const coords = STATE_CENTROIDS[abbr];
+    setPopover(null);
+    if (coords) {
+      setZoomTarget({ abbr, name });
+      setMapCenter(coords);
+      setMapZoom(3.5);
+      // Open panel after zoom animation completes
+      window.setTimeout(() => {
+        setSelected({ abbr, name });
+      }, 1200);
+    } else {
+      setSelected({ abbr, name });
+    }
+  };
+
+  const resetZoom = () => {
+    setMapCenter([-97, 38]);
+    setMapZoom(1);
+    setZoomTarget(null);
+  };
 
   useEffect(() => {
     if (selected) {
