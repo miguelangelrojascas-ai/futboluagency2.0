@@ -370,7 +370,9 @@ const UniversityMap = () => {
     if (selected) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-      const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSelected(null);
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") { setSelected(null); resetZoom(); }
+      };
       window.addEventListener("keydown", onKey);
       return () => {
         document.body.style.overflow = prev;
