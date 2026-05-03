@@ -63,7 +63,7 @@ const Navbar = () => {
         <div className="container-wide flex items-center justify-between px-4 sm:px-6 h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src={logo} alt="FutbolUAgency" className="h-10 md:h-14 w-auto" />
+            <img src={logo} alt="FutbolUAgency LLC." className="h-10 md:h-14 w-auto" />
           </Link>
 
           {/* Desktop Links */}
