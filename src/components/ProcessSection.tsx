@@ -407,7 +407,7 @@ const ProcessSection = () => {
                   fontWeight: 700,
                   lineHeight: 1.2,
                   marginBottom: 12,
-                  color: "white",
+                  color: NAVY,
                 }}
               >
                 {t(s.titleKey)}
