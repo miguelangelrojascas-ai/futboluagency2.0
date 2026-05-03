@@ -128,7 +128,7 @@ const VolleyballPage = () => {
 
         {/* Process */}
         <SportSection bg="#ffffff">
-          <SectionTitle>{es ? "El Proceso FUA" : "The FUA Process"}</SectionTitle>
+          <SectionTitle>{es ? "El Proceso FUA Sports" : "The FUA Sports Process"}</SectionTitle>
           <div className="grid md:grid-cols-2 gap-5">
             {(es
               ? [
