@@ -276,7 +276,7 @@ const ProcessSection = () => {
                         fontSize: "0.75rem",
                         fontWeight: 600,
                         letterSpacing: "0.2em",
-                        color: "rgba(255,255,255,0.55)",
+                        color: "rgba(18,33,58,0.6)",
                       }}
                     >
                       FASE {s.phase} DE 6
