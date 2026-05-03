@@ -64,8 +64,8 @@ const TrackPage = () => {
               title={es ? "+1,000 programas" : "1,000+ programs"}
               desc={
                 es
-                  ? "Donde FUA puede colocarte en todo el territorio de EE.UU., desde D1 hasta NAIA."
-                  : "Where FUA can place you across the entire US, from D1 to NAIA."
+                  ? "Donde FUA Sports puede colocarte en todo el territorio de EE.UU., desde D1 hasta NAIA."
+                  : "Where FUA Sports can place you across the entire US, from D1 to NAIA."
               }
             />
             <FeatureCard
