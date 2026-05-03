@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import realMadridLogo from "@/assets/clubs/real-madrid.png";
+import realMadridLogo from "@/assets/clubs/real-madrid.svg";
 import atleticoLogo from "@/assets/clubs/atletico-madrid.png";
 import getafeLogo from "@/assets/clubs/getafe.png";
 import leganesLogo from "@/assets/clubs/leganes.png";
