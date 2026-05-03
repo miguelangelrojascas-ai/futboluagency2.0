@@ -417,7 +417,7 @@ const ProcessSection = () => {
                   fontFamily: "Inter, sans-serif",
                   fontSize: "0.95rem",
                   lineHeight: 1.6,
-                  color: "rgba(255,255,255,0.65)",
+                  color: "rgba(18,33,58,0.7)",
                 }}
               >
                 {t(s.descKey)}
