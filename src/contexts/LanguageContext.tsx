@@ -267,7 +267,7 @@ const translations: Record<Language, Record<string, string>> = {
     "process.step1.title": "Free Application & Evaluation",
     "process.step1.desc": "It all starts with your application. We personally analyze your athletic and academic profile to give you a real answer about your scholarship possibilities before taking the next step.",
     "process.step2.title": "Admission & Personalized Plan",
-    "process.step2.desc": "Once you join FutbolU, we design your custom roadmap. You'll be assigned a personal agent and our editing team will start working on your profile and a high-impact highlight video.",
+    "process.step2.desc": "Once you join FutbolU LLC., we design your custom roadmap. You'll be assigned a personal agent and our editing team will start working on your profile and a high-impact highlight video.",
     "process.step3.title": "University Search",
     "process.step3.desc": "We identify the programs and teams that best fit what you're looking for. We seek the perfect balance between your soccer level, your academic goals, and your family's expectations.",
     "process.step4.title": "Contract Negotiation",
