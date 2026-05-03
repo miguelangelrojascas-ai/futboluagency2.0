@@ -121,7 +121,7 @@ const VolleyballPage = () => {
             <span className="opacity-60">{es ? "Sin beca: " : "Without scholarship: "}</span>
             <span className="font-bold">$20k – $40k / {es ? "año" : "year"}</span>
             <span className="mx-3" style={{ color: RED }}>→</span>
-            <span className="opacity-60">{es ? "Con FUA: " : "With FUA: "}</span>
+            <span className="opacity-60">{es ? "Con FUA Sports: " : "With FUA Sports: "}</span>
             <span className="font-bold">$6k – $12k / {es ? "año" : "year"}</span>
           </div>
         </SportSection>
