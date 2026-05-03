@@ -53,11 +53,11 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <img 
               src={logo} 
-              alt="FutbolUAgency" 
+              alt="FutbolUAgency LLC." 
               className="h-16 sm:h-20 w-auto mx-auto md:mx-0 mb-4"
             />
             <h3 className="font-display text-lg font-bold text-white mb-2" style={{ color: "#ffffff" }}>
-              FutbolUAgency
+              FutbolUAgency LLC.
             </h3>
             <p className="font-body text-sm text-white/70 max-w-xs mx-auto md:mx-0">
               Ayudamos a futbolistas internacionales a conseguir becas deportivas en universidades de Estados Unidos.
@@ -131,7 +131,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
             <p className="font-body text-xs text-white/60">
-              © {currentYear} FutbolUAgency. {t("footer.rights")}.
+              © {currentYear} FutbolUAgency LLC. {t("footer.rights")}.
             </p>
             <p className="font-body text-xs text-white/60">
               Diseñado con pasión por el fútbol y la educación.

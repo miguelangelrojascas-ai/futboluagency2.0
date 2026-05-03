@@ -160,7 +160,7 @@ const FUASports = () => {
                   Nuestra Historia
                 </h2>
                 <p className="font-body text-base sm:text-lg leading-relaxed text-muted-foreground">
-                  FUA Sports nació de FutbolU Agency, agencia especializada en
+                  FUA Sports nació de FutbolUAgency LLC., agencia especializada en
                   becas de fútbol universitario. Con años de experiencia y una
                   red consolidada de universidades en EE.UU., decidimos expandir
                   nuestra metodología a otros deportes para que más atletas

@@ -19,7 +19,7 @@ const HeroSection = () => {
 
       {/* Centered Logo at Top */}
       <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-20">
-        <img src={logo} alt="FutbolUAgency" className="h-24 sm:h-28 md:h-32 w-auto" />
+        <img src={logo} alt="FutbolUAgency LLC." className="h-24 sm:h-28 md:h-32 w-auto" />
       </div>
 
       {/* Content */}

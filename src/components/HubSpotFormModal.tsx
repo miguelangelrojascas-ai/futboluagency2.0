@@ -75,7 +75,7 @@ const HubSpotFormModal = ({ open, onOpenChange }: HubSpotFormModalProps) => {
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-[#ffffff] border-border">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl sm:text-3xl text-center font-bold text-foreground">
-            Aplicación FutbolUAgency
+            Aplicación FutbolUAgency LLC.
           </DialogTitle>
           <p className="text-center text-muted-foreground font-body text-sm mt-1">USA Program</p>
         </DialogHeader>

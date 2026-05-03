@@ -64,8 +64,8 @@ const TrackPage = () => {
               title={es ? "+1,000 programas" : "1,000+ programs"}
               desc={
                 es
-                  ? "Donde FUA puede colocarte en todo el territorio de EE.UU., desde D1 hasta NAIA."
-                  : "Where FUA can place you across the entire US, from D1 to NAIA."
+                  ? "Donde FUA Sports puede colocarte en todo el territorio de EE.UU., desde D1 hasta NAIA."
+                  : "Where FUA Sports can place you across the entire US, from D1 to NAIA."
               }
             />
             <FeatureCard
@@ -84,8 +84,8 @@ const TrackPage = () => {
           <SectionTitle>{es ? "Matriz de Rendimiento" : "Performance Matrix"}</SectionTitle>
           <p className="text-center font-body text-muted-foreground mb-8 -mt-6 max-w-2xl mx-auto">
             {es
-              ? "FUA utiliza marcas oficiales para determinar tu potencial de cobertura financiera."
-              : "FUA uses official marks to determine your financial coverage potential."}
+              ? "FUA Sports utiliza marcas oficiales para determinar tu potencial de cobertura financiera."
+              : "FUA Sports uses official marks to determine your financial coverage potential."}
           </p>
           <div className="overflow-x-auto rounded-xl border" style={{ borderColor: "#e5e5e5" }}>
             <table className="w-full text-sm bg-white">
@@ -127,7 +127,7 @@ const TrackPage = () => {
 
         {/* FUA Method — dark navy */}
         <SportSection bg={NAVY}>
-          <SectionTitle dark>{es ? "El Método FUA" : "The FUA Method"}</SectionTitle>
+          <SectionTitle dark>{es ? "El Método FUA Sports" : "The FUA Sports Method"}</SectionTitle>
           <p className="font-body text-white/70 text-center max-w-2xl mx-auto mb-10 -mt-6">
             {es
               ? "Ingeniería de reclutamiento diseñada para maximizar tu beca."
@@ -254,8 +254,8 @@ const TrackPage = () => {
                 </div>
                 <p className="text-sm italic text-center" style={{ color: NAVY }}>
                   {es
-                    ? "Si no cumples algún requisito, FUA diseña un plan de preparación personalizado."
-                    : "If you don't meet a requirement, FUA designs a custom preparation plan."}
+                    ? "Si no cumples algún requisito, FUA Sports diseña un plan de preparación personalizado."
+                    : "If you don't meet a requirement, FUA Sports designs a custom preparation plan."}
                 </p>
               </div>
             </div>
