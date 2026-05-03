@@ -538,6 +538,7 @@ const UniversityMap = () => {
 
           {popover && (
             <div
+              data-state-popover
               className="fixed z-[60] bg-white border border-border rounded-lg shadow-2xl p-4 min-w-[200px] animate-in fade-in zoom-in-95 duration-200"
               style={{ left: Math.min(popover.x, window.innerWidth - 240), top: popover.y + 12 }}
             >
