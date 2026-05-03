@@ -84,8 +84,8 @@ const TrackPage = () => {
           <SectionTitle>{es ? "Matriz de Rendimiento" : "Performance Matrix"}</SectionTitle>
           <p className="text-center font-body text-muted-foreground mb-8 -mt-6 max-w-2xl mx-auto">
             {es
-              ? "FUA utiliza marcas oficiales para determinar tu potencial de cobertura financiera."
-              : "FUA uses official marks to determine your financial coverage potential."}
+              ? "FUA Sports utiliza marcas oficiales para determinar tu potencial de cobertura financiera."
+              : "FUA Sports uses official marks to determine your financial coverage potential."}
           </p>
           <div className="overflow-x-auto rounded-xl border" style={{ borderColor: "#e5e5e5" }}>
             <table className="w-full text-sm bg-white">
