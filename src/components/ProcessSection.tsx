@@ -77,7 +77,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#0a0a0a", color: "white", padding: "120px 0 80px" }}
+      style={{ background: "#ffffff", color: NAVY, padding: "120px 0 80px" }}
     >
       {/* Header */}
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px 80px", textAlign: "center" }}>
@@ -96,7 +96,7 @@ const ProcessSection = () => {
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: "1.125rem",
-            color: "rgba(255,255,255,0.65)",
+            color: "rgba(18,33,58,0.7)",
             maxWidth: 640,
             margin: "0 auto",
             lineHeight: 1.6,
@@ -257,7 +257,8 @@ const ProcessSection = () => {
                         width: 48,
                         height: 48,
                         borderRadius: "50%",
-                        background: isActive ? RED : "rgba(255,255,255,0.08)",
+                        background: isActive ? RED : "rgba(18,33,58,0.08)",
+                        color: isActive ? "white" : NAVY,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -275,7 +276,7 @@ const ProcessSection = () => {
                         fontSize: "0.75rem",
                         fontWeight: 600,
                         letterSpacing: "0.2em",
-                        color: "rgba(255,255,255,0.55)",
+                        color: "rgba(18,33,58,0.6)",
                       }}
                     >
                       FASE {s.phase} DE 6
@@ -290,7 +291,7 @@ const ProcessSection = () => {
                       fontWeight: 700,
                       lineHeight: 1.1,
                       marginBottom: 24,
-                      color: "white",
+                      color: NAVY,
                       opacity: isActive ? 1 : 0.5,
                       transform: isActive ? "translateX(0)" : "translateX(-12px)",
                       transition: "all 0.5s ease",
@@ -305,7 +306,7 @@ const ProcessSection = () => {
                       fontFamily: "Inter, sans-serif",
                       fontSize: "1.0625rem",
                       lineHeight: 1.7,
-                      color: "rgba(255,255,255,0.7)",
+                      color: "rgba(18,33,58,0.7)",
                       maxWidth: 520,
                       opacity: isActive ? 1 : 0.4,
                       transition: "opacity 0.5s ease",
@@ -349,8 +350,9 @@ const ProcessSection = () => {
               marginBottom: 48,
               borderRadius: 20,
               overflow: "hidden",
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "#ffffff",
+              border: "1px solid rgba(18,33,58,0.08)",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
             }}
           >
             <div
@@ -405,7 +407,7 @@ const ProcessSection = () => {
                   fontWeight: 700,
                   lineHeight: 1.2,
                   marginBottom: 12,
-                  color: "white",
+                  color: NAVY,
                 }}
               >
                 {t(s.titleKey)}
@@ -415,7 +417,7 @@ const ProcessSection = () => {
                   fontFamily: "Inter, sans-serif",
                   fontSize: "0.95rem",
                   lineHeight: 1.6,
-                  color: "rgba(255,255,255,0.65)",
+                  color: "rgba(18,33,58,0.7)",
                 }}
               >
                 {t(s.descKey)}
