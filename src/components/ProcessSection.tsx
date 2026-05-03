@@ -306,7 +306,7 @@ const ProcessSection = () => {
                       fontFamily: "Inter, sans-serif",
                       fontSize: "1.0625rem",
                       lineHeight: 1.7,
-                      color: "rgba(255,255,255,0.7)",
+                      color: "rgba(18,33,58,0.7)",
                       maxWidth: 520,
                       opacity: isActive ? 1 : 0.4,
                       transition: "opacity 0.5s ease",
