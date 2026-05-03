@@ -254,8 +254,8 @@ const TrackPage = () => {
                 </div>
                 <p className="text-sm italic text-center" style={{ color: NAVY }}>
                   {es
-                    ? "Si no cumples algún requisito, FUA diseña un plan de preparación personalizado."
-                    : "If you don't meet a requirement, FUA designs a custom preparation plan."}
+                    ? "Si no cumples algún requisito, FUA Sports diseña un plan de preparación personalizado."
+                    : "If you don't meet a requirement, FUA Sports designs a custom preparation plan."}
                 </p>
               </div>
             </div>
