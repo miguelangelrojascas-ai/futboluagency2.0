@@ -131,7 +131,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
             <p className="font-body text-xs text-white/60">
-              © {currentYear} FutbolUAgency. {t("footer.rights")}.
+              © {currentYear} FutbolUAgency LLC. {t("footer.rights")}.
             </p>
             <p className="font-body text-xs text-white/60">
               Diseñado con pasión por el fútbol y la educación.
