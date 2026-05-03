@@ -10,7 +10,7 @@ const Header = ({ onOpenForm }: HeaderProps) => {
       <div className="container-wide flex flex-col items-center py-4">
         <img 
           src={logo} 
-          alt="FutbolUAgency" 
+          alt="FutbolUAgency LLC." 
           className="h-14 md:h-16 w-auto mb-3"
         />
         
