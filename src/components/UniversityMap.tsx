@@ -381,6 +381,18 @@ const UniversityMap = () => {
     }
   }, [selected]);
 
+  useEffect(() => {
+    if (!popover) return;
+    const onDown = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-state-popover]") && !target.closest(".rsm-geography")) {
+        setPopover(null);
+      }
+    };
+    window.addEventListener("mousedown", onDown);
+    return () => window.removeEventListener("mousedown", onDown);
+  }, [popover]);
+
   const selectedData = selected ? universitiesByState[selected.abbr] : null;
 
   return (
