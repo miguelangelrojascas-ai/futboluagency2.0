@@ -275,7 +275,7 @@ const translations: Record<Language, Record<string, string>> = {
     "process.step5.title": "Decision & Admission Process",
     "process.step5.desc": "We guide you through your final university choice. You're not alone in the paperwork: we complete all admission procedures together so every document is perfect.",
     "process.step6.title": "Visa & Your New Life in the USA",
-    "process.step6.desc": "We guide you through obtaining your F-1 Visa and prepare your arrival on campus. Once there, we stay by your side: FutbolU supports you throughout all 4 years of your university life.",
+    "process.step6.desc": "We guide you through obtaining your F-1 Visa and prepare your arrival on campus. Once there, we stay by your side: FutbolU LLC. supports you throughout all 4 years of your university life.",
     "process.phase": "Phase",
 
     // Team Section
