@@ -566,7 +566,7 @@ const UniversityMap = () => {
         <div className="fixed inset-0 z-[100]">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
-            onClick={() => setSelected(null)}
+            onClick={() => { setSelected(null); resetZoom(); }}
           />
           <aside
             className="absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300"
@@ -583,7 +583,7 @@ const UniversityMap = () => {
                 </h3>
               </div>
               <button
-                onClick={() => setSelected(null)}
+                onClick={() => { setSelected(null); resetZoom(); }}
                 className="p-2 rounded-full hover:bg-muted transition-colors"
                 aria-label="Cerrar"
               >
