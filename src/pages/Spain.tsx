@@ -98,6 +98,10 @@ const Spain = () => {
 
   const handleMouseUp = () => setIsDragging(false);
 
+  // Touch handlers — let the browser handle native horizontal scrolling on mobile.
+  // We only track touch start so we don't apply the dragging cursor on touch devices.
+  const handleTouchStart = () => setIsDragging(false);
+
   return (
     <>
       <Navbar />
