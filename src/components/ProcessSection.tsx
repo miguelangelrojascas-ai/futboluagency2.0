@@ -291,7 +291,7 @@ const ProcessSection = () => {
                       fontWeight: 700,
                       lineHeight: 1.1,
                       marginBottom: 24,
-                      color: "white",
+                      color: NAVY,
                       opacity: isActive ? 1 : 0.5,
                       transform: isActive ? "translateX(0)" : "translateX(-12px)",
                       transition: "all 0.5s ease",
