@@ -171,38 +171,6 @@ const About = () => {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              {[
-                { icon: Heart, title: es ? "Acompañamiento real" : "Real support", desc: es ? "Cada atleta tiene un agente personal que lo guía desde el primer día hasta que aterriza en su universidad." : "Each athlete has a personal agent who guides them from day one until they land at their university." },
-                { icon: Shield, title: es ? "Transparencia total" : "Full transparency", desc: es ? "Desde el primer día decimos la verdad: qué es posible, qué no, y cómo maximizar tus opciones reales." : "From day one we tell the truth: what's possible, what's not, and how to maximize your real options." },
-                { icon: Target, title: es ? "Resultados probados" : "Proven results", desc: es ? "No prometemos lo que no podemos cumplir. Nuestros números hablan: 350+ atletas colocados, 98% satisfacción." : "We don't promise what we can't deliver. Our numbers speak: 350+ placed athletes, 98% satisfaction." },
-                { icon: Users, title: es ? "Familia primero" : "Family first", desc: es ? "Entendemos que detrás de cada jugador hay una familia. Los incluimos en cada decisión importante del proceso." : "We understand that behind every player there is a family. We include them in every important decision." },
-              ].map((v, i) => {
-                const Icon = v.icon;
-                return (
-                  <div
-                    key={i}
-                    className="p-6 md:p-8 rounded-2xl flex gap-5"
-                    style={{ background: "#f5f4f2", border: "1px solid rgba(18,33,58,0.06)" }}
-                  >
-                    <div
-                      className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ background: "rgba(176,7,23,0.1)" }}
-                    >
-                      <Icon className="w-6 h-6" style={{ color: RED }} />
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl font-bold mb-2" style={{ color: NAVY }}>
-                        {v.title}
-                      </h3>
-                      <p className="font-body text-base leading-relaxed" style={{ color: "rgba(18,33,58,0.7)" }}>
-                        {v.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </section>
 
