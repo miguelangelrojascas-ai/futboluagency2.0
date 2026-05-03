@@ -397,6 +397,7 @@ const UniversityMap = () => {
         </div>
 
         <div className="block relative w-full max-w-6xl mx-auto" style={{ minHeight: 240 }}>
+          <style>{`.rsm-zoomable-group{transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);}`}</style>
           <ComposableMap
             projection="geoAlbersUsa"
             projectionConfig={{ scale: 1300 }}
@@ -404,105 +405,149 @@ const UniversityMap = () => {
             height={560}
             style={{ width: "100%", height: "auto", minHeight: 400 }}
           >
-            <Geographies geography={GEO_URL}>
-              {({ geographies }) =>
-                geographies
-                  .filter((geo) => {
-                    const fips = String(geo.id).padStart(2, "0");
-                    return fips !== "02" && fips !== "15";
-                  })
-                  .map((geo) => {
-                    const fips = String(geo.id).padStart(2, "0");
-                    const state = FIPS_TO_STATE[fips];
-                    const data = state ? universitiesByState[state.abbr] : undefined;
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={(e) => {
-                          if (state && data) {
-                            setTooltip({
-                              x: e.clientX,
-                              y: e.clientY,
-                              text: `${state.name}: ${data.count} universidades`,
-                            });
-                          }
-                        }}
-                        onMouseMove={(e) => {
-                          if (state && data) {
-                            setTooltip({
-                              x: e.clientX,
-                              y: e.clientY,
-                              text: `${state.name}: ${data.count} universidades`,
-                            });
-                          }
-                        }}
-                        onMouseLeave={() => setTooltip(null)}
-                        onClick={() => {
-                          if (state && data) {
-                            setTooltip(null);
-                            setSelected({ abbr: state.abbr, name: state.name });
-                          }
-                        }}
-                        style={{
-                          default: {
-                            fill: "#c5d5e8",
-                            stroke: "#ffffff",
-                            strokeWidth: 1.2,
-                            outline: "none",
-                            transition: "fill 0.2s",
-                          },
-                          hover: {
-                            fill: "#b00717",
-                            stroke: "#ffffff",
-                            strokeWidth: 1.2,
-                            outline: "none",
-                            cursor: data ? "pointer" : "default",
-                          },
-                          pressed: {
-                            fill: "#b00717",
-                            stroke: "#ffffff",
-                            strokeWidth: 1.2,
-                            outline: "none",
-                          },
-                        }}
-                      />
-                    );
-                  })
-              }
-            </Geographies>
+            <ZoomableGroup
+              center={mapCenter}
+              zoom={mapZoom}
+              minZoom={1}
+              maxZoom={6}
+              onMoveEnd={() => { /* keep state in sync if user pans */ }}
+              filterZoomEvent={() => false}
+            >
+              <Geographies geography={GEO_URL}>
+                {({ geographies }) =>
+                  geographies
+                    .filter((geo) => {
+                      const fips = String(geo.id).padStart(2, "0");
+                      return fips !== "02" && fips !== "15";
+                    })
+                    .map((geo) => {
+                      const fips = String(geo.id).padStart(2, "0");
+                      const state = FIPS_TO_STATE[fips];
+                      const data = state ? universitiesByState[state.abbr] : undefined;
+                      const isZoomed = zoomTarget?.abbr === state?.abbr;
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          onMouseEnter={(e) => {
+                            if (state && data && !popover) {
+                              setTooltip({
+                                x: e.clientX,
+                                y: e.clientY,
+                                text: `${state.name}: ${data.count} universidades`,
+                              });
+                            }
+                          }}
+                          onMouseMove={(e) => {
+                            if (state && data && !popover) {
+                              setTooltip({
+                                x: e.clientX,
+                                y: e.clientY,
+                                text: `${state.name}: ${data.count} universidades`,
+                              });
+                            }
+                          }}
+                          onMouseLeave={() => setTooltip(null)}
+                          onClick={(e) => {
+                            if (state && data) {
+                              setTooltip(null);
+                              setPopover({
+                                x: e.clientX,
+                                y: e.clientY,
+                                abbr: state.abbr,
+                                name: state.name,
+                              });
+                            }
+                          }}
+                          style={{
+                            default: {
+                              fill: isZoomed ? "#b00717" : "#c5d5e8",
+                              stroke: "#ffffff",
+                              strokeWidth: 1.2,
+                              outline: "none",
+                              transition: "fill 0.4s",
+                            },
+                            hover: {
+                              fill: "#b00717",
+                              stroke: "#ffffff",
+                              strokeWidth: 1.2,
+                              outline: "none",
+                              cursor: data ? "pointer" : "default",
+                            },
+                            pressed: {
+                              fill: "#b00717",
+                              stroke: "#ffffff",
+                              strokeWidth: 1.2,
+                              outline: "none",
+                            },
+                          }}
+                        />
+                      );
+                    })
+                }
+              </Geographies>
 
-            {Object.entries(universitiesByState).map(([abbr, data]) => {
-              const coords = STATE_CENTROIDS[abbr];
-              if (!coords) return null;
-              const count = data.count;
-              const radius = count >= 20 ? 16 : count >= 10 ? 14 : 12;
-              return (
-                <Marker key={abbr} coordinates={coords}>
-                  <g style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.25))", pointerEvents: "none" }}>
-                    <circle
-                      r={radius}
-                      fill="#ffffff"
-                      stroke="#12213a"
-                      strokeWidth={1.2}
-                    />
-                    <text
-                      textAnchor="middle"
-                      dy={3.5}
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: 10,
-                        fontWeight: 800,
-                        fill: "#12213a",
-                      }}
-                    >
-                      {count}
-                    </text>
-                  </g>
-                </Marker>
-              );
-            })}
+              {Object.entries(universitiesByState).map(([abbr, data]) => {
+                const coords = STATE_CENTROIDS[abbr];
+                if (!coords) return null;
+                const count = data.count;
+                const baseRadius = count >= 20 ? 16 : count >= 10 ? 14 : 12;
+                const radius = baseRadius / Math.max(1, mapZoom * 0.9);
+                const fontSize = 10 / Math.max(1, mapZoom * 0.9);
+                return (
+                  <Marker key={abbr} coordinates={coords}>
+                    <g style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.25))", pointerEvents: "none" }}>
+                      <circle
+                        r={radius}
+                        fill="#ffffff"
+                        stroke="#12213a"
+                        strokeWidth={1.2 / Math.max(1, mapZoom * 0.9)}
+                      />
+                      <text
+                        textAnchor="middle"
+                        dy={fontSize * 0.35}
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize,
+                          fontWeight: 800,
+                          fill: "#12213a",
+                        }}
+                      >
+                        {count}
+                      </text>
+                    </g>
+                  </Marker>
+                );
+              })}
+            </ZoomableGroup>
           </ComposableMap>
+
+          {popover && (
+            <div
+              className="fixed z-[60] bg-white border border-border rounded-lg shadow-2xl p-4 min-w-[200px] animate-in fade-in zoom-in-95 duration-200"
+              style={{ left: Math.min(popover.x, window.innerWidth - 240), top: popover.y + 12 }}
+            >
+              <button
+                onClick={() => setPopover(null)}
+                className="absolute top-2 right-2 p-1 rounded hover:bg-muted"
+                aria-label="Cerrar"
+              >
+                <X className="w-3.5 h-3.5 text-[#12213a]" />
+              </button>
+              <p className="font-display text-base font-bold text-[#12213a] pr-6 mb-1">
+                {popover.name}
+              </p>
+              <p className="font-body text-xs text-muted-foreground mb-3">
+                {universitiesByState[popover.abbr]?.count} universidades
+              </p>
+              <button
+                onClick={() => handleViewState(popover.abbr, popover.name)}
+                className="w-full bg-[#b00717] hover:bg-[#8a0512] text-white font-body text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-colors"
+              >
+                Ver estado
+              </button>
+            </div>
+          )}
 
           {tooltip && (
             <div
