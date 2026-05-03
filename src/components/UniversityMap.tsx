@@ -400,7 +400,7 @@ const UniversityMap = () => {
       <div className="container-wide px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block mb-4 text-[#b00717] font-body text-xs tracking-[0.15em] uppercase font-bold">
-            250+ Universidades Partner
+            350+ Universidades Partner
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
             Nuestra Red en EE.UU.
