@@ -6,6 +6,7 @@ import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 export const NAVY = "#12213a";
 export const RED = "#b00717";
 export const LIGHT = "#fafaf8";
+export const GRAY = "#f3f4f6";
 
 export const SportHero = ({
   title,
