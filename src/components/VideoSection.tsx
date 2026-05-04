@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
 
-interface VideoSectionProps {
-  onOpenForm: () => void;
-}
-
-const VideoSection = ({ onOpenForm }: VideoSectionProps) => {
+const VideoSection = () => {
   const { t } = useLanguage();
+  useCalendlyLoader();
+
   return (
     <section id="video-section" className="section-padding" style={{ backgroundColor: "#ffffff" }}>
       <div className="container-wide">
@@ -39,7 +38,7 @@ const VideoSection = ({ onOpenForm }: VideoSectionProps) => {
               variant="ctaLarge"
               size="ctaXl"
               className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-              onClick={onOpenForm}
+              onClick={openCalendly}
             >
               <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
               <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
