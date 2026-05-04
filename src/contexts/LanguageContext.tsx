@@ -62,7 +62,7 @@ const translations: Record<Language, Record<string, string>> = {
     "process.step1.title": "Aplicación y Evaluación Gratuita",
     "process.step1.desc": "Analizamos personalmente tu perfil deportivo y académico para darte una respuesta real sobre tus posibilidades de becadeportiva.",
     "process.step2.title": "Admisión y Plan Personalizado",
-    "process.step2.desc": "Diseñamos un plan de acción a tu medida. Se te asignará un agente personal y nuestro equipo empezará a trabajar en el material que busacn los entrenadores.",
+    "process.step2.desc": "Diseñamos un plan de acción a tu medida. Se te asignará un agente personal y nuestro equipo empezará a trabajar en el material que buscan los entrenadores.",
     "process.step3.title": "Búsqueda de Universidades",
     "process.step3.desc": "Identificamos los programas y equipos que mejor encajan con lo que buscas. Buscamos el equilibrio perfecto entre tu nivel futbolístico, tus metas académicas y las expectativas de tu familia.",
     "process.step4.title": "Negociación de Contrato",
