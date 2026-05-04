@@ -1,14 +1,16 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
+import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
 
 interface CalendlySectionProps {
-  onOpenForm: () => void;
+  onOpenForm?: () => void;
 }
 
-const CalendlySection = ({ onOpenForm }: CalendlySectionProps) => {
+const CalendlySection = (_props: CalendlySectionProps) => {
   const { language } = useLanguage();
   const isEs = language === "es";
+  useCalendlyLoader();
 
   return (
     <section id="calendly-section" className="py-24" style={{ backgroundColor: "#f5f4f2" }}>
@@ -25,7 +27,7 @@ const CalendlySection = ({ onOpenForm }: CalendlySectionProps) => {
               : "A strategic call with our admissions team to analyze your athletic profile, define your options, and create a personalized plan toward your destination."}
           </p>
           <Button 
-            onClick={onOpenForm}
+            onClick={openCalendly}
             size="lg"
             className="gap-2"
           >
