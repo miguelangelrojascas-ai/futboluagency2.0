@@ -27,7 +27,7 @@ const CalendlySection = (_props: CalendlySectionProps) => {
               : "A strategic call with our admissions team to analyze your athletic profile, define your options, and create a personalized plan toward your destination."}
           </p>
           <Button 
-            onClick={onOpenForm}
+            onClick={openCalendly}
             size="lg"
             className="gap-2"
           >
