@@ -13,19 +13,15 @@ import CalendlySection from "@/components/CalendlySection";
 import FUASportsTeaser from "@/components/FUASportsTeaser";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import HubSpotFormModal from "@/components/HubSpotFormModal";
-import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
 const Index = () => {
-  const { isOpen, openForm, setIsOpen } = useHubSpotForm();
-
   return (
     <>
       <Navbar />
       <main className="min-h-screen">
         <HeroSection />
         <MetricsSection />
-        <VideoSection onOpenForm={openForm} />
+        <VideoSection />
         <LogoCarousel />
         
         <PathSelectionSection />
@@ -34,9 +30,8 @@ const Index = () => {
         <AnderStoryCard />
         <SuccessCasesSection />
         <FUASportsTeaser />
-        <CalendlySection onOpenForm={openForm} />
+        <CalendlySection />
         <Footer />
-        <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
       </main>
     </>
   );
