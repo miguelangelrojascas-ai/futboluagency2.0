@@ -195,7 +195,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <HubSpotFormModal open={hubspotOpen} onOpenChange={setHubspotOpen} />
     </>
   );
 };
