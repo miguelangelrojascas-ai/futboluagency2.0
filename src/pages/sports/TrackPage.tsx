@@ -34,6 +34,8 @@ const TrackPage = () => {
       <main className="min-h-screen pt-16 md:pt-20">
         <BackToSports />
         <SportHero
+          image={sportTrack}
+          headline={es ? "Tu pista. Tu beca. Tu futuro." : "Your track. Your scholarship. Your future."}
           title={es ? "Becas de Track & Field en EE.UU." : "Track & Field Scholarships in the U.S."}
           subtitle={
             es
