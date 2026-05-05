@@ -22,7 +22,7 @@ export const SportHero = ({
   headline?: string;
 }) => (
   <section
-    className="relative py-24 md:py-32 px-4 overflow-hidden"
+    className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-4 overflow-hidden -mt-16 md:-mt-20"
     style={{
       backgroundColor: NAVY,
       backgroundImage: image ? `url(${image})` : undefined,
