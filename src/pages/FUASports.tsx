@@ -268,10 +268,10 @@ const FUASports = () => {
             {/* Sport pills */}
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
               {[
-                { name: "Volleyball", emoji: "🏐" },
-                { name: "Golf", emoji: "⛳" },
-                { name: "Tenis", emoji: "🎾" },
-                { name: "Track & Field", emoji: "🏃" },
+                { name: "Volleyball" },
+                { name: "Golf" },
+                { name: "Tenis" },
+                { name: "Track & Field" },
               ].map((p, i) => (
                 <button
                   key={i}
