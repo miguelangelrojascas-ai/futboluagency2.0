@@ -178,16 +178,17 @@ const FUASports = () => {
           >
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
               {/* LEFT — Logo + pitch */}
-              <div>
+              <div style={{ textAlign: "center" }}>
                 <img
                   src={fuaSportsLogo}
                   alt="FUA Sports"
                   style={{
-                    height: "80px",
+                    height: "120px",
                     width: "auto",
-                    filter: "invert(1) brightness(1.1)",
+                    filter: "invert(1) brightness(1.2) drop-shadow(0 4px 18px rgba(255,255,255,0.25))",
                     marginBottom: "28px",
                     display: "block",
+                    marginInline: "auto",
                   }}
                 />
                 <h1
