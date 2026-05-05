@@ -118,9 +118,11 @@ const Navbar = () => {
             </div>
 
             <a
-              href="https://calendly.com/futbolu-agency"
-              target="_blank"
-              rel="noopener noreferrer"
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
+                (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
+              }}
               className="ml-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
             >
               {t("nav.applyCta")}
