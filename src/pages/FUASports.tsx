@@ -482,6 +482,23 @@ const FUASports = () => {
                     }}
                   />
 
+                  {/* Sport image */}
+                  <img
+                    src={s.image}
+                    alt={s.name}
+                    style={{
+                      position: "absolute",
+                      bottom: "-20px",
+                      right: "-20px",
+                      width: "180px",
+                      height: "180px",
+                      objectFit: "contain",
+                      opacity: 0.85,
+                      pointerEvents: "none",
+                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.4))",
+                    }}
+                  />
+
                   <div style={{ position: "relative", zIndex: 1 }}>
                     <span
                       style={{
