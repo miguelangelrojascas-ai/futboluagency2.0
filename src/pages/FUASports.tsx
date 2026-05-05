@@ -22,7 +22,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #0a1628 0%, #12213a 50%, #1a3a6e 100%)",
     accent: "#4a90d9",
     path: "/sports/volleyball",
-    emoji: "🏐",
+    image: sportVolleyball,
   },
   {
     name: "Golf",
@@ -32,7 +32,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #0a1a0a 0%, #0f3a14 50%, #1a5e1e 100%)",
     accent: "#4ad98a",
     path: "/sports/golf",
-    emoji: "⛳",
+    image: sportGolf,
   },
   {
     name: "Tenis",
@@ -42,7 +42,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #1a0808 0%, #3a1012 50%, #6e1a1a 100%)",
     accent: "#d94a4a",
     path: "/sports/tennis",
-    emoji: "🎾",
+    image: sportTennis,
   },
   {
     name: "Track & Field",
@@ -52,7 +52,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #1a1808 0%, #3a3010 50%, #6e5e1a 100%)",
     accent: "#d9c44a",
     path: "/sports/track",
-    emoji: "🏃",
+    image: sportTrack,
   },
 ];
 
