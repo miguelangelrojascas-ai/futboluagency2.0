@@ -220,6 +220,29 @@ const FUASports = () => {
 
               {/* RIGHT — Animated sport */}
               <div>
+                {/* Sport image */}
+                <div
+                  style={{
+                    opacity: fading ? 0 : 1,
+                    transform: fading ? "scale(0.96)" : "scale(1)",
+                    transition: "opacity 0.4s ease, transform 0.4s ease",
+                    marginBottom: "20px",
+                    height: "180px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <img
+                    src={slide.image}
+                    alt={slide.name}
+                    style={{
+                      maxHeight: "180px",
+                      width: "auto",
+                      filter: `drop-shadow(0 12px 32px ${slide.accent}55)`,
+                    }}
+                  />
+                </div>
                 {/* Big sport name */}
                 <div
                   style={{
