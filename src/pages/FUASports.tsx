@@ -4,6 +4,10 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
+import sportVolleyball from "@/assets/sport-volleyball.png";
+import sportGolf from "@/assets/sport-golf.png";
+import sportTennis from "@/assets/sport-tennis.png";
+import sportTrack from "@/assets/sport-track.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const NAVY = "#12213a";
