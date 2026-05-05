@@ -171,69 +171,110 @@ const TennisPage = () => {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-10 items-start">
-              {/* Tennis ball visual */}
-              <div className="rounded-2xl aspect-[4/5] relative overflow-hidden shadow-2xl">
-                <img
-                  src={tennisPlayerImg}
-                  alt={es ? "Jugador de tenis ejecutando un golpe" : "Tennis player executing a stroke"}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              <div className="space-y-5">
-                {[
-                  {
-                    icon: BookOpen,
-                    title: es ? "Educación de alta calidad" : "High quality education",
-                    desc: es
-                      ? "Títulos universitarios con reconocimiento internacional que abren puertas en todo el mundo."
-                      : "Internationally recognized university degrees that open doors worldwide.",
-                  },
-                  {
-                    icon: Trophy,
-                    title: es ? "Entorno profesional" : "Professional environment",
-                    desc: es
-                      ? "Entrenamientos 4–5 días por semana con preparadores físicos, fisioterapeutas y tutores académicos."
-                      : "Training 4–5 days per week with physical trainers, physiotherapists and academic tutors.",
-                  },
-                  {
-                    icon: Shield,
-                    title: es ? "Instalaciones de élite" : "Elite facilities",
-                    desc: es
-                      ? "Pistas indoor y outdoor de primer nivel, gimnasio, sala de fisioterapia y tecnología de última generación."
-                      : "Top-level indoor and outdoor courts, gym, physiotherapy room and cutting-edge technology.",
-                  },
-                  {
-                    icon: Users,
-                    title: es ? "Desarrollo personal" : "Personal development",
-                    desc: es
-                      ? "Mejora del inglés, madurez personal y crecimiento a través de una competición organizada e internacional."
-                      : "English improvement, personal maturity and growth through organized international competition.",
-                  },
-                ].map((f) => (
-                  <div
-                    key={f.title}
-                    className="flex gap-4 p-6 rounded-xl border"
-                    style={{ borderColor: "#e5e5e5", backgroundColor: "#fafaf8" }}
-                  >
-                    <div
-                      className="shrink-0 w-12 h-12 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: `${RED}15` }}
-                    >
-                      <f.icon className="w-6 h-6" style={{ color: RED }} />
-                    </div>
-                    <div>
-                      <h3 className="font-display text-lg font-bold mb-1" style={{ color: NAVY }}>
-                        {f.title}
-                      </h3>
-                      <p className="font-body text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+            {(() => {
+              const items = [
+                {
+                  icon: BookOpen,
+                  image: golfFlagImg,
+                  title: es ? "Educación de alta calidad" : "High quality education",
+                  desc: es
+                    ? "Títulos universitarios con reconocimiento internacional que abren puertas en todo el mundo."
+                    : "Internationally recognized university degrees that open doors worldwide.",
+                },
+                {
+                  icon: Trophy,
+                  image: golfBagImg,
+                  title: es ? "Entorno profesional" : "Professional environment",
+                  desc: es
+                    ? "Entrenamientos 4–5 días por semana con preparadores físicos, fisioterapeutas y tutores académicos."
+                    : "Training 4–5 days per week with physical trainers, physiotherapists and academic tutors.",
+                },
+                {
+                  icon: Shield,
+                  image: golfSimulatorImg,
+                  title: es ? "Instalaciones de élite" : "Elite facilities",
+                  desc: es
+                    ? "Campos de práctica, simuladores TrackMan, gimnasio y tecnología de última generación."
+                    : "Practice ranges, TrackMan simulators, gym and cutting-edge technology.",
+                },
+                {
+                  icon: Users,
+                  image: golfPlayersImg,
+                  title: es ? "Desarrollo personal" : "Personal development",
+                  desc: es
+                    ? "Mejora del inglés, madurez personal y crecimiento a través de una competición organizada e internacional."
+                    : "English improvement, personal maturity and growth through organized international competition.",
+                },
+              ];
+              return (
+                <div
+                  className="grid lg:grid-cols-2 gap-10 items-start"
+                  onMouseEnter={() => { whyPausedRef.current = true; }}
+                  onMouseLeave={() => { whyPausedRef.current = false; }}
+                >
+                  <div className="rounded-2xl aspect-[4/5] relative overflow-hidden shadow-2xl lg:sticky lg:top-24">
+                    {items.map((it, i) => (
+                      <img
+                        key={it.title}
+                        src={it.image}
+                        alt={it.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out"
+                        style={{ opacity: activeWhy === i ? 1 : 0 }}
+                        loading="lazy"
+                      />
+                    ))}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                      {items.map((_, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          aria-label={`Imagen ${i + 1}`}
+                          onClick={() => setActiveWhy(i)}
+                          className="h-2 rounded-full transition-all"
+                          style={{
+                            width: activeWhy === i ? 24 : 8,
+                            backgroundColor: activeWhy === i ? "#ffffff" : "rgba(255,255,255,0.5)",
+                          }}
+                        />
+                      ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  <div className="space-y-4">
+                    {items.map((f, i) => {
+                      const isActive = activeWhy === i;
+                      return (
+                        <button
+                          key={f.title}
+                          type="button"
+                          onClick={() => setActiveWhy(i)}
+                          onMouseEnter={() => setActiveWhy(i)}
+                          aria-current={isActive}
+                          className="w-full text-left flex gap-4 p-6 rounded-xl bg-white border transition-all duration-500 ease-out"
+                          style={{
+                            borderColor: isActive ? RED : "#e5e5e5",
+                            boxShadow: isActive ? "0 20px 40px -20px rgba(176,7,23,0.35)" : "none",
+                          }}
+                        >
+                          <div
+                            className="shrink-0 w-12 h-12 rounded-lg flex items-center justify-center"
+                            style={{ backgroundColor: `${RED}15` }}
+                          >
+                            <f.icon className="w-6 h-6" style={{ color: RED }} />
+                          </div>
+                          <div>
+                            <h3 className="font-display text-lg font-bold mb-1" style={{ color: NAVY }}>
+                              {f.title}
+                            </h3>
+                            <p className="font-body text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </section>
 
