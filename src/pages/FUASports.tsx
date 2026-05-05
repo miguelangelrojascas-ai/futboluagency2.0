@@ -294,7 +294,6 @@ const FUASports = () => {
                     gap: "6px",
                   }}
                 >
-                  <span>{p.emoji}</span>
                   <span>{p.name}</span>
                 </button>
               ))}
