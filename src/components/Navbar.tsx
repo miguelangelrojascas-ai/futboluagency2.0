@@ -125,35 +125,14 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="relative ml-2" ref={applyMenuRef}>
-              <button
-                onClick={() => setShowApplyMenu(!showApplyMenu)}
-                className="bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
-              >
-                {t("nav.applyCta")}
-              </button>
-              {showApplyMenu && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-[#ffffff] border border-border rounded-xl shadow-xl overflow-hidden z-50">
-                  <button
-                    onClick={() => { setShowApplyMenu(false); openForm(); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left font-body text-sm text-foreground hover:bg-muted/50 transition-colors"
-                  >
-                    <GraduationCap className="w-4 h-4 text-blue-500" />
-                    Programa USA
-                  </button>
-                  <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setShowApplyMenu(false)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left font-body text-sm text-foreground hover:bg-muted/50 transition-colors border-t border-border"
-                  >
-                    <Trophy className="w-4 h-4 text-primary" />
-                    Programa España
-                  </a>
-                </div>
-              )}
-            </div>
+            <a
+              href="https://calendly.com/futbolu-agency"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+            >
+              {t("nav.applyCta")}
+            </a>
           </div>
 
           {/* Mobile Toggle */}
