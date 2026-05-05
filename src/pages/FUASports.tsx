@@ -178,16 +178,17 @@ const FUASports = () => {
           >
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
               {/* LEFT — Logo + pitch */}
-              <div>
+              <div style={{ textAlign: "center" }}>
                 <img
                   src={fuaSportsLogo}
                   alt="FUA Sports"
                   style={{
-                    height: "80px",
+                    height: "120px",
                     width: "auto",
-                    filter: "invert(1) brightness(1.1)",
+                    filter: "invert(1) brightness(1.2) drop-shadow(0 4px 18px rgba(255,255,255,0.25))",
                     marginBottom: "28px",
                     display: "block",
+                    marginInline: "auto",
                   }}
                 />
                 <h1
@@ -209,7 +210,7 @@ const FUASports = () => {
                     color: "rgba(255,255,255,0.65)",
                     lineHeight: 1.8,
                     maxWidth: "420px",
-                    marginBottom: "32px",
+                    margin: "0 auto 32px",
                   }}
                 >
                   {es
@@ -218,7 +219,7 @@ const FUASports = () => {
                 </p>
 
                 {/* Stats row */}
-                <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center" }}>
                   {[
                     { n: "350+", l: es ? "Atletas colocados" : "Athletes placed" },
                     { n: "4", l: es ? "Deportes activos" : "Active sports" },
