@@ -210,7 +210,7 @@ const FUASports = () => {
                     color: "rgba(255,255,255,0.65)",
                     lineHeight: 1.8,
                     maxWidth: "420px",
-                    marginBottom: "32px",
+                    margin: "0 auto 32px",
                   }}
                 >
                   {es
