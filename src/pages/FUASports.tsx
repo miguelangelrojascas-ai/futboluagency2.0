@@ -203,8 +203,8 @@ const FUASports = () => {
                   <span style={{ color: RED }}>{es ? "Todos los Deportes" : "All Sports"}</span>
                 </h1>
                 <p
+                  className="text-base"
                   style={{
-                    fontSize: "15px",
                     color: "rgba(255,255,255,0.65)",
                     lineHeight: 1.8,
                     maxWidth: "420px",
