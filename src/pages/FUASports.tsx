@@ -4,6 +4,10 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
+import sportVolleyball from "@/assets/sport-volleyball.png";
+import sportGolf from "@/assets/sport-golf.png";
+import sportTennis from "@/assets/sport-tennis.png";
+import sportTrack from "@/assets/sport-track.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const NAVY = "#12213a";
@@ -18,7 +22,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #0a1628 0%, #12213a 50%, #1a3a6e 100%)",
     accent: "#4a90d9",
     path: "/sports/volleyball",
-    emoji: "🏐",
+    image: sportVolleyball,
   },
   {
     name: "Golf",
@@ -28,7 +32,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #0a1a0a 0%, #0f3a14 50%, #1a5e1e 100%)",
     accent: "#4ad98a",
     path: "/sports/golf",
-    emoji: "⛳",
+    image: sportGolf,
   },
   {
     name: "Tenis",
@@ -38,7 +42,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #1a0808 0%, #3a1012 50%, #6e1a1a 100%)",
     accent: "#d94a4a",
     path: "/sports/tennis",
-    emoji: "🎾",
+    image: sportTennis,
   },
   {
     name: "Track & Field",
@@ -48,7 +52,7 @@ const SPORTS = [
     gradient: "linear-gradient(135deg, #1a1808 0%, #3a3010 50%, #6e5e1a 100%)",
     accent: "#d9c44a",
     path: "/sports/track",
-    emoji: "🏃",
+    image: sportTrack,
   },
 ];
 
@@ -216,6 +220,29 @@ const FUASports = () => {
 
               {/* RIGHT — Animated sport */}
               <div>
+                {/* Sport image */}
+                <div
+                  style={{
+                    opacity: fading ? 0 : 1,
+                    transform: fading ? "scale(0.96)" : "scale(1)",
+                    transition: "opacity 0.4s ease, transform 0.4s ease",
+                    marginBottom: "20px",
+                    height: "180px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <img
+                    src={slide.image}
+                    alt={slide.name}
+                    style={{
+                      maxHeight: "180px",
+                      width: "auto",
+                      filter: `drop-shadow(0 12px 32px ${slide.accent}55)`,
+                    }}
+                  />
+                </div>
                 {/* Big sport name */}
                 <div
                   style={{
@@ -304,7 +331,7 @@ const FUASports = () => {
                           transition: "color 0.3s ease",
                         }}
                       >
-                        {s.emoji} {s.name}
+                        {s.name}
                       </span>
                       {active === i && <ArrowRight size={14} color="white" />}
                     </Link>
@@ -519,7 +546,7 @@ const FUASports = () => {
                         marginBottom: "10px",
                       }}
                     >
-                      {s.emoji} {s.name}
+                      {s.name}
                     </h3>
                     <p
                       style={{
