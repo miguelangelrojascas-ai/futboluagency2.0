@@ -22,7 +22,7 @@ export const SportHero = ({
   headline?: string;
 }) => (
   <section
-    className="relative py-24 md:py-32 px-4 overflow-hidden"
+    className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-4 overflow-hidden -mt-16 md:-mt-20"
     style={{
       backgroundColor: NAVY,
       backgroundImage: image ? `url(${image})` : undefined,
@@ -147,13 +147,14 @@ export const FinalCTA = ({ label, sub }: { label: string; sub: string }) => (
 );
 
 export const BackToSports = () => (
-  <div className="container-wide max-w-6xl mx-auto px-4 pt-6">
+  <div className="fixed top-20 md:top-24 left-4 sm:left-6 z-30">
     <Link
       to="/sports"
-      className="inline-flex items-center gap-2 font-body text-sm font-medium hover:opacity-70 transition-opacity"
-      style={{ color: NAVY }}
+      className="inline-flex items-center gap-2 font-body text-xs sm:text-sm font-semibold px-4 py-2 rounded-full backdrop-blur-md border border-white/20 text-white/90 hover:text-white hover:bg-white/10 transition-all"
+      style={{ backgroundColor: "rgba(0,0,0,0.35)" }}
     >
-      ← FUA Sports
+      <span aria-hidden>←</span>
+      <span>FUA Sports</span>
     </Link>
   </div>
 );
