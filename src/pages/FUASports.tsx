@@ -308,7 +308,7 @@ const FUASports = () => {
                           transition: "color 0.3s ease",
                         }}
                       >
-                        {s.emoji} {s.name}
+                        {s.name}
                       </span>
                       {active === i && <ArrowRight size={14} color="white" />}
                     </Link>
@@ -523,7 +523,7 @@ const FUASports = () => {
                         marginBottom: "10px",
                       }}
                     >
-                      {s.emoji} {s.name}
+                      {s.name}
                     </h3>
                     <p
                       style={{
