@@ -1,346 +1,737 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Calendar, Volleyball, Flag, CircleDot, Zap, ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
-import sportVolleyball from "@/assets/sport-volleyball.png";
-import sportGolf from "@/assets/sport-golf.png";
-import sportTennis from "@/assets/sport-tennis.png";
-import sportTrack from "@/assets/sport-track.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const NAVY = "#12213a";
 const RED = "#b00717";
 
-const milestones = [
-  { year: "2020", text: "Fundación" },
-  { year: "2023", text: "350+ becas fútbol" },
-  { year: "2024", text: "Expansión multi-deporte" },
-  { year: "2025", text: "FUA Sports" },
-];
-
-const sports = [
+const SPORTS = [
   {
     name: "Volleyball",
-    tagline: "Becas NCAA para jugadoras de alto nivel.",
-    to: "/sports/volleyball",
-    img: sportVolleyball,
-    Icon: Volleyball,
+    tag: "NCAA D1 · D2 · D3 · NAIA",
+    desc: "Becas para jugadoras de alto nivel competitivo en todo el territorio de EE.UU.",
+    stat: "$1.8B en becas anuales",
+    gradient: "linear-gradient(135deg, #0a1628 0%, #12213a 50%, #1a3a6e 100%)",
+    accent: "#4a90d9",
+    path: "/sports/volleyball",
+    emoji: "🏐",
   },
   {
     name: "Golf",
-    tagline: "De tu club local a la élite universitaria americana.",
-    to: "/sports/golf",
-    img: sportGolf,
-    Icon: Flag,
+    tag: "$2.5B en becas anuales",
+    desc: "De tu club local a la élite universitaria americana. +1,300 programas disponibles.",
+    stat: "+1,300 programas",
+    gradient: "linear-gradient(135deg, #0a1a0a 0%, #0f3a14 50%, #1a5e1e 100%)",
+    accent: "#4ad98a",
+    path: "/sports/golf",
+    emoji: "⛳",
   },
   {
     name: "Tenis",
-    tagline: "Acompañamiento cercano para la beca que mereces.",
-    to: "/sports/tennis",
-    img: sportTennis,
-    Icon: CircleDot,
+    tag: "NCAA · NAIA · NJCAA",
+    desc: "Acompañamiento cercano para conseguir la beca que tu talento merece.",
+    stat: "100% atletas con beca",
+    gradient: "linear-gradient(135deg, #1a0808 0%, #3a1012 50%, #6e1a1a 100%)",
+    accent: "#d94a4a",
+    path: "/sports/tennis",
+    emoji: "🎾",
   },
   {
     name: "Track & Field",
-    tagline: "+1,000 programas y $3.5B en becas disponibles.",
-    to: "/sports/track",
-    img: sportTrack,
-    Icon: Zap,
-  },
-];
-
-const features = [
-  {
-    title: "Evaluación Gratuita",
-    desc: "Analizamos tu perfil deportivo y académico sin compromiso.",
-  },
-  {
-    title: "Red de +40 Universidades",
-    desc: "Acceso directo a coaches y programas en todo EE.UU.",
-  },
-  {
-    title: "75–100% de Beca",
-    desc: "Todos nuestros atletas obtienen cobertura entre 75% y 100%.",
+    tag: "+1,000 programas universitarios",
+    desc: "Estados Unidos es el destino #1 para atletas internacionales de alto rendimiento.",
+    stat: "$3.5B en becas",
+    gradient: "linear-gradient(135deg, #1a1808 0%, #3a3010 50%, #6e5e1a 100%)",
+    accent: "#d9c44a",
+    path: "/sports/track",
+    emoji: "🏃",
   },
 ];
 
 const FUASports = () => {
-  const [ctaEmail, setCtaEmail] = useState("");
-  const [ctaSubmitted, setCtaSubmitted] = useState(false);
+  const { language } = useLanguage();
+  const es = language === "es";
+  const [active, setActive] = useState(0);
+  const [fading, setFading] = useState(false);
 
-  const handleCtaSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (ctaEmail) {
-      setCtaSubmitted(true);
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFading(true);
       setTimeout(() => {
-        setCtaSubmitted(false);
-        setCtaEmail("");
-      }, 3000);
-    }
+        setActive((prev) => (prev + 1) % SPORTS.length);
+        setFading(false);
+      }, 400);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goTo = (i: number) => {
+    if (i === active) return;
+    setFading(true);
+    setTimeout(() => {
+      setActive(i);
+      setFading(false);
+    }, 400);
   };
+
+  const slide = SPORTS[active];
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
-        {/* SECTION 1 — Hero */}
+        {/* ── CINEMATIC HERO CAROUSEL ── */}
         <section
-          className="relative min-h-screen flex items-center justify-center px-4"
-          style={{ backgroundColor: NAVY }}
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            minHeight: "90vh",
+            background: slide.gradient,
+            transition: "background 0.8s ease",
+            display: "flex",
+            alignItems: "center",
+          }}
         >
-          <div className="container-wide max-w-5xl mx-auto text-center py-24">
-            <img
-              src={fuaSportsLogo}
-              alt="FUA Sports"
-              className="w-full h-auto mx-auto block"
-              style={{
-                maxWidth: "480px",
-                marginTop: "-40px",
-                marginBottom: "-20px",
-                filter: "invert(1) brightness(1.1)",
-                mixBlendMode: "screen",
-              }}
-            />
-            <h1
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
-            >
-              Becas Universitarias para{" "}
-              <span style={{ color: RED }}>Todos los Deportes</span>
-            </h1>
-            <p className="font-body text-base sm:text-lg md:text-xl text-white/75 max-w-3xl mx-auto mb-14 leading-relaxed">
-              La misma metodología que llevó a más de 350 atletas a universidades
-              en EE.UU., ahora disponible en más disciplinas deportivas.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
-              {[
-                { value: "350+", label: "Atletas colocados" },
-                { value: "$10M+", label: "En becas conseguidas" },
-                { value: "4", label: "Deportes disponibles" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-xl border border-white/10 px-4 py-6"
-                  style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
-                >
-                  <div
-                    className="font-display text-3xl sm:text-4xl font-bold mb-2"
-                    style={{ color: RED }}
-                  >
-                    {s.value}
-                  </div>
-                  <div className="font-body text-xs sm:text-sm text-white/65 uppercase tracking-wider">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Animated glow */}
           <div
-            className="absolute bottom-0 left-0 right-0 pointer-events-none"
             style={{
-              height: "120px",
-              background: "linear-gradient(to bottom, transparent, #fafaf8)",
+              position: "absolute",
+              top: "-100px",
+              right: "-100px",
+              width: "500px",
+              height: "500px",
+              borderRadius: "50%",
+              background: `${slide.accent}18`,
+              filter: "blur(100px)",
+              transition: "background 1s ease",
+              pointerEvents: "none",
             }}
           />
-        </section>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-80px",
+              left: "-80px",
+              width: "400px",
+              height: "400px",
+              borderRadius: "50%",
+              background: `rgba(176,7,23,0.08)`,
+              filter: "blur(80px)",
+              pointerEvents: "none",
+            }}
+          />
 
-        {/* SECTION 2 — Nuestra Historia */}
-        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#fafaf8" }}>
-          <div className="container-wide max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Bottom fade */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "120px",
+              background: "linear-gradient(to bottom, transparent, #fafaf8)",
+              zIndex: 2,
+            }}
+          />
+
+          <div
+            style={{
+              maxWidth: "1100px",
+              margin: "0 auto",
+              padding: "80px 32px 120px",
+              position: "relative",
+              zIndex: 1,
+              width: "100%",
+            }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
+              {/* LEFT — Logo + pitch */}
               <div>
-                <h2
-                  className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
-                  style={{ color: NAVY }}
+                <img
+                  src={fuaSportsLogo}
+                  alt="FUA Sports"
+                  style={{
+                    height: "80px",
+                    width: "auto",
+                    filter: "invert(1) brightness(1.1)",
+                    marginBottom: "28px",
+                    display: "block",
+                  }}
+                />
+                <h1
+                  style={{
+                    fontFamily: "Georgia, serif",
+                    fontSize: "clamp(28px, 4vw, 48px)",
+                    fontWeight: 700,
+                    color: "white",
+                    lineHeight: 1.2,
+                    marginBottom: "16px",
+                  }}
                 >
-                  Nuestra Historia
-                </h2>
-                <p className="font-body text-base sm:text-lg leading-relaxed text-muted-foreground">
-                  FUA Sports nació de FutbolUAgency LLC., agencia especializada en
-                  becas de fútbol universitario. Con años de experiencia y una
-                  red consolidada de universidades en EE.UU., decidimos expandir
-                  nuestra metodología a otros deportes para que más atletas
-                  puedan vivir el sueño americano.
+                  {es ? "Becas Universitarias para " : "University Scholarships for "}
+                  <span style={{ color: RED }}>{es ? "Todos los Deportes" : "All Sports"}</span>
+                </h1>
+                <p
+                  style={{
+                    fontSize: "15px",
+                    color: "rgba(255,255,255,0.65)",
+                    lineHeight: 1.8,
+                    maxWidth: "420px",
+                    marginBottom: "32px",
+                  }}
+                >
+                  {es
+                    ? "La misma metodología que llevó a más de 350 atletas a universidades en EE.UU., ahora disponible en más disciplinas deportivas."
+                    : "The same methodology that placed 350+ athletes in U.S. universities, now available in more sports."}
                 </p>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {milestones.map((m) => (
-                  <div
-                    key={m.year}
-                    className="rounded-xl bg-white px-5 py-6 border-2"
-                    style={{ borderColor: NAVY }}
-                  >
-                    <div
-                      className="font-display text-2xl sm:text-3xl font-bold mb-1"
-                      style={{ color: RED }}
-                    >
-                      {m.year}
-                    </div>
-                    <div
-                      className="font-body text-sm sm:text-base font-medium"
-                      style={{ color: NAVY }}
-                    >
-                      {m.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* SECTION 3 — Nuestros Deportes */}
-        <section className="py-24 md:py-32 px-4 bg-white">
-          <div className="container-wide max-w-6xl mx-auto">
-            <div className="text-center mb-14">
-              <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
-                style={{ color: NAVY }}
-              >
-                Elige tu Deporte
-              </h2>
-              <p className="font-body text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Programas especializados con la misma metodología ganadora.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {sports.map((s) => {
-                const Icon = s.Icon;
-                return (
-                  <Link
-                    key={s.name}
-                    to={s.to}
-                    className="group relative rounded-2xl overflow-hidden flex flex-col aspect-video transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.05] hover:z-10 border-2 border-transparent hover:shadow-[0_25px_60px_-15px_rgba(176,7,23,0.55)]"
-                    style={{ backgroundColor: NAVY }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.borderColor = RED)
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.borderColor = "transparent")
-                    }
+                {/* Stats row */}
+                <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+                  {[
+                    { n: "350+", l: es ? "Atletas colocados" : "Athletes placed" },
+                    { n: "4", l: es ? "Deportes activos" : "Active sports" },
+                    { n: "75–100%", l: es ? "Cobertura beca" : "Scholarship coverage" },
+                  ].map((s, i) => (
+                    <div key={i}>
+                      <div
+                        style={{
+                          fontFamily: "Georgia, serif",
+                          fontSize: "24px",
+                          fontWeight: 700,
+                          color: "white",
+                        }}
+                      >
+                        {s.n}
+                      </div>
+                      <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "2px" }}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT — Animated sport */}
+              <div>
+                {/* Big sport name */}
+                <div
+                  style={{
+                    opacity: fading ? 0 : 1,
+                    transform: fading ? "translateY(12px)" : "translateY(0)",
+                    transition: "opacity 0.4s ease, transform 0.4s ease",
+                    marginBottom: "24px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: slide.accent,
+                      display: "block",
+                      marginBottom: "10px",
+                      transition: "color 0.6s ease",
+                    }}
                   >
-                    <img
-                      src={s.img}
-                      alt={s.name}
-                      className="absolute inset-0 w-full h-full object-cover opacity-75 transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div
-                      className="absolute inset-0"
+                    {slide.tag}
+                  </span>
+                  <div
+                    style={{
+                      fontFamily: "Georgia, serif",
+                      fontSize: "clamp(48px, 8vw, 88px)",
+                      fontWeight: 700,
+                      color: "white",
+                      lineHeight: 1,
+                      marginBottom: "12px",
+                    }}
+                  >
+                    {slide.name}
+                  </div>
+                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "340px" }}>
+                    {slide.desc}
+                  </p>
+                </div>
+
+                {/* Progress dots */}
+                <div style={{ display: "flex", gap: "8px", marginBottom: "24px" }}>
+                  {SPORTS.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goTo(i)}
                       style={{
-                        background:
-                          "linear-gradient(to top, rgba(18,33,58,0.92) 15%, rgba(18,33,58,0.25) 100%)",
+                        height: "4px",
+                        width: active === i ? "32px" : "16px",
+                        borderRadius: "2px",
+                        background: active === i ? "white" : "rgba(255,255,255,0.2)",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: 0,
+                        transition: "all 0.3s ease",
                       }}
                     />
-                    <div className="relative z-10 flex flex-col justify-end flex-1 p-6 sm:p-8">
-                      <h3 className="font-display text-3xl sm:text-4xl font-bold text-white mb-2 leading-tight">
-                        {s.name}
-                      </h3>
-                      <p className="font-body text-sm sm:text-base text-white/80 leading-relaxed mb-4">
-                        {s.tagline}
-                      </p>
+                  ))}
+                </div>
+
+                {/* Sport pills */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+                  {SPORTS.map((s, i) => (
+                    <Link
+                      key={i}
+                      to={s.path}
+                      onClick={() => goTo(i)}
+                      style={{
+                        borderRadius: "10px",
+                        padding: "14px 16px",
+                        background: active === i ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)",
+                        border: active === i ? "1px solid rgba(255,255,255,0.25)" : "1px solid rgba(255,255,255,0.08)",
+                        transition: "all 0.3s ease",
+                        textDecoration: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
                       <span
-                        className="font-body text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
-                        style={{ color: "#ff4757" }}
+                        style={{
+                          fontFamily: "Georgia, serif",
+                          fontSize: "14px",
+                          fontWeight: 700,
+                          color: active === i ? "white" : "rgba(255,255,255,0.45)",
+                          transition: "color 0.3s ease",
+                        }}
                       >
-                        Explorar programa <ArrowRight className="w-4 h-4" />
+                        {s.emoji} {s.name}
                       </span>
-                    </div>
-                  </Link>
-                );
-              })}
+                      {active === i && <ArrowRight size={14} color="white" />}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 4 — Por qué FUA Sports */}
-        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#f5f4f2" }}>
-          <div className="container-wide max-w-6xl mx-auto">
-            <div className="text-center mb-14">
-              <h2
-                className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
-                style={{ color: NAVY }}
+        {/* ── WHAT IS FUA SPORTS ── */}
+        <section style={{ background: "#fafaf8", padding: "80px 24px" }}>
+          <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: "56px" }}>
+              <span
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: RED,
+                  display: "block",
+                  marginBottom: "14px",
+                }}
               >
-                La Metodología que Funciona
+                {es ? "¿Qué es FUA Sports?" : "What is FUA Sports?"}
+              </span>
+              <h2
+                style={{
+                  fontFamily: "Georgia, serif",
+                  fontSize: "clamp(26px, 4vw, 42px)",
+                  fontWeight: 700,
+                  color: NAVY,
+                  marginBottom: "16px",
+                  lineHeight: 1.2,
+                }}
+              >
+                {es ? "Una metodología. Múltiples deportes." : "One methodology. Multiple sports."}
               </h2>
+              <p
+                style={{
+                  fontSize: "16px",
+                  color: "#555",
+                  lineHeight: 1.8,
+                  maxWidth: "620px",
+                  margin: "0 auto",
+                }}
+              >
+                {es
+                  ? "FUA Sports es la rama de FutbolUAgency enfocada en deportes más allá del fútbol. Usamos el mismo proceso que nos ha dado un 98% de satisfacción para colocar atletas de volleyball, golf, tenis y atletismo en universidades de EE.UU."
+                  : "FUA Sports is the branch of FutbolUAgency focused on sports beyond soccer. We use the same process that has given us 98% satisfaction to place volleyball, golf, tennis and track & field athletes in U.S. universities."}
+              </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {features.map((f) => (
+
+            {/* Three pillars */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+              {[
+                {
+                  num: "01",
+                  title: es ? "Evaluación gratuita" : "Free evaluation",
+                  desc: es
+                    ? "Analizamos tu perfil deportivo y académico sin compromiso para decirte exactamente qué opciones tienes."
+                    : "We analyze your athletic and academic profile at no cost to tell you exactly what options you have.",
+                },
+                {
+                  num: "02",
+                  title: es ? "Red de +40 universidades" : "40+ university network",
+                  desc: es
+                    ? "Acceso directo a coaches y programas en todo EE.UU., desde D1 hasta NAIA, en todas las divisiones."
+                    : "Direct access to coaches and programs across the U.S., from D1 to NAIA, across all divisions.",
+                },
+                {
+                  num: "03",
+                  title: es ? "75–100% de beca garantizada" : "75–100% guaranteed scholarship",
+                  desc: es
+                    ? "Todos nuestros atletas obtienen becas entre el 75% y el 100% de cobertura. Sin excepciones."
+                    : "All our athletes receive scholarships between 75% and 100% coverage. No exceptions.",
+                },
+              ].map((p, i) => (
                 <div
-                  key={f.title}
-                  className="rounded-xl bg-white p-7 border-t-4 shadow-sm"
-                  style={{ borderTopColor: RED }}
+                  key={i}
+                  style={{
+                    background: "white",
+                    border: "1px solid #e5e5e5",
+                    borderRadius: "16px",
+                    padding: "28px",
+                  }}
                 >
-                  <h3
-                    className="font-display text-xl sm:text-2xl font-bold mb-3"
-                    style={{ color: NAVY }}
+                  <div
+                    style={{
+                      fontFamily: "Georgia, serif",
+                      fontSize: "32px",
+                      fontWeight: 700,
+                      color: "rgba(176,7,23,0.12)",
+                      marginBottom: "12px",
+                    }}
                   >
-                    {f.title}
+                    {p.num}
+                  </div>
+                  <div
+                    style={{ width: "32px", height: "3px", background: RED, borderRadius: "2px", marginBottom: "14px" }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: "Georgia, serif",
+                      fontSize: "17px",
+                      fontWeight: 700,
+                      color: NAVY,
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {p.title}
                   </h3>
-                  <p className="font-body text-sm sm:text-base leading-relaxed text-muted-foreground">
-                    {f.desc}
-                  </p>
+                  <p style={{ fontSize: "13px", color: "#666", lineHeight: 1.75 }}>{p.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* SECTION 5 — Final CTA */}
-        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: NAVY }}>
-          <div className="container-wide max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-              ¿No ves tu deporte?
-            </h2>
-            <p className="font-body text-base sm:text-lg text-white/70 mb-8 leading-relaxed">
-              Déjanos tu email y sé el primero en saber cuando abramos nuevas disciplinas.
-            </p>
-            {ctaSubmitted ? (
-              <p className="font-body text-lg font-medium mb-6" style={{ color: RED }}>
-                ¡Listo! Te notificaremos.
-              </p>
-            ) : (
-              <form
-                onSubmit={handleCtaSubmit}
-                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6"
+        {/* ── SPORTS GRID ── */}
+        <section style={{ background: "white", padding: "80px 24px", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
+          <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: "48px" }}>
+              <span
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: RED,
+                  display: "block",
+                  marginBottom: "14px",
+                }}
               >
-                <div className="relative flex-1">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    type="email"
-                    required
-                    placeholder="Tu correo electrónico"
-                    value={ctaEmail}
-                    onChange={(e) => setCtaEmail(e.target.value)}
-                    className="pl-10 bg-white border-white/15 text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="font-semibold text-white hover:opacity-90"
-                  style={{ backgroundColor: RED }}
+                {es ? "Nuestros programas" : "Our programs"}
+              </span>
+              <h2
+                style={{
+                  fontFamily: "Georgia, serif",
+                  fontSize: "clamp(24px, 3vw, 36px)",
+                  fontWeight: 700,
+                  color: NAVY,
+                  marginBottom: "8px",
+                }}
+              >
+                {es ? "Elige tu Deporte" : "Choose Your Sport"}
+              </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto" }} />
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
+              {SPORTS.map((s, i) => (
+                <Link
+                  key={i}
+                  to={s.path}
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    background: s.gradient,
+                    padding: "36px 32px",
+                    position: "relative",
+                    minHeight: "200px",
+                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow = "0 20px 48px rgba(0,0,0,0.25)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
                 >
-                  Notificarme
-                </Button>
-              </form>
-            )}
+                  {/* Glow */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "-40px",
+                      right: "-40px",
+                      width: "160px",
+                      height: "160px",
+                      borderRadius: "50%",
+                      background: `${s.accent}20`,
+                      filter: "blur(40px)",
+                      pointerEvents: "none",
+                    }}
+                  />
+
+                  <div style={{ position: "relative", zIndex: 1 }}>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontWeight: 700,
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        color: s.accent,
+                        display: "block",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {s.stat}
+                    </span>
+                    <h3
+                      style={{
+                        fontFamily: "Georgia, serif",
+                        fontSize: "28px",
+                        fontWeight: 700,
+                        color: "white",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {s.emoji} {s.name}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "rgba(255,255,255,0.6)",
+                        lineHeight: 1.6,
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {s.desc}
+                    </p>
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: "white",
+                      }}
+                    >
+                      {es ? "Explorar programa" : "Explore program"} <ArrowRight size={14} />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SAME METHODOLOGY ── */}
+        <section style={{ background: NAVY, padding: "80px 24px" }}>
+          <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: "48px" }}>
+              <span
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: RED,
+                  display: "block",
+                  marginBottom: "14px",
+                }}
+              >
+                {es ? "Nuestra metodología" : "Our methodology"}
+              </span>
+              <h2
+                style={{
+                  fontFamily: "Georgia, serif",
+                  fontSize: "clamp(24px, 3vw, 36px)",
+                  fontWeight: 700,
+                  color: "white",
+                  marginBottom: "8px",
+                }}
+              >
+                {es ? "La Misma Metodología Ganadora" : "The Same Winning Methodology"}
+              </h2>
+              <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 16px" }} />
+              <p
+                style={{
+                  fontSize: "15px",
+                  color: "rgba(255,255,255,0.6)",
+                  maxWidth: "520px",
+                  margin: "0 auto",
+                  lineHeight: 1.7,
+                }}
+              >
+                {es
+                  ? "El mismo proceso que usamos en fútbol, adaptado a cada deporte. Probado con más de 350 atletas."
+                  : "The same process we use in soccer, adapted to each sport. Proven with 350+ athletes."}
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+              {[
+                {
+                  step: "01",
+                  title: es ? "Evaluación y Perfil" : "Evaluation & Profile",
+                  desc: es
+                    ? "Diagnóstico gratuito del nivel deportivo y académico. Creamos tu perfil profesional para los coaches."
+                    : "Free diagnosis of athletic and academic level. We create your professional profile for coaches.",
+                },
+                {
+                  step: "02",
+                  title: es ? "Contacto con Coaches" : "Coach Outreach",
+                  desc: es
+                    ? "Contactamos directamente con entrenadores universitarios y negociamos la mejor beca posible para ti."
+                    : "We directly contact university coaches and negotiate the best possible scholarship for you.",
+                },
+                {
+                  step: "03",
+                  title: es ? "Admisión y Llegada" : "Admission & Arrival",
+                  desc: es
+                    ? "Gestionamos la admisión, la visa y te acompañamos hasta que aterrices en tu universidad en EE.UU."
+                    : "We manage admission, the visa, and accompany you until you land at your U.S. university.",
+                },
+              ].map((s, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "14px",
+                    padding: "24px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      borderRadius: "50%",
+                      background: RED,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "Georgia, serif",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "white",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    {s.step}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "Georgia, serif",
+                      fontSize: "16px",
+                      fontWeight: 700,
+                      color: "white",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", lineHeight: 1.7 }}>{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── COMING SOON / EMAIL CAPTURE ── */}
+        <section style={{ background: "#fafaf8", padding: "72px 24px", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
+          <div style={{ maxWidth: "560px", margin: "0 auto", textAlign: "center" }}>
+            <h2
+              style={{
+                fontFamily: "Georgia, serif",
+                fontSize: "clamp(22px, 3vw, 32px)",
+                fontWeight: 700,
+                color: NAVY,
+                marginBottom: "12px",
+              }}
+            >
+              {es ? "¿No ves tu deporte?" : "Don't see your sport?"}
+            </h2>
+            <p style={{ fontSize: "14px", color: "#666", marginBottom: "28px", lineHeight: 1.7 }}>
+              {es
+                ? "Déjanos tu email y sé el primero en saber cuando abramos nuevas disciplinas."
+                : "Leave your email and be the first to know when we open new disciplines."}
+            </p>
+            <div style={{ display: "flex", gap: "10px", maxWidth: "420px", margin: "0 auto 16px" }}>
+              <input
+                type="email"
+                placeholder={es ? "Tu correo electrónico" : "Your email address"}
+                style={{
+                  flex: 1,
+                  padding: "12px 16px",
+                  borderRadius: "8px",
+                  border: "1px solid #e5e5e5",
+                  fontSize: "14px",
+                  fontFamily: "Inter, sans-serif",
+                  outline: "none",
+                }}
+              />
+              <button
+                style={{
+                  background: RED,
+                  color: "white",
+                  border: "none",
+                  padding: "12px 20px",
+                  borderRadius: "8px",
+                  fontWeight: 700,
+                  fontSize: "13px",
+                  cursor: "pointer",
+                  fontFamily: "Inter, sans-serif",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {es ? "Notificarme" : "Notify me"}
+              </button>
+            </div>
             <a
-              href="https://calendly.com/futbolu-agency"
+              href="https://calendly.com/miguelangelrojascas/new-meeting"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
+              style={{
+                fontSize: "13px",
+                color: "#888",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
             >
-              <Calendar className="w-4 h-4" />
-              O agenda una llamada gratuita →
+              {es ? "O agenda una llamada gratuita →" : "Or schedule a free call →"}
             </a>
           </div>
         </section>
-
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };
