@@ -12,36 +12,70 @@ export const SportHero = ({
   title,
   subtitle,
   stats,
+  image,
+  headline,
 }: {
   title: string;
   subtitle: string;
   stats: { value: string; label: string }[];
+  image?: string;
+  headline?: string;
 }) => (
-  <section className="py-24 md:py-32 px-4" style={{ backgroundColor: NAVY }}>
-    <div className="container-wide max-w-5xl mx-auto text-center">
+  <section
+    className="relative py-24 md:py-32 px-4 overflow-hidden"
+    style={{
+      backgroundColor: NAVY,
+      backgroundImage: image ? `url(${image})` : undefined,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    {image && (
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,16,30,0.78) 0%, rgba(10,16,30,0.85) 60%, rgba(10,16,30,0.95) 100%)",
+        }}
+      />
+    )}
+    <div className="container-wide max-w-5xl mx-auto text-center relative z-10">
       <Link to="/sports" className="inline-block mb-8">
         <img
           src={fuaSportsLogo}
           alt="FUA Sports"
-          className="h-24 sm:h-32 md:h-40 lg:h-48 w-auto mx-auto"
+          className="h-20 sm:h-24 md:h-28 w-auto mx-auto"
           style={{ filter: "brightness(0) invert(1)" }}
         />
       </Link>
+      {headline && (
+        <p
+          className="font-display uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-6"
+          style={{ color: RED }}
+        >
+          {headline}
+        </p>
+      )}
       <h1
-        className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-        style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
+        className="font-display font-bold text-white mb-6 leading-[1.05]"
+        style={{
+          fontSize: "clamp(40px, 7vw, 88px)",
+          textShadow: "0 4px 24px rgba(0,0,0,0.6)",
+          letterSpacing: "-0.02em",
+        }}
       >
         {title}
       </h1>
-      <p className="font-body text-base sm:text-lg md:text-xl text-white/75 max-w-3xl mx-auto mb-12 leading-relaxed">
+      <p className="font-body text-lg sm:text-xl md:text-2xl text-white/85 max-w-3xl mx-auto mb-12 leading-relaxed">
         {subtitle}
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
         {stats.map((s) => (
           <div
             key={s.label}
-            className="rounded-xl border border-white/10 px-4 py-6"
-            style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
+            className="rounded-xl border border-white/15 px-4 py-6 backdrop-blur-sm"
+            style={{ backgroundColor: "rgba(0,0,0,0.35)" }}
           >
             <div className="font-display text-2xl sm:text-3xl font-bold mb-2" style={{ color: RED }}>
               {s.value}

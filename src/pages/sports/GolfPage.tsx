@@ -19,6 +19,7 @@ import golfBagImg from "@/assets/golf-bag.jpg";
 import golfPlayersImg from "@/assets/golf-players.jpg";
 import golfSimulatorImg from "@/assets/golf-simulator.jpg";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
+import sportGolf from "@/assets/sport-golf.png";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -50,7 +51,23 @@ const TennisPage = () => {
           className="relative pt-28 md:pt-36 pb-20 md:pb-28 px-4 overflow-hidden"
           style={{ backgroundColor: NAVY }}
         >
-          {/* Decorative background */}
+          {/* Background image */}
+          <div className="absolute inset-0">
+            <img
+              src={sportGolf}
+              alt={es ? "Golf universitario" : "College golf"}
+              className="w-full h-full object-cover object-right"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(10,26,10,0.95) 0%, rgba(15,58,20,0.85) 55%, rgba(15,58,20,0.5) 100%)",
+              }}
+            />
+          </div>
+
+          {/* Decorative accents */}
           <div className="absolute inset-0 pointer-events-none">
             <div
               className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl"
@@ -66,7 +83,7 @@ const TennisPage = () => {
             {/* FUA Sports logo */}
             <div className="flex justify-center mb-6">
               <Link to="/sports">
-                <img src={fuaSportsLogo} alt="FUA Sports" className="h-24 sm:h-32 md:h-40 lg:h-48 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+                <img src={fuaSportsLogo} alt="FUA Sports" className="h-20 sm:h-24 md:h-28 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
               </Link>
             </div>
 
@@ -76,36 +93,33 @@ const TennisPage = () => {
                 FUA Sports
               </Link>
               <ChevronRight className="w-4 h-4" />
-              <span className="text-white/90">{es ? "Tenis" : "Tennis"}</span>
+              <span className="text-white/90">Golf</span>
             </div>
 
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 border"
-              style={{
-                borderColor: "rgba(176,7,23,0.4)",
-                backgroundColor: "rgba(176,7,23,0.12)",
-              }}
+            <p
+              className="font-display uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-4"
+              style={{ color: RED }}
             >
-              <Star className="w-4 h-4" style={{ color: RED }} fill={RED} />
-              <span className="text-xs sm:text-sm font-medium text-white font-body">
-                {es ? "100% de atletas con beca" : "100% of athletes with scholarship"}
-              </span>
-            </div>
+              {es ? "Tu swing. Tu beca. Tu futuro." : "Your swing. Your scholarship. Your future."}
+            </p>
 
             <h1
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight max-w-4xl"
-              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
+              className="font-display font-bold text-white mb-6 leading-[1.02] max-w-4xl"
+              style={{
+                fontSize: "clamp(48px, 8vw, 104px)",
+                textShadow: "0 4px 24px rgba(0,0,0,0.6)",
+                letterSpacing: "-0.02em",
+              }}
             >
-              {es ? "Becas de Tenis" : "Tennis Scholarships"}
+              {es ? "Becas de Golf" : "Golf Scholarships"}
               <br />
               <span style={{ color: RED }}>{es ? "Universitario en EE.UU." : "in the United States"}</span>
             </h1>
 
-            <p className="font-body text-base sm:text-lg md:text-xl text-white/75 max-w-3xl mb-12 leading-relaxed">
+            <p className="font-body text-lg sm:text-xl md:text-2xl text-white/85 max-w-3xl mb-12 leading-relaxed">
               {es
-                ? "Acompañamiento cercano para conseguir la beca que tu talento merece. De tu club local a la universidad americana de tus sueños."
-                : "Close guidance to secure the scholarship your talent deserves. From your local club to your dream American university."}
+                ? "De tu club local a la élite universitaria americana. +1,300 programas y $2.5B en becas anuales."
+                : "From your local club to the American university elite. 1,300+ programs and $2.5B in annual scholarships."}
             </p>
 
             {/* Stats */}

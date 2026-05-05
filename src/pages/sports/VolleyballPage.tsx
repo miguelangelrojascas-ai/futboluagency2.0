@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import sportVolleyball from "@/assets/sport-volleyball.png";
 import {
   SportHero,
   SportSection,
@@ -26,6 +27,8 @@ const VolleyballPage = () => {
       <main className="min-h-screen pt-16 md:pt-20" style={{ backgroundColor: LIGHT }}>
         <BackToSports />
         <SportHero
+          image={sportVolleyball}
+          headline={es ? "Tu red. Tu beca. Tu futuro." : "Your net. Your scholarship. Your future."}
           title={es ? "Becas de Voleibol Universitario en EE.UU." : "College Volleyball Scholarships in the U.S."}
           subtitle={
             es
