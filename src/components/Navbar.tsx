@@ -1,22 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, Trophy, ChevronDown } from "lucide-react";
+import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo-fua.png";
-import HubSpotFormModal from "@/components/HubSpotFormModal";
-import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showApplyMenu, setShowApplyMenu] = useState(false);
   const [showSportsMenu, setShowSportsMenu] = useState(false);
-  const applyMenuRef = useRef<HTMLDivElement>(null);
   const sportsMenuRef = useRef<HTMLDivElement>(null);
   const sportsCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
   const { language, t } = useLanguage();
   const es = language === "es";
-  const { isOpen: hubspotOpen, openForm, setIsOpen: setHubspotOpen } = useHubSpotForm();
 
   const links = [
     { to: "/", label: t("nav.home") },
