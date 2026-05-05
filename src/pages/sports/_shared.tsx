@@ -74,8 +74,8 @@ export const SportHero = ({
         {stats.map((s) => (
           <div
             key={s.label}
-            className="rounded-xl border border-white/10 px-4 py-6"
-            style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
+            className="rounded-xl border border-white/15 px-4 py-6 backdrop-blur-sm"
+            style={{ backgroundColor: "rgba(0,0,0,0.35)" }}
           >
             <div className="font-display text-2xl sm:text-3xl font-bold mb-2" style={{ color: RED }}>
               {s.value}
