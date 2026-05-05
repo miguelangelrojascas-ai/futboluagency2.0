@@ -32,9 +32,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (applyMenuRef.current && !applyMenuRef.current.contains(e.target as Node)) {
-        setShowApplyMenu(false);
-      }
       if (sportsMenuRef.current && !sportsMenuRef.current.contains(e.target as Node)) {
         setShowSportsMenu(false);
       }
