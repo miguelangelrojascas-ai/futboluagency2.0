@@ -450,12 +450,12 @@ const FUASports = () => {
                   style={{
                     display: "block",
                     textDecoration: "none",
-                    borderRadius: "16px",
+                     borderRadius: "16px",
                     overflow: "hidden",
                     background: s.gradient,
                     padding: "36px 32px",
                     position: "relative",
-                    minHeight: "200px",
+                    minHeight: "280px",
                     transition: "transform 0.2s ease, box-shadow 0.2s ease",
                   }}
                   onMouseOver={(e) => {
