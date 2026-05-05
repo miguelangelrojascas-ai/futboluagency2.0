@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   CheckCircle,
@@ -13,7 +14,10 @@ import {
   Award,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import tennisPlayerImg from "@/assets/tennis-player.jpg";
+import golfFlagImg from "@/assets/golf-flag.jpg";
+import golfBagImg from "@/assets/golf-bag.jpg";
+import golfPlayersImg from "@/assets/golf-players.jpg";
+import golfSimulatorImg from "@/assets/golf-simulator.jpg";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
