@@ -89,52 +89,31 @@ const FUASports = () => {
     <>
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
-        {/* ── CINEMATIC HERO CAROUSEL ── */}
+        {/* ── CENTERED HERO CAROUSEL ── */}
         <section
           style={{
             position: "relative",
             overflow: "hidden",
-            minHeight: "90vh",
+            minHeight: "92vh",
             background: slide.gradient,
             transition: "background 0.8s ease",
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
           }}
         >
-          {/* Background image */}
+          {/* Decorative glows */}
           <div
             style={{
               position: "absolute",
-              inset: 0,
-              backgroundImage: `url(${slide.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity: fading ? 0 : 0.35,
-              transition: "opacity 0.6s ease",
-              pointerEvents: "none",
-            }}
-          />
-          {/* Dark overlay for legibility */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.75) 100%)",
-              pointerEvents: "none",
-            }}
-          />
-          {/* Animated glow */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-100px",
-              right: "-100px",
-              width: "500px",
-              height: "500px",
+              top: "-120px",
+              right: "-120px",
+              width: "520px",
+              height: "520px",
               borderRadius: "50%",
-              background: `${slide.accent}18`,
-              filter: "blur(100px)",
+              background: `${slide.accent}26`,
+              filter: "blur(110px)",
               transition: "background 1s ease",
               pointerEvents: "none",
             }}
@@ -142,13 +121,13 @@ const FUASports = () => {
           <div
             style={{
               position: "absolute",
-              bottom: "-80px",
-              left: "-80px",
-              width: "400px",
-              height: "400px",
+              bottom: "-100px",
+              left: "-100px",
+              width: "440px",
+              height: "440px",
               borderRadius: "50%",
-              background: `rgba(176,7,23,0.08)`,
-              filter: "blur(80px)",
+              background: "rgba(176,7,23,0.18)",
+              filter: "blur(100px)",
               pointerEvents: "none",
             }}
           />
@@ -160,183 +139,165 @@ const FUASports = () => {
               bottom: 0,
               left: 0,
               right: 0,
-              height: "120px",
+              height: "140px",
               background: "linear-gradient(to bottom, transparent, #fafaf8)",
               zIndex: 2,
+              pointerEvents: "none",
             }}
           />
 
           <div
             style={{
-              maxWidth: "1100px",
-              margin: "0 auto",
-              padding: "80px 32px 120px",
               position: "relative",
               zIndex: 1,
               width: "100%",
+              maxWidth: "900px",
+              padding: "80px 24px 140px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
-              {/* LEFT — Logo + pitch */}
-              <div style={{ textAlign: "center" }}>
-                <img
-                  src={fuaSportsLogo}
-                  alt="FUA Sports"
+            <img
+              src={fuaSportsLogo}
+              alt="FUA Sports"
+              style={{
+                height: "56px",
+                width: "auto",
+                filter: "invert(1)",
+                marginBottom: "40px",
+                display: "block",
+              }}
+            />
+
+            {/* Animated tag + name + desc */}
+            <div
+              style={{
+                opacity: fading ? 0 : 1,
+                transform: fading ? "translateY(12px)" : "translateY(0)",
+                transition: "opacity 0.4s ease, transform 0.4s ease",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.25em",
+                  textTransform: "uppercase",
+                  color: slide.accent,
+                  display: "block",
+                  marginBottom: "18px",
+                  transition: "color 0.6s ease",
+                }}
+              >
+                {slide.tag}
+              </span>
+              <h1
+                style={{
+                  fontFamily: "Georgia, serif",
+                  fontSize: "clamp(64px, 12vw, 128px)",
+                  fontWeight: 700,
+                  color: "white",
+                  lineHeight: 1,
+                  letterSpacing: "-0.02em",
+                  marginBottom: "20px",
+                }}
+              >
+                {slide.name}
+              </h1>
+              <p
+                style={{
+                  color: "rgba(255,255,255,0.6)",
+                  fontSize: "16px",
+                  lineHeight: 1.7,
+                  maxWidth: "480px",
+                  margin: "0 auto 32px",
+                }}
+              >
+                {slide.desc}
+              </p>
+            </div>
+
+            {/* CTA */}
+            <Link
+              to={slide.path}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "white",
+                color: NAVY,
+                padding: "14px 28px",
+                borderRadius: "999px",
+                fontWeight: 700,
+                fontSize: "14px",
+                textDecoration: "none",
+                marginBottom: "36px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+              }}
+            >
+              {es ? "Ver programa" : "View program"}
+              <ArrowRight size={16} />
+            </Link>
+
+            {/* Progress dots */}
+            <div style={{ display: "flex", gap: "8px", marginBottom: "28px", justifyContent: "center" }}>
+              {SPORTS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  aria-label={`Slide ${i + 1}`}
                   style={{
-                    height: "120px",
-                    width: "auto",
-                    filter: "invert(1) brightness(1.2) drop-shadow(0 4px 18px rgba(255,255,255,0.25))",
-                    marginBottom: "28px",
-                    display: "block",
-                    marginInline: "auto",
+                    height: "4px",
+                    width: active === i ? "36px" : "16px",
+                    borderRadius: "2px",
+                    background: active === i ? "white" : "rgba(255,255,255,0.25)",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    transition: "all 0.3s ease",
                   }}
                 />
-                <h1
-                  className="text-2xl font-sans font-normal"
+              ))}
+            </div>
+
+            {/* Sport pills */}
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
+              {[
+                { name: "Volleyball", emoji: "🏐" },
+                { name: "Golf", emoji: "⛳" },
+                { name: "Tenis", emoji: "🎾" },
+                { name: "Track & Field", emoji: "🏃" },
+              ].map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
                   style={{
-                    color: "white",
-                    lineHeight: 1.2,
-                    marginBottom: "16px",
+                    borderRadius: "999px",
+                    padding: "10px 18px",
+                    background: active === i ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)",
+                    border:
+                      active === i
+                        ? "1px solid rgba(255,255,255,0.85)"
+                        : "1px solid rgba(255,255,255,0.12)",
+                    color: active === i ? "white" : "rgba(255,255,255,0.55)",
+                    fontWeight: active === i ? 700 : 500,
+                    fontSize: "13px",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
                   }}
                 >
-                  {es ? "Becas Universitarias para " : "University Scholarships for "}
-                  <span style={{ color: RED }}>{es ? "Todos los Deportes" : "All Sports"}</span>
-                </h1>
-                <p
-                  className="text-base"
-                  style={{
-                    color: "rgba(255,255,255,0.65)",
-                    lineHeight: 1.8,
-                    maxWidth: "420px",
-                    margin: "0 auto 32px",
-                  }}
-                >
-                  {es
-                    ? "La misma metodología que llevó a más de 350 atletas a universidades en EE.UU., ahora disponible en más disciplinas deportivas."
-                    : "The same methodology that placed 350+ athletes in U.S. universities, now available in more sports."}
-                </p>
-
-                {/* Stats row */}
-                <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center" }}>
-                  {[
-                    { n: "350+", l: es ? "Atletas colocados" : "Athletes placed" },
-                    { n: "4", l: es ? "Deportes activos" : "Active sports" },
-                    { n: "75–100%", l: es ? "Cobertura beca" : "Scholarship coverage" },
-                  ].map((s, i) => (
-                    <div key={i}>
-                      <div
-                        style={{
-                          fontFamily: "Georgia, serif",
-                          fontSize: "24px",
-                          fontWeight: 700,
-                          color: "white",
-                        }}
-                      >
-                        {s.n}
-                      </div>
-                      <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "2px" }}>{s.l}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* RIGHT — Animated sport */}
-              <div>
-                {/* Big sport name */}
-                <div
-                  style={{
-                    opacity: fading ? 0 : 1,
-                    transform: fading ? "translateY(12px)" : "translateY(0)",
-                    transition: "opacity 0.4s ease, transform 0.4s ease",
-                    marginBottom: "24px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: 700,
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      color: slide.accent,
-                      display: "block",
-                      marginBottom: "10px",
-                      transition: "color 0.6s ease",
-                    }}
-                  >
-                    {slide.tag}
-                  </span>
-                  <div
-                    style={{
-                      fontFamily: "Georgia, serif",
-                      fontSize: "clamp(48px, 8vw, 88px)",
-                      fontWeight: 700,
-                      color: "white",
-                      lineHeight: 1,
-                      marginBottom: "12px",
-                    }}
-                  >
-                    {slide.name}
-                  </div>
-                  <p className="text-base" style={{ color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "340px" }}>
-                    {slide.desc}
-                  </p>
-                </div>
-
-                {/* Progress dots */}
-                <div style={{ display: "flex", gap: "8px", marginBottom: "24px" }}>
-                  {SPORTS.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => goTo(i)}
-                      style={{
-                        height: "4px",
-                        width: active === i ? "32px" : "16px",
-                        borderRadius: "2px",
-                        background: active === i ? "white" : "rgba(255,255,255,0.2)",
-                        border: "none",
-                        cursor: "pointer",
-                        padding: 0,
-                        transition: "all 0.3s ease",
-                      }}
-                    />
-                  ))}
-                </div>
-
-                {/* Sport pills */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-                  {SPORTS.map((s, i) => (
-                    <Link
-                      key={i}
-                      to={s.path}
-                      onClick={() => goTo(i)}
-                      style={{
-                        borderRadius: "10px",
-                        padding: "14px 16px",
-                        background: active === i ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)",
-                        border: active === i ? "1px solid rgba(255,255,255,0.25)" : "1px solid rgba(255,255,255,0.08)",
-                        transition: "all 0.3s ease",
-                        textDecoration: "none",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span
-                        className="text-base"
-                        style={{
-                          fontFamily: "Georgia, serif",
-                          fontWeight: 700,
-                          color: active === i ? "white" : "rgba(255,255,255,0.45)",
-                          transition: "color 0.3s ease",
-                        }}
-                      >
-                        {s.name}
-                      </span>
-                      {active === i && <ArrowRight size={14} color="white" />}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                  <span>{p.emoji}</span>
+                  <span>{p.name}</span>
+                </button>
+              ))}
             </div>
           </div>
         </section>
