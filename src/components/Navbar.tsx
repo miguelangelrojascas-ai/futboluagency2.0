@@ -1,22 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, Trophy, ChevronDown } from "lucide-react";
+import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo-fua.png";
-import HubSpotFormModal from "@/components/HubSpotFormModal";
-import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showApplyMenu, setShowApplyMenu] = useState(false);
   const [showSportsMenu, setShowSportsMenu] = useState(false);
-  const applyMenuRef = useRef<HTMLDivElement>(null);
   const sportsMenuRef = useRef<HTMLDivElement>(null);
   const sportsCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
   const { language, t } = useLanguage();
   const es = language === "es";
-  const { isOpen: hubspotOpen, openForm, setIsOpen: setHubspotOpen } = useHubSpotForm();
 
   const links = [
     { to: "/", label: t("nav.home") },
@@ -37,9 +32,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (applyMenuRef.current && !applyMenuRef.current.contains(e.target as Node)) {
-        setShowApplyMenu(false);
-      }
       if (sportsMenuRef.current && !sportsMenuRef.current.contains(e.target as Node)) {
         setShowSportsMenu(false);
       }
@@ -125,35 +117,14 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="relative ml-2" ref={applyMenuRef}>
-              <button
-                onClick={() => setShowApplyMenu(!showApplyMenu)}
-                className="bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
-              >
-                {t("nav.applyCta")}
-              </button>
-              {showApplyMenu && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-[#ffffff] border border-border rounded-xl shadow-xl overflow-hidden z-50">
-                  <button
-                    onClick={() => { setShowApplyMenu(false); openForm(); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left font-body text-sm text-foreground hover:bg-muted/50 transition-colors"
-                  >
-                    <GraduationCap className="w-4 h-4 text-blue-500" />
-                    Programa USA
-                  </button>
-                  <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setShowApplyMenu(false)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left font-body text-sm text-foreground hover:bg-muted/50 transition-colors border-t border-border"
-                  >
-                    <Trophy className="w-4 h-4 text-primary" />
-                    Programa España
-                  </a>
-                </div>
-              )}
-            </div>
+            <a
+              href="https://calendly.com/futbolu-agency"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+            >
+              {t("nav.applyCta")}
+            </a>
           </div>
 
           {/* Mobile Toggle */}
@@ -210,28 +181,20 @@ const Navbar = () => {
                 ))}
               </div>
 
-              <button
-                onClick={() => { setIsOpen(false); openForm(); }}
-                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-muted/50"
-              >
-                <GraduationCap className="w-4 h-4 text-blue-500" />
-                Aplicar — USA
-              </button>
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
+                href="https://calendly.com/futbolu-agency"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-muted/50"
+                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary text-primary-foreground hover:bg-primary-hover"
               >
-                <Trophy className="w-4 h-4 text-primary" />
-                Aplicar — España
+                <GraduationCap className="w-4 h-4" />
+                {t("nav.applyCta")}
               </a>
             </div>
           </div>
         )}
       </nav>
-      <HubSpotFormModal open={hubspotOpen} onOpenChange={setHubspotOpen} />
     </>
   );
 };
