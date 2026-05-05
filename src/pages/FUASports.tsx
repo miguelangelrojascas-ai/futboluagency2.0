@@ -268,10 +268,10 @@ const FUASports = () => {
             {/* Sport pills */}
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
               {[
-                { name: "Volleyball", emoji: "🏐" },
-                { name: "Golf", emoji: "⛳" },
-                { name: "Tenis", emoji: "🎾" },
-                { name: "Track & Field", emoji: "🏃" },
+                { name: "Volleyball" },
+                { name: "Golf" },
+                { name: "Tenis" },
+                { name: "Track & Field" },
               ].map((p, i) => (
                 <button
                   key={i}
@@ -294,7 +294,6 @@ const FUASports = () => {
                     gap: "6px",
                   }}
                 >
-                  <span>{p.emoji}</span>
                   <span>{p.name}</span>
                 </button>
               ))}
@@ -480,6 +479,23 @@ const FUASports = () => {
                       background: `${s.accent}20`,
                       filter: "blur(40px)",
                       pointerEvents: "none",
+                    }}
+                  />
+
+                  {/* Sport image */}
+                  <img
+                    src={s.image}
+                    alt={s.name}
+                    style={{
+                      position: "absolute",
+                      bottom: "-20px",
+                      right: "-20px",
+                      width: "180px",
+                      height: "180px",
+                      objectFit: "contain",
+                      opacity: 0.85,
+                      pointerEvents: "none",
+                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.4))",
                     }}
                   />
 
