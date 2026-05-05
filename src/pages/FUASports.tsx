@@ -450,12 +450,12 @@ const FUASports = () => {
                   style={{
                     display: "block",
                     textDecoration: "none",
-                    borderRadius: "16px",
+                     borderRadius: "16px",
                     overflow: "hidden",
                     background: s.gradient,
                     padding: "36px 32px",
                     position: "relative",
-                    minHeight: "200px",
+                    minHeight: "280px",
                     transition: "transform 0.2s ease, box-shadow 0.2s ease",
                   }}
                   onMouseOver={(e) => {
@@ -482,20 +482,29 @@ const FUASports = () => {
                     }}
                   />
 
-                  {/* Sport image */}
+                  {/* Sport image as background */}
                   <img
                     src={s.image}
                     alt={s.name}
                     style={{
                       position: "absolute",
-                      bottom: "-20px",
-                      right: "-20px",
-                      width: "180px",
-                      height: "180px",
-                      objectFit: "contain",
-                      opacity: 0.85,
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: 0.55,
                       pointerEvents: "none",
-                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.4))",
+                      zIndex: 0,
+                    }}
+                  />
+                  {/* Dark overlay for legibility */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",
+                      pointerEvents: "none",
+                      zIndex: 0,
                     }}
                   />
 
