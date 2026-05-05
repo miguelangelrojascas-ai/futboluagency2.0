@@ -32,6 +32,15 @@ const TennisPage = () => {
   const { language } = useLanguage();
   const es = language === "es";
 
+  const [activeWhy, setActiveWhy] = useState(0);
+  const whyPausedRef = useRef(false);
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      if (!whyPausedRef.current) setActiveWhy((i) => (i + 1) % 4);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <>
       <Navbar />
