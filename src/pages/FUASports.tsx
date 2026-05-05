@@ -277,7 +277,7 @@ const FUASports = () => {
                   >
                     {slide.name}
                   </div>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "340px" }}>
+                  <p className="text-base" style={{ color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "340px" }}>
                     {slide.desc}
                   </p>
                 </div>
