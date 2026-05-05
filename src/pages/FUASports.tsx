@@ -323,9 +323,9 @@ const FUASports = () => {
                       }}
                     >
                       <span
+                        className="text-base"
                         style={{
                           fontFamily: "Georgia, serif",
-                          fontSize: "14px",
                           fontWeight: 700,
                           color: active === i ? "white" : "rgba(255,255,255,0.45)",
                           transition: "color 0.3s ease",
