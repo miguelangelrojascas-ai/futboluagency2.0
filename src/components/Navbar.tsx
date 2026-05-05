@@ -189,22 +189,15 @@ const Navbar = () => {
                 ))}
               </div>
 
-              <button
-                onClick={() => { setIsOpen(false); openForm(); }}
-                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-muted/50"
-              >
-                <GraduationCap className="w-4 h-4 text-blue-500" />
-                Aplicar — USA
-              </button>
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
+                href="https://calendly.com/futbolu-agency"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-muted/50"
+                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary text-primary-foreground hover:bg-primary-hover"
               >
-                <Trophy className="w-4 h-4 text-primary" />
-                Aplicar — España
+                <GraduationCap className="w-4 h-4" />
+                {t("nav.applyCta")}
               </a>
             </div>
           </div>
