@@ -219,7 +219,7 @@ const FUASports = () => {
                 </p>
 
                 {/* Stats row */}
-                <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center" }}>
                   {[
                     { n: "350+", l: es ? "Atletas colocados" : "Athletes placed" },
                     { n: "4", l: es ? "Deportes activos" : "Active sports" },
