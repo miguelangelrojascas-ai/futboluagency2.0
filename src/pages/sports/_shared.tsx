@@ -147,7 +147,7 @@ export const FinalCTA = ({ label, sub }: { label: string; sub: string }) => (
 );
 
 export const BackToSports = () => (
-  <div className="absolute top-20 md:top-24 left-4 sm:left-6 z-20">
+  <div className="fixed top-20 md:top-24 left-4 sm:left-6 z-30">
     <Link
       to="/sports"
       className="inline-flex items-center gap-2 font-body text-xs sm:text-sm font-semibold px-4 py-2 rounded-full backdrop-blur-md border border-white/20 text-white/90 hover:text-white hover:bg-white/10 transition-all"
