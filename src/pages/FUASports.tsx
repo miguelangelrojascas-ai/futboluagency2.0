@@ -192,10 +192,8 @@ const FUASports = () => {
                   }}
                 />
                 <h1
+                  className="text-2xl font-sans font-normal"
                   style={{
-                    fontFamily: "Georgia, serif",
-                    fontSize: "clamp(28px, 4vw, 48px)",
-                    fontWeight: 700,
                     color: "white",
                     lineHeight: 1.2,
                     marginBottom: "16px",
@@ -205,8 +203,8 @@ const FUASports = () => {
                   <span style={{ color: RED }}>{es ? "Todos los Deportes" : "All Sports"}</span>
                 </h1>
                 <p
+                  className="text-base"
                   style={{
-                    fontSize: "15px",
                     color: "rgba(255,255,255,0.65)",
                     lineHeight: 1.8,
                     maxWidth: "420px",
@@ -279,7 +277,7 @@ const FUASports = () => {
                   >
                     {slide.name}
                   </div>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "340px" }}>
+                  <p className="text-base" style={{ color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "340px" }}>
                     {slide.desc}
                   </p>
                 </div>
