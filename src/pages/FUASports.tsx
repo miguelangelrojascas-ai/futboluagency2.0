@@ -192,10 +192,8 @@ const FUASports = () => {
                   }}
                 />
                 <h1
+                  className="text-2xl font-sans font-normal"
                   style={{
-                    fontFamily: "Georgia, serif",
-                    fontSize: "clamp(28px, 4vw, 48px)",
-                    fontWeight: 700,
                     color: "white",
                     lineHeight: 1.2,
                     marginBottom: "16px",
