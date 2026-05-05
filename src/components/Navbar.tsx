@@ -118,9 +118,11 @@ const Navbar = () => {
             </div>
 
             <a
-              href="https://calendly.com/futbolu-agency"
-              target="_blank"
-              rel="noopener noreferrer"
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
+                (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
+              }}
               className="ml-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
             >
               {t("nav.applyCta")}
@@ -182,10 +184,12 @@ const Navbar = () => {
               </div>
 
               <a
-                href="https://calendly.com/futbolu-agency"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
+                }}
                 className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary text-primary-foreground hover:bg-primary-hover"
               >
                 <GraduationCap className="w-4 h-4" />
