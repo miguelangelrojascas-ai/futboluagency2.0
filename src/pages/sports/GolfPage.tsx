@@ -148,7 +148,7 @@ const TennisPage = () => {
                 {es ? "La oportunidad" : "The opportunity"}
               </span>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3" style={{ color: NAVY }}>
-                {es ? "¿Por qué el Tenis Universitario en EE.UU.?" : "Why University Tennis in the USA?"}
+                {es ? "¿Por qué el Golf Universitario en EE.UU.?" : "Why University Golf in the USA?"}
               </h2>
               <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 20px" }} />
               <p className="font-body text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
