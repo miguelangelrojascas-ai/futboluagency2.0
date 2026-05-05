@@ -101,6 +101,29 @@ const FUASports = () => {
             alignItems: "center",
           }}
         >
+          {/* Background image */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url(${slide.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: fading ? 0 : 0.35,
+              transition: "opacity 0.6s ease",
+              pointerEvents: "none",
+            }}
+          />
+          {/* Dark overlay for legibility */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.75) 100%)",
+              pointerEvents: "none",
+            }}
+          />
           {/* Animated glow */}
           <div
             style={{
