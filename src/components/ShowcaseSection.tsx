@@ -157,8 +157,10 @@ const ShowcaseSection = () => {
               </div>
 
               <div className="space-y-3">
-                <button
-                  onClick={openCalendly}
+                <a
+                  href="https://forms.gle/fGpZNHmB87sroUAT9"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group w-full inline-flex items-center justify-center gap-2 h-14 px-6 rounded-xl text-white font-body font-bold transition-all hover:scale-[1.02]"
                   style={{
                     background: `linear-gradient(135deg, ${RED} 0%, #7a0510 100%)`,
@@ -168,11 +170,11 @@ const ShowcaseSection = () => {
                   <span className="flex flex-col items-center leading-tight">
                     <span className="text-base">Aplica al Showcase</span>
                     <span className="text-[11px] font-normal opacity-90">
-                      Reserva tu llamada gratuita
+                      Rellena el formulario
                     </span>
                   </span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </a>
                 <a
                   href="tel:+34603331990"
                   className="block text-center font-body text-xs text-muted-foreground hover:text-foreground transition-colors"
