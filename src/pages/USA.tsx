@@ -101,6 +101,8 @@ const USA = () => {
           />
         </section>
 
+        <USAScholarshipOpportunity />
+
         <StudentAthleteExperience />
 
         {/* Scholarship / Financial Analysis */}
