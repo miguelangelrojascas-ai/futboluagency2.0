@@ -283,8 +283,8 @@ const About = () => {
             onClick={(e) => e.stopPropagation()}
             style={{
               background: "white", borderRadius: "20px",
-              maxWidth: "620px", width: "100%",
-              maxHeight: "90vh", overflowY: "auto",
+              maxWidth: "960px", width: "100%",
+              maxHeight: "90vh", overflow: "hidden",
               position: "relative",
             }}
           >
@@ -292,59 +292,57 @@ const About = () => {
               onClick={() => setActiveIndex(null)}
               style={{
                 position: "absolute", top: "16px", right: "16px", zIndex: 10,
-                width: "32px", height: "32px", borderRadius: "50%",
-                background: "#f5f4f2", border: "none", cursor: "pointer",
+                width: "40px", height: "40px", borderRadius: "50%",
+                background: "rgba(255,255,255,0.9)", border: "1px solid rgba(18,33,58,0.12)", cursor: "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}
             >
-              <X className="w-4 h-4" style={{ color: NAVY }} />
+              <X className="w-5 h-5" style={{ color: NAVY }} />
             </button>
 
-            <div className="p-6 sm:p-8">
-              <div className="flex flex-col sm:flex-row gap-5 mb-6">
+            <div className="grid md:grid-cols-2" style={{ maxHeight: "90vh" }}>
+              {/* INFO */}
+              <div className="p-8 sm:p-10 md:p-12 order-2 md:order-1 overflow-y-auto">
+                <span
+                  className="block font-body text-[11px] tracking-[0.18em] uppercase font-semibold mb-3"
+                  style={{ color: "rgba(18,33,58,0.45)" }}
+                >
+                  {selected.role[es ? "es" : "en"]}
+                </span>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6" style={{ color: NAVY }}>
+                  {selected.name}
+                </h2>
+
+                <div className="space-y-4">
+                  {selected.bio ? (
+                    selected.bio[es ? "es" : "en"].map((p: string, i: number) => (
+                      <p key={i} className="font-body text-sm sm:text-base leading-relaxed" style={{ color: "rgba(18,33,58,0.7)" }}>
+                        {p}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="font-body text-sm sm:text-base italic" style={{ color: "rgba(18,33,58,0.6)" }}>
+                      {es ? "Bio próximamente." : "Bio coming soon."}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* PHOTO */}
+              <div className="relative order-1 md:order-2 bg-[#0d0d0d] min-h-[260px] md:min-h-full">
                 {selected.image ? (
                   <img
                     src={selected.image}
                     alt={selected.name}
-                    className="w-32 h-40 sm:w-36 sm:h-48 object-cover rounded-xl flex-shrink-0"
+                    className="absolute inset-0 w-full h-full object-cover"
                     style={{ objectPosition: "center 15%" }}
                   />
                 ) : (
-                  <div
-                    className="w-32 h-40 sm:w-36 sm:h-48 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "#f5f4f2" }}
-                  >
-                    <span className="font-display text-4xl font-bold" style={{ color: "rgba(18,33,58,0.2)" }}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display text-6xl font-bold" style={{ color: "rgba(255,255,255,0.12)" }}>
                       {selected.initials}
                     </span>
                   </div>
-                )}
-                <div className="flex flex-col justify-center">
-                  <span
-                    className="inline-block w-fit font-body text-[10px] tracking-[0.15em] uppercase font-semibold mb-2 px-2.5 py-1 rounded-full text-white"
-                    style={{ background: RED }}
-                  >
-                    {selected.role[es ? "es" : "en"]}
-                  </span>
-                  <h2 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: NAVY }}>
-                    {selected.name}
-                  </h2>
-                </div>
-              </div>
-
-              <div style={{ height: "1px", background: "rgba(18,33,58,0.1)", margin: "0 0 24px" }} />
-
-              <div className="space-y-4">
-                {selected.bio ? (
-                  selected.bio[es ? "es" : "en"].map((p: string, i: number) => (
-                    <p key={i} className="font-body text-sm sm:text-base leading-relaxed" style={{ color: "rgba(18,33,58,0.75)" }}>
-                      {p}
-                    </p>
-                  ))
-                ) : (
-                  <p className="font-body text-sm sm:text-base italic" style={{ color: "rgba(18,33,58,0.6)" }}>
-                    {es ? "Bio próximamente." : "Bio coming soon."}
-                  </p>
                 )}
               </div>
             </div>
