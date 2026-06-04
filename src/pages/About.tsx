@@ -189,66 +189,53 @@ const About = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 max-w-5xl mx-auto">
               {teamMembers.map((member, i) => {
                 const hasBio = member.bio !== null;
                 return (
                   <div
                     key={i}
                     onClick={() => (hasBio ? setActiveIndex(i) : null)}
-                    className="relative rounded-2xl overflow-hidden aspect-[3/4] group transition-all duration-300"
-                    style={{
-                      cursor: hasBio ? "pointer" : "default",
-                      border: "1px solid rgba(18,33,58,0.08)",
-                      background: "white",
-                    }}
-                    onMouseOver={(e) => {
-                      if (hasBio) {
-                        e.currentTarget.style.borderColor = RED;
-                        e.currentTarget.style.boxShadow = "0 12px 32px rgba(176,7,23,0.15)";
-                      }
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(18,33,58,0.08)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
+                    className="group"
+                    style={{ cursor: hasBio ? "pointer" : "default" }}
                   >
-                    {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        style={{ objectPosition: "center 15%" }}
-                      />
-                    ) : (
-                      <div
-                        className="absolute inset-0 flex items-center justify-center"
-                        style={{ background: "linear-gradient(135deg, #f5f4f2 0%, #e5e5e5 100%)" }}
-                      >
-                        <span className="font-display text-6xl font-bold" style={{ color: "rgba(18,33,58,0.15)" }}>
-                          {member.initials}
-                        </span>
-                      </div>
-                    )}
+                    <div className="relative overflow-hidden aspect-[4/5] bg-[#0d0d0d]">
+                      {member.image ? (
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                          style={{ objectPosition: "center 15%" }}
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0 flex items-center justify-center"
+                          style={{ background: "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)" }}
+                        >
+                          <span className="font-display text-6xl font-bold" style={{ color: "rgba(255,255,255,0.12)" }}>
+                            {member.initials}
+                          </span>
+                        </div>
+                      )}
+                    </div>
 
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: "linear-gradient(to top, rgba(18,33,58,0.92) 0%, rgba(18,33,58,0.4) 45%, rgba(18,33,58,0) 100%)" }}
-                    />
-
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="pt-4">
                       <span
-                        className="inline-block font-body text-[10px] tracking-[0.15em] uppercase font-semibold mb-2 px-2.5 py-1 rounded-full text-white"
-                        style={{ background: RED }}
+                        className="block font-body text-[11px] tracking-[0.18em] uppercase font-semibold mb-1.5"
+                        style={{ color: "rgba(18,33,58,0.45)" }}
                       >
                         {member.role[es ? "es" : "en"]}
                       </span>
-                      <h3 className="font-display text-lg font-bold text-white leading-tight mb-1.5" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>
+                      <h3 className="font-display text-xl font-bold leading-tight" style={{ color: NAVY }}>
                         {member.name}
                       </h3>
                       {hasBio && (
-                        <span className="inline-flex items-center gap-1.5 font-body text-sm text-white/80 group-hover:text-white transition-colors">
-                          {es ? "Ver perfil" : "View profile"} <ArrowRight className="w-4 h-4" />
+                        <span
+                          className="inline-flex items-center gap-2 mt-3 font-body text-sm transition-all group-hover:gap-3"
+                          style={{ color: RED }}
+                        >
+                          <span className="h-px w-6 transition-all group-hover:w-10" style={{ background: RED }} />
+                          <ArrowRight className="w-4 h-4" />
                         </span>
                       )}
                     </div>
