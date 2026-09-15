@@ -52,7 +52,7 @@ const SpainAcademiesSection = () => {
               alt="CF Talavera de la Reina"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.95) 55%, rgba(0,0,0,0.2) 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.05) 100%)" }} />
 
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
               <span className="inline-block font-body text-[11px] sm:text-xs tracking-[0.15em] uppercase font-medium bg-primary text-primary-foreground px-3 py-1 rounded-full">

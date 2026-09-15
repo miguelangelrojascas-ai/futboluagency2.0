@@ -62,6 +62,13 @@ const FUASports = () => {
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
 
+  useEffect(() => {
+    document.title = "FUA Sports | Becas para Volleyball, Golf, Tenis y Atletismo – FutbolUAgency";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "FUA Sports abre becas universitarias en USA para volleyball, golf, tenis y atletismo. Más de $4B en becas disponibles cada año.");
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "FUA Sports | Becas Multi-Deporte – FutbolUAgency");
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "FUA Sports abre becas universitarias en USA para volleyball, golf, tenis y atletismo. Más de $4B en becas disponibles cada año.");
+  }, []);
+
   // Auto-advance carousel
   useEffect(() => {
     const interval = setInterval(() => {
@@ -103,6 +110,25 @@ const FUASports = () => {
             textAlign: "center",
           }}
         >
+          {/* Sport background image — fades with the slide */}
+          <img
+            key={slide.image}
+            src={slide.image}
+            alt={slide.name}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              opacity: fading ? 0 : 0.28,
+              transition: "opacity 0.6s ease",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+
           {/* Decorative glows */}
           <div
             style={{
@@ -116,6 +142,7 @@ const FUASports = () => {
               filter: "blur(110px)",
               transition: "background 1s ease",
               pointerEvents: "none",
+              zIndex: 1,
             }}
           />
           <div
@@ -129,6 +156,7 @@ const FUASports = () => {
               background: "rgba(176,7,23,0.18)",
               filter: "blur(100px)",
               pointerEvents: "none",
+              zIndex: 1,
             }}
           />
 
@@ -149,7 +177,7 @@ const FUASports = () => {
           <div
             style={{
               position: "relative",
-              zIndex: 1,
+              zIndex: 2,
               width: "100%",
               maxWidth: "900px",
               padding: "80px 24px 140px",

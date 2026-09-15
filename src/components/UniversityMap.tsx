@@ -396,7 +396,7 @@ const UniversityMap = () => {
   const selectedData = selected ? universitiesByState[selected.abbr] : null;
 
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
       <div className="container-wide px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block mb-4 text-[#b00717] font-body text-xs tracking-[0.15em] uppercase font-bold">

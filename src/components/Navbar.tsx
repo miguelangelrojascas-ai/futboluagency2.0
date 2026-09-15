@@ -4,31 +4,24 @@ import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo-fua.png";
 
+const fuaDropdown = [
+  { to: "/sports/volleyball", label: "Volleyball" },
+  { to: "/sports/golf",       label: "Golf" },
+  { to: "/sports/tennis",     label: "Tenis" },
+  { to: "/sports/track",      label: "Track & Field" },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSportsMenu, setShowSportsMenu] = useState(false);
+  const [showMobileSports, setShowMobileSports] = useState(false);
   const sportsMenuRef = useRef<HTMLDivElement>(null);
   const sportsCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
-  const { language, t } = useLanguage();
-  const es = language === "es";
-
-  const links = [
-    { to: "/", label: t("nav.home") },
-    { to: "/usa", label: t("nav.usa") },
-    { to: "/spain", label: t("nav.spain") },
-    { to: "/about", label: t("nav.about") },
-  ];
-
-  const sports = [
-    { to: "/sports/tennis", label: es ? "Tenis" : "Tennis" },
-    { to: "/sports/golf", label: "Golf" },
-    { to: "/sports/track", label: es ? "Atletismo" : "Track & Field" },
-    { to: "/sports/volleyball", label: es ? "Voleibol" : "Volleyball" },
-  ];
+  const { t } = useLanguage();
 
   const isActive = (path: string) => location.pathname === path;
-  const isSportsActive = location.pathname.startsWith("/sports");
+  const isSportsActive = location.pathname.startsWith("/sports/");
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -49,32 +42,44 @@ const Navbar = () => {
     sportsCloseTimer.current = setTimeout(() => setShowSportsMenu(false), 150);
   };
 
+  const navLinkClass = (active: boolean) =>
+    `font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
+      active
+        ? "text-primary bg-primary/10"
+        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+    }`;
+
+  const mobileNavLinkClass = (active: boolean) =>
+    `font-body text-sm font-bold text-center px-4 py-3 rounded-lg transition-colors ${
+      active
+        ? "text-primary bg-primary/10"
+        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+    }`;
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg navbar-shadow">
         <div className="container-wide flex items-center justify-between px-4 sm:px-6 h-16 md:h-20">
+
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img src={logo} alt="FutbolUAgency LLC." className="h-10 md:h-14 w-auto" />
           </Link>
 
-          {/* Desktop Links */}
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
-                  isActive(link.to)
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
 
-            {/* FUA Sports dropdown */}
+            {/* Inicio */}
+            <Link to="/" className={navLinkClass(isActive("/"))}>
+              {t("nav.home")}
+            </Link>
+
+            {/* Becas Fútbol EE.UU. — direct link, no dropdown */}
+            <Link to="/usa" className={navLinkClass(isActive("/usa"))}>
+              Becas Fútbol EE.UU.
+            </Link>
+
+            {/* FUA Sports dropdown (hover) */}
             <div
               className="relative"
               ref={sportsMenuRef}
@@ -84,31 +89,43 @@ const Navbar = () => {
               <Link
                 to="/sports"
                 onClick={() => setShowSportsMenu(false)}
-                className={`font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors inline-flex items-center gap-1 ${
-                  isSportsActive
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                }`}
+                className={`${navLinkClass(isSportsActive)} inline-flex items-center gap-1`}
               >
                 FUA Sports
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${showSportsMenu ? "rotate-180" : ""}`}
                 />
               </Link>
+
               <div
-                className={`absolute left-1/2 -translate-x-1/2 top-full pt-2 w-52 transition-all duration-200 origin-top ${
+                className={`absolute left-1/2 -translate-x-1/2 top-full pt-2 w-52 origin-top ${
                   showSportsMenu
                     ? "opacity-100 translate-y-0 pointer-events-auto"
-                    : "opacity-0 -translate-y-2 pointer-events-none"
+                    : "opacity-0 -translate-y-1 pointer-events-none"
                 }`}
+              style={{ transition: "opacity 150ms ease-out, transform 150ms cubic-bezier(0.23,1,0.32,1)" }}
               >
-                <div className="bg-white border border-border rounded-xl shadow-xl overflow-hidden">
-                  {sports.map((s) => (
+                <div
+                  style={{
+                    background: "white",
+                    border: "1px solid #e5e5e5",
+                    borderRadius: "12px",
+                    boxShadow: "0 8px 24px rgba(18,33,58,0.1)",
+                    overflow: "hidden",
+                  }}
+                >
+                  {fuaDropdown.map((s) => (
                     <Link
                       key={s.to}
                       to={s.to}
                       onClick={() => setShowSportsMenu(false)}
-                      className="block px-4 py-3 font-body text-sm text-foreground hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
+                      className="block transition-colors hover:bg-[#f5f4f2]"
+                      style={{
+                        padding: "10px 16px",
+                        fontSize: "14px",
+                        color: isActive(s.to) ? "#b00717" : "#12213a",
+                        fontWeight: isActive(s.to) ? 600 : 400,
+                      }}
                     >
                       {s.label}
                     </Link>
@@ -117,19 +134,30 @@ const Navbar = () => {
               </div>
             </div>
 
+            {/* España */}
+            <Link to="/spain" className={navLinkClass(isActive("/spain"))}>
+              {t("nav.spain")}
+            </Link>
+
+            {/* Nosotros */}
+            <Link to="/about" className={navLinkClass(isActive("/about"))}>
+              {t("nav.about")}
+            </Link>
+
+            {/* CTA */}
             <a
               href=""
               onClick={(e) => {
                 e.preventDefault();
                 (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
               }}
-              className="ml-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+              className="ml-2 bg-[#b00717] hover:bg-[#900612] text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
             >
               {t("nav.applyCta")}
             </a>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 text-foreground"
@@ -139,50 +167,58 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
             <div className="container-wide px-4 py-4 flex flex-col gap-1">
-              {links.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setIsOpen(false)}
-                  className={`font-body text-sm font-medium px-4 py-3 rounded-lg transition-colors ${
-                    isActive(link.to)
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
 
-              {/* Mobile FUA Sports + sublinks */}
-              <Link
-                to="/sports"
-                onClick={() => setIsOpen(false)}
-                className={`font-body text-sm font-medium px-4 py-3 rounded-lg transition-colors ${
-                  isSportsActive
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                }`}
+              {/* Inicio */}
+              <Link to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>
+                {t("nav.home")}
+              </Link>
+
+              {/* Becas Fútbol EE.UU. */}
+              <Link to="/usa" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/usa"))}>
+                Becas Fútbol EE.UU.
+              </Link>
+
+              {/* FUA Sports dropdown (click) */}
+              <button
+                onClick={() => setShowMobileSports(!showMobileSports)}
+                className={`${mobileNavLinkClass(isSportsActive)} inline-flex items-center justify-center w-full gap-1`}
               >
                 FUA Sports
-              </Link>
-              <div className="pl-4 flex flex-col gap-1">
-                {sports.map((s) => (
-                  <Link
-                    key={s.to}
-                    to={s.to}
-                    onClick={() => setIsOpen(false)}
-                    className="font-body text-sm px-4 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                  >
-                    {s.label}
-                  </Link>
-                ))}
-              </div>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${showMobileSports ? "rotate-180" : ""}`}
+                />
+              </button>
+              {showMobileSports && (
+                <div className="flex flex-col gap-0.5">
+                  {fuaDropdown.map((s) => (
+                    <Link
+                      key={s.to}
+                      to={s.to}
+                      onClick={() => { setIsOpen(false); setShowMobileSports(false); }}
+                      className="block px-4 py-2 rounded-lg font-body text-sm font-bold text-center transition-colors hover:bg-muted/50"
+                      style={{ color: isActive(s.to) ? "#b00717" : undefined }}
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
 
+              {/* España */}
+              <Link to="/spain" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/spain"))}>
+                {t("nav.spain")}
+              </Link>
+
+              {/* Nosotros */}
+              <Link to="/about" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/about"))}>
+                {t("nav.about")}
+              </Link>
+
+              {/* CTA */}
               <a
                 href=""
                 onClick={(e) => {
@@ -190,7 +226,7 @@ const Navbar = () => {
                   setIsOpen(false);
                   (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
                 }}
-                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary text-primary-foreground hover:bg-primary-hover"
+                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-[#b00717] hover:bg-[#900612] text-white"
               >
                 <GraduationCap className="w-4 h-4" />
                 {t("nav.applyCta")}

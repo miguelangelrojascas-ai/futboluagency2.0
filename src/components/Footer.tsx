@@ -51,10 +51,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-10">
           {/* Brand Column */}
           <div className="text-center md:text-left">
-            <img 
-              src={logo} 
-              alt="FutbolUAgency LLC." 
+            <img
+              src={logo}
+              alt="FutbolUAgency LLC."
               className="h-16 sm:h-20 w-auto mx-auto md:mx-0 mb-4"
+              loading="lazy"
             />
             <h3 className="font-display text-lg font-bold text-white mb-2" style={{ color: "#ffffff" }}>
               FutbolUAgency LLC.
@@ -77,12 +78,19 @@ const Footer = () => {
                 <Mail className="w-4 h-4" />
                 futboluagency@gmail.com
               </a>
-              <a 
-                href="tel:+34603331990" 
+              <a
+                href="tel:+34603331990"
                 className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +34 603 331 990
+                +34 603 331 990 <span className="text-white/40 text-xs">España</span>
+              </a>
+              <a
+                href="tel:+573337064037"
+                className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                +57 333 706 4037 <span className="text-white/40 text-xs">Latam</span>
               </a>
               <div className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70">
                 <MapPin className="w-4 h-4" />

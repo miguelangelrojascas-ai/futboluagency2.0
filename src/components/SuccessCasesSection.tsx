@@ -95,6 +95,7 @@ const SuccessCasesSection = () => {
                 src={successCase.image}
                 alt={successCase.name}
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
           </div>

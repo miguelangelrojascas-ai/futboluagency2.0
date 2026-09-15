@@ -25,7 +25,7 @@ const StudentAthleteExperience = () => {
   const [activeItem, setActiveItem] = useState(0);
 
   return (
-    <section className="py-24 bg-transparent">
+    <section className="py-24" style={{ backgroundColor: "#fafaf8" }}>
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         {/* Left Column */}
         <div>

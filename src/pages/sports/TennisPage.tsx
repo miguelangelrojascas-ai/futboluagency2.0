@@ -93,7 +93,7 @@ const TennisPage = () => {
             {/* FUA Sports logo */}
             <div className="flex justify-center mb-6">
               <Link to="/sports">
-                <img src={fuaSportsLogo} alt="FUA Sports" className="h-20 sm:h-24 md:h-28 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+                <img src={fuaSportsLogo} alt="FUA Sports" className="h-20 sm:h-24 md:h-28 w-auto" style={{ filter: "brightness(0) invert(1)" }} loading="lazy" />
               </Link>
             </div>
 

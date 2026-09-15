@@ -24,6 +24,13 @@ import spainAcademy from "@/assets/spain-academy.jpg";
 const Spain = () => {
   const { t, language } = useLanguage();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.title = "Programa en España | Academias de Fútbol Élite – FutbolUAgency";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales en Madrid. Para jugadores internacionales de 14 a 19 años.");
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "Programa en España | FutbolUAgency");
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales en Madrid.");
+  }, []);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
@@ -76,7 +83,10 @@ const Spain = () => {
   const scrollBy = (direction: number) => {
     const el = scrollContainerRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction * 320, behavior: "smooth" });
+    const card = el.children[0] as HTMLElement;
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 16; // card + gap-4
+    el.scrollBy({ left: direction * cardWidth, behavior: "smooth" });
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -123,7 +133,7 @@ const Spain = () => {
               <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
                 {t("spain.tag")}
               </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-[1.08]">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-[1.08] text-white" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
                 {language === "es"
                   ? "Juega en Academias Profesionales en España"
                   : "Play in Professional Academies in Spain"}
@@ -190,12 +200,13 @@ const Spain = () => {
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
               className={`flex gap-4 overflow-x-auto scrollbar-hide pb-2 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none", scrollSnapType: "x mandatory" }}
             >
               {carouselCards.map((card, i) => (
                 <div
                   key={i}
                   className="flex-shrink-0 w-[75%] sm:w-[280px] md:w-[300px] lg:w-[320px] rounded-2xl overflow-hidden relative aspect-[3/4] group"
+                  style={{ scrollSnapAlign: "start" }}
                 >
                   <img
                     src={card.image}

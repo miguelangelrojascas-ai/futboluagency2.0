@@ -20,6 +20,17 @@ const PathSelectionSection = () => {
     },
     {
       number: "02",
+      tag: "",
+      title: isEs ? "Otros Deportes Universitarios" : "Other College Sports",
+      desc: isEs
+        ? "Becas universitarias en EE.UU. para tenis, golf, atletismo y voleibol. Mismo proceso, mismo compromiso, ahora ampliando a más disciplinas para atletas internacionales."
+        : "U.S. college scholarships for tennis, golf, track & field and volleyball. Same process, same commitment, now expanding to more disciplines for international athletes.",
+      cta: isEs ? "Ver deportes" : "View sports",
+      to: "/sports",
+      accent: "#12213a",
+    },
+    {
+      number: "03",
       tag: isEs ? "Año de Preparación" : "Preparation Year",
       title: isEs ? "Gap Year en España" : "Gap Year in Spain",
       desc: isEs
@@ -28,17 +39,6 @@ const PathSelectionSection = () => {
       cta: isEs ? "Ver programa España" : "View Spain program",
       to: "/spain",
       accent: "#b00717",
-    },
-    {
-      number: "03",
-      tag: isEs ? "Próximamente" : "Coming Soon",
-      title: isEs ? "Otros Deportes Universitarios" : "Other College Sports",
-      desc: isEs
-        ? "Becas universitarias en EE.UU. para tenis, golf, atletismo y voleibol. Mismo proceso, mismo compromiso, ahora ampliando a más disciplinas para atletas internacionales."
-        : "U.S. college scholarships for tennis, golf, track & field and volleyball. Same process, same commitment, now expanding to more disciplines for international athletes.",
-      cta: isEs ? "Ver deportes" : "View sports",
-      to: "/fua-sports",
-      accent: "#12213a",
     },
   ];
 
@@ -52,7 +52,7 @@ const PathSelectionSection = () => {
               to={p.to}
               className={`group relative flex flex-col p-8 sm:p-10 lg:p-12 border-b border-foreground/15 md:border-b-0 ${
                 i > 0 ? "md:border-l md:border-foreground/15" : ""
-              } transition-colors duration-500 hover:bg-foreground/[0.02]`}
+              } transition-colors duration-150 hover:bg-foreground/[0.02]`}
             >
               {/* Top row: number + tag */}
               <div className="flex items-start justify-between mb-10 sm:mb-14">
@@ -82,17 +82,23 @@ const PathSelectionSection = () => {
 
               {/* CTA */}
               <span
-                className="inline-flex items-center gap-2 font-body text-sm font-bold tracking-wide group-hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 font-body text-sm font-bold tracking-wide"
                 style={{ color: p.accent }}
               >
                 {p.cta}
-                <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:rotate-45" />
+                <ArrowUpRight
+                  className="w-4 h-4 transition-transform duration-200 group-hover:rotate-45 group-hover:translate-x-0.5"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.23,1,0.32,1)" }}
+                />
               </span>
 
               {/* Bottom accent line on hover */}
               <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-700 ease-out"
-                style={{ backgroundColor: p.accent }}
+                className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full ease-out"
+                style={{
+                  backgroundColor: p.accent,
+                  transition: "width 450ms cubic-bezier(0.23,1,0.32,1)",
+                }}
               />
             </Link>
           ))}

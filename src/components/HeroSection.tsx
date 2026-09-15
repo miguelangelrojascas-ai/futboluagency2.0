@@ -10,7 +10,7 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" />
+        <img src={heroBg} alt="Soccer team huddle" className="w-full h-full object-cover" width="1920" height="1080" loading="eager" fetchPriority="high" />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.65)" }} />
       </div>
 
@@ -19,7 +19,7 @@ const HeroSection = () => {
 
       {/* Centered Logo at Top */}
       <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-20">
-        <img src={logo} alt="FutbolUAgency LLC." className="h-24 sm:h-28 md:h-32 w-auto" />
+        <img src={logo} alt="FutbolUAgency LLC." className="h-24 sm:h-28 md:h-32 w-auto" loading="eager" fetchPriority="high" />
       </div>
 
       {/* Content */}
@@ -45,14 +45,16 @@ const HeroSection = () => {
         <div className="animate-fade-in-up px-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4" style={{ animationDelay: "0.4s" }}>
           <Link
             to="/usa"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg hover:shadow-glow transform hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg bg-primary text-primary-foreground shadow-lg active:scale-[0.97]"
+            style={{ transition: "transform 160ms cubic-bezier(0.23,1,0.32,1), box-shadow 160ms ease-out, background-color 150ms ease-out" }}
           >
             {t("hero.cta.usa")}
             <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </Link>
           <Link
             to="/spain"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg hover:shadow-glow transform hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg bg-primary text-primary-foreground shadow-lg active:scale-[0.97]"
+            style={{ transition: "transform 160ms cubic-bezier(0.23,1,0.32,1), box-shadow 160ms ease-out, background-color 150ms ease-out" }}
           >
             {t("hero.cta.spain")}
             <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />

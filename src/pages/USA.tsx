@@ -1,19 +1,44 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, GraduationCap, Shield, BookOpen, Clock, DollarSign, TrendingUp, Trophy, Languages, Video } from "lucide-react";
+import { ArrowRight, CheckCircle, TrendingUp, Trophy, Languages, Video, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
 import StudentAthleteExperience from "@/components/StudentAthleteExperience";
-import USAScholarshipOpportunity from "@/components/USAScholarshipOpportunity";
 import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
 import UniversityMap from "@/components/UniversityMap";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 const USA = () => {
   const { t } = useLanguage();
   const { isOpen, openForm, setIsOpen } = useHubSpotForm();
+
+  const carouselImages = [
+    "/images/process-01.jpg",
+    "/images/process-02.jpg",
+    "/images/process-03.jpg",
+    "/images/process-04.jpg",
+    "/images/process-05.jpg",
+    "/images/process-06.jpg",
+  ];
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % carouselImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    document.title = "Fútbol Universitario en USA | Becas NCAA, NAIA y JUCO – FutbolUAgency";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Descubre cómo conseguir una beca de fútbol en universidades americanas NCAA, NAIA y JUCO. Proceso, requisitos y casos de éxito reales.");
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "Fútbol Universitario en USA | FutbolUAgency");
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Descubre cómo conseguir una beca de fútbol en universidades americanas NCAA, NAIA y JUCO. Proceso, requisitos y casos de éxito reales.");
+  }, []);
 
   const divisions = [
     { name: "NCAA Division I", desc: t("usa.ncaa.d1"), level: t("usa.level.highest") },
@@ -72,14 +97,14 @@ const USA = () => {
           <div className="absolute inset-0 bg-black/60" />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
-              <span className="inline-block mb-4 text-[#12213a] font-body text-xs tracking-[0.15em] uppercase">
+              <span className="inline-block mb-4 text-white/60 font-body text-xs tracking-[0.15em] uppercase">
                 {t("usa.tag")}
               </span>
               <h1
-                className="font-display text-3xl sm:text-4xl md:text-5xl mb-6 text-muted"
+                className="font-display text-3xl sm:text-4xl md:text-5xl mb-6 text-white"
                 style={{ fontWeight: 800, textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
               >
-                {t("usa.hero.title")} <span className="text-[#12213a] italic">{t("usa.hero.highlight")}</span>
+                {t("usa.hero.title")} <span className="text-[#b00717] italic">{t("usa.hero.highlight")}</span>
               </h1>
               <p
                 className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
@@ -89,7 +114,7 @@ const USA = () => {
               </p>
               <button
                 onClick={openForm}
-                className="inline-flex items-center gap-2 bg-[#12213a] hover:bg-[#12213a] text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
+                className="inline-flex items-center gap-2 bg-[#b00717] hover:bg-[#900612] text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
               >
                 {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
               </button>
@@ -97,16 +122,84 @@ const USA = () => {
           </div>
           <div
             className="absolute bottom-0 left-0 right-0 pointer-events-none"
-            style={{ height: "80px", background: "linear-gradient(to bottom, transparent, #ffffff)" }}
+            style={{ height: "100px", background: "linear-gradient(to bottom, transparent, #0a1628)" }}
           />
         </section>
 
-        <USAScholarshipOpportunity />
+        {/* La Oportunidad — narrative section */}
+        <section style={{ backgroundColor: "#f5f4f2", padding: "80px 0" }}>
+          <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Image Carousel */}
+            <div style={{ position: "relative", overflow: "hidden", borderRadius: "16px", aspectRatio: "4/3", boxShadow: "0 20px 60px rgba(18,33,58,0.18)" }}>
+              {carouselImages.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    opacity: activeImage === i ? 1 : 0,
+                    transition: "opacity 0.9s ease-in-out",
+                  }}
+                />
+              ))}
+              {/* Dot indicators */}
+              <div style={{ position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "8px", zIndex: 10 }}>
+                {carouselImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImage(i)}
+                    style={{
+                      width: activeImage === i ? "24px" : "8px",
+                      height: "8px",
+                      borderRadius: "4px",
+                      background: activeImage === i ? "#ffffff" : "rgba(255,255,255,0.5)",
+                      border: "none",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      padding: 0,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Text */}
+            <div>
+              <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#b00717", display: "block", marginBottom: "16px" }}>
+                LA OPORTUNIDAD
+              </span>
+              <h2 style={{ fontFamily: "Playfair Display, Georgia, serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, color: "#12213a", marginBottom: "12px", lineHeight: 1.2 }}>
+                Por qué estudiar y jugar en EE.UU.
+              </h2>
+              <div style={{ width: "40px", height: "3px", background: "#b00717", marginBottom: "32px" }} />
+              <p style={{ fontSize: "15px", color: "rgba(18,33,58,0.65)", lineHeight: 1.9, marginBottom: "20px" }}>
+                Cada año, cientos de futbolistas internacionales eligen las universidades de Estados Unidos porque es el único lugar donde pueden compaginar deporte de alto nivel con estudios superiores de calidad.
+              </p>
+              <blockquote style={{ background: "rgba(18,33,58,0.04)", borderLeft: "3px solid #b00717", borderRadius: 0, padding: "16px 24px", margin: "24px 0" }}>
+                <p style={{ fontFamily: "Playfair Display, Georgia, serif", fontStyle: "italic", fontSize: "17px", color: "#12213a", lineHeight: 1.7, margin: 0 }}>
+                  Las becas deportivas permiten que tu talento en el campo financie tu educación — abriéndote las puertas a una experiencia única que no existe en ningún otro país.
+                </p>
+              </blockquote>
+              <p style={{ fontSize: "15px", color: "rgba(18,33,58,0.65)", lineHeight: 1.9, marginBottom: "20px" }}>
+                El porcentaje de futbolistas que alcanza el mundo profesional es muy bajo. Las lesiones, la alta competitividad y la falta de recursos hacen que muy pocos puedan vivir del fútbol. Pero esta no es la única razón para elegir EE.UU.
+              </p>
+              <p style={{ fontSize: "15px", color: "rgba(18,33,58,0.75)", lineHeight: 1.9, marginBottom: 0 }}>
+                Tanto si tu objetivo es seguir desarrollándote deportivamente al más alto nivel, como si buscas garantizarte una carrera universitaria de prestigio — o simplemente aprovechar tu talento para reducir el coste de tus estudios — en EE.UU. los dos caminos van juntos.
+              </p>
+            </div>
+          </div>
+        </section>
 
         <StudentAthleteExperience />
 
         {/* Scholarship / Financial Analysis */}
-        <section className="section-padding bg-background">
+        <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
           <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-start">
             {/* Left Column */}
             <div>
@@ -172,6 +265,32 @@ const USA = () => {
                   </p>
                 </div>
               </div>
+
+            </div>
+          </div>
+
+          {/* CTA Banner — full width below grid */}
+          <div className="max-w-7xl mx-auto px-4 mt-8">
+            <div
+              className="flex flex-col items-center text-center gap-5 rounded-[14px] py-8 px-8"
+              style={{ backgroundColor: "#12213a" }}
+            >
+              <div>
+                <p className="font-display text-xl font-bold text-white mb-1.5 leading-snug">
+                  ¿Quieres saber cuánta beca podrías obtener?
+                </p>
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Mándanos tu video de highlights y te contactamos en menos de 24 horas.
+                </p>
+              </div>
+              <a
+                href="https://wa.me/34603331990?text=Hola,%20quiero%20saber%20cu%C3%A1nta%20beca%20podr%C3%ADa%20obtener.%20Les%20env%C3%ADo%20mi%20video%20de%20highlights."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#b00717] text-white font-bold text-sm px-8 py-3.5 rounded-lg no-underline whitespace-nowrap"
+              >
+                Enviar mi video →
+              </a>
             </div>
           </div>
         </section>
@@ -180,9 +299,9 @@ const USA = () => {
         <UniversityMap />
 
         {/* Requirements */}
-        <section className="section-padding bg-background relative overflow-hidden">
+        <section className="section-padding relative overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
           <div className="absolute inset-0">
-            <img src="/images/college-cup.png" alt="" className="w-full h-full object-cover opacity-10" />
+            <img src="/images/college-cup.png" alt="" className="w-full h-full object-cover opacity-10" loading="lazy" />
             <div className="absolute inset-0 bg-background/80" />
           </div>
             <div className="container-wide px-4 relative z-10">
@@ -228,8 +347,113 @@ const USA = () => {
         {/* Process Section */}
         <ProcessSection />
 
+        {/* FAQ */}
+        <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
+          <div className="container-wide px-4 max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-block text-[#b00717] text-xs font-bold tracking-[0.15em] uppercase mb-3">
+                Preguntas Frecuentes
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#12213a]">
+                Todo lo que necesitas saber
+              </h2>
+            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {[
+                {
+                  q: "¿Necesito hablar inglés perfectamente?",
+                  a: "No. Un nivel básico-intermedio es suficiente para empezar el proceso. Las universidades tienen programas de apoyo lingüístico.",
+                },
+                {
+                  q: "¿Cuánto cuesta el proceso con FutbolUAgency?",
+                  a: "La evaluación inicial es completamente gratuita. Nuestros honorarios se pagan únicamente cuando consigues una oferta universitaria real.",
+                },
+                {
+                  q: "¿Cuánto tiempo tarda todo el proceso?",
+                  a: "Entre 6 y 18 meses desde la evaluación inicial hasta tu llegada a la universidad en EE.UU.",
+                },
+                {
+                  q: "¿Qué nivel futbolístico necesito?",
+                  a: "Nivel competitivo regional o superior: liga preferente, nacional, división de honor o equivalente en tu país.",
+                },
+                {
+                  q: "¿La beca cubre todos los gastos?",
+                  a: "La mayoría de nuestros atletas obtienen becas entre el 75% y 100% que cubren matrícula, alojamiento y comida. El costo restante suele ser entre $6,000 y $12,000 anuales vs $40,000 sin beca.",
+                },
+                {
+                  q: "¿Puedo estudiar cualquier carrera?",
+                  a: "Sí. Las universidades americanas tienen cientos de carreras disponibles. Puedes elegir la que más te interese mientras compites en el equipo.",
+                },
+              ].map((item, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`item-${i}`}
+                  className="border-b border-[#12213a]/10"
+                >
+                  <AccordionTrigger className="font-body font-semibold text-[#12213a] text-left hover:no-underline hover:text-[#b00717] transition-colors py-5">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="font-body text-gray-600 leading-relaxed pb-5">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        {/* Otros deportes */}
+        <section style={{ backgroundColor: "#f5f4f2", padding: "48px 24px" }}>
+          <div className="max-w-3xl mx-auto text-center">
+            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#b00717", display: "block", marginBottom: "12px" }}>
+              FUA SPORTS
+            </span>
+            <h2 style={{ fontFamily: "Playfair Display, Georgia, serif", fontSize: "26px", fontWeight: 700, color: "#12213a", marginBottom: "10px", lineHeight: 1.3 }}>
+              ¿Practicas otro deporte?
+            </h2>
+            <p style={{ fontSize: "14px", color: "rgba(18,33,58,0.6)", lineHeight: 1.7, marginBottom: "28px" }}>
+              También gestionamos becas universitarias en EE.UU. para otros deportes.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                { label: "Volleyball", href: "/sports/volleyball" },
+                { label: "Golf", href: "/sports/golf" },
+                { label: "Tenis", href: "/sports/tennis" },
+                { label: "Track & Field", href: "/sports/track" },
+              ].map((pill) => (
+                <Link
+                  key={pill.href}
+                  to={pill.href}
+                  className="transition-colors duration-200"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #e5e5e5",
+                    borderRadius: "999px",
+                    padding: "10px 20px",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    color: "#12213a",
+                    textDecoration: "none",
+                    display: "inline-block",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#12213a";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#ffffff";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#12213a";
+                  }}
+                >
+                  {pill.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section className="section-padding bg-background">
+        <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
           <div className="container-wide px-4 text-center">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               {t("usa.cta.title")}

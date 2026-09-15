@@ -36,9 +36,6 @@ const FUASportsTeaser = () => {
                   <div className="font-display text-base sm:text-lg font-bold text-white mb-1">
                     {sport}
                   </div>
-                  <div className="font-body text-[10px] tracking-[0.12em] uppercase text-white/50">
-                    Próximamente
-                  </div>
                 </div>
               ))}
             </div>

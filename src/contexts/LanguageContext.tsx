@@ -12,7 +12,7 @@ const translations: Record<Language, Record<string, string>> = {
   es: {
     // Nav
     "nav.home": "Inicio",
-    "nav.usa": "EE.UU.",
+    "nav.usa": "Becas EE.UU.",
     "nav.spain": "España",
     "nav.about": "Nosotros",
     "nav.apply": "Aplicar",
@@ -20,9 +20,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.tag": "",
-    "hero.headline": "Transforma tu talento en",
-    "hero.headline.highlight": "oportunidades.",
-    "hero.subheadline": "Ayudamos a futbolistas internacionales a conseguir oportunidades en los mejores programas",
+    "hero.headline": "Consigue una Beca Deportiva en",
+    "hero.headline.highlight": "Universidades de Estados Unidos",
+    "hero.subheadline": "Ayudamos a futbolistas de 16 a 23 años a estudiar y competir en universidades de Estados Unidos a través de becas deportivas.",
     "hero.cta.usa": "Explorar Becas en EE.UU.",
     "hero.cta.spain": "Explorar Programa en España",
 
@@ -105,7 +105,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // USA Page
     "usa.tag": "Programa Estados Unidos",
-    "usa.hero.title": "Consigue una Beca de Fútbol en Estados Unidos y",
+    "usa.hero.title": "Consigue una Beca de Fútbol Universitario en Estados Unidos y",
     "usa.hero.highlight": "Compite al Máximo Nivel",
     "usa.hero.desc": "Te guiamos paso a paso para jugar, estudiar y desarrollarte en universidades americanas.",
     "usa.system.title": "El Sistema Universitario de EE.UU.",
@@ -217,7 +217,7 @@ const translations: Record<Language, Record<string, string>> = {
   en: {
     // Nav
     "nav.home": "Home",
-    "nav.usa": "USA",
+    "nav.usa": "USA Scholarships",
     "nav.spain": "Spain",
     "nav.about": "About Us",
     "nav.apply": "Apply",
@@ -310,8 +310,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // USA Page
     "usa.tag": "USA Program",
-    "usa.hero.title": "How to Get a",
-    "usa.hero.highlight": "Soccer Scholarship in the U.S.",
+    "usa.hero.title": "Get a College Soccer Scholarship in the U.S. and",
+    "usa.hero.highlight": "Compete at the Highest Level",
     "usa.hero.desc": "We guide you step by step to get your sports scholarship at an American university. NCAA, NAIA or JUCO.",
     "usa.system.title": "The U.S. University System",
     "usa.ncaa.d1": "The highest level. Universities with the best athletic programs and full scholarships.",

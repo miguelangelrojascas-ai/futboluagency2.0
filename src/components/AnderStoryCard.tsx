@@ -52,6 +52,7 @@ const AnderStoryCard = () => {
               src={anderMeet}
               alt="Ander González"
               className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-center p-8 sm:p-10 md:p-14 max-w-2xl">
@@ -157,6 +158,7 @@ const AnderStoryCard = () => {
                           src={item.image}
                           alt={item.title}
                           className="w-full h-auto object-contain"
+                          loading="lazy"
                         />
                       </div>
                     </div>

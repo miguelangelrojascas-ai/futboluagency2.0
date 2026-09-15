@@ -4,6 +4,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* ── Custom easing curves ── */
+:root {
+  --ease-out-strong:   cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 @layer base {
   :root {
     --background: 0 0% 99%;
@@ -111,7 +117,7 @@
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 200ms ease-out;
   }
 
   .premium-card:hover {
@@ -129,7 +135,7 @@
   }
   
   .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.55s var(--ease-out-strong) forwards;
   }
   
   .animate-slide-up {
@@ -146,24 +152,24 @@
   }
   
   @keyframes fadeInUp {
-    from { 
-      opacity: 0; 
-      transform: translateY(20px); 
+    from {
+      opacity: 0;
+      transform: translateY(10px);
     }
-    to { 
-      opacity: 1; 
-      transform: translateY(0); 
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
-  
+
   @keyframes slideUp {
-    from { 
-      opacity: 0; 
-      transform: translateY(40px); 
+    from {
+      opacity: 0;
+      transform: translateY(24px);
     }
-    to { 
-      opacity: 1; 
-      transform: translateY(0); 
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   
@@ -173,6 +179,22 @@
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  /* Press feedback on all interactive elements */
+  @media (hover: hover) and (pointer: fine) {
+    a:active, button:active {
+      transform: scale(0.97);
+    }
+  }
+
+  /* Reduced motion — keep opacity/color, remove movement */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 }
