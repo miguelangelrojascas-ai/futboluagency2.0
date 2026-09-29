@@ -2,16 +2,30 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
-import { CheckCircle, GraduationCap, Medal, Timer, Video } from "lucide-react";
+import {
+  CheckCircle,
+  ClipboardCheck,
+  GraduationCap,
+  HandCoins,
+  Home,
+  Medal,
+  Megaphone,
+  PlaneTakeoff,
+  ShieldCheck,
+  Timer,
+  Trophy,
+  Video,
+} from "lucide-react";
 import sportTrack from "@/assets/sport-track.png";
+import methodBg from "@/assets/neus-track.jpg";
 import SportSplitHero from "@/components/sports/SportSplitHero";
 import SportBenchmarks from "@/components/sports/SportBenchmarks";
+import SportMethodSection from "@/components/sports/SportMethodSection";
+import ScholarshipCoverage from "@/components/sports/ScholarshipCoverage";
 import {
   SportSection,
   SectionTitle,
   FeatureCard,
-  ProcessStep,
-  ColCard,
   FinalCTA,
   BackToSports,
   NAVY,
@@ -119,94 +133,53 @@ const TrackPage = () => {
           </div>
         </SportSection>
 
-        {/* FUA Method — dark navy */}
-        <SportSection bg={NAVY}>
-          <SectionTitle dark>{es ? "El Método FUA Sports" : "The FUA Sports Method"}</SectionTitle>
-          <p className="font-body text-white/70 text-center max-w-2xl mx-auto mb-10 -mt-6">
-            {es
-              ? "Ingeniería de reclutamiento diseñada para maximizar tu beca."
-              : "Recruitment engineering designed to maximize your scholarship."}
-          </p>
-          <div className="grid md:grid-cols-3 gap-5">
-            {(es
+        <SportMethodSection
+          image={methodBg}
+          eyebrow={es ? "Cómo trabajamos" : "How we work"}
+          title={es ? "El método" : "The FUA Sports"}
+          highlight={es ? "FUA Sports" : "method"}
+          subtitle={
+            es
+              ? "Ingeniería de reclutamiento diseñada para maximizar tu beca. Un equipo contigo en cada paso, desde tu primera marca hasta tu primer día en el campus."
+              : "Recruitment engineering designed to maximize your scholarship. A team by your side at every step, from your first mark to your first day on campus."
+          }
+          steps={
+            es
               ? [
-                  {
-                    t: "01. Validación Técnica",
-                    d: "Diagnóstico gratuito de marcas y nivel académico para crear un plan personalizado según tus objetivos.",
-                  },
-                  {
-                    t: "02. Blindaje Académico",
-                    d: "Traducción de notas, certificados de elegibilidad y registro oficial ante NCAA/NAIA.",
-                  },
-                  {
-                    t: "03. Negociación Financiera",
-                    d: "Maximización de recursos para asegurar el paquete más alto (Deporte + Academia).",
-                  },
+                  { icon: ClipboardCheck, title: "Validación técnica", desc: "Diagnóstico gratuito de tus marcas y nivel académico para crear un plan personalizado según tus objetivos.", points: ["Análisis de marcas", "Proyección por división", "Plan a medida"] },
+                  { icon: ShieldCheck, title: "Blindaje académico", desc: "Preparamos tu expediente para que ninguna universidad te descarte por papeles.", points: ["Traducción de notas", "Elegibilidad NCAA / NAIA", "TOEFL / Duolingo"] },
+                  { icon: Megaphone, title: "Exposición a entrenadores", desc: "Perfil profesional, video de pruebas y contacto directo con entrenadores de programas afines a tu nivel.", points: ["Perfil y highlights", "+1,000 programas", "Seguimiento semanal"] },
+                  { icon: HandCoins, title: "Negociación financiera", desc: "Comparamos ofertas y negociamos para asegurar el paquete más alto combinando beca deportiva y académica.", points: ["Comparativa de ofertas", "Beca deportiva + académica", "Firma del NLI"] },
+                  { icon: PlaneTakeoff, title: "Llegada al campus", desc: "Te acompañamos en visado, viaje y adaptación para que llegues listo para competir desde el primer día.", points: ["Visado F-1", "Logística de viaje", "Soporte en EE.UU."] },
                 ]
               : [
-                  {
-                    t: "01. Technical Validation",
-                    d: "Free diagnosis of marks and academic level to create a personalized plan based on your goals.",
-                  },
-                  {
-                    t: "02. Academic Lockdown",
-                    d: "Grade translation, eligibility certificates and official registration with NCAA/NAIA.",
-                  },
-                  {
-                    t: "03. Financial Negotiation",
-                    d: "Maximizing resources to secure the highest package (Athletic + Academic).",
-                  },
+                  { icon: ClipboardCheck, title: "Technical validation", desc: "Free diagnosis of your marks and academic level to build a personalized plan around your goals.", points: ["Mark analysis", "Division projection", "Custom plan"] },
+                  { icon: ShieldCheck, title: "Academic lockdown", desc: "We prepare your file so no university rules you out on paperwork.", points: ["Grade translation", "NCAA / NAIA eligibility", "TOEFL / Duolingo"] },
+                  { icon: Megaphone, title: "Coach exposure", desc: "Professional profile, race video and direct contact with coaches from programs matching your level.", points: ["Profile & highlights", "1,000+ programs", "Weekly follow-up"] },
+                  { icon: HandCoins, title: "Financial negotiation", desc: "We compare offers and negotiate to secure the highest package combining athletic and academic aid.", points: ["Offer comparison", "Athletic + academic aid", "NLI signing"] },
+                  { icon: PlaneTakeoff, title: "Arrival on campus", desc: "We guide you through visa, travel and adaptation so you arrive ready to compete from day one.", points: ["F-1 visa", "Travel logistics", "U.S. support"] },
                 ]
-            ).map((s, i) => (
-              <ProcessStep key={s.t} n={i + 1} title={s.t} desc={s.d} />
-            ))}
-          </div>
-        </SportSection>
+          }
+        />
 
-        {/* Elite scholarship — gray */}
-        <SportSection bg={GRAY}>
-          <SectionTitle>{es ? "¿Qué incluye una Beca de Élite?" : "What an Elite Scholarship Includes"}</SectionTitle>
-          <div className="grid md:grid-cols-3 gap-5">
-            <ColCard
-              title={es ? "Cobertura Académica" : "Academic Coverage"}
-              items={
-                es
-                  ? ["Pago de matrícula y créditos", "Materiales de estudio", "Centros de tutoría privada para atletas"]
-                  : ["Tuition and credits", "Study materials", "Private tutoring centers for athletes"]
-              }
-            />
-            <ColCard
-              title={es ? "Rendimiento Deportivo" : "Athletic Performance"}
-              items={
-                es
-                  ? [
-                      "Coaching de nivel olímpico",
-                      "Instalaciones de última tecnología",
-                      "Indumentaria Nike/Adidas/Puma",
-                      "Fisioterapia y nutrición deportiva",
-                    ]
-                  : [
-                      "Olympic-level coaching",
-                      "State-of-the-art facilities",
-                      "Nike/Adidas/Puma gear",
-                      "Physiotherapy and sports nutrition",
-                    ]
-              }
-            />
-            <ColCard
-              title={es ? "Costos de Vida" : "Living Costs"}
-              items={
-                es
-                  ? [
-                      "Alojamiento en residencias oficiales (Housing)",
-                      "Plan de comidas completo (Meal Plan)",
-                      "Logística de competencia (viajes y hoteles)",
-                    ]
-                  : ["Official housing residences", "Complete meal plan", "Competition logistics (travel and hotels)"]
-              }
-            />
-          </div>
-        </SportSection>
+        <ScholarshipCoverage
+          eyebrow={es ? "Qué cubre tu beca" : "What your scholarship covers"}
+          title={es ? "¿Qué incluye una" : "What an"}
+          highlight={es ? "beca de élite?" : "elite scholarship includes"}
+          cards={
+            es
+              ? [
+                  { icon: GraduationCap, title: "Cobertura académica", desc: "Tu carrera universitaria financiada y con apoyo para rendir en clase.", items: ["Pago de matrícula y créditos", "Materiales de estudio", "Centros de tutoría privada para atletas"] },
+                  { icon: Trophy, title: "Rendimiento deportivo", desc: "Todo lo necesario para competir al máximo nivel universitario.", items: ["Coaching de nivel olímpico", "Instalaciones de última tecnología", "Indumentaria Nike / Adidas / Puma", "Fisioterapia y nutrición deportiva"] },
+                  { icon: Home, title: "Costos de vida", desc: "Vive en el campus sin preocuparte por los gastos del día a día.", items: ["Alojamiento en residencias oficiales", "Plan de comidas completo", "Logística de competencia: viajes y hoteles"] },
+                ]
+              : [
+                  { icon: GraduationCap, title: "Academic coverage", desc: "Your university degree funded, with support to perform in class.", items: ["Tuition and credits", "Study materials", "Private tutoring centers for athletes"] },
+                  { icon: Trophy, title: "Athletic performance", desc: "Everything you need to compete at the highest college level.", items: ["Olympic-level coaching", "State-of-the-art facilities", "Nike / Adidas / Puma gear", "Physiotherapy and sports nutrition"] },
+                  { icon: Home, title: "Living costs", desc: "Live on campus without worrying about everyday expenses.", items: ["Official housing residences", "Complete meal plan", "Competition logistics: travel and hotels"] },
+                ]
+          }
+        />
 
         {/* Requirements + Day — white */}
         <SportSection bg="hsl(var(--background))">

@@ -22,7 +22,7 @@ const SportBenchmarks = ({ title, highlight, subtitle, metrics, columns, rows, c
   const es = language === "es";
 
   return (
-    <section id="benchmarks" className="section-alt scroll-mt-24 px-4 py-20 md:py-28">
+    <section id="benchmarks" className="section-alt bg-texture-subtle scroll-mt-24 px-4 py-20 md:py-28">
       <div className="container-wide mx-auto flex max-w-6xl flex-col gap-12">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
