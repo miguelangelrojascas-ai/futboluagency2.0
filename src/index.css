@@ -197,4 +197,16 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* Offset anchor scroll targets for the fixed navbar + sticky section nav */
+  [id="oportunidad"],
+  [id="vida-estudiantil"],
+  [id="becas"],
+  [id="universidades"],
+  [id="admision"],
+  [id="perfiles"],
+  [id="proceso"],
+  [id="faq"] {
+    scroll-margin-top: 8rem;
+  }
 }

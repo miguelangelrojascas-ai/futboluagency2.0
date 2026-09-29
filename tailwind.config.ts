@@ -26,6 +26,9 @@ export default {
         foreground: "hsl(var(--foreground))",
         "text-secondary": "hsl(var(--text-secondary))",
         "surface-light": "hsl(var(--surface-light))",
+        "section-alt": "hsl(var(--section-alt))",
+        "footer-dark": "hsl(var(--footer-dark))",
+        "accent-blue": "hsl(var(--accent-blue))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           hover: "hsl(var(--primary-hover))",
