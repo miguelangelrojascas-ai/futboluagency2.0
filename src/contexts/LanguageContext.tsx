@@ -14,6 +14,8 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Inicio",
     "nav.usa": "Becas EE.UU.",
     "nav.spain": "España",
+    "nav.sports": "FUA Sports",
+    "nav.players": "Jugadores",
     "nav.about": "Nosotros",
     "nav.apply": "Aplicar",
     "nav.applyCta": "Aplica Ahora",
@@ -25,6 +27,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.subheadline": "Ayudamos a futbolistas de 16 a 23 años a estudiar y competir en universidades de Estados Unidos a través de becas deportivas.",
     "hero.cta.usa": "Explorar Becas en EE.UU.",
     "hero.cta.spain": "Explorar Programa en España",
+    "hero.cta.apply": "Envía tu perfil",
 
     // Video Section
     "video.title": "Mira el",
@@ -219,6 +222,8 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Home",
     "nav.usa": "USA Scholarships",
     "nav.spain": "Spain",
+    "nav.sports": "FUA Sports",
+    "nav.players": "Players",
     "nav.about": "About Us",
     "nav.apply": "Apply",
     "nav.applyCta": "Apply Now",
@@ -230,6 +235,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.subheadline": "We help international players get opportunities in top programs",
     "hero.cta.usa": "Explore USA Scholarships",
     "hero.cta.spain": "Explore Spain Program",
+    "hero.cta.apply": "Send your profile",
 
     // Video Section
     "video.title": "Watch the",

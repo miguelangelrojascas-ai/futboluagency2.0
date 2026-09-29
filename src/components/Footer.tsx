@@ -45,7 +45,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0f0f0f] text-white">
+    <footer className="bg-footer-dark text-white">
       <div className="container-wide section-padding py-12 sm:py-16 px-4">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-10">
@@ -57,7 +57,7 @@ const Footer = () => {
               className="h-16 sm:h-20 w-auto mx-auto md:mx-0 mb-4"
               loading="lazy"
             />
-            <h3 className="font-display text-lg font-bold text-white mb-2" style={{ color: "#ffffff" }}>
+            <h3 className="font-display text-lg font-bold text-white mb-2" style={{ color: "hsl(var(--background))" }}>
               FutbolUAgency LLC.
             </h3>
             <p className="font-body text-sm text-white/70 max-w-xs mx-auto md:mx-0">
@@ -67,7 +67,7 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div className="text-center md:text-left">
-            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "#ffffff" }}>
+            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "hsl(var(--background))" }}>
               Contacto
             </h4>
             <div className="space-y-3">
@@ -101,7 +101,7 @@ const Footer = () => {
 
           {/* Social Column */}
           <div className="text-center md:text-left">
-            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "#ffffff" }}>
+            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "hsl(var(--background))" }}>
               Síguenos
             </h4>
             <div className="flex items-center justify-center md:justify-start gap-4">
@@ -122,14 +122,16 @@ const Footer = () => {
 
           {/* Navigation Column */}
           <div className="text-center md:text-left">
-            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "#ffffff" }}>
+            <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "hsl(var(--background))" }}>
               {t("nav.home")}
             </h4>
             <nav className="space-y-3">
               <Link to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</Link>
               <Link to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</Link>
               <Link to="/spain" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.spain")}</Link>
-              
+              <Link to="/sports" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.sports")}</Link>
+              <Link to="/about" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.about")}</Link>
+              <Link to="/players" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.players")}</Link>
               <Link to="/apply" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.apply")}</Link>
             </nav>
           </div>

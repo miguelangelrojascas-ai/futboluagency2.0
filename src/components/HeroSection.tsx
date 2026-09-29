@@ -59,6 +59,13 @@ const HeroSection = () => {
             {t("hero.cta.spain")}
             <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </Link>
+          <Link
+            to="/apply"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 text-sm sm:text-base font-semibold font-body rounded-lg border border-white/40 text-white hover:bg-white/10 active:scale-[0.97]"
+            style={{ transition: "transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 150ms ease-out" }}
+          >
+            {t("hero.cta.apply")}
+          </Link>
         </div>
       </div>
 
