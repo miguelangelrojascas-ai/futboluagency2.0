@@ -12,7 +12,10 @@ import {
   Heart,
   Plane,
   Award,
+  Target,
 } from "lucide-react";
+import SportSplitHero from "@/components/sports/SportSplitHero";
+import SportBenchmarks from "@/components/sports/SportBenchmarks";
 import Navbar from "@/components/Navbar";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import golfFlagImg from "@/assets/golf-flag.jpg";
@@ -56,123 +59,53 @@ const GolfPage = () => {
     <>
       <Navbar />
       <main className="min-h-screen" style={{ backgroundColor: LIGHT }}>
-        {/* ── HERO ── */}
-        <section
-          className="relative pt-28 md:pt-36 pb-20 md:pb-28 px-4 overflow-hidden"
-          style={{ backgroundColor: NAVY }}
-        >
-          {/* Background image */}
-          <div className="absolute inset-0">
-            <img
-              src={sportGolf}
-              alt={es ? "Golf universitario" : "College golf"}
-              className="w-full h-full object-cover object-right"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(90deg, rgba(10,26,10,0.95) 0%, rgba(15,58,20,0.85) 55%, rgba(15,58,20,0.5) 100%)",
-              }}
-            />
-          </div>
+        <SportSplitHero
+          sport="Golf"
+          image={sportGolf}
+          imageAlt={es ? "Golfista universitario" : "College golfer"}
+          eyebrow={es ? "Tu swing. Tu beca. Tu futuro." : "Your swing. Your scholarship. Your future."}
+          title={es ? "Becas de golf" : "Golf scholarships"}
+          highlight={es ? "en EE.UU." : "in the U.S."}
+          subtitle={
+            es
+              ? "De tu club local a la élite universitaria americana. +1,300 programas y $2.5B en becas anuales."
+              : "From your local club to the American university elite. 1,300+ programs and $2.5B in annual scholarships."
+          }
+          floatingStat={{ value: "100%", label: es ? "Atletas con beca" : "Athletes with scholarship" }}
+          stats={[
+            { value: "+1,300", label: es ? "Programas" : "Programs" },
+            { value: "75–100%", label: es ? "Cobertura" : "Coverage" },
+            { value: "$2.5B", label: es ? "Becas anuales" : "Annual aid" },
+          ]}
+        />
 
-          {/* Decorative accents */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div
-              className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl"
-              style={{ background: RED }}
-            />
-            <div
-              className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-10 blur-3xl"
-              style={{ background: "#3b82f6" }}
-            />
-          </div>
-
-          <div className="relative container-wide max-w-6xl mx-auto">
-            {/* FUA Sports logo */}
-            <div className="flex justify-center mb-6">
-              <Link to="/sports">
-                <img src={fuaSportsLogo} alt="FUA Sports" className="h-20 sm:h-24 md:h-28 w-auto" style={{ filter: "brightness(0) invert(1)" }} loading="lazy" />
-              </Link>
-            </div>
-
-            {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-white/60 mb-8 font-body">
-              <Link to="/sports" className="hover:text-white transition-colors">
-                FUA Sports
-              </Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-white/90">Golf</span>
-            </div>
-
-            <p
-              className="font-display uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-4"
-              style={{ color: RED }}
-            >
-              {es ? "Tu swing. Tu beca. Tu futuro." : "Your swing. Your scholarship. Your future."}
-            </p>
-
-            <h1
-              className="font-display font-bold text-white mb-6 leading-[1.02] max-w-4xl"
-              style={{
-                fontSize: "clamp(48px, 8vw, 104px)",
-                textShadow: "0 4px 24px rgba(0,0,0,0.6)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {es ? "Becas de Golf" : "Golf Scholarships"}
-              <br />
-              <span style={{ color: RED }}>{es ? "Universitario en EE.UU." : "in the United States"}</span>
-            </h1>
-
-            <p className="font-body text-lg sm:text-xl md:text-2xl text-white/85 max-w-3xl mb-12 leading-relaxed">
-              {es
-                ? "De tu club local a la élite universitaria americana. +1,300 programas y $2.5B en becas anuales."
-                : "From your local club to the American university elite. 1,300+ programs and $2.5B in annual scholarships."}
-            </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-4xl">
-              {[
-                { num: "75–100%", label: es ? "Cobertura de beca" : "Scholarship coverage" },
-                { num: "NCAA · NAIA · NJCAA", label: es ? "Divisiones disponibles" : "Available divisions" },
-                { num: "100%", label: es ? "Atletas con beca" : "Athletes with scholarship" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-xl border border-white/10 px-5 py-5"
-                  style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
-                >
-                  <div className="font-display text-xl sm:text-2xl font-bold mb-1" style={{ color: RED }}>
-                    {s.num}
-                  </div>
-                  <div className="font-body text-xs text-white/65 uppercase tracking-wider">{s.label}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href={CALENDLY}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 font-body font-semibold px-8 py-4 rounded-lg text-white transition-all hover:opacity-90 hover:scale-[1.02]"
-                style={{ backgroundColor: RED }}
-              >
-                {es ? "Agenda tu Evaluación Gratuita" : "Schedule Free Evaluation"}
-                <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="#process"
-                className="inline-flex items-center justify-center gap-2 font-body font-semibold px-8 py-4 rounded-lg text-white border border-white/20 transition-colors hover:bg-white/10"
-              >
-                {es ? "Ver el proceso" : "See the process"}
-              </a>
-            </div>
-          </div>
-        </section>
+        <SportBenchmarks
+          title={es ? "Tu promedio," : "Your average,"}
+          highlight={es ? "tu división" : "your division"}
+          subtitle={
+            es
+              ? "Los entrenadores de golf reclutan por números: promedio de golpes en torneos y handicap. Así se ubica tu nivel en cada división."
+              : "Golf coaches recruit by the numbers: tournament scoring average and handicap. Here is where your level fits in each division."
+          }
+          metrics={[
+            { icon: Target, label: es ? "Promedio de golpes" : "Scoring average", desc: es ? "Media en torneos oficiales de 18 hoyos." : "Average in official 18-hole events." },
+            { icon: Award, label: "Handicap", desc: es ? "Handicap oficial de tu federación." : "Official handicap from your federation." },
+            { icon: Trophy, label: es ? "Resultados" : "Results", desc: es ? "Torneos nacionales, rankings y victorias." : "National events, rankings and wins." },
+            { icon: BookOpen, label: es ? "Académico" : "Academics", desc: es ? "Notas y nivel de inglés para la admisión." : "Grades and English level for admission." },
+          ]}
+          columns={[es ? "División" : "Division", es ? "Promedio hombres" : "Men's average", es ? "Promedio mujeres" : "Women's average", es ? "Handicap aprox." : "Approx. handicap"]}
+          rows={[
+            ["NCAA D1", "70–75", "72–78", "+2 a 3"],
+            ["NCAA D2", "74–78", "77–84", "2 a 5"],
+            ["NAIA", "75–80", "79–86", "4 a 7"],
+            ["NJCAA", "76–82", "82–90", "6 a 10"],
+          ].map((r) => (es ? r : [r[0], r[1], r[2], r[3].replace(" a ", " to ")]))}
+          caption={
+            es
+              ? "Valores orientativos en torneos de 18 hoyos. Los programas top de D1 exigen promedios por debajo de 72."
+              : "Guideline values for 18-hole events. Top D1 programs require averages below 72."
+          }
+        />
 
         {/* ── WHY GOLF ── */}
         <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "hsl(var(--background))" }}>

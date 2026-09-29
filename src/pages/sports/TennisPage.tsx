@@ -25,6 +25,8 @@ import campusDining from "@/assets/campus-dining.jpg";
 import campusMedical from "@/assets/campus-medical.jpg";
 import campusOffcampus from "@/assets/campus-offcampus.jpg";
 import sportTennis from "@/assets/sport-tennis.png";
+import SportSplitHero from "@/components/sports/SportSplitHero";
+import SportBenchmarks from "@/components/sports/SportBenchmarks";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -66,127 +68,54 @@ const TennisPage = () => {
     <>
       <Navbar />
       <main className="min-h-screen" style={{ backgroundColor: LIGHT }}>
-        {/* ── HERO ── */}
-        <section
-          className="relative pt-28 md:pt-36 pb-20 md:pb-28 px-4 overflow-hidden"
-          style={{ backgroundColor: NAVY }}
-        >
-          {/* Background image */}
-          <div className="absolute inset-0">
-            <img
-              src={sportTennis}
-              alt={es ? "Jugadora de tenis" : "Tennis player"}
-              className="w-full h-full object-cover object-right"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(90deg, rgba(18,33,58,0.95) 0%, rgba(18,33,58,0.85) 55%, rgba(18,33,58,0.55) 100%)",
-              }}
-            />
-          </div>
+        <SportSplitHero
+          sport={es ? "Tenis" : "Tennis"}
+          image={sportTennis}
+          imageAlt={es ? "Jugadora de tenis universitario" : "College tennis player"}
+          eyebrow={es ? "Tu cancha. Tu beca. Tu futuro." : "Your court. Your scholarship. Your future."}
+          title={es ? "Becas de tenis" : "Tennis scholarships"}
+          highlight={es ? "en EE.UU." : "in the U.S."}
+          subtitle={
+            es
+              ? "Acompañamiento cercano para conseguir la beca que tu talento merece. De tu club local a la universidad americana de tus sueños."
+              : "Close guidance to secure the scholarship your talent deserves. From your local club to your dream American university."
+          }
+          floatingStat={{ value: "100%", label: es ? "Atletas con beca" : "Athletes with scholarship" }}
+          stats={[
+            { value: "75–100%", label: es ? "Cobertura" : "Coverage" },
+            { value: "NCAA", label: "NAIA · NJCAA" },
+            { value: es ? "Gratis" : "Free", label: es ? "Evaluación" : "Evaluation" },
+          ]}
+        />
 
-          {/* Decorative accents */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div
-              className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl"
-              style={{ background: RED }}
-            />
-            <div
-              className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-10 blur-3xl"
-              style={{ background: "#3b82f6" }}
-            />
-          </div>
-
-          <div className="relative container-wide max-w-6xl mx-auto">
-            {/* FUA Sports logo */}
-            <div className="flex justify-center mb-6">
-              <Link to="/sports">
-                <img src={fuaSportsLogo} alt="FUA Sports" className="h-20 sm:h-24 md:h-28 w-auto" style={{ filter: "brightness(0) invert(1)" }} loading="lazy" />
-              </Link>
-            </div>
-
-            {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-white/60 mb-8 font-body">
-              <Link to="/sports" className="hover:text-white transition-colors">
-                FUA Sports
-              </Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-white/90">{es ? "Tenis" : "Tennis"}</span>
-            </div>
-
-            <p
-              className="font-display uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-4"
-              style={{ color: RED }}
-            >
-              {es ? "Tu cancha. Tu beca. Tu futuro." : "Your court. Your scholarship. Your future."}
-            </p>
-
-            <h1
-              className="font-display font-bold text-white mb-6 leading-[1.02] max-w-4xl"
-              style={{
-                fontSize: "clamp(48px, 8vw, 104px)",
-                textShadow: "0 4px 24px rgba(0,0,0,0.6)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {es ? "Becas de Tenis" : "Tennis Scholarships"}
-              <br />
-              <span style={{ color: RED }}>
-                {es ? "Universitario en EE.UU." : "in the United States"}
-              </span>
-            </h1>
-
-            <p className="font-body text-lg sm:text-xl md:text-2xl text-white/85 max-w-3xl mb-12 leading-relaxed">
-              {es
-                ? "Acompañamiento cercano para conseguir la beca que tu talento merece. De tu club local a la universidad americana de tus sueños."
-                : "Close guidance to secure the scholarship your talent deserves. From your local club to your dream American university."}
-            </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-4xl">
-              {[
-                { num: "75–100%", label: es ? "Cobertura de beca" : "Scholarship coverage" },
-                { num: "NCAA · NAIA · NJCAA", label: es ? "Divisiones disponibles" : "Available divisions" },
-                { num: "100%", label: es ? "Atletas con beca" : "Athletes with scholarship" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-xl border border-white/10 px-5 py-5"
-                  style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
-                >
-                  <div className="font-display text-xl sm:text-2xl font-bold mb-1" style={{ color: RED }}>
-                    {s.num}
-                  </div>
-                  <div className="font-body text-xs text-white/65 uppercase tracking-wider">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href={CALENDLY}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 font-body font-semibold px-8 py-4 rounded-lg text-white transition-all hover:opacity-90 hover:scale-[1.02]"
-                style={{ backgroundColor: RED }}
-              >
-                {es ? "Agenda tu Evaluación Gratuita" : "Schedule Free Evaluation"}
-                <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="#process"
-                className="inline-flex items-center justify-center gap-2 font-body font-semibold px-8 py-4 rounded-lg text-white border border-white/20 transition-colors hover:bg-white/10"
-              >
-                {es ? "Ver el proceso" : "See the process"}
-              </a>
-            </div>
-          </div>
-        </section>
+        <SportBenchmarks
+          title={es ? "Tu UTR," : "Your UTR,"}
+          highlight={es ? "tu universidad" : "your university"}
+          subtitle={
+            es
+              ? "El Universal Tennis Rating (UTR) es la referencia que usan los entrenadores universitarios. Así se ubica tu nivel en cada división."
+              : "The Universal Tennis Rating (UTR) is the benchmark college coaches use. Here is where your level fits in each division."
+          }
+          metrics={[
+            { icon: Star, label: "UTR", desc: es ? "Rating universal: el primer filtro de los coaches." : "Universal rating: coaches' first filter." },
+            { icon: Trophy, label: es ? "Ranking ITF / nacional" : "ITF / national ranking", desc: es ? "Posición en rankings juveniles y federativos." : "Position in junior and federation rankings." },
+            { icon: Users, label: es ? "Victorias clave" : "Key wins", desc: es ? "Resultados ante rivales de nivel similar o superior." : "Wins over similar or higher-rated opponents." },
+            { icon: BookOpen, label: es ? "Académico" : "Academics", desc: es ? "Notas e inglés: sumas becas académicas." : "Grades and English: stack academic aid." },
+          ]}
+          columns={[es ? "División" : "Division", es ? "UTR hombres" : "Men's UTR", es ? "UTR mujeres" : "Women's UTR", es ? "Cobertura típica" : "Typical coverage"]}
+          rows={[
+            [es ? "NCAA D1 (top)" : "NCAA D1 (top)", "13+", "10.5+", "75–100%"],
+            ["NCAA D1", "11.5–13", "9–10.5", "60–100%"],
+            ["NCAA D2", "10–11.5", "7.5–9", "50–100%"],
+            ["NAIA", "9.5–11", "7–8.5", "50–100%"],
+            ["NJCAA", "8.5–10", "6–8", "50–100%"],
+          ]}
+          caption={
+            es
+              ? "Valores orientativos. Si todavía no tienes UTR, lo calculamos a partir de tus resultados en la evaluación gratuita."
+              : "Guideline values. If you don't have a UTR yet, we estimate it from your results in the free evaluation."
+          }
+        />
 
         {/* ── WHY TENNIS ── */}
         <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "hsl(var(--background))" }}>

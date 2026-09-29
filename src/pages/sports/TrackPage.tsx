@@ -2,10 +2,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, GraduationCap, Medal, Timer, Video } from "lucide-react";
 import sportTrack from "@/assets/sport-track.png";
+import SportSplitHero from "@/components/sports/SportSplitHero";
+import SportBenchmarks from "@/components/sports/SportBenchmarks";
 import {
-  SportHero,
   SportSection,
   SectionTitle,
   FeatureCard,
@@ -41,22 +42,48 @@ const TrackPage = () => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-16 md:pt-20">
-        <BackToSports />
-        <SportHero
+      <main className="min-h-screen">
+        <SportSplitHero
+          sport="Track & Field"
           image={sportTrack}
-          headline={es ? "Tu pista. Tu beca. Tu futuro." : "Your track. Your scholarship. Your future."}
-          title={es ? "Becas de Track & Field en EE.UU." : "Track & Field Scholarships in the U.S."}
+          imageAlt={es ? "Atleta universitario en la pista" : "College athlete on the track"}
+          eyebrow={es ? "Tu pista. Tu beca. Tu futuro." : "Your track. Your scholarship. Your future."}
+          title={es ? "Becas de Track & Field" : "Track & Field scholarships"}
+          highlight={es ? "en EE.UU." : "in the U.S."}
           subtitle={
             es
               ? "Más de $3.5 billones disponibles. Estados Unidos es el destino #1 para atletas internacionales de alto rendimiento."
               : "Over $3.5B available. The U.S. is the #1 destination for international high-performance athletes."
           }
+          floatingStat={{ value: "$3.5B", label: es ? "En becas disponibles" : "In available scholarships" }}
           stats={[
-            { value: "+1,000", label: es ? "Programas universitarios" : "University programs" },
-            { value: "$3.5B", label: es ? "En becas" : "In scholarships" },
-            { value: "D1·D2·NAIA", label: es ? "Divisiones" : "Divisions" },
+            { value: "+1,000", label: es ? "Programas" : "Programs" },
+            { value: "60–100%", label: es ? "Cobertura" : "Coverage" },
+            { value: "D1–NAIA", label: es ? "Divisiones" : "Divisions" },
           ]}
+        />
+
+        <SportBenchmarks
+          title={es ? "Tus marcas," : "Your marks,"}
+          highlight={es ? "tu beca" : "your scholarship"}
+          subtitle={
+            es
+              ? "En atletismo los números hablan. Usamos marcas oficiales para estimar tu potencial de cobertura en cada división."
+              : "In track & field the numbers speak. We use official marks to estimate your coverage potential in each division."
+          }
+          metrics={[
+            { icon: Timer, label: es ? "Marcas oficiales" : "Official marks", desc: es ? "Tiempos y distancias homologados por federación." : "Federation-certified times and distances." },
+            { icon: Medal, label: es ? "Progresión" : "Progression", desc: es ? "Evolución de tus marcas en las últimas temporadas." : "How your marks evolved over recent seasons." },
+            { icon: GraduationCap, label: es ? "Académico" : "Academics", desc: es ? "Notas que suman becas académicas a la deportiva." : "Grades that stack academic aid on athletic aid." },
+            { icon: Video, label: es ? "Video de pruebas" : "Race video", desc: es ? "Carreras o saltos recientes en competición." : "Recent races or jumps in competition." },
+          ]}
+          columns={[es ? "Prueba" : "Event", es ? "D1 Mujeres" : "D1 Women", es ? "D1 Hombres" : "D1 Men", es ? "D2 / NAIA (M / H)" : "D2 / NAIA (W / M)", es ? "Potencial beca" : "Scholarship potential"]}
+          rows={matrix.map((r) => [r.e, r.w, r.m, r.o, r.b])}
+          caption={
+            es
+              ? "Valores orientativos basados en marcas de acceso habituales. Cada caso se evalúa de forma individual."
+              : "Guideline values based on typical entry marks. Each case is evaluated individually."
+          }
         />
 
         {/* Market — gray */}
@@ -89,52 +116,6 @@ const TrackPage = () => {
                   : "For international high-performance athletes seeking athletic and academic growth."
               }
             />
-          </div>
-        </SportSection>
-
-        {/* Performance Matrix — white */}
-        <SportSection bg="hsl(var(--background))">
-          <SectionTitle>{es ? "Matriz de Rendimiento" : "Performance Matrix"}</SectionTitle>
-          <p className="text-center font-body text-muted-foreground mb-8 -mt-6 max-w-2xl mx-auto">
-            {es
-              ? "FUA Sports utiliza marcas oficiales para determinar tu potencial de cobertura financiera."
-              : "FUA Sports uses official marks to determine your financial coverage potential."}
-          </p>
-          <div className="overflow-x-auto rounded-xl border" style={{ borderColor: "hsl(var(--border))" }}>
-            <table className="w-full text-sm bg-white">
-              <thead style={{ backgroundColor: NAVY }}>
-                <tr className="text-white text-left">
-                  <th className="px-4 py-3 font-display font-semibold">{es ? "Evento" : "Event"}</th>
-                  <th className="px-4 py-3 font-display font-semibold">{es ? "D1 Mujeres" : "D1 Women"}</th>
-                  <th className="px-4 py-3 font-display font-semibold">{es ? "D1 Hombres" : "D1 Men"}</th>
-                  <th className="px-4 py-3 font-display font-semibold">D2/NAIA</th>
-                  <th className="px-4 py-3 font-display font-semibold">
-                    {es ? "Potencial Beca" : "Scholarship Potential"}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {matrix.map((r, i) => (
-                  <tr key={r.e} style={{ backgroundColor: i % 2 === 0 ? "hsl(var(--background))" : LIGHT }}>
-                    <td className="px-4 py-3 font-bold" style={{ color: NAVY }}>
-                      {r.e}
-                    </td>
-                    <td className="px-4 py-3" style={{ color: NAVY }}>
-                      {r.w}
-                    </td>
-                    <td className="px-4 py-3" style={{ color: NAVY }}>
-                      {r.m}
-                    </td>
-                    <td className="px-4 py-3" style={{ color: NAVY }}>
-                      {r.o}
-                    </td>
-                    <td className="px-4 py-3 font-bold" style={{ color: RED }}>
-                      {r.b}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </SportSection>
 

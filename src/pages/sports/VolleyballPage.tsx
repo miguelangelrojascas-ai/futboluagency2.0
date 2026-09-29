@@ -3,8 +3,10 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import sportVolleyball from "@/assets/sport-volleyball.png";
+import { ArrowUpFromLine, Hand, Ruler, Video } from "lucide-react";
+import SportSplitHero from "@/components/sports/SportSplitHero";
+import SportBenchmarks from "@/components/sports/SportBenchmarks";
 import {
-  SportHero,
   SportSection,
   SectionTitle,
   FeatureCard,
@@ -34,22 +36,53 @@ const VolleyballPage = () => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-16 md:pt-20" style={{ backgroundColor: LIGHT }}>
-        <BackToSports />
-        <SportHero
+      <main className="min-h-screen" style={{ backgroundColor: LIGHT }}>
+        <SportSplitHero
+          sport="Volleyball"
           image={sportVolleyball}
-          headline={es ? "Tu red. Tu beca. Tu futuro." : "Your net. Your scholarship. Your future."}
-          title={es ? "Becas de Voleibol Universitario en EE.UU." : "College Volleyball Scholarships in the U.S."}
+          imageAlt={es ? "Jugadora de voleibol universitario" : "College volleyball player"}
+          eyebrow={es ? "Tu red. Tu beca. Tu futuro." : "Your net. Your scholarship. Your future."}
+          title={es ? "Becas de voleibol" : "Volleyball scholarships"}
+          highlight={es ? "en EE.UU." : "in the U.S."}
           subtitle={
             es
-              ? "Combina tu pasión por el voleibol con una educación universitaria de calidad."
-              : "Combine your passion for volleyball with a top-tier university education."
+              ? "Combina tu pasión por el voleibol con una educación universitaria de calidad en NCAA, NAIA y NJCAA."
+              : "Combine your passion for volleyball with a top-tier university education across NCAA, NAIA and NJCAA."
           }
+          floatingStat={{ value: "75–100%", label: es ? "Cobertura de beca" : "Scholarship coverage" }}
           stats={[
-            { value: "75–100%", label: es ? "Cobertura de beca" : "Scholarship coverage" },
-            { value: "NCAA D1·D2·D3·NAIA", label: es ? "Divisiones" : "Divisions" },
-            { value: es ? "Gratis" : "Free", label: es ? "Evaluación inicial" : "Initial evaluation" },
+            { value: "$1.8B", label: es ? "Becas anuales" : "Annual scholarships" },
+            { value: "D1–NAIA", label: es ? "Divisiones" : "Divisions" },
+            { value: es ? "Gratis" : "Free", label: es ? "Evaluación" : "Evaluation" },
           ]}
+        />
+
+        <SportBenchmarks
+          title={es ? "Lo que miran los" : "What coaches"}
+          highlight={es ? "entrenadores" : "look for"}
+          subtitle={
+            es
+              ? "La altura y el alcance abren la puerta, pero la técnica y el video deciden. Estas son las referencias orientativas por posición en voleibol femenino."
+              : "Height and reach open the door, but technique and video decide. These are guideline references by position in women's volleyball."
+          }
+          metrics={[
+            { icon: Ruler, label: es ? "Altura" : "Height", desc: es ? "Filtro inicial según posición y división." : "First filter by position and division." },
+            { icon: ArrowUpFromLine, label: es ? "Alcance y salto" : "Reach & jump", desc: es ? "Alcance en ataque y bloqueo, salto vertical." : "Attack and block reach, vertical jump." },
+            { icon: Hand, label: es ? "Técnica" : "Technique", desc: es ? "Recepción, colocación y eficiencia en ataque." : "Passing, setting and attack efficiency." },
+            { icon: Video, label: "Highlights", desc: es ? "Video de partido completo y acciones clave." : "Full match video and key plays." },
+          ]}
+          columns={[es ? "Posición" : "Position", "NCAA D1", "NCAA D2", "NAIA / NJCAA"]}
+          rows={[
+            [es ? "Central" : "Middle blocker", "1.85 m+", "1.80 m+", "1.75 m+"],
+            [es ? "Punta / Opuesta" : "Outside / Opposite", "1.80 m+", "1.75 m+", "1.70 m+"],
+            [es ? "Colocadora" : "Setter", "1.75 m+", "1.70 m+", "1.65 m+"],
+            [es ? "Líbero" : "Libero", "1.65 m+", "1.60 m+", es ? "Sin mínimo" : "No minimum"],
+          ]}
+          caption={
+            es
+              ? "Valores orientativos. Cada entrenador valora el perfil completo: nivel competitivo, notas y video."
+              : "Guideline values. Each coach evaluates the full profile: competitive level, grades and video."
+          }
         />
 
         {/* Why */}
