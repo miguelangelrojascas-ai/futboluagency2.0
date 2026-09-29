@@ -37,7 +37,7 @@ const SpainMethodologySection = () => {
   ];
 
   return (
-    <section className="py-24" style={{ backgroundColor: "#ffffff" }}>
+    <section className="py-24" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">

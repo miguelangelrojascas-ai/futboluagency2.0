@@ -7,7 +7,7 @@ const VideoSection = () => {
   useCalendlyLoader();
 
   return (
-    <section id="video-section" className="section-padding" style={{ backgroundColor: "#ffffff" }}>
+    <section id="video-section" className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
@@ -20,8 +20,8 @@ const VideoSection = () => {
         <div className="max-w-4xl mx-auto px-2">
           <div className="relative">
             {/* Blue glow effect */}
-            <div className="absolute -inset-4 bg-[hsl(210,100%,50%)]/25 rounded-2xl blur-xl opacity-70" />
-            <div className="relative aspect-video rounded-xl border-2 border-[hsl(210,100%,50%)]/40 overflow-hidden bg-card shadow-2xl shadow-[hsl(210,100%,50%)]/20">
+            <div className="absolute -inset-4 bg-accent-blue/25 rounded-2xl blur-xl opacity-70" />
+            <div className="relative aspect-video rounded-xl border-2 border-accent-blue/40 overflow-hidden bg-card shadow-2xl shadow-accent-blue/20">
               <iframe
                 src="https://www.youtube.com/embed/0-dWsUxiYkI"
                 title="FutbolUAgency LLC. - Video explicativo"

@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -21,7 +22,15 @@ const players: Player[] = [
 ];
 
 const Players = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const es = language === "es";
+
+  useDocumentMeta({
+    title: es ? "Nuestros Jugadores | FutbolUAgency" : "Our Players | FutbolUAgency",
+    description: es
+      ? "Conoce a algunos de los jugadores que ya cumplieron su sueño de estudiar y competir en universidades de EE.UU."
+      : "Meet some of the players who already achieved their dream of studying and competing at US universities.",
+  });
 
   return (
     <>
@@ -59,7 +68,7 @@ const Players = () => {
                   <div className="p-5">
                     <h3 className="font-display text-lg font-bold text-foreground mb-1">{player.name}</h3>
                     <p className="font-body text-sm text-muted-foreground mb-2">{player.flag} {player.country}</p>
-                    <p className="font-body text-sm text-[hsl(210,100%,50%)] font-medium">{player.university}</p>
+                    <p className="font-body text-sm text-accent-blue font-medium">{player.university}</p>
                   </div>
                 </div>
               ))}

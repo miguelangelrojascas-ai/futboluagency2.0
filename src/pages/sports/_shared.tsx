@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Calendar } from "lucide-react";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 
-export const NAVY = "#12213a";
-export const RED = "#b00717";
-export const LIGHT = "#fafaf8";
-export const GRAY = "#f3f4f6";
+export const NAVY = "hsl(var(--foreground))";
+export const RED = "hsl(var(--primary))";
+export const LIGHT = "hsl(var(--background))";
+export const GRAY = "hsl(var(--muted))";
 
 export const SportHero = ({
   title,
@@ -93,7 +93,7 @@ export const SportHero = ({
 export const SectionTitle = ({ children, dark = false }: { children: ReactNode; dark?: boolean }) => (
   <h2
     className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12"
-    style={{ color: dark ? "#ffffff" : NAVY }}
+    style={{ color: dark ? "hsl(var(--background))" : NAVY }}
   >
     {children}
   </h2>
@@ -116,7 +116,7 @@ export const SportSection = ({
 export const FeatureCard = ({ title, desc }: { title: string; desc?: string }) => (
   <div
     className="rounded-xl p-6 sm:p-7 border bg-white"
-    style={{ borderColor: "#e5e5e5" }}
+    style={{ borderColor: "hsl(var(--border))" }}
   >
     <h3 className="font-display text-lg sm:text-xl font-bold mb-2" style={{ color: NAVY }}>
       {title}
@@ -160,7 +160,7 @@ export const BackToSports = () => (
 );
 
 export const ProcessStep = ({ n, title, desc }: { n: number; title: string; desc?: string }) => (
-  <div className="rounded-xl p-6 border bg-white flex gap-4" style={{ borderColor: "#e5e5e5" }}>
+  <div className="rounded-xl p-6 border bg-white flex gap-4" style={{ borderColor: "hsl(var(--border))" }}>
     <div
       className="font-display text-2xl font-bold shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white"
       style={{ backgroundColor: RED }}
@@ -181,7 +181,7 @@ export const TwoCol = ({ children }: { children: ReactNode }) => (
 );
 
 export const ColCard = ({ title, items }: { title: string; items: string[] }) => (
-  <div className="rounded-xl p-7 border bg-white" style={{ borderColor: "#e5e5e5" }}>
+  <div className="rounded-xl p-7 border bg-white" style={{ borderColor: "hsl(var(--border))" }}>
     <h3 className="font-display text-xl font-bold mb-4" style={{ color: RED }}>
       {title}
     </h3>

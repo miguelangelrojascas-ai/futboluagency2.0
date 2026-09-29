@@ -13,7 +13,7 @@ const CalendlySection = (_props: CalendlySectionProps) => {
   useCalendlyLoader();
 
   return (
-    <section id="calendly-section" className="py-24" style={{ backgroundColor: "#f5f4f2" }}>
+    <section id="calendly-section" className="py-24" style={{ backgroundColor: "hsl(var(--section-alt))" }}>
       <div className="container-wide">
         <div className="text-center">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">

@@ -24,14 +24,14 @@ const SpainTargetProfileSection = () => {
   ];
 
   const cardStyle = {
-    backgroundColor: "#ffffff",
+    backgroundColor: "hsl(var(--background))",
     border: "0.5px solid #222",
     borderRadius: "14px",
     padding: "32px",
   };
 
   return (
-    <section style={{ backgroundColor: "#ffffff", padding: "40px 0" }}>
+    <section style={{ backgroundColor: "hsl(var(--background))", padding: "40px 0" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Yes card */}

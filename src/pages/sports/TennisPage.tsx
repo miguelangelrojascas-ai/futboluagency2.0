@@ -14,6 +14,7 @@ import {
   Award,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import tennisPlayerImg from "@/assets/tennis-player.jpg";
 import tennisStudentsImg from "@/assets/tennis-students.jpg";
 import tennisTrophyImg from "@/assets/tennis-trophy.webp";
@@ -33,14 +34,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const NAVY = "#12213a";
-const RED = "#b00717";
-const LIGHT = "#fafaf8";
+const NAVY = "hsl(var(--foreground))";
+const RED = "hsl(var(--primary))";
+const LIGHT = "hsl(var(--background))";
 const CALENDLY = "https://calendly.com/futbolu-agency";
 
 const TennisPage = () => {
   const { language } = useLanguage();
   const es = language === "es";
+
+  useDocumentMeta({
+    title: es
+      ? "Becas de Tenis Universitario en EE.UU. | FutbolUAgency"
+      : "College Tennis Scholarships in the USA | FutbolUAgency",
+    description: es
+      ? "Acompañamiento cercano para conseguir la beca de tenis universitario que tu talento merece en NCAA, NAIA y NJCAA."
+      : "Close support to help you earn the college tennis scholarship your talent deserves across NCAA, NAIA and NJCAA.",
+  });
 
   // Carrusel sincronizado de la sección "Por qué el tenis universitario"
   const [activeWhy, setActiveWhy] = useState(0);
@@ -179,7 +189,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── WHY TENNIS ── */}
-        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "hsl(var(--background))" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -266,7 +276,7 @@ const TennisPage = () => {
                           className="h-2 rounded-full transition-all"
                           style={{
                             width: activeWhy === i ? 24 : 8,
-                            backgroundColor: activeWhy === i ? "#ffffff" : "rgba(255,255,255,0.5)",
+                            backgroundColor: activeWhy === i ? "hsl(var(--background))" : "rgba(255,255,255,0.5)",
                           }}
                         />
                       ))}
@@ -285,7 +295,7 @@ const TennisPage = () => {
                           aria-current={isActive}
                           className="w-full text-left flex gap-4 p-6 rounded-xl bg-white border transition-all duration-500 ease-out"
                           style={{
-                            borderColor: isActive ? RED : "#e5e5e5",
+                            borderColor: isActive ? RED : "hsl(var(--border))",
                             boxShadow: isActive ? "0 20px 40px -20px rgba(176,7,23,0.35)" : "none",
                             transform: isActive ? "scale(1.03)" : "scale(1)",
                             opacity: isActive ? 1 : 0.55,
@@ -297,7 +307,7 @@ const TennisPage = () => {
                           >
                             <f.icon
                               className="w-6 h-6 transition-colors duration-500"
-                              style={{ color: isActive ? "#ffffff" : RED }}
+                              style={{ color: isActive ? "hsl(var(--background))" : RED }}
                             />
                           </div>
                           <div>
@@ -321,7 +331,7 @@ const TennisPage = () => {
         {/* ── LEAGUE SYSTEM ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--section-alt))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -375,7 +385,7 @@ const TennisPage = () => {
                 <div
                   key={league.name}
                   className="rounded-2xl overflow-hidden border bg-white shadow-sm hover:shadow-lg transition-shadow"
-                  style={{ borderColor: "#e5e5e5" }}
+                  style={{ borderColor: "hsl(var(--border))" }}
                 >
                   <div className="p-6" style={{ backgroundColor: league.color }}>
                     <div className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1 font-body">
@@ -434,7 +444,7 @@ const TennisPage = () => {
         {/* ── FINANCIAL REALITY ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--background))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -479,7 +489,7 @@ const TennisPage = () => {
                 <div
                   key={b.title}
                   className="rounded-2xl p-7 sm:p-8 bg-white border"
-                  style={{ borderColor: "#e5e5e5" }}
+                  style={{ borderColor: "hsl(var(--border))" }}
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <div
@@ -621,7 +631,7 @@ const TennisPage = () => {
         </section>
 
         {/* ── STUDENT ATHLETE LIFE ── */}
-        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "hsl(var(--background))" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -723,7 +733,7 @@ const TennisPage = () => {
         {/* ── REQUIREMENTS ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--section-alt))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-5xl mx-auto">
             <div className="text-center mb-12">
@@ -742,7 +752,7 @@ const TennisPage = () => {
               <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
             </div>
 
-            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "#e5e5e5" }}>
+            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "hsl(var(--border))" }}>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
@@ -798,7 +808,7 @@ const TennisPage = () => {
         {/* ── FAQ ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--background))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -831,7 +841,7 @@ const TennisPage = () => {
                   key={i}
                   value={`item-${i}`}
                   className="rounded-xl border bg-white px-5"
-                  style={{ borderColor: "#e5e5e5" }}
+                  style={{ borderColor: "hsl(var(--border))" }}
                 >
                   <AccordionTrigger
                     className="font-display text-base sm:text-lg font-bold hover:no-underline text-left"

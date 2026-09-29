@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import HeroSection from "@/components/HeroSection";
 import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
@@ -14,12 +14,11 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 const Index = () => {
-  useEffect(() => {
-    document.title = "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Ayudamos a futbolistas internacionales a obtener becas deportivas en universidades NCAA, NAIA y JUCO en Estados Unidos. Evaluación gratuita.");
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos");
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Convierte tu talento en una beca deportiva. Ayudamos a futbolistas internacionales a entrar a universidades NCAA, NAIA y JUCO.");
-  }, []);
+  useDocumentMeta({
+    title: "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos",
+    description: "Ayudamos a futbolistas internacionales a obtener becas deportivas en universidades NCAA, NAIA y JUCO en Estados Unidos. Evaluación gratuita.",
+    ogDescription: "Convierte tu talento en una beca deportiva. Ayudamos a futbolistas internacionales a entrar a universidades NCAA, NAIA y JUCO.",
+  });
 
   return (
     <>

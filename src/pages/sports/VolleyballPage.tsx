@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import sportVolleyball from "@/assets/sport-volleyball.png";
 import {
   SportHero,
@@ -20,6 +21,15 @@ import {
 const VolleyballPage = () => {
   const { language } = useLanguage();
   const es = language === "es";
+
+  useDocumentMeta({
+    title: es
+      ? "Becas de Voleibol Universitario en EE.UU. | FutbolUAgency"
+      : "College Volleyball Scholarships in the USA | FutbolUAgency",
+    description: es
+      ? "Becas para jugadoras y jugadores de voleibol de alto nivel competitivo en universidades de EE.UU. NCAA, NAIA y NJCAA."
+      : "Scholarships for high-level competitive volleyball players at US universities across NCAA, NAIA and NJCAA.",
+  });
 
   return (
     <>
@@ -66,7 +76,7 @@ const VolleyballPage = () => {
         </SportSection>
 
         {/* League system */}
-        <SportSection bg="#ffffff">
+        <SportSection bg="hsl(var(--background))">
           <SectionTitle>{es ? "El Sistema de Ligas" : "The League System"}</SectionTitle>
           <div className="grid md:grid-cols-3 gap-5 mb-6">
             {[
@@ -130,7 +140,7 @@ const VolleyballPage = () => {
         </SportSection>
 
         {/* Process */}
-        <SportSection bg="#ffffff">
+        <SportSection bg="hsl(var(--background))">
           <SectionTitle>{es ? "El Proceso FUA Sports" : "The FUA Sports Process"}</SectionTitle>
           <div className="grid md:grid-cols-2 gap-5">
             {(es

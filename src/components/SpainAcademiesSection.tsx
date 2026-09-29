@@ -36,7 +36,7 @@ const SpainAcademiesSection = () => {
   const t = content[language];
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4 relative z-10">
 
         {/* Section Title */}

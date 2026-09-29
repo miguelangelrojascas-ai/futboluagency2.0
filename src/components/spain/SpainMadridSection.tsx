@@ -16,7 +16,7 @@ const SpainMadridSection = () => {
   const isEs = language === "es";
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#ffffff" }}>
+    <section className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">

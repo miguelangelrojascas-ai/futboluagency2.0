@@ -40,7 +40,7 @@ const PlayerProfilesSection = () => {
     },
     {
       level: "Alto",
-      badgeColor: "#b00717",
+      badgeColor: "hsl(var(--primary))",
       gradient: "linear-gradient(135deg, #6b0410 0%, #b00717 100%)",
       image: profileAlto,
       imagePosition: "center center",
@@ -93,10 +93,10 @@ const PlayerProfilesSection = () => {
   ];
 
   const colLabel = "font-display text-base sm:text-lg font-bold mb-2 block";
-  const colLabelStyle = { color: "#12213a" };
+  const colLabelStyle = { color: "hsl(var(--foreground))" };
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
+    <section className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
         <div className="max-w-3xl mb-12">
           <span className="text-primary text-xs font-bold tracking-[0.15em] uppercase mb-4 block">
@@ -116,7 +116,7 @@ const PlayerProfilesSection = () => {
           {profiles.map((p, i) => (
             <div
               key={i}
-              className="rounded-xl overflow-hidden bg-white grid grid-cols-1 md:grid-cols-[180px_1fr_1fr_1fr] transition-all duration-300 ease-out cursor-default hover:scale-[1.04] hover:z-10 hover:shadow-[0_12px_40px_rgba(18,33,58,0.18)] hover:ring-1 hover:ring-[#12213a]/40 relative"
+              className="rounded-xl overflow-hidden bg-white grid grid-cols-1 md:grid-cols-[180px_1fr_1fr_1fr] transition-all duration-300 ease-out cursor-default hover:scale-[1.04] hover:z-10 hover:shadow-[0_12px_40px_rgba(18,33,58,0.18)] hover:ring-1 hover:ring-foreground/40 relative"
               style={{ border: "1px solid #e5e5e5" }}
             >
               {/* Left column — level with photo background */}

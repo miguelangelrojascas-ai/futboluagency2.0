@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import { ArrowRight, X } from "lucide-react";
 
 const LinkedInIcon = () => (
@@ -25,8 +26,8 @@ import miguelRojas from "@/assets/miguel-rojas.jpg";
 import neusTrack from "@/assets/neus-track.jpg";
 import teamHeaderBg from "@/assets/team-header-bg.jpg";
 
-const NAVY = "#12213a";
-const RED = "#b00717";
+const NAVY = "hsl(var(--foreground))";
+const RED = "hsl(var(--primary))";
 
 type Bio = { es: string[]; en: string[] } | null;
 type Member = {
@@ -116,17 +117,15 @@ const About = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const selected = activeIndex !== null ? teamMembers[activeIndex] : null;
 
-  useEffect(() => {
-    document.title = "Sobre Nosotros | Quiénes Somos – FutbolUAgency";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Conoce al equipo detrás de FutbolUAgency. Exfutbolistas profesionales que ayudan a jóvenes talentos a obtener becas deportivas en universidades americanas.");
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "Sobre Nosotros | FutbolUAgency");
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Conoce al equipo detrás de FutbolUAgency. Exfutbolistas profesionales que ayudan a jóvenes talentos a obtener becas deportivas en universidades americanas.");
-  }, []);
+  useDocumentMeta({
+    title: "Sobre Nosotros | Quiénes Somos – FutbolUAgency",
+    description: "Conoce al equipo detrás de FutbolUAgency. Exfutbolistas profesionales que ayudan a jóvenes talentos a obtener becas deportivas en universidades americanas.",
+  });
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-16 md:pt-20" style={{ backgroundColor: "#ffffff", color: NAVY }}>
+      <main className="min-h-screen pt-16 md:pt-20" style={{ backgroundColor: "hsl(var(--background))", color: NAVY }}>
         {/* HERO */}
         <section className="relative overflow-hidden" style={{ minHeight: "480px" }}>
           <img
@@ -158,7 +157,7 @@ const About = () => {
         </section>
 
         {/* ORIGIN STORY */}
-        <section className="py-20 md:py-24" style={{ backgroundColor: "#f5f4f2" }}>
+        <section className="py-20 md:py-24" style={{ backgroundColor: "hsl(var(--section-alt))" }}>
           <div className="container-wide px-4 max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
@@ -239,7 +238,7 @@ const About = () => {
         </section>
 
         {/* TEAM */}
-        <section className="py-20 md:py-24" style={{ backgroundColor: "#f5f4f2" }}>
+        <section className="py-20 md:py-24" style={{ backgroundColor: "hsl(var(--section-alt))" }}>
           <div className="container-wide px-4 max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <span className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4 block" style={{ color: RED }}>

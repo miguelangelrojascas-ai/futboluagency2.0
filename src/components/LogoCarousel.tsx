@@ -47,7 +47,7 @@ const LogoCarousel = () => {
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <section className="py-8 overflow-hidden" style={{ backgroundColor: "#f5f4f2" }}>
+    <section className="py-8 overflow-hidden" style={{ backgroundColor: "hsl(var(--section-alt))" }}>
       <div className="relative">
         {/* Fade overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, #f5f4f2, transparent)" }} />

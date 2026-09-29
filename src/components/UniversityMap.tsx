@@ -327,8 +327,8 @@ const STATE_CENTROIDS: Record<string, [number, number]> = {
 
 const divisionColor = (div: string) => {
   switch (div) {
-    case "D1": return "bg-[#b00717] text-white";
-    case "D2": return "bg-[#12213a] text-white";
+    case "D1": return "bg-primary text-white";
+    case "D2": return "bg-secondary text-white";
     case "D3": return "bg-[#1a6e3c] text-white";
     case "NAIA": return "bg-[#d97706] text-white";
     case "NJCAA": return "bg-[#1e3a6e] text-white";
@@ -396,10 +396,10 @@ const UniversityMap = () => {
   const selectedData = selected ? universitiesByState[selected.abbr] : null;
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "#fafaf8" }}>
+    <section className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="inline-block mb-4 text-[#b00717] font-body text-xs tracking-[0.15em] uppercase font-bold">
+          <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase font-bold">
             350+ Universidades Partner
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -475,22 +475,22 @@ const UniversityMap = () => {
                           }}
                           style={{
                             default: {
-                              fill: isZoomed ? "#b00717" : "#c5d5e8",
-                              stroke: "#ffffff",
+                              fill: isZoomed ? "hsl(var(--primary))" : "#c5d5e8",
+                              stroke: "hsl(var(--background))",
                               strokeWidth: 1.2,
                               outline: "none",
                               transition: "fill 0.4s",
                             },
                             hover: {
-                              fill: "#b00717",
-                              stroke: "#ffffff",
+                              fill: "hsl(var(--primary))",
+                              stroke: "hsl(var(--background))",
                               strokeWidth: 1.2,
                               outline: "none",
                               cursor: data ? "pointer" : "default",
                             },
                             pressed: {
-                              fill: "#b00717",
-                              stroke: "#ffffff",
+                              fill: "hsl(var(--primary))",
+                              stroke: "hsl(var(--background))",
                               strokeWidth: 1.2,
                               outline: "none",
                             },
@@ -513,8 +513,8 @@ const UniversityMap = () => {
                     <g style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.25))", pointerEvents: "none" }}>
                       <circle
                         r={radius}
-                        fill="#ffffff"
-                        stroke="#12213a"
+                        fill="hsl(var(--background))"
+                        stroke="hsl(var(--foreground))"
                         strokeWidth={1.2 / Math.max(1, mapZoom * 0.9)}
                       />
                       <text
@@ -524,7 +524,7 @@ const UniversityMap = () => {
                           fontFamily: "Inter, sans-serif",
                           fontSize,
                           fontWeight: 800,
-                          fill: "#12213a",
+                          fill: "hsl(var(--foreground))",
                         }}
                       >
                         {count}
@@ -547,9 +547,9 @@ const UniversityMap = () => {
                 className="absolute top-2 right-2 p-1 rounded hover:bg-muted"
                 aria-label="Cerrar"
               >
-                <X className="w-3.5 h-3.5 text-[#12213a]" />
+                <X className="w-3.5 h-3.5 text-foreground" />
               </button>
-              <p className="font-display text-base font-bold text-[#12213a] pr-6 mb-1">
+              <p className="font-display text-base font-bold text-foreground pr-6 mb-1">
                 {popover.name}
               </p>
               <p className="font-body text-xs text-muted-foreground mb-3">
@@ -557,7 +557,7 @@ const UniversityMap = () => {
               </p>
               <button
                 onClick={() => handleViewState(popover.abbr, popover.name)}
-                className="w-full bg-[#b00717] hover:bg-[#8a0512] text-white font-body text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-colors"
+                className="w-full bg-primary hover:bg-primary-hover text-white font-body text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-colors"
               >
                 Ver estado
               </button>
@@ -566,7 +566,7 @@ const UniversityMap = () => {
 
           {tooltip && (
             <div
-              className="fixed pointer-events-none z-50 bg-[#12213a] text-white font-body text-xs font-semibold px-3 py-1.5 rounded-md shadow-lg"
+              className="fixed pointer-events-none z-50 bg-secondary text-white font-body text-xs font-semibold px-3 py-1.5 rounded-md shadow-lg"
               style={{ left: tooltip.x + 12, top: tooltip.y + 12 }}
             >
               {tooltip.text}
@@ -590,10 +590,10 @@ const UniversityMap = () => {
           >
             <div className="flex items-start justify-between p-6 border-b border-border">
               <div>
-                <span className="font-body text-xs tracking-[0.15em] uppercase text-[#b00717] font-bold block mb-2">
+                <span className="font-body text-xs tracking-[0.15em] uppercase text-primary font-bold block mb-2">
                   {selectedData.count} Universidades
                 </span>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#12213a]">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
                   {selected.name}
                 </h3>
               </div>
@@ -602,7 +602,7 @@ const UniversityMap = () => {
                 className="p-2 rounded-full hover:bg-muted transition-colors"
                 aria-label="Cerrar"
               >
-                <X className="w-5 h-5 text-[#12213a]" />
+                <X className="w-5 h-5 text-foreground" />
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-6">
@@ -610,7 +610,7 @@ const UniversityMap = () => {
                 {selectedData.universities.map((uni, i) => (
                   <li
                     key={i}
-                    className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border hover:border-[#12213a]/30 hover:bg-muted/40 transition-colors"
+                    className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-muted/40 transition-colors"
                   >
                     <span className="font-body text-sm text-foreground font-medium">
                       {uni.name}

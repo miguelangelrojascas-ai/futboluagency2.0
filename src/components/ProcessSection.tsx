@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
-const NAVY = "#12213a";
-const RED = "#b00717";
+const NAVY = "hsl(var(--foreground))";
+const RED = "hsl(var(--primary))";
 
 const STEPS_DATA = [
   {
@@ -77,7 +77,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#ffffff", color: NAVY, padding: "120px 0 80px" }}
+      style={{ background: "hsl(var(--background))", color: NAVY, padding: "120px 0 80px" }}
     >
       {/* Header */}
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px 80px", textAlign: "center" }}>
@@ -350,7 +350,7 @@ const ProcessSection = () => {
               marginBottom: 48,
               borderRadius: 20,
               overflow: "hidden",
-              background: "#ffffff",
+              background: "hsl(var(--background))",
               border: "1px solid rgba(18,33,58,0.08)",
               boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
             }}

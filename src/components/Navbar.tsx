@@ -119,11 +119,11 @@ const Navbar = () => {
                       key={s.to}
                       to={s.to}
                       onClick={() => setShowSportsMenu(false)}
-                      className="block transition-colors hover:bg-[#f5f4f2]"
+                      className="block transition-colors hover:bg-section-alt"
                       style={{
                         padding: "10px 16px",
                         fontSize: "14px",
-                        color: isActive(s.to) ? "#b00717" : "#12213a",
+                        color: isActive(s.to) ? "hsl(var(--primary))" : "hsl(var(--foreground))",
                         fontWeight: isActive(s.to) ? 600 : 400,
                       }}
                     >
@@ -151,7 +151,7 @@ const Navbar = () => {
                 e.preventDefault();
                 (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
               }}
-              className="ml-2 bg-[#b00717] hover:bg-[#900612] text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+              className="ml-2 bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
             >
               {t("nav.applyCta")}
             </a>
@@ -200,7 +200,7 @@ const Navbar = () => {
                       to={s.to}
                       onClick={() => { setIsOpen(false); setShowMobileSports(false); }}
                       className="block px-4 py-2 rounded-lg font-body text-sm font-bold text-center transition-colors hover:bg-muted/50"
-                      style={{ color: isActive(s.to) ? "#b00717" : undefined }}
+                      style={{ color: isActive(s.to) ? "hsl(var(--primary))" : undefined }}
                     >
                       {s.label}
                     </Link>
@@ -226,7 +226,7 @@ const Navbar = () => {
                   setIsOpen(false);
                   (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
                 }}
-                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-[#b00717] hover:bg-[#900612] text-white"
+                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary hover:bg-primary-hover text-white"
               >
                 <GraduationCap className="w-4 h-4" />
                 {t("nav.applyCta")}

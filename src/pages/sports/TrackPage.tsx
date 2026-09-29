@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import { CheckCircle } from "lucide-react";
 import sportTrack from "@/assets/sport-track.png";
 import {
@@ -21,6 +22,15 @@ import {
 const TrackPage = () => {
   const { language } = useLanguage();
   const es = language === "es";
+
+  useDocumentMeta({
+    title: es
+      ? "Becas de Atletismo Universitario en EE.UU. | FutbolUAgency"
+      : "College Track & Field Scholarships in the USA | FutbolUAgency",
+    description: es
+      ? "Lleva tu talento en atletismo a las pistas universitarias de EE.UU. con becas en NCAA, NAIA y NJCAA."
+      : "Take your track & field talent to US college tracks with scholarships across NCAA, NAIA and NJCAA.",
+  });
 
   const matrix = [
     { e: "100m", w: "11.8–12.2s", m: "10.3–10.7s", o: "12.5–13.0s / 11.3–11.8s", b: "70–100%" },
@@ -83,14 +93,14 @@ const TrackPage = () => {
         </SportSection>
 
         {/* Performance Matrix — white */}
-        <SportSection bg="#ffffff">
+        <SportSection bg="hsl(var(--background))">
           <SectionTitle>{es ? "Matriz de Rendimiento" : "Performance Matrix"}</SectionTitle>
           <p className="text-center font-body text-muted-foreground mb-8 -mt-6 max-w-2xl mx-auto">
             {es
               ? "FUA Sports utiliza marcas oficiales para determinar tu potencial de cobertura financiera."
               : "FUA Sports uses official marks to determine your financial coverage potential."}
           </p>
-          <div className="overflow-x-auto rounded-xl border" style={{ borderColor: "#e5e5e5" }}>
+          <div className="overflow-x-auto rounded-xl border" style={{ borderColor: "hsl(var(--border))" }}>
             <table className="w-full text-sm bg-white">
               <thead style={{ backgroundColor: NAVY }}>
                 <tr className="text-white text-left">
@@ -105,7 +115,7 @@ const TrackPage = () => {
               </thead>
               <tbody>
                 {matrix.map((r, i) => (
-                  <tr key={r.e} style={{ backgroundColor: i % 2 === 0 ? "#ffffff" : LIGHT }}>
+                  <tr key={r.e} style={{ backgroundColor: i % 2 === 0 ? "hsl(var(--background))" : LIGHT }}>
                     <td className="px-4 py-3 font-bold" style={{ color: NAVY }}>
                       {r.e}
                     </td>
@@ -218,7 +228,7 @@ const TrackPage = () => {
         </SportSection>
 
         {/* Requirements + Day — white */}
-        <SportSection bg="#ffffff">
+        <SportSection bg="hsl(var(--background))">
           <SectionTitle>{es ? "Requisitos y Vida Diaria" : "Requirements & Daily Life"}</SectionTitle>
           <div className="grid md:grid-cols-2 gap-8 mb-10">
             <div>
@@ -226,7 +236,7 @@ const TrackPage = () => {
                 {es ? "Filtro de Selección" : "Selection Filter"}
               </h3>
               <div className="space-y-4">
-                <div className="rounded-xl p-5 border" style={{ borderColor: "#e5e5e5", backgroundColor: LIGHT }}>
+                <div className="rounded-xl p-5 border" style={{ borderColor: "hsl(var(--border))", backgroundColor: LIGHT }}>
                   <h4 className="font-semibold mb-3" style={{ color: NAVY }}>
                     {es ? "Académico" : "Academic"}
                   </h4>
@@ -239,7 +249,7 @@ const TrackPage = () => {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl p-5 border" style={{ borderColor: "#e5e5e5", backgroundColor: LIGHT }}>
+                <div className="rounded-xl p-5 border" style={{ borderColor: "hsl(var(--border))", backgroundColor: LIGHT }}>
                   <h4 className="font-semibold mb-3" style={{ color: NAVY }}>
                     {es ? "Deportivo" : "Athletic"}
                   </h4>
@@ -294,7 +304,7 @@ const TrackPage = () => {
                   <div
                     key={row.time}
                     className="flex gap-4 items-center rounded-xl border p-4"
-                    style={{ borderColor: "#e5e5e5", backgroundColor: LIGHT }}
+                    style={{ borderColor: "hsl(var(--border))", backgroundColor: LIGHT }}
                   >
                     <div className="font-display text-base font-bold w-24 sm:w-28 shrink-0" style={{ color: RED }}>
                       {row.time}
