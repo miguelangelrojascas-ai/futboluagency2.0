@@ -5,6 +5,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import sportVolleyball from "@/assets/sport-volleyball.png";
 import { ArrowUpFromLine, Hand, Ruler, Video } from "lucide-react";
 import SportSplitHero from "@/components/sports/SportSplitHero";
+import volleyballLogo from "@/assets/logo-volleyball.jpg";
 import SportBenchmarks from "@/components/sports/SportBenchmarks";
 import {
   SportSection,
@@ -39,6 +40,7 @@ const VolleyballPage = () => {
       <main className="min-h-screen" style={{ backgroundColor: LIGHT }}>
         <SportSplitHero
           sport="Volleyball"
+          logo={volleyballLogo}
           image={sportVolleyball}
           imageAlt={es ? "Jugadora de voleibol universitario" : "College volleyball player"}
           eyebrow={es ? "Tu red. Tu beca. Tu futuro." : "Your net. Your scholarship. Your future."}
