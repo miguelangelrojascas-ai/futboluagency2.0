@@ -16,18 +16,18 @@ const PathSelectionSection = () => {
         : "We connect you with NCAA, NAIA and JUCO coaches. We build your profile, manage outreach and negotiate the best scholarship so you can study and compete at the highest level.",
       cta: isEs ? "Explorar EE.UU." : "Explore U.S.",
       to: "/usa",
-      accent: "#12213a",
+      accent: "hsl(var(--foreground))",
     },
     {
       number: "02",
-      tag: "",
+      tag: isEs ? "Nueva Expansión" : "New Expansion",
       title: isEs ? "Otros Deportes Universitarios" : "Other College Sports",
       desc: isEs
         ? "Becas universitarias en EE.UU. para tenis, golf, atletismo y voleibol. Mismo proceso, mismo compromiso, ahora ampliando a más disciplinas para atletas internacionales."
         : "U.S. college scholarships for tennis, golf, track & field and volleyball. Same process, same commitment, now expanding to more disciplines for international athletes.",
       cta: isEs ? "Ver deportes" : "View sports",
       to: "/sports",
-      accent: "#12213a",
+      accent: "hsl(var(--foreground))",
     },
     {
       number: "03",
@@ -38,12 +38,12 @@ const PathSelectionSection = () => {
         : "A full season training and competing in Spanish professional academies. Raise your level, improve your English, and get ready for the leap to the U.S. or European football.",
       cta: isEs ? "Ver programa España" : "View Spain program",
       to: "/spain",
-      accent: "#b00717",
+      accent: "hsl(var(--primary))",
     },
   ];
 
   return (
-    <section id="path-selection" className="py-24 sm:py-28 md:py-32" style={{ backgroundColor: "#ffffff" }}>
+    <section id="path-selection" className="py-24 sm:py-28 md:py-32" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-foreground/15">
           {programs.map((p, i) => (

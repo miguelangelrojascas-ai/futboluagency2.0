@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HubSpotFormModal from "@/components/HubSpotFormModal";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 import sportVolleyball from "@/assets/sport-volleyball.png";
 import sportGolf from "@/assets/sport-golf.png";
 import sportTennis from "@/assets/sport-tennis.png";
 import sportTrack from "@/assets/sport-track.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
-const NAVY = "#12213a";
-const RED = "#b00717";
+const NAVY = "hsl(var(--foreground))";
+const RED = "hsl(var(--primary))";
 
 const SPORTS = [
   {
@@ -61,13 +63,13 @@ const FUASports = () => {
   const es = language === "es";
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
+  const [showHubSpotModal, setShowHubSpotModal] = useState(false);
 
-  useEffect(() => {
-    document.title = "FUA Sports | Becas para Volleyball, Golf, Tenis y Atletismo – FutbolUAgency";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "FUA Sports abre becas universitarias en USA para volleyball, golf, tenis y atletismo. Más de $4B en becas disponibles cada año.");
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "FUA Sports | Becas Multi-Deporte – FutbolUAgency");
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "FUA Sports abre becas universitarias en USA para volleyball, golf, tenis y atletismo. Más de $4B en becas disponibles cada año.");
-  }, []);
+  useDocumentMeta({
+    title: "FUA Sports | Becas para Volleyball, Golf, Tenis y Atletismo – FutbolUAgency",
+    description: "FUA Sports abre becas universitarias en USA para volleyball, golf, tenis y atletismo. Más de $4B en becas disponibles cada año.",
+    ogTitle: "FUA Sports | Becas Multi-Deporte – FutbolUAgency",
+  });
 
   // Auto-advance carousel
   useEffect(() => {
@@ -330,7 +332,7 @@ const FUASports = () => {
         </section>
 
         {/* ── WHAT IS FUA SPORTS ── */}
-        <section style={{ background: "#fafaf8", padding: "80px 24px" }}>
+        <section style={{ background: "hsl(var(--background))", padding: "80px 24px" }}>
           <div style={{ maxWidth: "900px", margin: "0 auto" }}>
             <div style={{ textAlign: "center", marginBottom: "56px" }}>
               <span
@@ -704,7 +706,7 @@ const FUASports = () => {
         </section>
 
         {/* ── COMING SOON / EMAIL CAPTURE ── */}
-        <section style={{ background: "#fafaf8", padding: "72px 24px", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
+        <section style={{ background: "hsl(var(--background))", padding: "72px 24px", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
           <div style={{ maxWidth: "560px", margin: "0 auto", textAlign: "center" }}>
             <h2
               style={{
@@ -722,39 +724,27 @@ const FUASports = () => {
                 ? "Déjanos tu email y sé el primero en saber cuando abramos nuevas disciplinas."
                 : "Leave your email and be the first to know when we open new disciplines."}
             </p>
-            <div style={{ display: "flex", gap: "10px", maxWidth: "420px", margin: "0 auto 16px" }}>
-              <input
-                type="email"
-                placeholder={es ? "Tu correo electrónico" : "Your email address"}
-                style={{
-                  flex: 1,
-                  padding: "12px 16px",
-                  borderRadius: "8px",
-                  border: "1px solid #e5e5e5",
-                  fontSize: "14px",
-                  fontFamily: "Inter, sans-serif",
-                  outline: "none",
-                }}
-              />
-              <button
-                style={{
-                  background: RED,
-                  color: "white",
-                  border: "none",
-                  padding: "12px 20px",
-                  borderRadius: "8px",
-                  fontWeight: 700,
-                  fontSize: "13px",
-                  cursor: "pointer",
-                  fontFamily: "Inter, sans-serif",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {es ? "Notificarme" : "Notify me"}
-              </button>
-            </div>
+            <button
+              onClick={() => setShowHubSpotModal(true)}
+              style={{
+                background: RED,
+                color: "white",
+                border: "none",
+                padding: "12px 28px",
+                borderRadius: "8px",
+                fontWeight: 700,
+                fontSize: "13px",
+                cursor: "pointer",
+                fontFamily: "Inter, sans-serif",
+                whiteSpace: "nowrap",
+                marginBottom: "16px",
+              }}
+            >
+              {es ? "Notificarme" : "Notify me"}
+            </button>
+            <br />
             <a
-              href="https://calendly.com/miguelangelrojascas/new-meeting"
+              href="https://calendly.com/futbolu-agency"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -772,6 +762,7 @@ const FUASports = () => {
         </section>
       </main>
       <Footer />
+      <HubSpotFormModal open={showHubSpotModal} onOpenChange={setShowHubSpotModal} />
     </>
   );
 };

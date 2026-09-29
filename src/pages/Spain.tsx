@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SpainInfoBar from "@/components/spain/SpainInfoBar";
@@ -25,12 +26,12 @@ const Spain = () => {
   const { t, language } = useLanguage();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    document.title = "Programa en España | Academias de Fútbol Élite – FutbolUAgency";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales en Madrid. Para jugadores internacionales de 14 a 19 años.");
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "Programa en España | FutbolUAgency");
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales en Madrid.");
-  }, []);
+  useDocumentMeta({
+    title: "Programa en España | Academias de Fútbol Élite – FutbolUAgency",
+    description: "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales a una hora de Madrid. Para jugadores internacionales de 14 a 19 años.",
+    ogTitle: "Programa en España | FutbolUAgency",
+    ogDescription: "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales a una hora de Madrid.",
+  });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
@@ -124,7 +125,7 @@ const Spain = () => {
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            src="/videos/spain-hero-new.mov"
+            src="/videos/spain-hero.mp4"
           />
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #ffffff)" }} />
@@ -162,7 +163,7 @@ const Spain = () => {
         <SpainDifferentiatorSection />
 
         {/* ¿Por qué España? — Carousel */}
-        <section className="py-24" style={{ backgroundColor: "#ffffff" }}>
+        <section className="py-24" style={{ backgroundColor: "hsl(var(--background))" }}>
           <div className="container-wide px-4">
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">

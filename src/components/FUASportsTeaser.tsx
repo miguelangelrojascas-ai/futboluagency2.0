@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import fuaSportsLogo from "@/assets/fua-sports-logo.png";
 
-const sports = ["Volleyball", "Tenis", "Béisbol", "Golf", "Track & Field"];
+const sports = ["Volleyball", "Tenis", "Golf", "Track & Field"];
 
 const FUASportsTeaser = () => {
   return (
-    <section className="py-24" style={{ backgroundColor: "#0d0d1a" }}>
+    <section className="py-24" style={{ backgroundColor: "hsl(var(--footer-dark))" }}>
       <div className="container-wide px-4">
         <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Logo + tagline */}

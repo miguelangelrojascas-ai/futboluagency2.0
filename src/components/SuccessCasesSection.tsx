@@ -5,7 +5,6 @@ import successVictor from "@/assets/success-victor.jpg";
 import successBentchey from "@/assets/success-bentchey.jpg";
 import successEduardo from "@/assets/success-eduardo.jpg";
 import successPablo from "@/assets/success-pablo.jpg";
-import successSimone from "@/assets/success-simone.jpg";
 import successMiguel from "@/assets/success-miguel.jpg";
 import successChase from "@/assets/success-chase.jpg";
 import successDaniel from "@/assets/success-daniel.jpg";
@@ -27,7 +26,6 @@ const successCases = [
   { image: committedFrancisco, name: "Francisco Giraldo", university: "Regis University" },
   { image: successPablo, name: "Pablo Exposito", university: "Crowder College" },
   { image: committedJuan, name: "Juan Argüelles", university: "Prairie State College" },
-  { image: successSimone, name: "Simone Pitale", university: "Seward County CC" },
   { image: committedJose, name: "Jose Contreras", university: "University of West Florida" },
   { image: successMiguel, name: "Miguel Arnaiz", university: "NIACC" },
   { image: successChase, name: "Chase Nasir", university: "Lake Erie College" },
@@ -66,14 +64,14 @@ const SuccessCasesSection = () => {
   const allCases = [...successCases, ...successCases];
 
   return (
-    <section className="section-padding overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
+    <section className="section-padding overflow-hidden" style={{ backgroundColor: "hsl(var(--footer-dark))" }}>
       <div className="container-wide px-4">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <span className="text-[hsl(210,100%,60%)] font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
+          <span className="text-accent-blue font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
             {language === "es" ? "Más de 250 casos de éxito construidos" : "Over 250 success stories built"}
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold px-2 text-white" style={{ color: "#ffffff" }}>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold px-2 text-white" style={{ color: "hsl(var(--background))" }}>
             {language === "es" ? "Algunos resultados de trabajar" : "Some results from working"}{" "}
             <span className="text-primary italic">{language === "es" ? "juntos..." : "together..."}</span>
           </h2>
@@ -97,6 +95,14 @@ const SuccessCasesSection = () => {
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-3 pt-8 pb-3 sm:px-4 sm:pb-4">
+                <p className="font-body text-sm sm:text-base font-bold text-white leading-tight">
+                  {successCase.name}
+                </p>
+                <p className="font-body text-xs sm:text-sm text-white/75">
+                  {successCase.university}
+                </p>
+              </div>
             </div>
           </div>
         ))}

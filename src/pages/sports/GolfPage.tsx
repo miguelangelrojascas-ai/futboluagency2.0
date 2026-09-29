@@ -14,6 +14,7 @@ import {
   Award,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import golfFlagImg from "@/assets/golf-flag.jpg";
 import golfBagImg from "@/assets/golf-bag.jpg";
 import golfPlayersImg from "@/assets/golf-players.jpg";
@@ -24,14 +25,23 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-const NAVY = "#12213a";
-const RED = "#b00717";
-const LIGHT = "#fafaf8";
+const NAVY = "hsl(var(--foreground))";
+const RED = "hsl(var(--primary))";
+const LIGHT = "hsl(var(--background))";
 const CALENDLY = "https://calendly.com/futbolu-agency";
 
-const TennisPage = () => {
+const GolfPage = () => {
   const { language } = useLanguage();
   const es = language === "es";
+
+  useDocumentMeta({
+    title: es
+      ? "Becas de Golf Universitario en EE.UU. | FutbolUAgency"
+      : "College Golf Scholarships in the USA | FutbolUAgency",
+    description: es
+      ? "De tu club local a la élite universitaria americana. +1,300 programas y $2.5B en becas anuales de golf en NCAA, NAIA y NJCAA."
+      : "From your local club to the American university elite. 1,300+ programs and $2.5B in annual golf scholarships across NCAA, NAIA and NJCAA.",
+  });
 
   const [activeWhy, setActiveWhy] = useState(0);
   const whyPausedRef = useRef(false);
@@ -164,8 +174,8 @@ const TennisPage = () => {
           </div>
         </section>
 
-        {/* ── WHY TENNIS ── */}
-        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "#ffffff" }}>
+        {/* ── WHY GOLF ── */}
+        <section className="py-24 md:py-32 px-4" style={{ backgroundColor: "hsl(var(--background))" }}>
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <span
@@ -247,7 +257,7 @@ const TennisPage = () => {
                           className="h-2 rounded-full transition-all"
                           style={{
                             width: activeWhy === i ? 24 : 8,
-                            backgroundColor: activeWhy === i ? "#ffffff" : "rgba(255,255,255,0.5)",
+                            backgroundColor: activeWhy === i ? "hsl(var(--background))" : "rgba(255,255,255,0.5)",
                           }}
                         />
                       ))}
@@ -266,7 +276,7 @@ const TennisPage = () => {
                           aria-current={isActive}
                           className="w-full text-left flex gap-4 p-6 rounded-xl bg-white border transition-all duration-500 ease-out"
                           style={{
-                            borderColor: isActive ? RED : "#e5e5e5",
+                            borderColor: isActive ? RED : "hsl(var(--border))",
                             boxShadow: isActive ? "0 20px 40px -20px rgba(176,7,23,0.35)" : "none",
                           }}
                         >
@@ -295,7 +305,7 @@ const TennisPage = () => {
         {/* ── LEAGUE SYSTEM ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--section-alt))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -382,7 +392,7 @@ const TennisPage = () => {
                 <div
                   key={league.name}
                   className="rounded-2xl overflow-hidden border bg-white shadow-sm hover:shadow-lg transition-shadow"
-                  style={{ borderColor: "#e5e5e5" }}
+                  style={{ borderColor: "hsl(var(--border))" }}
                 >
                   <div className="p-6" style={{ backgroundColor: league.color }}>
                     <div className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1 font-body">
@@ -435,7 +445,7 @@ const TennisPage = () => {
         {/* ── FINANCIAL REALITY ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--background))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -458,13 +468,13 @@ const TennisPage = () => {
                   icon: Trophy,
                   items: es
                     ? [
-                        "Ranking nacional / internacional (UTR, ITF)",
+                        "Ranking nacional / internacional (WAGR, Hándicap)",
                         "Rendimiento en torneos recientes",
                         "Actitud, disciplina y potencial",
                         "Necesidades del equipo universitario",
                       ]
                     : [
-                        "National/international ranking (UTR, ITF)",
+                        "National/international ranking (WAGR, Handicap Index)",
                         "Performance in recent tournaments",
                         "Attitude, discipline and potential",
                         "University team needs",
@@ -495,7 +505,7 @@ const TennisPage = () => {
                 <div
                   key={b.title}
                   className="rounded-2xl p-7 sm:p-8 bg-white border"
-                  style={{ borderColor: "#e5e5e5" }}
+                  style={{ borderColor: "hsl(var(--border))" }}
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <div
@@ -606,8 +616,8 @@ const TennisPage = () => {
                     icon: Star,
                     title: es ? "Preparación del Perfil" : "Profile Preparation",
                     desc: es
-                      ? "Creamos tu perfil completo de tenista y el video de highlights profesional para presentarte ante coaches universitarios de forma impactante."
-                      : "We create your complete tennis profile and professional highlights video to present you to university coaches impressively.",
+                      ? "Creamos tu perfil completo de golfista y el video de highlights profesional para presentarte ante coaches universitarios de forma impactante."
+                      : "We create your complete golf profile and professional highlights video to present you to university coaches impressively.",
                   },
                   {
                     num: "03",
@@ -674,7 +684,7 @@ const TennisPage = () => {
         {/* ── STUDENT ATHLETE LIFE ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--section-alt))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -774,7 +784,7 @@ const TennisPage = () => {
                       ],
                 },
               ].map((card) => (
-                <div key={card.title} className="rounded-xl p-6 bg-white border" style={{ borderColor: "#e5e5e5" }}>
+                <div key={card.title} className="rounded-xl p-6 bg-white border" style={{ borderColor: "hsl(var(--border))" }}>
                   <div
                     className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
                     style={{ backgroundColor: `${RED}15` }}
@@ -804,7 +814,7 @@ const TennisPage = () => {
         {/* ── REQUIREMENTS ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--background))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-5xl mx-auto">
             <div className="text-center mb-12">
@@ -820,7 +830,7 @@ const TennisPage = () => {
               <div style={{ width: 40, height: 3, background: RED, margin: "0 auto 0" }} />
             </div>
 
-            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "#e5e5e5" }}>
+            <div className="rounded-2xl p-7 sm:p-10 bg-white border" style={{ borderColor: "hsl(var(--border))" }}>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
@@ -876,7 +886,7 @@ const TennisPage = () => {
         {/* ── FAQ ── */}
         <section
           className="py-24 md:py-32 px-4"
-          style={{ backgroundColor: "#f5f4f2", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+          style={{ backgroundColor: "hsl(var(--section-alt))", borderTop: "1px solid rgba(0,0,0,0.05)" }}
         >
           <div className="container-wide max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -889,8 +899,8 @@ const TennisPage = () => {
               {(es
                 ? [
                     {
-                      q: "¿Qué nivel de tenis necesito para conseguir una beca?",
-                      a: "Trabajamos con jugadores desde ranking ITF junior hasta jugadores con historial competitivo en ligas regionales. No se requiere ser profesional — el sistema NCAA y NAIA tiene opciones para muchos niveles.",
+                      q: "¿Qué nivel de golf necesito para conseguir una beca?",
+                      a: "Trabajamos con jugadores desde ranking WAGR junior hasta jugadores con hándicap competitivo en torneos regionales. No se requiere ser profesional — el sistema NCAA y NAIA tiene opciones para muchos niveles.",
                     },
                     {
                       q: "¿Es necesario hablar inglés perfectamente?",
@@ -911,8 +921,8 @@ const TennisPage = () => {
                   ]
                 : [
                     {
-                      q: "What tennis level do I need to get a scholarship?",
-                      a: "We work with players from ITF junior rankings to players with competitive history in regional leagues. You don't need to be professional — the NCAA and NAIA system has options for many levels.",
+                      q: "What golf level do I need to get a scholarship?",
+                      a: "We work with players from WAGR junior rankings to players with a competitive handicap in regional tournaments. You don't need to be professional — the NCAA and NAIA system has options for many levels.",
                     },
                     {
                       q: "Is perfect English required?",
@@ -936,7 +946,7 @@ const TennisPage = () => {
                   key={i}
                   value={`item-${i}`}
                   className="rounded-xl border bg-white px-5"
-                  style={{ borderColor: "#e5e5e5" }}
+                  style={{ borderColor: "hsl(var(--border))" }}
                 >
                   <AccordionTrigger
                     className="font-display text-base sm:text-lg font-bold hover:no-underline text-left"
@@ -963,7 +973,7 @@ const TennisPage = () => {
               <Trophy className="w-8 h-8 text-white" />
             </div>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-5">
-              {es ? "Tu carrera en el tenis universitario comienza hoy" : "Your university tennis career starts today"}
+              {es ? "Tu carrera en el golf universitario comienza hoy" : "Your university golf career starts today"}
             </h2>
             <p className="font-body text-base sm:text-lg text-white/70 mb-10 leading-relaxed">
               {es
@@ -1006,4 +1016,4 @@ const TennisPage = () => {
   );
 };
 
-export default TennisPage;
+export default GolfPage;

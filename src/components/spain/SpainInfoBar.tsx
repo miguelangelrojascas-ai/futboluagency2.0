@@ -19,12 +19,12 @@ const SpainInfoBar = () => {
     {
       icon: MapPin,
       label: isEs ? "Ubicación" : "Location",
-      value: "Talavera de la Reina, Madrid",
+      value: isEs ? "Talavera de la Reina, a 1h de Madrid" : "Talavera de la Reina, 1h from Madrid",
     },
   ];
 
   return (
-    <section style={{ backgroundColor: "#ffffff" }}>
+    <section style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border rounded-xl overflow-hidden">
           {items.map((item, i) => (
