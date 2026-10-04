@@ -17,6 +17,7 @@ import {
   Video,
 } from "lucide-react";
 import sportTrack from "@/assets/sport-track.png";
+import trackLogo from "@/assets/logo-track.jpg";
 import methodBg from "@/assets/neus-track.jpg";
 import SportSplitHero from "@/components/sports/SportSplitHero";
 import SportBenchmarks from "@/components/sports/SportBenchmarks";
@@ -59,6 +60,7 @@ const TrackPage = () => {
       <main className="min-h-screen">
         <SportSplitHero
           sport="Track & Field"
+          logo={trackLogo}
           image={sportTrack}
           imageAlt={es ? "Atleta universitario en la pista" : "College athlete on the track"}
           eyebrow={es ? "Tu pista. Tu beca. Tu futuro." : "Your track. Your scholarship. Your future."}

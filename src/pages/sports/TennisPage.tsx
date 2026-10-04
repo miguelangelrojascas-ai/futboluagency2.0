@@ -25,6 +25,7 @@ import campusDining from "@/assets/campus-dining.jpg";
 import campusMedical from "@/assets/campus-medical.jpg";
 import campusOffcampus from "@/assets/campus-offcampus.jpg";
 import sportTennis from "@/assets/sport-tennis.png";
+import tennisLogo from "@/assets/logo-tennis.png";
 import SportSplitHero from "@/components/sports/SportSplitHero";
 import SportBenchmarks from "@/components/sports/SportBenchmarks";
 import Footer from "@/components/Footer";
@@ -70,6 +71,7 @@ const TennisPage = () => {
       <main className="min-h-screen" style={{ backgroundColor: LIGHT }}>
         <SportSplitHero
           sport={es ? "Tenis" : "Tennis"}
+          logo={tennisLogo}
           image={sportTennis}
           imageAlt={es ? "Jugadora de tenis universitario" : "College tennis player"}
           eyebrow={es ? "Tu cancha. Tu beca. Tu futuro." : "Your court. Your scholarship. Your future."}
