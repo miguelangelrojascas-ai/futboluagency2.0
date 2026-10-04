@@ -44,6 +44,13 @@ const SportSplitHero = ({
         aria-hidden="true"
         className="hero-float pointer-events-none absolute -right-32 top-10 h-[28rem] w-[28rem] rounded-full bg-primary/5 blur-3xl"
       />
+      {logo && (
+        <div className="hero-reveal relative mb-10 flex justify-center md:mb-14" style={delay(0)}>
+          <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white p-2 shadow-xl sm:h-36 sm:w-36">
+            <img src={logo} alt={`FUA ${sport}`} className="h-full w-full object-contain" />
+          </div>
+        </div>
+      )}
       <div className="container-wide relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col">
           <nav aria-label={es ? "Ruta de navegación" : "Breadcrumb"} className="hero-reveal mb-8" style={delay(0)}>
@@ -105,13 +112,6 @@ const SportSplitHero = ({
           <div className="hero-image-reveal aspect-[4/5] overflow-hidden rounded-3xl bg-muted shadow-2xl lg:aspect-auto lg:h-[560px]">
             <img src={image} alt={imageAlt} className="hero-ken-burns h-full w-full object-cover" fetchPriority="high" />
           </div>
-          {logo && (
-            <div className="hero-reveal absolute -top-6 right-4 sm:-right-6" style={delay(820)}>
-              <div className="hero-float flex h-28 w-28 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white p-2 shadow-xl sm:h-36 sm:w-36">
-                <img src={logo} alt={`FUA ${sport}`} className="h-full w-full object-contain" />
-              </div>
-            </div>
-          )}
           <div className="hero-reveal absolute -bottom-6 left-4 sm:-left-8" style={delay(700)}>
             <div className="hero-float flex flex-col gap-1 rounded-2xl border border-border bg-card px-6 py-5 shadow-xl">
               <span className="font-display text-3xl font-bold text-primary">{floatingStat.value}</span>
