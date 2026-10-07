@@ -51,8 +51,8 @@ const PlayerProfilesSection = () => {
         ? "NCAA D1 / D2 — NAIA top. Beca 50–90%"
         : "NCAA D1 / D2 — Top NAIA. Scholarship 50–90%",
       plan: isEs
-        ? "Construimos tu perfil y video highlights para maximizar ofertas. Acceso a nuestra red de 40+ universidades partner."
-        : "We build your profile and highlights video to maximize offers. Access to our network of 40+ partner universities.",
+        ? "Construimos tu perfil y video highlights para maximizar ofertas. Acceso a nuestra red de contactos en universidades de todo el país."
+        : "We build your profile and highlights video to maximize offers. Access to our network of contacts at universities across the country.",
     },
     {
       level: "Medio",

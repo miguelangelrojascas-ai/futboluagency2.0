@@ -10,6 +10,7 @@ import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
 import UniversityMap from "@/components/UniversityMap";
 import UsaAnchorNav from "@/components/UsaAnchorNav";
 import HubSpotFormModal from "@/components/HubSpotFormModal";
+import SpotlightCard from "@/components/ui/spotlight-card";
 import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -232,8 +233,8 @@ const USA = () => {
             {/* Right Column */}
             <div className="space-y-4">
               {/* Main stat card */}
-              <div className="rounded-xl border border-border bg-white p-8 ring-1 ring-foreground/20 shadow-[0_0_40px_rgba(18,33,58,0.1)] relative overflow-hidden">
-                <TrendingUp className="absolute top-6 right-6 w-16 h-16 text-foreground/10" />
+              <SpotlightCard className="rounded-xl border border-border bg-white p-8 ring-1 ring-foreground/20 shadow-[0_0_40px_rgba(18,33,58,0.1)]">
+                <TrendingUp className="absolute -top-2 -right-2 w-16 h-16 text-foreground/10 transition-colors duration-300 group-hover/spotlight:text-primary/20" />
                 <span className="font-body text-xs tracking-[0.15em] uppercase text-muted-foreground mb-4 block">
                   Beca promedio de nuestros atletas
                 </span>
@@ -244,11 +245,11 @@ const USA = () => {
                 <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-sm">
                   Monto anual promedio gestionado y asegurado para nuestra red de atletas en el sistema universitario americano.
                 </p>
-              </div>
+              </SpotlightCard>
 
               {/* Two smaller cards */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-xl border border-border bg-white p-6">
+                <SpotlightCard className="rounded-xl border border-border bg-white p-6" radius={200}>
                   <span className="font-body text-xs tracking-[0.15em] uppercase text-foreground font-bold mb-3 block">
                     Rango Estándar
                   </span>
@@ -258,8 +259,12 @@ const USA = () => {
                   <p className="font-body text-xs text-muted-foreground leading-relaxed">
                     Cobertura promedio lograda para el 85% de nuestros representados.
                   </p>
-                </div>
-                <div className="rounded-xl border border-foreground/30 bg-secondary/5 p-6 ring-1 ring-foreground/30 shadow-[0_0_40px_rgba(18,33,58,0.15)]">
+                </SpotlightCard>
+                <SpotlightCard
+                  className="rounded-xl border border-foreground/30 bg-secondary/5 p-6 ring-1 ring-foreground/30 shadow-[0_0_40px_rgba(18,33,58,0.15)]"
+                  glow="hsl(var(--primary) / 0.14)"
+                  radius={200}
+                >
                   <span className="font-body text-xs tracking-[0.15em] uppercase text-foreground font-bold mb-3 block">
                     Perfil Élite
                   </span>
@@ -269,33 +274,29 @@ const USA = () => {
                   <p className="font-body text-xs text-muted-foreground leading-relaxed">
                     Reservado para atletas de Selección Nacional o perfiles de División 1.
                   </p>
-                </div>
+                </SpotlightCard>
               </div>
 
             </div>
           </div>
 
-          {/* CTA Banner — full width below grid */}
-          <div className="max-w-7xl mx-auto px-4 mt-8">
-            <div
-              className="flex flex-col items-center text-center gap-5 rounded-[14px] py-8 px-8"
-              style={{ backgroundColor: "hsl(var(--foreground))" }}
-            >
-              <div>
-                <p className="font-display text-xl font-bold text-white mb-1.5 leading-snug">
+          {/* Inline prompt — deliberately light so it reads as a note, not a footer */}
+          <div className="max-w-7xl mx-auto px-4 mt-10">
+            <div className="flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="font-body text-[15px] leading-relaxed text-muted-foreground">
+                <span className="font-semibold text-foreground">
                   ¿Quieres saber cuánta beca podrías obtener?
-                </p>
-                <p className="font-body text-sm text-white/70 leading-relaxed">
-                  Mándanos tu video de highlights y te contactamos en menos de 24 horas.
-                </p>
-              </div>
+                </span>{" "}
+                Mándanos tu vídeo de highlights y te contactamos en menos de 24 horas.
+              </p>
               <a
                 href="https://wa.me/34603331990?text=Hola,%20quiero%20saber%20cu%C3%A1nta%20beca%20podr%C3%ADa%20obtener.%20Les%20env%C3%ADo%20mi%20video%20de%20highlights."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-primary text-white font-bold text-sm px-8 py-3.5 rounded-lg no-underline whitespace-nowrap"
+                className="inline-flex shrink-0 items-center gap-2 font-body text-sm font-bold text-primary no-underline transition-colors hover:text-primary-hover"
               >
-                Enviar mi video →
+                Enviar mi vídeo
+                <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -377,8 +378,8 @@ const USA = () => {
                   a: "No. Un nivel básico-intermedio es suficiente para empezar el proceso. Las universidades tienen programas de apoyo lingüístico.",
                 },
                 {
-                  q: "¿Cuánto cuesta el proceso con FutbolUAgency?",
-                  a: "La evaluación inicial es completamente gratuita. Nuestros honorarios se pagan únicamente cuando consigues una oferta universitaria real.",
+                  q: "¿Qué gastos hay que tener en cuenta?",
+                  a: "La evaluación inicial es completamente gratuita. Aparte están las tasas obligatorias que se pagan a cada organismo —elegibilidad, examen de inglés, traducciones, visado y seguro médico— y las tienes desglosadas en nuestra guía de costes.",
                 },
                 {
                   q: "¿Cuánto tiempo tarda todo el proceso?",
@@ -411,56 +412,6 @@ const USA = () => {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </section>
-
-        {/* Otros deportes */}
-        <section style={{ backgroundColor: "hsl(var(--section-alt))", padding: "48px 24px" }}>
-          <div className="max-w-3xl mx-auto text-center">
-            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "hsl(var(--primary))", display: "block", marginBottom: "12px" }}>
-              FUA SPORTS
-            </span>
-            <h2 style={{ fontFamily: "Playfair Display, Georgia, serif", fontSize: "26px", fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: "10px", lineHeight: 1.3 }}>
-              ¿Practicas otro deporte?
-            </h2>
-            <p style={{ fontSize: "14px", color: "rgba(18,33,58,0.6)", lineHeight: 1.7, marginBottom: "28px" }}>
-              También gestionamos becas universitarias en EE.UU. para otros deportes.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                { label: "Volleyball", href: "/sports/volleyball" },
-                { label: "Golf", href: "/sports/golf" },
-                { label: "Tenis", href: "/sports/tennis" },
-                { label: "Track & Field", href: "/sports/track" },
-              ].map((pill) => (
-                <Link
-                  key={pill.href}
-                  to={pill.href}
-                  className="transition-colors duration-200"
-                  style={{
-                    backgroundColor: "hsl(var(--background))",
-                    border: "1px solid #e5e5e5",
-                    borderRadius: "999px",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                    fontWeight: 600,
-                    color: "hsl(var(--foreground))",
-                    textDecoration: "none",
-                    display: "inline-block",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "hsl(var(--foreground))";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "hsl(var(--background))";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "hsl(var(--background))";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "hsl(var(--foreground))";
-                  }}
-                >
-                  {pill.label}
-                </Link>
-              ))}
-            </div>
           </div>
         </section>
 

@@ -108,7 +108,6 @@ const teamMembers: Member[] = [
       ],
     },
   },
-  { name: "Próximamente", initials: "VB", role: { es: "Director Volleyball", en: "Volleyball Director" }, image: null, bio: null },
 ];
 
 const About = () => {

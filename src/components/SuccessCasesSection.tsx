@@ -1,48 +1,15 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import SuccessCaseCard, { type SuccessCase } from "@/components/SuccessCaseCard";
-import successZak from "@/assets/success-zak.jpg";
-import successVictor from "@/assets/success-victor.jpg";
-import successBentchey from "@/assets/success-bentchey.jpg";
-import successEduardo from "@/assets/success-eduardo.jpg";
-import successPablo from "@/assets/success-pablo.jpg";
-import successMiguel from "@/assets/success-miguel.jpg";
-import successChase from "@/assets/success-chase.jpg";
-import successDaniel from "@/assets/success-daniel.jpg";
-import successOmar from "@/assets/success-omar.png";
-import committedAnder from "@/assets/committed-ander.png";
-import committedIvan from "@/assets/committed-ivan.png";
-import committedSimone from "@/assets/committed-simone.png";
-import committedFrancisco from "@/assets/committed-francisco.png";
-import committedJuan from "@/assets/committed-juan.png";
-import committedJose from "@/assets/committed-jose.png";
-
-const topRow: SuccessCase[] = [
-  { image: successOmar, name: "Omar Ocampos", origin: "Club América", university: "Cowley College", division: "NJCAA", layout: "landscape" },
-  { image: committedAnder, name: "Ander González", university: "St. John's University", division: "NCAA D1" },
-  { image: successZak, name: "Zak McGall", university: "Seward County CC", division: "NJCAA" },
-  { image: committedIvan, name: "Iván Gómez Sumillera", university: "Delta State University", division: "NCAA D2" },
-  { image: successVictor, name: "Victor Paz", university: "Illinois Central College", division: "NJCAA" },
-  { image: committedSimone, name: "Simone Pitale", university: "Monroe University", division: "NJCAA" },
-  { image: successEduardo, name: "Eduardo Larsen", university: "Beloit College", division: "NCAA D3" },
-];
-
-const bottomRow: SuccessCase[] = [
-  { image: committedJose, name: "Jose Contreras", university: "University of West Florida", division: "NCAA D2" },
-  { image: successBentchey, name: "Bentchey Dominguez", university: "East Mississippi CC", division: "NJCAA" },
-  { image: committedFrancisco, name: "Francisco Giraldo", university: "Regis University", division: "NCAA D2" },
-  { image: successPablo, name: "Pablo Exposito", university: "Crowder College", division: "NJCAA" },
-  { image: committedJuan, name: "Juan Argüelles", university: "Prairie State College", division: "NJCAA" },
-  { image: successMiguel, name: "Miguel Arnaiz", university: "NIACC", division: "NJCAA" },
-  { image: successChase, name: "Chase Nasir", university: "Lake Erie College", division: "NCAA D2" },
-  { image: successDaniel, name: "Daniel Abreu", university: "East Mississippi CC", division: "NJCAA" },
-];
+import { topRow, bottomRow } from "@/data/successCases";
 
 const GalleryRow = ({ cases, reverse = false }: { cases: SuccessCase[]; reverse?: boolean }) => (
   <div className="group/row relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
     <ul
       className={cn(
-        "flex w-max gap-4 py-2 group-hover/row:[animation-play-state:paused] motion-reduce:animate-none sm:gap-6",
+        "flex w-max gap-4 py-2 motion-reduce:animate-none sm:gap-6",
         reverse ? "animate-marquee-reverse" : "animate-marquee",
       )}
     >
@@ -81,6 +48,18 @@ const SuccessCasesSection = () => {
       <div className="flex flex-col gap-6 sm:gap-8">
         <GalleryRow cases={topRow} />
         <GalleryRow cases={bottomRow} reverse />
+      </div>
+
+      <div className="container-wide px-4">
+        <div className="mt-10 flex justify-center sm:mt-12">
+          <Link
+            to="/players"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-6 py-3.5 font-body font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+          >
+            {es ? "Ver todos los jugadores" : "See all players"}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );

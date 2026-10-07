@@ -1,46 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
+import { Menu, X, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo-fua.png";
 
-const fuaDropdown = [
-  { to: "/sports/volleyball", label: "Volleyball" },
-  { to: "/sports/golf",       label: "Golf" },
-  { to: "/sports/tennis",     label: "Tenis" },
-  { to: "/sports/track",      label: "Track & Field" },
-];
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSportsMenu, setShowSportsMenu] = useState(false);
-  const [showMobileSports, setShowMobileSports] = useState(false);
-  const sportsMenuRef = useRef<HTMLDivElement>(null);
-  const sportsCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
   const { t } = useLanguage();
 
   const isActive = (path: string) => location.pathname === path;
-  const isSportsActive = location.pathname.startsWith("/sports/");
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (sportsMenuRef.current && !sportsMenuRef.current.contains(e.target as Node)) {
-        setShowSportsMenu(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const openSports = () => {
-    if (sportsCloseTimer.current) clearTimeout(sportsCloseTimer.current);
-    setShowSportsMenu(true);
-  };
-  const scheduleCloseSports = () => {
-    if (sportsCloseTimer.current) clearTimeout(sportsCloseTimer.current);
-    sportsCloseTimer.current = setTimeout(() => setShowSportsMenu(false), 150);
-  };
 
   const navLinkClass = (active: boolean) =>
     `font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
@@ -79,64 +48,19 @@ const Navbar = () => {
               Becas Fútbol EE.UU.
             </Link>
 
-            {/* FUA Sports dropdown (hover) */}
-            <div
-              className="relative"
-              ref={sportsMenuRef}
-              onMouseEnter={openSports}
-              onMouseLeave={scheduleCloseSports}
-            >
-              <Link
-                to="/sports"
-                onClick={() => setShowSportsMenu(false)}
-                className={`${navLinkClass(isSportsActive)} inline-flex items-center gap-1`}
-              >
-                FUA Sports
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${showSportsMenu ? "rotate-180" : ""}`}
-                />
-              </Link>
-
-              <div
-                className={`absolute left-1/2 -translate-x-1/2 top-full pt-2 w-52 origin-top ${
-                  showSportsMenu
-                    ? "opacity-100 translate-y-0 pointer-events-auto"
-                    : "opacity-0 -translate-y-1 pointer-events-none"
-                }`}
-              style={{ transition: "opacity 150ms ease-out, transform 150ms cubic-bezier(0.23,1,0.32,1)" }}
-              >
-                <div
-                  style={{
-                    background: "white",
-                    border: "1px solid #e5e5e5",
-                    borderRadius: "12px",
-                    boxShadow: "0 8px 24px rgba(18,33,58,0.1)",
-                    overflow: "hidden",
-                  }}
-                >
-                  {fuaDropdown.map((s) => (
-                    <Link
-                      key={s.to}
-                      to={s.to}
-                      onClick={() => setShowSportsMenu(false)}
-                      className="block transition-colors hover:bg-section-alt"
-                      style={{
-                        padding: "10px 16px",
-                        fontSize: "14px",
-                        color: isActive(s.to) ? "hsl(var(--primary))" : "hsl(var(--foreground))",
-                        fontWeight: isActive(s.to) ? 600 : 400,
-                      }}
-                    >
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-
             {/* España */}
             <Link to="/spain" className={navLinkClass(isActive("/spain"))}>
               {t("nav.spain")}
+            </Link>
+
+            {/* Players */}
+            <Link to="/players" className={navLinkClass(isActive("/players"))}>
+              {t("nav.players")}
+            </Link>
+
+            {/* Recursos */}
+            <Link to="/recursos" className={navLinkClass(location.pathname.startsWith("/recursos"))}>
+              {t("nav.resources")}
             </Link>
 
             {/* Nosotros */}
@@ -182,35 +106,19 @@ const Navbar = () => {
                 Becas Fútbol EE.UU.
               </Link>
 
-              {/* FUA Sports dropdown (click) */}
-              <button
-                onClick={() => setShowMobileSports(!showMobileSports)}
-                className={`${mobileNavLinkClass(isSportsActive)} inline-flex items-center justify-center w-full gap-1`}
-              >
-                FUA Sports
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${showMobileSports ? "rotate-180" : ""}`}
-                />
-              </button>
-              {showMobileSports && (
-                <div className="flex flex-col gap-0.5">
-                  {fuaDropdown.map((s) => (
-                    <Link
-                      key={s.to}
-                      to={s.to}
-                      onClick={() => { setIsOpen(false); setShowMobileSports(false); }}
-                      className="block px-4 py-2 rounded-lg font-body text-sm font-bold text-center transition-colors hover:bg-muted/50"
-                      style={{ color: isActive(s.to) ? "hsl(var(--primary))" : undefined }}
-                    >
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-
               {/* España */}
               <Link to="/spain" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/spain"))}>
                 {t("nav.spain")}
+              </Link>
+
+              {/* Players */}
+              <Link to="/players" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/players"))}>
+                {t("nav.players")}
+              </Link>
+
+              {/* Recursos */}
+              <Link to="/recursos" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(location.pathname.startsWith("/recursos"))}>
+                {t("nav.resources")}
               </Link>
 
               {/* Nosotros */}
