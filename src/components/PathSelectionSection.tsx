@@ -20,17 +20,6 @@ const PathSelectionSection = () => {
     },
     {
       number: "02",
-      tag: isEs ? "Nueva Expansión" : "New Expansion",
-      title: isEs ? "Otros Deportes Universitarios" : "Other College Sports",
-      desc: isEs
-        ? "Becas universitarias en EE.UU. para tenis, golf, atletismo y voleibol. Mismo proceso, mismo compromiso, ahora ampliando a más disciplinas para atletas internacionales."
-        : "U.S. college scholarships for tennis, golf, track & field and volleyball. Same process, same commitment, now expanding to more disciplines for international athletes.",
-      cta: isEs ? "Ver deportes" : "View sports",
-      to: "/sports",
-      accent: "hsl(var(--foreground))",
-    },
-    {
-      number: "03",
       tag: isEs ? "Año de Preparación" : "Preparation Year",
       title: isEs ? "Gap Year en España" : "Gap Year in Spain",
       desc: isEs
@@ -45,7 +34,18 @@ const PathSelectionSection = () => {
   return (
     <section id="path-selection" className="py-24 sm:py-28 md:py-32" style={{ backgroundColor: "hsl(var(--background))" }}>
       <div className="container-wide px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-foreground/15">
+        {/* Section header */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <span className="inline-block font-body text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
+            {isEs ? "Nuestros Programas" : "Our Programs"}
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-[1.1]">
+            {isEs ? "Explora nuestros " : "Explore our "}
+            <span className="italic text-primary">{isEs ? "programas" : "programs"}</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-foreground/15">
           {programs.map((p, i) => (
             <Link
               key={p.title}

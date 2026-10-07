@@ -129,9 +129,9 @@ const Footer = () => {
               <Link to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</Link>
               <Link to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</Link>
               <Link to="/spain" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.spain")}</Link>
-              <Link to="/sports" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.sports")}</Link>
               <Link to="/about" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.about")}</Link>
               <Link to="/players" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.players")}</Link>
+              <Link to="/recursos" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.resources")}</Link>
               <Link to="/apply" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.apply")}</Link>
             </nav>
           </div>

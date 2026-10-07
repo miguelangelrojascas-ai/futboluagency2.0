@@ -14,8 +14,8 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Inicio",
     "nav.usa": "Becas EE.UU.",
     "nav.spain": "España",
-    "nav.sports": "FUA Sports",
-    "nav.players": "Jugadores",
+    "nav.players": "Nuestros Jugadores",
+    "nav.resources": "Recursos",
     "nav.about": "Nosotros",
     "nav.apply": "Aplicar",
     "nav.applyCta": "Aplica Ahora",
@@ -92,7 +92,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Metrics
     "metrics.scholarships": "Becas Conseguidas",
-    "metrics.universities": "Universidades Partner",
+    "metrics.universities": "Universidades con Colocaciones",
     "metrics.satisfaction": "Satisfacción",
     "metrics.experience": "Años de Experiencia",
 
@@ -102,9 +102,6 @@ const translations: Record<Language, Record<string, string>> = {
     "calendly.button": "Agendar Reunión",
 
     // Other Sports
-    "othersports.title": "Otros Deportes — Próximamente",
-    "othersports.desc": "Estamos expandiendo nuestro programa a otros deportes. Si eres atleta de basketball, tenis u otros deportes, pronto tendremos oportunidades para ti.",
-    "othersports.coming": "Próximamente disponible — Regístrate para ser notificado",
 
     // USA Page
     "usa.tag": "Programa Estados Unidos",
@@ -222,8 +219,8 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Home",
     "nav.usa": "USA Scholarships",
     "nav.spain": "Spain",
-    "nav.sports": "FUA Sports",
-    "nav.players": "Players",
+    "nav.players": "Our Players",
+    "nav.resources": "Resources",
     "nav.about": "About Us",
     "nav.apply": "Apply",
     "nav.applyCta": "Apply Now",
@@ -300,7 +297,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Metrics
     "metrics.scholarships": "Scholarships Achieved",
-    "metrics.universities": "Partner Universities",
+    "metrics.universities": "Universities with Placements",
     "metrics.satisfaction": "Satisfaction",
     "metrics.experience": "Years of Experience",
 
@@ -310,9 +307,6 @@ const translations: Record<Language, Record<string, string>> = {
     "calendly.button": "Schedule Meeting",
 
     // Other Sports
-    "othersports.title": "Other Sports — Coming Soon",
-    "othersports.desc": "We're expanding our program to other sports. If you're a basketball, tennis or other sport athlete, we'll have opportunities for you soon.",
-    "othersports.coming": "Coming soon — Register to be notified",
 
     // USA Page
     "usa.tag": "USA Program",
