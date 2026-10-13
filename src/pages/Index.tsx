@@ -7,9 +7,9 @@ import MetricsSection from "@/components/MetricsSection";
 
 import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
-import AnderStoryCard from "@/components/AnderStoryCard";
-import CalendlySection from "@/components/CalendlySection";
-import FUASportsTeaser from "@/components/FUASportsTeaser";
+import HomeProcessSection from "@/components/HomeProcessSection";
+import FaqSection from "@/components/FaqSection";
+import GlobeCTASection from "@/components/GlobeCTASection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
@@ -30,10 +30,10 @@ const Index = () => {
         <LogoCarousel />
         
         <PathSelectionSection />
-        <AnderStoryCard />
         <SuccessCasesSection />
-        <FUASportsTeaser />
-        <CalendlySection />
+        <HomeProcessSection />
+        <FaqSection />
+        <GlobeCTASection />
         <Footer />
       </main>
     </>

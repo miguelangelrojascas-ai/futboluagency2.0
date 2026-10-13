@@ -33,7 +33,7 @@ const MetricsSection = () => {
   
   const metrics = [
     { value: "350+", label: t("metrics.universities") },
-    { value: "40+", label: "Estados Cubiertos" },
+    { value: "45+", label: "Estados Cubiertos" },
     { value: "$10M+", label: t("metrics.scholarships") },
     { value: "98%", label: t("metrics.satisfaction") },
   ];

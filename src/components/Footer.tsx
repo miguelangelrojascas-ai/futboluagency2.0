@@ -129,9 +129,9 @@ const Footer = () => {
               <Link to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</Link>
               <Link to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</Link>
               <Link to="/spain" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.spain")}</Link>
-              <Link to="/sports" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.sports")}</Link>
               <Link to="/about" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.about")}</Link>
               <Link to="/players" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.players")}</Link>
+              <Link to="/recursos" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.resources")}</Link>
               <Link to="/apply" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.apply")}</Link>
             </nav>
           </div>
@@ -143,9 +143,11 @@ const Footer = () => {
             <p className="font-body text-xs text-white/60">
               © {currentYear} FutbolUAgency LLC. {t("footer.rights")}.
             </p>
-            <p className="font-body text-xs text-white/60">
-              Diseñado con pasión por el fútbol y la educación.
-            </p>
+            <div className="flex items-center gap-4">
+              <Link to="/privacidad" className="font-body text-xs text-white/60 transition-colors hover:text-white">
+                {t("nav.privacy")}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

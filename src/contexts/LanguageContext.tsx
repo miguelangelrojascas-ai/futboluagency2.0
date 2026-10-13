@@ -14,8 +14,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Inicio",
     "nav.usa": "Becas EE.UU.",
     "nav.spain": "España",
-    "nav.sports": "FUA Sports",
-    "nav.players": "Jugadores",
+    "nav.players": "Nuestros Jugadores",
+    "nav.resources": "Recursos",
+    "nav.privacy": "Privacidad",
+    "nav.cookies": "Cookies",
     "nav.about": "Nosotros",
     "nav.apply": "Aplicar",
     "nav.applyCta": "Aplica Ahora",
@@ -32,8 +34,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Video Section
     "video.title": "Mira el",
     "video.title.highlight": "Vídeo",
-    "video.cta.title": "Agendar Llamada Estratégica",
-    "video.cta.subtitle": "Sesión 1 a 1 para evaluar tu caso",
+    "video.cta.title": "Envía tu perfil",
+    "video.cta.subtitle": "Lo revisamos y te escribimos para la llamada",
 
     // CTA Section
     "cta.headline": "Transformamos tu sueño de estudiar y jugar en EE.UU.",
@@ -92,19 +94,11 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Metrics
     "metrics.scholarships": "Becas Conseguidas",
-    "metrics.universities": "Universidades Partner",
+    "metrics.universities": "Universidades con Colocaciones",
     "metrics.satisfaction": "Satisfacción",
     "metrics.experience": "Años de Experiencia",
 
-    // Calendly
-    "calendly.title": "Agenda tu Evaluación Gratuita",
-    "calendly.subtitle": "Selecciona un horario que te convenga para hablar con nuestro equipo sobre tu futuro deportivo.",
-    "calendly.button": "Agendar Reunión",
-
     // Other Sports
-    "othersports.title": "Otros Deportes — Próximamente",
-    "othersports.desc": "Estamos expandiendo nuestro programa a otros deportes. Si eres atleta de basketball, tenis u otros deportes, pronto tendremos oportunidades para ti.",
-    "othersports.coming": "Próximamente disponible — Regístrate para ser notificado",
 
     // USA Page
     "usa.tag": "Programa Estados Unidos",
@@ -196,7 +190,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Apply Page
     "apply.title": "Comienza tu",
     "apply.title.highlight": "Camino",
-    "apply.subtitle": "Completa el formulario y nuestro equipo se pondrá en contacto contigo para evaluar tu perfil.",
+    "apply.subtitle": "Rellena el formulario y nuestro equipo de admisiones evaluará tu perfil deportivo y académico. Si vemos opciones reales, te escribimos para agendar la llamada. Sin compromiso y sin coste.",
     "apply.name": "Nombre Completo",
     "apply.name.placeholder": "Tu nombre completo",
     "apply.age": "Edad",
@@ -222,8 +216,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.home": "Home",
     "nav.usa": "USA Scholarships",
     "nav.spain": "Spain",
-    "nav.sports": "FUA Sports",
-    "nav.players": "Players",
+    "nav.players": "Our Players",
+    "nav.resources": "Resources",
+    "nav.privacy": "Privacy",
+    "nav.cookies": "Cookies",
     "nav.about": "About Us",
     "nav.apply": "Apply",
     "nav.applyCta": "Apply Now",
@@ -240,8 +236,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Video Section
     "video.title": "Watch the",
     "video.title.highlight": "Video",
-    "video.cta.title": "Schedule Strategic Call",
-    "video.cta.subtitle": "1-on-1 session to evaluate your case",
+    "video.cta.title": "Send your profile",
+    "video.cta.subtitle": "We review it and write to you about the call",
 
     // CTA Section
     "cta.headline": "We transform your dream of studying and playing in the U.S.",
@@ -300,19 +296,11 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Metrics
     "metrics.scholarships": "Scholarships Achieved",
-    "metrics.universities": "Partner Universities",
+    "metrics.universities": "Universities with Placements",
     "metrics.satisfaction": "Satisfaction",
     "metrics.experience": "Years of Experience",
 
-    // Calendly
-    "calendly.title": "Schedule Your Free Evaluation",
-    "calendly.subtitle": "Select a time that works for you to talk with our team about your athletic future.",
-    "calendly.button": "Schedule Meeting",
-
     // Other Sports
-    "othersports.title": "Other Sports — Coming Soon",
-    "othersports.desc": "We're expanding our program to other sports. If you're a basketball, tennis or other sport athlete, we'll have opportunities for you soon.",
-    "othersports.coming": "Coming soon — Register to be notified",
 
     // USA Page
     "usa.tag": "USA Program",
@@ -404,7 +392,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Apply Page
     "apply.title": "Start Your",
     "apply.title.highlight": "Journey",
-    "apply.subtitle": "Fill out the form and our team will contact you to evaluate your profile.",
+    "apply.subtitle": "Fill in the form and our admissions team will assess your athletic and academic profile. If we see real options, we will write to you to book the call. No commitment, no cost.",
     "apply.name": "Full Name",
     "apply.name.placeholder": "Your full name",
     "apply.age": "Age",
