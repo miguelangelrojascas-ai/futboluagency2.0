@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import { ArrowRight, ClipboardList, MessageSquare, UserCheck } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Globe } from "@/components/ui/globe";
-import AirtableForm from "@/components/AirtableForm";
+import ApplyForm from "@/components/ApplyForm";
 
 const Apply = () => {
   const { t, language } = useLanguage();
@@ -103,29 +102,17 @@ const Apply = () => {
               ))}
             </ol>
 
-            {/* The form itself, served from the CRM so nothing is retyped. */}
+            {/* The form itself. Submissions go straight into the CRM. */}
             <div id="formulario" className="scroll-mt-28">
               <h2 className="mb-2 mt-16 font-display text-2xl font-bold text-foreground sm:text-3xl">
                 {es ? "Cuéntanos tu caso" : "Tell us about your case"}
               </h2>
-              <p className="mb-3 max-w-xl font-body text-base leading-relaxed text-muted-foreground">
+              <p className="mb-8 max-w-xl font-body text-base leading-relaxed text-muted-foreground">
                 {es
                   ? "Ten a mano el enlace a tu vídeo de highlights: es lo que un entrenador mira primero."
                   : "Have your highlight video link ready: it is the first thing a coach looks at."}
               </p>
-              <p className="mb-8 max-w-xl font-body text-sm leading-relaxed text-muted-foreground">
-                {es ? "¿No sabes qué presupuesto necesitas? Lee primero " : "Not sure what budget you need? Read "}
-                <Link
-                  to="/recursos/costes-y-financiacion"
-                  className="font-semibold text-primary underline-offset-4 hover:underline"
-                >
-                  {es ? "la guía de costes" : "the costs guide"}
-                </Link>
-                {es ? " y vuelve." : " first and come back."}
-              </p>
-              <AirtableForm
-                title={es ? "Formulario de admisiones" : "Admissions form"}
-              />
+              <ApplyForm />
             </div>
           </div>
         </section>
