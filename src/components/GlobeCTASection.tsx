@@ -1,9 +1,9 @@
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Globe } from "@/components/ui/globe";
-import { openCalendly } from "@/hooks/useCalendly";
 
-/** Closing call to action: a rotating globe and a single booking button. */
+/** Closing call to action: a rotating globe and a single button to the form. */
 const GlobeCTASection = () => {
   const { language } = useLanguage();
   const es = language === "es";
@@ -26,17 +26,16 @@ const GlobeCTASection = () => {
               </h2>
               <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
                 {es
-                  ? "Agenda una llamada con nuestro equipo de admisiones. Analizamos tu perfil deportivo y académico y te decimos con claridad qué opciones reales tienes. Sin compromiso."
-                  : "Book a call with our admissions team. We analyse your athletic and academic profile and tell you clearly what real options you have. No commitment."}
+                  ? "Envíanos tu perfil y nuestro equipo de admisiones lo revisa: analizamos tu nivel deportivo y académico y te decimos con claridad qué opciones reales tienes. Sin compromiso."
+                  : "Send us your profile and our admissions team reviews it: we analyse your athletic and academic level and tell you clearly what real options you have. No commitment."}
               </p>
-              <button
-                type="button"
-                onClick={openCalendly}
+              <Link
+                to="/apply"
                 className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
-                {es ? "Agendar llamada" : "Book a call"}
+                {es ? "Envía tu perfil" : "Send your profile"}
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </Link>
             </div>
 
             <div className="relative h-[220px] w-full max-w-xl sm:h-[260px]">

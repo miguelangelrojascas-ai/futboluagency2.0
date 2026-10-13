@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const CALENDLY_URL = "https://calendly.com/miguelangelrojascas/new-meeting";
 const NAVY = "hsl(var(--foreground))";
 const RED = "hsl(var(--primary))";
 
@@ -436,10 +436,8 @@ const ProcessSection = () => {
           textAlign: "center",
         }}
       >
-        <a
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/apply"
           style={{
             display: "inline-flex",
             flexDirection: "column",
@@ -474,7 +472,7 @@ const ProcessSection = () => {
           >
             {t("video.cta.subtitle")}
           </span>
-        </a>
+        </Link>
       </div>
 
       <style>{`

@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { openCalendly } from "@/hooks/useCalendly";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const VideoSection = () => {
@@ -33,13 +33,15 @@ const VideoSection = () => {
           {/* CTA Button */}
           <div className="text-center mt-8 sm:mt-10">
             <Button
+              asChild
               variant="ctaLarge"
               size="ctaXl"
               className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-              onClick={openCalendly}
             >
-              <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
-              <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+              <Link to="/apply">
+                <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
+                <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+              </Link>
             </Button>
           </div>
         </div>

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle, TrendingUp, Trophy, Languages, Video, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { openCalendly } from "@/hooks/useCalendly";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
@@ -106,17 +105,17 @@ const USA = () => {
                 {t("usa.hero.desc")}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <button
-                  onClick={openCalendly}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
-                >
-                  {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
-                </button>
                 <Link
                   to="/apply"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
+                >
+                  {t("hero.cta.apply")} <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link
+                  to="/recursos"
                   className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border border-white/40 text-white hover:bg-white/10 font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
                 >
-                  {t("hero.cta.apply")}
+                  {t("nav.resources")}
                 </Link>
               </div>
             </div>
@@ -422,12 +421,12 @@ const USA = () => {
             <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
               {t("usa.cta.desc")}
             </p>
-            <button
-              onClick={openCalendly}
+            <Link
+              to="/apply"
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary text-white font-body font-semibold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
             >
               {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
-            </button>
+            </Link>
           </div>
         </section>
 

@@ -69,16 +69,12 @@ const Navbar = () => {
             </Link>
 
             {/* CTA */}
-            <a
-              href=""
-              onClick={(e) => {
-                e.preventDefault();
-                (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
-              }}
+            <Link
+              to="/apply"
               className="ml-2 bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
             >
               {t("nav.applyCta")}
-            </a>
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -127,18 +123,14 @@ const Navbar = () => {
               </Link>
 
               {/* CTA */}
-              <a
-                href=""
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsOpen(false);
-                  (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/miguelangelrojascas/new-meeting" });
-                }}
+              <Link
+                to="/apply"
+                onClick={() => setIsOpen(false)}
                 className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary hover:bg-primary-hover text-white"
               >
                 <GraduationCap className="w-4 h-4" />
                 {t("nav.applyCta")}
-              </a>
+              </Link>
             </div>
           </div>
         )}

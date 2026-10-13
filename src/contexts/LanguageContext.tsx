@@ -34,8 +34,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Video Section
     "video.title": "Mira el",
     "video.title.highlight": "Vídeo",
-    "video.cta.title": "Agendar Llamada Estratégica",
-    "video.cta.subtitle": "Sesión 1 a 1 para evaluar tu caso",
+    "video.cta.title": "Envía tu perfil",
+    "video.cta.subtitle": "Lo revisamos y te escribimos para la llamada",
 
     // CTA Section
     "cta.headline": "Transformamos tu sueño de estudiar y jugar en EE.UU.",
@@ -97,11 +97,6 @@ const translations: Record<Language, Record<string, string>> = {
     "metrics.universities": "Universidades con Colocaciones",
     "metrics.satisfaction": "Satisfacción",
     "metrics.experience": "Años de Experiencia",
-
-    // Calendly
-    "calendly.title": "Agenda tu Evaluación Gratuita",
-    "calendly.subtitle": "Selecciona un horario que te convenga para hablar con nuestro equipo sobre tu futuro deportivo.",
-    "calendly.button": "Agendar Reunión",
 
     // Other Sports
 
@@ -241,8 +236,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Video Section
     "video.title": "Watch the",
     "video.title.highlight": "Video",
-    "video.cta.title": "Schedule Strategic Call",
-    "video.cta.subtitle": "1-on-1 session to evaluate your case",
+    "video.cta.title": "Send your profile",
+    "video.cta.subtitle": "We review it and write to you about the call",
 
     // CTA Section
     "cta.headline": "We transform your dream of studying and playing in the U.S.",
@@ -304,11 +299,6 @@ const translations: Record<Language, Record<string, string>> = {
     "metrics.universities": "Universities with Placements",
     "metrics.satisfaction": "Satisfaction",
     "metrics.experience": "Years of Experience",
-
-    // Calendly
-    "calendly.title": "Schedule Your Free Evaluation",
-    "calendly.subtitle": "Select a time that works for you to talk with our team about your athletic future.",
-    "calendly.button": "Schedule Meeting",
 
     // Other Sports
 

@@ -38,7 +38,7 @@ const Privacy = () => {
           body: [
             "Solo los que nos facilitas tú. No hay analítica, no hay perfilado y no compramos datos a terceros.",
             "Del formulario de solicitud: nombre, datos de contacto, historial deportivo, antecedentes académicos, presupuesto familiar y objetivos. Más adelante, durante el proceso, documentación académica y deportiva.",
-            "De la reserva de llamada: nombre, correo y la franja horaria que elijas.",
+            "De la reserva de llamada, si llegamos a ese paso: nombre, correo y la franja horaria que elijas.",
             "Si eres menor de edad, el formulario lo debe completar tu madre, padre o tutor legal.",
           ],
         },
@@ -54,7 +54,7 @@ const Privacy = () => {
           body: [
             "Con las universidades y entrenadores a los que presentamos tu perfil, que es el objeto del servicio. Esto implica una transferencia de datos a Estados Unidos.",
             "Con los organismos de elegibilidad cuando corresponde: NCAA Eligibility Center o NAIA.",
-            "Con los proveedores que hacen funcionar la web y nuestra operativa: HubSpot (formularios), Calendly (citas) y Google (correo y documentos).",
+            "Con los proveedores que hacen funcionar la web y nuestra operativa: Vercel (alojamiento de la web), Airtable (donde se guarda tu solicitud), Calendly (para la cita de la llamada) y Google (correo y documentos).",
             "[COMPLETAR: base legal de las transferencias internacionales — cláusulas contractuales tipo, consentimiento explícito u otra — y acuerdos de encargado de tratamiento firmados con cada proveedor.]",
           ],
         },
@@ -75,7 +75,7 @@ const Privacy = () => {
           title: "Cookies",
           body: [
             "Esta web no usa cookies de analítica, de seguimiento ni de publicidad, y no instala ninguna cookie propia.",
-            "Los servicios externos solo se cargan cuando tú los pides: Calendly al pulsar para agendar una llamada, y YouTube al darle al play. Si no haces ninguna de esas dos cosas, no se envía ninguna petición a terceros.",
+            "El único servicio externo que se carga en la web es YouTube, y solo cuando le das al play a un vídeo. Si no lo haces, no se envía ninguna petición a terceros. El formulario se envía a nuestro propio servidor, no a un tercero.",
           ],
         },
       ]
@@ -109,7 +109,7 @@ const Privacy = () => {
           body: [
             "With the universities and coaches we present your profile to, which is the point of the service. This involves transferring data to the United States.",
             "With eligibility bodies where applicable: the NCAA Eligibility Center or the NAIA.",
-            "With the providers that run the site and our operations: HubSpot (forms), Calendly (scheduling) and Google (email and documents).",
+            "With the providers that run the site and our operations: Vercel (site hosting), Airtable (where your application is stored), Calendly (for scheduling the call) and Google (email and documents).",
             "[TO COMPLETE: legal basis for international transfers — standard contractual clauses, explicit consent or other — and the data processing agreements signed with each provider.]",
           ],
         },
@@ -130,7 +130,7 @@ const Privacy = () => {
           title: "Cookies",
           body: [
             "This site uses no analytics, tracking or advertising cookies, and sets no first-party cookies of its own.",
-            "External services load only when you ask for them: Calendly when you click to book a call, and YouTube when you press play. Do neither and no third-party request is ever made.",
+            "The only external service the site loads is YouTube, and only when you press play on a video. If you do not, no third-party request is ever made. The form is submitted to our own server, not to a third party.",
           ],
         },
       ];

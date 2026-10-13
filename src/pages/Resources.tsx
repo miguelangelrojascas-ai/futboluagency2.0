@@ -4,7 +4,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { openCalendly } from "@/hooks/useCalendly";
 import { guides, resourcesHeroImage } from "@/data/resources";
 
 const PREVIEW_SECTIONS = 3;
@@ -146,17 +145,16 @@ const Resources = () => {
               </h2>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
                 {es
-                  ? "Agenda una llamada informativa con nuestro equipo. Traes tus dudas y te respondemos sobre tu caso concreto, no en general."
-                  : "Book an information call with our team. Bring your questions and we answer them for your specific case, not in general."}
+                  ? "Envíanos tu perfil con tus dudas. Lo revisamos y te escribimos para hablar de tu caso concreto, no en general."
+                  : "Send us your profile along with your questions. We review it and write to you to talk about your specific case, not in general."}
               </p>
-              <button
-                type="button"
-                onClick={openCalendly}
+              <Link
+                to="/apply"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
-                {es ? "Agendar llamada informativa" : "Book an information call"}
+                {es ? "Envía tu perfil" : "Send your profile"}
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </Link>
             </div>
           </div>
         </section>

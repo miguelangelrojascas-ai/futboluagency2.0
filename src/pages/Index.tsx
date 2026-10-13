@@ -9,7 +9,6 @@ import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import HomeProcessSection from "@/components/HomeProcessSection";
 import FaqSection from "@/components/FaqSection";
-import CalendlySection from "@/components/CalendlySection";
 import GlobeCTASection from "@/components/GlobeCTASection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
