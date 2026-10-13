@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
+import { openCalendly } from "@/hooks/useCalendly";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const VideoSection = () => {
   const { t } = useLanguage();
-  useCalendlyLoader();
 
   return (
     <section id="video-section" className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
@@ -22,11 +22,9 @@ const VideoSection = () => {
             {/* Blue glow effect */}
             <div className="absolute -inset-4 bg-accent-blue/25 rounded-2xl blur-xl opacity-70" />
             <div className="relative aspect-video rounded-xl border-2 border-accent-blue/40 overflow-hidden bg-card shadow-2xl shadow-accent-blue/20">
-              <iframe
-                src="https://www.youtube.com/embed/0-dWsUxiYkI"
+              <YouTubeEmbed
+                id="0-dWsUxiYkI"
                 title="FutbolUAgency LLC. - Video explicativo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
                 className="absolute inset-0 w-full h-full"
               />
             </div>

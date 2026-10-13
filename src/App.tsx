@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 const USA = lazy(() => import("./pages/USA"));
 const Spain = lazy(() => import("./pages/Spain"));
 const Resources = lazy(() => import("./pages/Resources"));
+const Privacy = lazy(() => import("./pages/Privacy"));
 const ResourceGuide = lazy(() => import("./pages/ResourceGuide"));
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
               <Route path="/recursos/:slug" element={<ResourceGuide />} />
               <Route path="/about" element={<About />} />
               <Route path="/apply" element={<Apply />} />
+              <Route path="/privacidad" element={<Privacy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

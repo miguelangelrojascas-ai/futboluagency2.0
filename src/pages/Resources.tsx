@@ -4,7 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
+import { openCalendly } from "@/hooks/useCalendly";
 import { guides, resourcesHeroImage } from "@/data/resources";
 
 const PREVIEW_SECTIONS = 3;
@@ -12,7 +12,6 @@ const PREVIEW_SECTIONS = 3;
 const Resources = () => {
   const { language } = useLanguage();
   const es = language === "es";
-  useCalendlyLoader();
 
   useDocumentMeta({
     title: es

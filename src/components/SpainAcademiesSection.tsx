@@ -71,7 +71,7 @@ const SpainAcademiesSection = () => {
                 href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-body text-sm font-medium text-primary hover:text-primary-foreground hover:bg-primary px-4 py-2 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300"
+                className="inline-flex items-center gap-2 font-body text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary-hover px-5 py-2.5 rounded-lg shadow-[0_4px_16px_-4px_hsl(var(--primary)/0.5)] transition-colors duration-200"
               >
                 {t.applyBtn} <ArrowRight className="w-4 h-4" />
               </a>

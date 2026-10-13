@@ -143,9 +143,11 @@ const Footer = () => {
             <p className="font-body text-xs text-white/60">
               © {currentYear} FutbolUAgency LLC. {t("footer.rights")}.
             </p>
-            <p className="font-body text-xs text-white/60">
-              Diseñado con pasión por el fútbol y la educación.
-            </p>
+            <div className="flex items-center gap-4">
+              <Link to="/privacidad" className="font-body text-xs text-white/60 transition-colors hover:text-white">
+                {t("nav.privacy")}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

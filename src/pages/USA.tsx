@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle, TrendingUp, Trophy, Languages, Video, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { openCalendly } from "@/hooks/useCalendly";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
@@ -9,15 +10,12 @@ import StudentAthleteExperience from "@/components/StudentAthleteExperience";
 import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
 import UniversityMap from "@/components/UniversityMap";
 import UsaAnchorNav from "@/components/UsaAnchorNav";
-import HubSpotFormModal from "@/components/HubSpotFormModal";
 import SpotlightCard from "@/components/ui/spotlight-card";
-import { useHubSpotForm } from "@/hooks/useHubSpotForm";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 const USA = () => {
   const { t } = useLanguage();
-  const { isOpen, openForm, setIsOpen } = useHubSpotForm();
 
   const carouselImages = [
     "/images/process-01.jpg",
@@ -109,7 +107,7 @@ const USA = () => {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <button
-                  onClick={openForm}
+                  onClick={openCalendly}
                   className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
                 >
                   {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
@@ -425,7 +423,7 @@ const USA = () => {
               {t("usa.cta.desc")}
             </p>
             <button
-              onClick={openForm}
+              onClick={openCalendly}
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary text-white font-body font-semibold px-10 py-4 rounded-lg transition-colors text-base sm:text-lg"
             >
               {t("nav.applyCta")} <ArrowRight className="w-5 h-5" />
@@ -434,7 +432,6 @@ const USA = () => {
         </section>
 
         <Footer />
-        <HubSpotFormModal open={isOpen} onOpenChange={setIsOpen} />
       </main>
     </>
   );
