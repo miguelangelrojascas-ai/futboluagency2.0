@@ -13,7 +13,6 @@ const translations: Record<Language, Record<string, string>> = {
     // Nav
     "nav.home": "Inicio",
     "nav.usa": "Becas EE.UU.",
-    "nav.spain": "España",
     "nav.players": "Nuestros Jugadores",
     "nav.resources": "Recursos",
     "nav.privacy": "Privacidad",
@@ -28,7 +27,6 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.headline.highlight": "Universidades de Estados Unidos",
     "hero.subheadline": "Ayudamos a futbolistas de 16 a 23 años a estudiar y competir en universidades de Estados Unidos a través de becas deportivas.",
     "hero.cta.usa": "Explorar Becas en EE.UU.",
-    "hero.cta.spain": "Explorar Programa en España",
     "hero.cta.apply": "Envía tu perfil",
 
     // Video Section
@@ -57,9 +55,6 @@ const translations: Record<Language, Record<string, string>> = {
     "path.usa.title": "Becas Deportivas en EE.UU.",
     "path.usa.desc": "Estudia y juega fútbol en una universidad americana con beca deportiva. NCAA, NAIA y JUCO.",
     "path.usa.cta": "Explorar programa EE.UU.",
-    "path.spain.title": "Juega en Academias en España",
-    "path.spain.desc": "Entrena y compite en academias y clubes de fútbol competitivos en España durante una temporada completa.",
-    "path.spain.cta": "Explorar programa España",
 
     // Process Section
     "process.title": "Así es como funciona",
@@ -150,37 +145,6 @@ const translations: Record<Language, Record<string, string>> = {
     "usa.cta.title": "¿Listo para dar el salto?",
     "usa.cta.desc": "Aplica ahora y comienza tu camino hacia una beca deportiva en Estados Unidos.",
 
-    // Spain Page
-    "spain.tag": "Programa España",
-    "spain.hero.title": "Juega y Entrena en",
-    "spain.hero.highlight": "Academias de Fútbol en España",
-    "spain.hero.desc": "Nuestro programa ofrece a jugadores internacionales la oportunidad de entrenar y competir en clubes y academias de fútbol competitivas en España.",
-    "spain.system.title": "El Sistema de Fútbol en España",
-    "spain.system.desc": "España cuenta con una de las estructuras de fútbol más desarrolladas del mundo, con ligas competitivas en todos los niveles.",
-    "spain.leagues.title": "Ligas y Competición",
-    "spain.leagues.desc": "Desde ligas juveniles hasta divisiones profesionales, los jugadores compiten en un entorno de alto nivel durante toda la temporada.",
-    "spain.universities.title": "Formación Académica",
-    "spain.universities.desc": "Combinamos el entrenamiento deportivo con programas de estudio, asegurando el desarrollo integral del jugador.",
-    "spain.benefits.title": "¿Por qué España?",
-    "spain.benefit1.title": "Nivel Competitivo",
-    "spain.benefit1.desc": "Entrena en una de las mejores ligas del mundo con metodología española.",
-    "spain.benefit2.title": "Estilo de Vida",
-    "spain.benefit2.desc": "Clima ideal, cultura rica y un entorno perfecto para el desarrollo personal.",
-    "spain.benefit3.title": "Exposición",
-    "spain.benefit3.desc": "Visibilidad ante scouts y ojeadores de clubes profesionales europeos.",
-    "spain.benefit4.title": "Desarrollo Técnico",
-    "spain.benefit4.desc": "Metodología de entrenamiento reconocida mundialmente por formar jugadores técnicos.",
-    "spain.process.title": "Cómo Funciona",
-    "spain.step1.title": "Evaluación del Jugador",
-    "spain.step1.desc": "Analizamos tu nivel, edad y objetivos para encontrar la mejor academia para ti.",
-    "spain.step2.title": "Selección de Club",
-    "spain.step2.desc": "Te ubicamos en un club o academia acorde a tu nivel y aspiraciones.",
-    "spain.step3.title": "Documentación y Viaje",
-    "spain.step3.desc": "Gestionamos visados, seguros y toda la logística necesaria.",
-    "spain.step4.title": "Integración y Temporada",
-    "spain.step4.desc": "Te incorporas al equipo y compites durante toda la temporada oficial.",
-    "spain.cta.title": "¿Listo para jugar en España?",
-    "spain.cta.desc": "Aplica ahora y comienza tu experiencia futbolística en España.",
 
     // Players Page
     "players.title": "Jugadores que",
@@ -215,7 +179,6 @@ const translations: Record<Language, Record<string, string>> = {
     // Nav
     "nav.home": "Home",
     "nav.usa": "USA Scholarships",
-    "nav.spain": "Spain",
     "nav.players": "Our Players",
     "nav.resources": "Resources",
     "nav.privacy": "Privacy",
@@ -230,7 +193,6 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.headline.highlight": "Opportunities.",
     "hero.subheadline": "We help international players get opportunities in top programs",
     "hero.cta.usa": "Explore USA Scholarships",
-    "hero.cta.spain": "Explore Spain Program",
     "hero.cta.apply": "Send your profile",
 
     // Video Section
@@ -259,9 +221,6 @@ const translations: Record<Language, Record<string, string>> = {
     "path.usa.title": "Sports Scholarships in the U.S.",
     "path.usa.desc": "Study and play soccer at an American university with a sports scholarship. NCAA, NAIA and JUCO.",
     "path.usa.cta": "Explore USA program",
-    "path.spain.title": "Play in Spanish Academies",
-    "path.spain.desc": "Train and compete in competitive football academies and clubs in Spain for a full season.",
-    "path.spain.cta": "Explore Spain program",
 
     // Process Section
     "process.title": "This is how it works",
@@ -352,37 +311,6 @@ const translations: Record<Language, Record<string, string>> = {
     "usa.cta.title": "Ready to make the leap?",
     "usa.cta.desc": "Apply now and start your path to a sports scholarship in the United States.",
 
-    // Spain Page
-    "spain.tag": "Spain Program",
-    "spain.hero.title": "Play and Train at",
-    "spain.hero.highlight": "Football Academies in Spain",
-    "spain.hero.desc": "Our program gives international players the opportunity to train and compete in competitive football academies and clubs in Spain.",
-    "spain.system.title": "The Football System in Spain",
-    "spain.system.desc": "Spain has one of the most developed football structures in the world, with competitive leagues at every level.",
-    "spain.leagues.title": "Leagues and Competition",
-    "spain.leagues.desc": "From youth leagues to professional divisions, players compete in a high-level environment throughout the season.",
-    "spain.universities.title": "Academic Development",
-    "spain.universities.desc": "We combine athletic training with study programs, ensuring the player's comprehensive development.",
-    "spain.benefits.title": "Why Spain?",
-    "spain.benefit1.title": "Competitive Level",
-    "spain.benefit1.desc": "Train in one of the best leagues in the world with Spanish methodology.",
-    "spain.benefit2.title": "Lifestyle",
-    "spain.benefit2.desc": "Ideal climate, rich culture and a perfect environment for personal development.",
-    "spain.benefit3.title": "Exposure",
-    "spain.benefit3.desc": "Visibility to scouts from professional European clubs.",
-    "spain.benefit4.title": "Technical Development",
-    "spain.benefit4.desc": "World-renowned training methodology for developing technical players.",
-    "spain.process.title": "How It Works",
-    "spain.step1.title": "Player Evaluation",
-    "spain.step1.desc": "We analyze your level, age and goals to find the best academy for you.",
-    "spain.step2.title": "Club Selection",
-    "spain.step2.desc": "We place you in a club or academy matching your level and aspirations.",
-    "spain.step3.title": "Documentation and Travel",
-    "spain.step3.desc": "We manage visas, insurance and all necessary logistics.",
-    "spain.step4.title": "Integration and Season",
-    "spain.step4.desc": "You join the team and compete throughout the official season.",
-    "spain.cta.title": "Ready to play in Spain?",
-    "spain.cta.desc": "Apply now and start your football experience in Spain.",
 
     // Players Page
     "players.title": "Players Who",

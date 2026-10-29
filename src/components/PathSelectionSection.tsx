@@ -18,17 +18,6 @@ const PathSelectionSection = () => {
       to: "/usa",
       accent: "hsl(var(--foreground))",
     },
-    {
-      number: "02",
-      tag: isEs ? "Año de Preparación" : "Preparation Year",
-      title: isEs ? "Gap Year en España" : "Gap Year in Spain",
-      desc: isEs
-        ? "Una temporada completa entrenando y compitiendo en academias profesionales españolas. Eleva tu nivel futbolístico, mejora tu inglés y prepárate para dar el salto a EE.UU. o al fútbol europeo."
-        : "A full season training and competing in Spanish professional academies. Raise your level, improve your English, and get ready for the leap to the U.S. or European football.",
-      cta: isEs ? "Ver programa España" : "View Spain program",
-      to: "/spain",
-      accent: "hsl(var(--primary))",
-    },
   ];
 
   return (
@@ -37,15 +26,15 @@ const PathSelectionSection = () => {
         {/* Section header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="inline-block font-body text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
-            {isEs ? "Nuestros Programas" : "Our Programs"}
+            {isEs ? "Nuestro Programa" : "Our Program"}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-[1.1]">
-            {isEs ? "Explora nuestros " : "Explore our "}
-            <span className="italic text-primary">{isEs ? "programas" : "programs"}</span>
+            {isEs ? "Explora nuestro " : "Explore our "}
+            <span className="italic text-primary">{isEs ? "programa" : "program"}</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-foreground/15">
+        <div className="grid grid-cols-1 gap-0 border-t border-foreground/15">
           {programs.map((p, i) => (
             <Link
               key={p.title}

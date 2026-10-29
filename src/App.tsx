@@ -14,7 +14,6 @@ import Apply from "./pages/Apply";
 import NotFound from "./pages/NotFound";
 
 const USA = lazy(() => import("./pages/USA"));
-const Spain = lazy(() => import("./pages/Spain"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const ResourceGuide = lazy(() => import("./pages/ResourceGuide"));
@@ -39,7 +38,6 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/usa" element={<USA />} />
-              <Route path="/spain" element={<Spain />} />
               <Route path="/players" element={<Players />} />
               <Route path="/recursos" element={<Resources />} />
               <Route path="/recursos/:slug" element={<ResourceGuide />} />

@@ -194,13 +194,6 @@ const HomeProcessSection = () => {
             >
               {isEs ? "Recursos" : "Resources"}
             </Link>
-            {isEs ? ". ¿Buscas el Gap Year en España? Es " : ". Looking for the Gap Year in Spain? That's "}
-            <Link
-              to="/spain"
-              className="font-semibold text-primary hover:text-primary-hover transition-colors underline-offset-4 hover:underline"
-            >
-              {isEs ? "otro programa" : "a different program"}
-            </Link>
             .
           </p>
         </div>

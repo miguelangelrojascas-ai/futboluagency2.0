@@ -77,18 +77,14 @@ const PlayerProfilesSection = () => {
       image: profileDesarrollo,
       imagePosition: "center 30%",
       profile: isEs
-        ? "Jugador con ambición y compromiso. Considera el Gap Year en España para elevar su nivel antes de aplicar."
-        : "Ambitious and committed player. Consider a Gap Year in Spain to raise your level before applying.",
+        ? "Jugador con ambición y compromiso. Necesita un primer paso que eleve su nivel antes de competir en las divisiones altas."
+        : "Ambitious and committed player. Needs a first step that raises their level before competing in the higher divisions.",
       universities: isEs
         ? "NAIA — NJCAA — D3. Posibilidad de transferencia a D1/D2 tras primer año."
         : "NAIA — NJCAA — D3. Possibility to transfer to D1/D2 after first year.",
       plan: isEs
-        ? "Evaluamos si el Gap Year en España es el mejor paso previo. Un año en academia profesional puede transformar tu perfil."
-        : "We evaluate whether a Gap Year in Spain is the best prior step. A year in a professional academy can transform your profile.",
-      extraLink: {
-        label: isEs ? "Ver programa España →" : "See Spain program →",
-        to: "/spain",
-      },
+        ? "Empezamos por la división que te abre la puerta hoy y planificamos la transferencia desde el primer día. Un buen año en JUCO puede transformar tu perfil."
+        : "We start with the division that opens the door today and plan the transfer from day one. A strong year in JUCO can transform your profile.",
     },
   ];
 

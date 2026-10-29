@@ -48,11 +48,6 @@ const Navbar = () => {
               Becas Fútbol EE.UU.
             </Link>
 
-            {/* España */}
-            <Link to="/spain" className={navLinkClass(isActive("/spain"))}>
-              {t("nav.spain")}
-            </Link>
-
             {/* Players */}
             <Link to="/players" className={navLinkClass(isActive("/players"))}>
               {t("nav.players")}
@@ -100,11 +95,6 @@ const Navbar = () => {
               {/* Becas Fútbol EE.UU. */}
               <Link to="/usa" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/usa"))}>
                 Becas Fútbol EE.UU.
-              </Link>
-
-              {/* España */}
-              <Link to="/spain" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/spain"))}>
-                {t("nav.spain")}
               </Link>
 
               {/* Players */}

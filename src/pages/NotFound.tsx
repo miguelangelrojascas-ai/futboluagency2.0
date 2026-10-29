@@ -24,11 +24,6 @@ const NotFound = () => {
       desc: es ? "El programa principal: divisiones, proceso y requisitos." : "The main program: divisions, process and requirements.",
     },
     {
-      to: "/spain",
-      title: es ? "Gap Year en España" : "Gap Year in Spain",
-      desc: es ? "Una temporada completa en un club profesional español." : "A full season at a professional Spanish club.",
-    },
-    {
       to: "/players",
       title: es ? "Nuestros jugadores" : "Our players",
       desc: es ? "Los futbolistas que ya compiten y estudian en Estados Unidos." : "The players already competing and studying in the United States.",
