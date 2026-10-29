@@ -48,13 +48,6 @@ const translations: Record<Language, Record<string, string>> = {
     "cta.service4.title": "Acompañamiento hasta tu destino",
     "cta.service4.desc": "Te guiamos en todo el proceso hasta asegurar tu lugar, ya sea en una universidad o en un club en Europa.",
 
-    // Path Selection
-    "path.title": "Elige tu",
-    "path.title.highlight": "Camino",
-    "path.subtitle": "Dos oportunidades únicas para desarrollar tu carrera futbolística a nivel internacional.",
-    "path.usa.title": "Becas Deportivas en EE.UU.",
-    "path.usa.desc": "Estudia y juega fútbol en una universidad americana con beca deportiva. NCAA, NAIA y JUCO.",
-    "path.usa.cta": "Explorar programa EE.UU.",
 
     // Process Section
     "process.title": "Así es como funciona",
@@ -214,13 +207,6 @@ const translations: Record<Language, Record<string, string>> = {
     "cta.service4.title": "Support to your destination",
     "cta.service4.desc": "We guide you through the entire process to secure your spot, whether at a university or a club in Europe.",
 
-    // Path Selection
-    "path.title": "Choose Your",
-    "path.title.highlight": "Path",
-    "path.subtitle": "Two unique opportunities to develop your football career at an international level.",
-    "path.usa.title": "Sports Scholarships in the U.S.",
-    "path.usa.desc": "Study and play soccer at an American university with a sports scholarship. NCAA, NAIA and JUCO.",
-    "path.usa.cta": "Explore USA program",
 
     // Process Section
     "process.title": "This is how it works",

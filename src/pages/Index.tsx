@@ -3,9 +3,6 @@ import HeroSection from "@/components/HeroSection";
 import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
-
-
-import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
 import HomeProcessSection from "@/components/HomeProcessSection";
 import FaqSection from "@/components/FaqSection";
@@ -28,8 +25,6 @@ const Index = () => {
         <MetricsSection />
         <VideoSection />
         <LogoCarousel />
-        
-        <PathSelectionSection />
         <SuccessCasesSection />
         <HomeProcessSection />
         <FaqSection />

@@ -1,8 +1,36 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import imgEvaluation from "@/assets/card-bg-evaluation.webp";
+import imgPlan from "@/assets/process-plan.jpg";
+import imgProfile from "@/assets/card-bg-profile.webp";
+import imgCoaches from "@/assets/usa-facilities.webp";
+import imgAdmission from "@/assets/usa-academic.webp";
+import imgVisa from "@/assets/card-bg-visas.webp";
 
 const YOUTUBE_CHANNEL = "https://www.youtube.com/@FutbolUagency/videos";
+
+/** One photo per step, in order, so each card shows the step and not just names it. */
+const STEP_IMAGES = [imgEvaluation, imgPlan, imgProfile, imgCoaches, imgAdmission, imgVisa];
+
+/** What each photo shows, for anyone using a screen reader. */
+const STEP_ALT_ES = [
+  "Un entrenador y un jugador repasan su perfil en una tableta",
+  "Dos personas analizan documentos en la grada de un estadio",
+  "Montaje del vídeo de highlights en un programa de edición",
+  "Vestuario de un equipo universitario con las camisetas preparadas",
+  "Estudiantes en el campus de una universidad estadounidense",
+  "Un pasaporte sobre los formularios del visado de estudiante",
+];
+
+const STEP_ALT_EN = [
+  "A coach and a player going through his profile on a tablet",
+  "Two people going over documents in a stadium stand",
+  "The highlight video being cut in an editing timeline",
+  "A college team locker room with the kits laid out",
+  "Students on the campus of a U.S. university",
+  "A passport resting on student visa paperwork",
+];
 
 type StepLink = { to: string; label: string; external?: boolean };
 type Step = { title: string; desc: string; links?: StepLink[] };
@@ -92,10 +120,19 @@ const HomeProcessSection = () => {
   return (
     <section
       id="proceso"
-      className="section-padding"
+      className="section-padding relative overflow-hidden"
       style={{ backgroundColor: "hsl(var(--section-alt))" }}
     >
-      <div className="container-wide px-4">
+      {/* Soft wash so the section reads as its own chapter rather than a flat band. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(70rem 40rem at 15% -10%, hsl(var(--primary) / 0.07), transparent 60%), radial-gradient(55rem 35rem at 100% 110%, hsl(var(--foreground) / 0.05), transparent 65%)",
+        }}
+      />
+      <div className="container-wide relative px-4">
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="inline-block font-body text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
@@ -121,42 +158,62 @@ const HomeProcessSection = () => {
           {steps.map((step, i) => (
             <li
               key={step.title}
-              className="group relative flex flex-col p-7 sm:p-8 lg:p-10 transition-colors duration-200 hover:bg-primary/[0.02]"
+              className="group relative flex flex-col transition-colors duration-200 hover:bg-primary/[0.02]"
               style={{ backgroundColor: "hsl(var(--card))" }}
             >
-              <span className="font-display text-4xl sm:text-5xl font-bold text-primary/25 leading-none mb-5 transition-colors duration-200 group-hover:text-primary/50">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="font-display text-xl sm:text-[1.375rem] font-bold text-foreground leading-snug mb-3">
-                {step.title}
-              </h3>
-              <p className="font-body text-muted-foreground text-[15px] leading-relaxed">
-                {step.desc}
-              </p>
+              {/* The photo carries the step number, so the card leads with the image. */}
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={STEP_IMAGES[i]}
+                  alt={isEs ? STEP_ALT_ES[i] : STEP_ALT_EN[i]}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, hsl(var(--foreground) / 0.85) 0%, hsl(var(--foreground) / 0.35) 40%, transparent 75%)",
+                  }}
+                />
+                <span className="absolute bottom-4 left-7 font-display text-4xl font-bold leading-none text-white sm:text-5xl lg:left-10">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
 
-              {step.links && (
-                <div className="mt-4 flex flex-col gap-2">
-                  {step.links.map((link) =>
-                    link.external ? (
-                      <a
-                        key={link.to}
-                        href={link.to}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={linkClass}
-                      >
-                        {link.label}
-                        <ArrowUpRight className="h-3.5 w-3.5" />
-                      </a>
-                    ) : (
-                      <Link key={link.to} to={link.to} className={linkClass}>
-                        {link.label}
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    ),
-                  )}
-                </div>
-              )}
+              <div className="flex flex-1 flex-col p-7 sm:p-8 lg:p-10">
+                <h3 className="mb-3 font-display text-xl font-bold leading-snug text-foreground sm:text-[1.375rem]">
+                  {step.title}
+                </h3>
+                <p className="font-body text-[15px] leading-relaxed text-muted-foreground">
+                  {step.desc}
+                </p>
+
+                {step.links && (
+                  <div className="mt-auto flex flex-col gap-2 pt-5">
+                    {step.links.map((link) =>
+                      link.external ? (
+                        <a
+                          key={link.to}
+                          href={link.to}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={linkClass}
+                        >
+                          {link.label}
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </a>
+                      ) : (
+                        <Link key={link.to} to={link.to} className={linkClass}>
+                          {link.label}
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                      ),
+                    )}
+                  </div>
+                )}
+              </div>
 
               <span
                 aria-hidden="true"
