@@ -3,13 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
-
-
-import PathSelectionSection from "@/components/PathSelectionSection";
 import SuccessCasesSection from "@/components/SuccessCasesSection";
-import AnderStoryCard from "@/components/AnderStoryCard";
-import CalendlySection from "@/components/CalendlySection";
-import FUASportsTeaser from "@/components/FUASportsTeaser";
+import HomeProcessSection from "@/components/HomeProcessSection";
+import FaqSection from "@/components/FaqSection";
+import GlobeCTASection from "@/components/GlobeCTASection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
@@ -18,6 +15,7 @@ const Index = () => {
     title: "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos",
     description: "Ayudamos a futbolistas internacionales a obtener becas deportivas en universidades NCAA, NAIA y JUCO en Estados Unidos. Evaluación gratuita.",
     ogDescription: "Convierte tu talento en una beca deportiva. Ayudamos a futbolistas internacionales a entrar a universidades NCAA, NAIA y JUCO.",
+    canonicalPath: "/",
   });
 
   return (
@@ -28,12 +26,10 @@ const Index = () => {
         <MetricsSection />
         <VideoSection />
         <LogoCarousel />
-        
-        <PathSelectionSection />
-        <AnderStoryCard />
         <SuccessCasesSection />
-        <FUASportsTeaser />
-        <CalendlySection />
+        <HomeProcessSection />
+        <FaqSection />
+        <GlobeCTASection />
         <Footer />
       </main>
     </>

@@ -14,12 +14,10 @@ import Apply from "./pages/Apply";
 import NotFound from "./pages/NotFound";
 
 const USA = lazy(() => import("./pages/USA"));
-const Spain = lazy(() => import("./pages/Spain"));
-const FUASports = lazy(() => import("./pages/FUASports"));
-const VolleyballPage = lazy(() => import("./pages/sports/VolleyballPage"));
-const GolfPage = lazy(() => import("./pages/sports/GolfPage"));
-const TennisPage = lazy(() => import("./pages/sports/TennisPage"));
-const TrackPage = lazy(() => import("./pages/sports/TrackPage"));
+const Resources = lazy(() => import("./pages/Resources"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const PlayerStory = lazy(() => import("./pages/PlayerStory"));
+const ResourceGuide = lazy(() => import("./pages/ResourceGuide"));
 
 const queryClient = new QueryClient();
 
@@ -41,15 +39,13 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/usa" element={<USA />} />
-              <Route path="/spain" element={<Spain />} />
               <Route path="/players" element={<Players />} />
+              <Route path="/players/:slug" element={<PlayerStory />} />
+              <Route path="/recursos" element={<Resources />} />
+              <Route path="/recursos/:slug" element={<ResourceGuide />} />
               <Route path="/about" element={<About />} />
               <Route path="/apply" element={<Apply />} />
-              <Route path="/sports" element={<FUASports />} />
-              <Route path="/sports/volleyball" element={<VolleyballPage />} />
-              <Route path="/sports/golf" element={<GolfPage />} />
-              <Route path="/sports/tennis" element={<TennisPage />} />
-              <Route path="/sports/track" element={<TrackPage />} />
+              <Route path="/privacidad" element={<Privacy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

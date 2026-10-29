@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCalendlyLoader, openCalendly } from "@/hooks/useCalendly";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const VideoSection = () => {
   const { t } = useLanguage();
-  useCalendlyLoader();
 
   return (
     <section id="video-section" className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
@@ -22,11 +22,9 @@ const VideoSection = () => {
             {/* Blue glow effect */}
             <div className="absolute -inset-4 bg-accent-blue/25 rounded-2xl blur-xl opacity-70" />
             <div className="relative aspect-video rounded-xl border-2 border-accent-blue/40 overflow-hidden bg-card shadow-2xl shadow-accent-blue/20">
-              <iframe
-                src="https://www.youtube.com/embed/0-dWsUxiYkI"
+              <YouTubeEmbed
+                id="0-dWsUxiYkI"
                 title="FutbolUAgency LLC. - Video explicativo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
                 className="absolute inset-0 w-full h-full"
               />
             </div>
@@ -35,13 +33,15 @@ const VideoSection = () => {
           {/* CTA Button */}
           <div className="text-center mt-8 sm:mt-10">
             <Button
+              asChild
               variant="ctaLarge"
               size="ctaXl"
               className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
-              onClick={openCalendly}
             >
-              <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
-              <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+              <Link to="/apply">
+                <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
+                <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
+              </Link>
             </Button>
           </div>
         </div>
