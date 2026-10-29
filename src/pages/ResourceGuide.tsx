@@ -19,6 +19,7 @@ const ResourceGuide = () => {
   useDocumentMeta({
     title: guide ? `${title} | FutbolUAgency` : "FutbolUAgency",
     description: summary,
+    canonicalPath: guide ? `/recursos/${guide.slug}` : undefined,
   });
 
   if (!guide) return <Navigate to="/recursos" replace />;

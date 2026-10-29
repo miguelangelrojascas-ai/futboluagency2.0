@@ -37,6 +37,7 @@ const USA = () => {
     title: "Fútbol Universitario en USA | Becas NCAA, NAIA y JUCO – FutbolUAgency",
     description: "Descubre cómo conseguir una beca de fútbol en universidades americanas NCAA, NAIA y JUCO. Proceso, requisitos y casos de éxito reales.",
     ogTitle: "Fútbol Universitario en USA | FutbolUAgency",
+    canonicalPath: "/usa",
   });
 
   const requirements = [

@@ -19,6 +19,7 @@ const Resources = () => {
     description: es
       ? "Guías completas sobre becas de fútbol universitario en Estados Unidos: elegibilidad, requisitos, proceso, visado, costes y vida en el campus."
       : "Complete guides on U.S. college soccer scholarships: eligibility, requirements, process, visa, costs and campus life.",
+    canonicalPath: "/recursos",
   });
 
   return (

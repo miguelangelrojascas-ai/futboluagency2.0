@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 const USA = lazy(() => import("./pages/USA"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const PlayerStory = lazy(() => import("./pages/PlayerStory"));
 const ResourceGuide = lazy(() => import("./pages/ResourceGuide"));
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/usa" element={<USA />} />
               <Route path="/players" element={<Players />} />
+              <Route path="/players/:slug" element={<PlayerStory />} />
               <Route path="/recursos" element={<Resources />} />
               <Route path="/recursos/:slug" element={<ResourceGuide />} />
               <Route path="/about" element={<About />} />

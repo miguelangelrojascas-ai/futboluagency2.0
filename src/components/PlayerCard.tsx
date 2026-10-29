@@ -1,4 +1,6 @@
-import { UserRound } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, UserRound } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { Player } from "@/data/players";
 
 type PlayerCardProps = {
@@ -9,6 +11,9 @@ type PlayerCardProps = {
 
 /** One footballer in the roster, or an empty slot when no player is given. */
 const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
+  const { language } = useLanguage();
+  const es = language === "es";
+
   if (!player) {
     return (
       <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-dashed border-border bg-card/40">
@@ -30,7 +35,7 @@ const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
     );
   }
 
-  return (
+  const card = (
     <article className="group/card flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-shadow duration-300 hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.35)]">
       <div className="relative aspect-[4/5] overflow-hidden bg-muted">
         {player.image && (
@@ -58,8 +63,28 @@ const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
             {player.university}
           </p>
         )}
+        {player.story && (
+          <span className="mt-1.5 inline-flex items-center gap-1 font-body text-[12px] font-bold text-primary">
+            {es ? "Conoce su historia" : "Read his story"}
+            <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover/card:translate-x-0.5" />
+          </span>
+        )}
       </div>
     </article>
+  );
+
+  if (!player.story) return card;
+
+  return (
+    <Link
+      to={`/players/${player.story}`}
+      className="block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      aria-label={
+        es ? `Conoce la historia de ${player.name}` : `Read ${player.name}'s story`
+      }
+    >
+      {card}
+    </Link>
   );
 };
 

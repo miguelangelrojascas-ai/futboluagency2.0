@@ -18,6 +18,7 @@ const Players = () => {
     description: es
       ? "Los futbolistas de FutbolUAgency que ya estudian y compiten en universidades NCAA, NAIA y NJCAA de Estados Unidos."
       : "The FutbolUAgency footballers already studying and competing at NCAA, NAIA and NJCAA universities in the United States.",
+    canonicalPath: "/players",
   });
 
   return (
@@ -52,17 +53,6 @@ const Players = () => {
           style={{ backgroundColor: "hsl(var(--section-alt))" }}
         >
           <div className="container-wide px-4">
-            <div className="mb-10 max-w-2xl border-b border-border pb-6">
-              <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-                {es ? "Fútbol universitario en EE.UU." : "College soccer in the U.S."}
-              </h2>
-              <p className="mt-2 font-body text-[15px] leading-relaxed text-muted-foreground">
-                {es
-                  ? "Futbolistas que ya compiten y estudian en programas NCAA, NAIA y NJCAA."
-                  : "Footballers already competing and studying in NCAA, NAIA and NJCAA programs."}
-              </p>
-            </div>
-
             <ul className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 xl:grid-cols-5">
               {players.map((player) => (
                 <li key={player.name}>
@@ -74,6 +64,28 @@ const Players = () => {
                   <PlayerCard emptyLabel={es ? "Próximamente" : "Coming soon"} />
                 </li>
               ))}
+
+              {/* Fills the gap the grid leaves at the end: 14 players + 4 slots
+                  + these 2 cells divide evenly at 2, 4 and 5 columns. */}
+              <li className="col-span-2">
+                <div className="flex h-full flex-col justify-center rounded-2xl border border-border p-6 sm:p-7" style={{ backgroundColor: "hsl(var(--card))" }}>
+                  <h2 className="font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
+                    {es ? "Fútbol universitario en EE.UU." : "College soccer in the U.S."}
+                  </h2>
+                  <p className="mt-2 font-body text-[14px] leading-relaxed text-muted-foreground sm:text-[15px]">
+                    {es
+                      ? "Todos compiten y estudian en programas NCAA, NAIA y NJCAA."
+                      : "They all compete and study in NCAA, NAIA and NJCAA programs."}
+                  </p>
+                  <Link
+                    to="/recursos/las-divisiones"
+                    className="mt-4 inline-flex items-center gap-1.5 font-body text-[13px] font-bold text-primary transition-colors hover:text-primary-hover"
+                  >
+                    {es ? "Qué significa cada división" : "What each division means"}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </li>
             </ul>
           </div>
         </section>

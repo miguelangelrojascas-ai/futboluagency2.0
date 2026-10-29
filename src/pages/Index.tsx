@@ -15,6 +15,7 @@ const Index = () => {
     title: "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos",
     description: "Ayudamos a futbolistas internacionales a obtener becas deportivas en universidades NCAA, NAIA y JUCO en Estados Unidos. Evaluación gratuita.",
     ogDescription: "Convierte tu talento en una beca deportiva. Ayudamos a futbolistas internacionales a entrar a universidades NCAA, NAIA y JUCO.",
+    canonicalPath: "/",
   });
 
   return (

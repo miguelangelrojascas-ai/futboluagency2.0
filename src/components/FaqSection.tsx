@@ -340,12 +340,30 @@ const FaqSection = () => {
   const [active, setActive] = useState(0);
   const activeGroup = groups[active];
 
+  /* Every question, flattened, so answer engines can lift them straight out.
+     Only one FAQPage should exist per page, and this section is the only one. */
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: groups.flatMap((group) =>
+      group.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    ),
+  };
+
   return (
     <section
       id="faq"
       className="section-padding"
       style={{ backgroundColor: "hsl(var(--section-alt))" }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="container-wide px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">

@@ -1,4 +1,8 @@
 import { topRow, bottomRow } from "@/data/successCases";
+import { playerStories } from "@/data/playerStories";
+
+/** Players who have a long-form story page, keyed by the name on their card. */
+const storySlugByName = new Map(playerStories.map((story) => [story.name, story.slug]));
 
 export type Player = {
   name: string;
@@ -8,6 +12,8 @@ export type Player = {
   university?: string;
   division?: string;
   origin?: string;
+  /** Slug of this player's story page, when they have one. */
+  story?: string;
 };
 
 /** Footballers already committed to a U.S. university.
@@ -21,6 +27,7 @@ export const players: Player[] = [...topRow, ...bottomRow]
     university: c.university,
     division: c.division,
     origin: c.origin,
+    story: storySlugByName.get(c.name),
   }));
 
 /** Empty cards rendered after the real ones, to be filled in later. */

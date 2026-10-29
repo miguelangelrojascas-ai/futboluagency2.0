@@ -17,6 +17,7 @@ const Apply = () => {
     description: es
       ? "Rellena el formulario de admisiones de FutbolUAgency y descubre qué opciones reales de beca tienes."
       : "Fill in the FutbolUAgency admissions form and find out what real scholarship options you have.",
+    canonicalPath: "/apply",
   });
 
   const steps = [

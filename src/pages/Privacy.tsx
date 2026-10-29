@@ -21,6 +21,7 @@ const Privacy = () => {
     description: es
       ? "Qué datos recoge FutbolUAgency, para qué los usa, con quién los comparte y cómo ejercer tus derechos."
       : "What data FutbolUAgency collects, what it is used for, who it is shared with and how to exercise your rights.",
+    canonicalPath: "/privacidad",
   });
 
   const sections = es

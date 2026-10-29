@@ -89,6 +89,7 @@ const teamMembers: Member[] = [
   },
   { name: "Pablo", initials: "PB", role: { es: "Embajador & Scout Tenis", en: "Ambassador & Tennis Scout" }, image: pabloTenis, instagram: "https://www.instagram.com/pablo_fuatenis/", bio: null },
   { name: "Fabián Morales", initials: "FM", role: { es: "Reclutador Centroamérica", en: "Central America Recruiter" }, image: fabianMorales, linkedin: "https://www.linkedin.com/in/fabianmoralesrecruiting/", bio: null },
+  { name: "Alejandro Martín", initials: "AM", role: { es: "Reclutador España", en: "Spain Recruiter" }, image: null, bio: null },
   {
     name: "Neus Sansaloni",
     initials: "NS",
@@ -119,6 +120,7 @@ const About = () => {
   useDocumentMeta({
     title: "Sobre Nosotros | Quiénes Somos – FutbolUAgency",
     description: "Conoce al equipo detrás de FutbolUAgency. Exfutbolistas profesionales que ayudan a jóvenes talentos a obtener becas deportivas en universidades americanas.",
+    canonicalPath: "/about",
   });
 
   return (
