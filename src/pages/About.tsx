@@ -20,10 +20,8 @@ import Footer from "@/components/Footer";
 import ceoIgnacio from "@/assets/ceo-ignacio.jpg";
 import ceoMoha from "@/assets/ceo-moha.jpg";
 import monicaRodriguez from "@/assets/monica-rodriguez.jpg";
-import pabloTenis from "@/assets/pablo-tennis.jpg";
 import fabianMorales from "@/assets/fabian-morales.jpg";
 import miguelRojas from "@/assets/miguel-rojas.jpg";
-import neusTrack from "@/assets/neus-track.jpg";
 import teamHeaderBg from "@/assets/team-header-bg.jpg";
 
 const NAVY = "hsl(var(--foreground))";
@@ -87,28 +85,8 @@ const teamMembers: Member[] = [
     linkedin: "https://www.linkedin.com/in/monica-rodriguez-serrano-44367236/",
     bio: null,
   },
-  { name: "Pablo", initials: "PB", role: { es: "Embajador & Scout Tenis", en: "Ambassador & Tennis Scout" }, image: pabloTenis, instagram: "https://www.instagram.com/pablo_fuatenis/", bio: null },
   { name: "Fabián Morales", initials: "FM", role: { es: "Reclutador Centroamérica", en: "Central America Recruiter" }, image: fabianMorales, linkedin: "https://www.linkedin.com/in/fabianmoralesrecruiting/", bio: null },
   { name: "Alejandro Martín", initials: "AM", role: { es: "Reclutador España", en: "Spain Recruiter" }, image: null, bio: null },
-  {
-    name: "Neus Sansaloni",
-    initials: "NS",
-    role: { es: "Directora Atletismo", en: "Athletics Director" },
-    image: neusTrack,
-    instagram: "https://www.instagram.com/fua_trackandfield/",
-    bio: {
-      es: [
-        "Neus es atleta de élite y actualmente compite en un equipo de primera división, contando con una amplia trayectoria en el atletismo de alto rendimiento.",
-        "Su experiencia como deportista de élite, su profundo conocimiento del sector y su compromiso tanto con el deporte base como con el alto rendimiento la convierten en una pieza clave para el desarrollo de nuestra estructura internacional.",
-        "Con años de experiencia en la élite del atletismo, Neus aporta visión, credibilidad y una conexión directa con la realidad de los atletas.",
-      ],
-      en: [
-        "Neus is an elite athlete who currently competes on a first-division team, with an extensive track record in high-performance athletics.",
-        "Her experience as an elite athlete, her deep knowledge of the sector, and her commitment to both grassroots and high-performance sport make her a key piece in the development of our international structure.",
-        "With years of experience at the elite level of athletics, Neus brings vision, credibility, and a direct connection to the reality of athletes.",
-      ],
-    },
-  },
 ];
 
 const About = () => {
