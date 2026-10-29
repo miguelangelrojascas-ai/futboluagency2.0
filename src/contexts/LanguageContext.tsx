@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+"use client";
+
+import React, { createContext, useContext, useEffect } from "react";
 
 type Language = "es" | "en";
 
@@ -331,15 +333,33 @@ const translations: Record<Language, Record<string, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem("language");
-    return (saved as Language) || "es";
-  });
+/**
+ * Supplies the language the URL asked for.
+ *
+ * The language used to be read from localStorage while the first render was
+ * happening, which crashes on the server and could not be prerendered. It now
+ * comes from the route segment, so the HTML that gets built already carries the
+ * right language and the switcher is a link to the other one, not state.
+ */
+export const LanguageProvider: React.FC<{
+  children: React.ReactNode;
+  locale: Language;
+}> = ({ children, locale }) => {
+  const language = locale;
 
+  /* Kept so a visitor returning to a bare URL lands in the language they
+     last read. Guarded: this never runs during a server render. */
   useEffect(() => {
-    localStorage.setItem("language", language);
+    try {
+      window.localStorage.setItem("language", language);
+    } catch {
+      /* private mode, blocked storage: the URL still decides. */
+    }
   }, [language]);
+
+  const setLanguage = (_next: Language) => {
+    /* The switcher navigates instead; see LanguageToggle. */
+  };
 
   const t = (key: string): string => {
     return translations[language][key] || key;

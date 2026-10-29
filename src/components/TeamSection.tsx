@@ -1,6 +1,12 @@
+"use client";
+
 import { useLanguage } from "@/contexts/LanguageContext";
-import ceoIgnacio from "@/assets/ceo-ignacio.jpg";
-import ceoMoha from "@/assets/ceo-moha.jpg";
+import ceoIgnacioAsset from "@/assets/ceo-ignacio.jpg";
+import ceoMohaAsset from "@/assets/ceo-moha.jpg";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const ceoIgnacio = ceoIgnacioAsset.src;
+const ceoMoha = ceoMohaAsset.src;
 
 const TeamSection = () => {
   const { t, language } = useLanguage();

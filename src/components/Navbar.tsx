@@ -1,15 +1,23 @@
+"use client";
+
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import LocaleLink from "@/components/LocaleLink";
+import { usePathname } from "next/navigation";
 import { Menu, X, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import logo from "@/assets/logo-fua.png";
+import { resolveLegacyPath, type Locale } from "@/lib/routes";
+import logoAsset from "@/assets/logo-fua.png";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const logo = logoAsset.src;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-  const { t } = useLanguage();
+  const pathname = usePathname();
+  const { t, language } = useLanguage();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) =>
+    pathname === resolveLegacyPath(language as Locale, path);
 
   const navLinkClass = (active: boolean) =>
     `font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
@@ -31,45 +39,45 @@ const Navbar = () => {
         <div className="container-wide flex items-center justify-between px-4 sm:px-6 h-16 md:h-20">
 
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
+          <LocaleLink to="/" className="flex-shrink-0">
             <img src={logo} alt="FutbolUAgency LLC." className="h-10 md:h-14 w-auto" />
-          </Link>
+          </LocaleLink>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
 
             {/* Inicio */}
-            <Link to="/" className={navLinkClass(isActive("/"))}>
+            <LocaleLink to="/" className={navLinkClass(isActive("/"))}>
               {t("nav.home")}
-            </Link>
+            </LocaleLink>
 
             {/* Becas Fútbol EE.UU. — direct link, no dropdown */}
-            <Link to="/usa" className={navLinkClass(isActive("/usa"))}>
+            <LocaleLink to="/usa" className={navLinkClass(isActive("/usa"))}>
               Becas Fútbol EE.UU.
-            </Link>
+            </LocaleLink>
 
             {/* Players */}
-            <Link to="/players" className={navLinkClass(isActive("/players"))}>
+            <LocaleLink to="/players" className={navLinkClass(isActive("/players"))}>
               {t("nav.players")}
-            </Link>
+            </LocaleLink>
 
             {/* Recursos */}
-            <Link to="/recursos" className={navLinkClass(location.pathname.startsWith("/recursos"))}>
+            <LocaleLink to="/recursos" className={navLinkClass(pathname.startsWith(resolveLegacyPath(language as Locale, "/recursos")))}>
               {t("nav.resources")}
-            </Link>
+            </LocaleLink>
 
             {/* Nosotros */}
-            <Link to="/about" className={navLinkClass(isActive("/about"))}>
+            <LocaleLink to="/about" className={navLinkClass(isActive("/about"))}>
               {t("nav.about")}
-            </Link>
+            </LocaleLink>
 
             {/* CTA */}
-            <Link
+            <LocaleLink
               to="/apply"
               className="ml-2 bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
             >
               {t("nav.applyCta")}
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Mobile toggle */}
@@ -88,39 +96,39 @@ const Navbar = () => {
             <div className="container-wide px-4 py-4 flex flex-col gap-1">
 
               {/* Inicio */}
-              <Link to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>
+              <LocaleLink to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>
                 {t("nav.home")}
-              </Link>
+              </LocaleLink>
 
               {/* Becas Fútbol EE.UU. */}
-              <Link to="/usa" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/usa"))}>
+              <LocaleLink to="/usa" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/usa"))}>
                 Becas Fútbol EE.UU.
-              </Link>
+              </LocaleLink>
 
               {/* Players */}
-              <Link to="/players" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/players"))}>
+              <LocaleLink to="/players" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/players"))}>
                 {t("nav.players")}
-              </Link>
+              </LocaleLink>
 
               {/* Recursos */}
-              <Link to="/recursos" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(location.pathname.startsWith("/recursos"))}>
+              <LocaleLink to="/recursos" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(pathname.startsWith(resolveLegacyPath(language as Locale, "/recursos")))}>
                 {t("nav.resources")}
-              </Link>
+              </LocaleLink>
 
               {/* Nosotros */}
-              <Link to="/about" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/about"))}>
+              <LocaleLink to="/about" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/about"))}>
                 {t("nav.about")}
-              </Link>
+              </LocaleLink>
 
               {/* CTA */}
-              <Link
+              <LocaleLink
                 to="/apply"
                 onClick={() => setIsOpen(false)}
                 className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary hover:bg-primary-hover text-white"
               >
                 <GraduationCap className="w-4 h-4" />
                 {t("nav.applyCta")}
-              </Link>
+              </LocaleLink>
             </div>
           </div>
         )}

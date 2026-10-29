@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const NAVY = "hsl(var(--foreground))";
@@ -232,7 +234,7 @@ const ProcessSection = () => {
             return (
               <div
                 key={i}
-                ref={el => (stepRefs.current[i] = el)}
+                ref={(el) => { stepRefs.current[i] = el; }}
                 style={{
                   minHeight: "85vh",
                   display: "flex",
@@ -436,7 +438,7 @@ const ProcessSection = () => {
           textAlign: "center",
         }}
       >
-        <Link
+        <LocaleLink
           to="/apply"
           style={{
             display: "inline-flex",
@@ -472,7 +474,7 @@ const ProcessSection = () => {
           >
             {t("video.cta.subtitle")}
           </span>
-        </Link>
+        </LocaleLink>
       </div>
 
       <style>{`

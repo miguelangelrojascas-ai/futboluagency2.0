@@ -1,19 +1,36 @@
 import type { SuccessCase } from "@/components/SuccessCaseCard";
-import successZak from "@/assets/success-zak.webp";
-import successVictor from "@/assets/success-victor.webp";
-import successBentchey from "@/assets/success-bentchey.webp";
-import successEduardo from "@/assets/success-eduardo.webp";
-import successPablo from "@/assets/success-pablo.webp";
-import successMiguel from "@/assets/success-miguel.webp";
-import successChase from "@/assets/success-chase.webp";
-import successDaniel from "@/assets/success-daniel.webp";
-import successOmar from "@/assets/success-omar.webp";
-import committedAnder from "@/assets/committed-ander.webp";
-import committedIvan from "@/assets/committed-ivan.webp";
-import committedSimone from "@/assets/committed-simone.webp";
-import committedFrancisco from "@/assets/committed-francisco.webp";
-import committedJuan from "@/assets/committed-juan.webp";
-import committedJose from "@/assets/committed-jose.webp";
+import successZakAsset from "@/assets/success-zak.webp";
+import successVictorAsset from "@/assets/success-victor.webp";
+import successBentcheyAsset from "@/assets/success-bentchey.webp";
+import successEduardoAsset from "@/assets/success-eduardo.webp";
+import successPabloAsset from "@/assets/success-pablo.webp";
+import successMiguelAsset from "@/assets/success-miguel.webp";
+import successChaseAsset from "@/assets/success-chase.webp";
+import successDanielAsset from "@/assets/success-daniel.webp";
+import successOmarAsset from "@/assets/success-omar.webp";
+import committedAnderAsset from "@/assets/committed-ander.webp";
+import committedIvanAsset from "@/assets/committed-ivan.webp";
+import committedSimoneAsset from "@/assets/committed-simone.webp";
+import committedFranciscoAsset from "@/assets/committed-francisco.webp";
+import committedJuanAsset from "@/assets/committed-juan.webp";
+import committedJoseAsset from "@/assets/committed-jose.webp";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const successZak = successZakAsset.src;
+const successVictor = successVictorAsset.src;
+const successBentchey = successBentcheyAsset.src;
+const successEduardo = successEduardoAsset.src;
+const successPablo = successPabloAsset.src;
+const successMiguel = successMiguelAsset.src;
+const successChase = successChaseAsset.src;
+const successDaniel = successDanielAsset.src;
+const successOmar = successOmarAsset.src;
+const committedAnder = committedAnderAsset.src;
+const committedIvan = committedIvanAsset.src;
+const committedSimone = committedSimoneAsset.src;
+const committedFrancisco = committedFranciscoAsset.src;
+const committedJuan = committedJuanAsset.src;
+const committedJose = committedJoseAsset.src;
 
 /** Marquee row shown first on the home page. */
 export const topRow: SuccessCase[] = [

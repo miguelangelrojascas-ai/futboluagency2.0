@@ -1,7 +1,13 @@
-import anderMeet from "@/assets/ander-meet.jpg";
-import anderGfi from "@/assets/ander-gfi.jpg";
-import anderCareer from "@/assets/ander-career.jpg";
-import anderCommitted from "@/assets/ander-committed.jpg";
+import anderMeetAsset from "@/assets/ander-meet.jpg";
+import anderGfiAsset from "@/assets/ander-gfi.jpg";
+import anderCareerAsset from "@/assets/ander-career.jpg";
+import anderCommittedAsset from "@/assets/ander-committed.jpg";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const anderMeet = anderMeetAsset.src;
+const anderGfi = anderGfiAsset.src;
+const anderCareer = anderCareerAsset.src;
+const anderCommitted = anderCommittedAsset.src;
 
 /**
  * The long-form story behind a player in the roster.

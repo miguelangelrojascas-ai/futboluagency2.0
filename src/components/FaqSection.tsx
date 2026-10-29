@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import LocaleLink from "@/components/LocaleLink";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -447,13 +449,13 @@ const FaqSection = () => {
                         {item.a}
                       </p>
                       {item.link && (
-                        <Link
+                        <LocaleLink
                           to={item.link.to}
                           className="inline-flex items-center gap-1.5 mt-4 font-body text-sm font-bold text-primary hover:text-primary-hover transition-colors"
                         >
                           {item.link.label}
                           <ArrowRight className="w-4 h-4" />
-                        </Link>
+                        </LocaleLink>
                       )}
                     </div>
                   </AccordionPrimitive.Content>
@@ -464,12 +466,12 @@ const FaqSection = () => {
 
           <p className="mt-10 text-center font-body text-sm leading-relaxed text-muted-foreground">
             {isEs ? "¿Necesitas más detalle? Todo esto está explicado a fondo en " : "Need more detail? All of this is explained in depth in "}
-            <Link
+            <LocaleLink
               to="/recursos"
               className="font-semibold text-primary underline-offset-4 transition-colors hover:text-primary-hover hover:underline"
             >
               {isEs ? "nuestras guías" : "our guides"}
-            </Link>
+            </LocaleLink>
             .
           </p>
         </div>
