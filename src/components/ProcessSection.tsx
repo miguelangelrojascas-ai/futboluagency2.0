@@ -319,20 +319,27 @@ const ProcessSection = ({
       {/* El campo se queda pegado solo mientras hay pasos: al cerrarse este
           contenedor, en la tarjeta de la fase 06, deja de mostrarse. */}
       <div style={{ position: "relative" }}>
-        {/* ── CAMPO A PANTALLA COMPLETA (solo detrás de los pasos) ── */}
+        {/* ── CAMPO A PANTALLA COMPLETA (solo detrás de los pasos y el CTA) ──
+            Una pista absoluta del alto de este contenedor encierra al sticky,
+            de modo que el campo no puede asomar en la sección siguiente. El
+            truco anterior del margen negativo sí lo dejaba escapar. */}
         <div
           aria-hidden="true"
           style={{
-            position: "sticky",
-            top: 0,
-            height: "100vh",
-            marginBottom: "-100vh",
-            width: "100%",
-            overflow: "hidden",
+            position: "absolute",
+            inset: 0,
             pointerEvents: "none",
             zIndex: 0,
           }}
         >
+          <div
+            style={{
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              overflow: "hidden",
+            }}
+          >
           <svg
             viewBox="0 0 1000 1000"
             preserveAspectRatio="xMidYMid slice"
@@ -439,6 +446,7 @@ const ProcessSection = ({
               </g>
             </g>
           </svg>
+          </div>
         </div>
 
         {/* ── DESKTOP: Sticky scroll ── */}
@@ -799,205 +807,205 @@ const ProcessSection = ({
           ))}
         </div>
 
-      </div>
-
-      {/* ── CTA CON IMPACTO DEL BALÓN DE GOL Y CONFETI DE CELEBRACIÓN ── */}
-      <div
-        style={{
-          position: "relative",
-          maxWidth: 720,
-          margin: "90px auto 0",
-          padding: "0 24px",
-          textAlign: "center",
-        }}
-      >
-        {/* Balón que baja desde el cabezazo y golpea el botón CTA */}
-        {ctaHitKey > 0 && (
-          <div
-            key={`strike-${ctaHitKey}`}
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: 0,
-              transform: "translateX(-50%)",
-              pointerEvents: "none",
-              zIndex: 20,
-            }}
-          >
-            {/* Balón que impacta el botón y rebota */}
+        {/* ── CTA CON IMPACTO DEL BALÓN DE GOL Y CONFETI DE CELEBRACIÓN ── */}
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 720,
+            margin: "90px auto 0",
+            padding: "0 24px",
+            textAlign: "center",
+          }}
+        >
+          {/* Balón que baja desde el cabezazo y golpea el botón CTA */}
+          {ctaHitKey > 0 && (
             <div
-              style={{
-                animation:
-                  "ballStrikeCta 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards",
-              }}
-            >
-              <svg width="26" height="26" viewBox="-12 -12 24 24">
-                <circle
-                  r="10"
-                  fill="hsl(var(--background))"
-                  stroke={NAVY}
-                  strokeWidth="1.6"
-                />
-                <polygon
-                  points="0,-4.4 4.2,-1.4 2.6,3.5 -2.6,3.5 -4.2,-1.4"
-                  fill={RED}
-                />
-                <line x1="0" y1="-4.4" x2="0" y2="-10" stroke={NAVY} strokeWidth="1.2" />
-                <line x1="4.2" y1="-1.4" x2="9.5" y2="-3.1" stroke={NAVY} strokeWidth="1.2" />
-                <line x1="2.6" y1="3.5" x2="6" y2="8" stroke={NAVY} strokeWidth="1.2" />
-                <line x1="-2.6" y1="3.5" x2="-6" y2="8" stroke={NAVY} strokeWidth="1.2" />
-                <line x1="-4.2" y1="-1.4" x2="-9.5" y2="-3.1" stroke={NAVY} strokeWidth="1.2" />
-              </svg>
-            </div>
-
-            {/* Onda de choque en el punto de impacto */}
-            <div
+              key={`strike-${ctaHitKey}`}
+              aria-hidden="true"
               style={{
                 position: "absolute",
                 left: "50%",
                 top: 0,
-                width: 24,
-                height: 24,
-                borderRadius: "50%",
-                border: `2px solid ${RED}`,
-                transform: "translate(-50%, -50%) scale(0)",
-                animation: "ctaShockwave 0.7s ease-out 0.22s forwards",
+                transform: "translateX(-50%)",
+                pointerEvents: "none",
+                zIndex: 20,
               }}
-            />
+            >
+              {/* Balón que impacta el botón y rebota */}
+              <div
+                style={{
+                  animation:
+                    "ballStrikeCta 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards",
+                }}
+              >
+                <svg width="26" height="26" viewBox="-12 -12 24 24">
+                  <circle
+                    r="10"
+                    fill="hsl(var(--background))"
+                    stroke={NAVY}
+                    strokeWidth="1.6"
+                  />
+                  <polygon
+                    points="0,-4.4 4.2,-1.4 2.6,3.5 -2.6,3.5 -4.2,-1.4"
+                    fill={RED}
+                  />
+                  <line x1="0" y1="-4.4" x2="0" y2="-10" stroke={NAVY} strokeWidth="1.2" />
+                  <line x1="4.2" y1="-1.4" x2="9.5" y2="-3.1" stroke={NAVY} strokeWidth="1.2" />
+                  <line x1="2.6" y1="3.5" x2="6" y2="8" stroke={NAVY} strokeWidth="1.2" />
+                  <line x1="-2.6" y1="3.5" x2="-6" y2="8" stroke={NAVY} strokeWidth="1.2" />
+                  <line x1="-4.2" y1="-1.4" x2="-9.5" y2="-3.1" stroke={NAVY} strokeWidth="1.2" />
+                </svg>
+              </div>
 
-            {/* Explosión de confeti alrededor del botón */}
-            {CONFETTI_PARTICLES.map((p) => (
-              <span
-                key={p.id}
-                style={
-                  {
-                    position: "absolute",
-                    left: 0,
-                    top: 12,
-                    width: p.width,
-                    height: p.height,
-                    background: p.color,
-                    borderRadius: 2,
-                    opacity: 0,
-                    "--tx": `${p.tx}px`,
-                    "--ty": `${p.ty}px`,
-                    "--rot": `${p.rot}deg`,
-                    animation: `confettiBurst 1.35s cubic-bezier(0.16, 1, 0.3, 1) ${
-                      0.22 + p.delay
-                    }s forwards`,
-                  } as React.CSSProperties
-                }
+              {/* Onda de choque en el punto de impacto */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: 0,
+                  width: 24,
+                  height: 24,
+                  borderRadius: "50%",
+                  border: `2px solid ${RED}`,
+                  transform: "translate(-50%, -50%) scale(0)",
+                  animation: "ctaShockwave 0.7s ease-out 0.22s forwards",
+                }}
               />
-            ))}
-          </div>
-        )}
 
-        <div
-          key={`btn-bounce-${ctaHitKey}`}
-          style={{
-            position: "relative",
-            display: "inline-block",
-            animation:
-              ctaHitKey > 0
-                ? "ctaButtonImpact 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.22s both"
-                : "none",
-          }}
-        >
-          {/* ── LA PORTERÍA: el botón es la meta a la que llega la jugada ── */}
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 300 150"
-            preserveAspectRatio="none"
-            style={{
-              position: "absolute",
-              left: "-13%",
-              top: "-26%",
-              width: "126%",
-              height: "152%",
-              zIndex: 0,
-              pointerEvents: "none",
-              overflow: "visible",
-            }}
-          >
-            {/* Red: malla tenue que se enciende al entrar el balón */}
-            <g
-              stroke={isGoal ? RED : NAVY}
-              strokeOpacity={isGoal ? 0.28 : 0.1}
-              strokeWidth="0.7"
-              style={{ transition: "stroke 0.4s ease, stroke-opacity 0.4s ease" }}
-            >
-              {Array.from({ length: 11 }, (_, i) => (
-                <line key={`v${i}`} x1={18 + i * 26.4} y1="14" x2={18 + i * 26.4} y2="136" />
+              {/* Explosión de confeti alrededor del botón */}
+              {CONFETTI_PARTICLES.map((p) => (
+                <span
+                  key={p.id}
+                  style={
+                    {
+                      position: "absolute",
+                      left: 0,
+                      top: 12,
+                      width: p.width,
+                      height: p.height,
+                      background: p.color,
+                      borderRadius: 2,
+                      opacity: 0,
+                      "--tx": `${p.tx}px`,
+                      "--ty": `${p.ty}px`,
+                      "--rot": `${p.rot}deg`,
+                      animation: `confettiBurst 1.35s cubic-bezier(0.16, 1, 0.3, 1) ${
+                        0.22 + p.delay
+                      }s forwards`,
+                    } as React.CSSProperties
+                  }
+                />
               ))}
-              {Array.from({ length: 6 }, (_, i) => (
-                <line key={`h${i}`} x1="18" y1={14 + i * 24.4} x2="282" y2={14 + i * 24.4} />
-              ))}
-            </g>
+            </div>
+          )}
 
-            {/* Postes y larguero */}
-            <g
-              stroke={isGoal ? RED : NAVY}
-              strokeOpacity={isGoal ? 0.9 : 0.3}
-              strokeWidth="3"
-              strokeLinecap="round"
-              fill="none"
-              style={{ transition: "stroke 0.4s ease, stroke-opacity 0.4s ease" }}
-            >
-              <line x1="18" y1="14" x2="282" y2="14" />
-              <line x1="18" y1="14" x2="18" y2="136" />
-              <line x1="282" y1="14" x2="282" y2="136" />
-            </g>
-          </svg>
-          <LocaleLink
-            to="/apply"
+          <div
+            key={`btn-bounce-${ctaHitKey}`}
             style={{
               position: "relative",
-              zIndex: 1,
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 4,
-              background: RED,
-              color: "white",
-              padding: "20px 48px",
-              borderRadius: 12,
-              textDecoration: "none",
-              fontFamily: "Inter, sans-serif",
-              boxShadow: isGoal
-                ? `0 24px 60px color-mix(in srgb, ${RED} 50%, transparent), 0 0 0 4px color-mix(in srgb, ${RED} 20%, transparent)`
-                : `0 20px 50px color-mix(in srgb, ${RED} 35%, transparent), 0 0 0 1px rgba(255,255,255,0.08)`,
-              transition: "transform 0.3s ease, box-shadow 0.4s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0) scale(1)";
+              display: "inline-block",
+              animation:
+                ctaHitKey > 0
+                  ? "ctaButtonImpact 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.22s both"
+                  : "none",
             }}
           >
-            <span
+            {/* ── LA PORTERÍA: el botón es la meta a la que llega la jugada ── */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 300 150"
+              preserveAspectRatio="none"
               style={{
-                fontSize: "1.05rem",
-                fontWeight: 700,
-                letterSpacing: "0.02em",
+                position: "absolute",
+                left: "-13%",
+                top: "-26%",
+                width: "126%",
+                height: "152%",
+                zIndex: 0,
+                pointerEvents: "none",
+                overflow: "visible",
               }}
             >
-              {t("video.cta.title")}
-            </span>
-            <span
+              {/* Red: malla tenue que se enciende al entrar el balón */}
+              <g
+                stroke={isGoal ? RED : NAVY}
+                strokeOpacity={isGoal ? 0.28 : 0.1}
+                strokeWidth="0.7"
+                style={{ transition: "stroke 0.4s ease, stroke-opacity 0.4s ease" }}
+              >
+                {Array.from({ length: 11 }, (_, i) => (
+                  <line key={`v${i}`} x1={18 + i * 26.4} y1="14" x2={18 + i * 26.4} y2="136" />
+                ))}
+                {Array.from({ length: 6 }, (_, i) => (
+                  <line key={`h${i}`} x1="18" y1={14 + i * 24.4} x2="282" y2={14 + i * 24.4} />
+                ))}
+              </g>
+
+              {/* Postes y larguero */}
+              <g
+                stroke={isGoal ? RED : NAVY}
+                strokeOpacity={isGoal ? 0.9 : 0.3}
+                strokeWidth="3"
+                strokeLinecap="round"
+                fill="none"
+                style={{ transition: "stroke 0.4s ease, stroke-opacity 0.4s ease" }}
+              >
+                <line x1="18" y1="14" x2="282" y2="14" />
+                <line x1="18" y1="14" x2="18" y2="136" />
+                <line x1="282" y1="14" x2="282" y2="136" />
+              </g>
+            </svg>
+            <LocaleLink
+              to="/apply"
               style={{
-                fontSize: "0.8rem",
-                fontWeight: 400,
-                opacity: 0.85,
-                letterSpacing: "0.05em",
+                position: "relative",
+                zIndex: 1,
+                display: "inline-flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 4,
+                background: RED,
+                color: "white",
+                padding: "20px 48px",
+                borderRadius: 12,
+                textDecoration: "none",
+                fontFamily: "Inter, sans-serif",
+                boxShadow: isGoal
+                  ? `0 24px 60px color-mix(in srgb, ${RED} 50%, transparent), 0 0 0 4px color-mix(in srgb, ${RED} 20%, transparent)`
+                  : `0 20px 50px color-mix(in srgb, ${RED} 35%, transparent), 0 0 0 1px rgba(255,255,255,0.08)`,
+                transition: "transform 0.3s ease, box-shadow 0.4s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
               }}
             >
-              {t("video.cta.subtitle")}
-            </span>
-          </LocaleLink>
+              <span
+                style={{
+                  fontSize: "1.05rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {t("video.cta.title")}
+              </span>
+              <span
+                style={{
+                  fontSize: "0.8rem",
+                  fontWeight: 400,
+                  opacity: 0.85,
+                  letterSpacing: "0.05em",
+                }}
+              >
+                {t("video.cta.subtitle")}
+              </span>
+            </LocaleLink>
+          </div>
         </div>
       </div>
+
 
       <style>{`
         @keyframes goalRipple {
