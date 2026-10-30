@@ -11,6 +11,18 @@ type PlayerCardProps = {
   emptyLabel?: string;
 };
 
+/**
+ * Forma corta de la división, que es como se nombra en el ambiente:
+ * "NCAA D1" se dice D1, y "NJCAA" se dice JC.
+ */
+const shortDivision = (division: string) => {
+  const d = division.toUpperCase();
+  if (d.includes("NJCAA") || d.includes("JUCO")) return "JC";
+  if (d.includes("NAIA")) return "NAIA";
+  const tier = d.match(/D\s?([123])/);
+  return tier ? `D${tier[1]}` : division;
+};
+
 /** One footballer in the roster, or an empty slot when no player is given. */
 const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
   const { language } = useLanguage();
@@ -49,26 +61,31 @@ const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.03]"
           />
         )}
-        {player.division && (
-          <span className="absolute right-3 top-3 rounded-full bg-background/90 px-2.5 py-1 font-body text-[10px] font-bold uppercase tracking-[0.12em] text-primary backdrop-blur-sm">
-            {player.division}
-          </span>
-        )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-1 px-4 py-3.5">
-        <h3 className="truncate font-display text-base font-bold leading-snug text-foreground">
-          {player.name}
-        </h3>
-        {player.university && (
-          <p className="truncate font-body text-[13px] text-muted-foreground">
-            {player.university}
-          </p>
-        )}
-        {player.story && (
-          <span className="mt-1.5 inline-flex items-center gap-1 font-body text-[12px] font-bold text-primary">
-            {es ? "Conoce su historia" : "Read his story"}
-            <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover/card:translate-x-0.5" />
+      <div className="flex flex-1 items-end gap-2 px-4 py-3.5">
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate font-display text-base font-bold leading-snug text-foreground">
+            {player.name}
+          </h3>
+          {player.university && (
+            <p className="truncate font-body text-[13px] text-muted-foreground">
+              {player.university}
+            </p>
+          )}
+          {player.story && (
+            <span className="mt-1.5 inline-flex items-center gap-1 font-body text-[12px] font-bold text-primary">
+              {es ? "Conoce su historia" : "Read his story"}
+              <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover/card:translate-x-0.5" />
+            </span>
+          )}
+        </div>
+        {player.division && (
+          <span
+            title={player.division}
+            className="shrink-0 rounded-md border border-primary/25 bg-primary/[0.07] px-2 py-0.5 font-body text-[11px] font-bold uppercase tracking-[0.08em] text-primary"
+          >
+            {shortDivision(player.division)}
           </span>
         )}
       </div>
