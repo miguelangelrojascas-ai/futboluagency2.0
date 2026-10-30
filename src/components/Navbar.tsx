@@ -36,15 +36,15 @@ const Navbar = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg navbar-shadow">
-        <div className="container-wide flex items-center justify-between px-4 sm:px-6 h-16 md:h-20">
+        <div className="container-wide grid grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 h-16 md:h-20">
 
           {/* Logo */}
-          <LocaleLink to="/" className="flex-shrink-0">
+          <LocaleLink to="/" className="flex-shrink-0 justify-self-start">
             <img src={logo} alt="FutbolUAgency LLC." className="h-10 md:h-14 w-auto" />
           </LocaleLink>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop nav — centrado en la columna del medio */}
+          <div className="hidden md:flex items-center justify-center gap-1">
 
             {/* Inicio */}
             <LocaleLink to="/" className={navLinkClass(isActive("/"))}>
@@ -71,19 +71,20 @@ const Navbar = () => {
               {t("nav.about")}
             </LocaleLink>
 
-            {/* CTA */}
-            <LocaleLink
-              to="/apply"
-              className="ml-2 bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
-            >
-              {t("nav.applyCta")}
-            </LocaleLink>
           </div>
+
+          {/* CTA */}
+          <LocaleLink
+            to="/apply"
+            className="hidden md:inline-flex justify-self-end bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+          >
+            {t("nav.applyCta")}
+          </LocaleLink>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground"
+            className="md:hidden col-start-3 justify-self-end p-2 text-foreground"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

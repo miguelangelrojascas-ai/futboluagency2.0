@@ -53,36 +53,42 @@ const STEPS_DATA = [
 ];
 
 /**
- * JUGADA POR LA BANDA DERECHA (viewBox 1000 x 1000).
+ * SALIDA DE BALÓN POR LA DERECHA, toque a toque (viewBox 1000 x 1000).
  *
- * Va pegada a la derecha para que se vea: la mitad izquierda la tapa la
- * imagen sticky. Termina cortando hacia el centro-abajo, que es por donde
- * el balón sale del campo y golpea el botón, que hace de portería.
+ * No es un zig-zag regular: imita cómo progresa de verdad un equipo. Hay
+ * pases cortos de apoyo, un retroceso al central cuando aprietan, un cambio
+ * largo a la línea, una pared con el lateral que se incorpora, un balón
+ * conducido al espacio y un centro atrás desde el fondo. Las distancias y
+ * los ángulos son desiguales a propósito.
+ *
+ * Va pegada a la banda derecha porque la mitad izquierda la tapa la imagen.
  */
 const MATCH_NODES = [
-  { x: 905, y: 70, type: "start" },   // Saque desde la banda derecha
-  { x: 835, y: 165, type: "short" },  // Lateral derecho
-  { x: 915, y: 255, type: "short" },  // Pared con el interior
-  { x: 850, y: 360, type: "layoff" }, // Descarga de cara
-  { x: 940, y: 470, type: "long" },   // Cambio largo a la línea
-  { x: 865, y: 580, type: "short" },  // Apoyo corto
-  { x: 930, y: 670, type: "short" },  // Conducción por la banda
-  { x: 880, y: 775, type: "cross" },  // Llegada a línea de fondo
-  { x: 690, y: 860, type: "header" }, // Centro al punto de remate
-  { x: 500, y: 960, type: "goal" },   // Sale hacia el botón-portería
+  { x: 905, y: 70, type: "start" },   // Saque de puerta
+  { x: 852, y: 148, type: "short" },  // Apoyo corto al central derecho
+  { x: 928, y: 212, type: "short" },  // Abre al lateral por la línea
+  { x: 874, y: 186, type: "back" },   // Le aprietan: retrocede al central
+  { x: 941, y: 398, type: "long" },   // Cambio largo a la banda
+  { x: 846, y: 447, type: "short" },  // Se asocia por dentro
+  { x: 922, y: 487, type: "short" },  // Pared con el lateral que sube
+  { x: 897, y: 645, type: "long" },   // Balón conducido al espacio
+  { x: 927, y: 757, type: "cross" },  // Llega al fondo
+  { x: 736, y: 838, type: "header" }, // Centro atrás al punto de penalti
+  { x: 520, y: 955, type: "goal" },   // Remate: sale hacia el botón
 ];
 
 const PLAY_PATH = [
   "M 905 70",
-  "L 835 165",
-  "L 915 255",
-  "L 850 360",
-  "L 940 470",
-  "L 865 580",
-  "L 930 670",
-  "L 880 775",
-  "Q 820 845 690 860", // Centro bombeado desde la banda
-  "L 500 960",         // Remate hacia la portería (el botón)
+  "L 852 148",                 // corto, hacia dentro
+  "L 928 212",                 // corto, a la línea
+  "L 874 186",                 // retroceso bajo presión
+  "Q 925 300 941 398",         // cambio largo, con comba
+  "L 846 447",                 // corto por dentro
+  "L 922 487",                 // pared de primeras
+  "Q 915 570 897 645",         // conducción al espacio
+  "L 927 757",                 // hasta la línea de fondo
+  "Q 860 820 736 838",         // centro atrás
+  "L 520 955",                 // remate hacia la portería (el botón)
 ].join(" ");
 
 /** Confeti determinista para la celebración en el CTA. */
@@ -310,484 +316,489 @@ const ProcessSection = ({
         />
       </div>
 
-      {/* ── CAMPO A PANTALLA COMPLETA (fondo de toda la sección) ── */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          marginBottom: "-100vh",
-          width: "100%",
-          overflow: "hidden",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      >
-        <svg
-          viewBox="0 0 1000 1000"
-          preserveAspectRatio="xMidYMid slice"
-          style={{ width: "100%", height: "100%" }}
+      {/* El campo se queda pegado solo mientras hay pasos: al cerrarse este
+          contenedor, en la tarjeta de la fase 06, deja de mostrarse. */}
+      <div style={{ position: "relative" }}>
+        {/* ── CAMPO A PANTALLA COMPLETA (solo detrás de los pasos) ── */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+            marginBottom: "-100vh",
+            width: "100%",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
         >
-          {/* Líneas del campo */}
-          <g
-            stroke={NAVY}
-            strokeOpacity={pitchStrokeOpacity}
-            strokeWidth="1.5"
-            fill="none"
-            style={{ transition: "stroke-opacity 0.4s ease" }}
+          <svg
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="xMidYMid slice"
+            style={{ width: "100%", height: "100%" }}
           >
-            <rect x="40" y="40" width="920" height="920" rx="6" />
-            <line x1="40" y1="500" x2="960" y2="500" />
-            <circle cx="500" cy="500" r="95" />
-            <circle cx="500" cy="500" r="2.5" fill={NAVY} fillOpacity={pitchStrokeOpacity} />
+            {/* Líneas del campo */}
+            <g
+              stroke={NAVY}
+              strokeOpacity={pitchStrokeOpacity}
+              strokeWidth="1.5"
+              fill="none"
+              style={{ transition: "stroke-opacity 0.4s ease" }}
+            >
+              <rect x="40" y="40" width="920" height="920" rx="6" />
+              <line x1="40" y1="500" x2="960" y2="500" />
+              <circle cx="500" cy="500" r="95" />
+              <circle cx="500" cy="500" r="2.5" fill={NAVY} fillOpacity={pitchStrokeOpacity} />
 
-            {/* Área propia (arriba) */}
-            <rect x="300" y="40" width="400" height="140" />
-            <rect x="410" y="40" width="180" height="55" />
-            <path d="M 345 180 A 85 85 0 0 0 655 180" />
+              {/* Área propia (arriba) */}
+              <rect x="300" y="40" width="400" height="140" />
+              <rect x="410" y="40" width="180" height="55" />
+              <path d="M 345 180 A 85 85 0 0 0 655 180" />
 
-            {/* Área rival (abajo). La portería es el botón, así que no se dibuja aquí. */}
-            <rect x="300" y="820" width="400" height="140" />
-            <rect x="410" y="905" width="180" height="55" />
-            <path d="M 345 820 A 85 85 0 0 1 655 820" />
+              {/* Área rival (abajo). La portería es el botón, así que no se dibuja aquí. */}
+              <rect x="300" y="820" width="400" height="140" />
+              <rect x="410" y="905" width="180" height="55" />
+              <path d="M 345 820 A 85 85 0 0 1 655 820" />
 
-            {/* Córners */}
-            <path d="M 40 58 A 18 18 0 0 0 58 40" />
-            <path d="M 942 40 A 18 18 0 0 0 960 58" />
-            <path d="M 40 942 A 18 18 0 0 1 58 960" />
-            <path d="M 942 960 A 18 18 0 0 1 960 942" />
-          </g>
+              {/* Córners */}
+              <path d="M 40 58 A 18 18 0 0 0 58 40" />
+              <path d="M 942 40 A 18 18 0 0 0 960 58" />
+              <path d="M 40 942 A 18 18 0 0 1 58 960" />
+              <path d="M 942 960 A 18 18 0 0 1 960 942" />
+            </g>
 
-          {/* Guía punteada de la jugada */}
-          <path
-            d={PLAY_PATH}
-            fill="none"
-            stroke={NAVY}
-            strokeOpacity={pitchStrokeOpacity * 0.85}
-            strokeWidth="1.2"
-            strokeDasharray="4 6"
-            strokeLinejoin="round"
-          />
+            {/* Guía punteada de la jugada */}
+            <path
+              d={PLAY_PATH}
+              fill="none"
+              stroke={NAVY}
+              strokeOpacity={pitchStrokeOpacity * 0.85}
+              strokeWidth="1.2"
+              strokeDasharray="4 6"
+              strokeLinejoin="round"
+            />
 
-          {/* Línea de pases que se dibuja con el scroll */}
-          <path
-            ref={activePathRef}
-            d={PLAY_PATH}
-            fill="none"
-            stroke={RED}
-            strokeOpacity={passLineOpacity}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+            {/* Línea de pases que se dibuja con el scroll */}
+            <path
+              ref={activePathRef}
+              d={PLAY_PATH}
+              fill="none"
+              stroke={RED}
+              strokeOpacity={passLineOpacity}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
 
-          {/* Micro-nodos de toque */}
-          {MATCH_NODES.map((pt, idx) => (
-            <g key={idx}>
-              <circle
-                cx={pt.x}
-                cy={pt.y}
-                r={pt.type === "header" ? "4" : "2.6"}
-                fill={pt.type === "header" && isHeaderMoment ? RED : NAVY}
-                fillOpacity={
-                  pt.type === "header" && isHeaderMoment ? 0.65 : pitchStrokeOpacity * 1.4
-                }
-              />
-              {pt.type === "header" && isHeaderMoment && (
+            {/* Micro-nodos de toque */}
+            {MATCH_NODES.map((pt, idx) => (
+              <g key={idx}>
                 <circle
                   cx={pt.x}
                   cy={pt.y}
-                  r="7"
-                  fill="none"
-                  stroke={RED}
-                  strokeOpacity="0.4"
-                  strokeWidth="1.2"
-                  style={{ animation: "headerImpact 1.1s ease-out infinite" }}
+                  r={pt.type === "header" ? "4" : "2.6"}
+                  fill={pt.type === "header" && isHeaderMoment ? RED : NAVY}
+                  fillOpacity={
+                    pt.type === "header" && isHeaderMoment ? 0.65 : pitchStrokeOpacity * 1.4
+                  }
                 />
-              )}
-            </g>
-          ))}
+                {pt.type === "header" && isHeaderMoment && (
+                  <circle
+                    cx={pt.x}
+                    cy={pt.y}
+                    r="7"
+                    fill="none"
+                    stroke={RED}
+                    strokeOpacity="0.4"
+                    strokeWidth="1.2"
+                    style={{ animation: "headerImpact 1.1s ease-out infinite" }}
+                  />
+                )}
+              </g>
+            ))}
 
-          {/* ── BALÓN ── */}
-          <g
-            ref={ballGroupRef}
-            transform="translate(905, 70)"
-            style={{ opacity: ballOpacity, transition: "opacity 0.3s ease" }}
-          >
-            <g ref={ballSpinRef}>
-              <circle r="10" fill="hsl(var(--background))" stroke={NAVY} strokeWidth="1.4" />
-              <polygon
-                points="0,-4.2 4,-1.3 2.5,3.4 -2.5,3.4 -4,-1.3"
-                fill={NAVY}
-                fillOpacity="0.75"
-              />
-              <line x1="0" y1="-4.2" x2="0" y2="-10" stroke={NAVY} strokeWidth="1" />
-              <line x1="4" y1="-1.3" x2="9.4" y2="-3.1" stroke={NAVY} strokeWidth="1" />
-              <line x1="2.5" y1="3.4" x2="5.9" y2="8" stroke={NAVY} strokeWidth="1" />
-              <line x1="-2.5" y1="3.4" x2="-5.9" y2="8" stroke={NAVY} strokeWidth="1" />
-              <line x1="-4" y1="-1.3" x2="-9.4" y2="-3.1" stroke={NAVY} strokeWidth="1" />
+            {/* ── BALÓN ── */}
+            <g
+              ref={ballGroupRef}
+              transform="translate(905, 70)"
+              style={{ opacity: ballOpacity, transition: "opacity 0.3s ease" }}
+            >
+              <g ref={ballSpinRef}>
+                <circle r="10" fill="hsl(var(--background))" stroke={NAVY} strokeWidth="1.4" />
+                <polygon
+                  points="0,-4.2 4,-1.3 2.5,3.4 -2.5,3.4 -4,-1.3"
+                  fill={NAVY}
+                  fillOpacity="0.75"
+                />
+                <line x1="0" y1="-4.2" x2="0" y2="-10" stroke={NAVY} strokeWidth="1" />
+                <line x1="4" y1="-1.3" x2="9.4" y2="-3.1" stroke={NAVY} strokeWidth="1" />
+                <line x1="2.5" y1="3.4" x2="5.9" y2="8" stroke={NAVY} strokeWidth="1" />
+                <line x1="-2.5" y1="3.4" x2="-5.9" y2="8" stroke={NAVY} strokeWidth="1" />
+                <line x1="-4" y1="-1.3" x2="-9.4" y2="-3.1" stroke={NAVY} strokeWidth="1" />
+              </g>
             </g>
-          </g>
-        </svg>
-      </div>
+          </svg>
+        </div>
 
-      {/* ── DESKTOP: Sticky scroll ── */}
-      <div
-        className="process-desktop"
-        style={{
-          position: "relative",
-          zIndex: 1,
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: "0 24px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 80,
-          alignItems: "start",
-        }}
-      >
-        {/* LEFT — Sticky image */}
+        {/* ── DESKTOP: Sticky scroll ── */}
         <div
+          className="process-desktop"
           style={{
-            position: "sticky",
-            top: "10vh",
-            height: "80vh",
-            borderRadius: 24,
-            overflow: "hidden",
-            boxShadow:
-              "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)",
+            position: "relative",
+            zIndex: 1,
+            maxWidth: 1280,
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 80,
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT — Sticky image */}
+          <div
+            style={{
+              position: "sticky",
+              top: "10vh",
+              height: "80vh",
+              borderRadius: 24,
+              overflow: "hidden",
+              boxShadow:
+                "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)",
+            }}
+          >
+            {STEPS_DATA.map((s, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  opacity: activeStep === i ? 1 : 0,
+                  transition: "opacity 0.7s ease",
+                  background: s.gradient,
+                }}
+              >
+                {!imgError[i] && (
+                  <img
+                    src={s.image}
+                    alt={t(s.titleKey)}
+                    onError={() =>
+                      setImgError((prev) => ({ ...prev, [i]: true }))
+                    }
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                )}
+                {/* Bottom gradient overlay */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%)",
+                  }}
+                />
+                {/* Big phase number watermark */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 32,
+                    left: 40,
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "8rem",
+                    fontWeight: 700,
+                    color: "rgba(255,255,255,0.95)",
+                    lineHeight: 1,
+                    textShadow: "0 4px 30px rgba(0,0,0,0.6)",
+                  }}
+                >
+                  {s.phase}
+                </div>
+              </div>
+            ))}
+
+            {/* Right-side progress dots */}
+            <div
+              style={{
+                position: "absolute",
+                right: 20,
+                top: "50%",
+                transform: "translateY(-50%)",
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+                zIndex: 5,
+              }}
+            >
+              {STEPS_DATA.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() =>
+                    stepRefs.current[i]?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    })
+                  }
+                  aria-label={`Ir a fase ${i + 1}`}
+                  style={{
+                    width: "5px",
+                    height: activeStep === i ? "22px" : "5px",
+                    borderRadius: "3px",
+                    background:
+                      activeStep === i ? "white" : "rgba(255,255,255,0.25)",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
+                    border: "none",
+                    padding: 0,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — Pasos de texto */}
+          <div style={{ position: "relative" }}>
+
+            {/* ── PASOS DE TEXTO ── */}
+            <div
+              style={{
+                position: "relative",
+                zIndex: 1,
+                opacity: textOpacity,
+                transition: "opacity 0.35s ease",
+              }}
+            >
+              {STEPS_DATA.map((s, i) => {
+                const isActive = activeStep === i;
+                return (
+                  <div
+                    key={i}
+                    ref={(el) => {
+                      stepRefs.current[i] = el;
+                    }}
+                    style={{
+                      minHeight: "85vh",
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "32px 0",
+                    }}
+                  >
+                    <div
+                      ref={(el) => {
+                        contentRefs.current[i] = el;
+                      }}
+                      style={{ position: "relative", width: "100%" }}
+                    >
+                      {/* Velo que mantiene el texto legible sobre el campo. Sin
+                          bordes ni blur: solo el fondo difuminándose hacia la
+                          banda derecha, por donde pasa la jugada. */}
+                      <span
+                        aria-hidden="true"
+                        style={{
+                          position: "absolute",
+                          inset: "-28px -56px -28px -32px",
+                          zIndex: -1,
+                          background:
+                            "radial-gradient(120% 90% at 20% 50%, hsl(var(--background)) 55%, color-mix(in srgb, hsl(var(--background)) 80%, transparent) 78%, transparent 100%)",
+                        }}
+                      />
+                      {/* Phase pill */}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 16,
+                          marginBottom: 24,
+                          opacity: isActive ? 1 : 0.45,
+                          transition: "opacity 0.5s ease",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 48,
+                            height: 48,
+                            borderRadius: "50%",
+                            background: isActive ? RED : "rgba(18,33,58,0.08)",
+                            color: isActive ? "white" : NAVY,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontFamily: "'Playfair Display', serif",
+                            fontWeight: 700,
+                            fontSize: "1.1rem",
+                            transition: "background 0.5s ease",
+                          }}
+                        >
+                          {s.phase}
+                        </div>
+                        <span
+                          style={{
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "0.75rem",
+                            fontWeight: 600,
+                            letterSpacing: "0.2em",
+                            color: "rgba(18,33,58,0.6)",
+                          }}
+                        >
+                          FASE {s.phase} DE 6
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3
+                        style={{
+                          fontFamily: "'Playfair Display', serif",
+                          fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                          fontWeight: 700,
+                          lineHeight: 1.1,
+                          marginBottom: 24,
+                          color: NAVY,
+                          opacity: isActive ? 1 : 0.5,
+                          transform: isActive
+                            ? "translateX(0)"
+                            : "translateX(-12px)",
+                          transition: "all 0.5s ease",
+                        }}
+                      >
+                        {t(s.titleKey)}
+                      </h3>
+
+                      {/* Description */}
+                      <p
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "1.0625rem",
+                          lineHeight: 1.7,
+                          color: "rgba(18,33,58,0.7)",
+                          maxWidth: 520,
+                          opacity: isActive ? 1 : 0.4,
+                          transition: "opacity 0.5s ease",
+                        }}
+                      >
+                        {t(s.descKey)}
+                      </p>
+
+                      {/* Animated accent line */}
+                      <div
+                        style={{
+                          marginTop: 32,
+                          height: 2,
+                          background: RED,
+                          width: isActive ? 80 : 0,
+                          transition: "width 0.6s ease",
+                          borderRadius: 2,
+                        }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── MOBILE: Stacked cards ── */}
+        <div
+          className="process-mobile"
+          style={{
+            position: "relative",
+            zIndex: 1,
+            display: "none",
+            maxWidth: 640,
+            margin: "0 auto",
+            padding: "0 20px",
           }}
         >
           {STEPS_DATA.map((s, i) => (
             <div
               key={i}
               style={{
-                position: "absolute",
-                inset: 0,
-                opacity: activeStep === i ? 1 : 0,
-                transition: "opacity 0.7s ease",
-                background: s.gradient,
+                marginBottom: 48,
+                borderRadius: 20,
+                overflow: "hidden",
+                background: "hsl(var(--background))",
+                border: "1px solid rgba(18,33,58,0.08)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
               }}
             >
-              {!imgError[i] && (
-                <img
-                  src={s.image}
-                  alt={t(s.titleKey)}
-                  onError={() =>
-                    setImgError((prev) => ({ ...prev, [i]: true }))
-                  }
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              )}
-              {/* Bottom gradient overlay */}
               <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%)",
-                }}
-              />
-              {/* Big phase number watermark */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 32,
-                  left: 40,
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "8rem",
-                  fontWeight: 700,
-                  color: "rgba(255,255,255,0.95)",
-                  lineHeight: 1,
-                  textShadow: "0 4px 30px rgba(0,0,0,0.6)",
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "16 / 10",
+                  background: s.gradient,
                 }}
               >
-                {s.phase}
+                {!imgError[i] && (
+                  <img
+                    src={s.image}
+                    alt={t(s.titleKey)}
+                    onError={() =>
+                      setImgError((prev) => ({ ...prev, [i]: true }))
+                    }
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                )}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 16,
+                    left: 20,
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "2.5rem",
+                    fontWeight: 700,
+                    color: "white",
+                    lineHeight: 1,
+                  }}
+                >
+                  FASE {s.phase}
+                </div>
+              </div>
+
+              <div style={{ padding: "24px 24px 28px" }}>
+                <h3
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "1.6rem",
+                    fontWeight: 700,
+                    lineHeight: 1.2,
+                    marginBottom: 12,
+                    color: NAVY,
+                  }}
+                >
+                  {t(s.titleKey)}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "0.95rem",
+                    lineHeight: 1.6,
+                    color: "rgba(18,33,58,0.7)",
+                  }}
+                >
+                  {t(s.descKey)}
+                </p>
               </div>
             </div>
           ))}
-
-          {/* Right-side progress dots */}
-          <div
-            style={{
-              position: "absolute",
-              right: 20,
-              top: "50%",
-              transform: "translateY(-50%)",
-              display: "flex",
-              flexDirection: "column",
-              gap: 10,
-              zIndex: 5,
-            }}
-          >
-            {STEPS_DATA.map((_, i) => (
-              <button
-                key={i}
-                onClick={() =>
-                  stepRefs.current[i]?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  })
-                }
-                aria-label={`Ir a fase ${i + 1}`}
-                style={{
-                  width: "5px",
-                  height: activeStep === i ? "22px" : "5px",
-                  borderRadius: "3px",
-                  background:
-                    activeStep === i ? "white" : "rgba(255,255,255,0.25)",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                  border: "none",
-                  padding: 0,
-                }}
-              />
-            ))}
-          </div>
         </div>
 
-        {/* RIGHT — Pasos de texto */}
-        <div style={{ position: "relative" }}>
-
-          {/* ── PASOS DE TEXTO ── */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 1,
-              opacity: textOpacity,
-              transition: "opacity 0.35s ease",
-            }}
-          >
-            {STEPS_DATA.map((s, i) => {
-              const isActive = activeStep === i;
-              return (
-                <div
-                  key={i}
-                  ref={(el) => {
-                    stepRefs.current[i] = el;
-                  }}
-                  style={{
-                    minHeight: "85vh",
-                    display: "flex",
-                    alignItems: "center",
-                    padding: "32px 0",
-                  }}
-                >
-                  <div
-                    ref={(el) => {
-                      contentRefs.current[i] = el;
-                    }}
-                    style={{ position: "relative", width: "100%" }}
-                  >
-                    {/* Velo que mantiene el texto legible sobre el campo. Sin
-                        bordes ni blur: solo el fondo difuminándose hacia la
-                        banda derecha, por donde pasa la jugada. */}
-                    <span
-                      aria-hidden="true"
-                      style={{
-                        position: "absolute",
-                        inset: "-28px -56px -28px -32px",
-                        zIndex: -1,
-                        background:
-                          "radial-gradient(120% 90% at 20% 50%, hsl(var(--background)) 55%, color-mix(in srgb, hsl(var(--background)) 80%, transparent) 78%, transparent 100%)",
-                      }}
-                    />
-                    {/* Phase pill */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 16,
-                        marginBottom: 24,
-                        opacity: isActive ? 1 : 0.45,
-                        transition: "opacity 0.5s ease",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 48,
-                          height: 48,
-                          borderRadius: "50%",
-                          background: isActive ? RED : "rgba(18,33,58,0.08)",
-                          color: isActive ? "white" : NAVY,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontFamily: "'Playfair Display', serif",
-                          fontWeight: 700,
-                          fontSize: "1.1rem",
-                          transition: "background 0.5s ease",
-                        }}
-                      >
-                        {s.phase}
-                      </div>
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "0.75rem",
-                          fontWeight: 600,
-                          letterSpacing: "0.2em",
-                          color: "rgba(18,33,58,0.6)",
-                        }}
-                      >
-                        FASE {s.phase} DE 6
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                        fontWeight: 700,
-                        lineHeight: 1.1,
-                        marginBottom: 24,
-                        color: NAVY,
-                        opacity: isActive ? 1 : 0.5,
-                        transform: isActive
-                          ? "translateX(0)"
-                          : "translateX(-12px)",
-                        transition: "all 0.5s ease",
-                      }}
-                    >
-                      {t(s.titleKey)}
-                    </h3>
-
-                    {/* Description */}
-                    <p
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "1.0625rem",
-                        lineHeight: 1.7,
-                        color: "rgba(18,33,58,0.7)",
-                        maxWidth: 520,
-                        opacity: isActive ? 1 : 0.4,
-                        transition: "opacity 0.5s ease",
-                      }}
-                    >
-                      {t(s.descKey)}
-                    </p>
-
-                    {/* Animated accent line */}
-                    <div
-                      style={{
-                        marginTop: 32,
-                        height: 2,
-                        background: RED,
-                        width: isActive ? 80 : 0,
-                        transition: "width 0.6s ease",
-                        borderRadius: 2,
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* ── MOBILE: Stacked cards ── */}
-      <div
-        className="process-mobile"
-        style={{
-          position: "relative",
-          zIndex: 1,
-          display: "none",
-          maxWidth: 640,
-          margin: "0 auto",
-          padding: "0 20px",
-        }}
-      >
-        {STEPS_DATA.map((s, i) => (
-          <div
-            key={i}
-            style={{
-              marginBottom: 48,
-              borderRadius: 20,
-              overflow: "hidden",
-              background: "hsl(var(--background))",
-              border: "1px solid rgba(18,33,58,0.08)",
-              boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "16 / 10",
-                background: s.gradient,
-              }}
-            >
-              {!imgError[i] && (
-                <img
-                  src={s.image}
-                  alt={t(s.titleKey)}
-                  onError={() =>
-                    setImgError((prev) => ({ ...prev, [i]: true }))
-                  }
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              )}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 16,
-                  left: 20,
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "2.5rem",
-                  fontWeight: 700,
-                  color: "white",
-                  lineHeight: 1,
-                }}
-              >
-                FASE {s.phase}
-              </div>
-            </div>
-
-            <div style={{ padding: "24px 24px 28px" }}>
-              <h3
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "1.6rem",
-                  fontWeight: 700,
-                  lineHeight: 1.2,
-                  marginBottom: 12,
-                  color: NAVY,
-                }}
-              >
-                {t(s.titleKey)}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "0.95rem",
-                  lineHeight: 1.6,
-                  color: "rgba(18,33,58,0.7)",
-                }}
-              >
-                {t(s.descKey)}
-              </p>
-            </div>
-          </div>
-        ))}
       </div>
 
       {/* ── CTA CON IMPACTO DEL BALÓN DE GOL Y CONFETI DE CELEBRACIÓN ── */}
