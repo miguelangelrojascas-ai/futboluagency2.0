@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { BUDGETS, BUDGET_UNSURE, COUNTRIES, START_TERMS } from "@/data/leadOptions";
@@ -75,13 +77,13 @@ const ApplyForm = () => {
             ? "Mientras esperas, lo más útil que puedes hacer es leer las guías. Llegarás a la llamada sabiendo qué preguntar."
             : "While you wait, the most useful thing you can do is read the guides. You will come to the call knowing what to ask."}
         </p>
-        <Link
+        <LocaleLink
           to="/recursos"
           className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           {es ? "Ver los recursos" : "See the resources"}
           <ArrowRight className="h-4 w-4" />
-        </Link>
+        </LocaleLink>
       </div>
     );
   }
@@ -315,12 +317,12 @@ const ApplyForm = () => {
             style={{ backgroundColor: "hsl(var(--primary) / 0.06)" }}
           >
             {es ? "Sin problema. " : "No problem. "}
-            <Link
+            <LocaleLink
               to="/recursos/costes-y-financiacion"
               className="font-semibold text-primary underline-offset-4 hover:underline"
             >
               {es ? "La guía de costes" : "The costs guide"}
-            </Link>
+            </LocaleLink>
             {es
               ? " desglosa lo que cuesta un año y qué parte cubre normalmente la beca. Puedes enviarlo así y lo vemos juntos en la llamada."
               : " breaks down what a year costs and how much a scholarship usually covers. You can send this as it is and we will go through it on the call."}
@@ -387,12 +389,12 @@ const ApplyForm = () => {
           {es
             ? "Sin coste y sin compromiso. Usamos tus datos solo para evaluar tu perfil: "
             : "No cost, no commitment. We use your details only to assess your profile: "}
-          <Link
+          <LocaleLink
             to="/privacidad"
             className="font-semibold text-primary underline-offset-4 hover:underline"
           >
             {es ? "política de datos" : "data policy"}
-          </Link>
+          </LocaleLink>
           .
         </p>
       </div>

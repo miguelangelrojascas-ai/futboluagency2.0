@@ -1,7 +1,14 @@
+"use client";
+
 import { useState } from "react";
-import coachHandshake from "@/assets/card-bg-coaches-new.jpg";
-import usaFacilities from "@/assets/usa-facilities.png";
-import usaAcademic from "@/assets/usa-academic.png";
+import coachHandshakeAsset from "@/assets/card-bg-coaches-new.jpg";
+import usaFacilitiesAsset from "@/assets/usa-facilities.png";
+import usaAcademicAsset from "@/assets/usa-academic.png";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const coachHandshake = coachHandshakeAsset.src;
+const usaFacilities = usaFacilitiesAsset.src;
+const usaAcademic = usaAcademicAsset.src;
 
 const items = [
   {

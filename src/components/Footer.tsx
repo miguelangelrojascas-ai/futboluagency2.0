@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/logo-fua.png";
+import logoAsset from "@/assets/logo-fua.png";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const logo = logoAsset.src;
 
 // Social media icons as inline SVGs since lucide doesn't have TikTok
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -126,12 +131,12 @@ const Footer = () => {
               {t("nav.home")}
             </h4>
             <nav className="space-y-3">
-              <Link to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</Link>
-              <Link to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</Link>
-              <Link to="/about" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.about")}</Link>
-              <Link to="/players" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.players")}</Link>
-              <Link to="/recursos" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.resources")}</Link>
-              <Link to="/apply" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.apply")}</Link>
+              <LocaleLink to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</LocaleLink>
+              <LocaleLink to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</LocaleLink>
+              <LocaleLink to="/about" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.about")}</LocaleLink>
+              <LocaleLink to="/players" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.players")}</LocaleLink>
+              <LocaleLink to="/recursos" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.resources")}</LocaleLink>
+              <LocaleLink to="/apply" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.apply")}</LocaleLink>
             </nav>
           </div>
         </div>
@@ -143,9 +148,9 @@ const Footer = () => {
               © {currentYear} FutbolUAgency LLC. {t("footer.rights")}.
             </p>
             <div className="flex items-center gap-4">
-              <Link to="/privacidad" className="font-body text-xs text-white/60 transition-colors hover:text-white">
+              <LocaleLink to="/privacidad" className="font-body text-xs text-white/60 transition-colors hover:text-white">
                 {t("nav.privacy")}
-              </Link>
+              </LocaleLink>
             </div>
           </div>
         </div>

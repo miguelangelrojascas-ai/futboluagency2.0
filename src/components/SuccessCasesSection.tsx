@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
@@ -52,13 +54,13 @@ const SuccessCasesSection = () => {
 
       <div className="container-wide px-4">
         <div className="mt-10 flex justify-center sm:mt-12">
-          <Link
+          <LocaleLink
             to="/players"
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-6 py-3.5 font-body font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
           >
             {es ? "Ver todos los jugadores" : "See all players"}
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </LocaleLink>
         </div>
       </div>
     </section>

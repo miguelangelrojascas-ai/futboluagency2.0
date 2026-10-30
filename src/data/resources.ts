@@ -1,13 +1,25 @@
-import heroResources from "@/assets/campus-library.webp";
-import diagramPyramid from "@/assets/us-soccer-pyramid.webp";
-import imgBecas from "@/assets/card-bg-evaluation.webp";
-import imgDivisiones from "@/assets/card-bg-coaches-new.webp";
-import imgRequisitos from "@/assets/card-bg-profile.webp";
-import imgVisado from "@/assets/card-bg-visas.webp";
-import imgCostes from "@/assets/usa-academic.webp";
-import imgVida from "@/assets/campus-dorm.webp";
-import imgOffCampus from "@/assets/campus-offcampus.webp";
-import imgDining from "@/assets/campus-dining.webp";
+import heroResourcesAsset from "@/assets/campus-library.webp";
+import diagramPyramidAsset from "@/assets/us-soccer-pyramid.webp";
+import imgBecasAsset from "@/assets/card-bg-evaluation.webp";
+import imgDivisionesAsset from "@/assets/card-bg-coaches-new.webp";
+import imgRequisitosAsset from "@/assets/card-bg-profile.webp";
+import imgVisadoAsset from "@/assets/card-bg-visas.webp";
+import imgCostesAsset from "@/assets/usa-academic.webp";
+import imgVidaAsset from "@/assets/campus-dorm.webp";
+import imgOffCampusAsset from "@/assets/campus-offcampus.webp";
+import imgDiningAsset from "@/assets/campus-dining.webp";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const heroResources = heroResourcesAsset.src;
+const diagramPyramid = diagramPyramidAsset.src;
+const imgBecas = imgBecasAsset.src;
+const imgDivisiones = imgDivisionesAsset.src;
+const imgRequisitos = imgRequisitosAsset.src;
+const imgVisado = imgVisadoAsset.src;
+const imgCostes = imgCostesAsset.src;
+const imgVida = imgVidaAsset.src;
+const imgOffCampus = imgOffCampusAsset.src;
+const imgDining = imgDiningAsset.src;
 
 /** Wide shot used behind the resources index header. */
 export const resourcesHeroImage = heroResources;

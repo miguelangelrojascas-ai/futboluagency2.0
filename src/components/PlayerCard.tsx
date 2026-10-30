@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, UserRound } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { Player } from "@/data/players";
@@ -76,7 +78,7 @@ const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
   if (!player.story) return card;
 
   return (
-    <Link
+    <LocaleLink
       to={`/players/${player.story}`}
       className="block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       aria-label={
@@ -84,7 +86,7 @@ const PlayerCard = ({ player, emptyLabel }: PlayerCardProps) => {
       }
     >
       {card}
-    </Link>
+    </LocaleLink>
   );
 };
 

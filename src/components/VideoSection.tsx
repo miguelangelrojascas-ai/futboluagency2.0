@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
@@ -38,10 +40,10 @@ const VideoSection = () => {
               size="ctaXl"
               className="w-full sm:w-auto min-h-[70px] sm:min-h-[80px] px-8 sm:px-16"
             >
-              <Link to="/apply">
+              <LocaleLink to="/apply">
                 <span className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider">{t("video.cta.title")}</span>
                 <span className="text-xs sm:text-sm md:text-base font-normal opacity-90">{t("video.cta.subtitle")}</span>
-              </Link>
+              </LocaleLink>
             </Button>
           </div>
         </div>

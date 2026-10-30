@@ -1,12 +1,22 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import imgEvaluation from "@/assets/card-bg-evaluation.webp";
-import imgPlan from "@/assets/process-plan.jpg";
-import imgProfile from "@/assets/card-bg-profile.webp";
-import imgCoaches from "@/assets/usa-facilities.webp";
-import imgAdmission from "@/assets/usa-academic.webp";
-import imgVisa from "@/assets/card-bg-visas.webp";
+import imgEvaluationAsset from "@/assets/card-bg-evaluation.webp";
+import imgPlanAsset from "@/assets/process-plan.jpg";
+import imgProfileAsset from "@/assets/card-bg-profile.webp";
+import imgCoachesAsset from "@/assets/usa-facilities.webp";
+import imgAdmissionAsset from "@/assets/usa-academic.webp";
+import imgVisaAsset from "@/assets/card-bg-visas.webp";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const imgEvaluation = imgEvaluationAsset.src;
+const imgPlan = imgPlanAsset.src;
+const imgProfile = imgProfileAsset.src;
+const imgCoaches = imgCoachesAsset.src;
+const imgAdmission = imgAdmissionAsset.src;
+const imgVisa = imgVisaAsset.src;
 
 const YOUTUBE_CHANNEL = "https://www.youtube.com/@FutbolUagency/videos";
 
@@ -205,10 +215,10 @@ const HomeProcessSection = () => {
                           <ArrowUpRight className="h-3.5 w-3.5" />
                         </a>
                       ) : (
-                        <Link key={link.to} to={link.to} className={linkClass}>
+                        <LocaleLink key={link.to} to={link.to} className={linkClass}>
                           {link.label}
                           <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
+                        </LocaleLink>
                       ),
                     )}
                   </div>
@@ -229,28 +239,28 @@ const HomeProcessSection = () => {
 
         {/* CTA + pointers */}
         <div className="mt-12 sm:mt-14 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-          <Link
+          <LocaleLink
             to="/apply"
             className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-6 py-3.5 rounded-lg transition-colors shrink-0"
           >
             {isEs ? "Empieza por el paso 1" : "Start with step 1"}
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </LocaleLink>
           <p className="font-body text-sm text-muted-foreground leading-relaxed">
             {isEs ? "Comprueba si cumples " : "Check whether you meet the "}
-            <Link
+            <LocaleLink
               to="/recursos/requisitos-y-perfil"
               className="font-semibold text-primary hover:text-primary-hover transition-colors underline-offset-4 hover:underline"
             >
               {isEs ? "los requisitos" : "requirements"}
-            </Link>
+            </LocaleLink>
             {isEs ? " y lee cada paso a fondo en " : " and read every step in depth in "}
-            <Link
+            <LocaleLink
               to="/recursos"
               className="font-semibold text-primary hover:text-primary-hover transition-colors underline-offset-4 hover:underline"
             >
               {isEs ? "Recursos" : "Resources"}
-            </Link>
+            </LocaleLink>
             .
           </p>
         </div>

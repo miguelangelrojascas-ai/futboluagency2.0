@@ -1,9 +1,17 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
-import profileElite from "@/assets/profile-elite.png";
-import profileAlto from "@/assets/profile-alto.webp";
-import profileMedio from "@/assets/profile-medio.jpeg";
-import profileDesarrollo from "@/assets/profile-desarrollo.webp";
+import profileEliteAsset from "@/assets/profile-elite.png";
+import profileAltoAsset from "@/assets/profile-alto.webp";
+import profileMedioAsset from "@/assets/profile-medio.jpeg";
+import profileDesarrolloAsset from "@/assets/profile-desarrollo.webp";
+
+/* Next resolves an image import to an object; the components want the URL. */
+const profileElite = profileEliteAsset.src;
+const profileAlto = profileAltoAsset.src;
+const profileMedio = profileMedioAsset.src;
+const profileDesarrollo = profileDesarrolloAsset.src;
 
 interface Profile {
   level: string;
@@ -160,12 +168,12 @@ const PlayerProfilesSection = () => {
                 <span className={colLabel} style={colLabelStyle}>{isEs ? "Nuestro plan" : "Our Plan"}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.plan}</p>
                 {p.extraLink && (
-                  <Link
+                  <LocaleLink
                     to={p.extraLink.to}
                     className="inline-block mt-3 text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
                   >
                     {p.extraLink.label}
-                  </Link>
+                  </LocaleLink>
                 )}
               </div>
             </div>

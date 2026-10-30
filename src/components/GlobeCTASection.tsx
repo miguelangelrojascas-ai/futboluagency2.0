@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Globe } from "@/components/ui/globe";
@@ -29,13 +31,13 @@ const GlobeCTASection = () => {
                   ? "Envíanos tu perfil y nuestro equipo de admisiones lo revisa: analizamos tu nivel deportivo y académico y te decimos con claridad qué opciones reales tienes. Sin compromiso."
                   : "Send us your profile and our admissions team reviews it: we analyse your athletic and academic level and tell you clearly what real options you have. No commitment."}
               </p>
-              <Link
+              <LocaleLink
                 to="/apply"
                 className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
                 {es ? "Envía tu perfil" : "Send your profile"}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </LocaleLink>
             </div>
 
             <div className="relative h-[220px] w-full max-w-xl sm:h-[260px]">
