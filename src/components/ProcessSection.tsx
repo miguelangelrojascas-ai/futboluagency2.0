@@ -53,31 +53,89 @@ const STEPS_DATA = [
 ];
 
 /**
- * Coordenadas tácticas en el viewBox (1000 x 1000).
- * Diseñadas por el canal central-derecho para no quedar ocultas
- * detrás de la tarjeta sticky izquierda en Desktop.
+ * JUGADA REAL DE PARTIDO (Progresión táctica con ritmos variables):
+ * 1. Salida en corto del portero al central izquierdo (280,58 -> 185,115)
+ * 2. Pase corto interior al pivote (185,115 -> 255,185)
+ * 3. Pared / descarga corta de cara al mediocentro derecho (255,185 -> 315,160)
+ * 4. Cambio de orientación LARGO cruzado a banda izquierda (315,160 -> 95,385)
+ * 5. Asociación corta por dentro con el mediapunta (95,385 -> 220,450 -> 195,485)
+ * 6. Pase al hueco LARGO y profundo al extremo derecho (195,485 -> 488,645)
+ * 7. Conducción corta por la banda hasta línea de fondo (488,645 -> 492,768)
+ * 8. Centro bombeado desde la banda al punto de penalti (Q 390,725 -> 278,782)
+ * 9. Cabezazo picado directo a la red (278,782 -> 265,855)
  */
-const TACTICAL_NODES = [
-  { x: 500, y: 95, label: "01" },  // Saque desde área propia
-  { x: 740, y: 240, label: "02" }, // Salida por banda derecha
-  { x: 560, y: 420, label: "03" }, // Interior / Mediocentro
-  { x: 800, y: 580, label: "04" }, // Progresión ofensiva
-  { x: 640, y: 760, label: "05" }, // Asistencia en frontal del área
-  { x: 500, y: 935, label: "06" }, // ¡GOL! Dentro de la portería rival
+const MATCH_NODES = [
+  { x: 280, y: 58, type: "start" },   // Saque de puerta
+  { x: 185, y: 115, type: "short" },  // Central izquierdo
+  { x: 255, y: 185, type: "short" },  // Pivote
+  { x: 315, y: 160, type: "layoff" }, // Descarga de cara (pared corta hacia atrás)
+  { x: 95, y: 385, type: "long" },    // Cambio de orientación largo a banda izq.
+  { x: 220, y: 450, type: "short" },  // Apoyo interior al mediapunta
+  { x: 195, y: 485, type: "short" },  // Control orientado corto
+  { x: 488, y: 645, type: "long" },   // Pase largo filtrado al extremo derecho
+  { x: 492, y: 768, type: "cross" },  // Llegada a línea de fondo y centro
+  { x: 278, y: 782, type: "header" }, // Punto de remate de cabeza
+  { x: 265, y: 855, type: "goal" },   // ¡Gol en la red!
 ];
 
-// Curva Bézier suave que conecta los 6 puntos tácticos de portería a portería
-const PLAY_PATH =
-  "M 500 95 C 640 120, 760 170, 740 240 C 710 320, 550 340, 560 420 C 570 500, 810 490, 800 580 C 790 670, 670 680, 640 760 C 610 835, 525 870, 500 935";
+const PLAY_PATH = [
+  "M 280 58",
+  "L 185 115",
+  "L 255 185",
+  "L 315 160",
+  "L 95 385",
+  "L 220 450",
+  "L 195 485",
+  "L 488 645",
+  "L 492 768",
+  "Q 390 722 278 782", // Curva suave del centro aéreo desde la banda
+  "L 265 855",         // Cabezazo recto a portería
+].join(" ");
 
-const ProcessSection = () => {
+/** Confeti determinista para la celebración en el CTA. */
+const CONFETTI_PARTICLES = Array.from({ length: 42 }, (_, i) => {
+  const angle = (i / 42) * Math.PI * 2 - Math.PI / 2 + (i % 3) * 0.12;
+  const velocity = 75 + (i % 5) * 32;
+  const tx = Math.cos(angle) * velocity * 1.35;
+  const ty = Math.sin(angle) * velocity - 35; // Impulso inicial hacia arriba
+  const colors = [
+    "hsl(var(--primary))",
+    "hsl(var(--foreground))",
+    "#f59e0b",
+    "#10b981",
+    "#3b82f6",
+    "#ffffff",
+  ];
+  return {
+    id: i,
+    tx: Math.round(tx),
+    ty: Math.round(ty),
+    rot: ((i * 73) % 720) - 360,
+    color: colors[i % colors.length],
+    delay: (i % 6) * 0.035,
+    width: i % 2 === 0 ? 9 : 6,
+    height: i % 3 === 0 ? 6 : 12,
+  };
+});
+
+type FieldVisibility = "subtle" | "balanced" | "xray";
+
+const ProcessSection = ({
+  fieldVisibility = "balanced",
+}: {
+  /** Cuánto se ve la pizarra táctica detrás del texto. */
+  fieldVisibility?: FieldVisibility;
+}) => {
   const { t } = useLanguage();
   const [activeStep, setActiveStep] = useState(0);
+  const [isHeaderMoment, setIsHeaderMoment] = useState(false);
   const [isGoal, setIsGoal] = useState(false);
+  const [ctaHitKey, setCtaHitKey] = useState(0);
   const [imgError, setImgError] = useState<Record<number, boolean>>({});
 
   const sectionRef = useRef<HTMLElement>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const wasGoalRef = useRef(false);
 
   // Referencias para animar el SVG a 60fps sin re-renderizar React
   const activePathRef = useRef<SVGPathElement>(null);
@@ -91,7 +149,6 @@ const ProcessSection = () => {
       const vh = window.innerHeight;
       let progress = 0;
 
-      // 1. Detectar si estamos en Desktop (stepRefs visibles) o Mobile
       const firstStep = stepRefs.current[0];
       const lastStep = stepRefs.current[STEPS_DATA.length - 1];
 
@@ -108,7 +165,7 @@ const ProcessSection = () => {
           progress = (triggerY - startY) / totalDistance;
         }
 
-        // Actualizar el paso activo para las tarjetas
+        // Actualizar el paso activo
         stepRefs.current.forEach((el, i) => {
           if (!el) return;
           const rect = el.getBoundingClientRect();
@@ -118,7 +175,7 @@ const ProcessSection = () => {
           }
         });
       } else if (sectionRef.current) {
-        // Mobile fallback: Progreso basado en el contenedor general
+        // Mobile fallback
         const rect = sectionRef.current.getBoundingClientRect();
         const scrollable = rect.height - vh * 1.1;
         if (scrollable > 0) {
@@ -131,10 +188,9 @@ const ProcessSection = () => {
         setActiveStep((prev) => (prev !== mobileIndex ? mobileIndex : prev));
       }
 
-      // Limitar progreso entre 0 y 1
       const clampedProgress = Math.max(0, Math.min(1, progress));
 
-      // 2. Animar el trazo táctico y la posición/rotación del balón directamente en el DOM
+      // Animar línea de pase y el balón sutil
       const pathEl = activePathRef.current;
       const ballEl = ballGroupRef.current;
       const spinEl = ballSpinRef.current;
@@ -143,21 +199,38 @@ const ProcessSection = () => {
         const totalLength = pathEl.getTotalLength();
         const currentLength = totalLength * clampedProgress;
 
-        // Dibuja la línea roja progresivamente
         pathEl.style.strokeDasharray = `${totalLength}`;
         pathEl.style.strokeDashoffset = `${totalLength - currentLength}`;
 
-        // Posiciona el balón en las coordenadas exactas de la curva
         const point = pathEl.getPointAtLength(currentLength);
-        ballEl.setAttribute("transform", `translate(${point.x}, ${point.y})`);
 
-        // Hace girar el balón conforme avanza (3 vueltas completas de portería a portería)
-        spinEl.setAttribute("transform", `rotate(${clampedProgress * 1080})`);
+        // Elevación sutil durante el centro desde la banda (82% a 94% del recorrido)
+        let ballScale = 1;
+        if (clampedProgress > 0.82 && clampedProgress < 0.94) {
+          const crossPhase = (clampedProgress - 0.82) / 0.12;
+          ballScale = 1 + Math.sin(crossPhase * Math.PI) * 0.28;
+        }
+
+        ballEl.setAttribute(
+          "transform",
+          `translate(${point.x}, ${point.y}) scale(${ballScale.toFixed(2)})`
+        );
+        spinEl.setAttribute("transform", `rotate(${clampedProgress * 820})`);
       }
 
-      // 3. Disparar estado de ¡GOL! al cruzar la línea de meta (96%+)
+      const headerActive = clampedProgress >= 0.92;
       const goalScored = clampedProgress >= 0.96;
+
+      setIsHeaderMoment((prev) => (prev !== headerActive ? headerActive : prev));
       setIsGoal((prev) => (prev !== goalScored ? goalScored : prev));
+
+      // Impacto en el botón y confeti cada vez que entra el gol
+      if (goalScored && !wasGoalRef.current) {
+        wasGoalRef.current = true;
+        setCtaHitKey((k) => k + 1);
+      } else if (!goalScored && clampedProgress < 0.88) {
+        wasGoalRef.current = false;
+      }
     };
 
     const onScroll = () => {
@@ -176,383 +249,370 @@ const ProcessSection = () => {
     };
   }, []);
 
+  // Ajustes de sutileza
+  const pitchStrokeOpacity =
+    fieldVisibility === "xray" ? 0.22 : fieldVisibility === "balanced" ? 0.08 : 0.045;
+  const passLineOpacity =
+    fieldVisibility === "xray" ? 0.65 : fieldVisibility === "balanced" ? 0.28 : 0.16;
+  const ballOpacity =
+    fieldVisibility === "xray" ? 0.9 : fieldVisibility === "balanced" ? 0.55 : 0.35;
+  const textOpacity = fieldVisibility === "xray" ? 0.15 : 1;
+
   return (
     <section
       ref={sectionRef}
       style={{
-        position: "relative",
         background: "hsl(var(--background))",
         color: NAVY,
         padding: "120px 0 80px",
       }}
     >
-      {/* ── FONDO STICKY: CAMPO DE FÚTBOL TÁCTICO Y BALÓN ── */}
+      {/* Header */}
       <div
-        aria-hidden="true"
         style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          marginBottom: "-100vh",
-          width: "100%",
-          overflow: "hidden",
-          pointerEvents: "none",
-          zIndex: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "0 24px 80px",
+          textAlign: "center",
         }}
       >
-        <svg
-          viewBox="0 0 1000 1000"
-          preserveAspectRatio="xMidYMid slice"
+        <h2
           style={{
-            width: "100%",
-            height: "100%",
-            maxWidth: 1360,
-            opacity: 0.9,
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(2.5rem, 5vw, 4rem)",
+            fontWeight: 700,
+            marginBottom: 16,
+            letterSpacing: "-0.02em",
           }}
         >
-          <defs>
-            {/* Filtro de resplandor para el balón y el gol */}
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="8" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* ── LÍNEAS DEL CAMPO (Estilo Pizarra Táctica) ── */}
-          <g
-            stroke={NAVY}
-            strokeOpacity="0.08"
-            strokeWidth="2"
-            fill="none"
-          >
-            {/* Perímetro del campo */}
-            <rect x="80" y="60" width="840" height="880" rx="8" />
-            {/* Línea de medio campo */}
-            <line x1="80" y1="500" x2="920" y2="500" />
-            {/* Círculo central */}
-            <circle cx="500" cy="500" r="95" />
-            <circle cx="500" cy="500" r="4" fill={NAVY} fillOpacity="0.12" />
-
-            {/* Área grande y pequeña SUPERIOR (Inicio - Fase 01) */}
-            <rect x="280" y="60" width="440" height="145" />
-            <rect x="390" y="60" width="220" height="55" />
-            <rect x="445" y="32" width="110" height="28" strokeOpacity="0.18" />
-            <path d="M 410 205 A 95 95 0 0 0 590 205" />
-
-            {/* Área grande y pequeña INFERIOR (Portería rival - Fase 06) */}
-            <rect x="280" y="795" width="440" height="145" />
-            <rect x="390" y="885" width="220" height="55" />
-            <path d="M 410 795 A 95 95 0 0 1 590 795" />
-
-            {/* Saques de esquina */}
-            <path d="M 80 85 A 25 25 0 0 0 105 60" />
-            <path d="M 895 60 A 25 25 0 0 0 920 85" />
-            <path d="M 80 915 A 25 25 0 0 1 105 940" />
-            <path d="M 895 940 A 25 25 0 0 1 920 915" />
-          </g>
-
-          {/* ── PORTERÍA INFERIOR (Se ilumina al marcar GOL en Fase 06) ── */}
-          <g>
-            <rect
-              x="445"
-              y="940"
-              width="110"
-              height="32"
-              rx="4"
-              fill={isGoal ? RED : "transparent"}
-              fillOpacity={isGoal ? 0.18 : 0}
-              stroke={isGoal ? RED : NAVY}
-              strokeOpacity={isGoal ? 0.9 : 0.2}
-              strokeWidth={isGoal ? 3.5 : 2}
-              style={{ transition: "all 0.4s ease" }}
-            />
-            {/* Onda expansiva de GOL */}
-            <circle
-              cx="500"
-              cy="940"
-              r={isGoal ? 90 : 10}
-              fill="none"
-              stroke={RED}
-              strokeWidth="2"
-              opacity={isGoal ? 0 : 0}
-              style={{
-                animation: isGoal ? "goalPulse 1.4s ease-out infinite" : "none",
-              }}
-            />
-            {/* Etiqueta ¡GOL! */}
-            <text
-              x="500"
-              y="990"
-              textAnchor="middle"
-              fill={RED}
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                fontWeight: 800,
-                letterSpacing: "0.25em",
-                opacity: isGoal ? 1 : 0,
-                transform: isGoal ? "translateY(0)" : "translateY(-6px)",
-                transition: "all 0.35s ease",
-              }}
-            >
-              GOAL!
-            </text>
-          </g>
-
-          {/* ── TRAZADO DE LA JUGADA (Guía punteada + Línea activa) ── */}
-          {/* Guía táctica de fondo */}
-          <path
-            d={PLAY_PATH}
-            fill="none"
-            stroke={NAVY}
-            strokeOpacity="0.12"
-            strokeWidth="2.5"
-            strokeDasharray="8 10"
-          />
-
-          {/* Línea roja que se dibuja con el scroll */}
-          <path
-            ref={activePathRef}
-            d={PLAY_PATH}
-            fill="none"
-            stroke={RED}
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            filter="url(#glow)"
-          />
-
-          {/* ── NODOS TÁCTICOS (01 a 06) ── */}
-          {TACTICAL_NODES.map((node, index) => {
-            const reached = activeStep >= index;
-            const isCurrent = activeStep === index;
-            return (
-              <g key={index} transform={`translate(${node.x}, ${node.y})`}>
-                <circle
-                  r={isCurrent ? 16 : 11}
-                  fill={reached ? RED : "hsl(var(--background))"}
-                  stroke={reached ? RED : NAVY}
-                  strokeOpacity={reached ? 1 : 0.2}
-                  strokeWidth="2"
-                  style={{ transition: "all 0.4s ease" }}
-                />
-                <text
-                  dy="4"
-                  textAnchor="middle"
-                  fill={reached ? "white" : NAVY}
-                  fillOpacity={reached ? 1 : 0.4}
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    fontWeight: 700,
-                    transition: "all 0.4s ease",
-                  }}
-                >
-                  {node.label}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* ── BALÓN DE FÚTBOL ANIMADO ── */}
-          <g ref={ballGroupRef} transform="translate(500, 95)">
-            {/* Halo exterior del balón */}
-            <circle
-              r="22"
-              fill={RED}
-              fillOpacity="0.15"
-              filter="url(#glow)"
-            />
-            <g ref={ballSpinRef}>
-              {/* Esfera del balón */}
-              <circle
-                r="14"
-                fill="#ffffff"
-                stroke={NAVY}
-                strokeWidth="2.2"
-              />
-              {/* Pentágono central y costuras clásicas */}
-              <polygon
-                points="0,-6 5.7,-1.8 3.5,4.8 -3.5,4.8 -5.7,-1.8"
-                fill={RED}
-              />
-              <line x1="0" y1="-6" x2="0" y2="-14" stroke={NAVY} strokeWidth="1.6" />
-              <line x1="5.7" y1="-1.8" x2="13.3" y2="-4.3" stroke={NAVY} strokeWidth="1.6" />
-              <line x1="3.5" y1="4.8" x2="8.2" y2="11.3" stroke={NAVY} strokeWidth="1.6" />
-              <line x1="-3.5" y1="4.8" x2="-8.2" y2="11.3" stroke={NAVY} strokeWidth="1.6" />
-              <line x1="-5.7" y1="-1.8" x2="-13.3" y2="-4.3" stroke={NAVY} strokeWidth="1.6" />
-            </g>
-          </g>
-        </svg>
+          {t("process.title")}
+        </h2>
+        <p
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: "1.125rem",
+            color: "rgba(18,33,58,0.7)",
+            maxWidth: 640,
+            margin: "0 auto",
+            lineHeight: 1.6,
+          }}
+        >
+          {t("process.subtitle")}
+        </p>
+        <div
+          style={{
+            width: 60,
+            height: 3,
+            background: RED,
+            margin: "32px auto 0",
+            borderRadius: 2,
+          }}
+        />
       </div>
 
-      {/* ── CONTENIDO PRINCIPAL (zIndex: 1 para estar sobre el campo) ── */}
-      <div style={{ position: "relative", zIndex: 1 }}>
-        {/* Header */}
+      {/* ── DESKTOP: Sticky scroll ── */}
+      <div
+        className="process-desktop"
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "0 24px",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 80,
+          alignItems: "start",
+        }}
+      >
+        {/* LEFT — Sticky image */}
         <div
           style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            padding: "0 24px 80px",
-            textAlign: "center",
+            position: "sticky",
+            top: "10vh",
+            height: "80vh",
+            borderRadius: 24,
+            overflow: "hidden",
+            boxShadow:
+              "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)",
           }}
         >
-          <h2
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.5rem, 5vw, 4rem)",
-              fontWeight: 700,
-              marginBottom: 16,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {t("process.title")}
-          </h2>
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "1.125rem",
-              color: "rgba(18,33,58,0.7)",
-              maxWidth: 640,
-              margin: "0 auto",
-              lineHeight: 1.6,
-            }}
-          >
-            {t("process.subtitle")}
-          </p>
+          {STEPS_DATA.map((s, i) => (
+            <div
+              key={i}
+              style={{
+                position: "absolute",
+                inset: 0,
+                opacity: activeStep === i ? 1 : 0,
+                transition: "opacity 0.7s ease",
+                background: s.gradient,
+              }}
+            >
+              {!imgError[i] && (
+                <img
+                  src={s.image}
+                  alt={t(s.titleKey)}
+                  onError={() =>
+                    setImgError((prev) => ({ ...prev, [i]: true }))
+                  }
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              )}
+              {/* Bottom gradient overlay */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%)",
+                }}
+              />
+              {/* Big phase number watermark */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 32,
+                  left: 40,
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "8rem",
+                  fontWeight: 700,
+                  color: "rgba(255,255,255,0.95)",
+                  lineHeight: 1,
+                  textShadow: "0 4px 30px rgba(0,0,0,0.6)",
+                }}
+              >
+                {s.phase}
+              </div>
+            </div>
+          ))}
+
+          {/* Right-side progress dots */}
           <div
             style={{
-              width: 60,
-              height: 3,
-              background: RED,
-              margin: "32px auto 0",
-              borderRadius: 2,
+              position: "absolute",
+              right: 20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 10,
+              zIndex: 5,
             }}
-          />
+          >
+            {STEPS_DATA.map((_, i) => (
+              <button
+                key={i}
+                onClick={() =>
+                  stepRefs.current[i]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  })
+                }
+                aria-label={`Ir a fase ${i + 1}`}
+                style={{
+                  width: "5px",
+                  height: activeStep === i ? "22px" : "5px",
+                  borderRadius: "3px",
+                  background:
+                    activeStep === i ? "white" : "rgba(255,255,255,0.25)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  border: "none",
+                  padding: 0,
+                }}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* ── DESKTOP: Sticky scroll ── */}
-        <div
-          className="process-desktop"
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            padding: "0 24px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 80,
-            alignItems: "start",
-          }}
-        >
-          {/* LEFT — Sticky image */}
+        {/* RIGHT — Columna de texto con el campo de fútbol sutil de fondo */}
+        <div style={{ position: "relative" }}>
+          {/* ── CAMPO DE FÚTBOL STICKY (SOLO EN LA COLUMNA DERECHA) ── */}
           <div
+            aria-hidden="true"
             style={{
               position: "sticky",
               top: "10vh",
               height: "80vh",
-              borderRadius: 24,
-              overflow: "hidden",
-              boxShadow:
-                "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)",
+              marginBottom: "-80vh",
+              width: "100%",
+              pointerEvents: "none",
+              zIndex: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {STEPS_DATA.map((s, i) => (
-              <div
-                key={i}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  opacity: activeStep === i ? 1 : 0,
-                  transition: "opacity 0.7s ease",
-                  background: s.gradient,
-                }}
-              >
-                {!imgError[i] && (
-                  <img
-                    src={s.image}
-                    alt={t(s.titleKey)}
-                    onError={() =>
-                      setImgError((prev) => ({ ...prev, [i]: true }))
-                    }
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                )}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%)",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 32,
-                    left: 40,
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "8rem",
-                    fontWeight: 700,
-                    color: "rgba(255,255,255,0.95)",
-                    lineHeight: 1,
-                    textShadow: "0 4px 30px rgba(0,0,0,0.6)",
-                  }}
-                >
-                  {s.phase}
-                </div>
-              </div>
-            ))}
-
-            {/* Right-side progress dots */}
-            <div
+            <svg
+              viewBox="0 0 560 880"
+              preserveAspectRatio="xMidYMid meet"
               style={{
-                position: "absolute",
-                right: 20,
-                top: "50%",
-                transform: "translateY(-50%)",
-                display: "flex",
-                flexDirection: "column",
-                gap: 10,
-                zIndex: 5,
+                width: "100%",
+                height: "100%",
+                overflow: "visible",
               }}
             >
-              {STEPS_DATA.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() =>
-                    stepRefs.current[i]?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "center",
-                    })
-                  }
-                  aria-label={`Ir a fase ${i + 1}`}
-                  style={{
-                    width: "5px",
-                    height: activeStep === i ? "22px" : "5px",
-                    borderRadius: "3px",
-                    background:
-                      activeStep === i ? "white" : "rgba(255,255,255,0.25)",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer",
-                    border: "none",
-                    padding: 0,
-                  }}
+              {/* Líneas del campo */}
+              <g
+                stroke={NAVY}
+                strokeOpacity={pitchStrokeOpacity}
+                strokeWidth="1.5"
+                fill="none"
+                style={{ transition: "stroke-opacity 0.4s ease" }}
+              >
+                {/* Perímetro del campo */}
+                <rect x="40" y="40" width="480" height="800" rx="6" />
+                {/* Línea de medio campo */}
+                <line x1="40" y1="440" x2="520" y2="440" />
+                {/* Círculo central */}
+                <circle cx="280" cy="440" r="68" />
+                <circle
+                  cx="280"
+                  cy="440"
+                  r="2.5"
+                  fill={NAVY}
+                  fillOpacity={pitchStrokeOpacity}
                 />
+
+                {/* Portería y áreas SUPERIORES (Inicio) */}
+                <rect x="240" y="22" width="80" height="18" rx="2" />
+                <rect x="140" y="40" width="280" height="110" />
+                <rect x="205" y="40" width="150" height="42" />
+                <path d="M 225 150 A 60 60 0 0 0 335 150" />
+
+                {/* Áreas INFERIORES (Ataque) */}
+                <rect x="140" y="730" width="280" height="110" />
+                <rect x="205" y="798" width="150" height="42" />
+                <path d="M 225 730 A 60 60 0 0 1 335 730" />
+
+                {/* Córners */}
+                <path d="M 40 58 A 18 18 0 0 0 58 40" />
+                <path d="M 502 40 A 18 18 0 0 0 520 58" />
+                <path d="M 40 822 A 18 18 0 0 1 58 840" />
+                <path d="M 502 840 A 18 18 0 0 1 520 822" />
+              </g>
+
+              {/* Portería inferior (Se ilumina al entrar el cabezazo) */}
+              <g>
+                <rect
+                  x="240"
+                  y="840"
+                  width="80"
+                  height="20"
+                  rx="2"
+                  fill={isGoal ? RED : "transparent"}
+                  fillOpacity={isGoal ? 0.14 : 0}
+                  stroke={isGoal ? RED : NAVY}
+                  strokeOpacity={isGoal ? 0.65 : pitchStrokeOpacity * 1.3}
+                  strokeWidth={isGoal ? 2.2 : 1.5}
+                  style={{ transition: "all 0.4s ease" }}
+                />
+                {isGoal && (
+                  <circle
+                    cx="265"
+                    cy="855"
+                    r="10"
+                    fill="none"
+                    stroke={RED}
+                    strokeOpacity="0.45"
+                    strokeWidth="1.5"
+                    style={{ animation: "goalRipple 1.5s ease-out infinite" }}
+                  />
+                )}
+              </g>
+
+              {/* Guía punteada muy tenue de la jugada */}
+              <path
+                d={PLAY_PATH}
+                fill="none"
+                stroke={NAVY}
+                strokeOpacity={pitchStrokeOpacity * 0.85}
+                strokeWidth="1.2"
+                strokeDasharray="4 6"
+                strokeLinejoin="round"
+              />
+
+              {/* Línea de pases reales (Fina y sutil) */}
+              <path
+                ref={activePathRef}
+                d={PLAY_PATH}
+                fill="none"
+                stroke={RED}
+                strokeOpacity={passLineOpacity}
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+
+              {/* Micro-nodos de toque y pulso en el punto del cabezazo */}
+              {MATCH_NODES.map((pt, idx) => (
+                <g key={idx}>
+                  <circle
+                    cx={pt.x}
+                    cy={pt.y}
+                    r={pt.type === "header" ? "3.5" : "2.2"}
+                    fill={pt.type === "header" && isHeaderMoment ? RED : NAVY}
+                    fillOpacity={
+                      pt.type === "header" && isHeaderMoment
+                        ? 0.65
+                        : pitchStrokeOpacity * 1.4
+                    }
+                  />
+                  {pt.type === "header" && isHeaderMoment && (
+                    <circle
+                      cx={pt.x}
+                      cy={pt.y}
+                      r="6"
+                      fill="none"
+                      stroke={RED}
+                      strokeOpacity="0.4"
+                      strokeWidth="1.2"
+                      style={{ animation: "headerImpact 1.1s ease-out infinite" }}
+                    />
+                  )}
+                </g>
               ))}
-            </div>
+
+              {/* ── BALÓN MINIMALISTA Y MUY SUTIL ── */}
+              <g
+                ref={ballGroupRef}
+                transform="translate(280, 58)"
+                style={{ opacity: ballOpacity, transition: "opacity 0.3s ease" }}
+              >
+                <g ref={ballSpinRef}>
+                  <circle
+                    r="8.5"
+                    fill="hsl(var(--background))"
+                    stroke={NAVY}
+                    strokeWidth="1.3"
+                  />
+                  {/* Pentágono central y costuras finas */}
+                  <polygon
+                    points="0,-3.6 3.4,-1.1 2.1,2.9 -2.1,2.9 -3.4,-1.1"
+                    fill={NAVY}
+                    fillOpacity="0.75"
+                  />
+                  <line x1="0" y1="-3.6" x2="0" y2="-8.5" stroke={NAVY} strokeWidth="1" />
+                  <line x1="3.4" y1="-1.1" x2="8" y2="-2.6" stroke={NAVY} strokeWidth="1" />
+                  <line x1="2.1" y1="2.9" x2="5" y2="6.8" stroke={NAVY} strokeWidth="1" />
+                  <line x1="-2.1" y1="2.9" x2="-5" y2="6.8" stroke={NAVY} strokeWidth="1" />
+                  <line x1="-3.4" y1="-1.1" x2="-8" y2="-2.6" stroke={NAVY} strokeWidth="1" />
+                </g>
+              </g>
+            </svg>
           </div>
 
-          {/* RIGHT — Scrollable text steps */}
-          <div>
+          {/* ── PASOS DE TEXTO ── */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
+              opacity: textOpacity,
+              transition: "opacity 0.35s ease",
+            }}
+          >
             {STEPS_DATA.map((s, i) => {
               const isActive = activeStep === i;
               return (
@@ -568,15 +628,7 @@ const ProcessSection = () => {
                     padding: "32px 0",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "100%",
-                      background: "color-mix(in srgb, hsl(var(--background)) 82%, transparent)",
-                      backdropFilter: "blur(6px)",
-                      padding: "28px",
-                      borderRadius: 20,
-                    }}
-                  >
+                  <div style={{ width: "100%" }}>
                     {/* Phase pill */}
                     <div
                       style={{
@@ -670,111 +722,204 @@ const ProcessSection = () => {
             })}
           </div>
         </div>
+      </div>
 
-        {/* ── MOBILE: Stacked cards ── */}
-        <div
-          className="process-mobile"
-          style={{
-            display: "none",
-            maxWidth: 640,
-            margin: "0 auto",
-            padding: "0 20px",
-          }}
-        >
-          {STEPS_DATA.map((s, i) => (
+      {/* ── MOBILE: Stacked cards ── */}
+      <div
+        className="process-mobile"
+        style={{
+          display: "none",
+          maxWidth: 640,
+          margin: "0 auto",
+          padding: "0 20px",
+        }}
+      >
+        {STEPS_DATA.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              marginBottom: 48,
+              borderRadius: 20,
+              overflow: "hidden",
+              background: "hsl(var(--background))",
+              border: "1px solid rgba(18,33,58,0.08)",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+            }}
+          >
             <div
-              key={i}
               style={{
-                marginBottom: 48,
-                borderRadius: 20,
-                overflow: "hidden",
-                background: "color-mix(in srgb, hsl(var(--background)) 90%, transparent)",
-                backdropFilter: "blur(8px)",
-                border: "1px solid rgba(18,33,58,0.08)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+                position: "relative",
+                width: "100%",
+                aspectRatio: "16 / 10",
+                background: s.gradient,
               }}
             >
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "16 / 10",
-                  background: s.gradient,
-                }}
-              >
-                {!imgError[i] && (
-                  <img
-                    src={s.image}
-                    alt={t(s.titleKey)}
-                    onError={() =>
-                      setImgError((prev) => ({ ...prev, [i]: true }))
-                    }
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                )}
-                <div
+              {!imgError[i] && (
+                <img
+                  src={s.image}
+                  alt={t(s.titleKey)}
+                  onError={() =>
+                    setImgError((prev) => ({ ...prev, [i]: true }))
+                  }
                   style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%)",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
                   }}
                 />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 16,
-                    left: 20,
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "2.5rem",
-                    fontWeight: 700,
-                    color: "white",
-                    lineHeight: 1,
-                  }}
-                >
-                  FASE {s.phase}
-                </div>
-              </div>
-
-              <div style={{ padding: "24px 24px 28px" }}>
-                <h3
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "1.6rem",
-                    fontWeight: 700,
-                    lineHeight: 1.2,
-                    marginBottom: 12,
-                    color: NAVY,
-                  }}
-                >
-                  {t(s.titleKey)}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "0.95rem",
-                    lineHeight: 1.6,
-                    color: "rgba(18,33,58,0.7)",
-                  }}
-                >
-                  {t(s.descKey)}
-                </p>
+              )}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%)",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 16,
+                  left: 20,
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "2.5rem",
+                  fontWeight: 700,
+                  color: "white",
+                  lineHeight: 1,
+                }}
+              >
+                FASE {s.phase}
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* CTA */}
+            <div style={{ padding: "24px 24px 28px" }}>
+              <h3
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "1.6rem",
+                  fontWeight: 700,
+                  lineHeight: 1.2,
+                  marginBottom: 12,
+                  color: NAVY,
+                }}
+              >
+                {t(s.titleKey)}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "0.95rem",
+                  lineHeight: 1.6,
+                  color: "rgba(18,33,58,0.7)",
+                }}
+              >
+                {t(s.descKey)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── CTA CON IMPACTO DEL BALÓN DE GOL Y CONFETI DE CELEBRACIÓN ── */}
+      <div
+        style={{
+          position: "relative",
+          maxWidth: 720,
+          margin: "90px auto 0",
+          padding: "0 24px",
+          textAlign: "center",
+        }}
+      >
+        {/* Balón que baja desde el cabezazo y golpea el botón CTA */}
+        {ctaHitKey > 0 && (
+          <div
+            key={`strike-${ctaHitKey}`}
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translateX(-50%)",
+              pointerEvents: "none",
+              zIndex: 20,
+            }}
+          >
+            {/* Balón que impacta el botón y rebota */}
+            <div
+              style={{
+                animation:
+                  "ballStrikeCta 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards",
+              }}
+            >
+              <svg width="26" height="26" viewBox="-12 -12 24 24">
+                <circle
+                  r="10"
+                  fill="hsl(var(--background))"
+                  stroke={NAVY}
+                  strokeWidth="1.6"
+                />
+                <polygon
+                  points="0,-4.4 4.2,-1.4 2.6,3.5 -2.6,3.5 -4.2,-1.4"
+                  fill={RED}
+                />
+                <line x1="0" y1="-4.4" x2="0" y2="-10" stroke={NAVY} strokeWidth="1.2" />
+                <line x1="4.2" y1="-1.4" x2="9.5" y2="-3.1" stroke={NAVY} strokeWidth="1.2" />
+                <line x1="2.6" y1="3.5" x2="6" y2="8" stroke={NAVY} strokeWidth="1.2" />
+                <line x1="-2.6" y1="3.5" x2="-6" y2="8" stroke={NAVY} strokeWidth="1.2" />
+                <line x1="-4.2" y1="-1.4" x2="-9.5" y2="-3.1" stroke={NAVY} strokeWidth="1.2" />
+              </svg>
+            </div>
+
+            {/* Onda de choque en el punto de impacto */}
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: 0,
+                width: 24,
+                height: 24,
+                borderRadius: "50%",
+                border: `2px solid ${RED}`,
+                transform: "translate(-50%, -50%) scale(0)",
+                animation: "ctaShockwave 0.7s ease-out 0.22s forwards",
+              }}
+            />
+
+            {/* Explosión de confeti alrededor del botón */}
+            {CONFETTI_PARTICLES.map((p) => (
+              <span
+                key={p.id}
+                style={
+                  {
+                    position: "absolute",
+                    left: 0,
+                    top: 12,
+                    width: p.width,
+                    height: p.height,
+                    background: p.color,
+                    borderRadius: 2,
+                    opacity: 0,
+                    "--tx": `${p.tx}px`,
+                    "--ty": `${p.ty}px`,
+                    "--rot": `${p.rot}deg`,
+                    animation: `confettiBurst 1.35s cubic-bezier(0.16, 1, 0.3, 1) ${
+                      0.22 + p.delay
+                    }s forwards`,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+          </div>
+        )}
+
         <div
+          key={`btn-bounce-${ctaHitKey}`}
           style={{
-            maxWidth: 720,
-            margin: "120px auto 0",
-            padding: "0 24px",
-            textAlign: "center",
+            display: "inline-block",
+            animation:
+              ctaHitKey > 0
+                ? "ctaButtonImpact 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.22s both"
+                : "none",
           }}
         >
           <LocaleLink
@@ -790,14 +935,16 @@ const ProcessSection = () => {
               borderRadius: 12,
               textDecoration: "none",
               fontFamily: "Inter, sans-serif",
-              boxShadow: `0 20px 50px color-mix(in srgb, ${RED} 35%, transparent), 0 0 0 1px rgba(255,255,255,0.08)`,
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              boxShadow: isGoal
+                ? `0 24px 60px color-mix(in srgb, ${RED} 50%, transparent), 0 0 0 4px color-mix(in srgb, ${RED} 20%, transparent)`
+                : `0 20px 50px color-mix(in srgb, ${RED} 35%, transparent), 0 0 0 1px rgba(255,255,255,0.08)`,
+              transition: "transform 0.3s ease, box-shadow 0.4s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.transform = "translateY(0) scale(1)";
             }}
           >
             <span
@@ -824,13 +971,84 @@ const ProcessSection = () => {
       </div>
 
       <style>{`
-        @keyframes goalPulse {
+        @keyframes goalRipple {
           0% {
-            r: 15px;
-            opacity: 0.85;
+            r: 8px;
+            opacity: 0.6;
           }
           100% {
-            r: 110px;
+            r: 55px;
+            opacity: 0;
+          }
+        }
+        @keyframes headerImpact {
+          0% {
+            r: 4px;
+            opacity: 0.65;
+          }
+          100% {
+            r: 22px;
+            opacity: 0;
+          }
+        }
+        @keyframes ballStrikeCta {
+          0% {
+            transform: translate(-18px, -110px) rotate(0deg) scale(0.85);
+            opacity: 0;
+          }
+          15% {
+            opacity: 1;
+          }
+          32% {
+            transform: translate(0px, -6px) rotate(180deg) scale(1.15, 0.82);
+            opacity: 1;
+          }
+          65% {
+            transform: translate(28px, -58px) rotate(340deg) scale(0.95);
+            opacity: 0.9;
+          }
+          100% {
+            transform: translate(54px, -18px) rotate(480deg) scale(0.6);
+            opacity: 0;
+          }
+        }
+        @keyframes ctaButtonImpact {
+          0% {
+            transform: scale(1) translateY(0);
+          }
+          25% {
+            transform: scale(1.06, 0.91) translateY(9px);
+          }
+          55% {
+            transform: scale(0.98, 1.04) translateY(-5px);
+          }
+          80% {
+            transform: scale(1.02, 0.99) translateY(2px);
+          }
+          100% {
+            transform: scale(1) translateY(0);
+          }
+        }
+        @keyframes ctaShockwave {
+          0% {
+            transform: translate(-50%, -50%) scale(0.3);
+            opacity: 0.9;
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(5.5);
+            opacity: 0;
+          }
+        }
+        @keyframes confettiBurst {
+          0% {
+            transform: translate(0, 0) rotate(0deg) scale(0.4);
+            opacity: 1;
+          }
+          65% {
+            opacity: 1;
+          }
+          100% {
+            transform: translate(var(--tx), calc(var(--ty) + 95px)) rotate(var(--rot)) scale(1);
             opacity: 0;
           }
         }
