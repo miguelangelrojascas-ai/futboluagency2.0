@@ -53,43 +53,36 @@ const STEPS_DATA = [
 ];
 
 /**
- * JUGADA REAL DE PARTIDO (Progresión táctica con ritmos variables):
- * 1. Salida en corto del portero al central izquierdo (280,58 -> 185,115)
- * 2. Pase corto interior al pivote (185,115 -> 255,185)
- * 3. Pared / descarga corta de cara al mediocentro derecho (255,185 -> 315,160)
- * 4. Cambio de orientación LARGO cruzado a banda izquierda (315,160 -> 95,385)
- * 5. Asociación corta por dentro con el mediapunta (95,385 -> 220,450 -> 195,485)
- * 6. Pase al hueco LARGO y profundo al extremo derecho (195,485 -> 488,645)
- * 7. Conducción corta por la banda hasta línea de fondo (488,645 -> 492,768)
- * 8. Centro bombeado desde la banda al punto de penalti (Q 390,725 -> 278,782)
- * 9. Cabezazo picado directo a la red (278,782 -> 265,855)
+ * JUGADA POR LA BANDA DERECHA (viewBox 1000 x 1000).
+ *
+ * Va pegada a la derecha para que se vea: la mitad izquierda la tapa la
+ * imagen sticky. Termina cortando hacia el centro-abajo, que es por donde
+ * el balón sale del campo y golpea el botón, que hace de portería.
  */
 const MATCH_NODES = [
-  { x: 280, y: 58, type: "start" },   // Saque de puerta
-  { x: 185, y: 115, type: "short" },  // Central izquierdo
-  { x: 255, y: 185, type: "short" },  // Pivote
-  { x: 315, y: 160, type: "layoff" }, // Descarga de cara (pared corta hacia atrás)
-  { x: 95, y: 385, type: "long" },    // Cambio de orientación largo a banda izq.
-  { x: 220, y: 450, type: "short" },  // Apoyo interior al mediapunta
-  { x: 195, y: 485, type: "short" },  // Control orientado corto
-  { x: 488, y: 645, type: "long" },   // Pase largo filtrado al extremo derecho
-  { x: 492, y: 768, type: "cross" },  // Llegada a línea de fondo y centro
-  { x: 278, y: 782, type: "header" }, // Punto de remate de cabeza
-  { x: 265, y: 855, type: "goal" },   // ¡Gol en la red!
+  { x: 905, y: 70, type: "start" },   // Saque desde la banda derecha
+  { x: 835, y: 165, type: "short" },  // Lateral derecho
+  { x: 915, y: 255, type: "short" },  // Pared con el interior
+  { x: 850, y: 360, type: "layoff" }, // Descarga de cara
+  { x: 940, y: 470, type: "long" },   // Cambio largo a la línea
+  { x: 865, y: 580, type: "short" },  // Apoyo corto
+  { x: 930, y: 670, type: "short" },  // Conducción por la banda
+  { x: 880, y: 775, type: "cross" },  // Llegada a línea de fondo
+  { x: 690, y: 860, type: "header" }, // Centro al punto de remate
+  { x: 500, y: 960, type: "goal" },   // Sale hacia el botón-portería
 ];
 
 const PLAY_PATH = [
-  "M 280 58",
-  "L 185 115",
-  "L 255 185",
-  "L 315 160",
-  "L 95 385",
-  "L 220 450",
-  "L 195 485",
-  "L 488 645",
-  "L 492 768",
-  "Q 390 722 278 782", // Curva suave del centro aéreo desde la banda
-  "L 265 855",         // Cabezazo recto a portería
+  "M 905 70",
+  "L 835 165",
+  "L 915 255",
+  "L 850 360",
+  "L 940 470",
+  "L 865 580",
+  "L 930 670",
+  "L 880 775",
+  "Q 820 845 690 860", // Centro bombeado desde la banda
+  "L 500 960",         // Remate hacia la portería (el botón)
 ].join(" ");
 
 /** Confeti determinista para la celebración en el CTA. */
@@ -135,6 +128,8 @@ const ProcessSection = ({
 
   const sectionRef = useRef<HTMLElement>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  /** El bloque de texto en sí, para saber dónde acaba la fase 6. */
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
   const wasGoalRef = useRef(false);
 
   // Referencias para animar el SVG a 60fps sin re-renderizar React
@@ -157,7 +152,12 @@ const ProcessSection = ({
         const firstRect = firstStep.getBoundingClientRect();
         const lastRect = lastStep.getBoundingClientRect();
         const startY = firstRect.top + firstRect.height / 2;
-        const endY = lastRect.top + lastRect.height / 2;
+        /* El gol cae cuando se acaba de leer la fase 6, no en su centro: el
+           ancla es el final de su bloque de texto. */
+        const lastContent = contentRefs.current[STEPS_DATA.length - 1];
+        const endY = lastContent
+          ? lastContent.getBoundingClientRect().bottom
+          : lastRect.top + lastRect.height / 2;
         const triggerY = vh * 0.55;
 
         const totalDistance = endY - startY;
@@ -310,10 +310,134 @@ const ProcessSection = ({
         />
       </div>
 
+      {/* ── CAMPO A PANTALLA COMPLETA (fondo de toda la sección) ── */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          marginBottom: "-100vh",
+          width: "100%",
+          overflow: "hidden",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <svg
+          viewBox="0 0 1000 1000"
+          preserveAspectRatio="xMidYMid slice"
+          style={{ width: "100%", height: "100%" }}
+        >
+          {/* Líneas del campo */}
+          <g
+            stroke={NAVY}
+            strokeOpacity={pitchStrokeOpacity}
+            strokeWidth="1.5"
+            fill="none"
+            style={{ transition: "stroke-opacity 0.4s ease" }}
+          >
+            <rect x="40" y="40" width="920" height="920" rx="6" />
+            <line x1="40" y1="500" x2="960" y2="500" />
+            <circle cx="500" cy="500" r="95" />
+            <circle cx="500" cy="500" r="2.5" fill={NAVY} fillOpacity={pitchStrokeOpacity} />
+
+            {/* Área propia (arriba) */}
+            <rect x="300" y="40" width="400" height="140" />
+            <rect x="410" y="40" width="180" height="55" />
+            <path d="M 345 180 A 85 85 0 0 0 655 180" />
+
+            {/* Área rival (abajo). La portería es el botón, así que no se dibuja aquí. */}
+            <rect x="300" y="820" width="400" height="140" />
+            <rect x="410" y="905" width="180" height="55" />
+            <path d="M 345 820 A 85 85 0 0 1 655 820" />
+
+            {/* Córners */}
+            <path d="M 40 58 A 18 18 0 0 0 58 40" />
+            <path d="M 942 40 A 18 18 0 0 0 960 58" />
+            <path d="M 40 942 A 18 18 0 0 1 58 960" />
+            <path d="M 942 960 A 18 18 0 0 1 960 942" />
+          </g>
+
+          {/* Guía punteada de la jugada */}
+          <path
+            d={PLAY_PATH}
+            fill="none"
+            stroke={NAVY}
+            strokeOpacity={pitchStrokeOpacity * 0.85}
+            strokeWidth="1.2"
+            strokeDasharray="4 6"
+            strokeLinejoin="round"
+          />
+
+          {/* Línea de pases que se dibuja con el scroll */}
+          <path
+            ref={activePathRef}
+            d={PLAY_PATH}
+            fill="none"
+            stroke={RED}
+            strokeOpacity={passLineOpacity}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Micro-nodos de toque */}
+          {MATCH_NODES.map((pt, idx) => (
+            <g key={idx}>
+              <circle
+                cx={pt.x}
+                cy={pt.y}
+                r={pt.type === "header" ? "4" : "2.6"}
+                fill={pt.type === "header" && isHeaderMoment ? RED : NAVY}
+                fillOpacity={
+                  pt.type === "header" && isHeaderMoment ? 0.65 : pitchStrokeOpacity * 1.4
+                }
+              />
+              {pt.type === "header" && isHeaderMoment && (
+                <circle
+                  cx={pt.x}
+                  cy={pt.y}
+                  r="7"
+                  fill="none"
+                  stroke={RED}
+                  strokeOpacity="0.4"
+                  strokeWidth="1.2"
+                  style={{ animation: "headerImpact 1.1s ease-out infinite" }}
+                />
+              )}
+            </g>
+          ))}
+
+          {/* ── BALÓN ── */}
+          <g
+            ref={ballGroupRef}
+            transform="translate(905, 70)"
+            style={{ opacity: ballOpacity, transition: "opacity 0.3s ease" }}
+          >
+            <g ref={ballSpinRef}>
+              <circle r="10" fill="hsl(var(--background))" stroke={NAVY} strokeWidth="1.4" />
+              <polygon
+                points="0,-4.2 4,-1.3 2.5,3.4 -2.5,3.4 -4,-1.3"
+                fill={NAVY}
+                fillOpacity="0.75"
+              />
+              <line x1="0" y1="-4.2" x2="0" y2="-10" stroke={NAVY} strokeWidth="1" />
+              <line x1="4" y1="-1.3" x2="9.4" y2="-3.1" stroke={NAVY} strokeWidth="1" />
+              <line x1="2.5" y1="3.4" x2="5.9" y2="8" stroke={NAVY} strokeWidth="1" />
+              <line x1="-2.5" y1="3.4" x2="-5.9" y2="8" stroke={NAVY} strokeWidth="1" />
+              <line x1="-4" y1="-1.3" x2="-9.4" y2="-3.1" stroke={NAVY} strokeWidth="1" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
       {/* ── DESKTOP: Sticky scroll ── */}
       <div
         className="process-desktop"
         style={{
+          position: "relative",
+          zIndex: 1,
           maxWidth: 1280,
           margin: "0 auto",
           padding: "0 24px",
@@ -427,182 +551,8 @@ const ProcessSection = ({
           </div>
         </div>
 
-        {/* RIGHT — Columna de texto con el campo de fútbol sutil de fondo */}
+        {/* RIGHT — Pasos de texto */}
         <div style={{ position: "relative" }}>
-          {/* ── CAMPO DE FÚTBOL STICKY (SOLO EN LA COLUMNA DERECHA) ── */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "sticky",
-              top: "10vh",
-              height: "80vh",
-              marginBottom: "-80vh",
-              width: "100%",
-              pointerEvents: "none",
-              zIndex: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg
-              viewBox="0 0 560 880"
-              preserveAspectRatio="xMidYMid meet"
-              style={{
-                width: "100%",
-                height: "100%",
-                overflow: "visible",
-              }}
-            >
-              {/* Líneas del campo */}
-              <g
-                stroke={NAVY}
-                strokeOpacity={pitchStrokeOpacity}
-                strokeWidth="1.5"
-                fill="none"
-                style={{ transition: "stroke-opacity 0.4s ease" }}
-              >
-                {/* Perímetro del campo */}
-                <rect x="40" y="40" width="480" height="800" rx="6" />
-                {/* Línea de medio campo */}
-                <line x1="40" y1="440" x2="520" y2="440" />
-                {/* Círculo central */}
-                <circle cx="280" cy="440" r="68" />
-                <circle
-                  cx="280"
-                  cy="440"
-                  r="2.5"
-                  fill={NAVY}
-                  fillOpacity={pitchStrokeOpacity}
-                />
-
-                {/* Portería y áreas SUPERIORES (Inicio) */}
-                <rect x="240" y="22" width="80" height="18" rx="2" />
-                <rect x="140" y="40" width="280" height="110" />
-                <rect x="205" y="40" width="150" height="42" />
-                <path d="M 225 150 A 60 60 0 0 0 335 150" />
-
-                {/* Áreas INFERIORES (Ataque) */}
-                <rect x="140" y="730" width="280" height="110" />
-                <rect x="205" y="798" width="150" height="42" />
-                <path d="M 225 730 A 60 60 0 0 1 335 730" />
-
-                {/* Córners */}
-                <path d="M 40 58 A 18 18 0 0 0 58 40" />
-                <path d="M 502 40 A 18 18 0 0 0 520 58" />
-                <path d="M 40 822 A 18 18 0 0 1 58 840" />
-                <path d="M 502 840 A 18 18 0 0 1 520 822" />
-              </g>
-
-              {/* Portería inferior (Se ilumina al entrar el cabezazo) */}
-              <g>
-                <rect
-                  x="240"
-                  y="840"
-                  width="80"
-                  height="20"
-                  rx="2"
-                  fill={isGoal ? RED : "transparent"}
-                  fillOpacity={isGoal ? 0.14 : 0}
-                  stroke={isGoal ? RED : NAVY}
-                  strokeOpacity={isGoal ? 0.65 : pitchStrokeOpacity * 1.3}
-                  strokeWidth={isGoal ? 2.2 : 1.5}
-                  style={{ transition: "all 0.4s ease" }}
-                />
-                {isGoal && (
-                  <circle
-                    cx="265"
-                    cy="855"
-                    r="10"
-                    fill="none"
-                    stroke={RED}
-                    strokeOpacity="0.45"
-                    strokeWidth="1.5"
-                    style={{ animation: "goalRipple 1.5s ease-out infinite" }}
-                  />
-                )}
-              </g>
-
-              {/* Guía punteada muy tenue de la jugada */}
-              <path
-                d={PLAY_PATH}
-                fill="none"
-                stroke={NAVY}
-                strokeOpacity={pitchStrokeOpacity * 0.85}
-                strokeWidth="1.2"
-                strokeDasharray="4 6"
-                strokeLinejoin="round"
-              />
-
-              {/* Línea de pases reales (Fina y sutil) */}
-              <path
-                ref={activePathRef}
-                d={PLAY_PATH}
-                fill="none"
-                stroke={RED}
-                strokeOpacity={passLineOpacity}
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-
-              {/* Micro-nodos de toque y pulso en el punto del cabezazo */}
-              {MATCH_NODES.map((pt, idx) => (
-                <g key={idx}>
-                  <circle
-                    cx={pt.x}
-                    cy={pt.y}
-                    r={pt.type === "header" ? "3.5" : "2.2"}
-                    fill={pt.type === "header" && isHeaderMoment ? RED : NAVY}
-                    fillOpacity={
-                      pt.type === "header" && isHeaderMoment
-                        ? 0.65
-                        : pitchStrokeOpacity * 1.4
-                    }
-                  />
-                  {pt.type === "header" && isHeaderMoment && (
-                    <circle
-                      cx={pt.x}
-                      cy={pt.y}
-                      r="6"
-                      fill="none"
-                      stroke={RED}
-                      strokeOpacity="0.4"
-                      strokeWidth="1.2"
-                      style={{ animation: "headerImpact 1.1s ease-out infinite" }}
-                    />
-                  )}
-                </g>
-              ))}
-
-              {/* ── BALÓN MINIMALISTA Y MUY SUTIL ── */}
-              <g
-                ref={ballGroupRef}
-                transform="translate(280, 58)"
-                style={{ opacity: ballOpacity, transition: "opacity 0.3s ease" }}
-              >
-                <g ref={ballSpinRef}>
-                  <circle
-                    r="8.5"
-                    fill="hsl(var(--background))"
-                    stroke={NAVY}
-                    strokeWidth="1.3"
-                  />
-                  {/* Pentágono central y costuras finas */}
-                  <polygon
-                    points="0,-3.6 3.4,-1.1 2.1,2.9 -2.1,2.9 -3.4,-1.1"
-                    fill={NAVY}
-                    fillOpacity="0.75"
-                  />
-                  <line x1="0" y1="-3.6" x2="0" y2="-8.5" stroke={NAVY} strokeWidth="1" />
-                  <line x1="3.4" y1="-1.1" x2="8" y2="-2.6" stroke={NAVY} strokeWidth="1" />
-                  <line x1="2.1" y1="2.9" x2="5" y2="6.8" stroke={NAVY} strokeWidth="1" />
-                  <line x1="-2.1" y1="2.9" x2="-5" y2="6.8" stroke={NAVY} strokeWidth="1" />
-                  <line x1="-3.4" y1="-1.1" x2="-8" y2="-2.6" stroke={NAVY} strokeWidth="1" />
-                </g>
-              </g>
-            </svg>
-          </div>
 
           {/* ── PASOS DE TEXTO ── */}
           <div
@@ -628,7 +578,25 @@ const ProcessSection = ({
                     padding: "32px 0",
                   }}
                 >
-                  <div style={{ width: "100%" }}>
+                  <div
+                    ref={(el) => {
+                      contentRefs.current[i] = el;
+                    }}
+                    style={{ position: "relative", width: "100%" }}
+                  >
+                    {/* Velo que mantiene el texto legible sobre el campo. Sin
+                        bordes ni blur: solo el fondo difuminándose hacia la
+                        banda derecha, por donde pasa la jugada. */}
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        inset: "-28px -56px -28px -32px",
+                        zIndex: -1,
+                        background:
+                          "radial-gradient(120% 90% at 20% 50%, hsl(var(--background)) 55%, color-mix(in srgb, hsl(var(--background)) 80%, transparent) 78%, transparent 100%)",
+                      }}
+                    />
                     {/* Phase pill */}
                     <div
                       style={{
@@ -728,6 +696,8 @@ const ProcessSection = ({
       <div
         className="process-mobile"
         style={{
+          position: "relative",
+          zIndex: 1,
           display: "none",
           maxWidth: 640,
           margin: "0 auto",
@@ -915,6 +885,7 @@ const ProcessSection = ({
         <div
           key={`btn-bounce-${ctaHitKey}`}
           style={{
+            position: "relative",
             display: "inline-block",
             animation:
               ctaHitKey > 0
@@ -922,9 +893,56 @@ const ProcessSection = ({
                 : "none",
           }}
         >
+          {/* ── LA PORTERÍA: el botón es la meta a la que llega la jugada ── */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 300 150"
+            preserveAspectRatio="none"
+            style={{
+              position: "absolute",
+              left: "-13%",
+              top: "-26%",
+              width: "126%",
+              height: "152%",
+              zIndex: 0,
+              pointerEvents: "none",
+              overflow: "visible",
+            }}
+          >
+            {/* Red: malla tenue que se enciende al entrar el balón */}
+            <g
+              stroke={isGoal ? RED : NAVY}
+              strokeOpacity={isGoal ? 0.28 : 0.1}
+              strokeWidth="0.7"
+              style={{ transition: "stroke 0.4s ease, stroke-opacity 0.4s ease" }}
+            >
+              {Array.from({ length: 11 }, (_, i) => (
+                <line key={`v${i}`} x1={18 + i * 26.4} y1="14" x2={18 + i * 26.4} y2="136" />
+              ))}
+              {Array.from({ length: 6 }, (_, i) => (
+                <line key={`h${i}`} x1="18" y1={14 + i * 24.4} x2="282" y2={14 + i * 24.4} />
+              ))}
+            </g>
+
+            {/* Postes y larguero */}
+            <g
+              stroke={isGoal ? RED : NAVY}
+              strokeOpacity={isGoal ? 0.9 : 0.3}
+              strokeWidth="3"
+              strokeLinecap="round"
+              fill="none"
+              style={{ transition: "stroke 0.4s ease, stroke-opacity 0.4s ease" }}
+            >
+              <line x1="18" y1="14" x2="282" y2="14" />
+              <line x1="18" y1="14" x2="18" y2="136" />
+              <line x1="282" y1="14" x2="282" y2="136" />
+            </g>
+          </svg>
           <LocaleLink
             to="/apply"
             style={{
+              position: "relative",
+              zIndex: 1,
               display: "inline-flex",
               flexDirection: "column",
               alignItems: "center",
