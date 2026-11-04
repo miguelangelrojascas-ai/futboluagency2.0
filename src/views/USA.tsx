@@ -10,6 +10,7 @@ import ProcessSection from "@/components/ProcessSection";
 import StudentAthleteExperience from "@/components/StudentAthleteExperience";
 import UniversityMap from "@/components/UniversityMap";
 import UsaAnchorNav from "@/components/UsaAnchorNav";
+import ScholarshipCasesSection from "@/components/usa/ScholarshipCasesSection";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
@@ -294,6 +295,7 @@ const USA = () => {
           </div>
         </section>
 
+        <ScholarshipCasesSection />
 
         <div id="universidades">
           <UniversityMap />

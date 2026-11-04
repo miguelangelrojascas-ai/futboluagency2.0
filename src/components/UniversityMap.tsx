@@ -398,8 +398,16 @@ const UniversityMap = () => {
   const selectedData = selected ? universitiesByState[selected.abbr] : null;
 
   return (
-    <section className="section-padding" style={{ backgroundColor: "hsl(var(--background))" }}>
-      <div className="container-wide px-4">
+    <section
+      className="section-padding relative overflow-hidden"
+      style={{
+        /* Fondo cálido muy leve, con un halo azul detrás del mapa, para que la
+           sección no sea un bloque blanco entre otras dos blancas. */
+        background:
+          "radial-gradient(ellipse 60% 55% at 50% 58%, hsl(var(--foreground) / 0.05), transparent 70%), hsl(var(--section-alt))",
+      }}
+    >
+      <div className="container-wide px-4 relative">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase font-bold">
             350+ Universidades con Colocaciones
