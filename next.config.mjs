@@ -7,6 +7,10 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  /* Paths with a dot never reach the middleware, so this one is handled here. */
+  async redirects() {
+    return [{ source: "/index.html", destination: "/es", permanent: true }];
+  },
 };
 
 export default nextConfig;

@@ -30,13 +30,15 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://futboluagency.com"),
   authors: [{ name: "FutbolUAgency LLC." }],
-  openGraph: { type: "website", images: ["/og-image.jpg"] },
-  twitter: {
-    card: "summary_large_image",
-    site: "@FutbolUAgencyLLC",
-    images: ["/og-image.jpg"],
-  },
+  openGraph: { type: "website", siteName: "FutbolUAgency", images: ["/og-image.jpg"] },
+  /* No `site` handle: "@FutbolUAgencyLLC" is longer than X allows (15
+     characters), so it pointed at an account that cannot exist. */
+  twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
 };
+
+/* Only "es" and "en" exist. Anything else (e.g. /favicon.ico reaching this
+   segment) is a 404 instead of being rendered as an unknown language. */
+export const dynamicParams = false;
 
 export const viewport: Viewport = {
   width: "device-width",

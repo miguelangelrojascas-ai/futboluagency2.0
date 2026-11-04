@@ -4,6 +4,7 @@ import {
   LOCALES,
   ROUTES,
   href,
+  isLocale,
   type Locale,
   type RouteKey,
 } from "./routes";
@@ -133,21 +134,74 @@ export function alternatesFor(
   };
 }
 
+export const OG_IMAGE = {
+  url: "/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "FutbolUAgency",
+};
+
+const ogLocale = (locale: Locale) => (locale === "es" ? "es_ES" : "en_US");
+
+/**
+ * Open Graph and Twitter tags for one page.
+ *
+ * Next replaces the layout's `openGraph` object instead of merging it, so a
+ * page that sets its own loses the image unless it is repeated here.
+ */
+export function socialFor({
+  locale,
+  path,
+  title,
+  description,
+  image = OG_IMAGE,
+  type = "website",
+}: {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  image?: { url: string; width?: number; height?: number; alt?: string };
+  type?: "website" | "article" | "profile";
+}): Pick<Metadata, "openGraph" | "twitter"> {
+  return {
+    openGraph: {
+      type,
+      siteName: "FutbolUAgency",
+      title,
+      description,
+      url: `${SITE}${path}`,
+      locale: ogLocale(locale),
+      alternateLocale: LOCALES.filter((l) => l !== locale).map(ogLocale),
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image.url],
+    },
+  };
+}
+
 /** Metadata for a fixed page, in the language being built. */
 export function metadataFor(locale: Locale, key: RouteKey): Metadata {
+  /* Paths with a dot in the first segment (/favicon.ico, /wp-login.php) skip
+     the middleware and arrive here as a "locale". Without this guard the
+     lookup below throws and the request ends in a 500. */
+  if (!isLocale(locale)) return {};
   const copy = PAGE_META[key][locale];
-  const url = `${SITE}${href(locale, key)}`;
 
   return {
     title: copy.title,
     description: copy.description,
     alternates: alternatesFor(locale, key),
-    openGraph: {
+    ...socialFor({
+      locale,
+      path: href(locale, key),
       title: copy.ogTitle ?? copy.title,
       description: copy.ogDescription ?? copy.description,
-      url,
-      locale: locale === "es" ? "es_ES" : "en_US",
-    },
+    }),
   };
 }
 

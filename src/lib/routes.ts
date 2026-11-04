@@ -80,6 +80,13 @@ export const LEGACY_REDIRECTS: Record<string, RouteKey> = {
   "/apply": "apply",
   "/privacidad": "privacy",
   "/spain": "usa",
+  /* FUA Sports (tennis, golf, track, volleyball) is no longer on this site;
+     the old pages send visitors home rather than to a 404. */
+  "/sports": "home",
+  "/sports/volleyball": "home",
+  "/sports/golf": "home",
+  "/sports/tennis": "home",
+  "/sports/track": "home",
 };
 
 /** Legacy paths whose trailing segment carries over, e.g. /recursos/<slug>. */

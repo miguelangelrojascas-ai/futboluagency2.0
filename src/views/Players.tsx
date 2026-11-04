@@ -27,7 +27,7 @@ const Players = () => {
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
                 {es ? "Más de " : "More than "}
-                <span className="italic text-primary">250 atletas</span>
+                <span className="italic text-primary">{es ? "250 atletas" : "250 athletes"}</span>
                 {es ? " han confiado en nosotros" : " have trusted us"}
               </h1>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">

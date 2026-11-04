@@ -57,6 +57,8 @@ export type Guide = {
   /** Cover shown on the index card and in the guide header. */
   image: string;
   title: { es: string; en: string };
+  /** Longer title for the browser tab and search results, with the terms people search for. */
+  seoTitle: { es: string; en: string };
   summary: { es: string; en: string };
   sections: GuideSection[];
 };
@@ -67,6 +69,10 @@ export const guides: Guide[] = [
     image: imgBecas,
     number: "01",
     title: { es: "Becas y elegibilidad", en: "Scholarships & eligibility" },
+    seoTitle: {
+      es: "Becas deportivas en EE.UU.: qué cubren y quién es elegible",
+      en: "U.S. athletic scholarships: what they cover and who is eligible",
+    },
     summary: {
       es: "Qué es exactamente una beca deportiva, cuánto cubre, qué divisiones existen y qué puede dejarte fuera antes de empezar.",
       en: "What an athletic scholarship actually is, how much it covers, which divisions exist and what can rule you out before you start.",
@@ -155,6 +161,10 @@ export const guides: Guide[] = [
     image: imgDivisiones,
     number: "02",
     title: { es: "Las divisiones", en: "The divisions" },
+    seoTitle: {
+      es: "Divisiones del fútbol universitario: NCAA, NAIA y NJCAA",
+      en: "College soccer divisions explained: NCAA, NAIA and NJCAA",
+    },
     summary: {
       es: "NCAA, NAIA y NJCAA explicadas sin siglas sueltas: qué nivel es cada una, cómo reparten las becas y dónde encaja tu perfil.",
       en: "NCAA, NAIA and NJCAA explained without loose acronyms: what level each one is, how they hand out scholarships and where your profile fits.",
@@ -232,6 +242,10 @@ export const guides: Guide[] = [
     image: imgRequisitos,
     number: "03",
     title: { es: "Requisitos y perfil", en: "Requirements & profile" },
+    seoTitle: {
+      es: "Requisitos para una beca de fútbol en Estados Unidos",
+      en: "Requirements for a soccer scholarship in the United States",
+    },
     summary: {
       es: "El nivel que piden los entrenadores, cómo se monta un vídeo que abran hasta el final, qué inglés necesitas y cuándo hay que empezar.",
       en: "The level coaches ask for, how to build a video they watch to the end, the English you need and when to start.",
@@ -316,6 +330,10 @@ export const guides: Guide[] = [
     image: imgVisado,
     number: "04",
     title: { es: "Visado y documentación", en: "Visa & paperwork" },
+    seoTitle: {
+      es: "Visa F-1 para deportistas: trámites y documentos",
+      en: "F-1 student visa for athletes: steps and documents",
+    },
     summary: {
       es: "La visa F-1, la entrevista en el consulado y la lista de documentos que te vamos a pedir.",
       en: "The F-1 visa, the consulate interview and the list of documents we will ask you for.",
@@ -400,6 +418,10 @@ export const guides: Guide[] = [
     image: imgCostes,
     number: "05",
     title: { es: "Costes y financiación", en: "Costs & funding" },
+    seoTitle: {
+      es: "Cuánto cuesta estudiar en EE.UU. con beca de fútbol",
+      en: "What studying in the U.S. on a soccer scholarship costs",
+    },
     summary: {
       es: "Cuánto cuesta un año sin beca, qué queda por pagar según tu porcentaje, cómo se paga a la universidad y qué tasas hay que prever.",
       en: "What a year costs without a scholarship, what is left to pay at your percentage, how to pay the university and which fees to plan for.",
@@ -614,6 +636,10 @@ export const guides: Guide[] = [
     image: imgVida,
     number: "06",
     title: { es: "Vida universitaria en EE.UU.", en: "College life in the U.S." },
+    seoTitle: {
+      es: "Vida universitaria en EE.UU. para estudiantes-deportistas",
+      en: "College life in the U.S. for student-athletes",
+    },
     summary: {
       es: "Cómo es el día a día de un student-athlete: entrenamientos, clases, instalaciones y qué pasa si te lesionas.",
       en: "What a student-athlete's day looks like: training, classes, facilities and what happens if you get injured.",
