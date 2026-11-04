@@ -5,6 +5,8 @@ import { LOCALES, isLocale, type Locale } from "@/lib/routes";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { organizationSchema } from "@/lib/schema";
 import Providers from "@/components/Providers";
+import { GuideIndexProvider, type GuideIndexItem } from "@/contexts/GuideIndexContext";
+import { guides } from "@/data/resources";
 import "@/index.css";
 
 /**
@@ -35,6 +37,17 @@ export const metadata: Metadata = {
      characters), so it pointed at an account that cannot exist. */
   twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
 };
+
+/* Titles and section anchors only, for the Resources menu. Written sections
+   only: the unwritten ones render as "en preparación". */
+const guideIndex: GuideIndexItem[] = guides.map((g) => ({
+  slug: g.slug,
+  number: g.number,
+  title: g.title,
+  sections: g.sections
+    .filter((s) => s.body.es.length > 0)
+    .map((s) => ({ id: s.id, title: s.title })),
+}));
 
 /* Only "es" and "en" exist. Anything else (e.g. /favicon.ico reaching this
    segment) is a 404 instead of being rendered as an unknown language. */
@@ -73,7 +86,9 @@ export default async function LocaleLayout({
           }}
         />
         <LanguageProvider locale={locale}>
-          <Providers>{children}</Providers>
+          <GuideIndexProvider guides={guideIndex}>
+            <Providers>{children}</Providers>
+          </GuideIndexProvider>
         </LanguageProvider>
       </body>
     </html>

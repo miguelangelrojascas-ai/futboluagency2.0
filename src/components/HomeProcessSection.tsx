@@ -3,7 +3,6 @@
 import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import imgEvaluationAsset from "@/assets/card-bg-evaluation.webp";
 import imgPlanAsset from "@/assets/process-plan.jpg";
 import imgProfileAsset from "@/assets/card-bg-profile.webp";
 import imgCoachesAsset from "@/assets/usa-facilities.webp";
@@ -11,7 +10,6 @@ import imgAdmissionAsset from "@/assets/usa-academic.webp";
 import imgVisaAsset from "@/assets/card-bg-visas.webp";
 
 /* Next resolves an image import to an object; the components want the URL. */
-const imgEvaluation = imgEvaluationAsset.src;
 const imgPlan = imgPlanAsset.src;
 const imgProfile = imgProfileAsset.src;
 const imgCoaches = imgCoachesAsset.src;
@@ -20,8 +18,9 @@ const imgVisa = imgVisaAsset.src;
 
 const YOUTUBE_CHANNEL = "https://www.youtube.com/@FutbolUagency/videos";
 
-/** One photo per step, in order, so each card shows the step and not just names it. */
-const STEP_IMAGES = [imgEvaluation, imgPlan, imgProfile, imgCoaches, imgAdmission, imgVisa];
+/** One photo per step, in order. Step 1 has none: its stock photo read as AI-made,
+ *  so the card shows a plain brand panel until there is a real one. */
+const STEP_IMAGES: (string | null)[] = [null, imgPlan, imgProfile, imgCoaches, imgAdmission, imgVisa];
 
 /** What each photo shows, for anyone using a screen reader. */
 const STEP_ALT_ES = [
@@ -172,13 +171,34 @@ const HomeProcessSection = () => {
               style={{ backgroundColor: "hsl(var(--card))" }}
             >
               {/* The photo carries the step number, so the card leads with the image. */}
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={STEP_IMAGES[i]}
-                  alt={isEs ? STEP_ALT_ES[i] : STEP_ALT_EN[i]}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                />
+              <div
+                className="relative aspect-[16/10] overflow-hidden"
+                style={{ backgroundColor: "hsl(var(--foreground))" }}
+              >
+                {STEP_IMAGES[i] ? (
+                  /* Soft focus at rest so the photos sit back behind the text;
+                     they sharpen on hover. Scaled up a touch so the blur never
+                     shows a pale edge. */
+                  <img
+                    src={STEP_IMAGES[i]!}
+                    alt={isEs ? STEP_ALT_ES[i] : STEP_ALT_EN[i]}
+                    loading="lazy"
+                    className="h-full w-full scale-[1.08] object-cover blur-[3px] saturate-[0.85] group-hover:scale-[1.04] group-hover:blur-0 group-hover:saturate-100 motion-reduce:transition-none"
+                    style={{
+                      transition:
+                        "filter 450ms cubic-bezier(0.23,1,0.32,1), transform 700ms cubic-bezier(0.23,1,0.32,1)",
+                    }}
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "radial-gradient(60% 80% at 85% 10%, hsl(var(--primary) / 0.35), transparent 70%), linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--foreground) / 0.88) 100%)",
+                    }}
+                  />
+                )}
                 <span
                   aria-hidden="true"
                   className="absolute inset-0"
