@@ -9,7 +9,6 @@ const links: { id: string; es: string; en: string }[] = [
   { id: "becas", es: "Becas", en: "Scholarships" },
   { id: "universidades", es: "Universidades", en: "Universities" },
   { id: "admision", es: "Admisión", en: "Admission" },
-  { id: "perfiles", es: "Perfiles", en: "Profiles" },
   { id: "proceso", es: "Proceso", en: "Process" },
   { id: "faq", es: "FAQ", en: "FAQ" },
 ];

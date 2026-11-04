@@ -8,7 +8,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProcessSection from "@/components/ProcessSection";
 import StudentAthleteExperience from "@/components/StudentAthleteExperience";
-import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
 import UniversityMap from "@/components/UniversityMap";
 import UsaAnchorNav from "@/components/UsaAnchorNav";
 import SpotlightCard from "@/components/ui/spotlight-card";
@@ -342,11 +341,6 @@ const USA = () => {
 
 
 
-
-        {/* Player Profiles */}
-        <div id="perfiles">
-          <PlayerProfilesSection />
-        </div>
 
         {/* Process Section */}
         <div id="proceso">

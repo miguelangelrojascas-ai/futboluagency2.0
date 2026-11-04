@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -52,44 +52,97 @@ const STEPS_DATA = [
   },
 ];
 
+type PlayNode = {
+  /** Posición relativa al campo visible: 0–1 en ancho y alto. */
+  x: number;
+  y: number;
+  type: "start" | "short" | "back" | "long" | "cross" | "header";
+  /** Punto de control si el pase va con comba. */
+  c?: [number, number];
+};
+
 /**
- * SALIDA DE BALÓN POR LA DERECHA, toque a toque (viewBox 1000 x 1000).
+ * La jugada, toque a toque, en coordenadas relativas a la pantalla.
  *
- * No es un zig-zag regular: imita cómo progresa de verdad un equipo. Hay
- * pases cortos de apoyo, un retroceso al central cuando aprietan, un cambio
- * largo a la línea, una pared con el lateral que se incorpora, un balón
- * conducido al espacio y un centro atrás desde el fondo. Las distancias y
- * los ángulos son desiguales a propósito.
- *
- * Va pegada a la banda derecha porque la mitad izquierda la tapa la imagen.
+ * Sale de portería, apoya en el central, abre al lateral y vuelve atrás
+ * cuando aprietan; luego entra por dentro al pivote, gira en el círculo
+ * central, combina con el interior y cambia a la banda derecha para llegar
+ * al fondo y dar el centro atrás. Pasa por el centro aunque las tarjetas la
+ * tapen un momento. El último toque, el remate, no está aquí: se calcula
+ * con la posición real del botón para que la línea acabe en él.
  */
-const MATCH_NODES = [
-  { x: 905, y: 70, type: "start" },   // Saque de puerta
-  { x: 852, y: 148, type: "short" },  // Apoyo corto al central derecho
-  { x: 928, y: 212, type: "short" },  // Abre al lateral por la línea
-  { x: 874, y: 186, type: "back" },   // Le aprietan: retrocede al central
-  { x: 941, y: 398, type: "long" },   // Cambio largo a la banda
-  { x: 846, y: 447, type: "short" },  // Se asocia por dentro
-  { x: 922, y: 487, type: "short" },  // Pared con el lateral que sube
-  { x: 897, y: 645, type: "long" },   // Balón conducido al espacio
-  { x: 927, y: 757, type: "cross" },  // Llega al fondo
-  { x: 736, y: 838, type: "header" }, // Centro atrás al punto de penalti
-  { x: 520, y: 955, type: "goal" },   // Remate: sale hacia el botón
+const PLAY_NODES: PlayNode[] = [
+  { x: 0.5, y: 0.07, type: "start" },                    // Saque de puerta
+  { x: 0.6, y: 0.15, type: "short" },                    // Apoyo al central derecho
+  { x: 0.84, y: 0.21, type: "short" },                   // Abre al lateral
+  { x: 0.7, y: 0.19, type: "back" },                     // Le aprietan: vuelve al central
+  { x: 0.53, y: 0.35, type: "long", c: [0.66, 0.29] },   // Entra por dentro al pivote
+  { x: 0.42, y: 0.47, type: "short" },                   // Gira en el círculo central
+  { x: 0.6, y: 0.56, type: "short" },                    // Combina con el interior
+  { x: 0.88, y: 0.64, type: "long", c: [0.8, 0.55] },    // Cambio a la banda derecha
+  { x: 0.79, y: 0.72, type: "short" },                   // Pared con el extremo
+  { x: 0.92, y: 0.8, type: "cross", c: [0.91, 0.75] },   // Conduce hasta el fondo
+  { x: 0.64, y: 0.82, type: "header", c: [0.82, 0.86] }, // Centro atrás al punto de penalti
 ];
 
-const PLAY_PATH = [
-  "M 905 70",
-  "L 852 148",                 // corto, hacia dentro
-  "L 928 212",                 // corto, a la línea
-  "L 874 186",                 // retroceso bajo presión
-  "Q 925 300 941 398",         // cambio largo, con comba
-  "L 846 447",                 // corto por dentro
-  "L 922 487",                 // pared de primeras
-  "Q 915 570 897 645",         // conducción al espacio
-  "L 927 757",                 // hasta la línea de fondo
-  "Q 860 820 736 838",         // centro atrás
-  "L 520 955",                 // remate hacia la portería (el botón)
-].join(" ");
+type Geometry = {
+  w: number;
+  h: number;
+  /** Centro del botón CTA dentro del campo, cuando el campo ya llegó al final. */
+  goalX: number;
+  goalY: number;
+};
+
+/** Trazado SVG en píxeles y fracción del recorrido en la que cae cada toque. */
+function buildPlay({ w, h, goalX, goalY }: Geometry) {
+  const pts = PLAY_NODES.map((n) => ({
+    ...n,
+    px: n.x * w,
+    py: n.y * h,
+    pc: n.c ? ([n.c[0] * w, n.c[1] * h] as const) : undefined,
+  }));
+
+  let d = `M ${pts[0].px} ${pts[0].py}`;
+  const cumulative = [0];
+  let total = 0;
+  let prev = { x: pts[0].px, y: pts[0].py };
+
+  const addSegment = (to: { x: number; y: number }, c?: readonly [number, number]) => {
+    if (c) {
+      d += ` Q ${c[0]} ${c[1]} ${to.x} ${to.y}`;
+      /* Longitud aproximada de la curva, muestreada. */
+      let last = prev;
+      for (let i = 1; i <= 16; i++) {
+        const t = i / 16;
+        const x = (1 - t) ** 2 * prev.x + 2 * (1 - t) * t * c[0] + t ** 2 * to.x;
+        const y = (1 - t) ** 2 * prev.y + 2 * (1 - t) * t * c[1] + t ** 2 * to.y;
+        total += Math.hypot(x - last.x, y - last.y);
+        last = { x, y };
+      }
+    } else {
+      d += ` L ${to.x} ${to.y}`;
+      total += Math.hypot(to.x - prev.x, to.y - prev.y);
+    }
+    cumulative.push(total);
+    prev = to;
+  };
+
+  for (const p of pts.slice(1)) addSegment({ x: p.px, y: p.py }, p.pc);
+  addSegment({ x: goalX, y: goalY }); // Remate al botón
+
+  const frac = (type: PlayNode["type"]) =>
+    cumulative[PLAY_NODES.findIndex((n) => n.type === type)] / total;
+
+  return {
+    d,
+    nodes: [
+      ...pts.map((p) => ({ x: p.px, y: p.py, type: p.type as string })),
+      { x: goalX, y: goalY, type: "goal" },
+    ],
+    crossFrac: frac("cross"),
+    headerFrac: frac("header"),
+  };
+}
 
 /** Confeti determinista para la celebración en el CTA. */
 const CONFETTI_PARTICLES = Array.from({ length: 42 }, (_, i) => {
@@ -143,33 +196,80 @@ const ProcessSection = ({
   const ballGroupRef = useRef<SVGGElement>(null);
   const ballSpinRef = useRef<SVGGElement>(null);
 
+  /** Contenedor del campo (pasos + CTA), la caja pegajosa y el botón. */
+  const fieldTrackRef = useRef<HTMLDivElement>(null);
+  const fieldBoxRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  const [geometry, setGeometry] = useState<Geometry>({
+    w: 1000,
+    h: 800,
+    goalX: 500,
+    goalY: 760,
+  });
+  const play = useMemo(() => buildPlay(geometry), [geometry]);
+  const playRef = useRef(play);
+  playRef.current = play;
+
+  /* El campo se dibuja en los píxeles reales de la pantalla. Antes era un
+     lienzo cuadrado recortado para llenarla, y en pantallas anchas el final
+     de la jugada quedaba fuera, cortado. La portería se coloca donde está el
+     botón cuando el campo deja de estar fijo, que es cuando entra el gol. */
+  useEffect(() => {
+    const measure = () => {
+      const track = fieldTrackRef.current;
+      const box = fieldBoxRef.current;
+      const cta = ctaRef.current;
+      if (!track || !box || !cta) return;
+      const trackRect = track.getBoundingClientRect();
+      const ctaRect = cta.getBoundingClientRect();
+      const w = box.clientWidth;
+      const h = box.clientHeight;
+      const next = {
+        w,
+        h,
+        goalX: Math.round(ctaRect.left + ctaRect.width / 2 - trackRect.left),
+        goalY: Math.round(h - (trackRect.bottom - (ctaRect.top + ctaRect.height / 2))),
+      };
+      setGeometry((prev) =>
+        prev.w === next.w && prev.h === next.h && prev.goalX === next.goalX && prev.goalY === next.goalY
+          ? prev
+          : next,
+      );
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    if (fieldTrackRef.current) observer.observe(fieldTrackRef.current);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
   useEffect(() => {
     let rafId: number;
 
     const updateAnimation = () => {
       const vh = window.innerHeight;
-      let progress = 0;
+      const track = fieldTrackRef.current;
+      if (!track) return;
+      const trackBottom = track.getBoundingClientRect().bottom;
+
+      /* El balón sale cuando el ancla cruza startLine y marca cuando el final
+         del campo (el botón) llega a endLine, ya visible en pantalla. */
+      const endLine = vh * 0.96;
+      let anchorY: number;
+      let startLine: number;
 
       const firstStep = stepRefs.current[0];
-      const lastStep = stepRefs.current[STEPS_DATA.length - 1];
+      const desktop = !!firstStep && firstStep.offsetHeight > 0;
 
-      if (firstStep && lastStep && firstStep.offsetHeight > 0) {
-        // Desktop: Progreso exacto desde el centro del Paso 1 al centro del Paso 6
+      if (desktop) {
         const firstRect = firstStep.getBoundingClientRect();
-        const lastRect = lastStep.getBoundingClientRect();
-        const startY = firstRect.top + firstRect.height / 2;
-        /* El gol cae cuando se acaba de leer la fase 6, no en su centro: el
-           ancla es el final de su bloque de texto. */
-        const lastContent = contentRefs.current[STEPS_DATA.length - 1];
-        const endY = lastContent
-          ? lastContent.getBoundingClientRect().bottom
-          : lastRect.top + lastRect.height / 2;
-        const triggerY = vh * 0.55;
-
-        const totalDistance = endY - startY;
-        if (totalDistance > 0) {
-          progress = (triggerY - startY) / totalDistance;
-        }
+        anchorY = firstRect.top + firstRect.height / 2;
+        startLine = vh * 0.55;
 
         // Actualizar el paso activo
         stepRefs.current.forEach((el, i) => {
@@ -180,13 +280,15 @@ const ProcessSection = ({
             setActiveStep((prev) => (prev !== i ? i : prev));
           }
         });
-      } else if (sectionRef.current) {
-        // Mobile fallback
-        const rect = sectionRef.current.getBoundingClientRect();
-        const scrollable = rect.height - vh * 1.1;
-        if (scrollable > 0) {
-          progress = (-rect.top + vh * 0.25) / scrollable;
-        }
+      } else {
+        anchorY = track.getBoundingClientRect().top;
+        startLine = vh * 0.3;
+      }
+
+      const distance = trackBottom - anchorY - (endLine - startLine);
+      const progress = distance > 0 ? (startLine - anchorY) / distance : 0;
+
+      if (!desktop) {
         const mobileIndex = Math.min(
           STEPS_DATA.length - 1,
           Math.max(0, Math.floor(progress * STEPS_DATA.length))
@@ -195,6 +297,7 @@ const ProcessSection = ({
       }
 
       const clampedProgress = Math.max(0, Math.min(1, progress));
+      const { crossFrac, headerFrac } = playRef.current;
 
       // Animar línea de pase y el balón sutil
       const pathEl = activePathRef.current;
@@ -210,10 +313,10 @@ const ProcessSection = ({
 
         const point = pathEl.getPointAtLength(currentLength);
 
-        // Elevación sutil durante el centro desde la banda (82% a 94% del recorrido)
+        // Elevación sutil durante el centro, del fondo al punto de penalti
         let ballScale = 1;
-        if (clampedProgress > 0.82 && clampedProgress < 0.94) {
-          const crossPhase = (clampedProgress - 0.82) / 0.12;
+        if (clampedProgress > crossFrac && clampedProgress < headerFrac) {
+          const crossPhase = (clampedProgress - crossFrac) / (headerFrac - crossFrac);
           ballScale = 1 + Math.sin(crossPhase * Math.PI) * 0.28;
         }
 
@@ -224,8 +327,8 @@ const ProcessSection = ({
         spinEl.setAttribute("transform", `rotate(${clampedProgress * 820})`);
       }
 
-      const headerActive = clampedProgress >= 0.92;
-      const goalScored = clampedProgress >= 0.96;
+      const headerActive = clampedProgress >= headerFrac;
+      const goalScored = clampedProgress >= 0.985;
 
       setIsHeaderMoment((prev) => (prev !== headerActive ? headerActive : prev));
       setIsGoal((prev) => (prev !== goalScored ? goalScored : prev));
@@ -234,7 +337,7 @@ const ProcessSection = ({
       if (goalScored && !wasGoalRef.current) {
         wasGoalRef.current = true;
         setCtaHitKey((k) => k + 1);
-      } else if (!goalScored && clampedProgress < 0.88) {
+      } else if (!goalScored && clampedProgress < headerFrac - 0.04) {
         wasGoalRef.current = false;
       }
     };
@@ -253,7 +356,8 @@ const ProcessSection = ({
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(rafId);
     };
-  }, []);
+    /* Se vuelve a enganchar cuando cambia el trazado, para redibujarlo ya. */
+  }, [play]);
 
   // Ajustes de sutileza
   const pitchStrokeOpacity =
@@ -318,7 +422,7 @@ const ProcessSection = ({
 
       {/* El campo se queda pegado solo mientras hay pasos: al cerrarse este
           contenedor, en la tarjeta de la fase 06, deja de mostrarse. */}
-      <div style={{ position: "relative" }}>
+      <div ref={fieldTrackRef} style={{ position: "relative" }}>
         {/* ── CAMPO A PANTALLA COMPLETA (solo detrás de los pasos y el CTA) ──
             Una pista absoluta del alto de este contenedor encierra al sticky,
             de modo que el campo no puede asomar en la sección siguiente. El
@@ -333,6 +437,7 @@ const ProcessSection = ({
           }}
         >
           <div
+            ref={fieldBoxRef}
             style={{
               position: "sticky",
               top: 0,
@@ -341,43 +446,58 @@ const ProcessSection = ({
             }}
           >
           <svg
-            viewBox="0 0 1000 1000"
-            preserveAspectRatio="xMidYMid slice"
-            style={{ width: "100%", height: "100%" }}
+            viewBox={`0 0 ${geometry.w} ${geometry.h}`}
+            style={{ width: "100%", height: "100%", display: "block" }}
           >
-            {/* Líneas del campo */}
-            <g
-              stroke={NAVY}
-              strokeOpacity={pitchStrokeOpacity}
-              strokeWidth="1.5"
-              fill="none"
-              style={{ transition: "stroke-opacity 0.4s ease" }}
-            >
-              <rect x="40" y="40" width="920" height="920" rx="6" />
-              <line x1="40" y1="500" x2="960" y2="500" />
-              <circle cx="500" cy="500" r="95" />
-              <circle cx="500" cy="500" r="2.5" fill={NAVY} fillOpacity={pitchStrokeOpacity} />
+            {/* Líneas del campo, en píxeles. La línea de fondo de abajo pasa por
+                el botón: la portería rival es el CTA. */}
+            {(() => {
+              const { w, h, goalX, goalY } = geometry;
+              const left = w * 0.04;
+              const right = w * 0.96;
+              const top = h * 0.04;
+              const bottom = Math.min(h - 4, goalY + 34);
+              const mid = (top + bottom) / 2;
+              const boxW = Math.min(w * 0.4, 520);
+              const smallW = boxW * 0.45;
+              const boxH = h * 0.14;
+              const smallH = h * 0.055;
+              const arc = boxW * 0.21;
+              const r = Math.min(h, w) * 0.11;
+              return (
+                <g
+                  stroke={NAVY}
+                  strokeOpacity={pitchStrokeOpacity}
+                  strokeWidth="1.5"
+                  fill="none"
+                  style={{ transition: "stroke-opacity 0.4s ease" }}
+                >
+                  <rect x={left} y={top} width={right - left} height={bottom - top} rx="6" />
+                  <line x1={left} y1={mid} x2={right} y2={mid} />
+                  <circle cx={w / 2} cy={mid} r={r} />
+                  <circle cx={w / 2} cy={mid} r="2.5" fill={NAVY} fillOpacity={pitchStrokeOpacity} />
 
-              {/* Área propia (arriba) */}
-              <rect x="300" y="40" width="400" height="140" />
-              <rect x="410" y="40" width="180" height="55" />
-              <path d="M 345 180 A 85 85 0 0 0 655 180" />
+                  {/* Área propia (arriba) */}
+                  <rect x={w / 2 - boxW / 2} y={top} width={boxW} height={boxH} />
+                  <rect x={w / 2 - smallW / 2} y={top} width={smallW} height={smallH} />
+                  <path d={`M ${w / 2 - arc} ${top + boxH} A ${arc} ${arc * 0.5} 0 0 0 ${w / 2 + arc} ${top + boxH}`} />
 
-              {/* Área rival (abajo). La portería es el botón, así que no se dibuja aquí. */}
-              <rect x="300" y="820" width="400" height="140" />
-              <rect x="410" y="905" width="180" height="55" />
-              <path d="M 345 820 A 85 85 0 0 1 655 820" />
+                  {/* Área rival (abajo), centrada en el botón */}
+                  <rect x={goalX - boxW / 2} y={bottom - boxH} width={boxW} height={boxH} />
+                  <path d={`M ${goalX - arc} ${bottom - boxH} A ${arc} ${arc * 0.5} 0 0 1 ${goalX + arc} ${bottom - boxH}`} />
 
-              {/* Córners */}
-              <path d="M 40 58 A 18 18 0 0 0 58 40" />
-              <path d="M 942 40 A 18 18 0 0 0 960 58" />
-              <path d="M 40 942 A 18 18 0 0 1 58 960" />
-              <path d="M 942 960 A 18 18 0 0 1 960 942" />
-            </g>
+                  {/* Córners */}
+                  <path d={`M ${left} ${top + 18} A 18 18 0 0 0 ${left + 18} ${top}`} />
+                  <path d={`M ${right - 18} ${top} A 18 18 0 0 0 ${right} ${top + 18}`} />
+                  <path d={`M ${left} ${bottom - 18} A 18 18 0 0 1 ${left + 18} ${bottom}`} />
+                  <path d={`M ${right - 18} ${bottom} A 18 18 0 0 1 ${right} ${bottom - 18}`} />
+                </g>
+              );
+            })()}
 
             {/* Guía punteada de la jugada */}
             <path
-              d={PLAY_PATH}
+              d={play.d}
               fill="none"
               stroke={NAVY}
               strokeOpacity={pitchStrokeOpacity * 0.85}
@@ -389,7 +509,7 @@ const ProcessSection = ({
             {/* Línea de pases que se dibuja con el scroll */}
             <path
               ref={activePathRef}
-              d={PLAY_PATH}
+              d={play.d}
               fill="none"
               stroke={RED}
               strokeOpacity={passLineOpacity}
@@ -399,7 +519,7 @@ const ProcessSection = ({
             />
 
             {/* Micro-nodos de toque */}
-            {MATCH_NODES.map((pt, idx) => (
+            {play.nodes.filter((pt) => pt.type !== "goal").map((pt, idx) => (
               <g key={idx}>
                 <circle
                   cx={pt.x}
@@ -428,7 +548,7 @@ const ProcessSection = ({
             {/* ── BALÓN ── */}
             <g
               ref={ballGroupRef}
-              transform="translate(905, 70)"
+              transform={`translate(${play.nodes[0].x}, ${play.nodes[0].y})`}
               style={{ opacity: ballOpacity, transition: "opacity 0.3s ease" }}
             >
               <g ref={ballSpinRef}>
@@ -900,6 +1020,7 @@ const ProcessSection = ({
           )}
 
           <div
+            ref={ctaRef}
             key={`btn-bounce-${ctaHitKey}`}
             style={{
               position: "relative",

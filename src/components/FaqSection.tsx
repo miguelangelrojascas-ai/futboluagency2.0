@@ -42,7 +42,7 @@ type Faq = {
 
 type FaqGroup = { label: string; items: Faq[] };
 
-const PROFILES_ANCHOR = "/usa#perfiles";
+const PROFILES_ANCHOR = "/recursos/las-divisiones#perfiles";
 
 const GROUPS_ES: FaqGroup[] = [
   {
