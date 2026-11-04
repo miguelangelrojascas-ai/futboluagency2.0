@@ -7,12 +7,12 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { locale: Locale };
-}): Metadata {
-  return metadataFor(params.locale, "players");
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  return metadataFor((await params).locale, "players");
 }
 
 export default function Page() {

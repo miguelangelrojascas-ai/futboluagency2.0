@@ -14,14 +14,15 @@ export function generateStaticParams() {
   );
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { locale: Locale; slug: string };
-}): Metadata {
-  const story = findPlayerStory(params.slug);
-  if (!story || !isLocale(params.locale)) return {};
-  const { locale } = params;
+  params: Promise<{ locale: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const resolved = await params;
+  const story = findPlayerStory(resolved.slug);
+  if (!story || !isLocale(resolved.locale)) return {};
+  const { locale } = resolved;
   const title = `${story.name} — ${story.university} | FutbolUAgency`;
   const description = story.summary[locale];
 
@@ -40,14 +41,15 @@ export function generateMetadata({
   };
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { locale: Locale; slug: string };
+  params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const story = findPlayerStory(params.slug);
+  const resolved = await params;
+  const story = findPlayerStory(resolved.slug);
   if (!story) notFound();
-  const { locale } = params;
+  const { locale } = resolved;
   const es = locale === "es";
   const path = href(locale, "players", story.slug);
 

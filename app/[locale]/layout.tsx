@@ -50,15 +50,16 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  if (!isLocale(params.locale)) notFound();
-  const locale = params.locale as Locale;
+  const { locale: requested } = await params;
+  if (!isLocale(requested)) notFound();
+  const locale = requested as Locale;
 
   return (
     <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>

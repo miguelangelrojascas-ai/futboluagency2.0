@@ -14,14 +14,15 @@ export function generateStaticParams() {
   );
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { locale: Locale; slug: string };
-}): Metadata {
-  const guide = findGuide(params.slug);
-  if (!guide || !isLocale(params.locale)) return {};
-  const { locale } = params;
+  params: Promise<{ locale: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const resolved = await params;
+  const guide = findGuide(resolved.slug);
+  if (!guide || !isLocale(resolved.locale)) return {};
+  const { locale } = resolved;
   const title = `${guide.seoTitle[locale]} | FutbolUAgency`;
   const description = guide.summary[locale];
 
@@ -40,14 +41,15 @@ export function generateMetadata({
   };
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { locale: Locale; slug: string };
+  params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const guide = findGuide(params.slug);
+  const resolved = await params;
+  const guide = findGuide(resolved.slug);
   if (!guide) notFound();
-  const { locale } = params;
+  const { locale } = resolved;
   const es = locale === "es";
   const path = href(locale, "resources", guide.slug);
 
