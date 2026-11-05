@@ -97,7 +97,7 @@ const ScholarshipCasesSection = () => {
             const image = imageByName.get(c.name);
             const card = (
               <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition-shadow duration-300 hover:shadow-[0_12px_40px_rgba(18,33,58,0.14)]">
-                <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+                <div className="relative aspect-[4/3] overflow-hidden bg-secondary transition-[aspect-ratio] duration-500 ease-out group-hover:aspect-[4/0.01]">
                   {image && (
                     <img
                       src={image}
