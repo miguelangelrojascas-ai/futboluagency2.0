@@ -297,7 +297,7 @@ const USA = () => {
 
         <ScholarshipCasesSection />
 
-        <div id="universidades">
+        <div id="universidades" style={{ background: "hsl(var(--section-alt))" }}>
           <UniversityMap />
         </div>
 

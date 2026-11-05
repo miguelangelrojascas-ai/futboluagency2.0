@@ -80,7 +80,7 @@ const ScholarshipCasesSection = () => {
     <section
       id="casos"
       className="section-padding"
-      style={{ backgroundColor: "hsl(var(--background))", paddingTop: 0 }}
+      style={{ backgroundColor: "hsl(var(--background))", paddingTop: 0, marginTop: "-6rem", position: "relative", zIndex: 10 }}
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl mb-10">
