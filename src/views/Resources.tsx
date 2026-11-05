@@ -66,7 +66,8 @@ const Resources = () => {
                       to={`/recursos/${guide.slug}`}
                       className="group/card flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 transition-colors duration-200 hover:border-primary/40 sm:p-8"
                     >
-                      <div className="-mx-7 -mt-7 mb-6 overflow-hidden sm:-mx-8 sm:-mt-8">
+                      <div className="guide-track relative flex flex-1 flex-col">
+                      <div className="guide-image -mx-7 -mt-7 mb-6 overflow-hidden sm:-mx-8 sm:-mt-8">
                         <img
                           src={guide.image}
                           alt=""
@@ -97,69 +98,69 @@ const Resources = () => {
                         {es ? "Explorar guía" : "Explore guide"}
                         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/card:translate-x-0.5" />
                       </span>
-                    </LocaleLink>
 
-                    {/* What the guide contains. On hover it slides down from under
-                        the card, over the row below, so the grid never reflows. */}
-                    <div className="guide-panel">
-                      <div className="rounded-b-2xl border border-t-0 border-primary/40 bg-card px-7 pb-7 pt-9 shadow-[0_28px_48px_-16px_rgba(18,33,58,0.28)] sm:px-8">
-                        <span className="mb-3 block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-primary">
+                      {/* Revealed when the card slides up over its image. Sits outside
+                          the layout so the grid never reflows. */}
+                      <div className="guide-preview" aria-hidden="true">
+                        <span className="mb-2 block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-primary">
                           {es ? "Qué contiene" : "What it covers"}
                         </span>
                         <ol className="space-y-1">
                           {written.map((section, i) => (
-                            <li key={section.id}>
-                              <LocaleLink
-                                to={`/recursos/${guide.slug}#${section.id}`}
-                                className="group/item -mx-2 flex gap-3 rounded-md px-2 py-1.5 font-body text-[14px] leading-snug text-foreground/80 transition-colors hover:bg-primary/[0.05] hover:text-foreground"
-                              >
-                                <span className="w-4 shrink-0 font-display text-[13px] font-bold text-primary/60">
-                                  {i + 1}
-                                </span>
-                                <span>{es ? section.title.es : section.title.en}</span>
-                              </LocaleLink>
+                            <li
+                              key={section.id}
+                              className="flex gap-3 font-body text-[14px] leading-snug text-foreground/80"
+                            >
+                              <span className="w-4 shrink-0 font-display text-[13px] font-bold text-primary/60">
+                                {i + 1}
+                              </span>
+                              <span>{es ? section.title.es : section.title.en}</span>
                             </li>
                           ))}
                         </ol>
                       </div>
-                    </div>
+                      </div>
+                    </LocaleLink>
+
                   </li>
                 );
               })}
             </ul>
             <style>{`
-              /* Only where there is a real pointer and room for a grid. On touch
-                 the card is a plain link to the guide. */
-              .guide-panel { display: none; }
+              /* Only where there is a real pointer. On touch the card is a plain link. */
+              .guide-preview { display: none; }
               @media (hover: hover) and (min-width: 768px) {
-                .guide-card:hover, .guide-card:focus-within { z-index: 30; }
-                .guide-panel {
+                .guide-track {
+                  transition: transform 420ms cubic-bezier(0.23, 1, 0.32, 1);
+                }
+                .guide-card:hover .guide-track,
+                .guide-card:focus-within .guide-track {
+                  transform: translateY(-11.5rem);
+                }
+                .guide-preview {
                   display: block;
                   position: absolute;
                   left: 0;
                   right: 0;
-                  top: calc(100% - 18px);
-                  clip-path: inset(0 -60px 100% -60px);
-                  visibility: hidden;
-                  transition: clip-path 200ms ease-in, visibility 0s linear 200ms;
+                  top: 100%;
+                  height: 11.5rem;
+                  padding-top: 1.5rem;
+                  overflow: hidden;
+                  opacity: 0;
+                  transition: opacity 250ms ease;
+                  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
+                  mask-image: linear-gradient(to bottom, #000 80%, transparent);
                 }
-                .guide-card:hover .guide-panel,
-                .guide-card:focus-within .guide-panel {
-                  clip-path: inset(0 -60px -60px -60px);
-                  visibility: visible;
-                  transition: clip-path 380ms cubic-bezier(0.23, 1, 0.32, 1), visibility 0s;
-                }
-                /* The card loses its bottom corners so the panel reads as its continuation. */
-                .guide-card:hover > a, .guide-card:focus-within > a {
-                  border-bottom-left-radius: 0;
-                  border-bottom-right-radius: 0;
-                  border-color: hsl(var(--primary) / 0.4);
+                .guide-card:hover .guide-preview,
+                .guide-card:focus-within .guide-preview {
+                  opacity: 1;
+                  transition: opacity 300ms ease 120ms;
                 }
                 .guide-chevron { transition: transform 200ms ease; }
                 .guide-card:hover .guide-chevron { transform: rotate(180deg); }
               }
               @media (prefers-reduced-motion: reduce) {
-                .guide-panel { transition: none !important; }
+                .guide-track, .guide-preview { transition: none !important; }
               }
             `}</style>
           </div>
