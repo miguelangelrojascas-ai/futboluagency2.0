@@ -246,6 +246,17 @@ export default function ScrollLockedVideoHero({
       className={`relative h-[100dvh] w-full overflow-hidden bg-[#05070d] ${className ?? ""}`}
       style={{ touchAction: "none" }}
     >
+      {/* Poster as a plain image under the video, so the first frame shows
+          at once while the video downloads (the video fades in over it). */}
+      {poster && (
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          fetchPriority="high"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+      )}
       <video
         ref={videoRef}
         src={videoSrc}

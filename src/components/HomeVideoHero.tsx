@@ -6,15 +6,15 @@ import ScrollLockedVideoHero from "@/components/ui/scroll-locked-video-hero";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
- * PRUEBA: home header that scrubs a video with the scroll.
+ * Home header that scrubs a video with the scroll: out of the tunnel, onto
+ * the pitch, up to the lit stands.
  *
- * The video is the component's own demo clip, hosted on 21st.dev, until FUA
- * picks its own (a tunnel-to-pitch walk-out). Swap VIDEO_SRC for a file in
- * /public/videos, encoded without audio. The previous header is still in
+ * The clip is encoded without audio and with a keyframe every 4 frames so
+ * seeking back and forth stays smooth. The previous header is still in
  * HeroSection.tsx; switching back is a one-line change in views/Index.tsx.
  */
-const VIDEO_SRC =
-  "https://cdn.21st.dev/assets/mirror/21/21a77eac28eacbb7e142016eefeaa0b4a766619e51113629a3bc6df6af066c0f.mp4";
+const VIDEO_SRC = "/videos/hero-estadio.mp4";
+const POSTER = "/videos/hero-estadio-poster.jpg";
 
 const HomeVideoHero = () => {
   const { t, language } = useLanguage();
@@ -23,6 +23,7 @@ const HomeVideoHero = () => {
   return (
     <ScrollLockedVideoHero
       videoSrc={VIDEO_SRC}
+      poster={POSTER}
       scrollHint={es ? "DESLIZA" : "SCROLL"}
       skipLabel={es ? "Saltar intro" : "Skip intro"}
       title={
