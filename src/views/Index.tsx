@@ -1,4 +1,4 @@
-import HeroSection from "@/components/HeroSection";
+import HomeVideoHero from "@/components/HomeVideoHero";
 import VideoSection from "@/components/VideoSection";
 import LogoCarousel from "@/components/LogoCarousel";
 import MetricsSection from "@/components/MetricsSection";
@@ -15,7 +15,7 @@ const Index = () => {
     <>
       <Navbar />
       <main className="min-h-screen">
-        <HeroSection />
+        <HomeVideoHero />
         <MetricsSection />
         <VideoSection />
         <LogoCarousel />
