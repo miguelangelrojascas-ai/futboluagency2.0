@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const links: { id: string; es: string; en: string }[] = [
@@ -17,11 +17,12 @@ const UsaAnchorNav = () => {
   const { language } = useLanguage();
   const es = language === "es";
   const [activeId, setActiveId] = useState<string | null>(null);
+  const barRef = useRef<HTMLDivElement>(null);
 
   // Highlight whichever section currently sits under the bar.
   useEffect(() => {
     const handleScroll = () => {
-      const probe = window.innerHeight * 0.3;
+      const probe = (barRef.current?.getBoundingClientRect().bottom ?? 0) + window.innerHeight * 0.15;
       let current: string | null = null;
       for (const link of links) {
         const el = document.getElementById(link.id);
@@ -36,21 +37,33 @@ const UsaAnchorNav = () => {
 
   const scrollToSection = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(id);
+    if (!el) return;
+    /* Land the section just below the bar, so its heading is never under it. */
+    /* Where the bar ends once docked (its sticky top + height), not where it
+       is right now: from the top of the page it still sits below the hero. */
+    const bar = barRef.current;
+    const barBottom = bar ? parseFloat(getComputedStyle(bar).top) + bar.offsetHeight : 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - barBottom + 1;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
-    // Transparent rail so the pill floats clear of the navbar instead of
-    // reading as a second toolbar glued to it.
-    <div className="pointer-events-none sticky top-[4.5rem] z-40 px-4 py-3 md:top-[5.5rem] md:px-8">
+    // A full-width band docked under the navbar, like Apple's product
+    // sub-nav. Content scrolls under a solid strip instead of colliding with
+    // a floating pill.
+    <div
+      ref={barRef}
+      className="sticky top-16 z-40 border-b border-border md:top-20"
+      style={{
+        backgroundColor: "hsl(var(--background) / 0.88)",
+        backdropFilter: "blur(20px) saturate(1.8)",
+        WebkitBackdropFilter: "blur(20px) saturate(1.8)",
+      }}
+    >
       <nav
         aria-label={es ? "Secciones de la página" : "Page sections"}
-        className="pointer-events-auto mx-auto w-fit max-w-full overflow-x-auto rounded-full border border-border p-1.5 shadow-card [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{
-          backgroundColor: "hsl(var(--card) / 0.9)",
-          backdropFilter: "blur(20px) saturate(1.8)",
-          WebkitBackdropFilter: "blur(20px) saturate(1.8)",
-        }}
+        className="mx-auto w-fit max-w-full overflow-x-auto px-4 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <ul className="flex items-center gap-1 whitespace-nowrap">
           {links.map((link) => {

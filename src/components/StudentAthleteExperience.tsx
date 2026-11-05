@@ -51,6 +51,13 @@ const SLIDES: Slide[] = [
   },
 ];
 
+/** A slide's centre in the track's scroll coordinates, whatever the parent. */
+const slideCentre = (track: HTMLElement, slide: HTMLElement) =>
+  track.scrollLeft +
+  slide.getBoundingClientRect().left -
+  track.getBoundingClientRect().left +
+  slide.clientWidth / 2;
+
 /** How long each slide stays before the carousel moves on. */
 const SLIDE_MS = 6000;
 
@@ -71,7 +78,7 @@ const StudentAthleteExperience = () => {
     if (!track || !slide) return;
     setActive(index);
     track.scrollTo({
-      left: slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2,
+      left: slideCentre(track, slide) - track.clientWidth / 2,
       behavior: "smooth",
     });
   }, []);
@@ -87,7 +94,7 @@ const StudentAthleteExperience = () => {
       let best = Infinity;
       slideRefs.current.forEach((s, i) => {
         if (!s) return;
-        const d = Math.abs(s.offsetLeft + s.clientWidth / 2 - centre);
+        const d = Math.abs(slideCentre(track, s) - centre);
         if (d < best) {
           best = d;
           nearest = i;
@@ -116,7 +123,7 @@ const StudentAthleteExperience = () => {
 
   return (
     <section
-      className="overflow-hidden py-20 md:py-28"
+      className="overflow-x-clip py-20 md:py-28"
       style={{ backgroundColor: "#0b1526" }}
       aria-roledescription="carousel"
       aria-label={es ? "La experiencia student-athlete" : "The student-athlete experience"}
@@ -133,6 +140,9 @@ const StudentAthleteExperience = () => {
         </h2>
       </div>
 
+      {/* Wraps photos + controls so the sticky controls only live alongside
+          the photos, never over the heading above them. */}
+      <div className="relative">
       <div
         ref={trackRef}
         onScroll={onScroll}
@@ -162,14 +172,15 @@ const StudentAthleteExperience = () => {
                 }`}
                 priority={i === 0}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
+              {/* Caption sits at the top: the sticky controls float over the bottom. */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/10 to-transparent" />
               <div
-                className={`absolute inset-x-0 bottom-0 px-6 pb-8 text-center transition-all duration-700 md:px-16 md:pb-14 ${
-                  i === active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+                className={`absolute inset-x-0 top-0 px-6 pt-7 transition-all duration-700 md:px-12 md:pt-11 ${
+                  i === active ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0"
                 }`}
               >
                 <h3 className="font-display text-2xl font-bold text-white md:text-4xl">{s.title[language]}</h3>
-                <p className="mx-auto mt-3 max-w-2xl font-body text-sm leading-relaxed text-white/80 md:text-lg">
+                <p className="mt-3 max-w-xl font-body text-sm leading-relaxed text-white/85 md:text-lg">
                   {s.text[language]}
                 </p>
               </div>
@@ -178,8 +189,15 @@ const StudentAthleteExperience = () => {
         </ul>
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-3 md:mt-10">
-        <div className="flex h-14 items-center gap-3 rounded-full bg-white/10 px-6 backdrop-blur">
+      {/* Sticky like Apple's: pinned to the bottom of the screen while the
+          section is on screen, resting under the photos when it ends. Needs
+          overflow-x-clip on the section; overflow-hidden would break sticky. */}
+      <div
+        className={`sae-controls pointer-events-none sticky bottom-6 z-20 mt-8 flex items-center justify-center gap-3 transition-[opacity,transform] duration-500 md:bottom-8 md:mt-10 ${
+          inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 [&>*]:pointer-events-none"
+        }`}
+      >
+        <div className="pointer-events-auto flex h-14 items-center gap-3 rounded-full px-6">
           {SLIDES.map((s, i) => (
             <button
               key={s.title.es}
@@ -206,10 +224,12 @@ const StudentAthleteExperience = () => {
           type="button"
           onClick={() => setPlaying((p) => !p)}
           aria-label={playing ? (es ? "Pausar" : "Pause") : es ? "Reproducir" : "Play"}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+          className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full text-white transition-colors hover:brightness-125"
         >
           {playing ? <Pause className="h-5 w-5 fill-current" /> : <Play className="ml-0.5 h-5 w-5 fill-current" />}
         </button>
+      </div>
+
       </div>
 
       <style>{`
@@ -222,6 +242,12 @@ const StudentAthleteExperience = () => {
         .sae-slide { width: var(--slide-w); aspect-ratio: 4 / 5; }
         @media (min-width: 768px) {
           .sae-slide { aspect-ratio: 16 / 9; max-height: 78vh; }
+        }
+        /* Dark glass so the dots stay readable over bright photos. */
+        .sae-controls > * {
+          background: rgba(42, 46, 58, 0.72);
+          backdrop-filter: blur(20px) saturate(1.8);
+          -webkit-backdrop-filter: blur(20px) saturate(1.8);
         }
         .sae-fill { width: 0; animation: sae-fill ${SLIDE_MS}ms linear forwards; }
         @keyframes sae-fill { to { width: 100%; } }
