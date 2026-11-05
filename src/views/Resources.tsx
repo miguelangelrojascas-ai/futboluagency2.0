@@ -1,13 +1,11 @@
 "use client";
 
 import LocaleLink from "@/components/LocaleLink";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { guides, resourcesHeroImage } from "@/data/resources";
-
-const PREVIEW_SECTIONS = 3;
 
 const Resources = () => {
   const { language } = useLanguage();
@@ -61,10 +59,9 @@ const Resources = () => {
           <div className="container-wide px-4">
             <ul className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
               {guides.map((guide) => {
-                const written = guide.sections.filter((s) => s.body.es.length > 0).length;
-                const extra = guide.sections.length - PREVIEW_SECTIONS;
+                const written = guide.sections.filter((s) => s.body.es.length > 0);
                 return (
-                  <li key={guide.slug}>
+                  <li key={guide.slug} className="guide-card relative">
                     <LocaleLink
                       to={`/recursos/${guide.slug}`}
                       className="group/card flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 transition-colors duration-200 hover:border-primary/40 sm:p-8"
@@ -83,48 +80,88 @@ const Resources = () => {
                         <span className="font-display text-4xl font-bold leading-none text-primary/25 transition-colors duration-200 group-hover/card:text-primary/50">
                           {guide.number}
                         </span>
-                        <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground/70">
-                          {written} {es ? "secciones" : "sections"}
+                        <span className="inline-flex items-center gap-1 font-body text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground/70">
+                          {written.length} {es ? "secciones" : "sections"}
+                          <ChevronDown className="guide-chevron h-3.5 w-3.5" />
                         </span>
                       </div>
 
                       <h2 className="mb-3 font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
                         {es ? guide.title.es : guide.title.en}
                       </h2>
-                      <p className="mb-6 font-body text-[15px] leading-relaxed text-muted-foreground">
+                      <p className="mb-6 flex-1 font-body text-[15px] leading-relaxed text-muted-foreground">
                         {es ? guide.summary.es : guide.summary.en}
                       </p>
-
-                      <ul className="mb-6 flex-1 space-y-2 border-t border-border pt-5">
-                        {guide.sections.slice(0, PREVIEW_SECTIONS).map((section) => (
-                          <li
-                            key={section.id}
-                            className="flex gap-2.5 font-body text-[13px] leading-relaxed text-muted-foreground"
-                          >
-                            <span aria-hidden="true" className="text-primary/50">
-                              ·
-                            </span>
-                            <span className="truncate">
-                              {es ? section.title.es : section.title.en}
-                            </span>
-                          </li>
-                        ))}
-                        {extra > 0 && (
-                          <li className="pl-5 font-body text-[13px] text-muted-foreground/70">
-                            {es ? `+${extra} secciones más` : `+${extra} more sections`}
-                          </li>
-                        )}
-                      </ul>
 
                       <span className="inline-flex items-center gap-2 font-body text-sm font-bold text-primary">
                         {es ? "Explorar guía" : "Explore guide"}
                         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/card:translate-x-0.5" />
                       </span>
                     </LocaleLink>
+
+                    {/* What the guide contains. On hover it slides down from under
+                        the card, over the row below, so the grid never reflows. */}
+                    <div className="guide-panel">
+                      <div className="rounded-b-2xl border border-t-0 border-primary/40 bg-card px-7 pb-7 pt-9 shadow-[0_28px_48px_-16px_rgba(18,33,58,0.28)] sm:px-8">
+                        <span className="mb-3 block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-primary">
+                          {es ? "Qué contiene" : "What it covers"}
+                        </span>
+                        <ol className="space-y-1">
+                          {written.map((section, i) => (
+                            <li key={section.id}>
+                              <LocaleLink
+                                to={`/recursos/${guide.slug}#${section.id}`}
+                                className="group/item -mx-2 flex gap-3 rounded-md px-2 py-1.5 font-body text-[14px] leading-snug text-foreground/80 transition-colors hover:bg-primary/[0.05] hover:text-foreground"
+                              >
+                                <span className="w-4 shrink-0 font-display text-[13px] font-bold text-primary/60">
+                                  {i + 1}
+                                </span>
+                                <span>{es ? section.title.es : section.title.en}</span>
+                              </LocaleLink>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
                   </li>
                 );
               })}
             </ul>
+            <style>{`
+              /* Only where there is a real pointer and room for a grid. On touch
+                 the card is a plain link to the guide. */
+              .guide-panel { display: none; }
+              @media (hover: hover) and (min-width: 768px) {
+                .guide-card:hover, .guide-card:focus-within { z-index: 30; }
+                .guide-panel {
+                  display: block;
+                  position: absolute;
+                  left: 0;
+                  right: 0;
+                  top: calc(100% - 18px);
+                  clip-path: inset(0 -60px 100% -60px);
+                  visibility: hidden;
+                  transition: clip-path 200ms ease-in, visibility 0s linear 200ms;
+                }
+                .guide-card:hover .guide-panel,
+                .guide-card:focus-within .guide-panel {
+                  clip-path: inset(0 -60px -60px -60px);
+                  visibility: visible;
+                  transition: clip-path 380ms cubic-bezier(0.23, 1, 0.32, 1), visibility 0s;
+                }
+                /* The card loses its bottom corners so the panel reads as its continuation. */
+                .guide-card:hover > a, .guide-card:focus-within > a {
+                  border-bottom-left-radius: 0;
+                  border-bottom-right-radius: 0;
+                  border-color: hsl(var(--primary) / 0.4);
+                }
+                .guide-chevron { transition: transform 200ms ease; }
+                .guide-card:hover .guide-chevron { transform: rotate(180deg); }
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .guide-panel { transition: none !important; }
+              }
+            `}</style>
           </div>
         </section>
 
