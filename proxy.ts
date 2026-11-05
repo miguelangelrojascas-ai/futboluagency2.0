@@ -20,7 +20,7 @@ import {
  *    actually served from. The address bar keeps the English slug.
  *  - A visitor whose browser asks for English gets `/en` from the bare root.
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const redirectTo = (path: string) =>
     NextResponse.redirect(new URL(path, request.url), 308);
