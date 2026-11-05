@@ -239,9 +239,14 @@ const StudentAthleteExperience = () => {
           scrollbar-width: none;
         }
         .sae-track::-webkit-scrollbar { display: none; }
-        .sae-slide { width: var(--slide-w); aspect-ratio: 4 / 5; }
+        /* Never taller than the screen minus the navbar, the section bar and
+           the controls, so a whole photo and the controls fit at once. */
+        .sae-slide {
+          width: var(--slide-w);
+          height: min(calc(var(--slide-w) * 5 / 4), calc(100svh - 13rem));
+        }
         @media (min-width: 768px) {
-          .sae-slide { aspect-ratio: 16 / 9; max-height: 78vh; }
+          .sae-slide { height: min(calc(var(--slide-w) * 9 / 16), calc(100svh - 16rem)); }
         }
         /* Dark glass so the dots stay readable over bright photos. */
         .sae-controls > * {
