@@ -97,6 +97,34 @@ export const START_TERMS = [
   "Spring 2029",
 ] as const;
 
+/**
+ * English display names for the form. Only the label changes: the value sent
+ * to the CRM is always the Spanish name above.
+ */
+export const COUNTRY_EN: Record<(typeof COUNTRIES)[number], string> = {
+  Alemania: "Germany", Argentina: "Argentina", Armenia: "Armenia", Australia: "Australia",
+  Austria: "Austria", "Bélgica": "Belgium", Bolivia: "Bolivia", Brasil: "Brazil",
+  "Camerún": "Cameroon", "Canadá": "Canada", Chile: "Chile", China: "China",
+  Colombia: "Colombia", "Corea del Sur": "South Korea", "Costa de Marfil": "Ivory Coast",
+  "Costa Rica": "Costa Rica", Croacia: "Croatia", Cuba: "Cuba", Dinamarca: "Denmark",
+  Ecuador: "Ecuador", Egipto: "Egypt", "El Salvador": "El Salvador", "España": "Spain",
+  "Estados Unidos": "United States", Francia: "France", Ghana: "Ghana", Grecia: "Greece",
+  Guatemala: "Guatemala", Honduras: "Honduras", India: "India", Irlanda: "Ireland",
+  Israel: "Israel", Italia: "Italy", "Japón": "Japan", Marruecos: "Morocco",
+  "México": "Mexico", Mongolia: "Mongolia", Nicaragua: "Nicaragua", Nigeria: "Nigeria",
+  Noruega: "Norway", "Nueva Zelanda": "New Zealand", "Países Bajos": "Netherlands",
+  "Panamá": "Panama", Paraguay: "Paraguay", "Perú": "Peru", Polonia: "Poland",
+  Portugal: "Portugal", "Puerto Rico": "Puerto Rico", "Reino Unido": "United Kingdom",
+  "República Dominicana": "Dominican Republic", "Rumanía": "Romania", Senegal: "Senegal",
+  Serbia: "Serbia", "Sudáfrica": "South Africa", Suecia: "Sweden", Suiza: "Switzerland",
+  "Túnez": "Tunisia", "Turquía": "Turkey", Ucrania: "Ukraine", Uruguay: "Uruguay",
+  Venezuela: "Venezuela", Otro: "Other",
+};
+
+/** "Fall 2026" → "Otoño 2026" for the Spanish form; the value stays in English. */
+export const termLabelEs = (term: string) =>
+  term.replace("Fall", "Otoño").replace("Spring", "Primavera");
+
 export type Country = (typeof COUNTRIES)[number];
 export type Budget = (typeof BUDGETS)[number];
 export type StartTerm = (typeof START_TERMS)[number];

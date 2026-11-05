@@ -31,7 +31,7 @@ const PlayerProfilesSection = () => {
 
   const profiles: Profile[] = [
     {
-      level: "Élite",
+      level: isEs ? "Élite" : "Elite",
       badgeColor: "#1e3a6e",
       gradient: "linear-gradient(135deg, #0f1f3d 0%, #1e3a6e 100%)",
       image: profileElite,
@@ -47,7 +47,7 @@ const PlayerProfilesSection = () => {
         : "We select the best options based on position, playing style and academic goals. Direct negotiation with coaches.",
     },
     {
-      level: "Alto",
+      level: isEs ? "Alto" : "High",
       badgeColor: "hsl(var(--primary))",
       gradient: "linear-gradient(135deg, #6b0410 0%, #b00717 100%)",
       image: profileAlto,
@@ -63,7 +63,7 @@ const PlayerProfilesSection = () => {
         : "We build your profile and highlights video to maximize offers. Access to our network of contacts at universities across the country.",
     },
     {
-      level: "Medio",
+      level: isEs ? "Medio" : "Mid",
       badgeColor: "#1a6e3c",
       gradient: "linear-gradient(135deg, #0e3d21 0%, #1a6e3c 100%)",
       image: profileMedio,

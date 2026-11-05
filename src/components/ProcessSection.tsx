@@ -178,7 +178,8 @@ const ProcessSection = ({
   /** Cuánto se ve la pizarra táctica detrás del texto. */
   fieldVisibility?: FieldVisibility;
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const phaseWord = language === "es" ? "FASE" : "PHASE";
   const [activeStep, setActiveStep] = useState(0);
   const [isHeaderMoment, setIsHeaderMoment] = useState(false);
   const [isGoal, setIsGoal] = useState(false);
@@ -388,7 +389,7 @@ const ProcessSection = ({
       >
         <h2
           style={{
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "var(--font-digits), var(--font-display), serif",
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
             fontWeight: 700,
             marginBottom: 16,
@@ -636,7 +637,7 @@ const ProcessSection = ({
                     position: "absolute",
                     bottom: 32,
                     left: 40,
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "var(--font-digits), var(--font-display), serif",
                     fontSize: "8rem",
                     fontWeight: 700,
                     color: "rgba(255,255,255,0.95)",
@@ -671,7 +672,7 @@ const ProcessSection = ({
                       block: "center",
                     })
                   }
-                  aria-label={`Ir a fase ${i + 1}`}
+                  aria-label={`${language === "es" ? "Ir a fase" : "Go to phase"} ${i + 1}`}
                   style={{
                     width: "5px",
                     height: activeStep === i ? "22px" : "5px",
@@ -755,7 +756,7 @@ const ProcessSection = ({
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            fontFamily: "'Playfair Display', serif",
+                            fontFamily: "var(--font-digits), var(--font-display), serif",
                             fontWeight: 700,
                             fontSize: "1.1rem",
                             transition: "background 0.5s ease",
@@ -772,14 +773,14 @@ const ProcessSection = ({
                             color: "rgba(18,33,58,0.6)",
                           }}
                         >
-                          FASE {s.phase} DE 6
+                          {phaseWord} {s.phase} {language === "es" ? "DE" : "OF"} 6
                         </span>
                       </div>
 
                       {/* Title */}
                       <h3
                         style={{
-                          fontFamily: "'Playfair Display', serif",
+                          fontFamily: "var(--font-digits), var(--font-display), serif",
                           fontSize: "clamp(2rem, 3.5vw, 3rem)",
                           fontWeight: 700,
                           lineHeight: 1.1,
@@ -888,21 +889,21 @@ const ProcessSection = ({
                     position: "absolute",
                     bottom: 16,
                     left: 20,
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "var(--font-digits), var(--font-display), serif",
                     fontSize: "2.5rem",
                     fontWeight: 700,
                     color: "white",
                     lineHeight: 1,
                   }}
                 >
-                  FASE {s.phase}
+                  {phaseWord} {s.phase}
                 </div>
               </div>
 
               <div style={{ padding: "24px 24px 28px" }}>
                 <h3
                   style={{
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "var(--font-digits), var(--font-display), serif",
                     fontSize: "1.6rem",
                     fontWeight: 700,
                     lineHeight: 1.2,

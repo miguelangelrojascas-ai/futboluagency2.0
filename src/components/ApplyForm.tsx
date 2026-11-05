@@ -4,7 +4,7 @@ import { useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { BUDGETS, BUDGET_UNSURE, COUNTRIES, START_TERMS } from "@/data/leadOptions";
+import { BUDGETS, BUDGET_UNSURE, COUNTRIES, COUNTRY_EN, START_TERMS, termLabelEs } from "@/data/leadOptions";
 
 type Status = "idle" | "submitting" | "error" | "success";
 
@@ -180,7 +180,7 @@ const ApplyForm = () => {
             </option>
             {COUNTRIES.map((country) => (
               <option key={country} value={country}>
-                {country}
+                {es ? country : COUNTRY_EN[country]}
               </option>
             ))}
           </select>
@@ -276,7 +276,7 @@ const ApplyForm = () => {
             <option value="">{es ? "Aún no lo sé" : "Not sure yet"}</option>
             {START_TERMS.map((term) => (
               <option key={term} value={term}>
-                {term}
+                {es ? termLabelEs(term) : term}
               </option>
             ))}
           </select>

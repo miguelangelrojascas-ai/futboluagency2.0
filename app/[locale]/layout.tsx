@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Playfair_Display, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { LOCALES, isLocale, type Locale } from "@/lib/routes";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { organizationSchema } from "@/lib/schema";
@@ -25,6 +26,22 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
   variable: "--font-body",
+});
+
+/**
+ * Playfair's figures are old-style (some sit lower than others), which looked
+ * uneven in stats and prices. This face only covers digits and the symbols
+ * around them, and sits first in the display stack, so every number in a
+ * heading renders in a bold geometric sans close to the logo lettering.
+ */
+const digits = localFont({
+  src: "../../src/fonts/montserrat-latin.woff2",
+  weight: "500 800",
+  display: "swap",
+  variable: "--font-digits",
+  adjustFontFallback: false,
+  fallback: [],
+  declarations: [{ prop: "unicode-range", value: "U+0024-0025, U+002B, U+0030-0039" }],
 });
 
 export const metadata: Metadata = {
@@ -62,7 +79,7 @@ export default async function LocaleLayout({
   const locale = requested as Locale;
 
   return (
-    <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
+    <html lang={locale} className={`${playfair.variable} ${inter.variable} ${digits.variable}`}>
       <body>
         {/* Entity data for search and AI engines, in the served HTML so a
             crawler that never runs JavaScript still reads it. */}

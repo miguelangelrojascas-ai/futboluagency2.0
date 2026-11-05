@@ -127,9 +127,9 @@ const StudentAthleteExperience = () => {
         </span>
         <h2 className="max-w-4xl font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">
           {es ? "Vive la experiencia " : "Live the "}
-          <span className="whitespace-nowrap text-white/45">
-            {es ? "student-athlete." : "student-athlete experience."}
-          </span>
+          {/* Same term in both languages, in brand red (a touch brighter so it reads on navy). */}
+          <span className="whitespace-nowrap text-[#e0293a]">student-athlete</span>
+          {es ? "." : " experience."}
         </h2>
       </div>
 

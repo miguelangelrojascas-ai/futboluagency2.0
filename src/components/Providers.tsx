@@ -1,7 +1,6 @@
 "use client";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 /**
  * The client-side shell that used to live in App.tsx.
@@ -12,7 +11,6 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 const Providers = ({ children }: { children: React.ReactNode }) => (
   <TooltipProvider>
     {children}
-    <LanguageSwitcher />
   </TooltipProvider>
 );
 

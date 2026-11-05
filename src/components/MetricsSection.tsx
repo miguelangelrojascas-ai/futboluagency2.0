@@ -31,11 +31,11 @@ const CountUpValue = ({ value, label }: { value: string; label: string }) => {
 };
 
 const MetricsSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const metrics = [
     { value: "350+", label: t("metrics.universities") },
-    { value: "45+", label: "Estados Cubiertos" },
+    { value: "45+", label: language === "es" ? "Estados cubiertos" : "States covered" },
     { value: "$10M+", label: t("metrics.scholarships") },
     { value: "98%", label: t("metrics.satisfaction") },
   ];

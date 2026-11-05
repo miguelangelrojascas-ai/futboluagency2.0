@@ -4,35 +4,46 @@ import { Globe } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { other, swapLocaleInPath, type Locale } from "@/lib/routes";
+import { LOCALES, swapLocaleInPath, type Locale } from "@/lib/routes";
 
 /**
- * Switches language by going to the same page in the other one.
+ * ES / EN toggle for the navbar.
  *
- * It used to flip a piece of state, which meant both languages lived at the
- * same URL and only one of them could ever be prerendered. Now each language
- * has its own address, so this is a link: the destination is the current path
- * with its locale segment and slug swapped.
+ * Each language has its own address, so both options are links: the target is
+ * the current path with its locale segment and slug swapped. The current
+ * language is shown as selected and is not a link.
  */
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
   const { language } = useLanguage();
   const pathname = usePathname();
-  const target = other(language as Locale);
 
   return (
-    <Link
-      href={swapLocaleInPath(pathname, target)}
-      hrefLang={target}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-full shadow-lg hover:bg-card/80 transition-all duration-300 hover:scale-105 group"
-      aria-label={
-        target === "en" ? "Switch to English" : "Cambiar a español"
-      }
+    <div
+      className={`flex items-center gap-1.5 font-body text-xs font-bold uppercase tracking-[0.08em] ${className}`}
+      aria-label={language === "es" ? "Idioma" : "Language"}
+      role="group"
     >
-      <Globe className="w-5 h-5 text-primary" />
-      <span className="font-body font-semibold text-sm text-foreground uppercase">
-        {target}
-      </span>
-    </Link>
+      <Globe className="h-4 w-4 text-muted-foreground" aria-hidden />
+      {LOCALES.map((locale, i) => (
+        <span key={locale} className="flex items-center gap-1.5">
+          {i > 0 && <span className="text-border" aria-hidden>|</span>}
+          {locale === language ? (
+            <span className="text-primary" aria-current="true">
+              {locale}
+            </span>
+          ) : (
+            <Link
+              href={swapLocaleInPath(pathname, locale as Locale)}
+              hrefLang={locale}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label={locale === "en" ? "English" : "Español"}
+            >
+              {locale}
+            </Link>
+          )}
+        </span>
+      ))}
+    </div>
   );
 };
 

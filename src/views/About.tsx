@@ -51,7 +51,7 @@ const teamMembers: Member[] = [
   {
     name: "Ignacio De Bejar",
     initials: "ID",
-    role: { es: "Co-Founder & CEO", en: "Co-Founder & CEO" },
+    role: { es: "Cofundador y CEO", en: "Co-Founder & CEO" },
     image: ceoIgnacio,
     instagram: "https://www.instagram.com/ignacio_futboluagency/",
     bio: {
@@ -70,7 +70,7 @@ const teamMembers: Member[] = [
   {
     name: "Moha",
     initials: "MH",
-    role: { es: "Co-Founder & CEO", en: "Co-Founder & CEO" },
+    role: { es: "Cofundador y CEO", en: "Co-Founder & CEO" },
     image: ceoMoha,
     bio: {
       es: [

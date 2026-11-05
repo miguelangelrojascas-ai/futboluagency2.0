@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "react-simple-maps";
 import { X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -339,6 +340,9 @@ const divisionColor = (div: string) => {
 };
 
 const UniversityMap = () => {
+  const { language } = useLanguage();
+  const es = language === "es";
+  const unis = es ? "universidades" : "universities";
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null);
   const [selected, setSelected] = useState<{ abbr: string; name: string } | null>(null);
   const [popover, setPopover] = useState<{ x: number; y: number; abbr: string; name: string } | null>(null);
@@ -410,13 +414,15 @@ const UniversityMap = () => {
       <div className="container-wide px-4 relative">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase font-bold">
-            350+ Universidades con Colocaciones
+            {es ? "350+ universidades con colocaciones" : "350+ universities with placements"}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Nuestra Red en EE.UU.
+            {es ? "Nuestra red en EE.UU." : "Our US network"}
           </h2>
           <p className="font-body text-muted-foreground text-base leading-relaxed">
-            Una red consolidada de contactos directos con coaches a lo largo del país. Haz clic en un estado para ver las universidades.
+            {es
+              ? "Una red consolidada de contactos directos con coaches a lo largo del país. Haz clic en un estado para ver las universidades."
+              : "An established network of direct contacts with coaches across the country. Click a state to see its universities."}
           </p>
         </div>
 
@@ -458,7 +464,7 @@ const UniversityMap = () => {
                               setTooltip({
                                 x: e.clientX,
                                 y: e.clientY,
-                                text: `${state.name}: ${data.count} universidades`,
+                                text: `${state.name}: ${data.count} ${unis}`,
                               });
                             }
                           }}
@@ -467,7 +473,7 @@ const UniversityMap = () => {
                               setTooltip({
                                 x: e.clientX,
                                 y: e.clientY,
-                                text: `${state.name}: ${data.count} universidades`,
+                                text: `${state.name}: ${data.count} ${unis}`,
                               });
                             }
                           }}
@@ -555,7 +561,7 @@ const UniversityMap = () => {
               <button
                 onClick={() => setPopover(null)}
                 className="absolute top-2 right-2 p-1 rounded hover:bg-muted"
-                aria-label="Cerrar"
+                aria-label={es ? "Cerrar" : "Close"}
               >
                 <X className="w-3.5 h-3.5 text-foreground" />
               </button>
@@ -563,13 +569,13 @@ const UniversityMap = () => {
                 {popover.name}
               </p>
               <p className="font-body text-xs text-muted-foreground mb-3">
-                {universitiesByState[popover.abbr]?.count} universidades
+                {universitiesByState[popover.abbr]?.count} {unis}
               </p>
               <button
                 onClick={() => handleViewState(popover.abbr, popover.name)}
                 className="w-full bg-primary hover:bg-primary-hover text-white font-body text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-colors"
               >
-                Ver estado
+                {es ? "Ver estado" : "View state"}
               </button>
             </div>
           )}
@@ -596,12 +602,12 @@ const UniversityMap = () => {
           <aside
             className="absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300"
             role="dialog"
-            aria-label={`Universidades en ${selected.name}`}
+            aria-label={`${es ? "Universidades en" : "Universities in"} ${selected.name}`}
           >
             <div className="flex items-start justify-between p-6 border-b border-border">
               <div>
                 <span className="font-body text-xs tracking-[0.15em] uppercase text-primary font-bold block mb-2">
-                  {selectedData.count} Universidades
+                  {selectedData.count} {unis}
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
                   {selected.name}
@@ -610,7 +616,7 @@ const UniversityMap = () => {
               <button
                 onClick={() => { setSelected(null); resetZoom(); }}
                 className="p-2 rounded-full hover:bg-muted transition-colors"
-                aria-label="Cerrar"
+                aria-label={es ? "Cerrar" : "Close"}
               >
                 <X className="w-5 h-5 text-foreground" />
               </button>

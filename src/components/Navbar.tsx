@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { resolveLegacyPath, type Locale } from "@/lib/routes";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logoAsset from "@/assets/logo-fua.png";
 
 /* Next resolves an image import to an object; the components want the URL. */
@@ -15,6 +16,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { t, language } = useLanguage();
+  const usaLabel = language === "es" ? "Becas Fútbol EE.UU." : "Soccer Scholarships USA";
 
   const isActive = (path: string) =>
     pathname === resolveLegacyPath(language as Locale, path);
@@ -53,7 +55,7 @@ const Navbar = () => {
 
             {/* Becas Fútbol EE.UU. — direct link, no dropdown */}
             <LocaleLink to="/usa" className={navLinkClass(isActive("/usa"))}>
-              Becas Fútbol EE.UU.
+              {usaLabel}
             </LocaleLink>
 
             {/* Players */}
@@ -73,22 +75,25 @@ const Navbar = () => {
 
           </div>
 
-          {/* CTA */}
-          <LocaleLink
-            to="/apply"
-            className="hidden md:inline-flex justify-self-end bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
-          >
-            {t("nav.applyCta")}
-          </LocaleLink>
+          {/* Language + CTA */}
+          <div className="col-start-3 flex items-center justify-self-end gap-3 md:gap-5">
+            <LanguageSwitcher />
+            <LocaleLink
+              to="/apply"
+              className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+            >
+              {t("nav.applyCta")}
+            </LocaleLink>
 
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden col-start-3 justify-self-end p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 text-foreground"
+              aria-label={isOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : language === "es" ? "Abrir menú" : "Open menu"}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -103,7 +108,7 @@ const Navbar = () => {
 
               {/* Becas Fútbol EE.UU. */}
               <LocaleLink to="/usa" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/usa"))}>
-                Becas Fútbol EE.UU.
+                {usaLabel}
               </LocaleLink>
 
               {/* Players */}
