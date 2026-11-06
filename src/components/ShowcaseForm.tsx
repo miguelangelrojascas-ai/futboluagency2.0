@@ -485,8 +485,8 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
           <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl bg-muted/60 px-4 py-3 font-body text-[14px] leading-relaxed text-muted-foreground">
             <span className="font-display text-xl font-bold text-foreground">45 €</span>
             {es
-              ? "es la inscripción para jugadores. No pagas nada al enviar este formulario: primero te confirmamos si tienes plaza."
-              : "is the player registration fee. You pay nothing when you send this form: we first confirm whether you have a place."}
+              ? "es la inscripción para jugadores de España (incluye equipación, sudadera y seguro). No pagas nada al enviar este formulario: primero te confirmamos si tienes plaza."
+              : "is the registration fee for players from Spain (kit, hoodie and insurance included). You pay nothing when you send this form: we first confirm whether you have a place."}
           </p>
           <label
             htmlFor="sc-consent"

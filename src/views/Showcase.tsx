@@ -195,6 +195,42 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         ["A dedicated point of contact", "throughout your visit, for anything you need."],
       ];
 
+  const playerDays = es
+    ? [
+        { day: "Martes 2 feb", time: "9:00 – 17:00", text: "Día de partidos del showcase, delante de los entrenadores universitarios." },
+        { day: "Miércoles 3 feb", time: "9:00 – 14:00", text: "Reuniones individuales con los entrenadores interesados en ti." },
+      ]
+    : [
+        { day: "Tuesday, Feb 2", time: "9:00 AM – 5:00 PM", text: "Showcase match day, in front of the college coaches." },
+        { day: "Wednesday, Feb 3", time: "9:00 AM – 2:00 PM", text: "One-to-one meetings with the coaches interested in you." },
+      ];
+
+  const playerPack = es
+    ? [
+        "Inscripción oficial al showcase",
+        "Camiseta y equipación oficial del evento",
+        "Sudadera oficial del showcase",
+        "Acceso completo a las instalaciones de la Ciudad Deportiva",
+        "Reuniones con los entrenadores universitarios interesados",
+        "Seguro deportivo durante los días del evento",
+        "Agua y fruta durante las jornadas",
+      ]
+    : [
+        "Official Showcase registration",
+        "Official event shirt and kit",
+        "Official Showcase hoodie",
+        "Full access to the Ciudad Deportiva facilities",
+        "Meetings with the interested college coaches",
+        "Sports insurance during the event days",
+        "Water and fruit throughout both days",
+      ];
+
+  const residenceWhatsApp = `https://wa.me/34603331990?text=${encodeURIComponent(
+    es
+      ? "Hola, me inscribo al Showcase Talavera 2027 y necesitaría residencia la noche del martes 2 al miércoles 3."
+      : "Hi, I'm registering for the Showcase Talavera 2027 and would need accommodation on the night of Tuesday 2 to Wednesday 3.",
+  )}`;
+
   return (
     <>
       <Navbar />
@@ -241,7 +277,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
               style={{ animationDelay: "240ms" }}
             >
               <a
-                href="#inscripcion"
+                href="#jugadores"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
               >
                 {es ? "Soy jugador: quiero participar" : "I'm a player: I want in"}
@@ -585,8 +621,100 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
           </div>
         </section>
 
+        {/* ── For players: the event and the fee ──────────── */}
+        <section id="jugadores" className="section-padding scroll-mt-24">
+          <div className="container-wide grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
+              <span className={eyebrow}>{es ? "Para jugadores" : "For players"}</span>
+              <h2 className={`${h2} mt-4`}>
+                {es ? "Dos días para " : "Two days to "}
+                <span className="text-primary italic">{es ? "darte a conocer" : "get noticed"}</span>
+              </h2>
+              <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {es
+                  ? "Un evento de scouting en directo que reúne a 60 jugadores y a entrenadores universitarios en la Ciudad Deportiva de Talavera de la Reina. Compites delante de ellos y hablas cara a cara con los que se interesan por ti: una oportunidad real de entrar en un programa universitario."
+                  : "A live scouting event that brings together 60 players and college coaches at the Ciudad Deportiva in Talavera de la Reina. You compete in front of them and talk face to face with the ones interested in you: a real chance to get into a college program."}
+              </p>
+
+              <ol className="mt-8 divide-y divide-border border-y border-border">
+                {playerDays.map((d) => (
+                  <li key={d.day} className="grid gap-1 py-5 sm:grid-cols-[170px_1fr] sm:gap-6">
+                    <div>
+                      <p className="font-body text-base font-bold text-foreground">{d.day}</p>
+                      <p className="font-body text-sm font-semibold text-primary">{d.time}</p>
+                    </div>
+                    <p className="font-body text-sm leading-relaxed text-muted-foreground sm:text-base">{d.text}</p>
+                  </li>
+                ))}
+              </ol>
+
+              <h3 className="mt-10 font-display text-2xl font-bold sm:text-3xl">
+                {es ? "¿Qué ganas participando?" : "What's in it for you?"}
+              </h3>
+              <p className="mt-3 font-body text-base leading-relaxed text-muted-foreground">
+                {es
+                  ? "Este evento abre puertas que muy pocos jugadores consiguen abrir. Si un entrenador universitario te ficha, no solo estudias en una gran universidad con beca: también multiplicas tus opciones de llegar a la MLS. Es un camino real hacia el fútbol profesional, y empieza aquí."
+                  : "This event opens doors very few players ever get to open. If a college coach signs you, you don't just study at a great university on a scholarship: you also multiply your chances of reaching the MLS. It's a real path to professional football, and it starts here."}
+              </p>
+            </div>
+
+            <div className="lg:pt-10">
+              <div className="rounded-3xl border border-border border-t-4 border-t-primary bg-card p-8 shadow-card md:p-10">
+                <div className="text-center">
+                  <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                    {es ? "Cuota de inscripción" : "Registration fee"}
+                  </p>
+                  <p className="mt-3 font-display text-6xl font-bold text-foreground md:text-7xl">45 €</p>
+                  <p className="mt-3 font-body text-sm text-muted-foreground">
+                    {es ? "Jugadores de España · los días del showcase" : "Players from Spain · the Showcase days"}
+                  </p>
+                </div>
+                <p className="mt-8 font-body text-xs font-bold uppercase tracking-[0.15em] text-foreground">
+                  {es ? "Qué incluye" : "What's included"}
+                </p>
+                <ul className="mt-3 space-y-2.5">
+                  {playerPack.map((item) => (
+                    <li key={item} className="flex items-start gap-3 font-body text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#inscripcion"
+                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
+                >
+                  {es ? "Inscribirme" : "Register"}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+              <p className="mt-5 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-4 font-body text-sm leading-relaxed text-amber-950">
+                {es ? (
+                  <>
+                    Para los jugadores de España el evento son solo los días del showcase, no un viaje de varios días. Si vienes de lejos y
+                    necesitas dormir la noche del martes 2 al miércoles 3, tenemos residencia disponible:{" "}
+                    <a href={residenceWhatsApp} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">
+                      escríbenos por WhatsApp
+                    </a>{" "}
+                    y lo vemos en tu caso.
+                  </>
+                ) : (
+                  <>
+                    For players from Spain the event is just the Showcase days, not a multi-day trip. If you live far away and need to stay
+                    the night of Tuesday 2 to Wednesday 3, we have a residence available:{" "}
+                    <a href={residenceWhatsApp} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">
+                      message us on WhatsApp
+                    </a>{" "}
+                    and we'll sort it out case by case.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* ── Player registration (goes to the CRM's Showcase section) ── */}
-        <section id="inscripcion" className="section-padding scroll-mt-20">
+        <section id="inscripcion" className="section-padding section-alt scroll-mt-20">
           <div className="container-wide">
             <div className="relative overflow-hidden rounded-3xl bg-footer-dark px-6 pb-20 pt-14 sm:px-10 md:px-16 md:pb-24 md:pt-16">
               <Image
@@ -611,6 +739,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                     {es ? "Inscripción jugadores" : "Player registration"}
                   </span>
                   <span className="font-display text-3xl font-bold">45 €</span>
+                  <span className="text-xs text-white/60">{es ? "jugadores de España" : "players from Spain"}</span>
                 </p>
               </div>
             </div>
