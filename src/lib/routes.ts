@@ -21,6 +21,7 @@ export const isLocale = (value: string): value is Locale =>
 export type RouteKey =
   | "home"
   | "usa"
+  | "showcase"
   | "players"
   | "resources"
   | "about"
@@ -31,6 +32,7 @@ export type RouteKey =
 export const ROUTES: Record<RouteKey, { es: string; en: string }> = {
   home: { es: "", en: "" },
   usa: { es: "usa", en: "usa" },
+  showcase: { es: "showcase", en: "showcase" },
   players: { es: "jugadores", en: "players" },
   resources: { es: "recursos", en: "resources" },
   about: { es: "nosotros", en: "about" },
@@ -101,6 +103,7 @@ const LEGACY_PATH_KEYS: Array<[string, RouteKey]> = [
   ["/players", "players"],
   ["/jugadores", "players"],
   ["/usa", "usa"],
+  ["/showcase", "showcase"],
   ["/about", "about"],
   ["/nosotros", "about"],
   ["/apply", "apply"],

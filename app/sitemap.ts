@@ -9,6 +9,7 @@ const SITE = "https://futboluagency.com";
 const PRIORITY: Record<RouteKey, number> = {
   home: 1,
   usa: 0.9,
+  showcase: 0.8,
   resources: 0.8,
   apply: 0.8,
   players: 0.6,

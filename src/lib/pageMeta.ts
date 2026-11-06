@@ -50,6 +50,20 @@ export const PAGE_META: Record<RouteKey, Record<Locale, Copy>> = {
       ogTitle: "College Soccer in the USA | FutbolUAgency",
     },
   },
+  showcase: {
+    es: {
+      title: "Showcase Talavera 2027 | Fútbol ante entrenadores universitarios de EE.UU. – FutbolUAgency",
+      description:
+        "1, 2 y 3 de febrero de 2027 en Talavera de la Reina, a 1h30 de Madrid. 60 jugadores de España y EE.UU. jugando ante entrenadores universitarios. Solo por invitación.",
+      ogTitle: "Showcase Talavera 2027 | FutbolUAgency",
+    },
+    en: {
+      title: "Showcase Talavera 2027 | Play in front of U.S. college coaches – FutbolUAgency",
+      description:
+        "February 1–3, 2027 in Talavera de la Reina, 90 minutes from Madrid. 60 players from Spain and the U.S. evaluated live by college coaches. By invitation only.",
+      ogTitle: "Showcase Talavera 2027 | FutbolUAgency",
+    },
+  },
   players: {
     es: {
       title: "Nuestros Jugadores | FutbolUAgency",

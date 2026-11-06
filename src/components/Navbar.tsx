@@ -58,6 +58,11 @@ const Navbar = () => {
               {usaLabel}
             </LocaleLink>
 
+            {/* Showcase */}
+            <LocaleLink to="/showcase" className={navLinkClass(isActive("/showcase"))}>
+              Showcase
+            </LocaleLink>
+
             {/* Players */}
             <LocaleLink to="/players" className={navLinkClass(isActive("/players"))}>
               {t("nav.players")}
@@ -109,6 +114,11 @@ const Navbar = () => {
               {/* Becas Fútbol EE.UU. */}
               <LocaleLink to="/usa" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/usa"))}>
                 {usaLabel}
+              </LocaleLink>
+
+              {/* Showcase */}
+              <LocaleLink to="/showcase" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/showcase"))}>
+                Showcase
               </LocaleLink>
 
               {/* Players */}
