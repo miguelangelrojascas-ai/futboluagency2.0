@@ -273,60 +273,8 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
           </div>
         </section>
 
-        {/* ── Last edition video ───────────────────────────── */}
-        <section id="edicion-anterior" className="section-padding scroll-mt-24">
-          <div className="container-wide grid items-center gap-12 md:grid-cols-[1fr_auto] lg:gap-20">
-            <div className="max-w-xl">
-              <span className={eyebrow}>{es ? "Edición anterior" : "Last edition"}</span>
-              <h2 className={`${h2} mt-4`}>
-                {es ? "Así se vive el " : "What the "}
-                <span className="text-primary italic">showcase</span>
-                {es ? "" : " looks like"}
-              </h2>
-              <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "La última edición, en la Ciudad Deportiva de Talavera: jugadores compitiendo en partidos reales mientras los entrenadores evalúan en el campo. Este año crecemos: más jugadores, dos países y tres días completos."
-                  : "Our last edition, at the Ciudad Deportiva in Talavera: players competing in real matches while coaches evaluate pitch-side. This year it grows: more players, two countries and three full days."}
-              </p>
-              <ul className="mt-8 space-y-3">
-                {(es
-                  ? [
-                      "Partidos completos, no pruebas sueltas.",
-                      "Entrenadores universitarios evaluando en directo.",
-                      "Un día entero para hablar cara a cara con ellos.",
-                    ]
-                  : [
-                      "Full matches, not isolated drills.",
-                      "College coaches evaluating live.",
-                      "A full day to talk with them face to face.",
-                    ]
-                ).map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-sm text-foreground sm:text-base">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mx-auto w-full max-w-[360px]">
-              <div className="relative overflow-hidden rounded-2xl bg-black shadow-card">
-                <video
-                  className="aspect-[9/16] w-full object-cover"
-                  src="/videos/showcase-2026.mp4"
-                  poster="/videos/showcase-2026-poster.jpg"
-                  controls
-                  playsInline
-                  preload="none"
-                  aria-label={es ? "Vídeo de la edición anterior del showcase" : "Video of the last Showcase edition"}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── The talent ───────────────────────────────────── */}
-        <section className="section-padding section-alt">
+        <section className="section-padding">
           <div className="container-wide">
             <span className={eyebrow}>{es ? "El talento" : "The talent"}</span>
             <h2 className={`${h2} mt-4 max-w-3xl`}>
@@ -351,7 +299,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         </section>
 
         {/* ── Location ─────────────────────────────────────── */}
-        <section id="ubicacion" className="section-padding scroll-mt-24">
+        <section id="ubicacion" className="section-padding section-alt scroll-mt-24">
           <div className="container-wide grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
               <span className={eyebrow}>{es ? "La ubicación" : "The location"}</span>
@@ -364,19 +312,6 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                   ? "Talavera de la Reina está a unos 130 km —hora y media por carretera— del aeropuerto Adolfo Suárez Madrid-Barajas, uno de los mejor conectados de Europa. Aterrizas por la mañana y esa misma tarde estás viendo fútbol."
                   : "Talavera de la Reina is about 130 km — 90 minutes by road — from Madrid–Barajas Airport, one of Europe's best-connected hubs. Land in the morning and you can be watching football that same afternoon."}
               </p>
-
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {[
-                  { v: "130 km", l: es ? "Desde Madrid" : "From Madrid" },
-                  { v: "~90 min", l: es ? "Por carretera" : "By road" },
-                  { v: "MAD", l: es ? "Aeropuerto Barajas" : "Barajas airport" },
-                ].map((s) => (
-                  <div key={s.v} className="rounded-xl border border-border border-b-4 border-b-primary bg-card px-3 py-4 text-center">
-                    <p className="font-body text-lg font-bold text-foreground sm:text-2xl">{s.v}</p>
-                    <p className="mt-1 font-body text-[10px] uppercase tracking-[0.12em] text-muted-foreground sm:text-xs">{s.l}</p>
-                  </div>
-                ))}
-              </div>
 
               <ul className="mt-8 space-y-3">
                 {(es
@@ -429,6 +364,58 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                   <Navigation className="h-4 w-4" />
                   {es ? "Ruta desde el aeropuerto" : "Route from the airport"}
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Last edition video ───────────────────────────── */}
+        <section id="edicion-anterior" className="section-padding scroll-mt-24">
+          <div className="container-wide grid items-center gap-12 md:grid-cols-[1fr_auto] lg:gap-20">
+            <div className="max-w-xl">
+              <span className={eyebrow}>{es ? "Edición anterior" : "Last edition"}</span>
+              <h2 className={`${h2} mt-4`}>
+                {es ? "Así se vive el " : "What the "}
+                <span className="text-primary italic">showcase</span>
+                {es ? "" : " looks like"}
+              </h2>
+              <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {es
+                  ? "La última edición, en la Ciudad Deportiva de Talavera: jugadores compitiendo en partidos reales mientras los entrenadores evalúan en el campo. Este año crecemos: más jugadores, dos países y tres días completos."
+                  : "Our last edition, at the Ciudad Deportiva in Talavera: players competing in real matches while coaches evaluate pitch-side. This year it grows: more players, two countries and three full days."}
+              </p>
+              <ul className="mt-8 space-y-3">
+                {(es
+                  ? [
+                      "Partidos completos, no pruebas sueltas.",
+                      "Entrenadores universitarios evaluando en directo.",
+                      "Un día entero para hablar cara a cara con ellos.",
+                    ]
+                  : [
+                      "Full matches, not isolated drills.",
+                      "College coaches evaluating live.",
+                      "A full day to talk with them face to face.",
+                    ]
+                ).map((item) => (
+                  <li key={item} className="flex items-start gap-3 font-body text-sm text-foreground sm:text-base">
+                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mx-auto w-full max-w-[360px]">
+              <div className="relative overflow-hidden rounded-2xl bg-black shadow-card">
+                <video
+                  className="aspect-[9/16] w-full object-cover"
+                  src="/videos/showcase-2026.mp4"
+                  poster="/videos/showcase-2026-poster.jpg"
+                  controls
+                  playsInline
+                  preload="none"
+                  aria-label={es ? "Vídeo de la edición anterior del showcase" : "Video of the last Showcase edition"}
+                />
               </div>
             </div>
           </div>
@@ -616,8 +603,14 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                 </h2>
                 <p className="mt-5 font-body text-base leading-relaxed text-white/75 sm:text-lg">
                   {es
-                    ? "Es solo por invitación y hay 60 plazas. Rellena tu perfil con tu vídeo: lo revisamos y, si encajas, te enviamos la invitación con los siguientes pasos."
-                    : "It is by invitation only and there are 60 places. Fill in your profile with your video: we review it and, if you are a fit, we send you the invitation and next steps."}
+                    ? "Es solo por invitación y hay 60 plazas. Rellena tu perfil paso a paso: lo revisamos y, si encajas, te enviamos la invitación con los siguientes pasos."
+                    : "It is by invitation only and there are 60 places. Fill in your profile step by step: we review it and, if you are a fit, we send you the invitation and next steps."}
+                </p>
+                <p className="mt-6 inline-flex items-baseline gap-3 rounded-xl border border-white/15 bg-white/10 px-5 py-3 font-body text-white backdrop-blur">
+                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                    {es ? "Inscripción jugadores" : "Player registration"}
+                  </span>
+                  <span className="font-display text-3xl font-bold">45 €</span>
                 </p>
               </div>
             </div>
