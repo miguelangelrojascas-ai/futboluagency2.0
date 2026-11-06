@@ -135,7 +135,7 @@ const Resources = () => {
                 }
                 .guide-card:hover .guide-track,
                 .guide-card:focus-within .guide-track {
-                  transform: translateY(-11.5rem);
+                  transform: translateY(-8.5rem);
                 }
                 .guide-preview {
                   display: block;
@@ -143,7 +143,7 @@ const Resources = () => {
                   left: 0;
                   right: 0;
                   top: 100%;
-                  height: 11.5rem;
+                  height: 8.5rem;
                   padding-top: 1.5rem;
                   overflow: hidden;
                   opacity: 0;
