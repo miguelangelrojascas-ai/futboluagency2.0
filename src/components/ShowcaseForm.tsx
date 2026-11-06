@@ -5,6 +5,7 @@ import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { COUNTRIES, COUNTRY_EN } from "@/data/leadOptions";
+import { DIAL_CODES, dialCodeFor } from "@/data/dialCodes";
 import type { FormQuestion, ShowcaseFormDefinition } from "@/lib/showcaseForm";
 
 type Status = "idle" | "submitting" | "error" | "success";
@@ -37,6 +38,105 @@ const AUTOCOMPLETE: Record<string, string> = {
   email: "email",
   whatsapp: "tel",
   city: "address-level2",
+};
+
+/**
+ * WhatsApp / phone: country code picker plus the number, sent as one
+ * international number (e.g. "+34 600123456") so the CRM can open WhatsApp
+ * without guessing the country. The code follows the country chosen above
+ * until the player picks one by hand.
+ */
+const PhoneField = ({
+  q,
+  es,
+  invalid,
+  required,
+  help,
+  country,
+}: {
+  q: FormQuestion;
+  es: boolean;
+  invalid: boolean;
+  required: boolean;
+  help?: string;
+  country: string;
+}) => {
+  const [picked, setPicked] = useState<string | null>(null);
+  const [custom, setCustom] = useState("");
+  const [number, setNumber] = useState("");
+
+  const dial = picked ?? (dialCodeFor(country) ? country : "España");
+  const code = dial === "otro" ? custom.replace(/\D/g, "") : DIAL_CODES.find((d) => d.country === dial)?.code ?? "";
+  const typed = number.trim();
+  // Someone who types the full number with + or 00 has already given the code.
+  const full = /^(\+|00)/.test(typed)
+    ? `+${typed.replace(/^00/, "").replace(/\D/g, "")}`
+    : code && typed
+      ? `+${code} ${typed.replace(/\D/g, "").replace(/^0+/, "")}`
+      : "";
+  const id = `sc-${q.id}`;
+  const label = es ? q.es : q.en || q.es;
+  const placeholder = (es ? q.placeholderEs : q.placeholderEn || q.placeholderEs) || undefined;
+  const bad = invalid ? { "aria-invalid": true as const } : {};
+  /* FIELD is full width; the code picker and the number share the row instead. */
+  const PART = FIELD.replace("w-full ", "");
+
+  return (
+    <div className={q.ancho === "completo" ? "sm:col-span-2" : undefined}>
+      <label className={LABEL} htmlFor={id}>
+        {label}
+        {required ? " *" : ""}
+      </label>
+      <div className="flex gap-2">
+        <select
+          aria-label={es ? "Prefijo del país" : "Country code"}
+          value={dial}
+          onChange={(e) => setPicked(e.target.value)}
+          className={`${PART} w-[6.5rem] shrink-0 px-2.5`}
+          {...bad}
+        >
+          {DIAL_CODES.map((d) => (
+            <option key={d.country} value={d.country} title={es ? d.country : d.en}>
+              {d.flag} +{d.code}
+            </option>
+          ))}
+          <option value="otro">{es ? "Otro prefijo" : "Other code"}</option>
+        </select>
+        {dial === "otro" && (
+          <input
+            aria-label={es ? "Prefijo" : "Code"}
+            inputMode="numeric"
+            placeholder="+00"
+            value={custom}
+            onChange={(e) => setCustom(e.target.value)}
+            className={`${PART} w-20 shrink-0`}
+            {...bad}
+          />
+        )}
+        <input
+          id={id}
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel-national"
+          placeholder={placeholder}
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
+          className={`${PART} min-w-0 flex-1`}
+          {...bad}
+        />
+      </div>
+      <input type="hidden" name={q.id} value={full} />
+      <p className={`${HINT} ${invalid ? "text-destructive" : ""}`}>
+        {invalid
+          ? es
+            ? "Revisa el prefijo y el número: tiene que ser un número completo de WhatsApp."
+            : "Check the code and the number: it has to be a full WhatsApp number."
+          : full && full.replace(/\D/g, "").length >= 8
+            ? `${es ? "Te escribiremos al" : "We will message"} ${full}`
+            : help}
+      </p>
+    </div>
+  );
 };
 
 /** One question, drawn from its definition in the CRM. */
@@ -127,6 +227,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
   // Watched to adapt the guardian question to under-18 players.
   const [birthDate, setBirthDate] = useState("");
   const [contactOf, setContactOf] = useState("");
+  const [country, setCountry] = useState("");
 
   const age = birthDate ? ageAtShowcase(birthDate) : null;
   const minor = age != null && age < 18;
@@ -212,6 +313,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
         const t = e.target as unknown as HTMLInputElement;
         if (t.name === "birthDate") setBirthDate(t.value);
         if (t.name === "contactOf") setContactOf(t.value);
+        if (t.name === "country") setCountry(t.value);
       }}
       noValidate
       className="space-y-8 rounded-2xl border border-border bg-card p-6 sm:p-8"
@@ -224,7 +326,18 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
 
       {sections.map((s, i) => (
         <Section key={s.id} n={i + 1} title={es ? s.es : s.en || s.es}>
-          {s.preguntas.map((q) => (
+          {s.preguntas.map((q) =>
+            q.tipo === "tel" ? (
+              <PhoneField
+                key={q.id}
+                q={q}
+                es={es}
+                invalid={invalid.includes(q.id)}
+                required={q.obligatoria}
+                help={es ? q.ayudaEs : q.ayudaEn || q.ayudaEs}
+                country={country}
+              />
+            ) : (
             <Field
               key={q.id}
               q={q}
@@ -233,7 +346,8 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
               required={q.obligatoria || (q.id === "guardianEmail" && needsGuardian)}
               hint={hintFor(q)}
             />
-          ))}
+            ),
+          )}
         </Section>
       ))}
 

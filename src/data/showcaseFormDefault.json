@@ -85,8 +85,10 @@
           "tipo": "tel",
           "es": "WhatsApp",
           "en": "WhatsApp",
-          "placeholderEs": "Con el prefijo de tu país",
-          "placeholderEn": "With your country code"
+          "placeholderEs": "600 123 456",
+          "placeholderEn": "600 123 456",
+          "ayudaEs": "Elige el prefijo de tu país y escribe el número sin el prefijo.",
+          "ayudaEn": "Pick your country code and type the number without it."
         },
         {
           "activa": true,
@@ -125,7 +127,7 @@
           "placeholderEn": "@"
         },
         {
-          "activa": true,
+          "activa": false,
           "obligatoria": false,
           "id": "guardianEmail",
           "tipo": "email",
@@ -243,7 +245,7 @@
           ]
         },
         {
-          "activa": true,
+          "activa": false,
           "obligatoria": false,
           "id": "foot",
           "tipo": "select",
@@ -330,7 +332,7 @@
         },
         {
           "activa": true,
-          "obligatoria": true,
+          "obligatoria": false,
           "id": "highlightVideo",
           "tipo": "url",
           "es": "Enlace a tu vídeo de highlights",
@@ -338,8 +340,8 @@
           "ancho": "completo",
           "placeholderEs": "https://youtube.com/...",
           "placeholderEn": "https://youtube.com/...",
-          "ayudaEs": "De 4 a 6 minutos con tus mejores jugadas. Es lo que usamos para decidir las invitaciones.",
-          "ayudaEn": "Four to six minutes of your best plays. It is what we use to decide the invitations."
+          "ayudaEs": "Si lo tienes, de 4 a 6 minutos con tus mejores jugadas. Nos ayuda mucho a valorar tu perfil.",
+          "ayudaEn": "If you have one, four to six minutes of your best plays. It helps us a lot to assess your profile."
         },
         {
           "activa": true,
