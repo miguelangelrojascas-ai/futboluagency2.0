@@ -83,15 +83,32 @@ const USA = () => {
       <main className="min-h-screen pt-16 md:pt-20">
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            src="/videos/campo-showcase.mp4"
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 25%, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 45%, hsl(0 75% 16%) 100%)",
+            }}
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 flex items-end justify-between opacity-40 md:opacity-100"
+          >
+            <div className="flex h-full items-end -space-x-6 lg:-space-x-10">
+              <img src="/images/hero-players/player-1.webp" alt="" className="relative z-10 h-[78%] w-auto drop-shadow-2xl" />
+              <img src="/images/hero-players/player-4.webp" alt="" className="relative z-20 h-[88%] w-auto drop-shadow-2xl" />
+              <img src="/images/hero-players/player-2.webp" alt="" className="relative z-10 hidden h-[70%] w-auto drop-shadow-2xl lg:block" />
+            </div>
+            <div className="flex h-full items-end -space-x-6 lg:-space-x-10">
+              <img src="/images/hero-players/player-3.webp" alt="" className="relative z-10 hidden h-[70%] w-auto drop-shadow-2xl lg:block" />
+              <img src="/images/hero-players/player-5.webp" alt="" className="relative z-20 h-[88%] w-auto drop-shadow-2xl" />
+              <img src="/images/hero-players/player-6.webp" alt="" className="relative z-10 h-[78%] w-auto drop-shadow-2xl" />
+            </div>
+          </div>
+          <div
+            className="absolute inset-0"
+            style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.25) 100%)" }}
+          />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
               <span className="inline-block mb-4 text-white/60 font-body text-xs tracking-[0.15em] uppercase">
