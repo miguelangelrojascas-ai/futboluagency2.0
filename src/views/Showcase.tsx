@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/carousel";
 import { useCountUp } from "@/hooks/useCountUp";
 import ShowcaseForm from "@/components/ShowcaseForm";
+import type { ShowcaseFormDefinition } from "@/lib/showcaseForm";
 
 /* Ciudad Deportiva (Ébora Formación), P.I. Soto de Cazalegas, Talavera. */
 const VENUE = { lat: 39.97637, lng: -4.74797 };
@@ -50,7 +51,7 @@ const StatValue = ({ value, label }: { value: number; label: string }) => {
   );
 };
 
-const Showcase = () => {
+const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
   const { language } = useLanguage();
   const es = language === "es";
 
@@ -621,7 +622,7 @@ const Showcase = () => {
               </div>
             </div>
             <div className="relative mx-auto -mt-8 max-w-4xl px-0 sm:-mt-10 sm:px-6">
-              <ShowcaseForm />
+              <ShowcaseForm definition={form} />
             </div>
           </div>
         </section>

@@ -4,17 +4,8 @@ import { useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { BUDGETS, BUDGET_UNSURE, COUNTRIES, COUNTRY_EN, START_TERMS, termLabelEs } from "@/data/leadOptions";
-import {
-  CONTACT_OF,
-  ENGLISH_LEVELS,
-  FEET,
-  GENDERS,
-  GRADUATIONS,
-  LEAGUES,
-  POSITIONS,
-  SOURCES,
-} from "@/data/showcaseOptions";
+import { COUNTRIES, COUNTRY_EN } from "@/data/leadOptions";
+import type { FormQuestion, ShowcaseFormDefinition } from "@/lib/showcaseForm";
 
 type Status = "idle" | "submitting" | "error" | "success";
 
@@ -40,27 +31,110 @@ const Section = ({ n, title, children }: { n: number; title: string; children: R
   </fieldset>
 );
 
+const AUTOCOMPLETE: Record<string, string> = {
+  firstName: "given-name",
+  lastName: "family-name",
+  email: "email",
+  whatsapp: "tel",
+  city: "address-level2",
+};
+
+/** One question, drawn from its definition in the CRM. */
+const Field = ({
+  q,
+  es,
+  invalid,
+  required,
+  hint,
+}: {
+  q: FormQuestion;
+  es: boolean;
+  invalid: boolean;
+  required: boolean;
+  hint?: string | null;
+}) => {
+  const id = `sc-${q.id}`;
+  const label = es ? q.es : q.en || q.es;
+  const help = hint ?? (es ? q.ayudaEs : q.ayudaEn || q.ayudaEs);
+  const placeholder = (es ? q.placeholderEs : q.placeholderEn || q.placeholderEs) || undefined;
+  const common = { id, name: q.id, className: FIELD, ...(invalid ? { "aria-invalid": true as const } : {}) };
+  const choose = es ? "Selecciona" : "Select";
+
+  let control: React.ReactNode;
+  switch (q.tipo) {
+    case "textarea":
+      control = <textarea {...common} rows={3} placeholder={placeholder} className={`${FIELD} resize-y`} />;
+      break;
+    case "select":
+      control = (
+        <select {...common} defaultValue="">
+          <option value="" disabled={q.obligatoria}>{choose}</option>
+          {q.opciones?.map((o) => (
+            <option key={o.es} value={o.es}>{es ? o.es : o.en || o.es}</option>
+          ))}
+        </select>
+      );
+      break;
+    case "country":
+      control = (
+        <select {...common} defaultValue="">
+          <option value="" disabled={q.obligatoria}>{es ? "Selecciona tu país" : "Select your country"}</option>
+          {COUNTRIES.map((c) => (
+            <option key={c} value={c}>{es ? c : COUNTRY_EN[c]}</option>
+          ))}
+        </select>
+      );
+      break;
+    case "date":
+      control =
+        q.id === "birthDate" ? (
+          <input {...common} type="date" min="1990-01-01" max="2015-12-31" />
+        ) : (
+          <input {...common} type="date" />
+        );
+      break;
+    case "number":
+      control = <input {...common} type="number" inputMode="decimal" placeholder={placeholder} />;
+      break;
+    default:
+      control = <input {...common} type={q.tipo} placeholder={placeholder} autoComplete={AUTOCOMPLETE[q.id]} />;
+  }
+
+  return (
+    <div className={q.ancho === "completo" || q.tipo === "textarea" ? "sm:col-span-2" : undefined}>
+      <label className={LABEL} htmlFor={id}>
+        {label}
+        {required ? " *" : ""}
+      </label>
+      {control}
+      {help && <p className={HINT}>{help}</p>}
+    </div>
+  );
+};
+
 /**
  * Player registration for the Talavera Showcase.
  *
- * Posts to /api/showcase, which forwards it to the "Showcase" section of the
- * FUA CRM. Questions merge the admissions form with what a showcase needs to
- * know: who to contact (parents for under-18s), the current team and level,
- * and the academic year coaches recruit by.
+ * The questions come from the FUA CRM, where they can be edited; submissions
+ * go to /api/showcase, which forwards them to the CRM's Showcase section.
  */
-const ShowcaseForm = () => {
+const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) => {
   const { language } = useLanguage();
   const es = language === "es";
-  const l = (o: { value: string; en: string }) => (es ? o.value : o.en);
 
   const [status, setStatus] = useState<Status>("idle");
   const [invalid, setInvalid] = useState<string[]>([]);
+  // Watched to adapt the guardian question to under-18 players.
   const [birthDate, setBirthDate] = useState("");
   const [contactOf, setContactOf] = useState("");
-  const [budget, setBudget] = useState("");
 
   const age = birthDate ? ageAtShowcase(birthDate) : null;
   const minor = age != null && age < 18;
+  const needsGuardian = minor && (contactOf === "" || contactOf === "Jugador");
+
+  const sections = definition.secciones
+    .map((s) => ({ ...s, preguntas: s.preguntas.filter((q) => q.activa) }))
+    .filter((s) => s.preguntas.length > 0);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -118,251 +192,72 @@ const ShowcaseForm = () => {
     );
   }
 
-  const bad = (field: string) => (invalid.includes(field) ? { "aria-invalid": true as const } : {});
-  const req = " *";
-
+  /* Live hints for the questions the form knows about. */
+  const hintFor = (q: FormQuestion) => {
+    if (q.id === "birthDate" && age != null && age > 0) {
+      return es ? `Tendrás ${age} años en el showcase.` : `You will be ${age} at the Showcase.`;
+    }
+    if (q.id === "guardianEmail" && minor) {
+      return es
+        ? "Como serás menor de edad en el showcase, necesitamos el contacto de tu familia."
+        : "You will be under 18 at the Showcase, so we need a family contact.";
+    }
+    return null;
+  };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-8 rounded-2xl border border-border bg-card p-6 sm:p-8">
+    <form
+      onSubmit={handleSubmit}
+      onChange={(e) => {
+        const t = e.target as unknown as HTMLInputElement;
+        if (t.name === "birthDate") setBirthDate(t.value);
+        if (t.name === "contactOf") setContactOf(t.value);
+      }}
+      noValidate
+      className="space-y-8 rounded-2xl border border-border bg-card p-6 sm:p-8"
+    >
       {/* Bots fill this in; it is never shown to a person. */}
       <div className="hidden" aria-hidden="true">
         <label htmlFor="sc-website">Website</label>
         <input id="sc-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <Section n={1} title={es ? "El jugador" : "The player"}>
-        <div>
-          <label className={LABEL} htmlFor="sc-firstName">{es ? "Nombre" : "First name"}{req}</label>
-          <input id="sc-firstName" name="firstName" type="text" autoComplete="given-name" className={FIELD} {...bad("firstName")} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-lastName">{es ? "Apellidos" : "Last name"}{req}</label>
-          <input id="sc-lastName" name="lastName" type="text" autoComplete="family-name" className={FIELD} {...bad("lastName")} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-birthDate">{es ? "Fecha de nacimiento" : "Date of birth"}{req}</label>
-          <input
-            id="sc-birthDate"
-            name="birthDate"
-            type="date"
-            min="1990-01-01"
-            max="2015-12-31"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-            className={FIELD}
-            {...bad("birthDate")}
-          />
-          {age != null && age > 0 && (
-            <p className={HINT}>{es ? `Tendrás ${age} años en el showcase.` : `You will be ${age} at the Showcase.`}</p>
-          )}
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-gender">{es ? "Género" : "Gender"}{req}</label>
-          <select id="sc-gender" name="gender" defaultValue="" className={FIELD} {...bad("gender")}>
-            <option value="" disabled>{es ? "Selecciona" : "Select"}</option>
-            {GENDERS.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-country">{es ? "País" : "Country"}{req}</label>
-          <select id="sc-country" name="country" defaultValue="" className={FIELD} {...bad("country")}>
-            <option value="" disabled>{es ? "Selecciona tu país" : "Select your country"}</option>
-            {COUNTRIES.map((c) => <option key={c} value={c}>{es ? c : COUNTRY_EN[c]}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-city">{es ? "Ciudad" : "City"}</label>
-          <input id="sc-city" name="city" type="text" autoComplete="address-level2" className={FIELD} />
-        </div>
-      </Section>
+      {sections.map((s, i) => (
+        <Section key={s.id} n={i + 1} title={es ? s.es : s.en || s.es}>
+          {s.preguntas.map((q) => (
+            <Field
+              key={q.id}
+              q={q}
+              es={es}
+              invalid={invalid.includes(q.id)}
+              required={q.obligatoria || (q.id === "guardianEmail" && needsGuardian)}
+              hint={hintFor(q)}
+            />
+          ))}
+        </Section>
+      ))}
 
-      <Section n={2} title={es ? "Contacto" : "Contact"}>
-        <div>
-          <label className={LABEL} htmlFor="sc-email">{es ? "Correo electrónico" : "Email"}{req}</label>
-          <input id="sc-email" name="email" type="email" autoComplete="email" className={FIELD} {...bad("email")} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-whatsapp">WhatsApp{req}</label>
-          <input
-            id="sc-whatsapp"
-            name="whatsapp"
-            type="tel"
-            autoComplete="tel"
-            placeholder={es ? "Con el prefijo de tu país" : "With your country code"}
-            className={FIELD}
-            {...bad("whatsapp")}
-          />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-contactOf">{es ? "Este email y WhatsApp son del…" : "These contact details are…"}{req}</label>
-          <select
-            id="sc-contactOf"
-            name="contactOf"
-            value={contactOf}
-            onChange={(e) => setContactOf(e.target.value)}
-            className={FIELD}
-            {...bad("contactOf")}
-          >
-            <option value="" disabled>{es ? "Selecciona" : "Select"}</option>
-            {CONTACT_OF.map((o) => <option key={o.value} value={o.value}>{es ? o.value.toLowerCase() : o.en}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-instagram">Instagram</label>
-          <input id="sc-instagram" name="instagram" type="text" placeholder="@" className={FIELD} />
-        </div>
-        <div className="sm:col-span-2">
-          <label className={LABEL} htmlFor="sc-guardianEmail">
-            {es ? "Email del padre, madre o tutor" : "Parent or guardian's email"}
-            {minor && contactOf === "Jugador" ? req : ""}
-          </label>
-          <input id="sc-guardianEmail" name="guardianEmail" type="email" className={FIELD} {...bad("guardianEmail")} />
-          <p className={HINT}>
-            {minor
-              ? es
-                ? "Como serás menor de edad en el showcase, necesitamos el contacto de tu familia."
-                : "You will be under 18 at the Showcase, so we need a family contact."
-              : es
-                ? "Opcional si eres mayor de edad."
-                : "Optional if you are 18 or over."}
-          </p>
-        </div>
-      </Section>
-
-      <Section n={3} title={es ? "Perfil deportivo" : "Football profile"}>
-        <div>
-          <label className={LABEL} htmlFor="sc-position">{es ? "Posición principal" : "Main position"}{req}</label>
-          <select id="sc-position" name="position" defaultValue="" className={FIELD} {...bad("position")}>
-            <option value="" disabled>{es ? "Selecciona" : "Select"}</option>
-            {POSITIONS.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-secondaryPosition">{es ? "Posición secundaria" : "Second position"}</label>
-          <select id="sc-secondaryPosition" name="secondaryPosition" defaultValue="" className={FIELD}>
-            <option value="">{es ? "Ninguna" : "None"}</option>
-            {POSITIONS.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-foot">{es ? "Pie dominante" : "Strong foot"}</label>
-          <select id="sc-foot" name="foot" defaultValue="" className={FIELD}>
-            <option value="">{es ? "Selecciona" : "Select"}</option>
-            {FEET.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-height">{es ? "Altura (cm)" : "Height (cm)"}</label>
-          <input id="sc-height" name="height" type="number" inputMode="numeric" min={140} max={220} placeholder="178" className={FIELD} {...bad("height")} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-currentTeam">{es ? "Equipo actual" : "Current team"}{req}</label>
-          <input id="sc-currentTeam" name="currentTeam" type="text" className={FIELD} {...bad("currentTeam")} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-league">{es ? "Categoría o liga" : "Category or league"}{req}</label>
-          <select id="sc-league" name="league" defaultValue="" className={FIELD} {...bad("league")}>
-            <option value="" disabled>{es ? "Selecciona" : "Select"}</option>
-            {LEAGUES.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label className={LABEL} htmlFor="sc-highlightVideo">{es ? "Enlace a tu vídeo de highlights" : "Link to your highlight video"}{req}</label>
-          <input id="sc-highlightVideo" name="highlightVideo" type="url" placeholder="https://youtube.com/..." className={FIELD} {...bad("highlightVideo")} />
-          <p className={HINT}>
-            {es
-              ? "De 4 a 6 minutos con tus mejores jugadas. Es lo que usamos para decidir las invitaciones."
-              : "Four to six minutes of your best plays. It is what we use to decide the invitations."}
-          </p>
-        </div>
-        <div className="sm:col-span-2">
-          <label className={LABEL} htmlFor="sc-fullMatchVideo">{es ? "Vídeo de un partido completo" : "Full match video"}</label>
-          <input id="sc-fullMatchVideo" name="fullMatchVideo" type="url" placeholder="https://youtube.com/..." className={FIELD} />
-        </div>
-      </Section>
-
-      <Section n={4} title={es ? "Estudios y planes" : "Studies and plans"}>
-        <div>
-          <label className={LABEL} htmlFor="sc-graduation">{es ? "¿En qué año acabas bachillerato?" : "High school graduation year"}{req}</label>
-          <select id="sc-graduation" name="graduation" defaultValue="" className={FIELD} {...bad("graduation")}>
-            <option value="" disabled>{es ? "Selecciona" : "Select"}</option>
-            {GRADUATIONS.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-gpa">{es ? "Nota media" : "GPA / average grade"}</label>
-          <input id="sc-gpa" name="gpa" type="text" placeholder={es ? "Ej.: 7,5 / 10" : "E.g. 3.4 / 4.0"} className={FIELD} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-english">{es ? "Nivel de inglés" : "English level"}</label>
-          <select id="sc-english" name="english" defaultValue="" className={FIELD}>
-            <option value="">{es ? "Selecciona" : "Select"}</option>
-            {ENGLISH_LEVELS.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-startTerm">{es ? "¿Cuándo te gustaría empezar en EE.UU.?" : "When would you like to start in the U.S.?"}</label>
-          <select id="sc-startTerm" name="startTerm" defaultValue="" className={FIELD}>
-            <option value="">{es ? "Aún no lo sé" : "Not sure yet"}</option>
-            {START_TERMS.map((t) => <option key={t} value={t}>{es ? termLabelEs(t) : t}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-major">{es ? "¿Qué te gustaría estudiar?" : "What would you like to study?"}</label>
-          <input id="sc-major" name="major" type="text" className={FIELD} />
-        </div>
-        <div>
-          <label className={LABEL} htmlFor="sc-budget">{es ? "Presupuesto anual de la familia" : "Family budget per year"}</label>
-          <select id="sc-budget" name="budget" value={budget} onChange={(e) => setBudget(e.target.value)} className={FIELD}>
-            <option value="">{es ? "Prefiero hablarlo en la llamada" : "I'd rather discuss it on a call"}</option>
-            {BUDGETS.map((b) => <option key={b} value={b}>{b === BUDGET_UNSURE && !es ? "I don't know yet" : b}</option>)}
-          </select>
-          <p className={HINT}>
-            {es ? "Para la universidad en EE.UU., con vivienda y comida." : "For college in the U.S., housing and food included."}
-          </p>
-        </div>
-      </Section>
-
-      <Section n={5} title={es ? "Último paso" : "Last step"}>
-        <div>
-          <label className={LABEL} htmlFor="sc-source">{es ? "¿Cómo conociste el showcase?" : "How did you hear about the Showcase?"}</label>
-          <select id="sc-source" name="source" defaultValue="" className={FIELD}>
-            <option value="">{es ? "Selecciona" : "Select"}</option>
-            {SOURCES.map((o) => <option key={o.value} value={o.value}>{l(o)}</option>)}
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label className={LABEL} htmlFor="sc-comments">{es ? "¿Algo más que debamos saber?" : "Anything else we should know?"}</label>
-          <textarea
-            id="sc-comments"
-            name="comments"
-            rows={3}
-            placeholder={es ? "Lesiones, convocatorias, objetivos, dudas sobre el viaje…" : "Injuries, call-ups, goals, travel questions…"}
-            className={`${FIELD} resize-y`}
-          />
-        </div>
-        <label
-          htmlFor="sc-consent"
-          className="flex cursor-pointer items-start gap-3 font-body text-[14px] leading-relaxed text-muted-foreground sm:col-span-2"
-        >
-          <input
-            id="sc-consent"
-            name="consent"
-            type="checkbox"
-            className="mt-1 h-4 w-4 shrink-0 accent-[hsl(var(--primary))]"
-            {...bad("consent")}
-          />
-          <span className={invalid.includes("consent") ? "text-destructive" : undefined}>
-            {es
-              ? "Acepto que FutbolUAgency use estos datos para valorar mi inscripción y contactarme sobre el showcase. Si soy menor de edad, mi familia está informada. "
-              : "I agree that FutbolUAgency may use these details to assess my registration and contact me about the Showcase. If I am under 18, my family knows. "}
-            <LocaleLink to="/privacidad" className="font-semibold text-primary underline-offset-4 hover:underline">
-              {es ? "Política de datos" : "Data policy"}
-            </LocaleLink>
-            .{req}
-          </span>
-        </label>
-      </Section>
+      <label
+        htmlFor="sc-consent"
+        className="flex cursor-pointer items-start gap-3 border-t border-border pt-7 font-body text-[14px] leading-relaxed text-muted-foreground"
+      >
+        <input
+          id="sc-consent"
+          name="consent"
+          type="checkbox"
+          className="mt-1 h-4 w-4 shrink-0 accent-[hsl(var(--primary))]"
+          {...(invalid.includes("consent") ? { "aria-invalid": true as const } : {})}
+        />
+        <span className={invalid.includes("consent") ? "text-destructive" : undefined}>
+          {es
+            ? "Acepto que FutbolUAgency use estos datos para valorar mi inscripción y contactarme sobre el showcase. Si soy menor de edad, mi familia está informada. "
+            : "I agree that FutbolUAgency may use these details to assess my registration and contact me about the Showcase. If I am under 18, my family knows. "}
+          <LocaleLink to="/privacidad" className="font-semibold text-primary underline-offset-4 hover:underline">
+            {es ? "Política de datos" : "Data policy"}
+          </LocaleLink>
+          . *
+        </span>
+      </label>
 
       {status === "error" && (
         <p

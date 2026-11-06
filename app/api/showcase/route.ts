@@ -1,3 +1,5 @@
+import { CRM_URL } from "@/lib/showcaseForm";
+
 /**
  * Receives a Showcase registration and hands it to the FUA CRM.
  *
@@ -6,9 +8,6 @@
  * the CRM address out of the page and avoids cross-site requests. Set CRM_URL
  * to point at another CRM deployment.
  */
-
-const CRM_URL =
-  process.env.CRM_URL ?? "https://vetcrm-veterinary-clinic-dash-pi-blond.vercel.app";
 
 /** Generous ceiling for a form post; anything bigger is not a real person. */
 const MAX_BYTES = 20_000;
