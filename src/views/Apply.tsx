@@ -57,7 +57,7 @@ const Apply = () => {
 
                 <a
                   href="#formulario"
-                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-4 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                 >
                   {es ? "Rellenar el formulario" : "Fill in the form"}
                   <ArrowRight className="h-4 w-4" />

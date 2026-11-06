@@ -79,7 +79,7 @@ const ApplyForm = () => {
         </p>
         <LocaleLink
           to="/recursos"
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           {es ? "Ver los recursos" : "See the resources"}
           <ArrowRight className="h-4 w-4" />
@@ -371,7 +371,7 @@ const ApplyForm = () => {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-4 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>

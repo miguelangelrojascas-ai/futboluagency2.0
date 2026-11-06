@@ -112,13 +112,13 @@ const USA = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <LocaleLink
                   to="/apply"
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-body font-semibold px-8 py-3.5 rounded-full transition-colors text-sm sm:text-base"
                 >
                   {t("hero.cta.apply")} <ArrowRight className="w-5 h-5" />
                 </LocaleLink>
                 <LocaleLink
                   to="/recursos"
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border border-white/40 text-white hover:bg-white/10 font-body font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm sm:text-base"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border border-white/40 text-white hover:bg-white/10 font-body font-semibold px-8 py-3.5 rounded-full transition-colors text-sm sm:text-base"
                 >
                   {t("nav.resources")}
                 </LocaleLink>

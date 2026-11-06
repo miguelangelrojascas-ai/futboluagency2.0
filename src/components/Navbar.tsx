@@ -22,7 +22,7 @@ const Navbar = () => {
     pathname === resolveLegacyPath(language as Locale, path);
 
   const navLinkClass = (active: boolean) =>
-    `font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
+    `font-body text-sm font-medium px-4 py-2 rounded-none transition-colors ${
       active
         ? "text-primary bg-primary/10"
         : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -85,7 +85,7 @@ const Navbar = () => {
             <LanguageSwitcher />
             <LocaleLink
               to="/apply"
-              className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+              className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
             >
               {t("nav.applyCta")}
             </LocaleLink>
@@ -104,7 +104,7 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
-            <div className="container-wide px-4 py-4 flex flex-col gap-1">
+            <div className="container-wide px-6 py-4 flex flex-col gap-1">
 
               {/* Inicio */}
               <LocaleLink to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>
@@ -140,7 +140,7 @@ const Navbar = () => {
               <LocaleLink
                 to="/apply"
                 onClick={() => setIsOpen(false)}
-                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary hover:bg-primary-hover text-white"
+                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-full transition-colors bg-primary hover:bg-primary-hover text-white"
               >
                 <GraduationCap className="w-4 h-4" />
                 {t("nav.applyCta")}

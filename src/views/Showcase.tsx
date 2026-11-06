@@ -222,7 +222,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
               style={{ animationDelay: "160ms" }}
             >
               {es
-                ? "Tres días de fútbol en directo ante entrenadores universitarios de Estados Unidos. 60 jugadores de España y EE.UU., a hora y media de Madrid."
+                  ? "Tres días de fútbol en directo ante entrenadores universitarios de Estados Unidos."
                 : "Three days of live football in front of U.S. college coaches. 60 players from Spain and the U.S., ninety minutes from Madrid."}
             </p>
             <ul
@@ -242,7 +242,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
             >
               <a
                 href="#inscripcion"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
               >
                 {es ? "Soy jugador: quiero participar" : "I'm a player: I want in"}
                 <ArrowRight className="h-4 w-4" />
@@ -556,7 +556,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                 </p>
                 <a
                   href={coachMail}
-                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
+                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
                 >
                   <Mail className="h-4 w-4" />
                   {es ? "Confirmar asistencia" : "Confirm your attendance"}

@@ -261,7 +261,7 @@ const HomeProcessSection = () => {
         <div className="mt-12 sm:mt-14 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
           <LocaleLink
             to="/apply"
-            className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-6 py-3.5 rounded-lg transition-colors shrink-0"
+            className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-semibold px-6 py-3.5 rounded-full transition-colors shrink-0"
           >
             {isEs ? "Empieza por el paso 1" : "Start with step 1"}
             <ArrowRight className="w-4 h-4" />

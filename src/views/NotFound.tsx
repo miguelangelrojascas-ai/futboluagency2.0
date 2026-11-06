@@ -58,7 +58,7 @@ const NotFound = () => {
               <div className="mb-10 flex flex-col gap-3 sm:flex-row">
                 <LocaleLink
                   to="/"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                 >
                   <Home className="h-4 w-4" />
                   {es ? "Volver al inicio" : "Back to home"}
