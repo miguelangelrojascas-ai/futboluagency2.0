@@ -1,0 +1,565 @@
+{
+  "secciones": [
+    {
+      "id": "jugador",
+      "es": "El jugador",
+      "en": "The player",
+      "preguntas": [
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "firstName",
+          "tipo": "text",
+          "es": "Nombre",
+          "en": "First name"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "lastName",
+          "tipo": "text",
+          "es": "Apellidos",
+          "en": "Last name"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "birthDate",
+          "tipo": "date",
+          "es": "Fecha de nacimiento",
+          "en": "Date of birth"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "gender",
+          "tipo": "select",
+          "es": "Género",
+          "en": "Gender",
+          "opciones": [
+            {
+              "es": "Masculino",
+              "en": "Male"
+            },
+            {
+              "es": "Femenino",
+              "en": "Female"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "country",
+          "tipo": "country",
+          "es": "País",
+          "en": "Country"
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "city",
+          "tipo": "text",
+          "es": "Ciudad",
+          "en": "City"
+        }
+      ]
+    },
+    {
+      "id": "contacto",
+      "es": "Contacto",
+      "en": "Contact",
+      "preguntas": [
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "email",
+          "tipo": "email",
+          "es": "Correo electrónico",
+          "en": "Email"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "whatsapp",
+          "tipo": "tel",
+          "es": "WhatsApp",
+          "en": "WhatsApp",
+          "placeholderEs": "Con el prefijo de tu país",
+          "placeholderEn": "With your country code"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "contactOf",
+          "tipo": "select",
+          "es": "Este email y WhatsApp son del…",
+          "en": "These contact details are…",
+          "opciones": [
+            {
+              "es": "Jugador",
+              "en": "The player's"
+            },
+            {
+              "es": "Padre",
+              "en": "The father's"
+            },
+            {
+              "es": "Madre",
+              "en": "The mother's"
+            },
+            {
+              "es": "Tutor",
+              "en": "A guardian's"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "instagram",
+          "tipo": "text",
+          "es": "Instagram",
+          "en": "Instagram",
+          "placeholderEs": "@",
+          "placeholderEn": "@"
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "guardianEmail",
+          "tipo": "email",
+          "es": "Email del padre, madre o tutor",
+          "en": "Parent or guardian's email",
+          "ayudaEs": "Obligatorio si serás menor de edad en el showcase y el contacto de arriba es el tuyo.",
+          "ayudaEn": "Required if you will be under 18 at the Showcase and the contact above is your own.",
+          "ancho": "completo"
+        }
+      ]
+    },
+    {
+      "id": "futbol",
+      "es": "Perfil deportivo",
+      "en": "Football profile",
+      "preguntas": [
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "position",
+          "tipo": "select",
+          "es": "Posición principal",
+          "en": "Main position",
+          "opciones": [
+            {
+              "es": "Portero",
+              "en": "Goalkeeper"
+            },
+            {
+              "es": "Lateral derecho",
+              "en": "Right back"
+            },
+            {
+              "es": "Lateral izquierdo",
+              "en": "Left back"
+            },
+            {
+              "es": "Central",
+              "en": "Centre back"
+            },
+            {
+              "es": "Pivote",
+              "en": "Defensive midfielder"
+            },
+            {
+              "es": "Mediocentro",
+              "en": "Central midfielder"
+            },
+            {
+              "es": "Mediapunta",
+              "en": "Attacking midfielder"
+            },
+            {
+              "es": "Extremo derecho",
+              "en": "Right winger"
+            },
+            {
+              "es": "Extremo izquierdo",
+              "en": "Left winger"
+            },
+            {
+              "es": "Delantero centro",
+              "en": "Striker"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "secondaryPosition",
+          "tipo": "select",
+          "es": "Posición secundaria",
+          "en": "Second position",
+          "opciones": [
+            {
+              "es": "Portero",
+              "en": "Goalkeeper"
+            },
+            {
+              "es": "Lateral derecho",
+              "en": "Right back"
+            },
+            {
+              "es": "Lateral izquierdo",
+              "en": "Left back"
+            },
+            {
+              "es": "Central",
+              "en": "Centre back"
+            },
+            {
+              "es": "Pivote",
+              "en": "Defensive midfielder"
+            },
+            {
+              "es": "Mediocentro",
+              "en": "Central midfielder"
+            },
+            {
+              "es": "Mediapunta",
+              "en": "Attacking midfielder"
+            },
+            {
+              "es": "Extremo derecho",
+              "en": "Right winger"
+            },
+            {
+              "es": "Extremo izquierdo",
+              "en": "Left winger"
+            },
+            {
+              "es": "Delantero centro",
+              "en": "Striker"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "foot",
+          "tipo": "select",
+          "es": "Pie dominante",
+          "en": "Strong foot",
+          "opciones": [
+            {
+              "es": "Derecho",
+              "en": "Right"
+            },
+            {
+              "es": "Izquierdo",
+              "en": "Left"
+            },
+            {
+              "es": "Ambos",
+              "en": "Both"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "height",
+          "tipo": "number",
+          "es": "Altura (cm)",
+          "en": "Height (cm)",
+          "placeholderEs": "178",
+          "placeholderEn": "178"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "currentTeam",
+          "tipo": "text",
+          "es": "Equipo actual",
+          "en": "Current team"
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "league",
+          "tipo": "select",
+          "es": "Categoría o liga",
+          "en": "Category or league",
+          "opciones": [
+            {
+              "es": "División de Honor Juvenil",
+              "en": "División de Honor Juvenil (Spain, top U19)"
+            },
+            {
+              "es": "Liga Nacional Juvenil",
+              "en": "Liga Nacional Juvenil (Spain)"
+            },
+            {
+              "es": "Primera / Segunda RFEF",
+              "en": "Primera / Segunda RFEF (Spain)"
+            },
+            {
+              "es": "Tercera RFEF",
+              "en": "Tercera RFEF (Spain)"
+            },
+            {
+              "es": "Regional (sénior o juvenil)",
+              "en": "Regional league (senior or youth)"
+            },
+            {
+              "es": "High school (EE.UU.)",
+              "en": "High school (U.S.)"
+            },
+            {
+              "es": "Club o academia (EE.UU.)",
+              "en": "Club or academy (U.S.)"
+            },
+            {
+              "es": "Universidad",
+              "en": "College"
+            },
+            {
+              "es": "Otra",
+              "en": "Other"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "highlightVideo",
+          "tipo": "url",
+          "es": "Enlace a tu vídeo de highlights",
+          "en": "Link to your highlight video",
+          "ancho": "completo",
+          "placeholderEs": "https://youtube.com/...",
+          "placeholderEn": "https://youtube.com/...",
+          "ayudaEs": "De 4 a 6 minutos con tus mejores jugadas. Es lo que usamos para decidir las invitaciones.",
+          "ayudaEn": "Four to six minutes of your best plays. It is what we use to decide the invitations."
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "fullMatchVideo",
+          "tipo": "url",
+          "es": "Vídeo de un partido completo",
+          "en": "Full match video",
+          "ancho": "completo",
+          "placeholderEs": "https://youtube.com/...",
+          "placeholderEn": "https://youtube.com/..."
+        }
+      ]
+    },
+    {
+      "id": "estudios",
+      "es": "Estudios y planes",
+      "en": "Studies and plans",
+      "preguntas": [
+        {
+          "activa": true,
+          "obligatoria": true,
+          "id": "graduation",
+          "tipo": "select",
+          "es": "¿En qué año acabas bachillerato?",
+          "en": "High school graduation year",
+          "opciones": [
+            {
+              "es": "2025 o antes",
+              "en": "2025 or earlier"
+            },
+            {
+              "es": "2026",
+              "en": "2026"
+            },
+            {
+              "es": "2027",
+              "en": "2027"
+            },
+            {
+              "es": "2028",
+              "en": "2028"
+            },
+            {
+              "es": "2029 o después",
+              "en": "2029 or later"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "gpa",
+          "tipo": "text",
+          "es": "Nota media",
+          "en": "GPA / average grade",
+          "placeholderEs": "Ej.: 7,5 / 10",
+          "placeholderEn": "E.g. 3.4 / 4.0"
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "english",
+          "tipo": "select",
+          "es": "Nivel de inglés",
+          "en": "English level",
+          "opciones": [
+            {
+              "es": "Básico",
+              "en": "Basic"
+            },
+            {
+              "es": "Intermedio",
+              "en": "Intermediate"
+            },
+            {
+              "es": "Avanzado",
+              "en": "Advanced"
+            },
+            {
+              "es": "Nativo",
+              "en": "Native"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "startTerm",
+          "tipo": "select",
+          "es": "¿Cuándo te gustaría empezar en EE.UU.?",
+          "en": "When would you like to start in the U.S.?",
+          "opciones": [
+            {
+              "es": "Otoño 2026",
+              "en": "Fall 2026"
+            },
+            {
+              "es": "Primavera 2027",
+              "en": "Spring 2027"
+            },
+            {
+              "es": "Otoño 2027",
+              "en": "Fall 2027"
+            },
+            {
+              "es": "Primavera 2028",
+              "en": "Spring 2028"
+            },
+            {
+              "es": "Otoño 2028",
+              "en": "Fall 2028"
+            },
+            {
+              "es": "Aún no lo sé",
+              "en": "Not sure yet"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "major",
+          "tipo": "text",
+          "es": "¿Qué te gustaría estudiar?",
+          "en": "What would you like to study?"
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "budget",
+          "tipo": "select",
+          "es": "Presupuesto anual de la familia",
+          "en": "Family budget per year",
+          "ayudaEs": "Para la universidad en EE.UU., con vivienda y comida.",
+          "ayudaEn": "For college in the U.S., housing and food included.",
+          "opciones": [
+            {
+              "es": "0-$5.000",
+              "en": "0-$5,000"
+            },
+            {
+              "es": "$5.000-$10.000",
+              "en": "$5,000-$10,000"
+            },
+            {
+              "es": "$10.000-$12.000",
+              "en": "$10,000-$12,000"
+            },
+            {
+              "es": "$12.000-$15.000",
+              "en": "$12,000-$15,000"
+            },
+            {
+              "es": "+$15.000",
+              "en": "+$15,000"
+            },
+            {
+              "es": "No lo sé todavía",
+              "en": "I don't know yet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "es": "Último paso",
+      "en": "Last step",
+      "preguntas": [
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "source",
+          "tipo": "select",
+          "es": "¿Cómo conociste el showcase?",
+          "en": "How did you hear about the Showcase?",
+          "opciones": [
+            {
+              "es": "Instagram",
+              "en": "Instagram"
+            },
+            {
+              "es": "TikTok",
+              "en": "TikTok"
+            },
+            {
+              "es": "Google",
+              "en": "Google search"
+            },
+            {
+              "es": "Un amigo o compañero",
+              "en": "A friend or teammate"
+            },
+            {
+              "es": "Mi entrenador o club",
+              "en": "My coach or club"
+            },
+            {
+              "es": "Un jugador de FUA",
+              "en": "A current or former FUA player"
+            },
+            {
+              "es": "Otro",
+              "en": "Other"
+            }
+          ]
+        },
+        {
+          "activa": true,
+          "obligatoria": false,
+          "id": "comments",
+          "tipo": "textarea",
+          "es": "¿Algo más que debamos saber?",
+          "en": "Anything else we should know?",
+          "ancho": "completo",
+          "placeholderEs": "Lesiones, convocatorias, objetivos, dudas sobre el viaje…",
+          "placeholderEn": "Injuries, call-ups, goals, travel questions…"
+        }
+      ]
+    }
+  ]
+}
