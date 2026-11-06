@@ -63,7 +63,7 @@ const UsaAnchorNav = () => {
     >
       <nav
         aria-label={es ? "Secciones de la página" : "Page sections"}
-        className="mx-auto w-fit max-w-full overflow-x-auto px-4 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mx-auto w-fit max-w-full overflow-x-auto rounded-full px-4 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <ul className="flex items-center gap-1 whitespace-nowrap">
           {links.map((link) => {
@@ -74,7 +74,7 @@ const UsaAnchorNav = () => {
                   href={`#${link.id}`}
                   onClick={scrollToSection(link.id)}
                   aria-current={isActive ? "true" : undefined}
-                  className={`block rounded-xl px-3.5 py-2 font-body text-[13px] font-semibold transition-colors duration-200 sm:px-4 ${
+                  className={`block rounded-full px-3.5 py-2 font-body text-[13px] font-semibold transition-colors duration-200 sm:px-4 ${
                     isActive
                       ? "bg-secondary text-white"
                       : "text-muted-foreground hover:text-foreground"
