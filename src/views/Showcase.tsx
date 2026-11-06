@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import LocaleLink from "@/components/LocaleLink";
 import {
   ArrowRight,
   CalendarDays,
@@ -22,6 +21,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useCountUp } from "@/hooks/useCountUp";
+import ShowcaseForm from "@/components/ShowcaseForm";
 
 /* Ciudad Deportiva (Ébora Formación), P.I. Soto de Cazalegas, Talavera. */
 const VENUE = { lat: 39.97637, lng: -4.74797 };
@@ -239,13 +239,13 @@ const Showcase = () => {
               className="hero-reveal mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center"
               style={{ animationDelay: "240ms" }}
             >
-              <LocaleLink
-                to="/apply"
+              <a
+                href="#inscripcion"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
               >
                 {es ? "Soy jugador: quiero participar" : "I'm a player: I want in"}
                 <ArrowRight className="h-4 w-4" />
-              </LocaleLink>
+              </a>
               <a
                 href="#coaches"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-white/10"
@@ -597,10 +597,10 @@ const Showcase = () => {
           </div>
         </section>
 
-        {/* ── Players CTA ──────────────────────────────────── */}
-        <section className="section-padding">
+        {/* ── Player registration (goes to the CRM's Showcase section) ── */}
+        <section id="inscripcion" className="section-padding scroll-mt-20">
           <div className="container-wide">
-            <div className="relative overflow-hidden rounded-3xl bg-footer-dark px-6 py-14 sm:px-10 md:px-16 md:py-20">
+            <div className="relative overflow-hidden rounded-3xl bg-footer-dark px-6 pb-20 pt-14 sm:px-10 md:px-16 md:pb-24 md:pt-16">
               <Image
                 src="/images/showcase/campo-principal.jpg"
                 alt=""
@@ -611,21 +611,17 @@ const Showcase = () => {
               <div className="relative max-w-2xl">
                 <span className={eyebrowDark}>{es ? "Jugadores" : "Players"}</span>
                 <h2 className={`${h2} mt-4 text-white`}>
-                  {es ? "¿Quieres jugar el showcase?" : "Want to play in the Showcase?"}
+                  {es ? "Inscríbete al showcase" : "Register for the Showcase"}
                 </h2>
                 <p className="mt-5 font-body text-base leading-relaxed text-white/75 sm:text-lg">
                   {es
-                    ? "El showcase es solo por invitación. Envíanos tu perfil: lo revisamos y, si encajas, te contamos cómo participar."
-                    : "The Showcase is by invitation only. Send us your profile: we review it and, if you're a fit, we'll tell you how to take part."}
+                    ? "Es solo por invitación y hay 60 plazas. Rellena tu perfil con tu vídeo: lo revisamos y, si encajas, te enviamos la invitación con los siguientes pasos."
+                    : "It is by invitation only and there are 60 places. Fill in your profile with your video: we review it and, if you are a fit, we send you the invitation and next steps."}
                 </p>
-                <LocaleLink
-                  to="/apply"
-                  className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
-                >
-                  {es ? "Envía tu perfil" : "Send your profile"}
-                  <ArrowRight className="h-4 w-4" />
-                </LocaleLink>
               </div>
+            </div>
+            <div className="relative mx-auto -mt-8 max-w-4xl px-0 sm:-mt-10 sm:px-6">
+              <ShowcaseForm />
             </div>
           </div>
         </section>
