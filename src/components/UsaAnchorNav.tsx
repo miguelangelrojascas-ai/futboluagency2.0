@@ -49,23 +49,22 @@ const UsaAnchorNav = () => {
   };
 
   return (
-    // A full-width band docked under the navbar, like Apple's product
-    // sub-nav. Content scrolls under a solid strip instead of colliding with
-    // a floating pill.
+    // A floating pill docked under the navbar, inset from the screen edges
+    // to match the navbar's shape.
     <div
       ref={barRef}
-      className="sticky top-16 z-40 border-b border-border md:top-20"
-      style={{
-        backgroundColor: "hsl(var(--background) / 0.88)",
-        backdropFilter: "blur(20px) saturate(1.8)",
-        WebkitBackdropFilter: "blur(20px) saturate(1.8)",
-      }}
+      className="pointer-events-none sticky top-16 z-40 px-3 pt-2 sm:px-4 md:top-20"
     >
       <nav
         aria-label={es ? "Secciones de la página" : "Page sections"}
-        className="mx-auto w-fit max-w-full overflow-x-auto rounded-full px-4 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="pointer-events-auto container-wide overflow-x-auto rounded-full border border-border/60 navbar-shadow px-2 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{
+          backgroundColor: "hsl(var(--background) / 0.9)",
+          backdropFilter: "blur(20px) saturate(1.8)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.8)",
+        }}
       >
-        <ul className="flex items-center gap-1 whitespace-nowrap">
+        <ul className="mx-auto flex w-fit items-center gap-1 whitespace-nowrap">
           {links.map((link) => {
             const isActive = activeId === link.id;
             return (
