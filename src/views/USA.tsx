@@ -314,7 +314,13 @@ const USA = () => {
 
         <ScholarshipCasesSection />
 
-        <div id="universidades" style={{ background: "hsl(var(--section-alt))" }}>
+        <div
+          id="universidades"
+          style={{
+            background:
+              "linear-gradient(180deg, hsl(var(--section-alt)) 0%, hsl(var(--background)) 50%, hsl(var(--section-alt)) 100%)",
+          }}
+        >
           <UniversityMap />
         </div>
 
