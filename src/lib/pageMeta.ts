@@ -36,6 +36,24 @@ export const PAGE_META: Record<RouteKey, Record<Locale, Copy>> = {
         "Turn your talent into a scholarship. We help international footballers reach NCAA, NAIA and JUCO universities.",
     },
   },
+  spain: {
+    es: {
+      title: "Programa en España | Academias de Fútbol Élite – FutbolUAgency",
+      description:
+        "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales a una hora de Madrid. Para jugadores internacionales de 14 a 19 años.",
+      ogTitle: "Programa en España | FutbolUAgency",
+      ogDescription:
+        "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales a una hora de Madrid.",
+    },
+    en: {
+      title: "Spain Program | Elite Football Academies – FutbolUAgency",
+      description:
+        "Train at top football academies in Spain. An elite program with professional clubs an hour from Madrid, for international players aged 14 to 19.",
+      ogTitle: "Spain Program | FutbolUAgency",
+      ogDescription:
+        "Train at top football academies in Spain. An elite program with professional clubs an hour from Madrid.",
+    },
+  },
   usa: {
     es: {
       title: "Fútbol Universitario en USA | Becas NCAA, NAIA y JUCO – FutbolUAgency",

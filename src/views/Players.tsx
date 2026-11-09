@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlayerCard from "@/components/PlayerCard";
+import NextPlayerCard from "@/components/NextPlayerCard";
 import { useState } from "react";
 import Image from "next/image";
 import { LEAGUES, players, type League } from "@/data/players";
@@ -24,31 +25,28 @@ const Players = () => {
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
         {/* Hero */}
-        <section
-          className="relative overflow-hidden"
-          /* Navy and maroon taken from the edges of the artwork, so it melts in. */
-          style={{ background: "radial-gradient(ellipse 70% 60% at 50% 0%, #2a1626 0%, #10182b 70%), #10182b" }}
-        >
-          {/* FUA players artwork (1920×945), anchored to the bottom. On phones and
-              tablets it sits under the text and is cropped to the middle players;
-              on large screens it fills the header with the players framing the text. */}
-          <div className="absolute inset-x-0 bottom-0 h-[340px] sm:h-[470px] lg:inset-0 lg:h-auto">
-            <Image src={HERO_IMAGE} alt="" fill priority sizes="(min-width: 640px) 100vw, 180vw" className="object-cover object-bottom" />
-            {/* Fades the top of the artwork into the background: no visible edge. */}
-            <div
-              className="absolute inset-x-0 top-0 h-1/2 lg:h-[30%]"
-              style={{ background: "linear-gradient(to bottom, #10182b 0%, rgba(16,24,43,0.6) 45%, rgba(16,24,43,0) 100%)" }}
-            />
-            {/* Large screens: a soft shade behind the centred text. */}
-            <div
-              className="absolute inset-0 hidden lg:block"
-              style={{ background: "radial-gradient(ellipse 32% 40% at 50% 36%, rgba(10,12,26,0.7) 0%, rgba(10,12,26,0.45) 50%, rgba(10,12,26,0.12) 80%, transparent 100%)" }}
-            />
-          </div>
+        {/* Hero: the artwork runs behind the floating navbar, tinted dark, and
+            stops short of the full screen so the roster peeks in below. */}
+        <section className="relative -mt-16 overflow-hidden bg-[#10182b] md:-mt-20">
+          <Image
+            src={HERO_IMAGE}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[center_30%]"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(10,14,30,0.55) 0%, rgba(10,14,30,0.35) 60%, rgba(10,14,30,0.2) 100%), linear-gradient(to bottom, rgba(10,14,30,0.55) 0%, rgba(10,14,30,0.25) 35%, rgba(10,14,30,0.45) 100%)",
+            }}
+          />
 
-          <div className="container-wide relative z-10 px-4 pb-[250px] pt-12 text-center sm:pb-[350px] sm:pt-16 lg:flex lg:min-h-[calc(100vh-5rem)] lg:flex-col lg:items-center lg:pb-0 lg:pt-[13vh]">
-            <div className="mx-auto max-w-3xl" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.85)" }}>
-              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-red-500">
+          <div className="container-wide relative z-10 flex min-h-[560px] flex-col items-center justify-center px-4 pb-16 pt-32 text-center sm:min-h-[620px] md:pt-36 lg:min-h-[70vh] lg:max-h-[760px]">
+            <div className="mx-auto max-w-3xl" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.75)" }}>
+              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-white/80">
                 {es ? "Nuestros jugadores" : "Our players"}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">
@@ -56,12 +54,19 @@ const Players = () => {
                 <span className="italic text-red-500">{es ? "250 atletas" : "250 athletes"}</span>
                 {es ? " han confiado en nosotros" : " have trusted us"}
               </h1>
-              <p className="mx-auto max-w-2xl font-body text-base leading-relaxed text-white/85 sm:text-lg">
+              <p className="mx-auto max-w-2xl font-body text-base leading-relaxed text-white/90 sm:text-lg">
                 {es
-                  ? "Esta es la familia FUA. Cada ficha es un futbolista real al que hemos acompañado hasta el campus. No están todos: algunas familias prefieren no hacerlo público."
-                  : "This is the FUA family. Every card is a real footballer we have guided all the way to campus. Not everyone is here: some families prefer to keep it private."}
+                  ? "Futbolistas que ya estudian y compiten en universidades de EE.UU. con beca. El siguiente puedes ser tú."
+                  : "Footballers already studying and competing at U.S. universities on a scholarship. You could be next."}
               </p>
             </div>
+            <LocaleLink
+              to="/apply"
+              className="mt-8 inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
+            >
+              {es ? "Envía tu perfil" : "Send your profile"}
+              <ArrowRight className="h-4 w-4" />
+            </LocaleLink>
           </div>
         </section>
 
@@ -102,6 +107,11 @@ const Players = () => {
                   <PlayerCard player={player} />
                 </li>
               ))}
+
+              {/* Empty card at the end: the next FUA player. */}
+              <li>
+                <NextPlayerCard />
+              </li>
 
               <li className="sm:col-span-2 lg:col-span-3">
                 <div className="flex h-full flex-col justify-center rounded-2xl border border-border p-6 sm:p-7" style={{ backgroundColor: "hsl(var(--card))" }}>

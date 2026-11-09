@@ -136,6 +136,7 @@ const Footer = () => {
             <nav className="space-y-3">
               <LocaleLink to="/" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.home")}</LocaleLink>
               <LocaleLink to="/usa" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.usa")}</LocaleLink>
+              <LocaleLink to="/spain" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.spain")}</LocaleLink>
               <LocaleLink to="/showcase" className="block font-body text-sm text-white/70 hover:text-white transition-colors">Showcase</LocaleLink>
               <LocaleLink to="/about" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.about")}</LocaleLink>
               <LocaleLink to="/players" className="block font-body text-sm text-white/70 hover:text-white transition-colors">{t("nav.players")}</LocaleLink>
