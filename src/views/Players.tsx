@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlayerCard from "@/components/PlayerCard";
-import { players, placeholderCount } from "@/data/players";
+import { players } from "@/data/players";
 
 const Players = () => {
   const { language } = useLanguage();
@@ -45,21 +45,14 @@ const Players = () => {
           style={{ backgroundColor: "hsl(var(--section-alt))" }}
         >
           <div className="container-wide px-4">
-            <ul className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 xl:grid-cols-5">
+            <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
               {players.map((player) => (
-                <li key={player.name}>
+                <li key={player.image}>
                   <PlayerCard player={player} />
                 </li>
               ))}
-              {Array.from({ length: placeholderCount }).map((_, i) => (
-                <li key={`placeholder-${i}`}>
-                  <PlayerCard emptyLabel={es ? "Próximamente" : "Coming soon"} />
-                </li>
-              ))}
 
-              {/* Fills the gap the grid leaves at the end: 14 players + 4 slots
-                  + these 2 cells divide evenly at 2, 4 and 5 columns. */}
-              <li className="col-span-2">
+              <li className="sm:col-span-2 lg:col-span-3">
                 <div className="flex h-full flex-col justify-center rounded-2xl border border-border p-6 sm:p-7" style={{ backgroundColor: "hsl(var(--card))" }}>
                   <h2 className="font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
                     {es ? "Fútbol universitario en EE.UU." : "College soccer in the U.S."}
