@@ -7,7 +7,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlayerCard from "@/components/PlayerCard";
 import { useState } from "react";
+import Image from "next/image";
 import { LEAGUES, players, type League } from "@/data/players";
+
+/** FUA players artwork for the header. */
+const HERO_IMAGE = "/images/hero/header-jugadores.png";
 
 const Players = () => {
   const { language } = useLanguage();
@@ -20,19 +24,39 @@ const Players = () => {
       <Navbar />
       <main className="min-h-screen pt-16 md:pt-20">
         {/* Hero */}
-        <section className="section-padding relative overflow-hidden bg-background">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.07),transparent_60%)]" />
-          <div className="container-wide relative px-4">
-            <div className="max-w-3xl">
-              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+        <section
+          className="relative overflow-hidden"
+          /* Navy and maroon taken from the edges of the artwork, so it melts in. */
+          style={{ background: "radial-gradient(ellipse 70% 60% at 50% 0%, #2a1626 0%, #10182b 70%), #10182b" }}
+        >
+          {/* FUA players artwork (1920×945), anchored to the bottom. On phones and
+              tablets it sits under the text and is cropped to the middle players;
+              on large screens it fills the header with the players framing the text. */}
+          <div className="absolute inset-x-0 bottom-0 h-[340px] sm:h-[470px] lg:inset-0 lg:h-auto">
+            <Image src={HERO_IMAGE} alt="" fill priority sizes="(min-width: 640px) 100vw, 180vw" className="object-cover object-bottom" />
+            {/* Fades the top of the artwork into the background: no visible edge. */}
+            <div
+              className="absolute inset-x-0 top-0 h-1/2 lg:h-[30%]"
+              style={{ background: "linear-gradient(to bottom, #10182b 0%, rgba(16,24,43,0.6) 45%, rgba(16,24,43,0) 100%)" }}
+            />
+            {/* Large screens: a soft shade behind the centred text. */}
+            <div
+              className="absolute inset-0 hidden lg:block"
+              style={{ background: "radial-gradient(ellipse 32% 40% at 50% 36%, rgba(10,12,26,0.7) 0%, rgba(10,12,26,0.45) 50%, rgba(10,12,26,0.12) 80%, transparent 100%)" }}
+            />
+          </div>
+
+          <div className="container-wide relative z-10 px-4 pb-[250px] pt-12 text-center sm:pb-[350px] sm:pt-16 lg:flex lg:min-h-[calc(100vh-5rem)] lg:flex-col lg:items-center lg:pb-0 lg:pt-[13vh]">
+            <div className="mx-auto max-w-3xl" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.85)" }}>
+              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-red-500">
                 {es ? "Nuestros jugadores" : "Our players"}
               </span>
-              <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
+              <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">
                 {es ? "Más de " : "More than "}
-                <span className="italic text-primary">{es ? "250 atletas" : "250 athletes"}</span>
+                <span className="italic text-red-500">{es ? "250 atletas" : "250 athletes"}</span>
                 {es ? " han confiado en nosotros" : " have trusted us"}
               </h1>
-              <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
+              <p className="mx-auto max-w-2xl font-body text-base leading-relaxed text-white/85 sm:text-lg">
                 {es
                   ? "Esta es la familia FUA. Cada ficha es un futbolista real al que hemos acompañado hasta el campus. No están todos: algunas familias prefieren no hacerlo público."
                   : "This is the FUA family. Every card is a real footballer we have guided all the way to campus. Not everyone is here: some families prefer to keep it private."}
@@ -50,7 +74,7 @@ const Players = () => {
             <div
               role="group"
               aria-label={es ? "Filtrar por liga" : "Filter by league"}
-              className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+              className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
             >
               {[null, ...LEAGUES].map((l) => {
                 const active = league === l;
