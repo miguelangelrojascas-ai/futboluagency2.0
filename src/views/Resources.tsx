@@ -127,16 +127,17 @@ const Resources = () => {
               })}
             </ul>
             <style>{`
-              /* Only where there is a real pointer. On touch the card is a plain link. */
+              /* Gated on width, not (hover: hover): touch-capable laptops and some
+                 embedded previews report no hover and would never get the lift. */
               .guide-preview { display: none; }
-              @media (hover: hover) and (min-width: 768px) {
+              @media (min-width: 768px) {
                 .guide-card { --guide-lift: 11rem; }
                 .guide-track {
                   transition: transform 420ms cubic-bezier(0.23, 1, 0.32, 1);
                 }
                 .guide-card:hover .guide-track,
                 .guide-card:focus-within .guide-track {
-                  transform: translateY(-var(--guide-lift));
+                  transform: translateY(calc(-1 * var(--guide-lift)));
                 }
                 .guide-preview {
                   display: block;

@@ -448,11 +448,11 @@ const UniversityMap = () => {
            sección no sea un bloque blanco entre otras dos blancas. */
   backgroundColor: "hsl(var(--section-alt))",
   backgroundImage: [
-    "radial-gradient(circle at 1px 1px, hsl(var(--secondary) / 0.14) 1px, transparent 0)",
-    "radial-gradient(ellipse 45% 40% at 12% 18%, hsl(var(--primary) / 0.12), transparent 70%)",
-    "radial-gradient(ellipse 50% 45% at 88% 88%, hsl(var(--secondary) / 0.16), transparent 70%)",
-    "radial-gradient(ellipse 60% 55% at 50% 58%, hsl(var(--foreground) / 0.05), transparent 70%)",
-    "linear-gradient(180deg, hsl(var(--section-alt)) 0%, hsl(var(--background)) 100%)",
+    "radial-gradient(circle at 1px 1px, hsl(var(--secondary) / 0.22) 1.2px, transparent 0)",
+    "radial-gradient(ellipse 55% 50% at 8% 12%, hsl(var(--primary) / 0.22), transparent 70%)",
+    "radial-gradient(ellipse 60% 55% at 92% 90%, hsl(var(--secondary) / 0.30), transparent 70%)",
+    "radial-gradient(ellipse 50% 45% at 85% 10%, hsl(var(--secondary) / 0.14), transparent 70%)",
+    "linear-gradient(160deg, hsl(var(--secondary) / 0.10) 0%, hsl(var(--section-alt)) 45%, hsl(var(--primary) / 0.08) 100%)",
   ].join(", "),
   backgroundSize: "22px 22px, 100% 100%, 100% 100%, 100% 100%, 100% 100%",
       }}
