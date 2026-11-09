@@ -6,12 +6,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlayerCard from "@/components/PlayerCard";
-import { players } from "@/data/players";
+import { useState } from "react";
+import { LEAGUES, players, type League } from "@/data/players";
 
 const Players = () => {
   const { language } = useLanguage();
   const es = language === "es";
-
+  const [league, setLeague] = useState<League | null>(null);
+  const shown = league ? players.filter((p) => p.league === league) : players;
 
   return (
     <>
@@ -45,8 +47,35 @@ const Players = () => {
           style={{ backgroundColor: "hsl(var(--section-alt))" }}
         >
           <div className="container-wide px-4">
+            <div
+              role="group"
+              aria-label={es ? "Filtrar por liga" : "Filter by league"}
+              className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+            >
+              {[null, ...LEAGUES].map((l) => {
+                const active = league === l;
+                const count = l ? players.filter((p) => p.league === l).length : players.length;
+                return (
+                  <button
+                    key={l ?? "all"}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setLeague(l)}
+                    className={`inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 font-body text-sm font-semibold transition-colors ${
+                      active
+                        ? "border-primary bg-primary text-white"
+                        : "border-border bg-card text-foreground hover:border-foreground/30"
+                    }`}
+                  >
+                    {l ?? (es ? "Todos" : "All")}
+                    <span className={`text-xs ${active ? "text-white/75" : "text-muted-foreground"}`}>{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+
             <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-              {players.map((player) => (
+              {shown.map((player) => (
                 <li key={player.image}>
                   <PlayerCard player={player} />
                 </li>

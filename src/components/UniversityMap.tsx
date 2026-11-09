@@ -214,7 +214,7 @@ const universitiesByState: Record<string, StateData> = {
   AL: { count: 5, universities: [
     { name: "Alabama", division: "D1" }, { name: "Auburn", division: "D1" },
     { name: "UAB", division: "D1" }, { name: "Huntingdon College", division: "D3" },
-    { name: "Spring Hill College", division: "D3" },
+    { name: "Spring Hill College", division: "D2" },
   ]},
   LA: { count: 5, universities: [
     { name: "LSU", division: "D1" }, { name: "Tulane", division: "D1" },
@@ -282,6 +282,45 @@ const universitiesByState: Record<string, StateData> = {
   DE: { count: 1, universities: [{ name: "Delaware", division: "D1" }] },
   RI: { count: 1, universities: [{ name: "Providence College", division: "D1" }] },
 };
+
+/* Universities where FUA players are committed (see /jugadores). Merged into the
+   map so every one of them shows up; counts follow the lists automatically. */
+const fuaCommitments: Record<string, University[]> = {
+  AL: [{ name: "Faulkner University", division: "NAIA" }],
+  AR: [{ name: "University of the Ozarks", division: "D3" }],
+  CA: [{ name: "Cal Poly Pomona", division: "D2" }],
+  CO: [{ name: "Regis University", division: "D2" }],
+  FL: [{ name: "St. Thomas University", division: "NAIA" }],
+  ID: [{ name: "Northwest Nazarene University", division: "D2" }],
+  IL: [
+    { name: "Greenville University", division: "D3" }, { name: "Dominican University (Illinois)", division: "D3" },
+    { name: "Carl Sandburg College", division: "NJCAA" }, { name: "Illinois Valley CC", division: "NJCAA" },
+    { name: "Joliet Junior College", division: "NJCAA" }, { name: "Illinois Central College", division: "NJCAA" },
+    { name: "Prairie State College", division: "NJCAA" },
+  ],
+  IN: [{ name: "Holy Cross College", division: "NAIA" }, { name: "Earlham College", division: "D3" }],
+  KS: [{ name: "Seward County CC", division: "NJCAA" }, { name: "Cowley College", division: "NJCAA" }],
+  KY: [{ name: "Union Commonwealth University", division: "NAIA" }, { name: "Midway University", division: "NAIA" }],
+  LA: [{ name: "LSU of Alexandria", division: "NAIA" }],
+  MI: [{ name: "Northern Michigan University", division: "D2" }],
+  MO: [{ name: "Crowder College", division: "NJCAA" }],
+  MS: [{ name: "Delta State University", division: "D2" }, { name: "East Mississippi CC", division: "NJCAA" }],
+  NC: [{ name: "Carolina University", division: "NAIA" }],
+  NE: [{ name: "Midland University", division: "NAIA" }],
+  NJ: [{ name: "Saint Peter's University", division: "D1" }, { name: "Felician University", division: "D2" }],
+  NY: [{ name: "Monroe College", division: "D2" }],
+  OH: [{ name: "Shawnee State University", division: "D2" }, { name: "Mount Vernon Nazarene", division: "NAIA" }],
+  OK: [{ name: "Southwestern Christian University", division: "NAIA" }, { name: "Oklahoma Panhandle State", division: "NAIA" }],
+  TX: [{ name: "Texas A&M–Victoria", division: "NAIA" }, { name: "North American University", division: "NAIA" }],
+  UT: [{ name: "Snow College", division: "NJCAA" }],
+  WI: [{ name: "Wisconsin-Stout", division: "D3" }, { name: "Beloit College", division: "D3" }],
+  WV: [{ name: "Salem University", division: "D2" }],
+};
+for (const [abbr, list] of Object.entries(fuaCommitments)) {
+  const state = (universitiesByState[abbr] ??= { count: 0, universities: [] });
+  for (const uni of list) if (!state.universities.some((u) => u.name === uni.name)) state.universities.push(uni);
+}
+for (const state of Object.values(universitiesByState)) state.count = state.universities.length;
 
 const FIPS_TO_STATE: Record<string, { abbr: string; name: string }> = {
   "01": { abbr: "AL", name: "Alabama" }, "02": { abbr: "AK", name: "Alaska" },

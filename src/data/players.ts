@@ -9,6 +9,8 @@ export type Player = {
   image: string;
   university: string;
   division: string;
+  /** Group used to order and filter the page. */
+  league: League;
   /** Slug of this player's story page, when they have one. */
   story?: string;
 };
@@ -74,11 +76,33 @@ const roster: Array<[string, string, string, string]> = [
   ["Tomás del Grosso", "tomas-del-grosso", "Cal Poly Pomona University", "NCAA D2"],
 ];
 
-/** Footballers already committed to a U.S. university, in the order of the graphics. */
-export const players: Player[] = roster.map(([name, file, university, division]) => ({
-  name,
-  image: `/images/commitments/${file}.jpg`,
-  university,
-  division,
-  story: storySlugByName.get(name),
-}));
+/** Leagues in the order the page shows them (and its filter buttons). */
+export const LEAGUES = ["NCAA D1", "NCAA D2", "NCAA D3", "NAIA", "NJCAA"] as const;
+export type League = (typeof LEAGUES)[number];
+
+/** "NJCAA D3" is still junior college: it goes with the rest of NJCAA. */
+const leagueOf = (division: string): League =>
+  division.startsWith("NJCAA") ? "NJCAA" : (division as League);
+
+/** The player who opens the page. */
+const FEATURED = "Ander González";
+
+/** Footballers already committed to a U.S. university: by league, featured player
+ *  first, otherwise in the order of the graphics. */
+export const players: Player[] = roster
+  .map(([name, file, university, division]) => ({
+    name,
+    image: `/images/commitments/${file}.jpg`,
+    university,
+    division,
+    league: leagueOf(division),
+    story: storySlugByName.get(name),
+  }))
+  .map((p, i) => ({ p, i }))
+  .sort(
+    (a, b) =>
+      Number(b.p.name === FEATURED) - Number(a.p.name === FEATURED) ||
+      LEAGUES.indexOf(a.p.league) - LEAGUES.indexOf(b.p.league) ||
+      a.i - b.i,
+  )
+  .map(({ p }) => p);
