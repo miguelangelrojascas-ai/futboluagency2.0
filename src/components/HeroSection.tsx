@@ -24,7 +24,7 @@ const HeroSection = () => {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 36% 46% at 50% 40%, rgba(10,12,26,0.94) 0%, rgba(10,12,26,0.8) 45%, rgba(10,12,26,0.35) 75%, transparent 100%), linear-gradient(to bottom, rgba(16,24,43,0.5), transparent 30%)",
+              "radial-gradient(ellipse 32% 42% at 50% 40%, rgba(10,12,26,0.72) 0%, rgba(10,12,26,0.5) 50%, rgba(10,12,26,0.15) 80%, transparent 100%), linear-gradient(to bottom, rgba(16,24,43,0.4), transparent 25%)",
           }}
         />
       </div>
@@ -68,14 +68,13 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Phones and tablets: the whole artwork below the text. A portrait crop
-          would cut through the middle of both groups of players. */}
-      <div className="relative mt-8 aspect-[1920/945] w-full sm:mt-10 lg:hidden">
-        <Image src={HERO_IMAGE} alt="" fill priority sizes="100vw" className="object-cover" />
+      {/* Phones and tablets: the artwork sits under the text and melts into the
+          same background, so there is no visible edge. On phones it is taller and
+          cropped to the middle so the players read bigger. */}
+      <div className="relative -mt-4 h-[300px] w-full sm:-mt-6 sm:h-auto sm:aspect-[1920/945] lg:hidden">
+        <Image src={HERO_IMAGE} alt="" fill priority sizes="(min-width: 640px) 100vw, 160vw" className="object-cover object-bottom" />
+        <div className="absolute inset-x-0 top-0 h-2/5" style={{ background: "linear-gradient(to bottom, #10182b, rgba(16,24,43,0))" }} />
       </div>
-
-      {/* Fade into the white page below. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-8 sm:h-14 lg:h-28" style={{ background: "linear-gradient(to bottom, transparent, #ffffff)" }} />
 
       {/* Scroll indicator, large screens only */}
       <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 animate-float hidden lg:block">
