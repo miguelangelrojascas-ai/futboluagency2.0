@@ -130,12 +130,13 @@ const Resources = () => {
               /* Only where there is a real pointer. On touch the card is a plain link. */
               .guide-preview { display: none; }
               @media (hover: hover) and (min-width: 768px) {
+                .guide-card { --guide-lift: 11rem; }
                 .guide-track {
                   transition: transform 420ms cubic-bezier(0.23, 1, 0.32, 1);
                 }
                 .guide-card:hover .guide-track,
                 .guide-card:focus-within .guide-track {
-                  transform: translateY(-8.5rem);
+                  transform: translateY(-var(--guide-lift));
                 }
                 .guide-preview {
                   display: block;
@@ -143,13 +144,11 @@ const Resources = () => {
                   left: 0;
                   right: 0;
                   top: 100%;
-                  height: 8.5rem;
+                  height: var(--guide-lift);
                   padding-top: 1.5rem;
                   overflow: hidden;
                   opacity: 0;
                   transition: opacity 250ms ease;
-                  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
-                  mask-image: linear-gradient(to bottom, #000 80%, transparent);
                 }
                 .guide-card:hover .guide-preview,
                 .guide-card:focus-within .guide-preview {

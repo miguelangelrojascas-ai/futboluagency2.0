@@ -14,6 +14,30 @@ const FIELD_CLASS =
 const LABEL_CLASS =
   "mb-1.5 block font-body text-[13px] font-semibold text-foreground";
 
+const PHONE_PREFIXES = [
+  { code: "+34", label: "🇪🇸 +34" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+52", label: "🇲🇽 +52" },
+  { code: "+57", label: "🇨🇴 +57" },
+  { code: "+54", label: "🇦🇷 +54" },
+  { code: "+56", label: "🇨🇱 +56" },
+  { code: "+51", label: "🇵🇪 +51" },
+  { code: "+58", label: "🇻🇪 +58" },
+  { code: "+593", label: "🇪🇨 +593" },
+  { code: "+503", label: "🇸🇻 +503" },
+  { code: "+502", label: "🇬🇹 +502" },
+  { code: "+506", label: "🇨🇷 +506" },
+  { code: "+507", label: "🇵🇦 +507" },
+  { code: "+598", label: "🇺🇾 +598" },
+  { code: "+591", label: "🇧🇴 +591" },
+  { code: "+595", label: "🇵🇾 +595" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+49", label: "🇩🇪 +49" },
+  { code: "+33", label: "🇫🇷 +33" },
+  { code: "+39", label: "🇮🇹 +39" },
+  { code: "+351", label: "🇵🇹 +351" },
+] as const;
+
 /**
  * The admissions form.
  *
@@ -138,16 +162,32 @@ const ApplyForm = () => {
           <label className={LABEL_CLASS} htmlFor="whatsapp">
             {es ? "WhatsApp" : "WhatsApp"} *
           </label>
-          <input
-            id="whatsapp"
-            name="whatsapp"
-            type="tel"
-            required
-            autoComplete="tel"
-            placeholder={es ? "Con el prefijo de tu país" : "With your country code"}
-            className={FIELD_CLASS}
-            {...invalidProps("whatsapp")}
-          />
+          <div className="flex gap-2">
+            <select
+              id="whatsappCountryCode"
+              name="whatsappCountryCode"
+              defaultValue="+34"
+              aria-label={es ? "Prefijo del país" : "Country code"}
+              className={`${FIELD_CLASS} w-28 shrink-0 sm:w-32`}
+            >
+              {PHONE_PREFIXES.map((prefix) => (
+                <option key={prefix.code} value={prefix.code}>
+                  {prefix.label}
+                </option>
+              ))}
+            </select>
+            <input
+              id="whatsapp"
+              name="whatsapp"
+              type="tel"
+              inputMode="tel"
+              required
+              autoComplete="tel-national"
+              placeholder={es ? "Número sin prefijo" : "Number without prefix"}
+              className={FIELD_CLASS}
+              {...invalidProps("whatsapp")}
+            />
+          </div>
         </div>
 
         <div>
