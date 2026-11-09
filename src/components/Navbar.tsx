@@ -22,14 +22,14 @@ const Navbar = () => {
     pathname === resolveLegacyPath(language as Locale, path);
 
   const navLinkClass = (active: boolean) =>
-    `font-body text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
+    `font-body text-sm font-medium px-4 py-2 rounded-full transition-colors ${
       active
         ? "text-primary bg-primary/10"
         : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
     }`;
 
   const mobileNavLinkClass = (active: boolean) =>
-    `font-body text-sm font-bold text-center px-4 py-3 rounded-lg transition-colors ${
+    `font-body text-sm font-bold text-center px-4 py-3 rounded-full transition-colors ${
       active
         ? "text-primary bg-primary/10"
         : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -37,8 +37,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg navbar-shadow">
-        <div className="container-wide grid grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 h-16 md:h-20">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3">
+        <div className="container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full bg-background/95 backdrop-blur-lg navbar-shadow border border-border/60 pl-5 pr-3 sm:pl-6 sm:pr-4 h-14 md:h-16">
 
           {/* Logo */}
           <LocaleLink to="/" className="flex-shrink-0 justify-self-start">
@@ -85,7 +85,7 @@ const Navbar = () => {
             <LanguageSwitcher />
             <LocaleLink
               to="/apply"
-              className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+              className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
             >
               {t("nav.applyCta")}
             </LocaleLink>
@@ -103,8 +103,8 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
-            <div className="container-wide px-4 py-4 flex flex-col gap-1">
+          <div className="md:hidden mt-2 rounded-3xl bg-background/95 backdrop-blur-lg border border-border/60 navbar-shadow">
+            <div className="px-4 py-4 flex flex-col gap-1">
 
               {/* Inicio */}
               <LocaleLink to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>
@@ -140,7 +140,7 @@ const Navbar = () => {
               <LocaleLink
                 to="/apply"
                 onClick={() => setIsOpen(false)}
-                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-lg transition-colors bg-primary hover:bg-primary-hover text-white"
+                className="mt-2 flex items-center gap-3 font-body text-sm font-semibold px-4 py-3 rounded-full transition-colors bg-primary hover:bg-primary-hover text-white"
               >
                 <GraduationCap className="w-4 h-4" />
                 {t("nav.applyCta")}

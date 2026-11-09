@@ -49,7 +49,7 @@ const ShowcaseTeaser = () => {
                 </span>
               </div>
             </div>
-            <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors group-hover:bg-primary-hover md:self-auto">
+            <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors group-hover:bg-primary-hover md:self-auto">
               {es ? "Ver el showcase" : "See the Showcase"}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </span>

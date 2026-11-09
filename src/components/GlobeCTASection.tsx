@@ -33,7 +33,7 @@ const GlobeCTASection = () => {
               </p>
               <LocaleLink
                 to="/apply"
-                className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
                 {es ? "Envía tu perfil" : "Send your profile"}
                 <ArrowRight className="h-4 w-4" />

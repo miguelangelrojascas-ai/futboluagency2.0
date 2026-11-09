@@ -135,7 +135,7 @@ const Resources = () => {
                 }
                 .guide-card:hover .guide-track,
                 .guide-card:focus-within .guide-track {
-                  transform: translateY(-11.5rem);
+                  transform: translateY(-8.5rem);
                 }
                 .guide-preview {
                   display: block;
@@ -143,7 +143,7 @@ const Resources = () => {
                   left: 0;
                   right: 0;
                   top: 100%;
-                  height: 11.5rem;
+                  height: 8.5rem;
                   padding-top: 1.5rem;
                   overflow: hidden;
                   opacity: 0;
@@ -181,7 +181,7 @@ const Resources = () => {
               </p>
               <LocaleLink
                 to="/apply"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
                 {es ? "Envía tu perfil" : "Send your profile"}
                 <ArrowRight className="h-4 w-4" />

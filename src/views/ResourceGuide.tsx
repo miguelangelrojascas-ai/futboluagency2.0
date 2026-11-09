@@ -250,7 +250,7 @@ const ResourceGuide = () => {
               </p>
               <LocaleLink
                 to="/apply"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
                 {es ? "Evaluación gratuita" : "Free evaluation"}
                 <ArrowRight className="h-4 w-4" />

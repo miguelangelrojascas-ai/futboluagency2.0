@@ -18,11 +18,12 @@ const UsaAnchorNav = () => {
   const es = language === "es";
   const [activeId, setActiveId] = useState<string | null>(null);
   const barRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   // Highlight whichever section currently sits under the bar.
   useEffect(() => {
     const handleScroll = () => {
-      const probe = (barRef.current?.getBoundingClientRect().bottom ?? 0) + window.innerHeight * 0.15;
+      const probe = (navRef.current?.getBoundingClientRect().bottom ?? 0) + window.innerHeight * 0.15;
       let current: string | null = null;
       for (const link of links) {
         const el = document.getElementById(link.id);
@@ -43,29 +44,32 @@ const UsaAnchorNav = () => {
     /* Where the bar ends once docked (its sticky top + height), not where it
        is right now: from the top of the page it still sits below the hero. */
     const bar = barRef.current;
-    const barBottom = bar ? parseFloat(getComputedStyle(bar).top) + bar.offsetHeight : 0;
+    const nav = navRef.current;
+    const barBottom = bar && nav ? parseFloat(getComputedStyle(bar).top) + nav.offsetTop + nav.offsetHeight : 0;
     const top = el.getBoundingClientRect().top + window.scrollY - barBottom + 1;
     window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
-    // A full-width band docked under the navbar, like Apple's product
-    // sub-nav. Content scrolls under a solid strip instead of colliding with
-    // a floating pill.
+    // A floating pill docked under the navbar, inset from the screen edges
+    // to match the navbar's shape.
     <div
       ref={barRef}
-      className="sticky top-16 z-40 border-b border-border md:top-20"
-      style={{
-        backgroundColor: "hsl(var(--background) / 0.88)",
-        backdropFilter: "blur(20px) saturate(1.8)",
-        WebkitBackdropFilter: "blur(20px) saturate(1.8)",
-      }}
+      // h-0: the wrapper takes no layout space, so no strip of page background
+      // shows between the hero and the next section; the pill overlaps them.
+      className="pointer-events-none sticky top-16 z-40 h-0 overflow-visible px-3 sm:px-4 md:top-20"
     >
       <nav
+        ref={navRef}
         aria-label={es ? "Secciones de la página" : "Page sections"}
-        className="mx-auto w-fit max-w-full overflow-x-auto px-4 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="pointer-events-auto container-wide relative top-2 overflow-x-auto rounded-full border border-border/60 navbar-shadow px-2 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{
+          backgroundColor: "hsl(var(--background) / 0.9)",
+          backdropFilter: "blur(20px) saturate(1.8)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.8)",
+        }}
       >
-        <ul className="flex items-center gap-1 whitespace-nowrap">
+        <ul className="mx-auto flex w-fit items-center gap-1 whitespace-nowrap">
           {links.map((link) => {
             const isActive = activeId === link.id;
             return (

@@ -372,7 +372,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
         </p>
         <LocaleLink
           to="/recursos"
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           {es ? "Mientras, lee las guías" : "Meanwhile, read the guides"}
           <ArrowRight className="h-4 w-4" />
@@ -553,7 +553,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
           <button
             type="button"
             onClick={next}
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
           >
             {es ? "Siguiente" : "Next"}
             <ArrowRight className="h-4 w-4" />
@@ -562,7 +562,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
           >
             {status === "submitting" ? (
               <>
