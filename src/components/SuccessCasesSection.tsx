@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import SuccessCaseCard, { type SuccessCase } from "@/components/SuccessCaseCard";
-import { topRow, bottomRow } from "@/data/successCases";
+import { homeTopRow, homeBottomRow } from "@/data/homeCarousel";
 
 const GalleryRow = ({ cases, reverse = false }: { cases: SuccessCase[]; reverse?: boolean }) => (
   <div className="group/row relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
@@ -48,8 +48,8 @@ const SuccessCasesSection = () => {
       </div>
 
       <div className="flex flex-col gap-6 sm:gap-8">
-        <GalleryRow cases={topRow} />
-        <GalleryRow cases={bottomRow} reverse />
+        <GalleryRow cases={homeTopRow} />
+        <GalleryRow cases={homeBottomRow} reverse />
       </div>
 
       <div className="container-wide px-4">
