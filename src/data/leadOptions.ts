@@ -2,8 +2,8 @@
  * The closed sets of values a lead submission may contain.
  *
  * Imported by both the form and the serverless endpoint, which is the point:
- * the endpoint writes to Airtable without `typecast`, so a value that is not
- * on these lists is rejected rather than quietly added as a new select option.
+ * the endpoint rejects any value that is not on these lists before it forwards
+ * the lead to the CRM.
  * Keep this file free of imports so the function bundle stays tiny.
  */
 
