@@ -252,3 +252,11 @@
     scroll-margin-top: 8rem;
   }
 }
+
+/* Editorial fonts ship a single weight: stop headings from faking a bold. */
+@layer utilities {
+  .font-druk,
+  .font-bebas {
+    font-weight: 400;
+  }
+}

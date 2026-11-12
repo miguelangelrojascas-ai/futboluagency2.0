@@ -368,18 +368,14 @@ const FaqSection = () => {
       />
       <div className="container-wide px-4">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-block font-body text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
-            FAQ
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {isEs ? "Preguntas frecuentes" : "Frequently asked questions"}
-          </h2>
-          <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed">
-            {isEs
-              ? "Todo lo que necesitas saber sobre becas deportivas en Estados Unidos."
-              : "Everything you need to know about athletic scholarships in the United States."}
+        <div className="max-w-3xl mx-auto mb-10 text-center">
+          <p className="font-bebas text-[15px] tracking-[0.3em] text-primary sm:text-base">
+            {isEs ? "Preguntas frecuentes" : "FAQ"}
           </p>
+          <h2 className="mt-3 font-druk uppercase leading-[0.88] text-ink text-[clamp(3rem,12vw,6.5rem)]">
+            {isEs ? "Todo lo que" : "Everything"}
+            <span className="block pr-[0.08em] italic text-primary">{isEs ? "necesitas saber" : "you need to know"}</span>
+          </h2>
         </div>
 
         {/* Category tabs */}
@@ -399,7 +395,7 @@ const FaqSection = () => {
                 onClick={() => setActive(i)}
                 className={`font-body text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full border transition-colors duration-200 ${
                   isActive
-                    ? "bg-secondary text-white border-transparent"
+                    ? "bg-ink text-white border-transparent"
                     : "bg-card text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
                 }`}
               >

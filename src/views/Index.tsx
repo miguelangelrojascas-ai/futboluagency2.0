@@ -1,34 +1,30 @@
-import HeroSection from "@/components/HeroSection";
-import VideoSection from "@/components/VideoSection";
-import ShowcaseTeaser from "@/components/ShowcaseTeaser";
-import LogoCarousel from "@/components/LogoCarousel";
-import MetricsSection from "@/components/MetricsSection";
-import SuccessCasesSection from "@/components/SuccessCasesSection";
-import HomeProcessSection from "@/components/HomeProcessSection";
+import HomeHero from "@/components/home/HomeHero";
+import HomeStats from "@/components/home/HomeStats";
+import HomeRoster from "@/components/home/HomeRoster";
+import HomeMethod from "@/components/home/HomeMethod";
+import HomeVideo from "@/components/home/HomeVideo";
+import HomeFinalCta from "@/components/home/HomeFinalCta";
 import FaqSection from "@/components/FaqSection";
-import GlobeCTASection from "@/components/GlobeCTASection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { druk, bebas } from "@/fonts/editorial";
 
-const Index = () => {
-
-  return (
-    <>
-      <Navbar />
-      <main className="min-h-screen">
-        <HeroSection />
-        <MetricsSection />
-        <VideoSection />
-        <ShowcaseTeaser />
-        <LogoCarousel />
-        <SuccessCasesSection />
-        <HomeProcessSection />
-        <FaqSection />
-        <GlobeCTASection />
-        <Footer />
-      </main>
-    </>
-  );
-};
+/* Editorial home: black hero and numbers, white chapters, one CTA ("Envía tu
+   perfil") repeated in the hero and at the close, nothing competing with it. */
+const Index = () => (
+  <>
+    <Navbar />
+    <main className={`min-h-screen ${druk.variable} ${bebas.variable}`}>
+      <HomeHero />
+      <HomeStats />
+      <HomeRoster />
+      <HomeMethod />
+      <HomeVideo />
+      <FaqSection />
+      <HomeFinalCta />
+      <Footer />
+    </main>
+  </>
+);
 
 export default Index;

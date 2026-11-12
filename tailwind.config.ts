@@ -16,6 +16,9 @@ export default {
       fontFamily: {
         display: ["var(--font-digits)", "var(--font-display)", "Playfair Display", "serif"],
         body: ["var(--font-body)", "Inter", "sans-serif"],
+        /* Editorial home: big condensed headlines and spaced-out labels. */
+        druk: ["var(--font-druk)", "Druk Condensed", "Impact", "sans-serif"],
+        bebas: ["var(--font-bebas)", "Bebas Neue", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -29,6 +32,9 @@ export default {
         "section-alt": "hsl(var(--section-alt))",
         "footer-dark": "hsl(var(--footer-dark))",
         "accent-blue": "hsl(var(--accent-blue))",
+        /* Corporate red, brightened so it still reads on near-black. */
+        "red-bright": "hsl(354 86% 50%)",
+        ink: "#0a0a0a",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           hover: "hsl(var(--primary-hover))",
