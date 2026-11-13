@@ -97,7 +97,7 @@ const HomeHero = () => {
 
       <HomeLogoMorph heroRef={heroRef} />
 
-      <div className="container-wide relative flex min-h-[100svh] flex-col justify-end px-4 pb-10 pt-28 lg:pb-16">
+      <div data-hero-content className="container-wide relative flex min-h-[100svh] flex-col justify-end px-4 pb-10 pt-28 lg:pb-16">
         <div className="max-w-[60rem]">
           <h1
             className={`font-druk uppercase leading-[0.96] text-white lg:text-[clamp(5rem,7.2vw,8rem)] ${
@@ -106,19 +106,23 @@ const HomeHero = () => {
           >
             {es ? (
               <>
+                {/* The F, U and A that become the logo on scroll (HomeLogoMorph). */}
                 <span className="block">
-                  Tu beca <br className="lg:hidden" />
-                  de fútbol
+                  T<span data-morph="U">u</span> bec<span data-morph="A">a</span> <br className="lg:hidden" />
+                  de <span data-morph="F">f</span>útbol
                 </span>
                 <span className="block pr-[0.08em] italic text-red-bright">en EE.UU.</span>
               </>
             ) : (
               <>
+                {/* U and A for the logo morph; the F comes from "profile" in the CTA. */}
                 <span className="block">
-                  Your soccer <br className="lg:hidden" />
+                  Yo<span data-morph="U">u</span>r soccer <br className="lg:hidden" />
                   scholarship
                 </span>
-                <span className="block pr-[0.08em] italic text-red-bright">in the USA</span>
+                <span className="block pr-[0.08em] italic text-red-bright">
+                  in the US<span data-morph="A">A</span>
+                </span>
               </>
             )}
           </h1>
@@ -133,7 +137,7 @@ const HomeHero = () => {
               </>
             )}
           </p>
-          <HomeCta className="mt-8" />
+          <HomeCta className="mt-8" morph={!es} />
         </div>
 
         {/* Slide word and controls, bottom right. */}

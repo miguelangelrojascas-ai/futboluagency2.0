@@ -8,18 +8,20 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { resolveLegacyPath, type Locale } from "@/lib/routes";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logoAsset from "@/assets/logo-fua.png";
-import logoWhiteAsset from "@/assets/logo-fua-white.png";
+import logoDarkAsset from "@/assets/logo-fua-dark.png";
 
 /* Next resolves an image import to an object; the components want the URL. */
 const logo = logoAsset.src;
-const logoWhite = logoWhiteAsset.src;
+/* Red FUA with the "FutbolUAgency" arc in white, for dark backgrounds. */
+const logoDark = logoDarkAsset.src;
 
 /**
  * `light` is the default bar. `dark` is the home: over the hero there is no
  * bar at all, only the language and the menu button, so the photo and the
  * F·U·A letters get the whole screen. Once the letters have formed the logo
- * the desktop bar comes back; on phones it never does: the white logo sits
- * centred and the menu button on the right, blending against any background.
+ * the desktop bar comes back; on phones it never does: the logo sits centred
+ * and the menu button on the right, each in a small dark disc so both stay
+ * readable over any section, light or dark.
  */
 const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   const dark = tone === "dark";
@@ -27,7 +29,8 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   const [docked, setDocked] = useState(!dark);
   useEffect(() => {
     if (!dark) return;
-    const update = () => setDocked(window.scrollY > window.innerHeight * 0.5);
+    /* In step with HomeLogoMorph, which lands the letters at about 55% of the hero. */
+    const update = () => setDocked(window.scrollY > window.innerHeight * 0.55);
     update();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
@@ -63,12 +66,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3 ${
-          /* Phones, no bar: white on dark, inverted on light sections. */
-          dark && !isOpen ? "max-lg:mix-blend-difference" : ""
-        }`}
-      >
+      <nav className="fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3">
         <div
           className={`container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full border pl-5 pr-3 transition-[background-color,border-color] duration-500 sm:pl-6 sm:pr-4 h-14 md:h-16 ${
             dark
@@ -82,12 +80,14 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
           {/* Logo */}
           <LocaleLink
             to="/"
-            className={`flex-shrink-0 ${dark ? "col-start-2 row-start-1 justify-self-center lg:col-start-1 lg:justify-self-start" : "justify-self-start"}`}
+            className={`flex-shrink-0 rounded-full transition-[background-color,box-shadow] duration-500 ${
+              dark ? "col-start-2 row-start-1 justify-self-center p-1.5 lg:col-start-1 lg:justify-self-start lg:p-0" : "justify-self-start"
+            } ${dark && docked ? "max-lg:bg-[#0a0a0a]/85 max-lg:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.55)] max-lg:backdrop-blur-md" : ""}`}
           >
             {/* On the home the hero's F·U·A letters fly into this spot and hand
                 over to it (--fua-logo-reveal); everywhere else it is always shown. */}
             <img
-              src={dark ? logoWhite : logo}
+              src={dark ? logoDark : logo}
               alt="FutbolUAgency LLC."
               data-nav-logo
               className={dark ? "h-11 w-auto md:h-12" : "h-10 md:h-14 w-auto"}
@@ -194,7 +194,9 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             {/* Mobile toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 ${immersive ? "" : "lg:hidden"} ${dark ? "text-white" : "text-foreground"}`}
+              className={`rounded-full p-2.5 transition-[background-color,box-shadow] duration-500 ${immersive ? "" : "lg:hidden"} ${dark ? "text-white" : "text-foreground"} ${
+                dark && docked ? "max-lg:bg-[#0a0a0a]/85 max-lg:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.55)] max-lg:backdrop-blur-md" : ""
+              }`}
               aria-expanded={isOpen}
               aria-label={isOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : language === "es" ? "Abrir menú" : "Open menu"}
             >
