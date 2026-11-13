@@ -266,3 +266,9 @@
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }
 }
+
+/* Text selection in the corporate red instead of the browser blue. */
+::selection {
+  background: hsl(354 86% 50%);
+  color: #fff;
+}

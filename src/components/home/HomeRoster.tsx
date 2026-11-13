@@ -3,7 +3,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import SuccessCaseCard, { type SuccessCase } from "@/components/SuccessCaseCard";
-import LogoCarousel from "@/components/LogoCarousel";
 import { homeTopRow, homeBottomRow } from "@/data/homeCarousel";
 
 const GalleryRow = ({ cases, reverse = false }: { cases: SuccessCase[]; reverse?: boolean }) => (
@@ -23,13 +22,12 @@ const GalleryRow = ({ cases, reverse = false }: { cases: SuccessCase[]; reverse?
   </div>
 );
 
-/** "Del club a la universidad": the commitment graphics, then the schools they play for. */
+/** "Del club a la universidad": the commitment graphics. */
 const HomeRoster = () => {
   const { language } = useLanguage();
   const es = language === "es";
 
   return (
-    <>
       <section className="overflow-hidden bg-white py-20 sm:py-28" aria-labelledby="roster-title">
         <div className="container-wide mb-12 grid gap-6 px-4 sm:mb-16 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">
           <div>
@@ -56,14 +54,6 @@ const HomeRoster = () => {
           <GalleryRow cases={homeBottomRow} reverse />
         </div>
       </section>
-
-      <div className="bg-section-alt pt-10">
-        <p className="text-center font-bebas text-[15px] tracking-[0.3em] text-ink/50 sm:text-base">
-          {es ? "Nuestros jugadores compiten en" : "Our players compete at"}
-        </p>
-        <LogoCarousel />
-      </div>
-    </>
   );
 };
 

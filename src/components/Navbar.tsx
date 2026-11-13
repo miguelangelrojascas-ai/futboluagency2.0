@@ -50,7 +50,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
           </LocaleLink>
 
           {/* Desktop nav — centrado en la columna del medio */}
-          <div className="hidden md:flex items-center justify-center gap-1">
+          <div className="hidden lg:flex items-center justify-center gap-1">
 
             {/* Inicio */}
             <LocaleLink to="/" className={navLinkClass(isActive("/"))}>
@@ -131,7 +131,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             <LanguageSwitcher dark={dark} />
             <LocaleLink
               to="/apply"
-              className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
+              className="hidden lg:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
             >
               {t("nav.applyCta")}
             </LocaleLink>
@@ -139,7 +139,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             {/* Mobile toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`md:hidden p-2 ${dark ? "text-white" : "text-foreground"}`}
+              className={`lg:hidden p-2 ${dark ? "text-white" : "text-foreground"}`}
               aria-label={isOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : language === "es" ? "Abrir menú" : "Open menu"}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -149,7 +149,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className={`md:hidden mt-2 rounded-3xl backdrop-blur-lg border ${dark ? "bg-[#0a0a0a]/90 border-white/10" : "bg-background/95 border-border/60 navbar-shadow"}`}>
+          <div className={`lg:hidden mt-2 rounded-3xl backdrop-blur-lg border ${dark ? "bg-[#0a0a0a]/90 border-white/10" : "bg-background/95 border-border/60 navbar-shadow"}`}>
             <div className="px-4 py-4 flex flex-col gap-1">
 
               {/* Inicio */}

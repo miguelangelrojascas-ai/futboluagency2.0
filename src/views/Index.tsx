@@ -1,22 +1,22 @@
-import HomeHeroSpotlight from "@/components/home/HomeHeroSpotlight";
-import HomeHeroStatement from "@/components/home/HomeHeroStatement";
+import HomeHero from "@/components/home/HomeHero";
 import HomeStatement from "@/components/home/HomeStatement";
 import HomeRoster from "@/components/home/HomeRoster";
 import HomeMethod from "@/components/home/HomeMethod";
 import HomeFinalCta from "@/components/home/HomeFinalCta";
+import LogoCarousel from "@/components/LogoCarousel";
 import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { druk, bebas } from "@/fonts/editorial";
 
 /* Editorial home with one CTA ("Envía tu perfil"), in the hero and at the
-   close. Two header proposals share everything below the hero:
-   A "spotlight" (rotating players) and B "statement" (one portrait). */
-const Index = ({ variant = "a" }: { variant?: "a" | "b" }) => (
+   close. The university logos sit straight under the hero as proof. */
+const Index = () => (
   <>
     <Navbar tone="dark" />
     <main className={`min-h-screen ${druk.variable} ${bebas.variable}`}>
-      {variant === "a" ? <HomeHeroSpotlight /> : <HomeHeroStatement />}
+      <HomeHero />
+      <LogoCarousel />
       <HomeStatement />
       <HomeRoster />
       <HomeMethod />

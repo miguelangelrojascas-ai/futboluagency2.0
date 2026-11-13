@@ -42,10 +42,11 @@ const HomeMethod = () => {
               {es ? "6 pasos · De tu ciudad al campus" : "6 steps · From your city to campus"}
             </p>
             <div className="relative mt-8 hidden h-[460px] lg:block xl:h-[520px]">
+              {/* Floor shadow under the boots, so the cut-out stands on something. */}
               <div
                 aria-hidden="true"
-                className="absolute inset-x-8 bottom-0 h-3/4 rounded-full"
-                style={{ background: "radial-gradient(closest-side, hsl(354 86% 50% / 0.12), transparent)" }}
+                className="absolute bottom-0 left-1/2 h-6 w-48 -translate-x-1/2 translate-y-1/2 rounded-[50%]"
+                style={{ background: "radial-gradient(closest-side, rgba(10,10,10,0.22), transparent)" }}
               />
               <Image
                 src="/images/home/jugador-brazos.png"
