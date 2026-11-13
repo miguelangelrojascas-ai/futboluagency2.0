@@ -3,7 +3,7 @@
 import { useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { usePathname } from "next/navigation";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { resolveLegacyPath, type Locale } from "@/lib/routes";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -14,6 +14,8 @@ const logo = logoAsset.src;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  /* Desktop "Becas EE.UU." dropdown, which holds the Showcase. */
+  const [usaOpen, setUsaOpen] = useState(false);
   const pathname = usePathname();
   const { t, language } = useLanguage();
   const usaLabel = language === "es" ? "Becas Fútbol EE.UU." : "Soccer Scholarships USA";
@@ -53,14 +55,56 @@ const Navbar = () => {
               {t("nav.home")}
             </LocaleLink>
 
-            {/* Becas Fútbol EE.UU. — direct link, no dropdown */}
-            <LocaleLink to="/usa" className={navLinkClass(isActive("/usa"))}>
-              {usaLabel}
-            </LocaleLink>
+            {/* Becas Fútbol EE.UU. — the label opens the page, the dropdown adds the Showcase */}
+            <div
+              className="relative"
+              onMouseEnter={() => setUsaOpen(true)}
+              onMouseLeave={() => setUsaOpen(false)}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) setUsaOpen(false);
+              }}
+              onKeyDown={(e) => e.key === "Escape" && setUsaOpen(false)}
+            >
+              <div className={`flex items-center ${navLinkClass(isActive("/usa") || isActive("/showcase"))} !pr-2`}>
+                <LocaleLink to="/usa">{usaLabel}</LocaleLink>
+                <button
+                  type="button"
+                  onClick={() => setUsaOpen((v) => !v)}
+                  aria-expanded={usaOpen}
+                  aria-label={language === "es" ? "Más opciones de becas en EE.UU." : "More USA scholarship options"}
+                  className="ml-1 rounded-full p-0.5"
+                >
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${usaOpen ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              {usaOpen && (
+                <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
+                  <div className="w-64 rounded-2xl border border-border/60 bg-background p-2 navbar-shadow">
+                    <LocaleLink
+                      to="/usa"
+                      onClick={() => setUsaOpen(false)}
+                      className="block rounded-xl px-4 py-2.5 font-body text-sm font-medium text-foreground transition-colors hover:bg-muted/60"
+                    >
+                      {usaLabel}
+                    </LocaleLink>
+                    <LocaleLink
+                      to="/showcase"
+                      onClick={() => setUsaOpen(false)}
+                      className="block rounded-xl px-4 py-2.5 transition-colors hover:bg-muted/60"
+                    >
+                      <span className="block font-body text-sm font-medium text-foreground">Showcase Talavera 2027</span>
+                      <span className="block font-body text-xs text-muted-foreground">
+                        {language === "es" ? "Juega ante entrenadores universitarios" : "Play in front of college coaches"}
+                      </span>
+                    </LocaleLink>
+                  </div>
+                </div>
+              )}
+            </div>
 
-            {/* Showcase */}
-            <LocaleLink to="/showcase" className={navLinkClass(isActive("/showcase"))}>
-              Showcase
+            {/* España */}
+            <LocaleLink to="/spain" className={navLinkClass(isActive("/spain"))}>
+              {t("nav.spain")}
             </LocaleLink>
 
             {/* Players */}
@@ -116,9 +160,18 @@ const Navbar = () => {
                 {usaLabel}
               </LocaleLink>
 
-              {/* Showcase */}
-              <LocaleLink to="/showcase" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/showcase"))}>
-                Showcase
+              {/* Showcase, inside Becas EE.UU. */}
+              <LocaleLink
+                to="/showcase"
+                onClick={() => setIsOpen(false)}
+                className={`${mobileNavLinkClass(isActive("/showcase"))} !py-2 !font-semibold text-[13px]`}
+              >
+                ↳ Showcase Talavera 2027
+              </LocaleLink>
+
+              {/* España */}
+              <LocaleLink to="/spain" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/spain"))}>
+                {t("nav.spain")}
               </LocaleLink>
 
               {/* Players */}

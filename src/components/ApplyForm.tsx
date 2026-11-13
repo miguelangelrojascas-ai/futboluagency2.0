@@ -41,9 +41,9 @@ const PHONE_PREFIXES = [
 /**
  * The admissions form.
  *
- * Posts to /api/lead, which writes straight into the Airtable CRM. Built in
- * the page rather than embedded from Airtable so it follows the design system,
- * speaks both languages and can collect the email address the CRM needs.
+ * Posts to /api/lead, which creates the lead in the FUA CRM with every field
+ * filled in. Built in the page so it follows the design system and speaks
+ * both languages.
  */
 const ApplyForm = () => {
   const { language } = useLanguage();

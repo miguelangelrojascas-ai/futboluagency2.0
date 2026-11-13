@@ -49,7 +49,7 @@ const Privacy = () => {
           body: [
             "Con las universidades y entrenadores a los que presentamos tu perfil, que es el objeto del servicio. Esto implica una transferencia de datos a Estados Unidos.",
             "Con los organismos de elegibilidad cuando corresponde: NCAA Eligibility Center o NAIA.",
-            "Con los proveedores que hacen funcionar la web y nuestra operativa: Vercel (alojamiento de la web), Airtable (donde se guarda tu solicitud), Calendly (para la cita de la llamada) y Google (correo y documentos).",
+            "Con los proveedores que hacen funcionar la web y nuestra operativa: Vercel (alojamiento de la web), Supabase (donde se guarda tu solicitud, en nuestro CRM), Calendly (para la cita de la llamada) y Google (correo y documentos).",
             "[COMPLETAR: base legal de las transferencias internacionales — cláusulas contractuales tipo, consentimiento explícito u otra — y acuerdos de encargado de tratamiento firmados con cada proveedor.]",
           ],
         },
@@ -104,7 +104,7 @@ const Privacy = () => {
           body: [
             "With the universities and coaches we present your profile to, which is the point of the service. This involves transferring data to the United States.",
             "With eligibility bodies where applicable: the NCAA Eligibility Center or the NAIA.",
-            "With the providers that run the site and our operations: Vercel (site hosting), Airtable (where your application is stored), Calendly (for scheduling the call) and Google (email and documents).",
+            "With the providers that run the site and our operations: Vercel (site hosting), Supabase (where your application is stored, in our CRM), Calendly (for scheduling the call) and Google (email and documents).",
             "[TO COMPLETE: legal basis for international transfers — standard contractual clauses, explicit consent or other — and the data processing agreements signed with each provider.]",
           ],
         },

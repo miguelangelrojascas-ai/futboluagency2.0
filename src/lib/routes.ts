@@ -21,6 +21,7 @@ export const isLocale = (value: string): value is Locale =>
 export type RouteKey =
   | "home"
   | "usa"
+  | "spain"
   | "showcase"
   | "players"
   | "resources"
@@ -32,6 +33,7 @@ export type RouteKey =
 export const ROUTES: Record<RouteKey, { es: string; en: string }> = {
   home: { es: "", en: "" },
   usa: { es: "usa", en: "usa" },
+  spain: { es: "espana", en: "spain" },
   showcase: { es: "showcase", en: "showcase" },
   players: { es: "jugadores", en: "players" },
   resources: { es: "recursos", en: "resources" },
@@ -81,7 +83,7 @@ export const LEGACY_REDIRECTS: Record<string, RouteKey> = {
   "/about": "about",
   "/apply": "apply",
   "/privacidad": "privacy",
-  "/spain": "usa",
+  "/spain": "spain",
   /* FUA Sports (tennis, golf, track, volleyball) is no longer on this site;
      the old pages send visitors home rather than to a 404. */
   "/sports": "home",
@@ -103,6 +105,8 @@ const LEGACY_PATH_KEYS: Array<[string, RouteKey]> = [
   ["/players", "players"],
   ["/jugadores", "players"],
   ["/usa", "usa"],
+  ["/spain", "spain"],
+  ["/espana", "spain"],
   ["/showcase", "showcase"],
   ["/about", "about"],
   ["/nosotros", "about"],

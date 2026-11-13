@@ -496,17 +496,23 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
               id="sc-consent"
               name="consent"
               type="checkbox"
+              required
               className="mt-1 h-4 w-4 shrink-0 accent-[hsl(var(--primary))]"
               {...(invalid.includes("consent") ? { "aria-invalid": true as const } : {})}
             />
             <span className={invalid.includes("consent") ? "text-destructive" : undefined}>
-              {es
-                ? "Acepto que FutbolUAgency use estos datos para valorar mi inscripción y contactarme sobre el showcase. Si soy menor de edad, mi familia está informada. "
-                : "I agree that FutbolUAgency may use these details to assess my registration and contact me about the Showcase. If I am under 18, my family knows. "}
-              <LocaleLink to="/privacidad" className="font-semibold text-primary underline-offset-4 hover:underline">
-                {es ? "Política de datos" : "Data policy"}
+              {es ? "He leído y acepto la " : "I have read and accept the "}
+              <LocaleLink
+                to="/privacidad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-primary underline underline-offset-4"
+              >
+                {es ? "Política de privacidad" : "Privacy policy"}
               </LocaleLink>
-              . *
+              {es
+                ? " y consiento que FutbolUAgency trate mis datos para valorar mi inscripción y contactarme sobre el showcase (RGPD). Si soy menor de edad, cuento con el consentimiento de mi padre, madre o tutor. *"
+                : " and consent to FutbolUAgency processing my data to assess my registration and contact me about the Showcase (GDPR). If I am under 18, I have my parent's or guardian's consent. *"}
             </span>
           </label>
         </div>
@@ -521,8 +527,8 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
           {invalid.length > 0
             ? invalid.length === 1 && invalid[0] === "consent"
               ? es
-                ? "Marca la casilla de la política de datos para enviarlo."
-                : "Tick the data policy box to send it."
+                ? "Para enviarlo tienes que aceptar la política de privacidad."
+                : "You need to accept the privacy policy to send it."
               : es
                 ? "Revisa los campos marcados en rojo."
                 : "Check the fields marked in red."

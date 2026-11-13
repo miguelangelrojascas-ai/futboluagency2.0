@@ -1,36 +1,14 @@
 import { BUDGETS, COUNTRIES, START_TERMS } from "@/data/leadOptions";
+import { CRM_URL } from "@/lib/showcaseForm";
 
 /**
- * Receives an admissions form submission and writes it to the CRM.
+ * Receives an admissions form submission ("Aplicar") and hands it to the FUA CRM.
  *
- * The Airtable token lives only in the AIRTABLE_TOKEN environment variable, so
- * it never reaches the browser. Records are created with `typecast` off and
- * every select is checked against a closed list, which means a crafted request
- * cannot invent new select options in the base.
+ * Checked here first (every select against a closed list) so obvious junk never
+ * leaves the site, then forwarded server to server to the CRM (CRM-FUA,
+ * /api/lead), which creates the lead with all its fields and a follow-up for
+ * today. The CRM address stays out of the page.
  */
-
-const BASE_ID = "appwUisPpFsktV9d5";
-const TABLE_ID = "tbliwN3tDaKzYzVVa";
-
-const FIELD = {
-  name: "fldp81ekfc7PAs2Uu",
-  email: "fldSJhlTR6xmeES8U",
-  whatsapp: "fldelhx52GV5tX3MS",
-  instagram: "fldFUwMN2dJvUIqcy",
-  country: "fldAzbYHq4mTdx4NK",
-  age: "fldVQqQJrjte0GT5J",
-  major: "fldyKDhRL7Hy7BElg",
-  position: "fldcWjPFrZwBkD3Rk",
-  stats: "fldzDozgGTPNQIeeW",
-  highlightVideo: "fldJR1x7Zs5nYTjxQ",
-  fullMatchVideo: "fldciiFFSTx9QHQk2",
-  startTerm: "fldPLGO0qOwdhgBfn",
-  budget: "fld7NHC4YebrXkXdi",
-  notes: "fld4FWIPCyeYIOvAQ",
-  sport: "fldnzcYj7SBm1N1hE",
-  stage: "flduKFfELyHMWCuFO",
-  contactDate: "fldanL2TbwukyWSae",
-} as const;
 
 /** Longest value we accept per text field, so a submission cannot be huge. */
 const MAX_TEXT = 500;
@@ -65,12 +43,6 @@ const oneOf = <T extends readonly string[]>(value: unknown, allowed: T) => {
 const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 
 export async function POST(request: Request): Promise<Response> {
-  const token = process.env.AIRTABLE_TOKEN;
-  if (!token) {
-    console.error("AIRTABLE_TOKEN is not set");
-    return json(500, { error: "server_misconfigured" });
-  }
-
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;
@@ -104,52 +76,42 @@ export async function POST(request: Request): Promise<Response> {
     return json(400, { error: "invalid_fields", fields: missing });
   }
 
-  const fields: Record<string, unknown> = {
-    [FIELD.name]: name,
-    [FIELD.email]: email,
-    [FIELD.whatsapp]: whatsapp,
-    [FIELD.country]: country,
-    [FIELD.age]: Math.round(age),
-    [FIELD.position]: position,
-    [FIELD.highlightVideo]: highlightVideo,
-    [FIELD.budget]: budget,
-    // Set for the team so a new lead lands in the pipeline ready to work.
-    [FIELD.sport]: "Futbol",
-    [FIELD.stage]: "Nuevo lead",
-    [FIELD.contactDate]: new Date().toISOString().slice(0, 10),
+  const lead = {
+    name,
+    email,
+    whatsapp,
+    country,
+    age: Math.round(age),
+    position,
+    highlightVideo,
+    budget,
+    instagram: text(body.instagram, 120),
+    major: text(body.major, 200),
+    stats: text(body.stats),
+    fullMatchVideo: httpUrl(body.fullMatchVideo),
+    startTerm: oneOf(body.startTerm, START_TERMS),
+    notes: text(body.notes, MAX_NOTES),
   };
 
-  const instagram = text(body.instagram, 120);
-  const major = text(body.major, 200);
-  const stats = text(body.stats);
-  const fullMatchVideo = httpUrl(body.fullMatchVideo);
-  const startTerm = oneOf(body.startTerm, START_TERMS);
-  const notes = text(body.notes, MAX_NOTES);
-
-  if (instagram) fields[FIELD.instagram] = instagram;
-  if (major) fields[FIELD.major] = major;
-  if (stats) fields[FIELD.stats] = stats;
-  if (fullMatchVideo) fields[FIELD.fullMatchVideo] = fullMatchVideo;
-  if (startTerm) fields[FIELD.startTerm] = startTerm;
-  if (notes) fields[FIELD.notes] = notes;
-
-  const response = await fetch(
-    `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`,
-    {
+  try {
+    const response = await fetch(`${CRM_URL}/api/lead`, {
       method: "POST",
-      headers: {
-        authorization: `Bearer ${token}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ records: [{ fields }], typecast: false }),
-    },
-  );
-
-  if (!response.ok) {
-    // Logged for us, not returned: the reply would otherwise describe the base.
-    console.error("Airtable rejected the lead", response.status, await response.text());
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(lead),
+      signal: AbortSignal.timeout(15_000),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      // Logged for us, not returned: the reply would otherwise describe the CRM.
+      console.error("CRM rejected the lead", response.status, payload);
+      return json(response.status === 400 ? 400 : 502, {
+        error: "crm_unavailable",
+        fields: Array.isArray(payload?.fields) ? payload.fields : undefined,
+      });
+    }
+    return json(200, { ok: true });
+  } catch (error) {
+    console.error("Could not reach the CRM", error);
     return json(502, { error: "crm_unavailable" });
   }
-
-  return json(200, { ok: true });
 }

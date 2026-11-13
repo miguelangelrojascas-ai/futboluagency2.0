@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useEffect, useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, CheckCircle, TrendingUp, Trophy, Languages, Video, BookOpen } from "lucide-react";
@@ -83,31 +85,18 @@ const USA = () => {
       <main className="min-h-screen pt-16 md:pt-20">
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 25%, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 45%, hsl(0 75% 16%) 100%)",
-            }}
+          {/* NCAA College Cup celebration, darkened so the white text reads. */}
+          <Image
+            src="/images/college-cup.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[center_40%]"
           />
           <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 flex items-end justify-between opacity-40 md:opacity-100"
-          >
-            <div className="flex h-full items-end -space-x-6 lg:-space-x-10">
-              <img src="/images/hero-players/player-1.webp" alt="" className="relative z-10 h-[78%] w-auto drop-shadow-2xl" />
-              <img src="/images/hero-players/player-4.webp" alt="" className="relative z-20 h-[88%] w-auto drop-shadow-2xl" />
-              <img src="/images/hero-players/player-2.webp" alt="" className="relative z-10 hidden h-[70%] w-auto drop-shadow-2xl lg:block" />
-            </div>
-            <div className="flex h-full items-end -space-x-6 lg:-space-x-10">
-              <img src="/images/hero-players/player-3.webp" alt="" className="relative z-10 hidden h-[70%] w-auto drop-shadow-2xl lg:block" />
-              <img src="/images/hero-players/player-5.webp" alt="" className="relative z-20 h-[88%] w-auto drop-shadow-2xl" />
-              <img src="/images/hero-players/player-6.webp" alt="" className="relative z-10 h-[78%] w-auto drop-shadow-2xl" />
-            </div>
-          </div>
-          <div
             className="absolute inset-0"
-            style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.25) 100%)" }}
+            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.8))" }}
           />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">

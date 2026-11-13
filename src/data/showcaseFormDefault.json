@@ -331,7 +331,7 @@
           ]
         },
         {
-          "activa": true,
+          "activa": false,
           "obligatoria": false,
           "id": "highlightVideo",
           "tipo": "url",
@@ -344,7 +344,7 @@
           "ayudaEn": "If you have one, four to six minutes of your best plays. It helps us a lot to assess your profile."
         },
         {
-          "activa": true,
+          "activa": false,
           "obligatoria": false,
           "id": "fullMatchVideo",
           "tipo": "url",
