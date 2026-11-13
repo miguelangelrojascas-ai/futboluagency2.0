@@ -1,5 +1,6 @@
 import HomeHero from "@/components/home/HomeHero";
-import HomeStatement from "@/components/home/HomeStatement";
+import HomePromise from "@/components/home/HomePromise";
+import HomeWhyUs from "@/components/home/HomeWhyUs";
 import HomeRoster from "@/components/home/HomeRoster";
 import HomeMethod from "@/components/home/HomeMethod";
 import HomeFinalCta from "@/components/home/HomeFinalCta";
@@ -10,16 +11,18 @@ import Navbar from "@/components/Navbar";
 import { druk, bebas } from "@/fonts/editorial";
 
 /* Editorial home with one CTA ("Envía tu perfil"), in the hero and at the
-   close. The university logos sit straight under the hero as proof. */
+   close. Order: hero, proof (logos), promise, players, method, why FUA,
+   doubts (FAQ), close. */
 const Index = () => (
   <>
     <Navbar tone="dark" />
     <main className={`min-h-screen ${druk.variable} ${bebas.variable}`}>
       <HomeHero />
       <LogoCarousel />
-      <HomeStatement />
+      <HomePromise />
       <HomeRoster />
       <HomeMethod />
+      <HomeWhyUs />
       <FaqSection />
       <HomeFinalCta />
       <Footer />

@@ -18,6 +18,8 @@ import usfLogoAsset from "@/assets/usf-logo.png";
 import notreDameLogoAsset from "@/assets/notre-dame-logo.png";
 import dukeLogoAsset from "@/assets/duke-logo.png";
 import jmuLogoAsset from "@/assets/jmu-logo.png";
+import lincolnLogoAsset from "@/assets/lincoln-university.png";
+import akronLogoAsset from "@/assets/akron-logo.png";
 
 /* Next resolves an image import to an object; the components want the URL. */
 const ncaaLogo = ncaaLogoAsset.src;
@@ -40,6 +42,8 @@ const usfLogo = usfLogoAsset.src;
 const notreDameLogo = notreDameLogoAsset.src;
 const dukeLogo = dukeLogoAsset.src;
 const jmuLogo = jmuLogoAsset.src;
+const lincolnLogo = lincolnLogoAsset.src;
+const akronLogo = akronLogoAsset.src;
 
 const LogoCarousel = () => {
   const logos = [
@@ -63,6 +67,8 @@ const LogoCarousel = () => {
     { name: "Notre Dame", logo: notreDameLogo },
     { name: "Duke", logo: dukeLogo },
     { name: "JMU", logo: jmuLogo },
+    { name: "Lincoln University", logo: lincolnLogo },
+    { name: "Akron", logo: akronLogo },
   ];
 
   // Duplicate logos for seamless infinite scroll
