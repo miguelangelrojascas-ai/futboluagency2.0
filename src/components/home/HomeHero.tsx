@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import HomeCta from "@/components/home/HomeCta";
+import HomeLogoMorph from "@/components/home/HomeLogoMorph";
 
 const SLIDE_MS = 6500;
 
@@ -16,9 +17,9 @@ const SLIDE_MS = 6500;
  * They show the stage, not FUA clients, so no player is named on them.
  */
 const SLIDES = [
-  { src: "/images/home/hero-bengalas.jpg", w: 2400, h: 1600, position: "50% 18%", es: "Juega", en: "Play", color: true },
-  { src: "/images/home/hero-niebla.jpg", w: 2400, h: 1600, position: "55% 45%", es: "Entrena", en: "Train", color: false },
-  { src: "/images/home/hero-grada.jpg", w: 2400, h: 1668, position: "60% 55%", es: "Compite", en: "Compete", color: false },
+  { src: "/images/home/hero-bengalas.jpg", w: 2400, h: 1600, position: "50% 18%", es: "Compite", en: "Compete", color: true },
+  { src: "/images/home/hero-niebla.jpg", w: 2400, h: 1600, position: "55% 45%", es: "Estudia", en: "Study", color: false },
+  { src: "/images/home/hero-grada.jpg", w: 2400, h: 1668, position: "60% 55%", es: "Crece", en: "Grow", color: false },
 ];
 
 /**
@@ -31,6 +32,7 @@ const HomeHero = () => {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [still, setStill] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -47,7 +49,7 @@ const HomeHero = () => {
   }, [active, paused, still]);
 
   return (
-    <section className="relative isolate overflow-hidden bg-ink text-white">
+    <section ref={heroRef} className="relative isolate overflow-hidden bg-ink text-white">
       {/* Photos: cross-fade, each settling from a slight zoom while it is on screen. */}
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         {SLIDES.map((s, i) => (
@@ -92,6 +94,8 @@ const HomeHero = () => {
             "linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.2) 22%, rgba(10,10,10,0.25) 45%, rgba(10,10,10,0.92) 68%)",
         }}
       />
+
+      <HomeLogoMorph heroRef={heroRef} />
 
       <div className="container-wide relative flex min-h-[100svh] flex-col justify-end px-4 pb-10 pt-28 lg:pb-16">
         <div className="max-w-[60rem]">

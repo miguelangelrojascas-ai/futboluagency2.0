@@ -46,7 +46,15 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
 
           {/* Logo */}
           <LocaleLink to="/" className="flex-shrink-0 justify-self-start">
-            <img src={logo} alt="FutbolUAgency LLC." className="h-10 md:h-14 w-auto" />
+            {/* On the home the hero's F·U·A letters fly into this spot and hand
+                over to it (--fua-logo-reveal); everywhere else it is always shown. */}
+            <img
+              src={logo}
+              alt="FutbolUAgency LLC."
+              data-nav-logo
+              className="h-10 md:h-14 w-auto"
+              style={{ opacity: "var(--fua-logo-reveal, 1)" }}
+            />
           </LocaleLink>
 
           {/* Desktop nav — centrado en la columna del medio */}
