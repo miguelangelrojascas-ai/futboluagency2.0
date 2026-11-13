@@ -137,7 +137,7 @@ const Privacy = () => {
         <section className="section-padding bg-background">
           <div className="container-wide px-4">
             <div className="mx-auto max-w-3xl">
-              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              <span className="mb-4 inline-block label-bebas text-base text-primary">
                 {es ? "Legal" : "Legal"}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.1] sm:text-5xl">

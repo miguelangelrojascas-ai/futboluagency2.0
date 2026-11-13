@@ -307,7 +307,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             role="dialog"
             aria-modal="true"
             aria-label={language === "es" ? "Menú" : "Menu"}
-            className={`fixed inset-y-0 right-0 z-40 flex w-2/3 flex-col bg-ink px-16 pb-10 pt-24 text-white shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] xl:px-24 ${
+            className={`fixed inset-y-0 right-0 z-40 flex w-2/3 flex-col bg-ink px-16 pb-10 pt-24 text-white shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] xl:px-24 ${
               drawer ? "translate-x-0" : "translate-x-full"
             }`}
           >
@@ -323,7 +323,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
               ].map((l, i) => (
                 <li
                   key={l.to}
-                  className={`transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${drawer ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"}`}
+                  className={`transition-[opacity,transform] duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${drawer ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"}`}
                   style={{ transitionDelay: drawer ? `${120 + i * 45}ms` : "0ms" }}
                 >
                   <LocaleLink

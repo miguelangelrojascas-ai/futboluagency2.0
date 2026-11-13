@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -11,6 +12,22 @@ const Resources = () => {
   const { language } = useLanguage();
   const es = language === "es";
 
+  /* Each card slides up by exactly the height of its own contents list, so
+     the last item is never cut off, whatever the number of sections or how
+     the titles wrap. */
+  useEffect(() => {
+    const cards = [...document.querySelectorAll<HTMLElement>(".guide-card")];
+    const fit = () =>
+      cards.forEach((card) => {
+        const preview = card.querySelector<HTMLElement>(".guide-preview");
+        const h = preview?.offsetHeight ?? 0;
+        if (h) card.style.setProperty("--guide-shift", `${h}px`);
+      });
+    fit();
+    document.fonts?.ready.then(fit);
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
+  }, [language]);
 
   return (
     <>
@@ -35,7 +52,7 @@ const Resources = () => {
           />
           <div className="container-wide relative px-4">
             <div className="max-w-3xl">
-              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              <span className="mb-4 inline-block label-bebas text-base text-primary">
                 {es ? "Recursos" : "Resources"}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
@@ -135,7 +152,7 @@ const Resources = () => {
                 }
                 .guide-card:hover .guide-track,
                 .guide-card:focus-within .guide-track {
-                  transform: translateY(-8.5rem);
+                  transform: translateY(calc(-1 * var(--guide-shift, 8.5rem)));
                 }
                 .guide-preview {
                   display: block;
@@ -143,13 +160,10 @@ const Resources = () => {
                   left: 0;
                   right: 0;
                   top: 100%;
-                  height: 8.5rem;
                   padding-top: 1.5rem;
-                  overflow: hidden;
+                  padding-bottom: 0.25rem;
                   opacity: 0;
                   transition: opacity 250ms ease;
-                  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
-                  mask-image: linear-gradient(to bottom, #000 80%, transparent);
                 }
                 .guide-card:hover .guide-preview,
                 .guide-card:focus-within .guide-preview {

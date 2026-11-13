@@ -2,29 +2,26 @@ import HomeHero from "@/components/home/HomeHero";
 import HomePromise from "@/components/home/HomePromise";
 import HomeWhyUs from "@/components/home/HomeWhyUs";
 import HomeRoster from "@/components/home/HomeRoster";
-import HomeMethod from "@/components/home/HomeMethod";
+import HomePaths from "@/components/home/HomePaths";
 import HomeFinalCta from "@/components/home/HomeFinalCta";
 import LogoCarousel from "@/components/LogoCarousel";
 import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { druk, bebas } from "@/fonts/editorial";
 
 /* Editorial home with one CTA ("Envía tu perfil"), in the hero and at the
-   close. Order: hero, proof (logos), promise, players, method, why FUA,
-   doubts (FAQ), close. */
+   close. Order: hero and university logos, success stories (proof first),
+   the promise, the two paths (USA and Spain), why FUA, doubts (FAQ), close.
+   The step-by-step method lives on the USA page only. */
 const Index = () => (
   <>
-    {/* The navbar's desktop drawer uses the same display faces. */}
-    <div className={`${druk.variable} ${bebas.variable}`}>
-      <Navbar tone="dark" />
-    </div>
-    <main className={`min-h-screen ${druk.variable} ${bebas.variable}`}>
+    <Navbar tone="dark" />
+    <main className="min-h-screen">
       <HomeHero />
       <LogoCarousel />
-      <HomePromise />
       <HomeRoster />
-      <HomeMethod />
+      <HomePromise />
+      <HomePaths />
       <HomeWhyUs />
       <FaqSection />
       <HomeFinalCta />

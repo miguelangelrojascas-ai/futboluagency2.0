@@ -25,7 +25,7 @@ const ageAtShowcase = (birthDate: string) => {
 const Section = ({ n, total, title, es, children }: { n: number; total: number; title: string; es: boolean; children: React.ReactNode }) => (
   <fieldset>
     <legend className="float-left mb-6 w-full">
-      <span className="block font-body text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+      <span className="block label-bebas text-base text-primary">
         {es ? `Paso ${n} de ${total}` : `Step ${n} of ${total}`}
       </span>
       <span className="mt-1 block font-display text-2xl font-bold text-foreground">{title}</span>

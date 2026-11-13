@@ -6,6 +6,7 @@ import { LOCALES, isLocale, type Locale } from "@/lib/routes";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { organizationSchema } from "@/lib/schema";
 import Providers from "@/components/Providers";
+import { druk, bebas } from "@/fonts/editorial";
 import "@/index.css";
 
 /**
@@ -79,7 +80,7 @@ export default async function LocaleLayout({
   const locale = requested as Locale;
 
   return (
-    <html lang={locale} className={`${playfair.variable} ${inter.variable} ${digits.variable}`}>
+    <html lang={locale} className={`${playfair.variable} ${inter.variable} ${digits.variable} ${druk.variable} ${bebas.variable}`}>
       <body>
         {/* Entity data for search and AI engines, in the served HTML so a
             crawler that never runs JavaScript still reads it. */}

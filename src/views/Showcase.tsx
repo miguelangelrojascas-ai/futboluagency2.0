@@ -35,9 +35,9 @@ const MAPS_FROM_AIRPORT = `https://www.google.com/maps/dir/?api=1&origin=${encod
 
 const COACH_EMAIL = "futboluagency@gmail.com";
 
-const eyebrow = "inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary";
+const eyebrow = "inline-block label-bebas text-base text-primary";
 /* FUA red is too dark to read on black; dark sections use a lighter red. */
-const eyebrowDark = "inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-red-500";
+const eyebrowDark = "inline-block label-bebas text-base text-red-500";
 const h2 = "font-display text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl";
 
 /** Same count-up number as the home metrics strip. */
@@ -484,7 +484,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                     />
                   </div>
                   <div className="flex-1 px-5 pb-6 pt-6 md:px-8 md:pb-8">
-                    <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-primary sm:text-sm">{d.tag}</p>
+                    <p className="label-bebas text-base text-primary sm:text-sm">{d.tag}</p>
                     <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl">{d.title}</h3>
                     <ul className="mt-4 space-y-3">
                       {d.items.map((item) => (
@@ -585,7 +585,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
 
             <div className="lg:pt-10">
               <div className="rounded-3xl border border-border border-t-4 border-t-primary bg-card p-8 text-center shadow-card md:p-10">
-                <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">Coach Pack</p>
+                <p className="label-bebas text-base text-primary">Coach Pack</p>
                 <p className="mt-3 font-display text-6xl font-bold text-foreground md:text-7xl">550 €</p>
                 <p className="mt-3 font-body text-sm text-muted-foreground">
                   {es ? "2 noches de hotel · comidas y cenas · transporte" : "2 nights hotel · meals & dinners · ground transport"}
@@ -661,7 +661,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
             <div className="lg:pt-10">
               <div className="rounded-3xl border border-border border-t-4 border-t-primary bg-card p-8 shadow-card md:p-10">
                 <div className="text-center">
-                  <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  <p className="label-bebas text-base text-primary">
                     {es ? "Cuota de inscripción" : "Registration fee"}
                   </p>
                   <p className="mt-3 font-display text-6xl font-bold text-foreground md:text-7xl">45 €</p>
@@ -669,7 +669,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                     {es ? "Jugadores de España · los días del showcase" : "Players from Spain · the Showcase days"}
                   </p>
                 </div>
-                <p className="mt-8 font-body text-xs font-bold uppercase tracking-[0.15em] text-foreground">
+                <p className="mt-8 label-bebas text-base text-foreground">
                   {es ? "Qué incluye" : "What's included"}
                 </p>
                 <ul className="mt-3 space-y-2.5">

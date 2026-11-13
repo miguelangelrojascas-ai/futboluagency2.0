@@ -184,10 +184,10 @@ const USA = () => {
 
             {/* Right: Text */}
             <div>
-              <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "hsl(var(--primary))", display: "block", marginBottom: "16px" }}>
+              <span className="label-bebas text-base" style={{ color: "hsl(var(--primary))", display: "block", marginBottom: "16px" }}>
                 {es ? "LA OPORTUNIDAD" : "THE OPPORTUNITY"}
               </span>
-              <h2 style={{ fontFamily: "var(--font-digits), var(--font-display), Georgia, serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: "12px", lineHeight: 1.2 }}>
+              <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", color: "hsl(var(--foreground))", marginBottom: "12px" }}>
                 {es ? "Por qué estudiar y jugar en EE.UU." : "Why study and play in the US"}
               </h2>
               <div style={{ width: "40px", height: "3px", background: "hsl(var(--primary))", marginBottom: "32px" }} />

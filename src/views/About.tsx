@@ -1,472 +1,462 @@
 "use client";
 
-import { useState } from "react";
-import LocaleLink from "@/components/LocaleLink";
-import { ArrowRight, X } from "lucide-react";
-
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-  </svg>
-);
-
-const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-  </svg>
-);
+import { useEffect, useState } from "react";
+import Image, { type StaticImageData } from "next/image";
+import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { pick, type Copy } from "@/lib/i18n";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
-import ceoIgnacioAsset from "@/assets/ceo-ignacio.jpg";
-import ceoMohaAsset from "@/assets/ceo-moha.jpg";
-import monicaRodriguezAsset from "@/assets/monica-rodriguez.jpg";
-import fabianMoralesAsset from "@/assets/fabian-morales.jpg";
-import miguelRojasAsset from "@/assets/miguel-rojas.jpg";
-import teamHeaderBgAsset from "@/assets/team-header-bg.jpg";
+import HomeCta from "@/components/home/HomeCta";
+import teamHuddle from "@/assets/team-header-bg.jpg";
 
-/* Next resolves an image import to an object; the components want the URL. */
-const ceoIgnacio = ceoIgnacioAsset.src;
-const ceoMoha = ceoMohaAsset.src;
-const monicaRodriguez = monicaRodriguezAsset.src;
-const fabianMorales = fabianMoralesAsset.src;
-const miguelRojas = miguelRojasAsset.src;
-const teamHeaderBg = teamHeaderBgAsset.src;
+/*
+ * Photos: only real ones. The studio portraits that used to be here were
+ * AI-generated and are gone; each person shows their initials until a real
+ * photo is added as `photo` (put the file in src/assets/team/).
+ * Moha's photo is from the FUA Showcase presentation to families.
+ */
+const MOHA_SHOWCASE = "/images/showcase/presentacion-familias.jpg";
 
-const NAVY = "hsl(var(--foreground))";
-const RED = "hsl(var(--primary))";
-
-type Bio = { es: string[]; en: string[] } | null;
-type Member = {
+type Person = {
   name: string;
   initials: string;
-  role: { es: string; en: string };
-  image: string | null;
-  linkedin?: string;
+  role: Copy;
+  photo?: string | StaticImageData;
+  position?: string;
   instagram?: string;
-  bio: Bio;
+  bio?: Copy<string[]>;
 };
 
-const teamMembers: Member[] = [
+const FOUNDERS: Person[] = [
   {
     name: "Ignacio De Bejar",
     initials: "ID",
-    role: { es: "Cofundador y CEO", en: "Co-Founder & CEO" },
-    image: ceoIgnacio,
+    role: { es: "Cofundador y CEO", en: "Co-founder & CEO", it: "Cofondatore e CEO", de: "Mitgründer & CEO" },
     instagram: "https://www.instagram.com/ignacio_futboluagency/",
     bio: {
       es: [
-        "Ignacio vivió en primera persona lo difícil que es conseguir una beca deportiva en Estados Unidos. Tras formarse en el Hércules CF, decidió dar el salto a EE.UU. para continuar su carrera, pero descubrió que la agencia que debía ayudarlo no brindaba el apoyo prometido.",
-        "Se encontró solo en un país nuevo, enfrentando rechazos y obstáculos que tuvo que superar por su cuenta mientras buscaba una universidad donde desarrollarse como atleta y estudiante.",
-        "Esa experiencia lo motivó a dedicar su carrera a que ningún jugador viva lo mismo. Hoy, Ignacio utiliza su trayectoria y conocimiento del sistema universitario para guiar a futbolistas internacionales y acompañarlos paso a paso en su camino hacia una beca real en EE.UU.",
+        "Se formó en el Hércules CF y dio el salto a Estados Unidos para seguir jugando y estudiar. La agencia que debía acompañarlo no cumplió lo prometido.",
+        "Se encontró solo en un país nuevo, con rechazos y trámites que tuvo que resolver por su cuenta mientras buscaba una universidad donde crecer como atleta y estudiante.",
+        "Hoy pone esa experiencia y su conocimiento del sistema universitario al servicio de cada jugador, paso a paso, hasta una beca real.",
       ],
       en: [
-        "Ignacio experienced firsthand how difficult it is to get a sports scholarship in the United States. After training at Hércules CF, he decided to make the leap to the U.S. to continue his career, but discovered that the agency supposed to help him didn't provide the promised support.",
-        "He found himself alone in a new country, facing rejections and obstacles he had to overcome on his own while searching for a university to develop as an athlete and student.",
-        "That experience motivated him to dedicate his career to ensuring no player goes through the same. Today, Ignacio uses his experience and knowledge of the university system to guide international soccer players step by step on their path to a real scholarship in the U.S.",
+        "He came through Hércules CF and made the jump to the United States to keep playing and study. The agency that was supposed to support him did not deliver.",
+        "He found himself alone in a new country, facing rejections and paperwork he had to solve on his own while looking for a university where he could grow as an athlete and a student.",
+        "Today he puts that experience and his knowledge of the college system to work for every player, step by step, all the way to a real scholarship.",
+      ],
+      it: [
+        "Si è formato nell'Hércules CF ed è partito per gli Stati Uniti per continuare a giocare e studiare. L'agenzia che doveva seguirlo non ha mantenuto le promesse.",
+        "Si è ritrovato solo in un paese nuovo, tra rifiuti e pratiche da risolvere da solo, mentre cercava un'università dove crescere come atleta e studente.",
+        "Oggi mette quell'esperienza e la sua conoscenza del sistema universitario al servizio di ogni giocatore, passo dopo passo, fino a una borsa di studio reale.",
+      ],
+      de: [
+        "Er wurde beim Hércules CF ausgebildet und wagte den Schritt in die USA, um weiterzuspielen und zu studieren. Die Agentur, die ihn begleiten sollte, hielt ihr Versprechen nicht.",
+        "Er stand allein in einem neuen Land, mit Absagen und Formalitäten, die er selbst lösen musste, während er eine Universität suchte, an der er als Sportler und Student wachsen konnte.",
+        "Heute stellt er diese Erfahrung und sein Wissen über das College-System jedem Spieler zur Verfügung, Schritt für Schritt, bis zu einem echten Stipendium.",
       ],
     },
   },
   {
     name: "Moha",
     initials: "MH",
-    role: { es: "Cofundador y CEO", en: "Co-Founder & CEO" },
-    image: ceoMoha,
+    role: { es: "Cofundador y CEO", en: "Co-founder & CEO", it: "Cofondatore e CEO", de: "Mitgründer & CEO" },
+    photo: MOHA_SHOWCASE,
+    position: "50% 25%",
     bio: {
       es: [
-        "Cuando Mohammed intentó transferirse a una universidad de mayor nivel, esperaba recibir el apoyo de la agencia que lo representaba. Sin embargo, en el momento más importante del proceso, fue abandonado sin guía ni acompañamiento.",
-        "Enfrentó solo un camino lleno de incertidumbre, obstáculos y decisiones críticas que impactaban su futuro deportivo y académico.",
-        "Esta experiencia lo llevó a crear una agencia con un propósito claro: ofrecer el apoyo que a él le faltó. Hoy, Moha ha ayudado a decenas de jugadores a conseguir becas y oportunidades reales, asegurándose de que cada uno reciba el acompañamiento cercano, profesional y humano que él nunca tuvo.",
+        "Cuando quiso transferirse a una universidad de más nivel, esperaba el apoyo de la agencia que lo representaba. En el momento más importante del proceso lo dejaron sin guía.",
+        "Recorrió solo un camino de incertidumbre y decisiones que marcaban su futuro deportivo y académico.",
+        "De ahí nace su propósito: dar a cada jugador el acompañamiento cercano, profesional y humano que a él le faltó.",
       ],
       en: [
-        "When Mohammed tried to transfer to a higher-level university, he expected to receive support from the agency representing him. However, at the most important moment of the process, he was abandoned without guidance or support.",
-        "He faced alone a path full of uncertainty, obstacles, and critical decisions that impacted his athletic and academic future.",
-        "This experience led him to create an agency with a clear purpose: to offer the support he lacked. Today, Moha has helped dozens of players get real scholarships and opportunities, ensuring each one receives the close, professional, and human support he never had.",
+        "When he wanted to transfer to a higher-level university, he expected the support of the agency representing him. At the most important moment of the process, he was left without guidance.",
+        "He walked alone through uncertainty and decisions that shaped his athletic and academic future.",
+        "That is where his purpose comes from: giving every player the close, professional and human support he never had.",
+      ],
+      it: [
+        "Quando ha voluto trasferirsi in un'università di livello più alto, si aspettava il sostegno dell'agenzia che lo rappresentava. Nel momento più importante del percorso è rimasto senza guida.",
+        "Ha affrontato da solo un cammino pieno di incertezze e di decisioni che segnavano il suo futuro sportivo e accademico.",
+        "Da qui nasce il suo obiettivo: dare a ogni giocatore l'accompagnamento vicino, professionale e umano che a lui è mancato.",
+      ],
+      de: [
+        "Als er an eine Universität mit höherem Niveau wechseln wollte, erwartete er die Unterstützung der Agentur, die ihn vertrat. Im wichtigsten Moment des Prozesses blieb er ohne Begleitung.",
+        "Er ging allein einen Weg voller Unsicherheit und Entscheidungen, die seine sportliche und akademische Zukunft prägten.",
+        "Daraus entstand sein Ziel: jedem Spieler die nahe, professionelle und menschliche Begleitung zu geben, die ihm selbst gefehlt hat.",
       ],
     },
   },
-  { name: "Miguel Rojas", initials: "MR", role: { es: "Director Fútbol Latinoamérica", en: "Director Soccer LATAM" }, image: miguelRojas, instagram: "https://www.instagram.com/futboluagency.latam/", bio: null },
-  {
-    name: "Mónica Rodríguez",
-    initials: "MR",
-    role: { es: "Directora de Scouting y Reclutamiento", en: "Scouting & Recruitment Director" },
-    image: monicaRodriguez,
-    linkedin: "https://www.linkedin.com/in/monica-rodriguez-serrano-44367236/",
-    bio: null,
-  },
-  { name: "Fabián Morales", initials: "FM", role: { es: "Reclutador Centroamérica", en: "Central America Recruiter" }, image: fabianMorales, linkedin: "https://www.linkedin.com/in/fabianmoralesrecruiting/", bio: null },
-  { name: "Alejandro Martín", initials: "AM", role: { es: "Reclutador España", en: "Spain Recruiter" }, image: null, bio: null },
 ];
+
+const TEAM: Person[] = [
+  {
+    name: "Miguel Rojas",
+    initials: "MR",
+    role: { es: "Director Fútbol Latinoamérica", en: "Director, Soccer Latin America", it: "Direttore Calcio America Latina", de: "Direktor Fußball Lateinamerika" },
+    instagram: "https://www.instagram.com/futboluagency.latam/",
+  },
+  {
+    name: "Alejandro Martín",
+    initials: "AM",
+    role: { es: "Reclutador España", en: "Recruiter, Spain", it: "Recruiter Spagna", de: "Scout Spanien" },
+  },
+  /* Italian subsidiary: add each director's name here when confirmed. */
+  {
+    name: "FUA Italia",
+    initials: "IT",
+    role: { es: "Dirección de la filial italiana", en: "Italian subsidiary leadership", it: "Direzione della filiale italiana", de: "Leitung der italienischen Niederlassung" },
+  },
+];
+
+const CHAPTERS: { mark: string; title: Copy; body: Copy<string[]> }[] = [
+  {
+    mark: "01",
+    title: { es: "Dos jugadores, la misma herida", en: "Two players, the same wound", it: "Due giocatori, la stessa ferita", de: "Zwei Spieler, dieselbe Wunde" },
+    body: {
+      es: [
+        "Ignacio y Moha no se conocían cuando vivieron lo mismo. Los dos se fueron a Estados Unidos a jugar y estudiar, y los dos confiaron en agencias que desaparecieron cuando más las necesitaban: en una transferencia, en un trámite, en la búsqueda de universidad.",
+        "Aprendieron el sistema a base de rechazos, correos sin respuesta y decisiones tomadas a solas, lejos de casa.",
+      ],
+      en: [
+        "Ignacio and Moha did not know each other when they went through the same thing. Both moved to the United States to play and study, and both trusted agencies that disappeared when they were needed most: during a transfer, a piece of paperwork, the search for a university.",
+        "They learned the system through rejections, unanswered emails and decisions made alone, far from home.",
+      ],
+      it: [
+        "Ignacio e Moha non si conoscevano quando hanno vissuto la stessa cosa. Entrambi sono partiti per gli Stati Uniti per giocare e studiare, ed entrambi si sono fidati di agenzie sparite quando servivano di più: in un trasferimento, in una pratica, nella ricerca dell'università.",
+        "Hanno imparato il sistema a forza di rifiuti, email senza risposta e decisioni prese da soli, lontano da casa.",
+      ],
+      de: [
+        "Ignacio und Moha kannten sich noch nicht, als sie dasselbe erlebten. Beide gingen in die USA, um zu spielen und zu studieren, und beide vertrauten Agenturen, die verschwanden, als man sie am meisten brauchte: bei einem Wechsel, einem Formular, der Suche nach einer Universität.",
+        "Sie lernten das System durch Absagen, unbeantwortete E-Mails und Entscheidungen, die sie allein und weit weg von zu Hause treffen mussten.",
+      ],
+    },
+  },
+  {
+    mark: "2020",
+    title: { es: "Nace FutbolUAgency", en: "FutbolUAgency is born", it: "Nasce FutbolUAgency", de: "FutbolUAgency entsteht" },
+    body: {
+      es: [
+        "Cuando se conocieron, vieron que su historia no era una excepción: era lo habitual. En 2020 fundaron FutbolUAgency LLC. con una promesa sencilla: acompañar a cada atleta como si fuera su propio hermano.",
+        "Querían ser la agencia que a ellos les habría gustado tener.",
+      ],
+      en: [
+        "When they met, they saw their story was not the exception: it was the norm. In 2020 they founded FutbolUAgency LLC. with a simple promise: to stand by every athlete as if he were their own brother.",
+        "They wanted to be the agency they wish they had had.",
+      ],
+      it: [
+        "Quando si sono conosciuti hanno capito che la loro storia non era un'eccezione: era la normalità. Nel 2020 hanno fondato FutbolUAgency LLC. con una promessa semplice: accompagnare ogni atleta come se fosse un fratello.",
+        "Volevano essere l'agenzia che avrebbero voluto avere.",
+      ],
+      de: [
+        "Als sie sich kennenlernten, sahen sie, dass ihre Geschichte keine Ausnahme war, sondern die Regel. 2020 gründeten sie FutbolUAgency LLC. mit einem einfachen Versprechen: jeden Athleten so zu begleiten, als wäre er ihr eigener Bruder.",
+        "Sie wollten die Agentur sein, die sie selbst gern gehabt hätten.",
+      ],
+    },
+  },
+  {
+    mark: "360°",
+    title: { es: "Acompañamiento integral", en: "Support from start to finish", it: "Accompagnamento completo", de: "Begleitung von Anfang bis Ende" },
+    body: {
+      es: [
+        "Cada jugador tiene un agente que lo conoce por su nombre. Ese agente evalúa su nivel deportivo y académico, diseña el plan, presenta su perfil a los entrenadores, negocia la beca y lo guía en la admisión, el visado y la llegada al campus.",
+        "Y no desaparece después de la firma: sigue ahí durante los cuatro años de carrera, para lo deportivo, lo académico y lo personal.",
+      ],
+      en: [
+        "Every player has an agent who knows them by name. That agent assesses their athletic and academic level, builds the plan, presents their profile to coaches, negotiates the scholarship and guides them through admission, the visa and arrival on campus.",
+        "And they do not disappear after the signing: they stay through all four years of college, on and off the pitch.",
+      ],
+      it: [
+        "Ogni giocatore ha un agente che lo conosce per nome. Quell'agente valuta il suo livello sportivo e accademico, costruisce il piano, presenta il profilo agli allenatori, negozia la borsa di studio e lo guida nell'ammissione, nel visto e nell'arrivo al campus.",
+        "E non sparisce dopo la firma: resta al suo fianco per tutti i quattro anni di università, dentro e fuori dal campo.",
+      ],
+      de: [
+        "Jeder Spieler hat einen Agenten, der ihn beim Namen kennt. Dieser Agent bewertet sein sportliches und akademisches Niveau, erstellt den Plan, stellt sein Profil den Trainern vor, verhandelt das Stipendium und begleitet ihn bei Zulassung, Visum und Ankunft auf dem Campus.",
+        "Und er verschwindet nicht nach der Unterschrift: Er bleibt die ganzen vier Studienjahre an seiner Seite, auf und neben dem Platz.",
+      ],
+    },
+  },
+  {
+    mark: "HOY",
+    title: { es: "Quiénes somos hoy", en: "Who we are today", it: "Chi siamo oggi", de: "Wer wir heute sind" },
+    body: {
+      es: [
+        "Lo que empezó con dos exjugadores es hoy un equipo con presencia en España, Latinoamérica, Estados Unidos e Italia, donde una filial propia con sus directores acerca el programa a los jugadores italianos.",
+        "Trabajamos dos caminos: becas deportivas en universidades de EE.UU. y temporadas en clubes de España y Portugal. La forma de trabajar es la misma en los dos: un agente, todo el camino.",
+      ],
+      en: [
+        "What began with two former players is now a team present in Spain, Latin America, the United States and Italy, where our own subsidiary, with its directors, brings the programme to Italian players.",
+        "We work two paths: athletic scholarships at U.S. universities and seasons with clubs in Spain and Portugal. The way we work is the same on both: one agent, all the way.",
+      ],
+      it: [
+        "Quello che è iniziato con due ex giocatori oggi è una squadra presente in Spagna, America Latina, Stati Uniti e Italia, dove una filiale propria con i suoi direttori porta il programma ai giocatori italiani.",
+        "Lavoriamo su due strade: borse di studio sportive nelle università degli USA e stagioni nei club di Spagna e Portogallo. Il modo di lavorare è lo stesso: un agente, tutto il percorso.",
+      ],
+      de: [
+        "Was mit zwei ehemaligen Spielern begann, ist heute ein Team mit Präsenz in Spanien, Lateinamerika, den USA und Italien, wo eine eigene Niederlassung mit ihren Direktoren das Programm zu italienischen Spielern bringt.",
+        "Wir bieten zwei Wege: Sportstipendien an US-Universitäten und Saisons bei Vereinen in Spanien und Portugal. Die Arbeitsweise ist bei beiden gleich: ein Agent, den ganzen Weg.",
+      ],
+    },
+  },
+];
+
+const STATS: { num: string; label: Copy }[] = [
+  { num: "2020", label: { es: "Año de fundación", en: "Year founded", it: "Anno di fondazione", de: "Gründungsjahr" } },
+  { num: "350+", label: { es: "Atletas colocados", en: "Athletes placed", it: "Atleti collocati", de: "Vermittelte Athleten" } },
+  { num: "$10M+", label: { es: "En becas conseguidas", en: "In scholarships secured", it: "In borse di studio ottenute", de: "An erhaltenen Stipendien" } },
+  { num: "98%", label: { es: "Satisfacción de familias", en: "Family satisfaction", it: "Famiglie soddisfatte", de: "Zufriedene Familien" } },
+];
+
+const Portrait = ({ person, sizes }: { person: Person; sizes: string }) =>
+  person.photo ? (
+    <Image
+      src={person.photo}
+      alt={person.name}
+      fill
+      sizes={sizes}
+      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+      style={{ objectPosition: person.position ?? "50% 20%" }}
+    />
+  ) : (
+    <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(120%_90%_at_30%_10%,#2a2a2a_0%,#0a0a0a_70%)]">
+      <span className="font-druk text-[5.5rem] leading-none text-white/15">{person.initials}</span>
+    </div>
+  );
 
 const About = () => {
   const { language } = useLanguage();
-  const es = language === "es";
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const selected = activeIndex !== null ? teamMembers[activeIndex] : null;
+  const [open, setOpen] = useState<Person | null>(null);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-16 md:pt-20" style={{ backgroundColor: "hsl(var(--background))", color: NAVY }}>
+      <main className="min-h-screen bg-background pt-16 md:pt-20">
         {/* HERO */}
-        <section className="relative overflow-hidden" style={{ minHeight: "480px" }}>
-          <img
-            src={teamHeaderBg}
-            alt="FUA Team"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: "grayscale(100%)", objectPosition: "center 15%" }}
+        <section className="relative isolate overflow-hidden bg-ink text-white">
+          <Image
+            src={teamHuddle}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            placeholder="blur"
+            className="-z-20 object-cover grayscale"
+            style={{ objectPosition: "50% 20%" }}
           />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(to bottom, rgba(18,33,58,0.55) 0%, rgba(18,33,58,0.78) 100%)" }}
-          />
-          <div className="relative container-wide px-4 max-w-4xl mx-auto text-center flex flex-col items-center justify-center py-28 md:py-36">
-            <span
-              className="inline-block font-body text-xs tracking-[0.2em] uppercase font-semibold mb-5 px-3 py-1 rounded-full"
-              style={{ color: "rgba(255,255,255,0.85)", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}
-            >
-              {es ? "Nuestra historia" : "Our story"}
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 text-white">
-              {es ? "Fundada por atletas que vivieron el proceso" : "Founded by athletes who lived the process"}
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(10,10,10,0.92)_0%,rgba(10,10,10,0.7)_55%,rgba(10,10,10,0.35)_100%)]" />
+          <div className="container-wide px-4 py-28 md:py-40">
+            <h1 className="max-w-4xl leading-[0.92] text-white text-[clamp(3rem,9vw,7rem)]">
+              {pick(language, { es: "Fundada por jugadores", en: "Founded by players", it: "Fondata da giocatori", de: "Gegründet von Spielern" })}
+              <span className="block pr-[0.08em] italic text-red-bright">
+                {pick(language, { es: "que vivieron el proceso", en: "who lived the process", it: "che hanno vissuto il percorso", de: "die den Weg selbst gingen" })}
+              </span>
             </h1>
-            <p className="font-body text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
-              {es
-                ? "FutbolUAgency LLC. nació de una experiencia real: la frustración de buscar una beca en EE.UU. sin el apoyo adecuado. Hoy somos la agencia que nos habría gustado tener."
-                : "FutbolUAgency LLC. was born from a real experience: the frustration of seeking a scholarship in the U.S. without proper support. Today we are the agency we wish we'd had."}
+            <p className="label-bebas mt-5 text-base text-white/60 sm:text-lg">
+              {pick(language, { es: "Nuestra historia · Desde 2020", en: "Our story · Since 2020", it: "La nostra storia · Dal 2020", de: "Unsere Geschichte · Seit 2020" })}
+            </p>
+            <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed text-white/80">
+              {pick(language, {
+                es: "FutbolUAgency LLC. nació de una experiencia real: buscar una beca en Estados Unidos sin el apoyo adecuado. Hoy somos la agencia que nos habría gustado tener.",
+                en: "FutbolUAgency LLC. was born from a real experience: chasing a scholarship in the United States without the right support. Today we are the agency we wish we had had.",
+                it: "FutbolUAgency LLC. è nata da un'esperienza reale: cercare una borsa di studio negli Stati Uniti senza il sostegno giusto. Oggi siamo l'agenzia che avremmo voluto avere.",
+                de: "FutbolUAgency LLC. entstand aus einer echten Erfahrung: ein Stipendium in den USA zu suchen, ohne die richtige Unterstützung. Heute sind wir die Agentur, die wir selbst gern gehabt hätten.",
+              })}
             </p>
           </div>
         </section>
 
-        {/* ORIGIN STORY */}
-        <section className="py-20 md:py-24" style={{ backgroundColor: "hsl(var(--section-alt))" }}>
-          <div className="container-wide px-4 max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <div>
-                <span className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4 block" style={{ color: RED }}>
-                  {es ? "Cómo empezó todo" : "How it all started"}
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 leading-tight" style={{ color: NAVY }}>
-                  {es ? "Dos jugadores. La misma historia." : "Two players. The same story."}
-                </h2>
-                <div className="space-y-4">
-                  {(es
-                    ? [
-                        "Ignacio y Moha se conocieron después de haber vivido experiencias casi idénticas: los dos intentaron llegar a universidades en EE.UU., los dos confiaron en agencias que los dejaron solos en el momento más importante.",
-                        "En lugar de rendirse, decidieron aprender el sistema por su cuenta y ayudar a otros a no vivir lo mismo.",
-                        "En 2020 fundaron FutbolUAgency LLC. con una promesa simple: acompañar a cada atleta como si fuera su propio hermano.",
-                      ]
-                    : [
-                        "Ignacio and Moha met after having lived almost identical experiences: both tried to reach universities in the U.S., both trusted agencies that left them alone at the most important moment.",
-                        "Instead of giving up, they decided to learn the system on their own and help others avoid the same experience.",
-                        "In 2020 they founded FutbolUAgency LLC. with a simple promise: to accompany each athlete as if they were their own brother.",
-                      ]
-                  ).map((p, i) => (
-                    <p key={i} className="font-body text-base md:text-lg leading-relaxed" style={{ color: "rgba(18,33,58,0.75)" }}>
-                      {p}
-                    </p>
-                  ))}
+        {/* STORY */}
+        <section className="py-24 sm:py-32" aria-labelledby="story-title">
+          <div className="container-wide px-4">
+            <div className="grid gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-4">
+                <div className="lg:sticky lg:top-32">
+                  <h2 id="story-title" className="leading-[0.92] text-ink text-[clamp(2.75rem,7vw,5rem)]">
+                    {pick(language, { es: "De la experiencia", en: "From experience", it: "Dall'esperienza", de: "Aus Erfahrung" })}
+                    <span className="block pr-[0.08em] italic text-primary">
+                      {pick(language, { es: "a la misión", en: "to mission", it: "alla missione", de: "zur Mission" })}
+                    </span>
+                  </h2>
+                  <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/10 pt-8">
+                    {STATS.map((s) => (
+                      <div key={s.num}>
+                        <dt className="label-bebas text-sm text-ink/50">{pick(language, s.label)}</dt>
+                        <dd className="mt-1 font-druk text-4xl text-primary">{s.num}</dd>
+                      </div>
+                    ))}
+                  </dl>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { num: "2020", label: es ? "Año de fundación" : "Year founded" },
-                  { num: "350+", label: es ? "Atletas colocados" : "Athletes placed" },
-                  { num: "$10M+", label: es ? "En becas conseguidas" : "In scholarships secured" },
-                  { num: "98%", label: es ? "Satisfacción de familias" : "Family satisfaction" },
-                ].map((s, i) => (
-                  <div
-                    key={i}
-                    className="p-6 rounded-2xl bg-white"
-                    style={{ border: "1px solid rgba(18,33,58,0.06)", boxShadow: "0 4px 16px rgba(18,33,58,0.04)" }}
-                  >
-                    <div className="font-display text-3xl md:text-4xl font-bold mb-2" style={{ color: RED }}>
-                      {s.num}
-                    </div>
-                    <div className="font-body text-sm" style={{ color: "rgba(18,33,58,0.6)" }}>
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* VIDEO: moved here from the home */}
-        <section id="video" className="py-20 md:py-24">
-          <div className="container-wide px-4 max-w-5xl mx-auto">
-            <div className="text-center mb-10">
-              <span className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4 block" style={{ color: RED }}>
-                {es ? "Conócenos" : "Meet us"}
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold leading-tight" style={{ color: NAVY }}>
-                {es ? "Así trabajamos" : "How we work"}
-              </h2>
-            </div>
-            <div className="relative aspect-video overflow-hidden rounded-2xl bg-black" style={{ boxShadow: "0 18px 50px -20px rgba(18,33,58,0.45)" }}>
-              <YouTubeEmbed id="0-dWsUxiYkI" title="FutbolUAgency LLC. - Video explicativo" className="absolute inset-0 h-full w-full" />
-            </div>
-          </div>
-        </section>
-
-        {/* MISSION & VALUES */}
-        <section className="py-20 md:py-24">
-          <div className="container-wide px-4 max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4 block" style={{ color: RED }}>
-                {es ? "Lo que nos mueve" : "What drives us"}
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold leading-tight" style={{ color: NAVY }}>
-                {es ? "Nuestra Misión y Valores" : "Our Mission & Values"}
-              </h2>
-            </div>
-
-            <div
-              className="max-w-3xl mx-auto p-8 md:p-10 rounded-2xl mb-14 text-center"
-              style={{ background: NAVY, color: "white" }}
-            >
-              <p className="font-display italic text-xl md:text-2xl leading-relaxed">
-                {es
-                  ? '"Nuestra misión es clara: que ningún talento se pierda por falta de información, por una agencia irresponsable o por no saber cómo funciona el sistema."'
-                  : '"Our mission is clear: no talent should be lost due to lack of information, an irresponsible agency, or not knowing how the system works."'}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* TEAM */}
-        <section className="py-20 md:py-24" style={{ backgroundColor: "hsl(var(--section-alt))" }}>
-          <div className="container-wide px-4 max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4 block" style={{ color: RED }}>
-                {es ? "Las personas" : "The people"}
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 leading-tight" style={{ color: NAVY }}>
-                {es ? "Nuestro Equipo" : "Our Team"}
-              </h2>
-              <p className="font-body text-base md:text-lg max-w-xl mx-auto" style={{ color: "rgba(18,33,58,0.7)" }}>
-                {es ? "Las personas detrás de cada oportunidad que creamos." : "The people behind every opportunity we create."}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 max-w-5xl mx-auto">
-              {teamMembers.map((member, i) => {
-                const hasBio = member.bio !== null;
-                return (
-                  <div
-                    key={i}
-                    onClick={() => (hasBio ? setActiveIndex(i) : null)}
-                    className="group"
-                    style={{ cursor: hasBio ? "pointer" : "default" }}
-                  >
-                    <div className="relative overflow-hidden aspect-[4/5] bg-[#0d0d0d]">
-                      {member.image ? (
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                          style={{ objectPosition: "center 15%" }}
-                        />
-                      ) : (
-                        <div
-                          className="absolute inset-0 flex items-center justify-center"
-                          style={{ background: "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)" }}
-                        >
-                          <span className="font-display text-6xl font-bold" style={{ color: "rgba(255,255,255,0.12)" }}>
-                            {member.initials}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="pt-4">
-                      <span
-                        className="block font-body text-[11px] tracking-[0.18em] uppercase font-semibold mb-1.5"
-                        style={{ color: "rgba(18,33,58,0.45)" }}
-                      >
-                        {member.role[es ? "es" : "en"]}
-                      </span>
-                      <div className="flex items-center justify-between gap-2">
-                        <h3 className="font-display text-xl font-bold leading-tight" style={{ color: NAVY }}>
-                          {member.name}
-                        </h3>
-                        <div className="flex items-center gap-2">
-                          {member.instagram && (
-                            <a
-                              href={member.instagram}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-opacity hover:opacity-70"
-                              style={{ background: "rgba(18,33,58,0.08)", border: "1px solid rgba(18,33,58,0.14)", color: NAVY }}
-                              aria-label="Instagram"
-                            >
-                              <InstagramIcon />
-                            </a>
-                          )}
-                          {member.linkedin && (
-                            <a
-                              href={member.linkedin}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-opacity hover:opacity-70"
-                              style={{ background: "rgba(18,33,58,0.08)", border: "1px solid rgba(18,33,58,0.14)", color: NAVY }}
-                              aria-label="LinkedIn"
-                            >
-                              <LinkedInIcon />
-                            </a>
-                          )}
-                        </div>
+              <ol className="space-y-16 lg:col-span-7 lg:col-start-6">
+                {CHAPTERS.map((c, i) => (
+                  <li key={c.mark} className="grid gap-4 sm:grid-cols-[7.5rem_1fr] sm:gap-8">
+                    <span aria-hidden="true" className="font-druk text-5xl leading-none text-primary/25 sm:text-6xl">
+                      {c.mark}
+                    </span>
+                    <div>
+                      <h3 className="text-2xl font-bold text-ink sm:text-[1.75rem]">{pick(language, c.title)}</h3>
+                      <div className="mt-4 max-w-[62ch] space-y-4 font-body text-base leading-relaxed text-ink/70 sm:text-lg">
+                        {pick(language, c.body).map((p) => (
+                          <p key={p}>{p}</p>
+                        ))}
                       </div>
-                      {hasBio && (
-                        <span
-                          className="inline-flex items-center gap-2 mt-3 font-body text-sm transition-all group-hover:gap-3"
-                          style={{ color: RED }}
-                        >
-                          <span className="h-px w-6 transition-all group-hover:w-10" style={{ background: RED }} />
-                          <ArrowRight className="w-4 h-4" />
-                        </span>
+                      {i === 1 && (
+                        <blockquote className="mt-8 border-l-2 border-primary pl-5 font-body text-lg font-medium leading-relaxed text-ink sm:text-xl">
+                          {pick(language, {
+                            es: "«Que ningún talento se pierda por falta de información, por una agencia irresponsable o por no saber cómo funciona el sistema.»",
+                            en: "“No talent should be lost to a lack of information, an irresponsible agency or not knowing how the system works.”",
+                            it: "«Nessun talento deve andare perso per mancanza di informazioni, per un'agenzia irresponsabile o per non sapere come funziona il sistema.»",
+                            de: "„Kein Talent soll verloren gehen, weil Informationen fehlen, eine Agentur unverantwortlich handelt oder niemand weiß, wie das System funktioniert.“",
+                          })}
+                        </blockquote>
                       )}
                     </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        {/* FOUNDERS */}
+        <section className="bg-ink py-24 text-white sm:py-32" aria-labelledby="founders-title">
+          <div className="container-wide px-4">
+            <h2 id="founders-title" className="leading-[0.92] text-white text-[clamp(2.75rem,8vw,5.5rem)]">
+              {pick(language, { es: "Los fundadores", en: "The founders", it: "I fondatori", de: "Die Gründer" })}
+            </h2>
+            <p className="label-bebas mt-4 text-base text-white/55">
+              {pick(language, { es: "Ignacio y Moha · Exjugadores", en: "Ignacio and Moha · Former players", it: "Ignacio e Moha · Ex giocatori", de: "Ignacio und Moha · Ehemalige Spieler" })}
+            </p>
+
+            <ul className="mt-12 grid gap-6 md:grid-cols-2">
+              {FOUNDERS.map((f) => (
+                <li key={f.name}>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(f)}
+                    className="group block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#111]">
+                      <Portrait person={f} sizes="(min-width: 768px) 50vw, 100vw" />
+                    </div>
+                    <p className="label-bebas mt-5 text-sm text-white/50">{pick(language, f.role)}</p>
+                    <p className="mt-1 flex items-center justify-between font-body text-xl font-semibold text-white">
+                      {f.name}
+                      <span className="font-body text-sm font-medium text-white/60 transition-colors group-hover:text-red-bright">
+                        {pick(language, { es: "Leer su historia", en: "Read his story", it: "Leggi la sua storia", de: "Seine Geschichte lesen" })} →
+                      </span>
+                    </p>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* TEAM TODAY */}
+        <section className="py-24 sm:py-32" aria-labelledby="team-title">
+          <div className="container-wide px-4">
+            <h2 id="team-title" className="leading-[0.92] text-ink text-[clamp(2.75rem,8vw,5.5rem)]">
+              {pick(language, { es: "El equipo", en: "The team", it: "La squadra", de: "Das Team" })}{" "}
+              <span className="pr-[0.08em] italic text-primary">{pick(language, { es: "hoy", en: "today", it: "oggi", de: "heute" })}</span>
+            </h2>
+            <p className="label-bebas mt-4 text-base text-ink/50">
+              {pick(language, { es: "España · Latinoamérica · Estados Unidos · Italia", en: "Spain · Latin America · United States · Italy", it: "Spagna · America Latina · Stati Uniti · Italia", de: "Spanien · Lateinamerika · USA · Italien" })}
+            </p>
+
+            <ul className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {TEAM.map((m) => (
+                <li key={m.name}>
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink">
+                    <Portrait person={m} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
                   </div>
-                );
-              })}
+                  <p className="label-bebas mt-4 text-sm text-ink/50">{pick(language, m.role)}</p>
+                  <p className="mt-1 flex items-center gap-3 font-body text-lg font-semibold text-ink">
+                    {m.name}
+                    {m.instagram && (
+                      <a
+                        href={m.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-body text-sm font-medium text-primary hover:underline"
+                      >
+                        Instagram
+                      </a>
+                    )}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* VIDEO */}
+        <section id="video" className="bg-[#f3f1ec] py-24 sm:py-28" aria-labelledby="video-title">
+          <div className="container-wide max-w-5xl px-4">
+            <h2 id="video-title" className="leading-[0.92] text-ink text-[clamp(2.5rem,6vw,4.5rem)]">
+              {pick(language, { es: "Así trabajamos", en: "How we work", it: "Come lavoriamo", de: "So arbeiten wir" })}
+            </h2>
+            <div className="relative mt-10 aspect-video overflow-hidden rounded-2xl bg-black shadow-[0_18px_50px_-20px_rgba(10,10,10,0.45)]">
+              <YouTubeEmbed id="0-dWsUxiYkI" title="FutbolUAgency LLC." className="absolute inset-0 h-full w-full" />
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="py-20 md:py-24 text-center">
-          <div className="container-wide px-4 max-w-3xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4" style={{ color: NAVY }}>
-              {es ? "¿Listo para dar el siguiente paso?" : "Ready to take the next step?"}
+        <section className="bg-ink py-24 text-white sm:py-28">
+          <div className="container-wide px-4">
+            <h2 className="leading-[0.92] text-white text-[clamp(3rem,9vw,6.5rem)]">
+              {pick(language, { es: "El siguiente", en: "The next one", it: "Il prossimo", de: "Der Nächste" })}
+              <span className="block pr-[0.08em] italic text-red-bright">{pick(language, { es: "eres tú", en: "is you", it: "sei tu", de: "bist du" })}</span>
             </h2>
-            <p className="font-body text-base md:text-lg mb-8" style={{ color: "rgba(18,33,58,0.7)" }}>
-              {es ? "Aplica ahora y descubre qué oportunidades hay para ti." : "Apply now and discover what opportunities exist for you."}
-            </p>
-            <LocaleLink
-              to="/apply"
-              className="inline-flex items-center gap-2 font-body font-semibold px-8 py-3.5 rounded-lg transition-all text-sm sm:text-base text-white"
-              style={{ background: RED, boxShadow: "0 8px 24px rgba(176,7,23,0.3)" }}
-            >
-              {es ? "Aplica Ahora" : "Apply Now"} <ArrowRight className="w-5 h-5" />
-            </LocaleLink>
+            <HomeCta className="mt-10" />
           </div>
         </section>
 
         <Footer />
       </main>
 
-      {/* MODAL */}
-      {selected && (
+      {/* Founder story */}
+      {open && (
         <div
-          onClick={() => setActiveIndex(null)}
-          style={{
-            position: "fixed", inset: 0, zIndex: 50,
-            background: "rgba(18,33,58,0.85)", backdropFilter: "blur(6px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            padding: "24px",
-          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={open.name}
+          onClick={() => setOpen(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-6 backdrop-blur-sm"
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              background: "white", borderRadius: "20px",
-              maxWidth: "960px", width: "100%",
-              maxHeight: "90vh", overflow: "hidden",
-              position: "relative",
-            }}
-          >
+          <div onClick={(e) => e.stopPropagation()} className="relative grid max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-2xl bg-white md:grid-cols-2">
             <button
-              onClick={() => setActiveIndex(null)}
-              style={{
-                position: "absolute", top: "16px", right: "16px", zIndex: 10,
-                width: "40px", height: "40px", borderRadius: "50%",
-                background: "rgba(255,255,255,0.9)", border: "1px solid rgba(18,33,58,0.12)", cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}
+              type="button"
+              autoFocus
+              onClick={() => setOpen(null)}
+              aria-label={pick(language, { es: "Cerrar", en: "Close", it: "Chiudi", de: "Schließen" })}
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-ink/10 bg-white/90"
             >
-              <X className="w-5 h-5" style={{ color: NAVY }} />
+              <X className="h-5 w-5 text-ink" />
             </button>
-
-            <div className="grid md:grid-cols-2" style={{ maxHeight: "90vh" }}>
-              {/* INFO */}
-              <div className="p-8 sm:p-10 md:p-12 order-2 md:order-1 overflow-y-auto">
-                <span
-                  className="block font-body text-[11px] tracking-[0.18em] uppercase font-semibold mb-3"
-                  style={{ color: "rgba(18,33,58,0.45)" }}
-                >
-                  {selected.role[es ? "es" : "en"]}
-                </span>
-                <div className="flex items-center gap-3 mb-6 flex-wrap">
-                  <h2 className="font-display text-3xl sm:text-4xl font-bold" style={{ color: NAVY }}>
-                    {selected.name}
-                  </h2>
-                  <div className="flex items-center gap-2">
-                    {selected.instagram && (
-                      <a
-                        href={selected.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full transition-opacity hover:opacity-70"
-                        style={{ background: "rgba(18,33,58,0.08)", border: "1px solid rgba(18,33,58,0.14)", color: NAVY }}
-                        aria-label="Instagram"
-                      >
-                        <InstagramIcon />
-                      </a>
-                    )}
-                    {selected.linkedin && (
-                      <a
-                        href={selected.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full transition-opacity hover:opacity-70"
-                        style={{ background: "rgba(18,33,58,0.08)", border: "1px solid rgba(18,33,58,0.14)", color: NAVY }}
-                        aria-label="LinkedIn"
-                      >
-                        <LinkedInIcon />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  {selected.bio ? (
-                    selected.bio[es ? "es" : "en"].map((p: string, i: number) => (
-                      <p key={i} className="font-body text-sm sm:text-base leading-relaxed" style={{ color: "rgba(18,33,58,0.7)" }}>
-                        {p}
-                      </p>
-                    ))
-                  ) : (
-                    <p className="font-body text-sm sm:text-base italic" style={{ color: "rgba(18,33,58,0.6)" }}>
-                      {es ? "Bio próximamente." : "Bio coming soon."}
-                    </p>
-                  )}
-                </div>
+            <div className="order-2 overflow-y-auto p-8 sm:p-10 md:order-1">
+              <p className="label-bebas text-sm text-ink/50">{pick(language, open.role)}</p>
+              <h2 className="mt-1 text-4xl text-ink">{open.name}</h2>
+              <div className="mt-6 space-y-4 font-body text-base leading-relaxed text-ink/70">
+                {open.bio && pick(language, open.bio).map((p) => <p key={p}>{p}</p>)}
               </div>
-
-              {/* PHOTO */}
-              <div className="relative order-1 md:order-2 bg-[#0d0d0d] min-h-[260px] md:min-h-full">
-                {selected.image ? (
-                  <img
-                    src={selected.image}
-                    alt={selected.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ objectPosition: "center 15%" }}
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-6xl font-bold" style={{ color: "rgba(255,255,255,0.12)" }}>
-                      {selected.initials}
-                    </span>
-                  </div>
-                )}
-              </div>
+              {open.instagram && (
+                <a href={open.instagram} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block font-body text-sm font-semibold text-primary hover:underline">
+                  Instagram
+                </a>
+              )}
+            </div>
+            <div className="relative order-1 min-h-[260px] bg-ink md:order-2">
+              <Portrait person={open} sizes="(min-width: 768px) 28rem, 100vw" />
             </div>
           </div>
         </div>

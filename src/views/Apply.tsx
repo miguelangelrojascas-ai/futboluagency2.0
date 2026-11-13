@@ -44,7 +44,7 @@ const Apply = () => {
           <div className="container-wide px-4">
             <div className="relative grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
               <div className="relative z-10">
-                <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                <span className="mb-4 inline-block label-bebas text-base text-primary">
                   {es ? "Evaluación gratuita" : "Free evaluation"}
                 </span>
                 <h1 className="mb-5 font-display text-4xl font-bold leading-[1.05] sm:text-5xl">

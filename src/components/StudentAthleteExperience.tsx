@@ -129,7 +129,7 @@ const StudentAthleteExperience = () => {
       aria-label={es ? "La experiencia student-athlete" : "The student-athlete experience"}
     >
       <div className="mx-auto mb-10 max-w-7xl px-4 md:mb-14">
-        <span className="mb-4 block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+        <span className="mb-4 block label-bebas text-base text-primary">
           {es ? "El sueño americano" : "The American dream"}
         </span>
         <h2 className="max-w-4xl font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">

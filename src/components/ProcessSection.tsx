@@ -389,11 +389,8 @@ const ProcessSection = ({
       >
         <h2
           style={{
-            fontFamily: "var(--font-digits), var(--font-display), serif",
-            fontSize: "clamp(2.5rem, 5vw, 4rem)",
-            fontWeight: 700,
+            fontSize: "clamp(2.75rem, 6vw, 4.75rem)",
             marginBottom: 16,
-            letterSpacing: "-0.02em",
           }}
         >
           {t("process.title")}

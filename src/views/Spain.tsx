@@ -8,6 +8,7 @@ import SpainInfoBar from "@/components/spain/SpainInfoBar";
 import SpainDifferentiatorSection from "@/components/spain/SpainDifferentiatorSection";
 import SpainWhySection from "@/components/spain/SpainWhySection";
 import SpainAcademiesSection from "@/components/SpainAcademiesSection";
+import SpainClubsStrip from "@/components/spain/SpainClubsStrip";
 import SpainMadridSection from "@/components/spain/SpainMadridSection";
 import SpainMethodologySection from "@/components/spain/SpainMethodologySection";
 import SpainTargetProfileSection from "@/components/spain/SpainTargetProfileSection";
@@ -39,13 +40,12 @@ const Spain = () => {
           <div className="absolute bottom-0 left-0 right-0 h-[120px] z-10" style={{ background: "linear-gradient(to bottom, transparent, #ffffff)" }} />
           <div className="container-wide px-4 relative">
             <div className="max-w-4xl mx-auto text-center section-padding">
-              <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
+              <span className="label-bebas inline-block mb-4 text-base text-white/80">
                 {t("spain.tag")}
               </span>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-[1.08] text-white" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
-                {language === "es"
-                  ? "Juega en Academias Profesionales en España"
-                  : "Play in Professional Academies in Spain"}
+              <h1 className="font-display text-[2.75rem] sm:text-6xl md:text-7xl mb-6 leading-[0.95] text-white" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
+                {language === "es" ? "Juega en academias profesionales " : "Play in professional academies "}
+                <span className="pr-[0.08em] italic text-red-bright">{language === "es" ? "en España" : "in Spain"}</span>
               </h1>
               <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
                 {language === "es"
@@ -74,6 +74,7 @@ const Spain = () => {
 
         {/* Talavera + partner clubs */}
         <SpainAcademiesSection />
+        <SpainClubsStrip />
 
         {/* New sections */}
         <SpainMadridSection />

@@ -84,10 +84,53 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
     color: #12213a;
     font-weight: 700;
   }
+
+  /* Sub-headings speak in the body face: clean and easy to read. */
+  h3, h4, h5, h6 {
+    font-family: var(--font-body), Inter, sans-serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/*
+ * Editorial type system, site-wide: H1 and H2 are section titles in the
+ * condensed face (Anton standing in for Druk), always upper case, one weight.
+ * The selectors carry an attribute so they win over the old per-heading
+ * utilities (font-display, font-bold). A heading styled as a small label opts
+ * out with font-body.
+ */
+h1:not(.font-body),
+h2:not(.font-body),
+h1[class]:not(.font-body),
+h2[class]:not(.font-body) {
+  font-family: var(--font-druk), "Druk Condensed", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  font-synthesis: style;
+}
+h1:not(.font-body):not([class*="leading-"]),
+h2:not(.font-body):not([class*="leading-"]),
+h1.leading-tight, h2.leading-tight,
+h1.leading-snug, h2.leading-snug,
+h1.leading-\[1\.1\], h2.leading-\[1\.1\],
+h1.leading-\[1\.08\], h2.leading-\[1\.08\] {
+  line-height: 0.98;
+}
+h3[class]:not(.font-druk):not(.font-bebas),
+h4[class], h5[class], h6[class] {
+  font-family: var(--font-body), Inter, sans-serif;
+}
+
+/* Short labels and subtitles: Bebas Neue, spaced out. */
+.label-bebas {
+  font-family: var(--font-bebas), "Bebas Neue", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
 }
 
 @layer components {

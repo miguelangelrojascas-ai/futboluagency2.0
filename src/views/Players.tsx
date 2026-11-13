@@ -46,7 +46,7 @@ const Players = () => {
 
           <div className="container-wide relative z-10 flex min-h-[560px] flex-col items-center justify-center px-4 pb-16 pt-32 text-center sm:min-h-[620px] md:pt-36 lg:min-h-[70vh] lg:max-h-[760px]">
             <div className="mx-auto max-w-3xl" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.75)" }}>
-              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-white/80">
+              <span className="mb-4 inline-block label-bebas text-base text-white/80">
                 {es ? "Nuestros jugadores" : "Our players"}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">

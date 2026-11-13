@@ -57,7 +57,7 @@ const PlayerStory = () => {
             </nav>
 
             <div className="max-w-3xl">
-              <span className="mb-4 inline-block font-body text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              <span className="mb-4 inline-block label-bebas text-base text-primary">
                 {es ? story.eyebrow.es : story.eyebrow.en}
               </span>
               <h1 className="mb-4 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
