@@ -369,13 +369,13 @@ const FaqSection = () => {
       <div className="container-wide px-4">
         {/* Header */}
         <div className="max-w-3xl mx-auto mb-10 text-center">
-          <p className="font-bebas text-[15px] tracking-[0.3em] text-primary sm:text-base">
-            {isEs ? "Preguntas frecuentes" : "FAQ"}
-          </p>
-          <h2 className="mt-3 font-druk uppercase leading-[0.88] text-ink text-[clamp(3rem,12vw,6.5rem)]">
+          <h2 className="font-druk uppercase leading-[0.88] text-ink text-[clamp(3rem,12vw,6.5rem)]">
             {isEs ? "Todo lo que" : "Everything"}
             <span className="block pr-[0.08em] italic text-primary">{isEs ? "necesitas saber" : "you need to know"}</span>
           </h2>
+          <p className="mt-4 font-bebas text-[15px] tracking-[0.26em] text-ink/50 sm:text-base">
+            {isEs ? "Preguntas frecuentes" : "Frequently asked questions"}
+          </p>
         </div>
 
         {/* Category tabs */}

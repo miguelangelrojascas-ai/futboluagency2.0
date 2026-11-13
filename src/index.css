@@ -260,3 +260,9 @@
     font-weight: 400;
   }
 }
+
+/* Home spotlight: the bar under the credit fills while a player is on screen. */
+@keyframes fua-progress {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}

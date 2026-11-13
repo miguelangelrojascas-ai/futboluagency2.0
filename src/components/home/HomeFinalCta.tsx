@@ -18,10 +18,7 @@ const HomeFinalCta = () => {
       />
       <div className="container-wide grid items-end gap-6 px-4 pt-20 sm:pt-28 lg:grid-cols-[1.15fr_1fr]">
         <div className="pb-4 lg:pb-28">
-          <p className="font-bebas text-[15px] tracking-[0.3em] text-red-bright sm:text-base">
-            {es ? "Evaluación gratuita" : "Free evaluation"}
-          </p>
-          <h2 className="mt-3 font-druk text-white uppercase leading-[0.96] text-[clamp(3.75rem,16vw,8.5rem)] lg:text-[clamp(5rem,7vw,8.5rem)]">
+          <h2 className="font-druk text-white uppercase leading-[0.96] text-[clamp(3.75rem,16vw,8.5rem)] lg:text-[clamp(5rem,7vw,8.5rem)]">
             <span className="block whitespace-nowrap">{es ? "El siguiente" : "The next one"}</span>
             <span className="block pr-[0.08em] italic text-red-bright">{es ? "eres tú" : "is you"}</span>
           </h2>

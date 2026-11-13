@@ -13,7 +13,7 @@ import { LOCALES, swapLocaleInPath, type Locale } from "@/lib/routes";
  * the current path with its locale segment and slug swapped. The current
  * language is shown as selected and is not a link.
  */
-const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
+const LanguageSwitcher = ({ className = "", dark = false }: { className?: string; dark?: boolean }) => {
   const { language } = useLanguage();
   const pathname = usePathname();
 
@@ -23,19 +23,19 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
       aria-label={language === "es" ? "Idioma" : "Language"}
       role="group"
     >
-      <Globe className="h-4 w-4 text-muted-foreground" aria-hidden />
+      <Globe className={`h-4 w-4 ${dark ? "text-white/50" : "text-muted-foreground"}`} aria-hidden />
       {LOCALES.map((locale, i) => (
         <span key={locale} className="flex items-center gap-1.5">
-          {i > 0 && <span className="text-border" aria-hidden>|</span>}
+          {i > 0 && <span className={dark ? "text-white/20" : "text-border"} aria-hidden>|</span>}
           {locale === language ? (
-            <span className="text-primary" aria-current="true">
+            <span className={dark ? "text-white" : "text-primary"} aria-current="true">
               {locale}
             </span>
           ) : (
             <Link
               href={swapLocaleInPath(pathname, locale as Locale)}
               hrefLang={locale}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className={`transition-colors ${dark ? "text-white/50 hover:text-white" : "text-muted-foreground hover:text-foreground"}`}
               aria-label={locale === "en" ? "English" : "Español"}
             >
               {locale}

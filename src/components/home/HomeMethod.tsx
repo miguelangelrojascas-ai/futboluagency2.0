@@ -34,13 +34,13 @@ const HomeMethod = () => {
       <div className="container-wide grid gap-12 px-4 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <p className="font-bebas text-[15px] tracking-[0.3em] text-primary sm:text-base">
-              {es ? "6 pasos · De tu ciudad al campus" : "6 steps · From your city to campus"}
-            </p>
-            <h2 className="mt-3 font-druk uppercase leading-[0.88] text-ink text-[clamp(3.25rem,13vw,7rem)] lg:text-[clamp(4rem,6.6vw,7rem)]">
+            <h2 className="font-druk uppercase leading-[0.88] text-ink text-[clamp(3.25rem,13vw,7rem)] lg:text-[clamp(4rem,6.6vw,7rem)]">
               {es ? "El método" : "The FUA"}
               <span className="block pr-[0.08em] italic text-primary">{es ? "FUA" : "method"}</span>
             </h2>
+            <p className="mt-4 font-bebas text-[15px] tracking-[0.26em] text-ink/50 sm:text-base">
+              {es ? "6 pasos · De tu ciudad al campus" : "6 steps · From your city to campus"}
+            </p>
             <div className="relative mt-8 hidden h-[460px] lg:block xl:h-[520px]">
               <div
                 aria-hidden="true"
@@ -48,10 +48,10 @@ const HomeMethod = () => {
                 style={{ background: "radial-gradient(closest-side, hsl(354 86% 50% / 0.12), transparent)" }}
               />
               <Image
-                src="/images/home/jugador-bandera.png"
-                alt={es ? "Jugador de FUA con la bandera de España" : "FUA player wrapped in the Spanish flag"}
-                width={605}
-                height={1423}
+                src="/images/home/jugador-brazos.png"
+                alt={es ? "Jugador de FUA con los brazos cruzados" : "FUA player with his arms crossed"}
+                width={342}
+                height={1199}
                 sizes="20vw"
                 className="relative mx-auto h-full w-auto"
               />

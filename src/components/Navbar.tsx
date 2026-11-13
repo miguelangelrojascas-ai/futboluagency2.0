@@ -12,7 +12,9 @@ import logoAsset from "@/assets/logo-fua.png";
 /* Next resolves an image import to an object; the components want the URL. */
 const logo = logoAsset.src;
 
-const Navbar = () => {
+/** `dark` floats the bar over a black hero (the home); `light` is the default. */
+const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
+  const dark = tone === "dark";
   const [isOpen, setIsOpen] = useState(false);
   /* Desktop "Becas EE.UU." dropdown, which holds the Showcase. */
   const [usaOpen, setUsaOpen] = useState(false);
@@ -26,21 +28,21 @@ const Navbar = () => {
   const navLinkClass = (active: boolean) =>
     `font-body text-sm font-medium px-4 py-2 rounded-full transition-colors ${
       active
-        ? "text-primary bg-primary/10"
-        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+        ? dark ? "text-white bg-white/10" : "text-primary bg-primary/10"
+        : dark ? "text-white/65 hover:text-white hover:bg-white/10" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
     }`;
 
   const mobileNavLinkClass = (active: boolean) =>
     `font-body text-sm font-bold text-center px-4 py-3 rounded-full transition-colors ${
       active
-        ? "text-primary bg-primary/10"
-        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+        ? dark ? "text-white bg-white/10" : "text-primary bg-primary/10"
+        : dark ? "text-white/65 hover:text-white hover:bg-white/10" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
     }`;
 
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3">
-        <div className="container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full bg-background/95 backdrop-blur-lg navbar-shadow border border-border/60 pl-5 pr-3 sm:pl-6 sm:pr-4 h-14 md:h-16">
+        <div className={`container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full backdrop-blur-lg border pl-5 ${dark ? "bg-[#0a0a0a]/70 border-white/10" : "bg-background/95 navbar-shadow border-border/60"} pr-3 sm:pl-6 sm:pr-4 h-14 md:h-16`}>
 
           {/* Logo */}
           <LocaleLink to="/" className="flex-shrink-0 justify-self-start">
@@ -126,7 +128,7 @@ const Navbar = () => {
 
           {/* Language + CTA */}
           <div className="col-start-3 flex items-center justify-self-end gap-3 md:gap-5">
-            <LanguageSwitcher />
+            <LanguageSwitcher dark={dark} />
             <LocaleLink
               to="/apply"
               className="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
@@ -137,7 +139,7 @@ const Navbar = () => {
             {/* Mobile toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 text-foreground"
+              className={`md:hidden p-2 ${dark ? "text-white" : "text-foreground"}`}
               aria-label={isOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : language === "es" ? "Abrir menú" : "Open menu"}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -147,7 +149,7 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden mt-2 rounded-3xl bg-background/95 backdrop-blur-lg border border-border/60 navbar-shadow">
+          <div className={`md:hidden mt-2 rounded-3xl backdrop-blur-lg border ${dark ? "bg-[#0a0a0a]/90 border-white/10" : "bg-background/95 border-border/60 navbar-shadow"}`}>
             <div className="px-4 py-4 flex flex-col gap-1">
 
               {/* Inicio */}

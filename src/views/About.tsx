@@ -18,6 +18,7 @@ const InstagramIcon = () => (
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import ceoIgnacioAsset from "@/assets/ceo-ignacio.jpg";
 import ceoMohaAsset from "@/assets/ceo-moha.jpg";
 import monicaRodriguezAsset from "@/assets/monica-rodriguez.jpg";
@@ -191,6 +192,23 @@ const About = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* VIDEO: moved here from the home */}
+        <section id="video" className="py-20 md:py-24">
+          <div className="container-wide px-4 max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <span className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4 block" style={{ color: RED }}>
+                {es ? "Conócenos" : "Meet us"}
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold leading-tight" style={{ color: NAVY }}>
+                {es ? "Así trabajamos" : "How we work"}
+              </h2>
+            </div>
+            <div className="relative aspect-video overflow-hidden rounded-2xl bg-black" style={{ boxShadow: "0 18px 50px -20px rgba(18,33,58,0.45)" }}>
+              <YouTubeEmbed id="0-dWsUxiYkI" title="FutbolUAgency LLC. - Video explicativo" className="absolute inset-0 h-full w-full" />
             </div>
           </div>
         </section>
