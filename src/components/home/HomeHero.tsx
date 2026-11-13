@@ -12,18 +12,20 @@ const SLIDE_MS = 6500;
  * Photos: Unsplash License (free for commercial use, no attribution required).
  * Credited here anyway, in case they are ever replaced:
  *   hero-bengalas.jpg  Waldemar Brandt   unsplash.com/photos/0aLvDQ_Q6qk
- *   hero-niebla.jpg    Michal Balog      unsplash.com/photos/pc5AA3yBRUg
- *   hero-grada.jpg     Kisha Tuman       unsplash.com/photos/-p8TaLLcXxs
+ * hero-estudia.jpg (Grand Canyon University soccer stadium at dusk) and
+ * hero-crece.jpg (Clemson celebrating a goal) were supplied by FUA.
  * They show the stage, not FUA clients, so no player is named on them.
  */
 const SLIDES = [
   { src: "/images/home/hero-bengalas.jpg", w: 2400, h: 1600, position: "50% 18%", es: "Compite", en: "Compete", color: true },
-  { src: "/images/home/hero-niebla.jpg", w: 2400, h: 1600, position: "55% 45%", es: "Estudia", en: "Study", color: false },
-  { src: "/images/home/hero-grada.jpg", w: 2400, h: 1668, position: "60% 55%", es: "Crece", en: "Grow", color: false },
+  { src: "/images/home/hero-estudia.jpg", w: 1600, h: 900, position: "62% 50%", es: "Estudia", en: "Study", color: true },
+  { src: "/images/home/hero-crece.jpg", w: 1600, h: 1067, position: "55% 60%", es: "Crece", en: "Grow", color: true,
+    /* Wide screens: enlarge from the left so the celebration clears the headline. */
+    wide: "lg:[--base:1.32] lg:origin-[0%_55%]" },
 ];
 
 /**
- * Full-bleed black-and-white photography of the college game, rotating, with a
+ * Full-bleed photography of the college game, rotating, with a
  * dark wash on the copy side so the white and red type reads at full contrast.
  */
 const HomeHero = () => {
@@ -50,7 +52,7 @@ const HomeHero = () => {
 
   return (
     <section ref={heroRef} className="relative isolate overflow-hidden bg-ink text-white">
-      {/* Photos: cross-fade, each settling from a slight zoom while it is on screen. */}
+      {/* Photos: cross-fade, each pushing in very slightly while it is on screen. */}
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         {SLIDES.map((s, i) => (
           <Image
@@ -60,15 +62,18 @@ const HomeHero = () => {
             fill
             priority={i === 0}
             sizes="100vw"
-            className={`object-cover transition-[opacity,transform] ease-out ${
+            className={`object-cover transition-[opacity,transform] ease-out ${"wide" in s ? s.wide : ""} ${
               /* The flares keep their colour: the one red moment; the rest is black and white. */
               s.color ? "saturate-[1.1] contrast-[1.1]" : "grayscale-[1] contrast-[1.2] brightness-[0.85]"
             }`}
             style={{
               objectPosition: s.position,
               opacity: i === active ? 1 : 0,
-              transform: i === active && !still ? "scale(1)" : "scale(1.07)",
-              transitionDuration: i === active ? `1000ms, ${SLIDE_MS + 1000}ms` : "1000ms, 1000ms",
+              /* A very slow push-in while on screen; once faded out it resets unseen. */
+              transform: i === active && !still ? "scale(calc(var(--base, 1) * 1.04))" : "scale(var(--base, 1))",
+              transitionDuration: i === active ? `1000ms, ${SLIDE_MS + 1000}ms` : "1000ms, 0ms",
+              transitionDelay: i === active ? "0ms, 0ms" : "0ms, 1000ms",
+              transitionTimingFunction: i === active ? "ease-out, linear" : "ease-out, linear",
             }}
           />
         ))}
