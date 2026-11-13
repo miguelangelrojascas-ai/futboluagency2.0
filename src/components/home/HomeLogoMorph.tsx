@@ -1,167 +1,141 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import logoDark from "@/assets/logo-fua-dark.png";
 
-const LETTERS = ["F", "U", "A"] as const;
-
-/* Each letter's cap box inside the dark logo (logo-fua-dark.png, fractions of the image). */
-const SLOTS = {
-  F: { x: 0.049, y: 0.204, w: 0.254, h: 0.43 },
-  U: { x: 0.34, y: 0.189, w: 0.301, h: 0.5 },
-  A: { x: 0.678, y: 0.204, w: 0.258, h: 0.43 },
-};
-/* The logo's red. */
-const RED = [175, 7, 23];
-
-/* Phases of the scroll, as fractions of the morph distance. */
-const FADE_END = 0.3; // everything but the three letters is gone
-const GATHER_START = 0.22; // the letters start moving
+/* The name the hero copy spells out on scroll; F, U and A in red as in the logo. */
+const WORD = "FUTBOLUAGENCY";
+const RED = new Set([0, 6, 7]);
 
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
+/* Progress of t between a and b, 0 before, 1 after. */
+const seg = (t: number, a: number, b: number) => clamp01((t - a) / (b - a));
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-const parseRgb = (c: string) => (c.match(/[\d.]+/g) ?? ["255", "255", "255"]).slice(0, 3).map(Number);
-
-type Glyph = { x: number; y: number; w: number; h: number; ox: number; oy: number };
-type Type = { font: string; text: string; color: string; style: React.CSSProperties };
+const norm = (c: string) => c.normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase();
 
 /**
- * The hero headline already holds an F, a U and an A (marked data-morph).
- * Scrolling out of the hero, the rest of the copy fades away while those three
- * stay suspended where they were, then glide together, turn the logo's red and
- * land on the navbar logo, which takes over. Fixed copies (portalled above the
- * navbar) do the moving; the originals keep their place in the layout.
- * Reduced motion: nothing moves, the navbar logo is simply there.
+ * Hero copy split into letters the scroll story can pick from. Words stay
+ * unbreakable; each letter is its own box so it can move on its own.
  */
-const HomeLogoMorph = ({ heroRef }: { heroRef: React.RefObject<HTMLElement | null> }) => {
-  const clones = useRef<(HTMLSpanElement | null)[]>([]);
-  const [animate, setAnimate] = useState(false);
-  const [types, setTypes] = useState<Type[] | null>(null);
+export const Chars = ({ text }: { text: string }) => (
+  <>
+    {text.split(" ").map((w, i, all) => (
+      <span key={i}>
+        <span className="inline-block whitespace-nowrap">
+          {[...w].map((c, j) => (
+            <span key={j} data-ch={c} className="inline-block">
+              {c}
+            </span>
+          ))}
+        </span>
+        {i < all.length - 1 ? " " : null}
+      </span>
+    ))}
+  </>
+);
+
+/**
+ * The hero's scroll story, while the hero is pinned:
+ *  1. the copy fades, except the letters that spell FUTBOLUAGENCY, which hang
+ *     where they are for a beat;
+ *  2. they glide to the centre and become the word (letters the copy lacks,
+ *     like the G, simply appear with it);
+ *  3. the word turns into the FUA logo, which then blurs out in place;
+ *  4. the hero un-pins and the navbar arrives as the university logos reach
+ *     the top.
+ * The original letters move themselves (no copies), so nothing can drift out
+ * of size on any screen. Off when motion is reduced.
+ */
+const HomeLogoMorph = ({
+  wrapRef,
+  stageRef,
+  enabled,
+}: {
+  wrapRef: React.RefObject<HTMLElement | null>;
+  stageRef: React.RefObject<HTMLElement | null>;
+  enabled: boolean;
+}) => {
+  const wordRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const washRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setAnimate(!mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
+    const wrap = wrapRef.current;
+    const stage = stageRef.current;
+    const word = wordRef.current;
+    const logo = logoRef.current;
+    const wash = washRef.current;
+    if (!enabled || !wrap || !stage || !word || !logo || !wash) return;
 
-  /* Copy each original letter's type so the clone is identical at rest. */
-  useEffect(() => {
-    if (!animate) {
-      setTypes(null);
-      return;
-    }
-    let live = true;
-    document.fonts.ready.then(() => {
-      const hero = heroRef.current;
-      if (!live || !hero) return;
-      const found = LETTERS.map((l) => hero.querySelector<HTMLElement>(`[data-morph="${l}"]`));
-      if (found.some((el) => !el)) return;
-      setTypes(
-        found.map((el) => {
-          const cs = getComputedStyle(el!);
-          return {
-            font: `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`,
-            text: (el!.textContent ?? "").toUpperCase(),
-            color: cs.color,
-            style: {
-              fontFamily: cs.fontFamily,
-              fontSize: cs.fontSize,
-              fontStyle: cs.fontStyle,
-              fontWeight: cs.fontWeight,
-              letterSpacing: cs.letterSpacing,
-              lineHeight: cs.lineHeight,
-            },
-          };
-        }),
-      );
+    const sources = [...stage.querySelectorAll<HTMLElement>("[data-src] [data-ch]")];
+    const targets = [...word.querySelectorAll<HTMLElement>("[data-ch]")];
+    const used = new Set<HTMLElement>();
+    /* First unused match in reading order: headline first, then the proof line. */
+    const pairs = targets.map((t) => {
+      const s = sources.find((el) => !used.has(el) && norm(el.dataset.ch ?? "") === t.dataset.ch);
+      if (s) used.add(s);
+      return s ?? null;
     });
-    return () => {
-      live = false;
-    };
-  }, [animate, heroRef]);
+    const rest = sources.filter((el) => !used.has(el));
+    const fades = [...stage.querySelectorAll<HTMLElement>("[data-fade]")];
 
-  useEffect(() => {
-    const hero = heroRef.current;
-    const root = document.documentElement;
-    if (!animate || !types || !hero) {
-      root.style.removeProperty("--fua-logo-reveal");
-      return;
-    }
-    const originals = LETTERS.map((l) => hero.querySelector<HTMLElement>(`[data-morph="${l}"]`)!);
-    const content = hero.querySelector<HTMLElement>("[data-hero-content]");
-    const ctx = document.createElement("canvas").getContext("2d")!;
-    const colors = types.map((t) => parseRgb(t.color));
-
-    let start: Glyph[] = [];
-    let distance = 1;
-    let shown = 0;
+    let geo: ({ dx: number; dy: number; k: number } | null)[] = [];
+    let shown = -1;
     let frame = 0;
 
-    /* Where each letter's ink sits, in page coordinates, from the font's own metrics. */
-    const measure = () => {
-      start = originals.map((el, i) => {
-        const r = el.getBoundingClientRect();
-        const cloneH = clones.current[i]!.offsetHeight; // untransformed box
-        ctx.font = types[i].font;
-        const m = ctx.measureText(types[i].text);
-        const contentH = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
-        const baseline = r.top + (r.height - contentH) / 2 + m.fontBoundingBoxAscent;
-        const top = baseline - m.actualBoundingBoxAscent;
-        const left = r.left - m.actualBoundingBoxLeft;
-        return {
-          x: left,
-          y: top + window.scrollY,
-          w: m.actualBoundingBoxLeft + m.actualBoundingBoxRight,
-          h: m.actualBoundingBoxAscent + m.actualBoundingBoxDescent,
-          /* Ink offset inside the clone, an absolutely placed box one line tall. */
-          ox: -m.actualBoundingBoxLeft,
-          oy: (cloneH - contentH) / 2 + m.fontBoundingBoxAscent - m.actualBoundingBoxAscent,
-        };
-      });
-      distance = Math.max(240, hero.offsetHeight * 0.6);
+    const progress = () => {
+      const run = wrap.offsetHeight - window.innerHeight;
+      return run > 0 ? clamp01((window.scrollY - wrap.offsetTop) / run) : 0;
     };
 
-    const slots = () => {
-      const logo = document.querySelector<HTMLElement>("[data-nav-logo]");
-      if (!logo) return null;
-      const r = logo.getBoundingClientRect();
-      return LETTERS.map((l) => {
-        const s = SLOTS[l];
-        return { x: r.left + r.width * s.x, y: r.top + r.height * s.y, w: r.width * s.w, h: r.height * s.h };
+    /* Centre-to-centre offsets, read with every letter back at rest. */
+    const measure = () => {
+      pairs.forEach((s) => s && (s.style.transform = ""));
+      word.style.transform = "";
+      geo = pairs.map((s, i) => {
+        if (!s) return null;
+        const a = s.getBoundingClientRect();
+        const b = targets[i].getBoundingClientRect();
+        return {
+          dx: b.left + b.width / 2 - (a.left + a.width / 2),
+          dy: b.top + b.height / 2 - (a.top + a.height / 2),
+          k: parseFloat(getComputedStyle(targets[i]).fontSize) / parseFloat(getComputedStyle(s).fontSize),
+        };
       });
     };
 
     const paint = () => {
-      const goal = clamp01(window.scrollY / distance);
-      shown += (goal - shown) * 0.14;
+      const goal = progress();
+      shown = shown < 0 ? goal : shown + (goal - shown) * 0.16;
       if (Math.abs(goal - shown) < 0.0005) shown = goal;
+      const t = shown;
 
-      if (content) content.style.opacity = String(1 - clamp01(shown / FADE_END));
-      const ends = slots();
-      /* If the F (from "fútbol", right of the U and A) has to pass them, it arcs over. */
-      const crossings =
-        ends &&
-        start.map((a, i) => start.filter((b, j) => j !== i && (a.x - b.x) * (ends[i].x - ends[j].x) < 0).length);
-      const p = easeInOut(clamp01((shown - GATHER_START) / (1 - GATHER_START)));
-      clones.current.forEach((el, i) => {
-        const s = start[i];
-        if (!el || !s || !ends) return;
-        const e = ends[i];
-        const k = e.h / s.h;
-        const scale = 1 + (k - 1) * p;
-        /* Suspended: at rest the clone holds the spot the letter had before any scroll. */
-        const gx = s.x + (e.x + (e.w - s.w * k) / 2 - s.x) * p;
-        const lift = crossings && i === 0 && crossings[0] > 0 ? Math.sin(Math.PI * p) * Math.min(140, s.h * 0.9) : 0;
-        const gy = s.y + (e.y - s.y) * p - lift;
-        el.style.transformOrigin = `${s.ox}px ${s.oy}px`;
-        el.style.transform = `translate3d(${gx - s.ox}px, ${gy - s.oy}px, 0) scale(${scale})`;
-        const c = colors[i].map((v, j) => Math.round(v + (RED[j] - v) * p));
-        el.style.color = `rgb(${c.join(",")})`;
-        el.style.opacity = String(1 - clamp01((shown - 0.92) / 0.08));
+      /* 1. Everything but the chosen letters goes. */
+      const restO = String(1 - seg(t, 0.02, 0.16));
+      rest.forEach((el) => (el.style.opacity = restO));
+      fades.forEach((el) => (el.style.opacity = restO));
+      wash.style.opacity = String(0.6 * seg(t, 0, 0.35));
+
+      /* 2. The chosen letters hang, then glide into the word. */
+      const m = easeInOut(seg(t, 0.12, 0.42));
+      const handOff = String(1 - seg(t, 0.4, 0.46));
+      pairs.forEach((s, i) => {
+        const g = geo[i];
+        if (!s || !g) return;
+        s.style.transform = `translate3d(${g.dx * m}px, ${g.dy * m}px, 0) scale(${1 + (g.k - 1) * m})`;
+        s.style.opacity = handOff;
       });
-      root.style.setProperty("--fua-logo-reveal", String(clamp01((shown - 0.88) / 0.1)));
+
+      /* 3. The word becomes the logo, which blurs out where it stands. */
+      const toLogo = seg(t, 0.56, 0.68);
+      word.style.opacity = String(seg(t, 0.38, 0.44) * (1 - toLogo));
+      word.style.transform = `scale(${1 - 0.1 * toLogo})`;
+      const logoIn = easeInOut(seg(t, 0.58, 0.72));
+      const logoOut = seg(t, 0.82, 0.98);
+      logo.style.opacity = String(logoIn * (1 - logoOut));
+      logo.style.transform = `scale(${0.82 + 0.18 * logoIn + 0.08 * logoOut})`;
+      logo.style.filter = logoOut ? `blur(${(16 * logoOut).toFixed(1)}px)` : "";
 
       if (shown !== goal) frame = requestAnimationFrame(paint);
       else frame = 0;
@@ -171,44 +145,51 @@ const HomeLogoMorph = ({ heroRef }: { heroRef: React.RefObject<HTMLElement | nul
     };
     const onResize = () => {
       measure();
+      shown = -1;
       kick();
     };
 
-    /* The hero opens the page, so a letter's page position is also its resting
-       spot on screen, which is where the clone stays suspended. */
     measure();
-    shown = clamp01(window.scrollY / distance);
     paint();
-    originals.forEach((el) => (el.style.visibility = "hidden"));
     window.addEventListener("scroll", kick, { passive: true });
     window.addEventListener("resize", onResize);
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", kick);
       window.removeEventListener("resize", onResize);
-      originals.forEach((el) => (el.style.visibility = ""));
-      if (content) content.style.opacity = "";
-      root.style.removeProperty("--fua-logo-reveal");
+      [...sources, ...fades].forEach((el) => {
+        el.style.opacity = "";
+        el.style.transform = "";
+      });
     };
-  }, [animate, types, heroRef]);
+  }, [enabled, wrapRef, stageRef]);
 
-  if (!animate || !types) return null;
-  return createPortal(
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[60]">
-      {types.map((t, i) => (
-        <span
-          key={LETTERS[i]}
-          ref={(el) => {
-            clones.current[i] = el;
-          }}
-          className="absolute left-0 top-0 whitespace-pre uppercase will-change-transform"
-          style={{ ...t.style, color: t.color, opacity: 0 }}
+  if (!enabled) return null;
+  return (
+    <>
+      {/* Deepens the photo while the name and logo hold the centre. */}
+      <div ref={washRef} aria-hidden="true" className="pointer-events-none absolute inset-0 bg-ink" style={{ opacity: 0 }} />
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
+        <div
+          ref={wordRef}
+          className="font-druk whitespace-nowrap uppercase leading-none text-white text-[clamp(2.6rem,11.5vw,9rem)]"
+          style={{ opacity: 0 }}
         >
-          {t.text}
-        </span>
-      ))}
-    </div>,
-    document.body,
+          {[...WORD].map((c, i) => (
+            <span key={i} data-ch={c} className={`inline-block ${RED.has(i) ? "text-red-bright" : ""}`}>
+              {c}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div ref={logoRef} className="w-[min(56vw,22rem)] will-change-transform" style={{ opacity: 0 }}>
+          <Image src={logoDark} alt="" sizes="(min-width: 1024px) 22rem, 56vw" className="h-auto w-full" />
+        </div>
+      </div>
+    </>
   );
 };
 

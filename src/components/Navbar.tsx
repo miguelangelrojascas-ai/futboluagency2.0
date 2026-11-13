@@ -29,8 +29,13 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   const [docked, setDocked] = useState(!dark);
   useEffect(() => {
     if (!dark) return;
-    /* In step with HomeLogoMorph, which lands the letters at about 55% of the hero. */
-    const update = () => setDocked(window.scrollY > window.innerHeight * 0.55);
+    /* The bar arrives as the hero leaves: when the university logos under it
+       reach the top of the screen. */
+    const update = () => {
+      const hero = document.querySelector<HTMLElement>("[data-hero-wrap]");
+      const end = hero ? hero.offsetTop + hero.offsetHeight - 80 : window.innerHeight * 0.55;
+      setDocked(window.scrollY >= end);
+    };
     update();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
@@ -69,6 +74,9 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
       <nav className="fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3">
         <div
           className={`container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full border pl-5 pr-3 transition-[background-color,border-color] duration-500 sm:pl-6 sm:pr-4 h-14 md:h-16 ${
+            /* Over the hero the language and menu sit at the far right edge. */
+            immersive ? "lg:max-w-none lg:pr-2" : ""
+          } ${
             dark
               ? docked
                 ? "border-transparent lg:border-white/10 lg:bg-[#0a0a0a]/70 lg:backdrop-blur-lg"
@@ -80,18 +88,18 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
           {/* Logo */}
           <LocaleLink
             to="/"
+            tabIndex={immersive ? -1 : undefined}
             className={`flex-shrink-0 rounded-full transition-[background-color,box-shadow] duration-500 ${
               dark ? "col-start-2 row-start-1 justify-self-center p-1.5 lg:col-start-1 lg:justify-self-start lg:p-0" : "justify-self-start"
             } ${dark && docked ? "max-lg:bg-[#0a0a0a]/85 max-lg:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.55)] max-lg:backdrop-blur-md" : ""}`}
           >
-            {/* On the home the hero's F·U·A letters fly into this spot and hand
-                over to it (--fua-logo-reveal); everywhere else it is always shown. */}
+            {/* On the home it waits out the hero, where the scroll story shows the
+                logo big in the centre; everywhere else it is always shown. */}
             <img
               src={dark ? logoDark : logo}
               alt="FutbolUAgency LLC."
               data-nav-logo
-              className={dark ? "h-11 w-auto md:h-12" : "h-10 md:h-14 w-auto"}
-              style={{ opacity: "var(--fua-logo-reveal, 1)" }}
+              className={`${dark ? "h-11 w-auto md:h-12" : "h-10 md:h-14 w-auto"} transition-opacity duration-500 ${immersive ? "opacity-0" : "opacity-100"}`}
             />
           </LocaleLink>
 

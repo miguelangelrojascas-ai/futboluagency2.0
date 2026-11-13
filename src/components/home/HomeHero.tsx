@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import HomeCta from "@/components/home/HomeCta";
-import HomeLogoMorph from "@/components/home/HomeLogoMorph";
+import HomeLogoMorph, { Chars } from "@/components/home/HomeLogoMorph";
 
 const SLIDE_MS = 6500;
 
@@ -34,7 +34,8 @@ const HomeHero = () => {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [still, setStill] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
+  const wrapRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -51,7 +52,10 @@ const HomeHero = () => {
   }, [active, paused, still]);
 
   return (
-    <section ref={heroRef} className="relative isolate overflow-hidden bg-ink text-white">
+    /* Tall wrapper with a pinned stage: the scroll story (HomeLogoMorph) plays
+       while the photo holds, then the hero scrolls away. Reduced motion: no pin. */
+    <section ref={wrapRef} data-hero-wrap className={`relative bg-ink text-white ${still ? "" : "h-[220svh]"}`}>
+      <div ref={stageRef} className="sticky top-0 isolate min-h-[100svh] overflow-hidden">
       {/* Photos: cross-fade, each pushing in very slightly while it is on screen. */}
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         {SLIDES.map((s, i) => (
@@ -100,53 +104,56 @@ const HomeHero = () => {
         }}
       />
 
-      <HomeLogoMorph heroRef={heroRef} />
+      <HomeLogoMorph wrapRef={wrapRef} stageRef={stageRef} enabled={!still} />
 
-      <div data-hero-content className="container-wide relative flex min-h-[100svh] flex-col justify-end px-4 pb-10 pt-28 lg:pb-16">
+      <div className="container-wide relative flex min-h-[100svh] flex-col justify-end px-4 pb-10 pt-28 lg:pb-16">
         <div className="max-w-[60rem]">
           <h1
+            data-src
+            aria-label={es ? "Tu beca de fútbol en EE.UU." : "Your soccer scholarship in the USA"}
             className={`font-druk uppercase leading-[0.96] text-white lg:text-[clamp(5rem,7.2vw,8rem)] ${
               es ? "text-[clamp(3.75rem,19vw,6.5rem)]" : "text-[clamp(3.25rem,15vw,6.5rem)]"
             }`}
           >
             {es ? (
               <>
-                {/* The F, U and A that become the logo on scroll (HomeLogoMorph). */}
-                <span className="block">
-                  T<span data-morph="U">u</span> bec<span data-morph="A">a</span> <br className="lg:hidden" />
-                  de <span data-morph="F">f</span>útbol
+                <span className="block" aria-hidden="true">
+                  <Chars text="Tu beca" /> <br className="lg:hidden" />
+                  <Chars text="de fútbol" />
                 </span>
-                <span className="block pr-[0.08em] italic text-red-bright">en EE.UU.</span>
+                <span className="block pr-[0.08em] italic text-red-bright" aria-hidden="true">
+                  <Chars text="en EE.UU." />
+                </span>
               </>
             ) : (
               <>
-                {/* U and A for the logo morph; the F comes from "profile" in the CTA. */}
-                <span className="block">
-                  Yo<span data-morph="U">u</span>r soccer <br className="lg:hidden" />
-                  scholarship
+                <span className="block" aria-hidden="true">
+                  <Chars text="Your soccer" /> <br className="lg:hidden" />
+                  <Chars text="scholarship" />
                 </span>
-                <span className="block pr-[0.08em] italic text-red-bright">
-                  in the US<span data-morph="A">A</span>
+                <span className="block pr-[0.08em] italic text-red-bright" aria-hidden="true">
+                  <Chars text="in the USA" />
                 </span>
               </>
             )}
           </h1>
-          <p className="mt-5 max-w-2xl font-bebas text-[1.2rem] leading-snug tracking-[0.16em] text-white sm:text-[1.45rem]">
-            {es ? (
-              <>
-                +250 futbolistas ya compiten en NCAA, NAIA y NJCAA · más de $10M en becas
-              </>
-            ) : (
-              <>
-                250+ players already compete in the NCAA, NAIA and NJCAA · over $10M in scholarships
-              </>
-            )}
+          <p data-src className="mt-5 max-w-2xl font-bebas text-[1.2rem] leading-snug tracking-[0.16em] text-white sm:text-[1.45rem]">
+            <Chars
+              text={
+                es
+                  ? "+250 futbolistas ya compiten en NCAA, NAIA y NJCAA · más de $10M en becas"
+                  : "250+ players already compete in the NCAA, NAIA and NJCAA · over $10M in scholarships"
+              }
+            />
           </p>
-          <HomeCta className="mt-8" morph={!es} />
+          <div data-fade>
+            <HomeCta className="mt-8" />
+          </div>
         </div>
 
         {/* Slide word and controls, bottom right. */}
         <div
+          data-fade
           className="mt-10 flex items-end justify-between gap-6 lg:absolute lg:bottom-16 lg:right-4 lg:mt-0 lg:block lg:text-right"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
@@ -180,6 +187,7 @@ const HomeHero = () => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
