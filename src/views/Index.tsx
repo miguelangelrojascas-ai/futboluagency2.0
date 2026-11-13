@@ -15,7 +15,10 @@ import { druk, bebas } from "@/fonts/editorial";
    doubts (FAQ), close. */
 const Index = () => (
   <>
-    <Navbar tone="dark" />
+    {/* The navbar's desktop drawer uses the same display faces. */}
+    <div className={`${druk.variable} ${bebas.variable}`}>
+      <Navbar tone="dark" />
+    </div>
     <main className={`min-h-screen ${druk.variable} ${bebas.variable}`}>
       <HomeHero />
       <LogoCarousel />

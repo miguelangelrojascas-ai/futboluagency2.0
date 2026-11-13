@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { usePathname } from "next/navigation";
-import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
+import { Menu, X, GraduationCap, ChevronDown, CornerDownRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { resolveLegacyPath, type Locale } from "@/lib/routes";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -29,11 +29,11 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   const [docked, setDocked] = useState(!dark);
   useEffect(() => {
     if (!dark) return;
-    /* The bar arrives as the hero leaves: when the university logos under it
-       reach the top of the screen. */
+    /* The bar arrives when half the hero has gone, the moment the scroll story
+       (logo blurring out) ends. */
     const update = () => {
       const hero = document.querySelector<HTMLElement>("[data-hero-wrap]");
-      const end = hero ? hero.offsetTop + hero.offsetHeight - 80 : window.innerHeight * 0.55;
+      const end = hero ? hero.offsetTop + hero.offsetHeight * 0.5 - 2 : window.innerHeight * 0.5;
       setDocked(window.scrollY >= end);
     };
     update();
@@ -46,6 +46,25 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   }, [dark]);
   /* Over the hero the desktop shows the phone layout (language + menu button). */
   const immersive = dark && !docked;
+  /* There, on desktop, the menu button opens a drawer over two thirds of the
+     screen instead of the phone dropdown. */
+  const drawer = isOpen && immersive;
+  useEffect(() => {
+    /* Once the bar is back, the drawer has no button left to close it. */
+    if (docked && window.matchMedia("(min-width: 1024px)").matches) setIsOpen(false);
+  }, [docked]);
+  useEffect(() => {
+    if (!drawer) return;
+    const desk = window.matchMedia("(min-width: 1024px)").matches;
+    const root = document.documentElement;
+    if (desk) root.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      root.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [drawer]);
   /* Desktop "Becas EE.UU." dropdown, which holds the Showcase. */
   const [usaOpen, setUsaOpen] = useState(false);
   const pathname = usePathname();
@@ -216,7 +235,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
         {/* Mobile menu */}
         {isOpen && (
           <div
-            className={`mt-2 rounded-3xl backdrop-blur-lg border ${immersive ? "lg:ml-auto lg:max-w-sm" : "lg:hidden"} ${
+            className={`mt-2 rounded-3xl backdrop-blur-lg border lg:hidden ${
               dark ? "bg-[#0a0a0a]/90 border-white/10" : "bg-background/95 border-border/60 navbar-shadow"
             }`}
           >
@@ -275,6 +294,74 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
           </div>
         )}
       </nav>
+
+      {/* Desktop drawer, home hero only: slides in from the right over two thirds. */}
+      {dark && (
+        <div className="hidden lg:block" aria-hidden={!drawer || undefined}>
+          <div
+            onClick={() => setIsOpen(false)}
+            className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-500 ${drawer ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          />
+          <div
+            inert={!drawer}
+            role="dialog"
+            aria-modal="true"
+            aria-label={language === "es" ? "Menú" : "Menu"}
+            className={`fixed inset-y-0 right-0 z-40 flex w-2/3 flex-col bg-ink px-16 pb-10 pt-24 text-white shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] xl:px-24 ${
+              drawer ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            <ul className="flex flex-col gap-1">
+              {[
+                { to: "/", label: t("nav.home"), active: isActive("/") },
+                { to: "/usa", label: usaLabel, active: isActive("/usa") },
+                { to: "/showcase", label: "Showcase Talavera 2027", active: isActive("/showcase"), sub: true },
+                { to: "/spain", label: t("nav.spain"), active: isActive("/spain") },
+                { to: "/players", label: t("nav.players"), active: isActive("/players") },
+                { to: "/recursos", label: t("nav.resources"), active: pathname.startsWith(resolveLegacyPath(language as Locale, "/recursos")) },
+                { to: "/about", label: t("nav.about"), active: isActive("/about") },
+              ].map((l, i) => (
+                <li
+                  key={l.to}
+                  className={`transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${drawer ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"}`}
+                  style={{ transitionDelay: drawer ? `${120 + i * 45}ms` : "0ms" }}
+                >
+                  <LocaleLink
+                    to={l.to}
+                    onClick={() => setIsOpen(false)}
+                    aria-current={l.active ? "page" : undefined}
+                    className={`group inline-flex items-baseline gap-4 rounded-sm uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
+                      l.sub
+                        ? "pl-1 font-bebas text-[clamp(1.1rem,3svh,1.6rem)] tracking-[0.12em] text-white/60 hover:text-white"
+                        : `font-druk text-[clamp(2.25rem,min(4.4vw,8.2svh),4.5rem)] leading-[1.02] ${l.active ? "text-red-bright" : "text-white hover:text-red-bright"}`
+                    }`}
+                  >
+                    {l.sub && <CornerDownRight aria-hidden="true" className="h-5 w-5 self-center text-red-bright" />}
+                    {l.label}
+                  </LocaleLink>
+                </li>
+              ))}
+            </ul>
+
+            <div
+              className={`mt-auto flex items-center justify-between gap-6 border-t border-white/10 pt-6 transition-opacity delay-300 duration-700 ${drawer ? "opacity-100" : "opacity-0"}`}
+            >
+              <p className="max-w-xs font-body text-sm leading-relaxed text-white/60">
+                {language === "es"
+                  ? "Cuéntanos quién eres y te decimos qué becas tienes a tu alcance."
+                  : "Tell us who you are and we will tell you which scholarships are within reach."}
+              </p>
+              <LocaleLink
+                to="/apply"
+                onClick={() => setIsOpen(false)}
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-red-bright px-7 py-3.5 font-body text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
+              >
+                {language === "es" ? "Envía tu perfil" : "Send your profile"}
+              </LocaleLink>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

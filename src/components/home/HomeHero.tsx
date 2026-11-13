@@ -52,10 +52,10 @@ const HomeHero = () => {
   }, [active, paused, still]);
 
   return (
-    /* Tall wrapper with a pinned stage: the scroll story (HomeLogoMorph) plays
-       while the photo holds, then the hero scrolls away. Reduced motion: no pin. */
-    <section ref={wrapRef} data-hero-wrap className={`relative bg-ink text-white ${still ? "" : "h-[220svh]"}`}>
-      <div ref={stageRef} className="sticky top-0 isolate min-h-[100svh] overflow-hidden">
+    /* Nothing is pinned: the scroll story (HomeLogoMorph) plays while the hero
+       scrolls away and ends with half of it still on screen. */
+    <section ref={wrapRef} data-hero-wrap className="relative bg-ink text-white">
+      <div ref={stageRef} className="relative isolate min-h-[100svh] overflow-hidden">
       {/* Photos: cross-fade, each pushing in very slightly while it is on screen. */}
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         {SLIDES.map((s, i) => (
