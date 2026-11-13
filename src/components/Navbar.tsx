@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { usePathname } from "next/navigation";
 import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
@@ -8,14 +8,36 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { resolveLegacyPath, type Locale } from "@/lib/routes";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logoAsset from "@/assets/logo-fua.png";
+import logoWhiteAsset from "@/assets/logo-fua-white.png";
 
 /* Next resolves an image import to an object; the components want the URL. */
 const logo = logoAsset.src;
+const logoWhite = logoWhiteAsset.src;
 
-/** `dark` floats the bar over a black hero (the home); `light` is the default. */
+/**
+ * `light` is the default bar. `dark` is the home: over the hero there is no
+ * bar at all, only the language and the menu button, so the photo and the
+ * F·U·A letters get the whole screen. Once the letters have formed the logo
+ * the desktop bar comes back; on phones it never does: the white logo sits
+ * centred and the menu button on the right, blending against any background.
+ */
 const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   const dark = tone === "dark";
   const [isOpen, setIsOpen] = useState(false);
+  const [docked, setDocked] = useState(!dark);
+  useEffect(() => {
+    if (!dark) return;
+    const update = () => setDocked(window.scrollY > window.innerHeight * 0.5);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [dark]);
+  /* Over the hero the desktop shows the phone layout (language + menu button). */
+  const immersive = dark && !docked;
   /* Desktop "Becas EE.UU." dropdown, which holds the Showcase. */
   const [usaOpen, setUsaOpen] = useState(false);
   const pathname = usePathname();
@@ -41,24 +63,45 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3">
-        <div className={`container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full backdrop-blur-lg border pl-5 ${dark ? "bg-[#0a0a0a]/70 border-white/10" : "bg-background/95 navbar-shadow border-border/60"} pr-3 sm:pl-6 sm:pr-4 h-14 md:h-16`}>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-4 md:pt-3 ${
+          /* Phones, no bar: white on dark, inverted on light sections. */
+          dark && !isOpen ? "max-lg:mix-blend-difference" : ""
+        }`}
+      >
+        <div
+          className={`container-wide grid grid-cols-[1fr_auto_1fr] items-center rounded-full border pl-5 pr-3 transition-[background-color,border-color] duration-500 sm:pl-6 sm:pr-4 h-14 md:h-16 ${
+            dark
+              ? docked
+                ? "border-transparent lg:border-white/10 lg:bg-[#0a0a0a]/70 lg:backdrop-blur-lg"
+                : "border-transparent"
+              : "backdrop-blur-lg bg-background/95 navbar-shadow border-border/60"
+          }`}
+        >
 
           {/* Logo */}
-          <LocaleLink to="/" className="flex-shrink-0 justify-self-start">
+          <LocaleLink
+            to="/"
+            className={`flex-shrink-0 ${dark ? "col-start-2 row-start-1 justify-self-center lg:col-start-1 lg:justify-self-start" : "justify-self-start"}`}
+          >
             {/* On the home the hero's F·U·A letters fly into this spot and hand
                 over to it (--fua-logo-reveal); everywhere else it is always shown. */}
             <img
-              src={logo}
+              src={dark ? logoWhite : logo}
               alt="FutbolUAgency LLC."
               data-nav-logo
-              className="h-10 md:h-14 w-auto"
+              className={dark ? "h-11 w-auto md:h-12" : "h-10 md:h-14 w-auto"}
               style={{ opacity: "var(--fua-logo-reveal, 1)" }}
             />
           </LocaleLink>
 
           {/* Desktop nav — centrado en la columna del medio */}
-          <div className="hidden lg:flex items-center justify-center gap-1">
+          <div
+            className={`hidden lg:flex col-start-2 row-start-1 items-center justify-center gap-1 transition-opacity duration-500 ${
+              immersive ? "lg:pointer-events-none lg:opacity-0" : ""
+            }`}
+            aria-hidden={immersive || undefined}
+          >
 
             {/* Inicio */}
             <LocaleLink to="/" className={navLinkClass(isActive("/"))}>
@@ -136,10 +179,14 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
 
           {/* Language + CTA */}
           <div className="col-start-3 flex items-center justify-self-end gap-3 md:gap-5">
-            <LanguageSwitcher dark={dark} />
+            <LanguageSwitcher
+              dark={dark}
+              className={`transition-opacity duration-300 ${dark && docked ? "max-lg:pointer-events-none max-lg:opacity-0" : ""}`}
+            />
             <LocaleLink
               to="/apply"
-              className="hidden lg:inline-flex bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
+              tabIndex={immersive ? -1 : undefined}
+              className={`hidden lg:inline-flex transition-[opacity,background-color] duration-500 ${immersive ? "lg:pointer-events-none lg:opacity-0" : ""} bg-primary hover:bg-primary-hover text-white font-body font-semibold px-5 py-2.5 rounded-full text-sm`}
             >
               {t("nav.applyCta")}
             </LocaleLink>
@@ -147,7 +194,8 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             {/* Mobile toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`lg:hidden p-2 ${dark ? "text-white" : "text-foreground"}`}
+              className={`p-2 ${immersive ? "" : "lg:hidden"} ${dark ? "text-white" : "text-foreground"}`}
+              aria-expanded={isOpen}
               aria-label={isOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : language === "es" ? "Abrir menú" : "Open menu"}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -157,8 +205,13 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className={`lg:hidden mt-2 rounded-3xl backdrop-blur-lg border ${dark ? "bg-[#0a0a0a]/90 border-white/10" : "bg-background/95 border-border/60 navbar-shadow"}`}>
+          <div
+            className={`mt-2 rounded-3xl backdrop-blur-lg border ${immersive ? "lg:ml-auto lg:max-w-sm" : "lg:hidden"} ${
+              dark ? "bg-[#0a0a0a]/90 border-white/10" : "bg-background/95 border-border/60 navbar-shadow"
+            }`}
+          >
             <div className="px-4 py-4 flex flex-col gap-1">
+              {dark && <LanguageSwitcher dark className="mb-2 justify-center" />}
 
               {/* Inicio */}
               <LocaleLink to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>

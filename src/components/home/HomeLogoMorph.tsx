@@ -6,10 +6,8 @@ import { druk } from "@/fonts/editorial";
 
 const LETTERS = ["F", "U", "A"] as const;
 
-/* Where the three letters sit inside the shield logo (fractions of the image). */
-const LOGO_BOX = { x: 0.2, y: 0.29, w: 0.6, h: 0.46 };
-/* The logo's red. */
-const RED = [200, 16, 46];
+/* Where the three letters sit inside the white shield logo (fractions of the image). */
+const LOGO_BOX = { x: 0.048, y: 0.184, w: 0.882, h: 0.544 };
 
 /* Fast at first, so the letters shrink out of the headline's way, then settle. */
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -17,8 +15,9 @@ const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 
 /**
  * F · U · A spread across the top of the hero. As the visitor scrolls out of
- * it, the letters slide together, shrink, fill in red and land on the navbar
- * logo, which then takes over. The in-hero letters are the server-rendered
+ * it, the letters slide together, shrink, fill in white and land on the navbar
+ * logo, which then takes over. On phones that logo sits centred, so the
+ * letters gather in the middle. The in-hero letters are the server-rendered
  * fallback; once mounted, a fixed copy (portalled above the navbar) does the
  * moving. Reduced motion: the letters simply scroll away with the hero.
  */
@@ -55,7 +54,12 @@ const HomeLogoMorph = ({ heroRef }: { heroRef: React.RefObject<HTMLElement | nul
         const r = el!.getBoundingClientRect();
         return { x: r.left, y: r.top + window.scrollY, w: r.width, h: r.height };
       });
-      distance = Math.max(1, (heroRef.current?.offsetHeight ?? window.innerHeight) * 0.55);
+      /* Finish before the headline climbs into the letters' row: on phones it
+         sits right below them, so the morph is shorter there. */
+      const heroH = heroRef.current?.offsetHeight ?? window.innerHeight;
+      const h1 = heroRef.current?.querySelector("h1");
+      const gap = h1 ? h1.getBoundingClientRect().top + window.scrollY - 64 : heroH;
+      distance = Math.max(160, Math.min(heroH * 0.55, gap * 1.25));
     };
 
     const target = () => {
@@ -83,11 +87,10 @@ const HomeLogoMorph = ({ heroRef }: { heroRef: React.RefObject<HTMLElement | nul
         /* Ride up with the page until the navbar line, then stay pinned to it. */
         const y = Math.max(e.y, s.y - scrolled);
         el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
-        /* Outline only at rest, solid logo red once compact. */
+        /* White outline at rest, solid white once compact, like the logo. */
         const fill = clamp01((p - 0.35) / 0.5);
-        const c = RED.map((v) => Math.round(255 + (v - 255) * fill)).join(",");
-        el.style.color = `rgba(${c},${fill})`;
-        el.style.webkitTextStroke = `${2 / scale}px rgba(${c},1)`;
+        el.style.color = `rgba(255,255,255,${fill})`;
+        el.style.webkitTextStroke = `${2 / scale}px #fff`;
         /* Hand over to the real logo at the very end. */
         el.style.opacity = String(1 - clamp01((shown - 0.9) / 0.1));
       });
