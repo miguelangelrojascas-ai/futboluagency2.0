@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+import { pick, tr } from "@/lib/i18n";
 /**
  * Draft privacy notice.
  *
@@ -18,8 +19,7 @@ const Privacy = () => {
   const es = language === "es";
 
 
-  const sections = es
-    ? [
+  const sections = pick(language, { es: [
         {
           title: "Quién es el responsable",
           body: [
@@ -73,8 +73,7 @@ const Privacy = () => {
             "El único servicio externo que se carga en la web es YouTube, y solo cuando le das al play a un vídeo. Si no lo haces, no se envía ninguna petición a terceros. El formulario se envía a nuestro propio servidor, no a un tercero.",
           ],
         },
-      ]
-    : [
+      ], en: [
         {
           title: "Who is responsible",
           body: [
@@ -128,7 +127,7 @@ const Privacy = () => {
             "The only external service the site loads is YouTube, and only when you press play on a video. If you do not, no third-party request is ever made. The form is submitted to our own server, not to a third party.",
           ],
         },
-      ];
+      ] });
 
   return (
     <>
@@ -138,21 +137,19 @@ const Privacy = () => {
           <div className="container-wide px-4">
             <div className="mx-auto max-w-3xl">
               <span className="mb-4 inline-block label-bebas text-base text-primary">
-                {es ? "Legal" : "Legal"}
+                {tr(language, "Legal", "Legal")}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.1] sm:text-5xl">
-                {es ? "Política de privacidad" : "Privacy policy"}
+                {tr(language, "Política de privacidad", "Privacy policy")}
               </h1>
 
               {/* Visible while the text has not been through legal review. */}
               <div className="mb-10 rounded-xl border border-dashed border-primary/40 bg-primary/[0.04] p-4">
                 <p className="font-body text-sm leading-relaxed text-foreground">
                   <span className="font-bold">
-                    {es ? "Borrador pendiente de revisión legal. " : "Draft pending legal review. "}
+                    {tr(language, "Borrador pendiente de revisión legal. ", "Draft pending legal review. ")}
                   </span>
-                  {es
-                    ? "Los apartados marcados con [COMPLETAR] necesitan los datos de la sociedad antes de publicarse."
-                    : "The sections marked [TO COMPLETE] need the company's details before publishing."}
+                  {tr(language, "Los apartados marcados con [COMPLETAR] necesitan los datos de la sociedad antes de publicarse.", "The sections marked [TO COMPLETE] need the company's details before publishing.")}
                 </p>
               </div>
 

@@ -1,8 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useEffect } from "react";
+import type { Locale } from "@/lib/routes";
+import { translate } from "@/lib/i18n";
 
-type Language = "es" | "en";
+type Language = Locale;
 
 interface LanguageContextType {
   language: Language;
@@ -10,7 +12,7 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const translations: Record<Language, Record<string, string>> = {
+const translations: Record<"es" | "en", Record<string, string>> = {
   es: {
     // Nav
     "nav.home": "Inicio",
@@ -434,7 +436,10 @@ export const LanguageProvider: React.FC<{
   };
 
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    if (language === "es" || language === "en") return translations[language][key] || key;
+    /* Italian and German: the English text, looked up in that language's dictionary. */
+    const en = translations.en[key];
+    return en ? translate(language, en) : key;
   };
 
   return (

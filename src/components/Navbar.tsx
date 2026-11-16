@@ -10,6 +10,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logoAsset from "@/assets/logo-fua.png";
 import logoDarkAsset from "@/assets/logo-fua-dark.png";
 
+import { tr } from "@/lib/i18n";
 /* Next resolves an image import to an object; the components want the URL. */
 const logo = logoAsset.src;
 /* Red FUA with the "FutbolUAgency" arc in white, for dark backgrounds. */
@@ -69,7 +70,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
   const [usaOpen, setUsaOpen] = useState(false);
   const pathname = usePathname();
   const { t, language } = useLanguage();
-  const usaLabel = language === "es" ? "Becas Fútbol EE.UU." : "Soccer Scholarships USA";
+  const usaLabel = tr(language, "Becas Fútbol EE.UU.", "Soccer Scholarships USA");
 
   const isActive = (path: string) =>
     pathname === resolveLegacyPath(language as Locale, path);
@@ -151,7 +152,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
                   type="button"
                   onClick={() => setUsaOpen((v) => !v)}
                   aria-expanded={usaOpen}
-                  aria-label={language === "es" ? "Más opciones de becas en EE.UU." : "More USA scholarship options"}
+                  aria-label={tr(language, "Más opciones de becas en EE.UU.", "More USA scholarship options")}
                   className="ml-1 rounded-full p-0.5"
                 >
                   <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${usaOpen ? "rotate-180" : ""}`} />
@@ -174,7 +175,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
                     >
                       <span className="block font-body text-sm font-medium text-foreground">Showcase Talavera 2027</span>
                       <span className="block font-body text-xs text-muted-foreground">
-                        {language === "es" ? "Juega ante entrenadores universitarios" : "Play in front of college coaches"}
+                        {tr(language, "Juega ante entrenadores universitarios", "Play in front of college coaches")}
                       </span>
                     </LocaleLink>
                   </div>
@@ -225,7 +226,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
                 dark && docked ? "max-lg:bg-[#0a0a0a]/85 max-lg:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.55)] max-lg:backdrop-blur-md" : ""
               }`}
               aria-expanded={isOpen}
-              aria-label={isOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : language === "es" ? "Abrir menú" : "Open menu"}
+              aria-label={isOpen ? (tr(language, "Cerrar menú", "Close menu")) : tr(language, "Abrir menú", "Open menu")}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -306,7 +307,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             inert={!drawer}
             role="dialog"
             aria-modal="true"
-            aria-label={language === "es" ? "Menú" : "Menu"}
+            aria-label={tr(language, "Menú", "Menu")}
             className={`fixed inset-y-0 right-0 z-40 flex w-2/3 flex-col bg-ink px-16 pb-10 pt-24 text-white shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] xl:px-24 ${
               drawer ? "translate-x-0" : "translate-x-full"
             }`}
@@ -347,16 +348,14 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
               className={`mt-auto flex items-center justify-between gap-6 border-t border-white/10 pt-6 transition-opacity delay-300 duration-700 ${drawer ? "opacity-100" : "opacity-0"}`}
             >
               <p className="max-w-xs font-body text-sm leading-relaxed text-white/60">
-                {language === "es"
-                  ? "Cuéntanos quién eres y te decimos qué becas tienes a tu alcance."
-                  : "Tell us who you are and we will tell you which scholarships are within reach."}
+                {tr(language, "Cuéntanos quién eres y te decimos qué becas tienes a tu alcance.", "Tell us who you are and we will tell you which scholarships are within reach.")}
               </p>
               <LocaleLink
                 to="/apply"
                 onClick={() => setIsOpen(false)}
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-red-bright px-7 py-3.5 font-body text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
               >
-                {language === "es" ? "Envía tu perfil" : "Send your profile"}
+                {tr(language, "Envía tu perfil", "Send your profile")}
               </LocaleLink>
             </div>
           </div>

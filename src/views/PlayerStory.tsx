@@ -8,13 +8,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { findPlayerStory } from "@/data/playerStories";
 
+import { pick, tr } from "@/lib/i18n";
 const PlayerStory = () => {
   const { slug } = useParams<{ slug: string }>();
   const { language } = useLanguage();
   const es = language === "es";
   const story = findPlayerStory(slug);
 
-  const summary = story ? (es ? story.summary.es : story.summary.en) : "";
+  const summary = story ? (pick(language, story.summary)) : "";
 
 
   if (!story) notFound();
@@ -40,11 +41,11 @@ const PlayerStory = () => {
             }}
           />
           <div className="container-wide relative px-4">
-            <nav aria-label={es ? "Ruta de navegación" : "Breadcrumb"} className="mb-8">
+            <nav aria-label={tr(language, "Ruta de navegación", "Breadcrumb")} className="mb-8">
               <ol className="flex items-center gap-2 font-body text-sm text-muted-foreground">
                 <li>
                   <LocaleLink to="/players" className="transition-colors hover:text-primary">
-                    {es ? "Nuestros jugadores" : "Our players"}
+                    {tr(language, "Nuestros jugadores", "Our players")}
                   </LocaleLink>
                 </li>
                 <li aria-hidden="true">
@@ -58,7 +59,7 @@ const PlayerStory = () => {
 
             <div className="max-w-3xl">
               <span className="mb-4 inline-block label-bebas text-base text-primary">
-                {es ? story.eyebrow.es : story.eyebrow.en}
+                {pick(language, story.eyebrow)}
               </span>
               <h1 className="mb-4 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
                 {story.name}
@@ -89,7 +90,7 @@ const PlayerStory = () => {
                     <figure className="overflow-hidden rounded-2xl border border-border">
                       <img
                         src={chapter.image}
-                        alt={es ? chapter.alt.es : chapter.alt.en}
+                        alt={pick(language, chapter.alt)}
                         loading="lazy"
                         className="aspect-[4/3] w-full object-cover"
                       />
@@ -100,10 +101,10 @@ const PlayerStory = () => {
                       {chapter.year}
                     </span>
                     <h2 className="mb-3 mt-3 font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
-                      {es ? chapter.title.es : chapter.title.en}
+                      {pick(language, chapter.title)}
                     </h2>
                     <p className="font-body text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-                      {es ? chapter.body.es : chapter.body.en}
+                      {pick(language, chapter.body)}
                     </p>
                   </div>
                 </li>
@@ -113,7 +114,7 @@ const PlayerStory = () => {
             {story.video && (
               <div className="mx-auto mt-14 max-w-3xl sm:mt-20">
                 <h2 className="mb-5 text-center font-display text-xl font-bold text-foreground sm:text-2xl">
-                  {es ? "Mira su vídeo" : "Watch his video"}
+                  {tr(language, "Mira su vídeo", "Watch his video")}
                 </h2>
                 <div className="overflow-hidden rounded-2xl border border-border">
                   <video
@@ -136,19 +137,17 @@ const PlayerStory = () => {
           <div className="container-wide px-4">
             <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
               <h2 className="text-balance font-display text-3xl font-bold sm:text-4xl">
-                {es ? "¿Quieres el " : "Want the "}
-                <span className="italic text-primary">{es ? "mismo camino" : "same path"}</span>?
+                {tr(language, "¿Quieres el ", "Want the ")}
+                <span className="italic text-primary">{tr(language, "mismo camino", "same path")}</span>?
               </h2>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "Empieza por la evaluación gratuita. Analizamos tu perfil y te decimos con claridad qué opciones reales tienes."
-                  : "Start with the free evaluation. We analyse your profile and tell you clearly what real options you have."}
+                {tr(language, "Empieza por la evaluación gratuita. Analizamos tu perfil y te decimos con claridad qué opciones reales tienes.", "Start with the free evaluation. We analyse your profile and tell you clearly what real options you have.")}
               </p>
               <LocaleLink
                 to="/apply"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
-                {es ? "Envía tu perfil" : "Send your profile"}
+                {tr(language, "Envía tu perfil", "Send your profile")}
                 <ArrowRight className="h-4 w-4" />
               </LocaleLink>
               <LocaleLink
@@ -156,7 +155,7 @@ const PlayerStory = () => {
                 className="inline-flex items-center gap-2 font-body text-sm font-bold text-muted-foreground transition-colors hover:text-primary"
               >
                 <ArrowLeft className="h-4 w-4" />
-                {es ? "Todos los jugadores" : "All players"}
+                {tr(language, "Todos los jugadores", "All players")}
               </LocaleLink>
             </div>
           </div>

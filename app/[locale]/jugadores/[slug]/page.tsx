@@ -5,6 +5,7 @@ import { LOCALES, href, isLocale, type Locale } from "@/lib/routes";
 import { breadcrumbSchema, jsonLd, playerSchema } from "@/lib/schema";
 import { findPlayerStory, playerStories } from "@/data/playerStories";
 import PlayerStory from "@/views/PlayerStory";
+import { pick, tr } from "@/lib/i18n";
 
 export const dynamicParams = false;
 
@@ -24,7 +25,7 @@ export async function generateMetadata({
   if (!story || !isLocale(resolved.locale)) return {};
   const { locale } = resolved;
   const title = `${story.name} — ${story.university} | FutbolUAgency`;
-  const description = story.summary[locale];
+  const description = pick(locale, story.summary);
 
   return {
     title,
@@ -50,7 +51,6 @@ export default async function Page({
   const story = findPlayerStory(resolved.slug);
   if (!story) notFound();
   const { locale } = resolved;
-  const es = locale === "es";
   const path = href(locale, "players", story.slug);
 
   const schema = jsonLd(
@@ -58,13 +58,13 @@ export default async function Page({
       locale,
       path,
       name: story.name,
-      description: story.summary[locale],
+      description: pick(locale, story.summary),
       image: story.heroImage,
       university: story.university,
     }),
     breadcrumbSchema([
-      { name: es ? "Inicio" : "Home", path: href(locale, "home") },
-      { name: es ? "Jugadores" : "Players", path: href(locale, "players") },
+      { name: tr(locale, "Inicio", "Home"), path: href(locale, "home") },
+      { name: tr(locale, "Jugadores", "Players"), path: href(locale, "players") },
       { name: story.name, path },
     ]),
   );

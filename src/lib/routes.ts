@@ -6,11 +6,12 @@
  * derived from it, so a slug is only ever written once.
  *
  * The Spanish slug doubles as the directory name under `app/[locale]/`. The
- * English paths are public only: middleware rewrites them onto the Spanish
- * ones, and the page renders in English because the locale says so.
+ * other languages' paths are public only: middleware rewrites them onto the
+ * Spanish ones, and the page renders in that language because the locale
+ * says so.
  */
 
-export const LOCALES = ["es", "en"] as const;
+export const LOCALES = ["es", "en", "it", "de"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = "es";
@@ -29,17 +30,17 @@ export type RouteKey =
   | "apply"
   | "privacy";
 
-/** Spanish slug (also the folder name) and the English slug it answers to. */
-export const ROUTES: Record<RouteKey, { es: string; en: string }> = {
-  home: { es: "", en: "" },
-  usa: { es: "usa", en: "usa" },
-  spain: { es: "espana", en: "spain" },
-  showcase: { es: "showcase", en: "showcase" },
-  players: { es: "jugadores", en: "players" },
-  resources: { es: "recursos", en: "resources" },
-  about: { es: "nosotros", en: "about" },
-  apply: { es: "aplicar", en: "apply" },
-  privacy: { es: "privacidad", en: "privacy" },
+/** Spanish slug (also the folder name) and the slug each language answers to. */
+export const ROUTES: Record<RouteKey, Record<Locale, string>> = {
+  home: { es: "", en: "", it: "", de: "" },
+  usa: { es: "usa", en: "usa", it: "usa", de: "usa" },
+  spain: { es: "espana", en: "spain", it: "spagna", de: "spanien" },
+  showcase: { es: "showcase", en: "showcase", it: "showcase", de: "showcase" },
+  players: { es: "jugadores", en: "players", it: "giocatori", de: "spieler" },
+  resources: { es: "recursos", en: "resources", it: "risorse", de: "ressourcen" },
+  about: { es: "nosotros", en: "about", it: "chi-siamo", de: "ueber-uns" },
+  apply: { es: "aplicar", en: "apply", it: "candidati", de: "bewerben" },
+  privacy: { es: "privacidad", en: "privacy", it: "privacy", de: "datenschutz" },
 };
 
 /**
@@ -65,12 +66,32 @@ export function alternateHref(
 
 export const other = (locale: Locale): Locale => (locale === "es" ? "en" : "es");
 
-/** Maps an English slug back to the Spanish folder it is served from. */
-export const EN_TO_ES_SLUG: Record<string, string> = Object.fromEntries(
-  Object.values(ROUTES)
-    .filter((r) => r.en && r.en !== r.es)
-    .map((r) => [r.en, r.es]),
-);
+/** Per language: its public slug back to the Spanish folder it is served from. */
+export const SLUG_TO_ES: Record<Locale, Record<string, string>> = Object.fromEntries(
+  LOCALES.map((l) => [
+    l,
+    Object.fromEntries(
+      Object.values(ROUTES)
+        .filter((r) => r[l] && r[l] !== r.es)
+        .map((r) => [r[l], r.es]),
+    ),
+  ]),
+) as Record<Locale, Record<string, string>>;
+
+/** Per language: the Spanish folder to that language's public slug. */
+export const ES_TO_SLUG: Record<Locale, Record<string, string>> = Object.fromEntries(
+  LOCALES.map((l) => [
+    l,
+    Object.fromEntries(
+      Object.values(ROUTES)
+        .filter((r) => r.es && r[l] !== r.es)
+        .map((r) => [r.es, r[l]]),
+    ),
+  ]),
+) as Record<Locale, Record<string, string>>;
+
+/** Any language's public slug back to the Spanish folder. */
+export const EN_TO_ES_SLUG: Record<string, string> = Object.assign({}, ...LOCALES.map((l) => SLUG_TO_ES[l]));
 
 /**
  * Paths the site used before it was split by language, pointing at their
@@ -143,12 +164,6 @@ export function resolveLegacyPath(locale: Locale, path: string): string {
   return path;
 }
 
-/** Spanish slug to the English one, for walking a path the other way. */
-const ES_TO_EN_SLUG: Record<string, string> = Object.fromEntries(
-  Object.values(ROUTES)
-    .filter((r) => r.es && r.en !== r.es)
-    .map((r) => [r.es, r.en]),
-);
 
 /**
  * Rewrites a path for the other language, swapping both the locale segment
@@ -162,12 +177,12 @@ export function swapLocaleInPath(pathname: string, target: Locale): string {
   if (segments.length === 0) return href(target, "home");
 
   const [slug, ...tail] = segments;
-  /* The incoming slug may be in either language; normalise, then re-localise. */
+  /* The incoming slug may be in any language; normalise, then re-localise. */
   const esSlug = EN_TO_ES_SLUG[slug] ?? slug;
-  const localised = target === "es" ? esSlug : (ES_TO_EN_SLUG[esSlug] ?? esSlug);
+  const localised = ES_TO_SLUG[target][esSlug] ?? esSlug;
 
   return `/${[target, localised, ...tail].filter(Boolean).join("/")}`;
 }
 
 /** Spanish slug to its English public slug, where the two differ. */
-export const ES_TO_EN_PUBLIC: Record<string, string> = ES_TO_EN_SLUG;
+export const ES_TO_EN_PUBLIC: Record<string, string> = ES_TO_SLUG.en;

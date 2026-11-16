@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import talaveraImgAsset from "@/assets/spain-clubs/talavera.jpg";
+import { pick } from "@/lib/i18n";
 
 /* Next resolves an image import to an object; the markup wants the URL. */
 const talaveraImg = talaveraImgAsset.src;
@@ -38,7 +39,7 @@ const SpainAcademiesSection = () => {
     },
   };
 
-  const t = content[language];
+  const t = pick(language, content);
 
   return (
     <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--background))" }}>

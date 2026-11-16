@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { pick, tr } from "@/lib/i18n";
 const links: { id: string; es: string; en: string }[] = [
   { id: "oportunidad", es: "Oportunidad", en: "Opportunity" },
   { id: "vida-estudiantil", es: "Vida Estudiantil", en: "Student Life" },
@@ -61,7 +62,7 @@ const UsaAnchorNav = () => {
     >
       <nav
         ref={navRef}
-        aria-label={es ? "Secciones de la página" : "Page sections"}
+        aria-label={tr(language, "Secciones de la página", "Page sections")}
         className="pointer-events-auto container-wide relative top-2 overflow-x-auto rounded-full border border-border/60 navbar-shadow px-2 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         style={{
           backgroundColor: "hsl(var(--background) / 0.9)",
@@ -84,7 +85,7 @@ const UsaAnchorNav = () => {
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {es ? link.es : link.en}
+                  {pick(language, link)}
                 </a>
               </li>
             );

@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
 };
 
-/* Only "es" and "en" exist. Anything else (e.g. /favicon.ico reaching this
+/* Only the four site languages exist. Anything else (e.g. /favicon.ico reaching this
    segment) is a 404 instead of being rendered as an unknown language. */
 export const dynamicParams = false;
 

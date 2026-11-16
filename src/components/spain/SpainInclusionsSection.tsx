@@ -3,6 +3,7 @@
 import { Home, Utensils, Dumbbell, Shield, ClipboardList, Plane } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 const SpainInclusionsSection = () => {
   const { language } = useLanguage();
   const isEs = language === "es";
@@ -10,33 +11,33 @@ const SpainInclusionsSection = () => {
   const items = [
     {
       icon: Home,
-      title: isEs ? "Residencia deportiva" : "Sports residence",
-      desc: isEs ? "Alojamiento completo durante toda la temporada" : "Full accommodation throughout the season",
+      title: tr(language, "Residencia deportiva", "Sports residence"),
+      desc: tr(language, "Alojamiento completo durante toda la temporada", "Full accommodation throughout the season"),
     },
     {
       icon: Utensils,
-      title: isEs ? "Alimentación completa" : "Full board meals",
-      desc: isEs ? "Dieta deportiva supervisada por nutricionistas" : "Sports diet supervised by nutritionists",
+      title: tr(language, "Alimentación completa", "Full board meals"),
+      desc: tr(language, "Dieta deportiva supervisada por nutricionistas", "Sports diet supervised by nutritionists"),
     },
     {
       icon: Dumbbell,
-      title: isEs ? "Entrenamiento diario" : "Daily training",
-      desc: isEs ? "Sesiones tácticas, técnicas y físicas" : "Tactical, technical and physical sessions",
+      title: tr(language, "Entrenamiento diario", "Daily training"),
+      desc: tr(language, "Sesiones tácticas, técnicas y físicas", "Tactical, technical and physical sessions"),
     },
     {
       icon: Shield,
-      title: isEs ? "Seguro médico" : "Medical insurance",
-      desc: isEs ? "Cobertura médica y prevención de lesiones" : "Medical coverage and injury prevention",
+      title: tr(language, "Seguro médico", "Medical insurance"),
+      desc: tr(language, "Cobertura médica y prevención de lesiones", "Medical coverage and injury prevention"),
     },
     {
       icon: ClipboardList,
-      title: isEs ? "Seguimiento individual" : "Individual tracking",
-      desc: isEs ? "Informes de rendimiento y plan de desarrollo" : "Performance reports and development plan",
+      title: tr(language, "Seguimiento individual", "Individual tracking"),
+      desc: tr(language, "Informes de rendimiento y plan de desarrollo", "Performance reports and development plan"),
     },
     {
       icon: Plane,
-      title: isEs ? "Gestión de visados" : "Visa management",
-      desc: isEs ? "Apoyo completo en trámites y documentación" : "Full support with paperwork and documentation",
+      title: tr(language, "Gestión de visados", "Visa management"),
+      desc: tr(language, "Apoyo completo en trámites y documentación", "Full support with paperwork and documentation"),
     },
   ];
 
@@ -45,10 +46,10 @@ const SpainInclusionsSection = () => {
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
-            {isEs ? "Incluido en el Programa" : "Included in the Program"}
+            {tr(language, "Incluido en el Programa", "Included in the Program")}
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-8 leading-tight">
-            {isEs ? "Todo lo que incluye" : "Everything included"}
+            {tr(language, "Todo lo que incluye", "Everything included")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {items.map((item, i) => (

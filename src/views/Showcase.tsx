@@ -24,6 +24,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import ShowcaseForm from "@/components/ShowcaseForm";
 import type { ShowcaseFormDefinition } from "@/lib/showcaseForm";
 
+import { pick, rich, tr } from "@/lib/i18n";
 /* Ciudad Deportiva (Ébora Formación), P.I. Soto de Cazalegas, Talavera. */
 const VENUE = { lat: 39.97637, lng: -4.74797 };
 const VENUE_LATLNG = `${VENUE.lat},${VENUE.lng}`;
@@ -56,157 +57,136 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
   const es = language === "es";
 
   const coachMail = `mailto:${COACH_EMAIL}?subject=${encodeURIComponent(
-    es ? "Showcase Talavera 2027 – Confirmo asistencia" : "Showcase Talavera 2027 – Attendance",
+    tr(language, "Showcase Talavera 2027 – Confirmo asistencia", "Showcase Talavera 2027 – Attendance"),
   )}`;
 
   const facts = [
     {
       icon: CalendarDays,
-      label: es ? "Cuándo" : "When",
-      value: es ? "1, 2 y 3 de febrero de 2027" : "February 1, 2 & 3, 2027",
+      label: tr(language, "Cuándo", "When"),
+      value: tr(language, "1, 2 y 3 de febrero de 2027", "February 1, 2 & 3, 2027"),
     },
     {
       icon: MapPin,
-      label: es ? "Dónde" : "Where",
-      value: es ? "Talavera de la Reina · a 1h30 de Madrid" : "Talavera de la Reina · 90 min from Madrid",
+      label: tr(language, "Dónde", "Where"),
+      value: tr(language, "Talavera de la Reina · a 1h30 de Madrid", "Talavera de la Reina · 90 min from Madrid"),
     },
   ];
 
   const stats = [
-    { value: 60, label: es ? "Jugadores en el showcase" : "Players on show" },
-    { value: 45, label: es ? "De clubes españoles" : "From Spanish clubs" },
-    { value: 15, label: es ? "De MLS NEXT (EE.UU.)" : "From MLS NEXT (USA)" },
-    { value: 3, label: es ? "Días de evaluación en directo" : "Days of live evaluation" },
+    { value: 60, label: tr(language, "Jugadores en el showcase", "Players on show") },
+    { value: 45, label: tr(language, "De clubes españoles", "From Spanish clubs") },
+    { value: 15, label: tr(language, "De MLS NEXT (EE.UU.)", "From MLS NEXT (USA)") },
+    { value: 3, label: tr(language, "Días de evaluación en directo", "Days of live evaluation") },
   ];
 
   const tiers = [
     {
       name: "División de Honor",
-      desc: es
-        ? "La máxima categoría regional del fútbol amateur español: la vía directa hacia la pirámide profesional."
-        : "The top regional tier of Spanish amateur football — the direct pipeline into the professional pyramid.",
+      desc: tr(language, "La máxima categoría regional del fútbol amateur español: la vía directa hacia la pirámide profesional.", "The top regional tier of Spanish amateur football — the direct pipeline into the professional pyramid."),
     },
     {
       name: "Segunda RFEF",
-      desc: es
-        ? "Cuarta categoría nacional: fútbol estructurado, competitivo y bien entrenado."
-        : "Spain's fourth national tier — structured, competitive, well-coached.",
+      desc: tr(language, "Cuarta categoría nacional: fútbol estructurado, competitivo y bien entrenado.", "Spain's fourth national tier — structured, competitive, well-coached."),
     },
     {
       name: "Tercera RFEF",
-      desc: es
-        ? "Quinta categoría nacional: cantera probada de jugadores técnicos y preparados físicamente."
-        : "Spain's fifth national tier — a proven source of technically sharp, physically ready prospects.",
+      desc: tr(language, "Quinta categoría nacional: cantera probada de jugadores técnicos y preparados físicamente.", "Spain's fifth national tier — a proven source of technically sharp, physically ready prospects."),
     },
     {
       name: "MLS NEXT (USA)",
-      desc: es
-        ? "15 jugadores de la academia GFI Houston (Texas), uno de los mejores circuitos formativos de EE.UU., que viajan a España para este showcase."
-        : "15 players from the GFI Houston academy (Texas), one of the top youth circuits in the U.S., traveling to Spain for this Showcase.",
+      desc: tr(language, "15 jugadores de la academia GFI Houston (Texas), uno de los mejores circuitos formativos de EE.UU., que viajan a España para este showcase.", "15 players from the GFI Houston academy (Texas), one of the top youth circuits in the U.S., traveling to Spain for this Showcase."),
     },
   ];
 
   const P = "/images/showcase";
   const days = [
     {
-      tag: es ? "Llegada (opcional)" : "Arrival (optional)",
-      title: es ? "Domingo o lunes" : "Sunday or Monday",
-      image: { src: `${P}/hotel.jpg`, alt: es ? "Habitación del Talavera Hotel" : "Talavera Hotel room" },
-      items: es
-        ? [
+      tag: tr(language, "Llegada (opcional)", "Arrival (optional)"),
+      title: tr(language, "Domingo o lunes", "Sunday or Monday"),
+      image: { src: `${P}/hotel.jpg`, alt: tr(language, "Habitación del Talavera Hotel", "Talavera Hotel room") },
+      items: pick(language, { es: [
             "Domingo 31 ene por la tarde: recogida en el aeropuerto, traslado y check-in para quien prefiera llegar un día antes.",
             "Lunes 1 feb por la mañana: recogida, traslado y check-in para quien llegue el día de la apertura.",
             "Tiempo libre antes de la presentación oficial.",
-          ]
-        : [
+          ], en: [
             "Sunday, Jan 31 afternoon: airport pickup, hotel transfer and check-in for coaches arriving a day early.",
             "Monday, Feb 1 morning: pickup, transfer and check-in for coaches arriving on opening day.",
             "Free time before the official presentation.",
-          ],
+          ] }),
     },
     {
-      tag: es ? "Día uno · 1 feb" : "Day one · Feb 1",
-      title: es ? "Lunes" : "Monday",
-      image: { src: `${P}/presentacion-familias.jpg`, alt: es ? "Presentación del showcase a las familias en la edición anterior" : "Showcase presentation to families at the last edition" },
-      items: es
-        ? [
+      tag: tr(language, "Día uno · 1 feb", "Day one · Feb 1"),
+      title: tr(language, "Lunes", "Monday"),
+      image: { src: `${P}/presentacion-familias.jpg`, alt: tr(language, "Presentación del showcase a las familias en la edición anterior", "Showcase presentation to families at the last edition") },
+      items: pick(language, { es: [
             "Tarde: presentación oficial del evento en la Ciudad Deportiva, con catering de bienvenida.",
             "Cena: catering en la Ciudad Deportiva.",
             "Traslado de vuelta al hotel.",
-          ]
-        : [
+          ], en: [
             "Afternoon: official presentation at the Ciudad Deportiva, with welcome catering.",
             "Dinner: catering at the Ciudad Deportiva.",
             "Transfer back to the hotel.",
-          ],
+          ] }),
     },
     {
-      tag: es ? "Día dos · 2 feb" : "Day two · Feb 2",
-      title: es ? "Martes" : "Tuesday",
-      image: { src: `${P}/campo-principal.jpg`, alt: es ? "Campo de partido de la Ciudad Deportiva" : "Ciudad Deportiva match pitch" },
-      items: es
-        ? [
+      tag: tr(language, "Día dos · 2 feb", "Day two · Feb 2"),
+      title: tr(language, "Martes", "Tuesday"),
+      image: { src: `${P}/campo-principal.jpg`, alt: tr(language, "Campo de partido de la Ciudad Deportiva", "Ciudad Deportiva match pitch") },
+      items: pick(language, { es: [
             "9:00 – 17:00: unos 6 partidos en la Ciudad Deportiva. Los 60 jugadores juegan a lo largo del día.",
             "Comida en la Ciudad Deportiva.",
             "Cena en un restaurante de Talavera.",
-          ]
-        : [
+          ], en: [
             "9:00 AM – 5:00 PM: around 6 Showcase matches at the Ciudad Deportiva. All 60 players feature across the day.",
             "Lunch at the Ciudad Deportiva.",
             "Dinner at a restaurant in Talavera.",
-          ],
+          ] }),
     },
     {
-      tag: es ? "Día tres · 3 feb" : "Day three · Feb 3",
-      title: es ? "Miércoles" : "Wednesday",
-      image: { src: `${P}/clubhouse.jpg`, alt: es ? "Clubhouse de la Ciudad Deportiva" : "Ciudad Deportiva clubhouse" },
-      items: es
-        ? [
+      tag: tr(language, "Día tres · 3 feb", "Day three · Feb 3"),
+      title: tr(language, "Miércoles", "Wednesday"),
+      image: { src: `${P}/clubhouse.jpg`, alt: tr(language, "Clubhouse de la Ciudad Deportiva", "Ciudad Deportiva clubhouse") },
+      items: pick(language, { es: [
             "9:00 – 14:00: conversaciones entre los entrenadores y los jugadores que les interesan.",
             "Comida de cierre en la Ciudad Deportiva.",
-          ]
-        : [
+          ], en: [
             "9:00 AM – 2:00 PM: informal conversations between coaches and the players who interest them.",
             "Closing lunch at the Ciudad Deportiva.",
-          ],
+          ] }),
     },
   ];
 
   const gallery = [
-    { src: "/images/showcase/campo-principal.jpg", label: es ? "Campo de partido" : "Match pitch" },
-    { src: "/images/showcase/campo-grada.jpg", label: es ? "Campo y grada" : "Pitch & stands" },
-    { src: "/images/showcase/terraza.jpg", label: es ? "Terraza exterior" : "Outdoor terrace" },
-    { src: "/images/showcase/ciudad-deportiva-atardecer.jpg", label: es ? "Las instalaciones al atardecer" : "The grounds at dusk" },
-    { src: "/images/showcase/clubhouse.jpg", label: es ? "Clubhouse de la Ciudad Deportiva" : "Ciudad Deportiva clubhouse" },
-    { src: "/images/showcase/estadio-el-prado.jpg", label: es ? "Estadio El Prado, Talavera" : "Estadio El Prado, Talavera" },
+    { src: "/images/showcase/campo-principal.jpg", label: tr(language, "Campo de partido", "Match pitch") },
+    { src: "/images/showcase/campo-grada.jpg", label: tr(language, "Campo y grada", "Pitch & stands") },
+    { src: "/images/showcase/terraza.jpg", label: tr(language, "Terraza exterior", "Outdoor terrace") },
+    { src: "/images/showcase/ciudad-deportiva-atardecer.jpg", label: tr(language, "Las instalaciones al atardecer", "The grounds at dusk") },
+    { src: "/images/showcase/clubhouse.jpg", label: tr(language, "Clubhouse de la Ciudad Deportiva", "Ciudad Deportiva clubhouse") },
+    { src: "/images/showcase/estadio-el-prado.jpg", label: tr(language, "Estadio El Prado, Talavera", "Estadio El Prado, Talavera") },
   ];
 
-  const coachPack = es
-    ? [
+  const coachPack = pick(language, { es: [
         ["2 noches en el Talavera Hotel (★★★)", "habitación doble superior de uso individual, con desayuno."],
         ["Comidas y cenas", "durante toda la estancia, incluido el catering de bienvenida."],
         ["Transporte", "traslados desde y hasta el aeropuerto y todos los desplazamientos locales."],
         ["Una persona de contacto", "durante toda la visita, para lo que necesites."],
-      ]
-    : [
+      ], en: [
         ["2 nights at the Talavera Hotel (★★★)", "superior double room, single occupancy, breakfast included."],
         ["Meals", "lunches and dinners for the full stay, including welcome catering."],
         ["Ground transport", "airport transfers and all local transportation."],
         ["A dedicated point of contact", "throughout your visit, for anything you need."],
-      ];
+      ] });
 
-  const playerDays = es
-    ? [
+  const playerDays = pick(language, { es: [
         { day: "Martes 2 feb", time: "9:00 – 17:00", text: "Día de partidos del showcase, delante de los entrenadores universitarios." },
         { day: "Miércoles 3 feb", time: "9:00 – 14:00", text: "Reuniones individuales con los entrenadores interesados en ti." },
-      ]
-    : [
+      ], en: [
         { day: "Tuesday, Feb 2", time: "9:00 AM – 5:00 PM", text: "Showcase match day, in front of the college coaches." },
         { day: "Wednesday, Feb 3", time: "9:00 AM – 2:00 PM", text: "One-to-one meetings with the coaches interested in you." },
-      ];
+      ] });
 
-  const playerPack = es
-    ? [
+  const playerPack = pick(language, { es: [
         "Inscripción oficial al showcase",
         "Camiseta y equipación oficial del evento",
         "Sudadera oficial del showcase",
@@ -214,8 +194,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         "Reuniones con los entrenadores universitarios interesados",
         "Seguro deportivo durante los días del evento",
         "Agua y fruta durante las jornadas",
-      ]
-    : [
+      ], en: [
         "Official Showcase registration",
         "Official event shirt and kit",
         "Official Showcase hoodie",
@@ -223,12 +202,10 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         "Meetings with the interested college coaches",
         "Sports insurance during the event days",
         "Water and fruit throughout both days",
-      ];
+      ] });
 
   const residenceWhatsApp = `https://wa.me/34603331990?text=${encodeURIComponent(
-    es
-      ? "Hola, me inscribo al Showcase Talavera 2027 y necesitaría residencia la noche del martes 2 al miércoles 3."
-      : "Hi, I'm registering for the Showcase Talavera 2027 and would need accommodation on the night of Tuesday 2 to Wednesday 3.",
+    tr(language, "Hola, me inscribo al Showcase Talavera 2027 y necesitaría residencia la noche del martes 2 al miércoles 3.", "Hi, I'm registering for the Showcase Talavera 2027 and would need accommodation on the night of Tuesday 2 to Wednesday 3."),
   )}`;
 
   return (
@@ -257,9 +234,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
               className="hero-reveal mx-auto mt-6 max-w-2xl font-body text-base leading-relaxed text-white/80 sm:text-lg"
               style={{ animationDelay: "160ms" }}
             >
-              {es
-                  ? "Tres días de fútbol en directo ante entrenadores universitarios de Estados Unidos."
-                : "Three days of live football in front of U.S. college coaches. 60 players from Spain and the U.S., ninety minutes from Madrid."}
+              {tr(language, "Tres días de fútbol en directo ante entrenadores universitarios de Estados Unidos.", "Three days of live football in front of U.S. college coaches. 60 players from Spain and the U.S., ninety minutes from Madrid.")}
             </p>
             <ul
               className="hero-reveal mt-6 flex flex-col items-center gap-2 font-body text-sm font-semibold text-white sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:text-base"
@@ -280,19 +255,19 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                 href="#jugadores"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
               >
-                {es ? "Soy jugador: quiero participar" : "I'm a player: I want in"}
+                {tr(language, "Soy jugador: quiero participar", "I'm a player: I want in")}
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#coaches"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 px-7 py-3.5 font-body font-semibold text-white transition-colors hover:bg-white/10"
               >
-                {es ? "Soy coach: ver el Coach Pack" : "I'm a coach: see the Coach Pack"}
+                {tr(language, "Soy coach: ver el Coach Pack", "I'm a coach: see the Coach Pack")}
               </a>
             </div>
 
             <p className="mt-10 font-body text-xs uppercase tracking-[0.15em] text-white/50">
-              {es ? "Organiza FutbolUAgency · Con PrimePlay" : "Organized by FutbolUAgency · With PrimePlay"}
+              {tr(language, "Organiza FutbolUAgency · Con PrimePlay", "Organized by FutbolUAgency · With PrimePlay")}
             </p>
           </div>
         </section>
@@ -312,15 +287,13 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         {/* ── The talent ───────────────────────────────────── */}
         <section className="section-padding">
           <div className="container-wide">
-            <span className={eyebrow}>{es ? "El talento" : "The talent"}</span>
+            <span className={eyebrow}>{tr(language, "El talento", "The talent")}</span>
             <h2 className={`${h2} mt-4 max-w-3xl`}>
-              {es ? "60 jugadores. España y EE.UU. " : "60 players. Spain and the U.S. "}
-              <span className="text-primary italic">{es ? "Una sola ventana." : "One scouting window."}</span>
+              {tr(language, "60 jugadores. España y EE.UU. ", "60 players. Spain and the U.S. ")}
+              <span className="text-primary italic">{tr(language, "Una sola ventana.", "One scouting window.")}</span>
             </h2>
             <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {es
-                ? "No lo hemos montado alrededor de una sola categoría ni de un solo país: 45 jugadores de tres niveles del fútbol español y 15 de MLS NEXT llegados desde Estados Unidos, evaluados en la misma ventana."
-                : "We didn't build it around one division or one country: 45 players from three tiers of Spanish football plus 15 MLS NEXT players from the U.S., all evaluated in the same window."}
+              {tr(language, "No lo hemos montado alrededor de una sola categoría ni de un solo país: 45 jugadores de tres niveles del fútbol español y 15 de MLS NEXT llegados desde Estados Unidos, evaluados en la misma ventana.", "We didn't build it around one division or one country: 45 players from three tiers of Spanish football plus 15 MLS NEXT players from the U.S., all evaluated in the same window.")}
             </p>
 
             <dl className="mt-12 divide-y divide-border border-y border-border">
@@ -338,29 +311,25 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         <section id="ubicacion" className="section-padding section-alt scroll-mt-24">
           <div className="container-wide grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <span className={eyebrow}>{es ? "La ubicación" : "The location"}</span>
+              <span className={eyebrow}>{tr(language, "La ubicación", "The location")}</span>
               <h2 className={`${h2} mt-4`}>
-                {es ? "A un paso de " : "A short trip from "}
+                {tr(language, "A un paso de ", "A short trip from ")}
                 <span className="text-primary italic">Madrid</span>
               </h2>
               <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "Talavera de la Reina está a unos 130 km —hora y media por carretera— del aeropuerto Adolfo Suárez Madrid-Barajas, uno de los mejor conectados de Europa. Aterrizas por la mañana y esa misma tarde estás viendo fútbol."
-                  : "Talavera de la Reina is about 130 km — 90 minutes by road — from Madrid–Barajas Airport, one of Europe's best-connected hubs. Land in the morning and you can be watching football that same afternoon."}
+                {tr(language, "Talavera de la Reina está a unos 130 km —hora y media por carretera— del aeropuerto Adolfo Suárez Madrid-Barajas, uno de los mejor conectados de Europa. Aterrizas por la mañana y esa misma tarde estás viendo fútbol.", "Talavera de la Reina is about 130 km — 90 minutes by road — from Madrid–Barajas Airport, one of Europe's best-connected hubs. Land in the morning and you can be watching football that same afternoon.")}
               </p>
 
               <ul className="mt-8 space-y-3">
-                {(es
-                  ? [
+                {(pick(language, { es: [
                       "Vuelos directos a Madrid desde los principales aeropuertos de EE.UU.",
                       "Nos encargamos de los traslados puerta a puerta: sin coche de alquiler ni logística.",
                       "Una ciudad castellana histórica, a orillas del Tajo, con mucha cultura futbolística.",
-                    ]
-                  : [
+                    ], en: [
                       "Direct flights to Madrid from most major U.S. hubs.",
                       "We handle airport transfers door to door — no rental car, no logistics.",
                       "A historic Castilian city on the Tagus River, with a deep football culture.",
-                    ]
+                    ] })
                 ).map((item) => (
                   <li key={item} className="flex items-start gap-3 font-body text-sm text-foreground sm:text-base">
                     <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
@@ -378,10 +347,10 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                 latitude={VENUE.lat}
                 longitude={VENUE.lng}
                 zoom={13}
-                hint={es ? "Toca para abrir" : "Tap to open"}
-                closeLabel={es ? "Cerrar mapa" : "Close map"}
+                hint={tr(language, "Toca para abrir", "Tap to open")}
+                closeLabel={tr(language, "Cerrar mapa", "Close map")}
                 mapsUrl={MAPS_LINK}
-                mapsLabel={es ? "Abrir en Google Maps" : "Open in Google Maps"}
+                mapsLabel={tr(language, "Abrir en Google Maps", "Open in Google Maps")}
                 expandedWidth={520}
                 expandedHeight={380}
               />
@@ -398,7 +367,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-5 py-3 font-body text-sm font-semibold text-foreground transition-colors hover:bg-muted"
                 >
                   <Navigation className="h-4 w-4" />
-                  {es ? "Ruta desde el aeropuerto" : "Route from the airport"}
+                  {tr(language, "Ruta desde el aeropuerto", "Route from the airport")}
                 </a>
               </div>
             </div>
@@ -409,29 +378,25 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         <section id="edicion-anterior" className="section-padding scroll-mt-24">
           <div className="container-wide grid items-center gap-12 md:grid-cols-[1fr_auto] lg:gap-20">
             <div className="max-w-xl">
-              <span className={eyebrow}>{es ? "Edición anterior" : "Last edition"}</span>
+              <span className={eyebrow}>{tr(language, "Edición anterior", "Last edition")}</span>
               <h2 className={`${h2} mt-4`}>
-                {es ? "Así se vive el " : "What the "}
+                {tr(language, "Así se vive el ", "What the ")}
                 <span className="text-primary italic">showcase</span>
-                {es ? "" : " looks like"}
+                {tr(language, "", " looks like")}
               </h2>
               <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "La última edición, en la Ciudad Deportiva de Talavera: jugadores compitiendo en partidos reales mientras los entrenadores evalúan en el campo. Este año crecemos: más jugadores, dos países y tres días completos."
-                  : "Our last edition, at the Ciudad Deportiva in Talavera: players competing in real matches while coaches evaluate pitch-side. This year it grows: more players, two countries and three full days."}
+                {tr(language, "La última edición, en la Ciudad Deportiva de Talavera: jugadores compitiendo en partidos reales mientras los entrenadores evalúan en el campo. Este año crecemos: más jugadores, dos países y tres días completos.", "Our last edition, at the Ciudad Deportiva in Talavera: players competing in real matches while coaches evaluate pitch-side. This year it grows: more players, two countries and three full days.")}
               </p>
               <ul className="mt-8 space-y-3">
-                {(es
-                  ? [
+                {(pick(language, { es: [
                       "Partidos completos, no pruebas sueltas.",
                       "Entrenadores universitarios evaluando en directo.",
                       "Un día entero para hablar cara a cara con ellos.",
-                    ]
-                  : [
+                    ], en: [
                       "Full matches, not isolated drills.",
                       "College coaches evaluating live.",
                       "A full day to talk with them face to face.",
-                    ]
+                    ] })
                 ).map((item) => (
                   <li key={item} className="flex items-start gap-3 font-body text-sm text-foreground sm:text-base">
                     <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
@@ -450,7 +415,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                   controls
                   playsInline
                   preload="none"
-                  aria-label={es ? "Vídeo de la edición anterior del showcase" : "Video of the last Showcase edition"}
+                  aria-label={tr(language, "Vídeo de la edición anterior del showcase", "Video of the last Showcase edition")}
                 />
               </div>
             </div>
@@ -460,15 +425,13 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         {/* ── Schedule ─────────────────────────────────────── */}
         <section id="programa" className="section-padding section-alt scroll-mt-24">
           <div className="container-wide">
-            <span className={eyebrow}>{es ? "Programa" : "Full schedule"}</span>
+            <span className={eyebrow}>{tr(language, "Programa", "Full schedule")}</span>
             <h2 className={`${h2} mt-4 max-w-3xl`}>
-              {es ? "Tres días pensados para " : "Every hour, built for "}
-              <span className="text-primary italic">{es ? "evaluar" : "evaluation"}</span>
+              {tr(language, "Tres días pensados para ", "Every hour, built for ")}
+              <span className="text-primary italic">{tr(language, "evaluar", "evaluation")}</span>
             </h2>
             <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {es
-                ? "Del aterrizaje a la última conversación con los jugadores. Para los entrenadores todo está incluido: traslados, hotel y comidas."
-                : "From landing to the last conversation with players. For coaches everything is covered: transfers, hotel and every meal."}
+              {tr(language, "Del aterrizaje a la última conversación con los jugadores. Para los entrenadores todo está incluido: traslados, hotel y comidas.", "From landing to the last conversation with players. For coaches everything is covered: transfers, hotel and every meal.")}
             </p>
 
             <ol className="mt-12 grid gap-5 md:grid-cols-2 md:gap-6">
@@ -503,15 +466,13 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         {/* ── Facility gallery ─────────────────────────────── */}
         <section className="section-padding">
           <div className="container-wide">
-            <span className={eyebrow}>{es ? "Las instalaciones" : "The facility"}</span>
+            <span className={eyebrow}>{tr(language, "Las instalaciones", "The facility")}</span>
             <h2 className={`${h2} mt-4 max-w-3xl`}>
-              {es ? "Tres días de fútbol en una " : "A first-class home for "}
-              <span className="text-primary italic">{es ? "casa de primera" : "three days of football"}</span>
+              {tr(language, "Tres días de fútbol en una ", "A first-class home for ")}
+              <span className="text-primary italic">{tr(language, "casa de primera", "three days of football")}</span>
             </h2>
             <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {es
-                ? "La Ciudad Deportiva de Talavera acoge los partidos, las pruebas y las comidas: campos modernos, clubhouse propio y espacio pensado para este tipo de evento."
-                : "Talavera's Ciudad Deportiva hosts the matches, testing and meals: modern pitches, a dedicated clubhouse and space built for exactly this kind of event."}
+              {tr(language, "La Ciudad Deportiva de Talavera acoge los partidos, las pruebas y las comidas: campos modernos, clubhouse propio y espacio pensado para este tipo de evento.", "Talavera's Ciudad Deportiva hosts the matches, testing and meals: modern pitches, a dedicated clubhouse and space built for exactly this kind of event.")}
             </p>
 
             <Carousel opts={{ align: "start", loop: true }} className="mt-12">
@@ -548,16 +509,14 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         <section id="coaches" className="section-padding section-alt scroll-mt-24">
           <div className="container-wide grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
             <div>
-              <span className={eyebrow}>{es ? "Para entrenadores" : "For coaches"}</span>
+              <span className={eyebrow}>{tr(language, "Para entrenadores", "For coaches")}</span>
               <h2 className={`${h2} mt-4`}>
-                {es ? "Tú te centras en " : "You focus on "}
-                <span className="text-primary italic">{es ? "evaluar" : "scouting"}</span>
-                {es ? ". Del resto nos ocupamos nosotros." : ". We handle the rest."}
+                {tr(language, "Tú te centras en ", "You focus on ")}
+                <span className="text-primary italic">{tr(language, "evaluar", "scouting")}</span>
+                {tr(language, ". Del resto nos ocupamos nosotros.", ". We handle the rest.")}
               </h2>
               <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "La invitación cubre hotel, comidas y transporte durante la visita estándar de 3 días y 2 noches."
-                  : "Your invitation covers hotel, meals and ground transport for the standard 3-day / 2-night visit."}
+                {tr(language, "La invitación cubre hotel, comidas y transporte durante la visita estándar de 3 días y 2 noches.", "Your invitation covers hotel, meals and ground transport for the standard 3-day / 2-night visit.")}
               </p>
 
               <ul className="mt-8 divide-y divide-border border-y border-border">
@@ -573,8 +532,8 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
 
               <div className="mt-8 grid grid-cols-2 gap-3">
                 {[
-                  { src: "/images/showcase/hotel.jpg", alt: es ? "Habitación del Talavera Hotel" : "Talavera Hotel room" },
-                  { src: "/images/showcase/comedor.jpg", alt: es ? "Comedor de la Ciudad Deportiva" : "Ciudad Deportiva dining room" },
+                  { src: "/images/showcase/hotel.jpg", alt: tr(language, "Habitación del Talavera Hotel", "Talavera Hotel room") },
+                  { src: "/images/showcase/comedor.jpg", alt: tr(language, "Comedor de la Ciudad Deportiva", "Ciudad Deportiva dining room") },
                 ].map((img) => (
                   <div key={img.src} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
                     <Image src={img.src} alt={img.alt} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
@@ -588,34 +547,27 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                 <p className="label-bebas text-base text-primary">Coach Pack</p>
                 <p className="mt-3 font-display text-6xl font-bold text-foreground md:text-7xl">550 €</p>
                 <p className="mt-3 font-body text-sm text-muted-foreground">
-                  {es ? "2 noches de hotel · comidas y cenas · transporte" : "2 nights hotel · meals & dinners · ground transport"}
+                  {tr(language, "2 noches de hotel · comidas y cenas · transporte", "2 nights hotel · meals & dinners · ground transport")}
                 </p>
                 <a
                   href={coachMail}
                   className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
                 >
                   <Mail className="h-4 w-4" />
-                  {es ? "Confirmar asistencia" : "Confirm your attendance"}
+                  {tr(language, "Confirmar asistencia", "Confirm your attendance")}
                 </a>
                 <p className="mt-4 font-body text-xs text-muted-foreground">{COACH_EMAIL}</p>
               </div>
               <p className="mt-5 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-4 font-body text-sm leading-relaxed text-amber-950">
-                {es ? (
-                  <>
-                    La visita estándar termina el miércoles después de comer. Si tu vuelo lo requiere, añadimos una noche más y sales el jueves;
-                    esa noche <strong>no está incluida</strong> en el Coach Pack y te confirmamos el precio antes de reservarla.
-                  </>
-                ) : (
-                  <>
-                    The standard visit ends Wednesday after lunch. If your flight requires it, we can add a night and you leave Thursday; that
-                    night is <strong>not included</strong> in the Coach Pack and we'll confirm the cost before booking it.
-                  </>
+                {rich(
+                  language,
+                  "La visita estándar termina el miércoles después de comer. Si tu vuelo lo requiere, añadimos una noche más y sales el jueves; esa noche <b>no está incluida</b> en el Coach Pack y te confirmamos el precio antes de reservarla.",
+                  "The standard visit ends Wednesday after lunch. If your flight requires it, we can add a night and you leave Thursday; that night is <b>not included</b> in the Coach Pack and we'll confirm the cost before booking it.",
+                  { b: (t) => <strong>{t}</strong> },
                 )}
               </p>
               <p className="mt-5 font-body text-sm leading-relaxed text-muted-foreground">
-                {es
-                  ? "Al confirmar, cuéntanos qué posiciones o perfiles buscas y te preparamos notas de scouting antes de que llegues."
-                  : "When you confirm, tell us which positions or profiles you're prioritizing and we'll prepare scouting notes before you arrive."}
+                {tr(language, "Al confirmar, cuéntanos qué posiciones o perfiles buscas y te preparamos notas de scouting antes de que llegues.", "When you confirm, tell us which positions or profiles you're prioritizing and we'll prepare scouting notes before you arrive.")}
               </p>
             </div>
           </div>
@@ -625,15 +577,13 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
         <section id="jugadores" className="section-padding scroll-mt-24">
           <div className="container-wide grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
             <div>
-              <span className={eyebrow}>{es ? "Para jugadores" : "For players"}</span>
+              <span className={eyebrow}>{tr(language, "Para jugadores", "For players")}</span>
               <h2 className={`${h2} mt-4`}>
-                {es ? "Dos días para " : "Two days to "}
-                <span className="text-primary italic">{es ? "darte a conocer" : "get noticed"}</span>
+                {tr(language, "Dos días para ", "Two days to ")}
+                <span className="text-primary italic">{tr(language, "darte a conocer", "get noticed")}</span>
               </h2>
               <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "Un evento de scouting en directo que reúne a 60 jugadores y a entrenadores universitarios en la Ciudad Deportiva de Talavera de la Reina. Compites delante de ellos y hablas cara a cara con los que se interesan por ti: una oportunidad real de entrar en un programa universitario."
-                  : "A live scouting event that brings together 60 players and college coaches at the Ciudad Deportiva in Talavera de la Reina. You compete in front of them and talk face to face with the ones interested in you: a real chance to get into a college program."}
+                {tr(language, "Un evento de scouting en directo que reúne a 60 jugadores y a entrenadores universitarios en la Ciudad Deportiva de Talavera de la Reina. Compites delante de ellos y hablas cara a cara con los que se interesan por ti: una oportunidad real de entrar en un programa universitario.", "A live scouting event that brings together 60 players and college coaches at the Ciudad Deportiva in Talavera de la Reina. You compete in front of them and talk face to face with the ones interested in you: a real chance to get into a college program.")}
               </p>
 
               <ol className="mt-8 divide-y divide-border border-y border-border">
@@ -649,12 +599,10 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
               </ol>
 
               <h3 className="mt-10 font-display text-2xl font-bold sm:text-3xl">
-                {es ? "¿Qué ganas participando?" : "What's in it for you?"}
+                {tr(language, "¿Qué ganas participando?", "What's in it for you?")}
               </h3>
               <p className="mt-3 font-body text-base leading-relaxed text-muted-foreground">
-                {es
-                  ? "Este evento abre puertas que muy pocos jugadores consiguen abrir. Si un entrenador universitario te ficha, no solo estudias en una gran universidad con beca: también multiplicas tus opciones de llegar a la MLS. Es un camino real hacia el fútbol profesional, y empieza aquí."
-                  : "This event opens doors very few players ever get to open. If a college coach signs you, you don't just study at a great university on a scholarship: you also multiply your chances of reaching the MLS. It's a real path to professional football, and it starts here."}
+                {tr(language, "Este evento abre puertas que muy pocos jugadores consiguen abrir. Si un entrenador universitario te ficha, no solo estudias en una gran universidad con beca: también multiplicas tus opciones de llegar a la MLS. Es un camino real hacia el fútbol profesional, y empieza aquí.", "This event opens doors very few players ever get to open. If a college coach signs you, you don't just study at a great university on a scholarship: you also multiply your chances of reaching the MLS. It's a real path to professional football, and it starts here.")}
               </p>
             </div>
 
@@ -662,15 +610,15 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
               <div className="rounded-3xl border border-border border-t-4 border-t-primary bg-card p-8 shadow-card md:p-10">
                 <div className="text-center">
                   <p className="label-bebas text-base text-primary">
-                    {es ? "Cuota de inscripción" : "Registration fee"}
+                    {tr(language, "Cuota de inscripción", "Registration fee")}
                   </p>
                   <p className="mt-3 font-display text-6xl font-bold text-foreground md:text-7xl">45 €</p>
                   <p className="mt-3 font-body text-sm text-muted-foreground">
-                    {es ? "Jugadores de España · los días del showcase" : "Players from Spain · the Showcase days"}
+                    {tr(language, "Jugadores de España · los días del showcase", "Players from Spain · the Showcase days")}
                   </p>
                 </div>
                 <p className="mt-8 label-bebas text-base text-foreground">
-                  {es ? "Qué incluye" : "What's included"}
+                  {tr(language, "Qué incluye", "What's included")}
                 </p>
                 <ul className="mt-3 space-y-2.5">
                   {playerPack.map((item) => (
@@ -684,29 +632,22 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                   href="#inscripcion"
                   className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
                 >
-                  {es ? "Inscribirme" : "Register"}
+                  {tr(language, "Inscribirme", "Register")}
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
               <p className="mt-5 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-4 font-body text-sm leading-relaxed text-amber-950">
-                {es ? (
-                  <>
-                    Para los jugadores de España el evento son solo los días del showcase, no un viaje de varios días. Si vienes de lejos y
-                    necesitas dormir la noche del martes 2 al miércoles 3, tenemos residencia disponible:{" "}
-                    <a href={residenceWhatsApp} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">
-                      escríbenos por WhatsApp
-                    </a>{" "}
-                    y lo vemos en tu caso.
-                  </>
-                ) : (
-                  <>
-                    For players from Spain the event is just the Showcase days, not a multi-day trip. If you live far away and need to stay
-                    the night of Tuesday 2 to Wednesday 3, we have a residence available:{" "}
-                    <a href={residenceWhatsApp} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">
-                      message us on WhatsApp
-                    </a>{" "}
-                    and we'll sort it out case by case.
-                  </>
+                {rich(
+                  language,
+                  "Para los jugadores de España el evento son solo los días del showcase, no un viaje de varios días. Si vienes de lejos y necesitas dormir la noche del martes 2 al miércoles 3, tenemos residencia disponible: <a>escríbenos por WhatsApp</a> y lo vemos en tu caso.",
+                  "For players from Spain the event is just the Showcase days, not a multi-day trip. If you live far away and need to stay the night of Tuesday 2 to Wednesday 3, we have a residence available: <a>message us on WhatsApp</a> and we'll sort it out case by case.",
+                  {
+                    a: (t) => (
+                      <a href={residenceWhatsApp} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">
+                        {t}
+                      </a>
+                    ),
+                  },
                 )}
               </p>
             </div>
@@ -725,21 +666,19 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
                 className="object-cover opacity-30"
               />
               <div className="relative max-w-2xl">
-                <span className={eyebrowDark}>{es ? "Jugadores" : "Players"}</span>
+                <span className={eyebrowDark}>{tr(language, "Jugadores", "Players")}</span>
                 <h2 className={`${h2} mt-4 text-white`}>
-                  {es ? "Inscríbete al showcase" : "Register for the Showcase"}
+                  {tr(language, "Inscríbete al showcase", "Register for the Showcase")}
                 </h2>
                 <p className="mt-5 font-body text-base leading-relaxed text-white/75 sm:text-lg">
-                  {es
-                    ? "Es solo por invitación y hay 60 plazas. Rellena tu perfil paso a paso: lo revisamos y, si encajas, te enviamos la invitación con los siguientes pasos."
-                    : "It is by invitation only and there are 60 places. Fill in your profile step by step: we review it and, if you are a fit, we send you the invitation and next steps."}
+                  {tr(language, "Es solo por invitación y hay 60 plazas. Rellena tu perfil paso a paso: lo revisamos y, si encajas, te enviamos la invitación con los siguientes pasos.", "It is by invitation only and there are 60 places. Fill in your profile step by step: we review it and, if you are a fit, we send you the invitation and next steps.")}
                 </p>
                 <p className="mt-6 inline-flex items-baseline gap-3 rounded-xl border border-white/15 bg-white/10 px-5 py-3 font-body text-white backdrop-blur">
                   <span className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
-                    {es ? "Inscripción jugadores" : "Player registration"}
+                    {tr(language, "Inscripción jugadores", "Player registration")}
                   </span>
                   <span className="font-display text-3xl font-bold">45 €</span>
-                  <span className="text-xs text-white/60">{es ? "jugadores de España" : "players from Spain"}</span>
+                  <span className="text-xs text-white/60">{tr(language, "jugadores de España", "players from Spain")}</span>
                 </p>
               </div>
             </div>

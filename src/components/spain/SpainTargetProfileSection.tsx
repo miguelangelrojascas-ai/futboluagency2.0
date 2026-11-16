@@ -3,26 +3,21 @@
 import { Check, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 const SpainTargetProfileSection = () => {
   const { language } = useLanguage();
   const isEs = language === "es";
 
   const yesItems = [
-    isEs
-      ? "Futbolistas de 16 a 23 años con ambición de competir en Europa"
-      : "Footballers aged 16–23 with ambition to compete in Europe",
-    isEs
-      ? "Jugadores que buscan exposición ante scouts y entrenadores profesionales"
-      : "Players seeking exposure to professional scouts and coaches",
-    isEs
-      ? "Atletas dispuestos a comprometerse con una temporada de desarrollo intensivo"
-      : "Athletes willing to commit to a full season of intensive development",
+    tr(language, "Futbolistas de 16 a 23 años con ambición de competir en Europa", "Footballers aged 16–23 with ambition to compete in Europe"),
+    tr(language, "Jugadores que buscan exposición ante scouts y entrenadores profesionales", "Players seeking exposure to professional scouts and coaches"),
+    tr(language, "Atletas dispuestos a comprometerse con una temporada de desarrollo intensivo", "Athletes willing to commit to a full season of intensive development"),
   ];
 
   const noItems = [
-    isEs ? "Solo buscas hacer turismo deportivo" : "You're only looking for sports tourism",
-    isEs ? "No estás dispuesto a entrenar al máximo nivel" : "You're not willing to train at the highest level",
-    isEs ? "Esperas resultados sin compromiso real" : "You expect results without real commitment",
+    tr(language, "Solo buscas hacer turismo deportivo", "You're only looking for sports tourism"),
+    tr(language, "No estás dispuesto a entrenar al máximo nivel", "You're not willing to train at the highest level"),
+    tr(language, "Esperas resultados sin compromiso real", "You expect results without real commitment"),
   ];
 
   const cardStyle = {
@@ -39,7 +34,7 @@ const SpainTargetProfileSection = () => {
           {/* Yes card */}
           <div style={cardStyle} className="flex flex-col">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              {isEs ? "¿Este programa es para ti?" : "Is this program for you?"}
+              {tr(language, "¿Este programa es para ti?", "Is this program for you?")}
             </h2>
             <div className="space-y-4 flex-1">
               {yesItems.map((item, i) => (
@@ -56,7 +51,7 @@ const SpainTargetProfileSection = () => {
           {/* No card */}
           <div style={cardStyle} className="flex flex-col">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              {isEs ? "No es para ti si..." : "It's not for you if..."}
+              {tr(language, "No es para ti si...", "It's not for you if...")}
             </h2>
             <div className="space-y-4 flex-1">
               {noItems.map((item, i) => (

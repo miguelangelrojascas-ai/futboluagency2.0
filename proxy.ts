@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import {
   DEFAULT_LOCALE,
-  EN_TO_ES_SLUG,
-  ES_TO_EN_PUBLIC,
+  ES_TO_SLUG,
+  SLUG_TO_ES,
   LEGACY_PREFIX_REDIRECTS,
   LEGACY_REDIRECTS,
   LOCALES,
@@ -42,30 +42,26 @@ export function proxy(request: NextRequest) {
 
   // Nothing language-prefixed: pick one and send them there.
   if (!isLocale(first)) {
-    const preferred = request.headers
-      .get("accept-language")
-      ?.toLowerCase()
-      .startsWith("en")
-      ? "en"
-      : DEFAULT_LOCALE;
+    const asked = request.headers.get("accept-language")?.toLowerCase().slice(0, 2);
+    const preferred = asked && isLocale(asked) ? asked : DEFAULT_LOCALE;
     const suffix = pathname === "/" ? "" : pathname;
     return redirectTo(`/${preferred}${suffix}`);
   }
 
-  if (first === "en" && rest.length > 0) {
-    // English slug: serve it from the Spanish folder, keeping the URL.
-    const mapped = EN_TO_ES_SLUG[rest[0]];
+  if (first !== DEFAULT_LOCALE && rest.length > 0) {
+    // This language's slug: serve it from the Spanish folder, keeping the URL.
+    const mapped = SLUG_TO_ES[first][rest[0]];
     if (mapped) {
       const url = request.nextUrl.clone();
-      url.pathname = `/${["en", mapped, ...rest.slice(1)].filter(Boolean).join("/")}`;
+      url.pathname = `/${[first, mapped, ...rest.slice(1)].filter(Boolean).join("/")}`;
       return NextResponse.rewrite(url);
     }
 
-    // The Spanish slug under /en would be a second address for the same page,
-    // so it is sent to the English one rather than left to compete with it.
-    const englishSlug = ES_TO_EN_PUBLIC[rest[0]];
-    if (englishSlug) {
-      return redirectTo(`/${["en", englishSlug, ...rest.slice(1)].filter(Boolean).join("/")}`);
+    // The Spanish slug under another language would be a second address for
+    // the same page, so it is sent to that language's own slug instead.
+    const ownSlug = ES_TO_SLUG[first][rest[0]];
+    if (ownSlug) {
+      return redirectTo(`/${[first, ownSlug, ...rest.slice(1)].filter(Boolean).join("/")}`);
     }
   }
 

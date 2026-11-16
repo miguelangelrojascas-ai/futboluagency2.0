@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PAGE_META, alternatesFor, socialFor } from "@/lib/pageMeta";
+import { alternatesFor, metaCopy, socialFor } from "@/lib/pageMeta";
 import { LOCALES, href, isLocale, type Locale } from "@/lib/routes";
 import { articleSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { findGuide, guides } from "@/data/resources";
 import ResourceGuide from "@/views/ResourceGuide";
+import { pick, tr } from "@/lib/i18n";
 
 export const dynamicParams = false;
 
@@ -23,8 +24,8 @@ export async function generateMetadata({
   const guide = findGuide(resolved.slug);
   if (!guide || !isLocale(resolved.locale)) return {};
   const { locale } = resolved;
-  const title = `${guide.seoTitle[locale]} | FutbolUAgency`;
-  const description = guide.summary[locale];
+  const title = `${pick(locale, guide.seoTitle)} | FutbolUAgency`;
+  const description = pick(locale, guide.summary);
 
   return {
     title,
@@ -35,7 +36,7 @@ export async function generateMetadata({
       path: href(locale, "resources", guide.slug),
       title,
       description,
-      image: { url: guide.image, alt: guide.title[locale] },
+      image: { url: guide.image, alt: pick(locale, guide.title) },
       type: "article",
     }),
   };
@@ -50,22 +51,21 @@ export default async function Page({
   const guide = findGuide(resolved.slug);
   if (!guide) notFound();
   const { locale } = resolved;
-  const es = locale === "es";
   const path = href(locale, "resources", guide.slug);
 
   const schema = jsonLd(
     articleSchema({
       locale,
       path,
-      headline: guide.seoTitle[locale],
-      description: guide.summary[locale],
+      headline: pick(locale, guide.seoTitle),
+      description: pick(locale, guide.summary),
       image: guide.image,
-      sections: guide.sections.map((s) => s.title[locale]),
+      sections: guide.sections.map((s) => pick(locale, s.title)),
     }),
     breadcrumbSchema([
-      { name: es ? "Inicio" : "Home", path: href(locale, "home") },
-      { name: PAGE_META.resources[locale].title.split(" |")[0], path: href(locale, "resources") },
-      { name: guide.title[locale], path },
+      { name: tr(locale, "Inicio", "Home"), path: href(locale, "home") },
+      { name: metaCopy("resources", locale).title.split(" |")[0], path: href(locale, "resources") },
+      { name: pick(locale, guide.title), path },
     ]),
   );
 

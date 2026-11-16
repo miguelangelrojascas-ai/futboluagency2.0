@@ -6,6 +6,7 @@ import atleticoLogoAsset from "@/assets/clubs/atletico-madrid.svg";
 import getafeLogoAsset from "@/assets/clubs/getafe.svg";
 import leganesLogoAsset from "@/assets/clubs/leganes.svg";
 
+import { tr } from "@/lib/i18n";
 /* Next resolves an image import to an object; the markup wants the URL. */
 const realMadridLogo = realMadridLogoAsset.src;
 const atleticoLogo = atleticoLogoAsset.src;
@@ -28,23 +29,19 @@ const SpainMadridSection = () => {
       <div className="container-wide px-4">
         <div className="max-w-[1100px] mx-auto">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase">
-            {isEs ? "Ubicación Estratégica" : "Strategic Location"}
+            {tr(language, "Ubicación Estratégica", "Strategic Location")}
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
             {/* Left — text */}
             <div>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-6 leading-tight">
-                {isEs ? "A minutos de Madrid" : "Minutes from Madrid"}
+                {tr(language, "A minutos de Madrid", "Minutes from Madrid")}
               </h2>
               <p className="font-body text-muted-foreground text-base leading-relaxed mb-4">
-                {isEs
-                  ? "Talavera de la Reina está a solo una hora de Madrid, dando acceso directo a un ecosistema futbolístico de primer nivel mundial. Los jugadores pueden ser vistos por scouts de los clubes más importantes de España."
-                  : "Talavera de la Reina is just one hour from Madrid, giving direct access to a world-class football ecosystem. Players can be scouted by the most important clubs in Spain."}
+                {tr(language, "Talavera de la Reina está a solo una hora de Madrid, dando acceso directo a un ecosistema futbolístico de primer nivel mundial. Los jugadores pueden ser vistos por scouts de los clubes más importantes de España.", "Talavera de la Reina is just one hour from Madrid, giving direct access to a world-class football ecosystem. Players can be scouted by the most important clubs in Spain.")}
               </p>
               <p className="font-body text-muted-foreground text-base leading-relaxed">
-                {isEs
-                  ? "La proximidad a la capital permite participar en torneos, amistosos y showcases con equipos de Primera y Segunda División."
-                  : "The proximity to the capital allows participation in tournaments, friendlies and showcases with First and Second Division teams."}
+                {tr(language, "La proximidad a la capital permite participar en torneos, amistosos y showcases con equipos de Primera y Segunda División.", "The proximity to the capital allows participation in tournaments, friendlies and showcases with First and Second Division teams.")}
               </p>
             </div>
 

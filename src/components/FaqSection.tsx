@@ -32,6 +32,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { pick, tr } from "@/lib/i18n";
 type Faq = {
   icon: LucideIcon;
   q: string;
@@ -337,7 +338,7 @@ const GROUPS_EN: FaqGroup[] = [
 const FaqSection = () => {
   const { language } = useLanguage();
   const isEs = language === "es";
-  const groups = isEs ? GROUPS_ES : GROUPS_EN;
+  const groups = pick(language, { es: GROUPS_ES, en: GROUPS_EN });
 
   const [active, setActive] = useState(0);
   const activeGroup = groups[active];
@@ -370,18 +371,18 @@ const FaqSection = () => {
         {/* Header */}
         <div className="max-w-3xl mx-auto mb-10 text-center">
           <h2 className="font-druk uppercase leading-[0.88] text-ink text-[clamp(3rem,12vw,6.5rem)]">
-            {isEs ? "Todo lo que" : "Everything"}
-            <span className="block pr-[0.08em] italic text-primary">{isEs ? "necesitas saber" : "you need to know"}</span>
+            {tr(language, "Todo lo que", "Everything")}
+            <span className="block pr-[0.08em] italic text-primary">{tr(language, "necesitas saber", "you need to know")}</span>
           </h2>
           <p className="mt-4 font-bebas text-[15px] tracking-[0.26em] text-ink/50 sm:text-base">
-            {isEs ? "Preguntas frecuentes" : "Frequently asked questions"}
+            {tr(language, "Preguntas frecuentes", "Frequently asked questions")}
           </p>
         </div>
 
         {/* Category tabs */}
         <div
           role="tablist"
-          aria-label={isEs ? "Categorías de preguntas" : "Question categories"}
+          aria-label={tr(language, "Categorías de preguntas", "Question categories")}
           className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10"
         >
           {groups.map((group, i) => {
@@ -461,12 +462,12 @@ const FaqSection = () => {
           </AccordionPrimitive.Root>
 
           <p className="mt-10 text-center font-body text-sm leading-relaxed text-muted-foreground">
-            {isEs ? "¿Necesitas más detalle? Todo esto está explicado a fondo en " : "Need more detail? All of this is explained in depth in "}
+            {tr(language, "¿Necesitas más detalle? Todo esto está explicado a fondo en ", "Need more detail? All of this is explained in depth in ")}
             <LocaleLink
               to="/recursos"
               className="font-semibold text-primary underline-offset-4 transition-colors hover:text-primary-hover hover:underline"
             >
-              {isEs ? "nuestras guías" : "our guides"}
+              {tr(language, "nuestras guías", "our guides")}
             </LocaleLink>
             .
           </p>

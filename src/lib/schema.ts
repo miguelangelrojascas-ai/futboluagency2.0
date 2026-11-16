@@ -1,4 +1,5 @@
 import { LOCALES, href, type Locale } from "./routes";
+import { tr } from "./i18n";
 
 const SITE = "https://futboluagency.com";
 
@@ -9,7 +10,6 @@ const SITE = "https://futboluagency.com";
  * matters for the engines that cite sources without running JavaScript.
  */
 export function organizationSchema(locale: Locale) {
-  const es = locale === "es";
 
   return {
     "@context": "https://schema.org",
@@ -26,9 +26,11 @@ export function organizationSchema(locale: Locale) {
           width: 512,
           height: 512,
         },
-        description: es
-          ? "Agencia de reclutamiento que ayuda a futbolistas internacionales a conseguir becas deportivas en universidades NCAA, NAIA y NJCAA de Estados Unidos."
-          : "Recruitment agency helping international footballers earn scholarships at NCAA, NAIA and NJCAA universities in the United States.",
+        description: tr(
+          locale,
+          "Agencia de reclutamiento que ayuda a futbolistas internacionales a conseguir becas deportivas en universidades NCAA, NAIA y NJCAA de Estados Unidos.",
+          "Recruitment agency helping international footballers earn scholarships at NCAA, NAIA and NJCAA universities in the United States.",
+        ),
         email: "futboluagency@gmail.com",
         address: {
           "@type": "PostalAddress",

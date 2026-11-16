@@ -5,6 +5,7 @@ import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { bottomRow, topRow } from "@/data/successCases";
 
+import { pick, tr } from "@/lib/i18n";
 type Bilingual = { es: string; en: string };
 
 type ScholarshipCase = {
@@ -85,10 +86,10 @@ const ScholarshipCasesSection = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl mb-10">
           <span className="text-primary text-xs font-bold tracking-[0.15em] uppercase mb-3 block">
-            {es ? "Casos reales" : "Real cases"}
+            {tr(language, "Casos reales", "Real cases")}
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight">
-            {es ? "Qué beca consiguieron nuestros jugadores" : "What scholarship our players earned"}
+            {tr(language, "Qué beca consiguieron nuestros jugadores", "What scholarship our players earned")}
           </h2>
         </div>
 
@@ -115,21 +116,21 @@ const ScholarshipCasesSection = () => {
                   <div className="mb-1 flex items-baseline gap-2">
                     <span className="font-display text-4xl font-bold text-primary">{c.coverage}</span>
                     <span className="font-body text-xs font-bold uppercase tracking-[0.12em] text-foreground">
-                      {c.type[language]}
+                      {pick(language, c.type)}
                     </span>
                   </div>
                   {!c.confirmed && (
                     <span className="mb-2 font-body text-[11px] italic text-muted-foreground">
-                      {es ? "Dato por confirmar" : "Figure to be confirmed"}
+                      {tr(language, "Dato por confirmar", "Figure to be confirmed")}
                     </span>
                   )}
                   <h3 className="mt-2 font-display text-xl font-bold text-foreground">{c.name}</h3>
                   <p className="mb-4 font-body text-sm text-muted-foreground">{c.university}</p>
-                  <p className="font-body text-sm leading-relaxed text-foreground/80">{c.covers[language]}</p>
+                  <p className="font-body text-sm leading-relaxed text-foreground/80">{pick(language, c.covers)}</p>
 
                   {c.story && (
                     <span className="mt-auto inline-flex items-center gap-2 pt-5 font-body text-sm font-bold text-primary">
-                      {es ? "Leer su historia" : "Read his story"}
+                      {tr(language, "Leer su historia", "Read his story")}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                   )}

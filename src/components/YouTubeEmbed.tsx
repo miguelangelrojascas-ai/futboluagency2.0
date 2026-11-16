@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { tr } from "@/lib/i18n";
 
 type YouTubeEmbedProps = {
   id: string;
@@ -39,7 +40,7 @@ const YouTubeEmbed = ({ id, title, className }: YouTubeEmbedProps) => {
       type="button"
       onClick={() => setPlaying(true)}
       className={`group/play relative block h-full w-full ${className ?? ""}`}
-      aria-label={es ? `Reproducir: ${title}` : `Play: ${title}`}
+      aria-label={tr(language, "Reproducir: {0}", "Play: {0}", [title])}
     >
       <img
         src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}

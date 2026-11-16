@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import HomeCta from "@/components/home/HomeCta";
 import HomeLogoMorph, { Chars } from "@/components/home/HomeLogoMorph";
 
+import { pick, tr } from "@/lib/i18n";
 const SLIDE_MS = 6500;
 
 /*
@@ -31,6 +32,13 @@ const SLIDES = [
 const HomeHero = () => {
   const { language } = useLanguage();
   const es = language === "es";
+  /* Headline in three lines; the scroll story picks its letters from them. */
+  const head = pick(language, {
+    es: ["Tu beca", "de fútbol", "en EE.UU."],
+    en: ["Your soccer", "scholarship", "in the USA"],
+    it: ["La tua borsa", "di calcio", "negli USA"],
+    de: ["Dein Stipendium", "für Fußball", "in den USA"],
+  });
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [still, setStill] = useState(false);
@@ -110,39 +118,23 @@ const HomeHero = () => {
         <div className="max-w-[60rem]">
           <h1
             data-src
-            aria-label={es ? "Tu beca de fútbol en EE.UU." : "Your soccer scholarship in the USA"}
+            aria-label={tr(language, "Tu beca de fútbol en EE.UU.", "Your soccer scholarship in the USA")}
             className={`font-druk uppercase leading-[0.96] text-white lg:text-[clamp(5rem,7.2vw,8rem)] ${
               es ? "text-[clamp(3.75rem,19vw,6.5rem)]" : "text-[clamp(3.25rem,15vw,6.5rem)]"
             }`}
           >
-            {es ? (
-              <>
-                <span className="block" aria-hidden="true">
-                  <Chars text="Tu beca" /> <br className="lg:hidden" />
-                  <Chars text="de fútbol" />
-                </span>
-                <span className="block pr-[0.08em] italic text-red-bright" aria-hidden="true">
-                  <Chars text="en EE.UU." />
-                </span>
-              </>
-            ) : (
-              <>
-                <span className="block" aria-hidden="true">
-                  <Chars text="Your soccer" /> <br className="lg:hidden" />
-                  <Chars text="scholarship" />
-                </span>
-                <span className="block pr-[0.08em] italic text-red-bright" aria-hidden="true">
-                  <Chars text="in the USA" />
-                </span>
-              </>
-            )}
+            <span className="block" aria-hidden="true">
+              <Chars text={head[0]} /> <br className="lg:hidden" />
+              <Chars text={head[1]} />
+            </span>
+            <span className="block pr-[0.08em] italic text-red-bright" aria-hidden="true">
+              <Chars text={head[2]} />
+            </span>
           </h1>
           <p data-src className="mt-5 max-w-2xl font-bebas text-[1.2rem] leading-snug tracking-[0.16em] text-white sm:text-[1.45rem]">
             <Chars
               text={
-                es
-                  ? "+250 futbolistas ya compiten en NCAA, NAIA y NJCAA · más de $10M en becas"
-                  : "250+ players already compete in the NCAA, NAIA and NJCAA · over $10M in scholarships"
+                tr(language, "+250 futbolistas ya compiten en NCAA, NAIA y NJCAA · más de $10M en becas", "250+ players already compete in the NCAA, NAIA and NJCAA · over $10M in scholarships")
               }
             />
           </p>
@@ -161,7 +153,7 @@ const HomeHero = () => {
           onBlur={() => setPaused(false)}
         >
           <p aria-hidden="true" className="font-druk text-[2.75rem] uppercase leading-none text-white/90 lg:text-[3.5rem]">
-            {SLIDES[active][es ? "es" : "en"]}
+            {SLIDES[active][tr(language, "es", "en")]}
             <span className="text-red-bright">.</span>
           </p>
           <div className="flex gap-2 lg:mt-4 lg:justify-end">
@@ -170,7 +162,7 @@ const HomeHero = () => {
                 key={s.src}
                 type="button"
                 onClick={() => setActive(i)}
-                aria-label={es ? `Imagen ${i + 1} de ${SLIDES.length}` : `Image ${i + 1} of ${SLIDES.length}`}
+                aria-label={tr(language, "Imagen {0} de {1}", "Image {0} of {1}", [i + 1, SLIDES.length])}
                 aria-pressed={i === active}
                 className="group flex h-6 w-12 items-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >

@@ -9,14 +9,15 @@ import Footer from "@/components/Footer";
 import PlayerProfilesSection from "@/components/usa/PlayerProfilesSection";
 import { findGuide, guides } from "@/data/resources";
 
+import { pick, tr } from "@/lib/i18n";
 const ResourceGuide = () => {
   const { slug } = useParams<{ slug: string }>();
   const { language } = useLanguage();
   const es = language === "es";
   const guide = findGuide(slug);
 
-  const title = guide ? (es ? guide.title.es : guide.title.en) : "";
-  const summary = guide ? (es ? guide.summary.es : guide.summary.en) : "";
+  const title = guide ? (pick(language, guide.title)) : "";
+  const summary = guide ? (pick(language, guide.summary)) : "";
 
 
   if (!guide) notFound();
@@ -46,11 +47,11 @@ const ResourceGuide = () => {
             }}
           />
           <div className="container-wide relative px-4">
-            <nav aria-label={es ? "Ruta de navegación" : "Breadcrumb"} className="mb-8">
+            <nav aria-label={tr(language, "Ruta de navegación", "Breadcrumb")} className="mb-8">
               <ol className="flex items-center gap-2 font-body text-sm text-muted-foreground">
                 <li>
                   <LocaleLink to="/recursos" className="transition-colors hover:text-primary">
-                    {es ? "Recursos" : "Resources"}
+                    {tr(language, "Recursos", "Resources")}
                   </LocaleLink>
                 </li>
                 <li aria-hidden="true">
@@ -84,9 +85,9 @@ const ResourceGuide = () => {
           <div className="container-wide px-4">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] lg:gap-16">
               {/* Table of contents */}
-              <nav aria-label={es ? "Contenido de la guía" : "Guide contents"} className="lg:sticky lg:top-28 lg:self-start">
+              <nav aria-label={tr(language, "Contenido de la guía", "Guide contents")} className="lg:sticky lg:top-28 lg:self-start">
                 <h2 className="mb-4 font-body text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                  {es ? "En esta guía" : "In this guide"}
+                  {tr(language, "En esta guía", "In this guide")}
                 </h2>
                 <ol className="space-y-2.5 border-l border-border pl-4">
                   {guide.sections.map((section) => (
@@ -95,7 +96,7 @@ const ResourceGuide = () => {
                         href={`#${section.id}`}
                         className="font-body text-[13px] leading-snug text-muted-foreground transition-colors hover:text-primary"
                       >
-                        {es ? section.title.es : section.title.en}
+                        {pick(language, section.title)}
                       </a>
                     </li>
                   ))}
@@ -105,7 +106,7 @@ const ResourceGuide = () => {
               {/* Sections */}
               <div className="max-w-2xl">
                 {guide.sections.map((section) => {
-                  const paragraphs = es ? section.body.es : section.body.en;
+                  const paragraphs = pick(language, section.body);
                   const pending = paragraphs.length === 0;
                   return (
                     <article
@@ -114,11 +115,11 @@ const ResourceGuide = () => {
                       className="scroll-mt-28 border-b border-border py-8 first:pt-0 last:border-b-0"
                     >
                       <h2 className="mb-4 font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
-                        {es ? section.title.es : section.title.en}
+                        {pick(language, section.title)}
                       </h2>
                       {pending ? (
                         <p className="rounded-xl border border-dashed border-border px-4 py-3 font-body text-sm text-muted-foreground/70">
-                          {es ? "Sección en preparación." : "Section in progress."}
+                          {tr(language, "Sección en preparación.", "Section in progress.")}
                         </p>
                       ) : (
                         paragraphs.map((text, i) => (
@@ -137,7 +138,7 @@ const ResourceGuide = () => {
                             <table className="w-full border-collapse text-left font-body text-sm">
                               <thead>
                                 <tr className="border-b border-border">
-                                  {(es ? section.table.columns.es : section.table.columns.en).map((col, i) => (
+                                  {(pick(language, section.table.columns)).map((col, i) => (
                                     <th
                                       key={col}
                                       scope="col"
@@ -152,7 +153,7 @@ const ResourceGuide = () => {
                               </thead>
                               <tbody>
                                 {section.table.rows.map((row) => {
-                                  const cells = es ? row.es : row.en;
+                                  const cells = pick(language, row);
                                   return (
                                     <tr key={cells[0]} className="border-b border-border/60 last:border-b-0">
                                       <td className="px-4 py-3 font-semibold text-foreground">{cells[0]}</td>
@@ -167,17 +168,17 @@ const ResourceGuide = () => {
                               <tfoot>
                                 <tr style={{ backgroundColor: "hsl(var(--primary) / 0.06)" }}>
                                   <td colSpan={2} className="px-4 py-3.5 font-bold text-foreground">
-                                    {(es ? section.table.total.es : section.table.total.en)[0]}
+                                    {(pick(language, section.table.total))[0]}
                                   </td>
                                   <td className="whitespace-nowrap px-4 py-3.5 text-right font-display text-base font-bold text-primary">
-                                    {(es ? section.table.total.es : section.table.total.en)[1]}
+                                    {(pick(language, section.table.total))[1]}
                                   </td>
                                 </tr>
                               </tfoot>
                             </table>
                           </div>
                           <figcaption className="mt-3 font-body text-xs leading-relaxed text-muted-foreground/80">
-                            {es ? section.table.caption.es : section.table.caption.en}
+                            {pick(language, section.table.caption)}
                           </figcaption>
                         </figure>
                       )}
@@ -195,7 +196,7 @@ const ResourceGuide = () => {
                         >
                           <img
                             src={section.image.src}
-                            alt={es ? section.image.alt.es : section.image.alt.en}
+                            alt={pick(language, section.image.alt)}
                             loading="lazy"
                             className={
                               section.image.diagram
@@ -216,14 +217,14 @@ const ResourceGuide = () => {
                     className="inline-flex items-center gap-2 font-body text-sm font-bold text-muted-foreground transition-colors hover:text-primary"
                   >
                     <ArrowLeft className="h-4 w-4" />
-                    {es ? "Todas las guías" : "All guides"}
+                    {tr(language, "Todas las guías", "All guides")}
                   </LocaleLink>
                   {next && (
                     <LocaleLink
                       to={`/recursos/${next.slug}`}
                       className="inline-flex items-center gap-2 font-body text-sm font-bold text-primary transition-colors hover:text-primary-hover"
                     >
-                      {es ? next.title.es : next.title.en}
+                      {pick(language, next.title)}
                       <ArrowRight className="h-4 w-4" />
                     </LocaleLink>
                   )}
@@ -240,19 +241,17 @@ const ResourceGuide = () => {
           <div className="container-wide px-4">
             <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
               <h2 className="text-balance font-display text-3xl font-bold sm:text-4xl">
-                {es ? "¿Lo quieres aplicar a " : "Want to apply this to "}
-                <span className="italic text-primary">{es ? "tu caso" : "your case"}</span>?
+                {tr(language, "¿Lo quieres aplicar a ", "Want to apply this to ")}
+                <span className="italic text-primary">{tr(language, "tu caso", "your case")}</span>?
               </h2>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? `Has leído ${written.length} ${written.length === 1 ? "sección" : "secciones"} de teoría. La evaluación gratuita te dice qué significa todo esto para tu perfil concreto.`
-                  : `You have read ${written.length} ${written.length === 1 ? "section" : "sections"} of theory. The free evaluation tells you what all of it means for your specific profile.`}
+                {pick(language, { es: `Has leído ${written.length} ${written.length === 1 ? "sección" : "secciones"} de teoría. La evaluación gratuita te dice qué significa todo esto para tu perfil concreto.`, en: `You have read ${written.length} ${written.length === 1 ? "section" : "sections"} of theory. The free evaluation tells you what all of it means for your specific profile.` })}
               </p>
               <LocaleLink
                 to="/apply"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
-                {es ? "Evaluación gratuita" : "Free evaluation"}
+                {tr(language, "Evaluación gratuita", "Free evaluation")}
                 <ArrowRight className="h-4 w-4" />
               </LocaleLink>
             </div>

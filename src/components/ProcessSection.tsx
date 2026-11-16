@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 const NAVY = "hsl(var(--foreground))";
 const RED = "hsl(var(--primary))";
 
@@ -179,7 +180,7 @@ const ProcessSection = ({
   fieldVisibility?: FieldVisibility;
 }) => {
   const { t, language } = useLanguage();
-  const phaseWord = language === "es" ? "FASE" : "PHASE";
+  const phaseWord = tr(language, "FASE", "PHASE");
   const [activeStep, setActiveStep] = useState(0);
   const [isHeaderMoment, setIsHeaderMoment] = useState(false);
   const [isGoal, setIsGoal] = useState(false);
@@ -669,7 +670,7 @@ const ProcessSection = ({
                       block: "center",
                     })
                   }
-                  aria-label={`${language === "es" ? "Ir a fase" : "Go to phase"} ${i + 1}`}
+                  aria-label={`${tr(language, "Ir a fase", "Go to phase")} ${i + 1}`}
                   style={{
                     width: "5px",
                     height: activeStep === i ? "22px" : "5px",
@@ -770,7 +771,7 @@ const ProcessSection = ({
                             color: "rgba(18,33,58,0.6)",
                           }}
                         >
-                          {phaseWord} {s.phase} {language === "es" ? "DE" : "OF"} 6
+                          {phaseWord} {s.phase} {tr(language, "DE", "OF")} 6
                         </span>
                       </div>
 

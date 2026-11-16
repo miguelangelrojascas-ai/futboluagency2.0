@@ -16,6 +16,7 @@ import ScholarshipCasesSection from "@/components/usa/ScholarshipCasesSection";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
+import { pick, tr } from "@/lib/i18n";
 const USA = () => {
   const { t, language } = useLanguage();
   const es = language === "es";
@@ -42,38 +43,30 @@ const USA = () => {
     {
       icon: BookOpen,
       num: "01",
-      label: es ? "BACHILLER O GRADO SUPERIOR" : "HIGH SCHOOL OR VOCATIONAL DIPLOMA",
-      value: es ? "16 — 23 años" : "Ages 16 — 23",
-      desc: es
-        ? "Tener el título o estar en proceso de conseguirlo. Aplicable también para aquellos graduados que deseen cursar un Máster en EE.UU."
-        : "Hold the diploma or be working towards it. Graduates who want to do a Master's in the US can apply too.",
+      label: tr(language, "BACHILLER O GRADO SUPERIOR", "HIGH SCHOOL OR VOCATIONAL DIPLOMA"),
+      value: tr(language, "16 — 23 años", "Ages 16 — 23"),
+      desc: tr(language, "Tener el título o estar en proceso de conseguirlo. Aplicable también para aquellos graduados que deseen cursar un Máster en EE.UU.", "Hold the diploma or be working towards it. Graduates who want to do a Master's in the US can apply too."),
     },
     {
       icon: Trophy,
       num: "02",
-      label: es ? "NIVEL FUTBOLÍSTICO COMPETITIVO" : "COMPETITIVE SOCCER LEVEL",
-      value: es ? "Nivel de Élite" : "Elite level",
-      desc: es
-        ? "Jugar a un nivel competitivo (Liga Preferente, Nacional, División de Honor, Regional o equivalentes). Se requiere un currículum deportivo y videos de respaldo."
-        : "Play at a competitive level (regional, national or top youth leagues, or the equivalent in your country). A soccer résumé and supporting video are required.",
+      label: tr(language, "NIVEL FUTBOLÍSTICO COMPETITIVO", "COMPETITIVE SOCCER LEVEL"),
+      value: tr(language, "Nivel de Élite", "Elite level"),
+      desc: tr(language, "Jugar a un nivel competitivo (Liga Preferente, Nacional, División de Honor, Regional o equivalentes). Se requiere un currículum deportivo y videos de respaldo.", "Play at a competitive level (regional, national or top youth leagues, or the equivalent in your country). A soccer résumé and supporting video are required."),
     },
     {
       icon: Languages,
       num: "03",
-      label: es ? "NIVEL DE INGLÉS" : "ENGLISH LEVEL",
-      value: es ? "Intermedio — Alto" : "Intermediate — Upper",
-      desc: es
-        ? "No es necesario ser experto inicialmente, pero se requiere obtener un nivel intermedio-alto para superar las pruebas exigidas (TOEFL o DUOLINGO)."
-        : "You don't need to be fluent at first, but you will need an upper-intermediate level to pass the required tests (TOEFL or Duolingo).",
+      label: tr(language, "NIVEL DE INGLÉS", "ENGLISH LEVEL"),
+      value: tr(language, "Intermedio — Alto", "Intermediate — Upper"),
+      desc: tr(language, "No es necesario ser experto inicialmente, pero se requiere obtener un nivel intermedio-alto para superar las pruebas exigidas (TOEFL o DUOLINGO).", "You don't need to be fluent at first, but you will need an upper-intermediate level to pass the required tests (TOEFL or Duolingo)."),
     },
     {
       icon: Video,
       num: "04",
-      label: es ? "VIDEO MEJORES JUGADAS" : "HIGHLIGHT VIDEO",
-      value: es ? "4 — 6 Minutos" : "4 — 6 minutes",
-      desc: es
-        ? "Capacidad de preparar un video de calidad con tus mejores jugadas y disponer de partidos completos para el análisis de los coaches universitarios."
-        : "A good-quality video of your best plays, plus full matches that college coaches can review.",
+      label: tr(language, "VIDEO MEJORES JUGADAS", "HIGHLIGHT VIDEO"),
+      value: tr(language, "4 — 6 Minutos", "4 — 6 minutes"),
+      desc: tr(language, "Capacidad de preparar un video de calidad con tus mejores jugadas y disponer de partidos completos para el análisis de los coaches universitarios.", "A good-quality video of your best plays, plus full matches that college coaches can review."),
     },
   ];
 
@@ -185,33 +178,25 @@ const USA = () => {
             {/* Right: Text */}
             <div>
               <span className="label-bebas text-base" style={{ color: "hsl(var(--primary))", display: "block", marginBottom: "16px" }}>
-                {es ? "LA OPORTUNIDAD" : "THE OPPORTUNITY"}
+                {tr(language, "LA OPORTUNIDAD", "THE OPPORTUNITY")}
               </span>
               <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", color: "hsl(var(--foreground))", marginBottom: "12px" }}>
-                {es ? "Por qué estudiar y jugar en EE.UU." : "Why study and play in the US"}
+                {tr(language, "Por qué estudiar y jugar en EE.UU.", "Why study and play in the US")}
               </h2>
               <div style={{ width: "40px", height: "3px", background: "hsl(var(--primary))", marginBottom: "32px" }} />
               <p style={{ fontSize: "15px", color: "rgba(18,33,58,0.65)", lineHeight: 1.9, marginBottom: "20px" }}>
-                {es
-                  ? "Cada año, cientos de futbolistas internacionales eligen las universidades de Estados Unidos porque es el único lugar donde pueden compaginar deporte de alto nivel con estudios superiores de calidad."
-                  : "Every year, hundreds of international players choose US universities because it is the only place where they can combine high-level sport with a quality degree."}
+                {tr(language, "Cada año, cientos de futbolistas internacionales eligen las universidades de Estados Unidos porque es el único lugar donde pueden compaginar deporte de alto nivel con estudios superiores de calidad.", "Every year, hundreds of international players choose US universities because it is the only place where they can combine high-level sport with a quality degree.")}
               </p>
               <blockquote style={{ background: "rgba(18,33,58,0.04)", borderLeft: "3px solid #b00717", borderRadius: 0, padding: "16px 24px", margin: "24px 0" }}>
                 <p style={{ fontFamily: "var(--font-digits), var(--font-display), Georgia, serif", fontStyle: "italic", fontSize: "17px", color: "hsl(var(--foreground))", lineHeight: 1.7, margin: 0 }}>
-                  {es
-                    ? "Las becas deportivas permiten que tu talento en el campo financie tu educación — abriéndote las puertas a una experiencia única que no existe en ningún otro país."
-                    : "Athletic scholarships let your talent on the field pay for your education — opening the door to an experience that exists nowhere else."}
+                  {tr(language, "Las becas deportivas permiten que tu talento en el campo financie tu educación — abriéndote las puertas a una experiencia única que no existe en ningún otro país.", "Athletic scholarships let your talent on the field pay for your education — opening the door to an experience that exists nowhere else.")}
                 </p>
               </blockquote>
               <p style={{ fontSize: "15px", color: "rgba(18,33,58,0.65)", lineHeight: 1.9, marginBottom: "20px" }}>
-                {es
-                  ? "El porcentaje de futbolistas que alcanza el mundo profesional es muy bajo. Las lesiones, la alta competitividad y la falta de recursos hacen que muy pocos puedan vivir del fútbol. Pero esta no es la única razón para elegir EE.UU."
-                  : "Very few players make it as professionals. Injuries, fierce competition and a lack of resources mean only a handful can make a living from soccer. But that is not the only reason to choose the US."}
+                {tr(language, "El porcentaje de futbolistas que alcanza el mundo profesional es muy bajo. Las lesiones, la alta competitividad y la falta de recursos hacen que muy pocos puedan vivir del fútbol. Pero esta no es la única razón para elegir EE.UU.", "Very few players make it as professionals. Injuries, fierce competition and a lack of resources mean only a handful can make a living from soccer. But that is not the only reason to choose the US.")}
               </p>
               <p style={{ fontSize: "15px", color: "rgba(18,33,58,0.75)", lineHeight: 1.9, marginBottom: 0 }}>
-                {es
-                  ? "Tanto si tu objetivo es seguir desarrollándote deportivamente al más alto nivel, como si buscas garantizarte una carrera universitaria de prestigio — o simplemente aprovechar tu talento para reducir el coste de tus estudios — en EE.UU. los dos caminos van juntos."
-                  : "Whether your goal is to keep developing at the highest level, to earn a respected degree — or simply to use your talent to cut the cost of your studies — in the US both paths go together."}
+                {tr(language, "Tanto si tu objetivo es seguir desarrollándote deportivamente al más alto nivel, como si buscas garantizarte una carrera universitaria de prestigio — o simplemente aprovechar tu talento para reducir el coste de tus estudios — en EE.UU. los dos caminos van juntos.", "Whether your goal is to keep developing at the highest level, to earn a respected degree — or simply to use your talent to cut the cost of your studies — in the US both paths go together.")}
               </p>
             </div>
           </div>
@@ -227,21 +212,21 @@ const USA = () => {
             {/* Left Column */}
             <div>
               <span className="text-foreground text-sm font-bold tracking-[0.15em] uppercase mb-4 block">
-                {es ? "TIPOS DE BECAS" : "SCHOLARSHIP TYPES"}
+                {tr(language, "TIPOS DE BECAS", "SCHOLARSHIP TYPES")}
               </span>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                {es ? "¿Cuánto puedes conseguir realmente?" : "How much can you really get?"}
+                {tr(language, "¿Cuánto puedes conseguir realmente?", "How much can you really get?")}
               </h2>
               <p className="font-body text-muted-foreground text-base leading-relaxed mb-8">
-                {es ? "Determinamos el potencial de beca basándonos en un análisis técnico del perfil deportivo y académico." : "We estimate scholarship potential from a technical review of the athletic and academic profile."}
+                {tr(language, "Determinamos el potencial de beca basándonos en un análisis técnico del perfil deportivo y académico.", "We estimate scholarship potential from a technical review of the athletic and academic profile.")}
               </p>
               <blockquote className="font-body text-base sm:text-lg italic text-muted-foreground leading-relaxed mb-8 border-l-2 border-foreground/40 pl-5">
-                {es ? "La inversión depende de tu nivel futbolístico y del potencial competitivo que puedas demostrar. En FutbolUAgency LLC. lo dejamos claro desde el primer día: trabajamos para conseguirte la mejor beca posible dentro de tus posibilidades." : "The award depends on your soccer level and the competitive potential you can show. At FutbolUAgency LLC. we are clear from day one: we work to get you the best scholarship your profile allows."}
+                {tr(language, "La inversión depende de tu nivel futbolístico y del potencial competitivo que puedas demostrar. En FutbolUAgency LLC. lo dejamos claro desde el primer día: trabajamos para conseguirte la mejor beca posible dentro de tus posibilidades.", "The award depends on your soccer level and the competitive potential you can show. At FutbolUAgency LLC. we are clear from day one: we work to get you the best scholarship your profile allows.")}
               </blockquote>
               <div className="flex items-center gap-3">
                 <CheckCircle className="w-5 h-5 text-foreground flex-shrink-0" />
                 <span className="font-body text-sm text-muted-foreground tracking-[0.15em] uppercase">
-                  {es ? "Gestión basada en transparencia" : "Transparency first"}
+                  {tr(language, "Gestión basada en transparencia", "Transparency first")}
                 </span>
               </div>
             </div>
@@ -252,14 +237,14 @@ const USA = () => {
               <SpotlightCard className="rounded-xl border border-border bg-white p-8 ring-1 ring-foreground/20 shadow-[0_0_40px_rgba(18,33,58,0.1)]">
                 <TrendingUp className="absolute -top-2 -right-2 w-16 h-16 text-foreground/10 transition-colors duration-300 group-hover/spotlight:text-primary/20" />
                 <span className="font-body text-xs tracking-[0.15em] uppercase text-muted-foreground mb-4 block">
-                  {es ? "Beca promedio de nuestros atletas" : "Our athletes' average scholarship"}
+                  {tr(language, "Beca promedio de nuestros atletas", "Our athletes' average scholarship")}
                 </span>
                 <div className="flex items-baseline gap-1 mb-3">
                   <span className="font-display text-5xl sm:text-6xl font-bold text-foreground">$25,324</span>
-                  <span className="font-display text-xl italic text-foreground">{es ? "/año" : "/year"}</span>
+                  <span className="font-display text-xl italic text-foreground">{tr(language, "/año", "/year")}</span>
                 </div>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-sm">
-                  {es ? "Monto anual promedio gestionado y asegurado para nuestra red de atletas en el sistema universitario americano." : "Average yearly amount secured for our athletes across the US college system."}
+                  {tr(language, "Monto anual promedio gestionado y asegurado para nuestra red de atletas en el sistema universitario americano.", "Average yearly amount secured for our athletes across the US college system.")}
                 </p>
               </SpotlightCard>
 
@@ -267,13 +252,13 @@ const USA = () => {
               <div className="grid grid-cols-2 gap-4">
                 <SpotlightCard className="rounded-xl border border-border bg-white p-6" radius={200}>
                   <span className="font-body text-xs tracking-[0.15em] uppercase text-foreground font-bold mb-3 block">
-                    {es ? "Rango Estándar" : "Standard range"}
+                    {tr(language, "Rango Estándar", "Standard range")}
                   </span>
                   <span className="font-display text-2xl sm:text-3xl font-bold text-foreground block mb-2">
                     70% — 90%
                   </span>
                   <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    {es ? "Cobertura promedio lograda para el 85% de nuestros representados." : "Average coverage achieved for 85% of our athletes."}
+                    {tr(language, "Cobertura promedio lograda para el 85% de nuestros representados.", "Average coverage achieved for 85% of our athletes.")}
                   </p>
                 </SpotlightCard>
                 <SpotlightCard
@@ -282,13 +267,13 @@ const USA = () => {
                   radius={200}
                 >
                   <span className="font-body text-xs tracking-[0.15em] uppercase text-foreground font-bold mb-3 block">
-                    {es ? "Perfil Élite" : "Elite profile"}
+                    {tr(language, "Perfil Élite", "Elite profile")}
                   </span>
                   <span className="font-display text-2xl sm:text-3xl font-bold text-foreground block mb-2">
-                    {es ? "Hasta 100%" : "Up to 100%"}
+                    {tr(language, "Hasta 100%", "Up to 100%")}
                   </span>
                   <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    {es ? "Reservado para atletas de Selección Nacional o perfiles de División 1." : "For national-team players or Division 1 profiles."}
+                    {tr(language, "Reservado para atletas de Selección Nacional o perfiles de División 1.", "For national-team players or Division 1 profiles.")}
                   </p>
                 </SpotlightCard>
               </div>
@@ -301,17 +286,17 @@ const USA = () => {
             <div className="flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-body text-[15px] leading-relaxed text-muted-foreground">
                 <span className="font-semibold text-foreground">
-                  {es ? "¿Quieres saber cuánta beca podrías obtener?" : "Want to know how much you could get?"}
+                  {tr(language, "¿Quieres saber cuánta beca podrías obtener?", "Want to know how much you could get?")}
                 </span>{" "}
-                {es ? "Mándanos tu vídeo de highlights y te contactamos en menos de 24 horas." : "Send us your highlight video and we'll get back to you within 24 hours."}
+                {tr(language, "Mándanos tu vídeo de highlights y te contactamos en menos de 24 horas.", "Send us your highlight video and we'll get back to you within 24 hours.")}
               </p>
               <a
-                href={`https://wa.me/34603331990?text=${encodeURIComponent(es ? "Hola, quiero saber cuánta beca podría obtener. Les envío mi video de highlights." : "Hi, I would like to know how much scholarship I could get. Here is my highlight video.")}`}
+                href={`https://wa.me/34603331990?text=${encodeURIComponent(tr(language, "Hola, quiero saber cuánta beca podría obtener. Les envío mi video de highlights.", "Hi, I would like to know how much scholarship I could get. Here is my highlight video."))}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 font-body text-sm font-bold text-primary no-underline transition-colors hover:text-primary-hover"
               >
-                {es ? "Enviar mi vídeo" : "Send my video"}
+                {tr(language, "Enviar mi vídeo", "Send my video")}
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
@@ -339,10 +324,10 @@ const USA = () => {
             <div className="container-wide px-4 relative z-10">
             <div className="max-w-3xl mb-12">
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-                {es ? "Perfil de Admisión" : "Admission profile"}
+                {tr(language, "Perfil de Admisión", "Admission profile")}
               </h2>
               <p className="font-body text-muted-foreground text-base leading-relaxed">
-                {es ? "Evaluamos cuatro áreas técnicas críticas para determinar la elegibilidad y el potencial de beca de cada prospecto." : "We review four key areas to assess each prospect's eligibility and scholarship potential."}
+                {tr(language, "Evaluamos cuatro áreas técnicas críticas para determinar la elegibilidad y el potencial de beca de cada prospecto.", "We review four key areas to assess each prospect's eligibility and scholarship potential.")}
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
@@ -383,15 +368,14 @@ const USA = () => {
           <div className="container-wide px-4 max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <span className="inline-block text-primary text-xs font-bold tracking-[0.15em] uppercase mb-3">
-                {es ? "Preguntas Frecuentes" : "FAQ"}
+                {tr(language, "Preguntas Frecuentes", "FAQ")}
               </span>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground">
-                {es ? "Todo lo que necesitas saber" : "Everything you need to know"}
+                {tr(language, "Todo lo que necesitas saber", "Everything you need to know")}
               </h2>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              {(es
-                ? [
+              {(pick(language, { es: [
                     {
                       q: "¿Necesito hablar inglés perfectamente?",
                       a: "No. Un nivel básico-intermedio es suficiente para empezar el proceso. Las universidades tienen programas de apoyo lingüístico.",
@@ -416,8 +400,7 @@ const USA = () => {
                       q: "¿Puedo estudiar cualquier carrera?",
                       a: "Sí. Las universidades americanas tienen cientos de carreras disponibles. Puedes elegir la que más te interese mientras compites en el equipo.",
                     },
-                  ]
-                : [
+                  ], en: [
                     {
                       q: "Do I need to speak perfect English?",
                       a: "No. A basic-to-intermediate level is enough to start the process. Universities run language support programs.",
@@ -442,7 +425,7 @@ const USA = () => {
                       q: "Can I study any degree?",
                       a: "Yes. US universities offer hundreds of majors. You can choose the one that interests you most while you compete for the team.",
                     },
-                  ]
+                  ] })
               ).map((item, i) => (
                 <AccordionItem
                   key={i}

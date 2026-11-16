@@ -6,8 +6,12 @@ import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LOCALES, swapLocaleInPath, type Locale } from "@/lib/routes";
 
+import { tr } from "@/lib/i18n";
+const NAME: Record<Locale, string> = { es: "Español", en: "English", it: "Italiano", de: "Deutsch" };
+const LABEL: Record<Locale, string> = { es: "Idioma", en: "Language", it: "Lingua", de: "Sprache" };
+
 /**
- * ES / EN toggle for the navbar.
+ * ES / EN / IT / DE switcher for the navbar.
  *
  * Each language has its own address, so both options are links: the target is
  * the current path with its locale segment and slug swapped. The current
@@ -20,7 +24,7 @@ const LanguageSwitcher = ({ className = "", dark = false }: { className?: string
   return (
     <div
       className={`flex items-center gap-1.5 font-body text-xs font-bold uppercase tracking-[0.08em] ${className}`}
-      aria-label={language === "es" ? "Idioma" : "Language"}
+      aria-label={tr(language, "Idioma", "Language")}
       role="group"
     >
       <Globe className={`h-4 w-4 ${dark ? "text-white/50" : "text-muted-foreground"}`} aria-hidden />
@@ -36,7 +40,7 @@ const LanguageSwitcher = ({ className = "", dark = false }: { className?: string
               href={swapLocaleInPath(pathname, locale as Locale)}
               hrefLang={locale}
               className={`transition-colors ${dark ? "text-white/50 hover:text-white" : "text-muted-foreground hover:text-foreground"}`}
-              aria-label={locale === "en" ? "English" : "Español"}
+              aria-label={NAME[locale as Locale]}
             >
               {locale}
             </Link>

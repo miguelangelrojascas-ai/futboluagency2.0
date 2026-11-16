@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import SuccessCaseCard, { type SuccessCase } from "@/components/SuccessCaseCard";
 import { homeTopRow, homeBottomRow } from "@/data/homeCarousel";
 
+import { tr } from "@/lib/i18n";
 const GalleryRow = ({ cases, reverse = false }: { cases: SuccessCase[]; reverse?: boolean }) => (
   <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
     <ul
@@ -35,17 +36,15 @@ const HomeRoster = () => {
               id="roster-title"
               className="font-druk uppercase leading-[0.88] text-ink text-[clamp(3.25rem,13vw,8rem)]"
             >
-              {es ? "Del club a la" : "From the club to"}
-              <span className="block pr-[0.08em] italic text-primary">{es ? "universidad" : "university"}</span>
+              {tr(language, "Del club a la", "From the club to")}
+              <span className="block pr-[0.08em] italic text-primary">{tr(language, "universidad", "university")}</span>
             </h2>
             <p className="mt-4 font-bebas text-[15px] tracking-[0.26em] text-ink/50 sm:text-base">
-              {es ? "Más de 250 casos de éxito" : "Over 250 success stories"}
+              {tr(language, "Más de 250 casos de éxito", "Over 250 success stories")}
             </p>
           </div>
           <p className="max-w-sm font-body text-base leading-relaxed text-muted-foreground lg:pb-3">
-            {es
-              ? "Cada gráfico es un jugador que confió en nosotros y hoy estudia y compite con beca en Estados Unidos."
-              : "Every graphic is a player who trusted us and now studies and competes on a scholarship in the United States."}
+            {tr(language, "Cada gráfico es un jugador que confió en nosotros y hoy estudia y compite con beca en Estados Unidos.", "Every graphic is a player who trusted us and now studies and competes on a scholarship in the United States.")}
           </p>
         </div>
 

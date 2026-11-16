@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { Player } from "@/data/players";
 
+import { tr } from "@/lib/i18n";
 /** One committed footballer. The graphic already carries name, school and division. */
 const PlayerCard = ({ player }: { player: Player }) => {
   const { language } = useLanguage();
@@ -25,7 +26,7 @@ const PlayerCard = ({ player }: { player: Player }) => {
       </div>
       {player.story && (
         <p className="flex items-center gap-1 border-t border-border px-4 py-3 font-body text-[13px] font-bold text-primary">
-          {es ? "Conoce su historia" : "Read his story"}
+          {tr(language, "Conoce su historia", "Read his story")}
           <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/card:translate-x-0.5" />
         </p>
       )}
@@ -38,7 +39,7 @@ const PlayerCard = ({ player }: { player: Player }) => {
     <LocaleLink
       to={`/players/${player.story}`}
       className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-      aria-label={es ? `Conoce la historia de ${player.name}` : `Read ${player.name}'s story`}
+      aria-label={tr(language, "Conoce la historia de {0}", "Read {0}'s story", [player.name])}
     >
       {card}
     </LocaleLink>

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Globe } from "@/components/ui/globe";
 import ApplyForm from "@/components/ApplyForm";
 
+import { tr } from "@/lib/i18n";
 const Apply = () => {
   const { t, language } = useLanguage();
   const es = language === "es";
@@ -15,24 +16,18 @@ const Apply = () => {
   const steps = [
     {
       Icon: ClipboardList,
-      title: es ? "Rellenas el formulario" : "You fill in the form",
-      desc: es
-        ? "Tu perfil deportivo, tu vídeo y cuándo quieres empezar. Cinco minutos."
-        : "Your athletic profile, your video and when you want to start. Five minutes.",
+      title: tr(language, "Rellenas el formulario", "You fill in the form"),
+      desc: tr(language, "Tu perfil deportivo, tu vídeo y cuándo quieres empezar. Cinco minutos.", "Your athletic profile, your video and when you want to start. Five minutes."),
     },
     {
       Icon: MessageSquare,
-      title: es ? "Revisamos tu perfil" : "We review your profile",
-      desc: es
-        ? "El equipo de admisiones lo valora uno a uno y ve qué divisiones encajan contigo."
-        : "The admissions team reviews it one by one and sees which divisions fit you.",
+      title: tr(language, "Revisamos tu perfil", "We review your profile"),
+      desc: tr(language, "El equipo de admisiones lo valora uno a uno y ve qué divisiones encajan contigo.", "The admissions team reviews it one by one and sees which divisions fit you."),
     },
     {
       Icon: UserCheck,
-      title: es ? "Agendamos la llamada" : "We book the call",
-      desc: es
-        ? "Si vemos opciones reales, te enviamos el enlace para que elijas día y hora."
-        : "If we see real options, we send you the link to pick a day and time.",
+      title: tr(language, "Agendamos la llamada", "We book the call"),
+      desc: tr(language, "Si vemos opciones reales, te enviamos el enlace para que elijas día y hora.", "If we see real options, we send you the link to pick a day and time."),
     },
   ];
 
@@ -45,7 +40,7 @@ const Apply = () => {
             <div className="relative grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
               <div className="relative z-10">
                 <span className="mb-4 inline-block label-bebas text-base text-primary">
-                  {es ? "Evaluación gratuita" : "Free evaluation"}
+                  {tr(language, "Evaluación gratuita", "Free evaluation")}
                 </span>
                 <h1 className="mb-5 font-display text-4xl font-bold leading-[1.05] sm:text-5xl">
                   {t("apply.title")}{" "}
@@ -59,12 +54,12 @@ const Apply = () => {
                   href="#formulario"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                 >
-                  {es ? "Rellenar el formulario" : "Fill in the form"}
+                  {tr(language, "Rellenar el formulario", "Fill in the form")}
                   <ArrowRight className="h-4 w-4" />
                 </a>
 
                 <p className="mt-5 font-body text-sm text-muted-foreground">
-                  {es ? "¿Prefieres escribirnos? " : "Prefer to write? "}
+                  {tr(language, "¿Prefieres escribirnos? ", "Prefer to write? ")}
                   <a
                     href="mailto:futboluagency@gmail.com"
                     className="font-semibold text-primary underline-offset-4 hover:underline"
@@ -98,12 +93,10 @@ const Apply = () => {
             {/* The form itself. Submissions go straight into the CRM. */}
             <div id="formulario" className="scroll-mt-28">
               <h2 className="mb-2 mt-16 font-display text-2xl font-bold text-foreground sm:text-3xl">
-                {es ? "Cuéntanos tu caso" : "Tell us about your case"}
+                {tr(language, "Cuéntanos tu caso", "Tell us about your case")}
               </h2>
               <p className="mb-8 max-w-xl font-body text-base leading-relaxed text-muted-foreground">
-                {es
-                  ? "Ten a mano el enlace a tu vídeo de highlights: es lo que un entrenador mira primero."
-                  : "Have your highlight video link ready: it is the first thing a coach looks at."}
+                {tr(language, "Ten a mano el enlace a tu vídeo de highlights: es lo que un entrenador mira primero.", "Have your highlight video link ready: it is the first thing a coach looks at.")}
               </p>
               <ApplyForm />
             </div>

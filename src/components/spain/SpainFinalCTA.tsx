@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 const SpainFinalCTA = () => {
   const { language } = useLanguage();
   const isEs = language === "es";
@@ -13,9 +14,7 @@ const SpainFinalCTA = () => {
       <div className="container-wide px-4">
         <div className="max-w-[700px] mx-auto text-center">
           <p className="font-body text-muted-foreground text-base leading-relaxed mb-6">
-            {isEs
-              ? "Plazas limitadas por temporada. El proceso comienza con una evaluación gratuita."
-              : "Limited spots per season. The process starts with a free evaluation."}
+            {tr(language, "Plazas limitadas por temporada. El proceso comienza con una evaluación gratuita.", "Limited spots per season. The process starts with a free evaluation.")}
           </p>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"
@@ -23,7 +22,7 @@ const SpainFinalCTA = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-body font-bold px-10 py-4 rounded-full transition-colors text-base sm:text-lg"
           >
-            {isEs ? "Comienza Tu Camino" : "Start Your Journey"} <ArrowRight className="w-5 h-5" />
+            {tr(language, "Comienza Tu Camino", "Start Your Journey")} <ArrowRight className="w-5 h-5" />
           </a>
         </div>
       </div>

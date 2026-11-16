@@ -5,6 +5,7 @@ import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "re
 import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 type University = { name: string; division: string };
@@ -381,7 +382,7 @@ const divisionColor = (div: string) => {
 const UniversityMap = () => {
   const { language } = useLanguage();
   const es = language === "es";
-  const unis = es ? "universidades" : "universities";
+  const unis = tr(language, "universidades", "universities");
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null);
   const [selected, setSelected] = useState<{ abbr: string; name: string } | null>(null);
   const [popover, setPopover] = useState<{ x: number; y: number; abbr: string; name: string } | null>(null);
@@ -460,15 +461,13 @@ const UniversityMap = () => {
       <div className="container-wide px-4 relative">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block mb-4 text-primary font-body text-xs tracking-[0.15em] uppercase font-bold">
-            {es ? "350+ universidades con colocaciones" : "350+ universities with placements"}
+            {tr(language, "350+ universidades con colocaciones", "350+ universities with placements")}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {es ? "Nuestra red en EE.UU." : "Our US network"}
+            {tr(language, "Nuestra red en EE.UU.", "Our US network")}
           </h2>
           <p className="font-body text-muted-foreground text-base leading-relaxed">
-            {es
-              ? "Una red consolidada de contactos directos con coaches a lo largo del país. Haz clic en un estado para ver las universidades."
-              : "An established network of direct contacts with coaches across the country. Click a state to see its universities."}
+            {tr(language, "Una red consolidada de contactos directos con coaches a lo largo del país. Haz clic en un estado para ver las universidades.", "An established network of direct contacts with coaches across the country. Click a state to see its universities.")}
           </p>
         </div>
 
@@ -607,7 +606,7 @@ const UniversityMap = () => {
               <button
                 onClick={() => setPopover(null)}
                 className="absolute top-2 right-2 p-1 rounded hover:bg-muted"
-                aria-label={es ? "Cerrar" : "Close"}
+                aria-label={tr(language, "Cerrar", "Close")}
               >
                 <X className="w-3.5 h-3.5 text-foreground" />
               </button>
@@ -621,7 +620,7 @@ const UniversityMap = () => {
                 onClick={() => handleViewState(popover.abbr, popover.name)}
                 className="w-full bg-primary hover:bg-primary-hover text-white font-body text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-colors"
               >
-                {es ? "Ver estado" : "View state"}
+                {tr(language, "Ver estado", "View state")}
               </button>
             </div>
           )}
@@ -648,7 +647,7 @@ const UniversityMap = () => {
           <aside
             className="absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300"
             role="dialog"
-            aria-label={`${es ? "Universidades en" : "Universities in"} ${selected.name}`}
+            aria-label={`${tr(language, "Universidades en", "Universities in")} ${selected.name}`}
           >
             <div className="flex items-start justify-between p-6 border-b border-border">
               <div>
@@ -662,7 +661,7 @@ const UniversityMap = () => {
               <button
                 onClick={() => { setSelected(null); resetZoom(); }}
                 className="p-2 rounded-full hover:bg-muted transition-colors"
-                aria-label={es ? "Cerrar" : "Close"}
+                aria-label={tr(language, "Cerrar", "Close")}
               >
                 <X className="w-5 h-5 text-foreground" />
               </button>

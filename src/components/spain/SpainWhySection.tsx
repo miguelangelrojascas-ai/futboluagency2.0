@@ -9,6 +9,7 @@ import spainWarmupAsset from "@/assets/spain-warmup.jpg";
 import spainStadiumAsset from "@/assets/spain-stadium.jpg";
 import spainAcademyAsset from "@/assets/spain-academy.jpg";
 
+import { tr } from "@/lib/i18n";
 /* Next resolves an image import to an object; the markup wants the URL. */
 const spainTraining = spainTrainingAsset.src;
 const spainCompetition = spainCompetitionAsset.src;
@@ -34,52 +35,42 @@ const SpainWhySection = () => {
   const features = [
     {
       Icon: Dumbbell,
-      name: isEs ? "Nivel competitivo real" : "Real competitive level",
-      description: isEs
-        ? "Mismo vestuario, misma liga y mismo nivel que los profesionales del club."
-        : "Same locker room, same league and same level as the club's professionals.",
+      name: tr(language, "Nivel competitivo real", "Real competitive level"),
+      description: tr(language, "Mismo vestuario, misma liga y mismo nivel que los profesionales del club.", "Same locker room, same league and same level as the club's professionals."),
       image: spainTraining,
-      alt: isEs ? "Entrenamiento en España" : "Training in Spain",
+      alt: tr(language, "Entrenamiento en España", "Training in Spain"),
       className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
     },
     {
       Icon: Eye,
-      name: isEs ? "Visibilidad ante entrenadores" : "Visibility to coaches",
-      description: isEs
-        ? "Partidos oficiales de temporada con scouts mirando cada jornada."
-        : "Official league matches with scouts watching every week.",
+      name: tr(language, "Visibilidad ante entrenadores", "Visibility to coaches"),
+      description: tr(language, "Partidos oficiales de temporada con scouts mirando cada jornada.", "Official league matches with scouts watching every week."),
       image: spainCompetition,
-      alt: isEs ? "Competición oficial" : "Official competition",
+      alt: tr(language, "Competición oficial", "Official competition"),
       className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-4",
     },
     {
       Icon: Flame,
-      name: isEs ? "Experiencia intensiva" : "An intensive experience",
-      description: isEs
-        ? "Una temporada completa, no un campus de verano."
-        : "A full season, not a summer camp.",
+      name: tr(language, "Experiencia intensiva", "An intensive experience"),
+      description: tr(language, "Una temporada completa, no un campus de verano.", "A full season, not a summer camp."),
       image: spainWarmup,
-      alt: isEs ? "Calentamiento previo al partido" : "Pre-match warm-up",
+      alt: tr(language, "Calentamiento previo al partido", "Pre-match warm-up"),
       className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
     },
     {
       Icon: Building2,
-      name: isEs ? "Entorno profesional" : "A professional environment",
-      description: isEs
-        ? "Dentro de un club real, a una hora de Madrid."
-        : "Inside a real club, an hour from Madrid.",
+      name: tr(language, "Entorno profesional", "A professional environment"),
+      description: tr(language, "Dentro de un club real, a una hora de Madrid.", "Inside a real club, an hour from Madrid."),
       image: spainStadium,
-      alt: isEs ? "Estadio del club" : "Club stadium",
+      alt: tr(language, "Estadio del club", "Club stadium"),
       className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
     },
     {
       Icon: ShieldCheck,
-      name: isEs ? "Academias de élite" : "Elite academies",
-      description: isEs
-        ? "Estructura, cuerpo técnico y metodología de cantera española."
-        : "The structure, coaching staff and methodology of a Spanish academy.",
+      name: tr(language, "Academias de élite", "Elite academies"),
+      description: tr(language, "Estructura, cuerpo técnico y metodología de cantera española.", "The structure, coaching staff and methodology of a Spanish academy."),
       image: spainAcademy,
-      alt: isEs ? "Academia de fútbol" : "Football academy",
+      alt: tr(language, "Academia de fútbol", "Football academy"),
       className: "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4",
     },
   ];
@@ -89,12 +80,10 @@ const SpainWhySection = () => {
       <div className="container-wide px-4">
         <div className="mb-10 max-w-xl">
           <h2 className="font-display text-2xl font-bold sm:text-3xl md:text-4xl">
-            {isEs ? "¿Por qué España?" : "Why Spain?"}
+            {tr(language, "¿Por qué España?", "Why Spain?")}
           </h2>
           <p className="mt-3 font-body text-base leading-relaxed text-muted-foreground">
-            {isEs
-              ? "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto."
-              : "One of the most demanding environments in the world to compete, improve, and get noticed."}
+            {tr(language, "Uno de los entornos más exigentes del mundo para competir, mejorar y ser visto.", "One of the most demanding environments in the world to compete, improve, and get noticed.")}
           </p>
         </div>
 

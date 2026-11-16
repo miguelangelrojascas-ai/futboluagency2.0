@@ -3,6 +3,7 @@
 import { Calendar, Globe, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 const SpainInfoBar = () => {
   const { language } = useLanguage();
   const isEs = language === "es";
@@ -10,18 +11,18 @@ const SpainInfoBar = () => {
   const items = [
     {
       icon: Calendar,
-      label: isEs ? "Duración" : "Duration",
-      value: isEs ? "Temporada completa" : "Full season",
+      label: tr(language, "Duración", "Duration"),
+      value: tr(language, "Temporada completa", "Full season"),
     },
     {
       icon: Globe,
-      label: isEs ? "Perfil" : "Profile",
-      value: isEs ? "Futbolistas internacionales" : "International footballers",
+      label: tr(language, "Perfil", "Profile"),
+      value: tr(language, "Futbolistas internacionales", "International footballers"),
     },
     {
       icon: MapPin,
-      label: isEs ? "Ubicación" : "Location",
-      value: isEs ? "Talavera de la Reina, a 1h de Madrid" : "Talavera de la Reina, 1h from Madrid",
+      label: tr(language, "Ubicación", "Location"),
+      value: tr(language, "Talavera de la Reina, a 1h de Madrid", "Talavera de la Reina, 1h from Madrid"),
     },
   ];
 

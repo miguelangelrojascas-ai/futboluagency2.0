@@ -4,7 +4,7 @@ import Image, { type StaticImageData } from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { pick } from "@/lib/i18n";
+import { pick, type Copy } from "@/lib/i18n";
 import usaPhoto from "@/assets/usa-exp-soccer.jpg";
 import spainPhoto from "@/assets/spain-clubs/talavera.jpg";
 
@@ -12,11 +12,11 @@ type Path = {
   to: string;
   photo: StaticImageData;
   position: string;
-  title: Record<string, string>;
-  label: Record<string, string>;
-  body: Record<string, string>;
-  points: Record<string, string[]>;
-  link: Record<string, string>;
+  title: Copy;
+  label: Copy;
+  body: Copy;
+  points: Copy<string[]>;
+  link: Copy;
 };
 
 const PATHS: Path[] = [
@@ -117,15 +117,15 @@ const HomePaths = () => {
                   }}
                 />
 
-                <p className="label-bebas text-base text-red-bright">{p.label[language] ?? p.label.en}</p>
+                <p className="label-bebas text-base text-red-bright">{pick(language, p.label)}</p>
                 <h3 className="mt-2 font-druk text-[clamp(2.75rem,7vw,4.75rem)] uppercase leading-[0.92] text-white">
-                  {p.title[language] ?? p.title.en}
+                  {pick(language, p.title)}
                 </h3>
                 <p className="mt-4 max-w-[46ch] font-body text-base leading-relaxed text-white/75">
-                  {p.body[language] ?? p.body.en}
+                  {pick(language, p.body)}
                 </p>
                 <ul className="mt-6 space-y-2 border-t border-white/15 pt-5 font-body text-[15px] text-white/85">
-                  {(p.points[language] ?? p.points.en).map((pt) => (
+                  {pick(language, p.points).map((pt) => (
                     <li key={pt} className="flex gap-3">
                       <span aria-hidden="true" className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-red-bright" />
                       {pt}
@@ -134,7 +134,7 @@ const HomePaths = () => {
                 </ul>
                 <span className="mt-8 inline-flex items-center gap-2 font-body text-sm font-semibold text-white">
                   <span className="border-b border-white/40 pb-0.5 transition-colors group-hover:border-red-bright">
-                    {p.link[language] ?? p.link.en}
+                    {pick(language, p.link)}
                   </span>
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>

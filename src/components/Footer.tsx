@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import logoAsset from "@/assets/logo-fua.png";
 
+import { tr } from "@/lib/i18n";
 /* Next resolves an image import to an object; the components want the URL. */
 const logo = logoAsset.src;
 
@@ -67,9 +68,7 @@ const Footer = () => {
               FutbolUAgency LLC.
             </h3>
             <p className="font-body text-sm text-white/70 max-w-xs mx-auto md:mx-0">
-              {es
-                ? "Ayudamos a futbolistas internacionales a conseguir becas deportivas en universidades de Estados Unidos."
-                : "We help international soccer players earn athletic scholarships at universities in the United States."}
+              {tr(language, "Ayudamos a futbolistas internacionales a conseguir becas deportivas en universidades de Estados Unidos.", "We help international soccer players earn athletic scholarships at universities in the United States.")}
             </p>
           </div>
 
@@ -91,7 +90,7 @@ const Footer = () => {
                 className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +34 603 331 990 <span className="text-white/40 text-xs">{es ? "España" : "Spain"}</span>
+                +34 603 331 990 <span className="text-white/40 text-xs">{tr(language, "España", "Spain")}</span>
               </a>
               <a
                 href="tel:+573337064037"
@@ -110,7 +109,7 @@ const Footer = () => {
           {/* Social Column */}
           <div className="text-center md:text-left">
             <h4 className="font-display text-base font-semibold text-white mb-4" style={{ color: "hsl(var(--background))" }}>
-              {es ? "Síguenos" : "Follow us"}
+              {tr(language, "Síguenos", "Follow us")}
             </h4>
             <div className="flex items-center justify-center md:justify-start gap-4">
               {socialLinks.map((social) => (

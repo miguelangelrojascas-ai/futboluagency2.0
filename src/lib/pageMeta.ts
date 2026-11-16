@@ -8,6 +8,7 @@ import {
   type Locale,
   type RouteKey,
 } from "./routes";
+import { pick } from "./i18n";
 
 const SITE = "https://futboluagency.com";
 
@@ -19,7 +20,7 @@ type Copy = { title: string; description: string; ogTitle?: string; ogDescriptio
  * Lives here rather than in each page component because the pages are client
  * components: metadata is emitted by the server route files, which read this.
  */
-export const PAGE_META: Record<RouteKey, Record<Locale, Copy>> = {
+export const PAGE_META: Record<RouteKey, Record<"es" | "en", Copy> & Partial<Record<Locale, Copy>>> = {
   home: {
     es: {
       title: "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos",
@@ -173,7 +174,8 @@ export const OG_IMAGE = {
   alt: "FutbolUAgency",
 };
 
-const ogLocale = (locale: Locale) => (locale === "es" ? "es_ES" : "en_US");
+const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_US", it: "it_IT", de: "de_DE" };
+const ogLocale = (locale: Locale) => OG_LOCALE[locale];
 
 /**
  * Open Graph and Twitter tags for one page.
@@ -216,13 +218,18 @@ export function socialFor({
   };
 }
 
+/** A page's title and description; Italian and German come from the dictionaries. */
+export function metaCopy(key: RouteKey, locale: Locale): Copy {
+  return pick(locale, PAGE_META[key]);
+}
+
 /** Metadata for a fixed page, in the language being built. */
 export function metadataFor(locale: Locale, key: RouteKey): Metadata {
   /* Paths with a dot in the first segment (/favicon.ico, /wp-login.php) skip
      the middleware and arrive here as a "locale". Without this guard the
      lookup below throws and the request ends in a 500. */
   if (!isLocale(locale)) return {};
-  const copy = PAGE_META[key][locale];
+  const copy = metaCopy(key, locale);
 
   return {
     title: copy.title,

@@ -8,6 +8,7 @@ import anderGfiAsset from "@/assets/ander-gfi.png";
 import anderCareerAsset from "@/assets/ander-career.jpg";
 import anderCommittedAsset from "@/assets/ander-committed.jpg";
 
+import { tr } from "@/lib/i18n";
 /* Next resolves an image import to an object; the markup wants the URL. */
 const anderMeet = anderMeetAsset.src;
 const anderGfi = anderGfiAsset.src;
@@ -23,26 +24,20 @@ const AnderStoryCard = () => {
   const timeline = [
     {
       year: "2024",
-      title: isEs ? "Identificado en GFI Academy" : "Identified at GFI Academy",
-      desc: isEs
-        ? "Nuestros scouts reconocieron su talento y potencial para competir al más alto nivel."
-        : "Our scouts recognized his talent and potential to compete at the highest level.",
+      title: tr(language, "Identificado en GFI Academy", "Identified at GFI Academy"),
+      desc: tr(language, "Nuestros scouts reconocieron su talento y potencial para competir al más alto nivel.", "Our scouts recognized his talent and potential to compete at the highest level."),
       image: anderGfi,
     },
     {
       year: "2025",
-      title: isEs ? "Debut en CF Fuenlabrada" : "CF Fuenlabrada debut",
-      desc: isEs
-        ? "Se unió al programa Boarding School y debutó con el primer equipo profesional."
-        : "Joined the Boarding School program and debuted with the professional first team.",
+      title: tr(language, "Debut en CF Fuenlabrada", "CF Fuenlabrada debut"),
+      desc: tr(language, "Se unió al programa Boarding School y debutó con el primer equipo profesional.", "Joined the Boarding School program and debuted with the professional first team."),
       image: anderCareer,
     },
     {
       year: "2026",
-      title: isEs ? "Beca NCAA D1 — St. John's" : "NCAA D1 — St. John's",
-      desc: isEs
-        ? "Consiguió una beca completa en St. John's University (NCAA D1)."
-        : "Earned a full scholarship to St. John's University (NCAA D1).",
+      title: tr(language, "Beca NCAA D1 — St. John's", "NCAA D1 — St. John's"),
+      desc: tr(language, "Consiguió una beca completa en St. John's University (NCAA D1).", "Earned a full scholarship to St. John's University (NCAA D1)."),
       image: anderCommitted,
     },
   ];
@@ -65,7 +60,7 @@ const AnderStoryCard = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-center p-8 sm:p-10 md:p-14 max-w-2xl">
               <span className="font-body font-medium text-base sm:text-lg md:text-xl text-white/90 mb-3 leading-snug" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
-                {isEs ? "De México a una beca NCAA D1" : "From Mexico to an NCAA D1 scholarship"}
+                {tr(language, "De México a una beca NCAA D1", "From Mexico to an NCAA D1 scholarship")}
               </span>
               <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
                 Ander González
@@ -74,7 +69,7 @@ const AnderStoryCard = () => {
                 St. John's University — NCAA Division 1
               </p>
               <span className="inline-flex items-center gap-2 font-body text-base sm:text-lg font-medium text-white/80 group-hover:text-white transition-colors">
-                {isEs ? "Ver su historia" : "See his story"} <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                {tr(language, "Ver su historia", "See his story")} <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </span>
             </div>
           </div>
@@ -98,16 +93,14 @@ const AnderStoryCard = () => {
             {/* Header */}
             <div className="text-center mb-12 sm:mb-16">
               <span className="text-primary font-body text-xs sm:text-sm tracking-[0.15em] uppercase mb-3 sm:mb-4 block">
-                {isEs ? "⭐ Historia de Éxito" : "⭐ Success Story"}
+                {tr(language, "⭐ Historia de Éxito", "⭐ Success Story")}
               </span>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                {isEs ? "El Camino de " : "The Journey of "}
+                {tr(language, "El Camino de ", "The Journey of ")}
                 <span className="text-primary italic">Ander González</span>
               </h2>
               <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-                {isEs
-                  ? "De México a España, y de España a una beca NCAA Division 1 en St. John's University."
-                  : "From Mexico to Spain, and from Spain to an NCAA Division 1 scholarship at St. John's University."}
+                {tr(language, "De México a España, y de España a una beca NCAA Division 1 en St. John's University.", "From Mexico to Spain, and from Spain to an NCAA Division 1 scholarship at St. John's University.")}
               </p>
             </div>
 
@@ -115,7 +108,7 @@ const AnderStoryCard = () => {
             {/* Video */}
             <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
               <h3 className="font-display text-lg sm:text-xl font-bold text-foreground text-center mb-6">
-                {isEs ? "Mira su historia" : "Watch his story"}
+                {tr(language, "Mira su historia", "Watch his story")}
               </h3>
               <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
                 <video
@@ -178,9 +171,7 @@ const AnderStoryCard = () => {
             {/* Quote */}
             <div className="max-w-2xl mx-auto mt-12 sm:mt-16 text-center">
               <blockquote className="font-display text-xl sm:text-2xl italic text-foreground/80">
-                "{isEs
-                  ? "El trabajo duro y el entorno adecuado pueden transformar tu carrera."
-                  : "Hard work and the right environment can transform your career."}"
+                "{tr(language, "El trabajo duro y el entorno adecuado pueden transformar tu carrera.", "Hard work and the right environment can transform your career.")}"
               </blockquote>
               <p className="font-body text-primary font-medium mt-3">— Ander González Vergara</p>
             </div>

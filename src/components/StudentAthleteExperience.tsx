@@ -9,6 +9,7 @@ import academicImg from "@/assets/usa-exp-academic.jpg";
 import facilitiesImg from "@/assets/usa-exp-facilities.jpg";
 import campusImg from "@/assets/usa-exp-campus.jpg";
 
+import { pick, tr } from "@/lib/i18n";
 type Bilingual = { es: string; en: string };
 type Slide = { title: Bilingual; text: Bilingual; img: StaticImageData; alt: Bilingual };
 
@@ -126,17 +127,17 @@ const StudentAthleteExperience = () => {
       className="overflow-x-clip py-20 md:py-28"
       style={{ backgroundColor: "#0b1526" }}
       aria-roledescription="carousel"
-      aria-label={es ? "La experiencia student-athlete" : "The student-athlete experience"}
+      aria-label={tr(language, "La experiencia student-athlete", "The student-athlete experience")}
     >
       <div className="mx-auto mb-10 max-w-7xl px-4 md:mb-14">
         <span className="mb-4 block label-bebas text-base text-primary">
-          {es ? "El sueño americano" : "The American dream"}
+          {tr(language, "El sueño americano", "The American dream")}
         </span>
         <h2 className="max-w-4xl font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">
-          {es ? "Vive la experiencia " : "Live the "}
+          {tr(language, "Vive la experiencia ", "Live the ")}
           {/* Same term in both languages, in brand red (a touch brighter so it reads on navy). */}
           <span className="whitespace-nowrap text-[#e0293a]">student-athlete</span>
-          {es ? "." : " experience."}
+          {tr(language, ".", " experience.")}
         </h2>
       </div>
 
@@ -164,7 +165,7 @@ const StudentAthleteExperience = () => {
             >
               <Image
                 src={s.img}
-                alt={s.alt[language]}
+                alt={pick(language, s.alt)}
                 fill
                 sizes="(min-width: 768px) 86vw, 90vw"
                 className={`object-cover transition-transform [transition-duration:1600ms] ease-out ${
@@ -179,9 +180,9 @@ const StudentAthleteExperience = () => {
                   i === active ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0"
                 }`}
               >
-                <h3 className="font-display text-2xl font-bold text-white md:text-4xl">{s.title[language]}</h3>
+                <h3 className="font-display text-2xl font-bold text-white md:text-4xl">{pick(language, s.title)}</h3>
                 <p className="mt-3 max-w-xl font-body text-sm leading-relaxed text-white/85 md:text-lg">
-                  {s.text[language]}
+                  {pick(language, s.text)}
                 </p>
               </div>
             </li>
@@ -203,7 +204,7 @@ const StudentAthleteExperience = () => {
               key={s.title.es}
               type="button"
               onClick={() => goTo(i)}
-              aria-label={`${es ? "Ir a" : "Go to"} ${s.title[language]}`}
+              aria-label={`${tr(language, "Ir a", "Go to")} ${pick(language, s.title)}`}
               aria-current={i === active}
               className={`relative h-2 overflow-hidden rounded-full bg-white/35 transition-[width] duration-500 ${
                 i === active ? "w-12" : "w-2 hover:bg-white/60"
@@ -223,7 +224,7 @@ const StudentAthleteExperience = () => {
         <button
           type="button"
           onClick={() => setPlaying((p) => !p)}
-          aria-label={playing ? (es ? "Pausar" : "Pause") : es ? "Reproducir" : "Play"}
+          aria-label={playing ? (tr(language, "Pausar", "Pause")) : tr(language, "Reproducir", "Play")}
           className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full text-white transition-colors hover:brightness-125"
         >
           {playing ? <Pause className="h-5 w-5 fill-current" /> : <Play className="ml-0.5 h-5 w-5 fill-current" />}

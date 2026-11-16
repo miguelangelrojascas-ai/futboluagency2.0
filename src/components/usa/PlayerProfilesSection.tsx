@@ -7,6 +7,7 @@ import profileAltoAsset from "@/assets/profile-alto.webp";
 import profileMedioAsset from "@/assets/profile-medio.jpeg";
 import profileDesarrolloAsset from "@/assets/profile-desarrollo.webp";
 
+import { tr } from "@/lib/i18n";
 /* Next resolves an image import to an object; the components want the URL. */
 const profileElite = profileEliteAsset.src;
 const profileAlto = profileAltoAsset.src;
@@ -31,68 +32,44 @@ const PlayerProfilesSection = () => {
 
   const profiles: Profile[] = [
     {
-      level: isEs ? "Élite" : "Elite",
+      level: tr(language, "Élite", "Elite"),
       badgeColor: "#1e3a6e",
       gradient: "linear-gradient(135deg, #0f1f3d 0%, #1e3a6e 100%)",
       image: profileElite,
       imagePosition: "center 20%",
-      profile: isEs
-        ? "Academias top o selecciones nacionales. Historial en divisiones competitivas, Sub-17, Sub-20 o debut semiprofesional."
-        : "Top academies or national teams. Background in competitive divisions, U-17, U-20 or semi-pro debut.",
-      universities: isEs
-        ? "NCAA D1 — Programas top. Beca 70–100%"
-        : "NCAA D1 — Top programs. Scholarship 70–100%",
-      plan: isEs
-        ? "Seleccionamos las mejores opciones según posición, estilo de juego y objetivos académicos. Negociación directa con coaches."
-        : "We select the best options based on position, playing style and academic goals. Direct negotiation with coaches.",
+      profile: tr(language, "Academias top o selecciones nacionales. Historial en divisiones competitivas, Sub-17, Sub-20 o debut semiprofesional.", "Top academies or national teams. Background in competitive divisions, U-17, U-20 or semi-pro debut."),
+      universities: tr(language, "NCAA D1 — Programas top. Beca 70–100%", "NCAA D1 — Top programs. Scholarship 70–100%"),
+      plan: tr(language, "Seleccionamos las mejores opciones según posición, estilo de juego y objetivos académicos. Negociación directa con coaches.", "We select the best options based on position, playing style and academic goals. Direct negotiation with coaches."),
     },
     {
-      level: isEs ? "Alto" : "High",
+      level: tr(language, "Alto", "High"),
       badgeColor: "hsl(var(--primary))",
       gradient: "linear-gradient(135deg, #6b0410 0%, #b00717 100%)",
       image: profileAlto,
       imagePosition: "center center",
-      profile: isEs
-        ? "Clubes competitivos, ligas regionales. Trayectoria sólida, buen nivel técnico y físico. Inglés intermedio o superior."
-        : "Competitive clubs, regional leagues. Solid track record, good technical and physical level. Intermediate or higher English.",
-      universities: isEs
-        ? "NCAA D1 / D2 — NAIA top. Beca 50–90%"
-        : "NCAA D1 / D2 — Top NAIA. Scholarship 50–90%",
-      plan: isEs
-        ? "Construimos tu perfil y video highlights para maximizar ofertas. Acceso a nuestra red de contactos en universidades de todo el país."
-        : "We build your profile and highlights video to maximize offers. Access to our network of contacts at universities across the country.",
+      profile: tr(language, "Clubes competitivos, ligas regionales. Trayectoria sólida, buen nivel técnico y físico. Inglés intermedio o superior.", "Competitive clubs, regional leagues. Solid track record, good technical and physical level. Intermediate or higher English."),
+      universities: tr(language, "NCAA D1 / D2 — NAIA top. Beca 50–90%", "NCAA D1 / D2 — Top NAIA. Scholarship 50–90%"),
+      plan: tr(language, "Construimos tu perfil y video highlights para maximizar ofertas. Acceso a nuestra red de contactos en universidades de todo el país.", "We build your profile and highlights video to maximize offers. Access to our network of contacts at universities across the country."),
     },
     {
-      level: isEs ? "Medio" : "Mid",
+      level: tr(language, "Medio", "Mid"),
       badgeColor: "#1a6e3c",
       gradient: "linear-gradient(135deg, #0e3d21 0%, #1a6e3c 100%)",
       image: profileMedio,
       imagePosition: "center 25%",
-      profile: isEs
-        ? "Perfil con potencial claro. Menos trayectoria pero con habilidades demostrables. Buen expediente académico."
-        : "Profile with clear potential. Less track record but with demonstrable skills. Good academic record.",
-      universities: isEs
-        ? "NCAA D2 — NAIA — NJCAA. Beca académica + deportiva combinada."
-        : "NCAA D2 — NAIA — NJCAA. Combined academic + athletic scholarship.",
-      plan: isEs
-        ? "Potenciamos tu perfil académico y deportivo. El GPA puede compensar y abrir puertas a mejores becas."
-        : "We boost your academic and athletic profile. GPA can compensate and unlock better scholarships.",
+      profile: tr(language, "Perfil con potencial claro. Menos trayectoria pero con habilidades demostrables. Buen expediente académico.", "Profile with clear potential. Less track record but with demonstrable skills. Good academic record."),
+      universities: tr(language, "NCAA D2 — NAIA — NJCAA. Beca académica + deportiva combinada.", "NCAA D2 — NAIA — NJCAA. Combined academic + athletic scholarship."),
+      plan: tr(language, "Potenciamos tu perfil académico y deportivo. El GPA puede compensar y abrir puertas a mejores becas.", "We boost your academic and athletic profile. GPA can compensate and unlock better scholarships."),
     },
     {
-      level: isEs ? "Desarrollo" : "Development",
+      level: tr(language, "Desarrollo", "Development"),
       badgeColor: "#d97706",
       gradient: "linear-gradient(135deg, #7c4406 0%, #d97706 100%)",
       image: profileDesarrollo,
       imagePosition: "center 30%",
-      profile: isEs
-        ? "Jugador con ambición y compromiso. Necesita un primer paso que eleve su nivel antes de competir en las divisiones altas."
-        : "Ambitious and committed player. Needs a first step that raises their level before competing in the higher divisions.",
-      universities: isEs
-        ? "NAIA — NJCAA — D3. Posibilidad de transferencia a D1/D2 tras primer año."
-        : "NAIA — NJCAA — D3. Possibility to transfer to D1/D2 after first year.",
-      plan: isEs
-        ? "Empezamos por la división que te abre la puerta hoy y planificamos la transferencia desde el primer día. Un buen año en JUCO puede transformar tu perfil."
-        : "We start with the division that opens the door today and plan the transfer from day one. A strong year in JUCO can transform your profile.",
+      profile: tr(language, "Jugador con ambición y compromiso. Necesita un primer paso que eleve su nivel antes de competir en las divisiones altas.", "Ambitious and committed player. Needs a first step that raises their level before competing in the higher divisions."),
+      universities: tr(language, "NAIA — NJCAA — D3. Posibilidad de transferencia a D1/D2 tras primer año.", "NAIA — NJCAA — D3. Possibility to transfer to D1/D2 after first year."),
+      plan: tr(language, "Empezamos por la división que te abre la puerta hoy y planificamos la transferencia desde el primer día. Un buen año en JUCO puede transformar tu perfil.", "We start with the division that opens the door today and plan the transfer from day one. A strong year in JUCO can transform your profile."),
     },
   ];
 
@@ -104,15 +81,13 @@ const PlayerProfilesSection = () => {
       <div className="container-wide px-4">
         <div className="max-w-3xl mb-12">
           <span className="text-primary text-xs font-bold tracking-[0.15em] uppercase mb-4 block">
-            {isEs ? "¿Puedes conseguir una beca?" : "Can you get a scholarship?"}
+            {tr(language, "¿Puedes conseguir una beca?", "Can you get a scholarship?")}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
-            {isEs ? "Encuentra tu perfil" : "Find your profile"}
+            {tr(language, "Encuentra tu perfil", "Find your profile")}
           </h2>
           <p className="font-body text-muted-foreground text-base sm:text-lg leading-relaxed">
-            {isEs
-              ? "El potencial de beca depende de tu nivel futbolístico y académico. Aquí te mostramos qué puede conseguir cada perfil."
-              : "Scholarship potential depends on your athletic and academic level. Here's what each profile can achieve."}
+            {tr(language, "El potencial de beca depende de tu nivel futbolístico y académico. Aquí te mostramos qué puede conseguir cada perfil.", "Scholarship potential depends on your athletic and academic level. Here's what each profile can achieve.")}
           </p>
         </div>
 
@@ -141,7 +116,7 @@ const PlayerProfilesSection = () => {
                   className="relative inline-flex items-center self-start px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.12em] uppercase text-white"
                   style={{ backgroundColor: p.badgeColor, boxShadow: "0 1px 4px rgba(0,0,0,0.3)" }}
                 >
-                  {isEs ? "Nivel" : "Level"}
+                  {tr(language, "Nivel", "Level")}
                 </span>
                 <span
                   className="relative font-display text-2xl sm:text-3xl font-bold text-white mt-4"
@@ -153,19 +128,19 @@ const PlayerProfilesSection = () => {
 
               {/* Profile */}
               <div className="p-4 md:border-l" style={{ borderColor: "#f0f0f0" }}>
-                <span className={colLabel} style={colLabelStyle}>{isEs ? "Perfil del jugador" : "Player Profile"}</span>
+                <span className={colLabel} style={colLabelStyle}>{tr(language, "Perfil del jugador", "Player Profile")}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.profile}</p>
               </div>
 
               {/* Universities */}
               <div className="p-4 md:border-l" style={{ borderColor: "#f0f0f0" }}>
-                <span className={colLabel} style={colLabelStyle}>{isEs ? "Universidades objetivo" : "Target Universities"}</span>
+                <span className={colLabel} style={colLabelStyle}>{tr(language, "Universidades objetivo", "Target Universities")}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.universities}</p>
               </div>
 
               {/* Plan */}
               <div className="p-4 md:border-l" style={{ borderColor: "#f0f0f0" }}>
-                <span className={colLabel} style={colLabelStyle}>{isEs ? "Nuestro plan" : "Our Plan"}</span>
+                <span className={colLabel} style={colLabelStyle}>{tr(language, "Nuestro plan", "Our Plan")}</span>
                 <p className="font-body text-sm text-foreground leading-relaxed">{p.plan}</p>
                 {p.extraLink && (
                   <LocaleLink
@@ -181,9 +156,7 @@ const PlayerProfilesSection = () => {
         </div>
 
         <p className="text-center text-xs italic text-muted-foreground mt-8 max-w-2xl mx-auto">
-          {isEs
-            ? "* El potencial de beca es orientativo. Cada caso se evalúa individualmente en una consulta gratuita."
-            : "* Scholarship potential is indicative. Each case is evaluated individually in a free consultation."}
+          {tr(language, "* El potencial de beca es orientativo. Cada caso se evalúa individualmente en una consulta gratuita.", "* Scholarship potential is indicative. Each case is evaluated individually in a free consultation.")}
         </p>
       </div>
     </section>

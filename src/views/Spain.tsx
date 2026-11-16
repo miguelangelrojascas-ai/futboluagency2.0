@@ -18,6 +18,7 @@ import AnderStoryCard from "@/components/AnderStoryCard";
 import SpainFinalCTA from "@/components/spain/SpainFinalCTA";
 
 
+import { tr } from "@/lib/i18n";
 const Spain = () => {
   const { t, language } = useLanguage();
 
@@ -44,13 +45,11 @@ const Spain = () => {
                 {t("spain.tag")}
               </span>
               <h1 className="font-display text-[2.75rem] sm:text-6xl md:text-7xl mb-6 leading-[0.95] text-white" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
-                {language === "es" ? "Juega en academias profesionales " : "Play in professional academies "}
-                <span className="pr-[0.08em] italic text-red-bright">{language === "es" ? "en España" : "in Spain"}</span>
+                {tr(language, "Juega en academias profesionales ", "Play in professional academies ")}
+                <span className="pr-[0.08em] italic text-red-bright">{tr(language, "en España", "in Spain")}</span>
               </h1>
               <p className="font-body font-medium text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-                {language === "es"
-                  ? "Entrena, compite y desarrolla tu carrera futbolística en uno de los entornos más exigentes del mundo"
-                  : "Train, compete and develop your football career in one of the most demanding environments in the world"}
+                {tr(language, "Entrena, compite y desarrolla tu carrera futbolística en uno de los entornos más exigentes del mundo", "Train, compete and develop your football career in one of the most demanding environments in the world")}
               </p>
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform"

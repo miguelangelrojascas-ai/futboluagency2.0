@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { guides, resourcesHeroImage } from "@/data/resources";
 
+import { pick, tr } from "@/lib/i18n";
 const Resources = () => {
   const { language } = useLanguage();
   const es = language === "es";
@@ -53,16 +54,14 @@ const Resources = () => {
           <div className="container-wide relative px-4">
             <div className="max-w-3xl">
               <span className="mb-4 inline-block label-bebas text-base text-primary">
-                {es ? "Recursos" : "Resources"}
+                {tr(language, "Recursos", "Resources")}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
-                {es ? "Guías para entenderlo " : "Guides to understand it "}
-                <span className="italic text-primary">{es ? "todo" : "all"}</span>
+                {tr(language, "Guías para entenderlo ", "Guides to understand it ")}
+                <span className="italic text-primary">{tr(language, "todo", "all")}</span>
               </h1>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "Esto es todo lo que necesitas entender antes de tener una reunión con el equipo de admisiones. Después de ver los recursos entenderás lo suficiente para tomar una decisión informada sobre el proceso de estudiar becado en una universidad americana."
-                  : "This is everything you need to understand before sitting down with our admissions team. Once you have been through these resources you will know enough to make an informed decision about studying on a scholarship at an American university."}
+                {tr(language, "Esto es todo lo que necesitas entender antes de tener una reunión con el equipo de admisiones. Después de ver los recursos entenderás lo suficiente para tomar una decisión informada sobre el proceso de estudiar becado en una universidad americana.", "This is everything you need to understand before sitting down with our admissions team. Once you have been through these resources you will know enough to make an informed decision about studying on a scholarship at an American university.")}
               </p>
             </div>
           </div>
@@ -99,20 +98,20 @@ const Resources = () => {
                           {guide.number}
                         </span>
                         <span className="inline-flex items-center gap-1 font-body text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground/70">
-                          {written.length} {es ? "secciones" : "sections"}
+                          {written.length} {tr(language, "secciones", "sections")}
                           <ChevronDown className="guide-chevron h-3.5 w-3.5" />
                         </span>
                       </div>
 
                       <h2 className="mb-3 font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
-                        {es ? guide.title.es : guide.title.en}
+                        {pick(language, guide.title)}
                       </h2>
                       <p className="mb-6 flex-1 font-body text-[15px] leading-relaxed text-muted-foreground">
-                        {es ? guide.summary.es : guide.summary.en}
+                        {pick(language, guide.summary)}
                       </p>
 
                       <span className="inline-flex items-center gap-2 font-body text-sm font-bold text-primary">
-                        {es ? "Explorar guía" : "Explore guide"}
+                        {tr(language, "Explorar guía", "Explore guide")}
                         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/card:translate-x-0.5" />
                       </span>
 
@@ -120,7 +119,7 @@ const Resources = () => {
                           the layout so the grid never reflows. */}
                       <div className="guide-preview" aria-hidden="true">
                         <span className="mb-2 block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-primary">
-                          {es ? "Qué contiene" : "What it covers"}
+                          {tr(language, "Qué contiene", "What it covers")}
                         </span>
                         <ol className="space-y-1">
                           {written.map((section, i) => (
@@ -131,7 +130,7 @@ const Resources = () => {
                               <span className="w-4 shrink-0 font-display text-[13px] font-bold text-primary/60">
                                 {i + 1}
                               </span>
-                              <span>{es ? section.title.es : section.title.en}</span>
+                              <span>{pick(language, section.title)}</span>
                             </li>
                           ))}
                         </ol>
@@ -185,19 +184,17 @@ const Resources = () => {
           <div className="container-wide px-4">
             <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
               <h2 className="text-balance font-display text-3xl font-bold sm:text-4xl">
-                {es ? "¿Te queda alguna " : "Still have a "}
-                <span className="italic text-primary">{es ? "duda" : "question"}</span>?
+                {tr(language, "¿Te queda alguna ", "Still have a ")}
+                <span className="italic text-primary">{tr(language, "duda", "question")}</span>?
               </h2>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "Envíanos tu perfil con tus dudas. Lo revisamos y te escribimos para hablar de tu caso concreto, no en general."
-                  : "Send us your profile along with your questions. We review it and write to you to talk about your specific case, not in general."}
+                {tr(language, "Envíanos tu perfil con tus dudas. Lo revisamos y te escribimos para hablar de tu caso concreto, no en general.", "Send us your profile along with your questions. We review it and write to you to talk about your specific case, not in general.")}
               </p>
               <LocaleLink
                 to="/apply"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
-                {es ? "Envía tu perfil" : "Send your profile"}
+                {tr(language, "Envía tu perfil", "Send your profile")}
                 <ArrowRight className="h-4 w-4" />
               </LocaleLink>
             </div>

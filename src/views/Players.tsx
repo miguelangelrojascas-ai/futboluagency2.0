@@ -11,6 +11,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { LEAGUES, players, type League } from "@/data/players";
 
+import { tr } from "@/lib/i18n";
 /** FUA players artwork for the header. */
 const HERO_IMAGE = "/images/hero/header-jugadores.png";
 
@@ -47,24 +48,22 @@ const Players = () => {
           <div className="container-wide relative z-10 flex min-h-[560px] flex-col items-center justify-center px-4 pb-16 pt-32 text-center sm:min-h-[620px] md:pt-36 lg:min-h-[70vh] lg:max-h-[760px]">
             <div className="mx-auto max-w-3xl" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.75)" }}>
               <span className="mb-4 inline-block label-bebas text-base text-white/80">
-                {es ? "Nuestros jugadores" : "Our players"}
+                {tr(language, "Nuestros jugadores", "Our players")}
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">
-                {es ? "Más de " : "More than "}
-                <span className="italic text-red-500">{es ? "250 atletas" : "250 athletes"}</span>
-                {es ? " han confiado en nosotros" : " have trusted us"}
+                {tr(language, "Más de ", "More than ")}
+                <span className="italic text-red-500">{tr(language, "250 atletas", "250 athletes")}</span>
+                {tr(language, " han confiado en nosotros", " have trusted us")}
               </h1>
               <p className="mx-auto max-w-2xl font-body text-base leading-relaxed text-white/90 sm:text-lg">
-                {es
-                  ? "Futbolistas que ya estudian y compiten en universidades de EE.UU. con beca. El siguiente puedes ser tú."
-                  : "Footballers already studying and competing at U.S. universities on a scholarship. You could be next."}
+                {tr(language, "Futbolistas que ya estudian y compiten en universidades de EE.UU. con beca. El siguiente puedes ser tú.", "Footballers already studying and competing at U.S. universities on a scholarship. You could be next.")}
               </p>
             </div>
             <LocaleLink
               to="/apply"
               className="mt-8 inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 font-body font-semibold text-white transition-colors hover:bg-primary-hover"
             >
-              {es ? "Envía tu perfil" : "Send your profile"}
+              {tr(language, "Envía tu perfil", "Send your profile")}
               <ArrowRight className="h-4 w-4" />
             </LocaleLink>
           </div>
@@ -78,7 +77,7 @@ const Players = () => {
           <div className="container-wide px-4">
             <div
               role="group"
-              aria-label={es ? "Filtrar por liga" : "Filter by league"}
+              aria-label={tr(language, "Filtrar por liga", "Filter by league")}
               className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
             >
               {[null, ...LEAGUES].map((l) => {
@@ -95,7 +94,7 @@ const Players = () => {
                         : "border-border bg-card text-foreground hover:border-foreground/30"
                     }`}
                   >
-                    {l ?? (es ? "Todos" : "All")}
+                    {l ?? (tr(language, "Todos", "All"))}
                   </button>
                 );
               })}
@@ -116,18 +115,16 @@ const Players = () => {
               <li className="sm:col-span-2 lg:col-span-3">
                 <div className="flex h-full flex-col justify-center rounded-2xl border border-border p-6 sm:p-7" style={{ backgroundColor: "hsl(var(--card))" }}>
                   <h2 className="font-display text-xl font-bold leading-snug text-foreground sm:text-2xl">
-                    {es ? "Fútbol universitario en EE.UU." : "College soccer in the U.S."}
+                    {tr(language, "Fútbol universitario en EE.UU.", "College soccer in the U.S.")}
                   </h2>
                   <p className="mt-2 font-body text-[14px] leading-relaxed text-muted-foreground sm:text-[15px]">
-                    {es
-                      ? "Todos compiten y estudian en programas NCAA, NAIA y NJCAA."
-                      : "They all compete and study in NCAA, NAIA and NJCAA programs."}
+                    {tr(language, "Todos compiten y estudian en programas NCAA, NAIA y NJCAA.", "They all compete and study in NCAA, NAIA and NJCAA programs.")}
                   </p>
                   <LocaleLink
                     to="/recursos/las-divisiones"
                     className="mt-4 inline-flex items-center gap-1.5 font-body text-[13px] font-bold text-primary transition-colors hover:text-primary-hover"
                   >
-                    {es ? "Qué significa cada división" : "What each division means"}
+                    {tr(language, "Qué significa cada división", "What each division means")}
                     <ArrowRight className="h-3.5 w-3.5" />
                   </LocaleLink>
                 </div>
@@ -141,19 +138,17 @@ const Players = () => {
           <div className="container-wide px-4">
             <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
               <h2 className="text-balance font-display text-3xl font-bold sm:text-4xl">
-                {es ? "¿Quieres ser el " : "Want to be the "}
-                <span className="italic text-primary">{es ? "siguiente" : "next one"}</span>?
+                {tr(language, "¿Quieres ser el ", "Want to be the ")}
+                <span className="italic text-primary">{tr(language, "siguiente", "next one")}</span>?
               </h2>
               <p className="font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "Empieza por la evaluación gratuita. Analizamos tu perfil deportivo y académico y te decimos con claridad qué opciones reales tienes."
-                  : "Start with the free evaluation. We analyse your athletic and academic profile and tell you clearly what real options you have."}
+                {tr(language, "Empieza por la evaluación gratuita. Analizamos tu perfil deportivo y académico y te decimos con claridad qué opciones reales tienes.", "Start with the free evaluation. We analyse your athletic and academic profile and tell you clearly what real options you have.")}
               </p>
               <LocaleLink
                 to="/apply"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
-                {es ? "Envía tu perfil" : "Send your profile"}
+                {tr(language, "Envía tu perfil", "Send your profile")}
                 <ArrowRight className="h-4 w-4" />
               </LocaleLink>
             </div>

@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+import { tr } from "@/lib/i18n";
 const NotFound = () => {
   const pathname = usePathname();
   const { language } = useLanguage();
@@ -16,18 +17,18 @@ const NotFound = () => {
   const links = [
     {
       to: "/usa",
-      title: es ? "Becas de fútbol en EE.UU." : "U.S. soccer scholarships",
-      desc: es ? "El programa principal: divisiones, proceso y requisitos." : "The main program: divisions, process and requirements.",
+      title: tr(language, "Becas de fútbol en EE.UU.", "U.S. soccer scholarships"),
+      desc: tr(language, "El programa principal: divisiones, proceso y requisitos.", "The main program: divisions, process and requirements."),
     },
     {
       to: "/players",
-      title: es ? "Nuestros jugadores" : "Our players",
-      desc: es ? "Los futbolistas que ya compiten y estudian en Estados Unidos." : "The players already competing and studying in the United States.",
+      title: tr(language, "Nuestros jugadores", "Our players"),
+      desc: tr(language, "Los futbolistas que ya compiten y estudian en Estados Unidos.", "The players already competing and studying in the United States."),
     },
     {
       to: "/recursos",
-      title: es ? "Recursos" : "Resources",
-      desc: es ? "Guías sobre becas, elegibilidad, visado y costes." : "Guides on scholarships, eligibility, visa and costs.",
+      title: tr(language, "Recursos", "Resources"),
+      desc: tr(language, "Guías sobre becas, elegibilidad, visado y costes.", "Guides on scholarships, eligibility, visa and costs."),
     },
   ];
 
@@ -43,12 +44,10 @@ const NotFound = () => {
                 404
               </span>
               <h1 className="mb-5 font-display text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl">
-                {es ? "Esta página no existe" : "This page does not exist"}
+                {tr(language, "Esta página no existe", "This page does not exist")}
               </h1>
               <p className="mb-2 font-body text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {es
-                  ? "O la dirección está mal escrita, o la página se movió. Si llegaste desde un enlace nuestro, avísanos."
-                  : "Either the address is mistyped, or the page has moved. If you got here from one of our links, let us know."}
+                {tr(language, "O la dirección está mal escrita, o la página se movió. Si llegaste desde un enlace nuestro, avísanos.", "Either the address is mistyped, or the page has moved. If you got here from one of our links, let us know.")}
               </p>
               {/* Helps a visitor report the broken link accurately. */}
               <p className="mb-10 font-body text-sm text-muted-foreground/70">
@@ -61,19 +60,19 @@ const NotFound = () => {
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                 >
                   <Home className="h-4 w-4" />
-                  {es ? "Volver al inicio" : "Back to home"}
+                  {tr(language, "Volver al inicio", "Back to home")}
                 </LocaleLink>
                 <LocaleLink
                   to="/apply"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 font-body font-semibold text-foreground transition-colors hover:border-foreground/30 hover:bg-muted"
                 >
-                  {es ? "Evaluación gratuita" : "Free evaluation"}
+                  {tr(language, "Evaluación gratuita", "Free evaluation")}
                   <ArrowRight className="h-4 w-4" />
                 </LocaleLink>
               </div>
 
               <h2 className="mb-4 font-body text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                {es ? "Quizá buscabas" : "You may have been looking for"}
+                {tr(language, "Quizá buscabas", "You may have been looking for")}
               </h2>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {links.map((link) => (

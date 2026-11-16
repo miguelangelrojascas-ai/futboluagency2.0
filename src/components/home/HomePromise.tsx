@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { pick, tr } from "@/lib/i18n";
 /**
  * First thing after the hero: the outcome the family is buying, said with
  * calm certainty. Order follows how a premium decision is made: the future
@@ -12,22 +13,20 @@ const HomePromise = () => {
   const { language } = useLanguage();
   const es = language === "es";
 
-  const outcomes = es
-    ? [
+  const outcomes = pick(language, { es: [
         { title: "Un título universitario", text: "Una carrera completa en una universidad de Estados Unidos." },
         { title: "Fútbol de competición", text: "Entrenas y compites cada semana con un programa universitario." },
         { title: "Una beca negociada por ti", text: "Tu agente presenta tu perfil y negocia la oferta en tu nombre." },
-      ]
-    : [
+      ], en: [
         { title: "A university degree", text: "A full degree at a university in the United States." },
         { title: "Competitive soccer", text: "You train and compete every week with a college program." },
         { title: "A scholarship negotiated for you", text: "Your agent presents your profile and negotiates the offer on your behalf." },
-      ];
+      ] });
 
   const proof = [
-    { value: "250+", label: es ? "Atletas en EE.UU." : "Athletes in the USA" },
-    { value: "$10M+", label: es ? "En becas conseguidas" : "In scholarships secured" },
-    { value: "4", label: es ? "Años a tu lado" : "Years by your side" },
+    { value: "250+", label: tr(language, "Atletas en EE.UU.", "Athletes in the USA") },
+    { value: "$10M+", label: tr(language, "En becas conseguidas", "In scholarships secured") },
+    { value: "4", label: tr(language, "Años a tu lado", "Years by your side") },
   ];
 
   return (
@@ -35,19 +34,17 @@ const HomePromise = () => {
       <div className="container-wide grid gap-12 px-4 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <h2 id="promise-title" className="font-druk uppercase leading-[1.1] text-ink text-[clamp(3.25rem,12vw,6.5rem)]">
-            {es ? "Cuatro años que" : "Four years that"}
-            <span className="block pr-[0.08em] leading-[0.96] italic text-primary">{es ? "lo cambian todo." : "change everything."}</span>
+            {tr(language, "Cuatro años que", "Four years that")}
+            <span className="block pr-[0.08em] leading-[0.96] italic text-primary">{tr(language, "lo cambian todo.", "change everything.")}</span>
           </h2>
           <p className="mt-4 font-bebas text-[15px] tracking-[0.26em] text-ink/50 sm:text-base">
-            {es ? "Fútbol, título y beca. A la vez." : "Soccer, a degree and a scholarship. At once."}
+            {tr(language, "Fútbol, título y beca. A la vez.", "Soccer, a degree and a scholarship. At once.")}
           </p>
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7 lg:pt-3">
           <p className="max-w-[60ch] font-body text-lg leading-relaxed text-ink/75 sm:text-xl">
-            {es
-              ? "No tienes que elegir entre estudiar y seguir jugando. En Estados Unidos haces las dos cosas, y la beca lo hace posible. Tú pones el talento; nosotros nos encargamos de que los entrenadores lo vean."
-              : "You don't have to choose between studying and playing on. In the United States you do both, and the scholarship makes it possible. You bring the talent; we make sure the coaches see it."}
+            {tr(language, "No tienes que elegir entre estudiar y seguir jugando. En Estados Unidos haces las dos cosas, y la beca lo hace posible. Tú pones el talento; nosotros nos encargamos de que los entrenadores lo vean.", "You don't have to choose between studying and playing on. In the United States you do both, and the scholarship makes it possible. You bring the talent; we make sure the coaches see it.")}
           </p>
 
           <ul className="mt-10 border-t border-ink/10">
@@ -69,9 +66,7 @@ const HomePromise = () => {
           </dl>
 
           <p className="mt-10 font-body text-[15px] text-ink/65">
-            {es
-              ? "Saber si tienes opciones no te cuesta nada: la evaluación es gratuita y sin compromiso."
-              : "Finding out whether you have options costs nothing: the evaluation is free and carries no commitment."}
+            {tr(language, "Saber si tienes opciones no te cuesta nada: la evaluación es gratuita y sin compromiso.", "Finding out whether you have options costs nothing: the evaluation is free and carries no commitment.")}
           </p>
         </div>
       </div>

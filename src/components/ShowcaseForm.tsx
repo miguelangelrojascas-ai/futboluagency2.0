@@ -8,6 +8,7 @@ import { COUNTRIES, COUNTRY_EN } from "@/data/leadOptions";
 import { DIAL_CODES, dialCodeFor } from "@/data/dialCodes";
 import type { FormQuestion, ShowcaseFormDefinition } from "@/lib/showcaseForm";
 
+import { pick, tr } from "@/lib/i18n";
 type Status = "idle" | "submitting" | "error" | "success";
 
 const FIELD =
@@ -22,17 +23,20 @@ const ageAtShowcase = (birthDate: string) => {
   return 2027 - y - (2 < m || (m === 2 && 1 < d) ? 1 : 0);
 };
 
-const Section = ({ n, total, title, es, children }: { n: number; total: number; title: string; es: boolean; children: React.ReactNode }) => (
+const Section = ({ n, total, title, children }: { n: number; total: number; title: string; es?: boolean; children: React.ReactNode }) => {
+  const { language } = useLanguage();
+  return (
   <fieldset>
     <legend className="float-left mb-6 w-full">
       <span className="block label-bebas text-base text-primary">
-        {es ? `Paso ${n} de ${total}` : `Step ${n} of ${total}`}
+        {tr(language, "Paso {0} de {1}", "Step {0} of {1}", [n, total])}
       </span>
       <span className="mt-1 block font-display text-2xl font-bold text-foreground">{title}</span>
     </legend>
     <div className="clear-both grid gap-5 sm:grid-cols-2">{children}</div>
   </fieldset>
-);
+  );
+};
 
 /** Same rules the CRM applies, checked before moving to the next step. */
 const isValidAnswer = (q: FormQuestion, raw: string) => {
@@ -98,6 +102,7 @@ const PhoneField = ({
   help?: string;
   country: string;
 }) => {
+  const { language } = useLanguage();
   const [picked, setPicked] = useState<string | null>(null);
   const [custom, setCustom] = useState("");
   const [number, setNumber] = useState("");
@@ -112,8 +117,8 @@ const PhoneField = ({
       ? `+${code} ${typed.replace(/\D/g, "").replace(/^0+/, "")}`
       : "";
   const id = `sc-${q.id}`;
-  const label = es ? q.es : q.en || q.es;
-  const placeholder = (es ? q.placeholderEs : q.placeholderEn || q.placeholderEs) || undefined;
+  const label = pick(language, q);
+  const placeholder = (q.placeholderEs ? tr(language, q.placeholderEs, q.placeholderEn || q.placeholderEs) : "") || undefined;
   const bad = invalid ? { "aria-invalid": true as const } : {};
   /* FIELD is full width; the code picker and the number share the row instead. */
   const PART = FIELD.replace("w-full ", "");
@@ -126,22 +131,22 @@ const PhoneField = ({
       </label>
       <div className="flex gap-2">
         <select
-          aria-label={es ? "Prefijo del país" : "Country code"}
+          aria-label={tr(language, "Prefijo del país", "Country code")}
           value={dial}
           onChange={(e) => setPicked(e.target.value)}
           className={`${PART} w-[6.5rem] shrink-0 px-2.5`}
           {...bad}
         >
           {DIAL_CODES.map((d) => (
-            <option key={d.country} value={d.country} title={es ? d.country : d.en}>
+            <option key={d.country} value={d.country} title={tr(language, d.country, d.en)}>
               {d.flag} +{d.code}
             </option>
           ))}
-          <option value="otro">{es ? "Otro prefijo" : "Other code"}</option>
+          <option value="otro">{tr(language, "Otro prefijo", "Other code")}</option>
         </select>
         {dial === "otro" && (
           <input
-            aria-label={es ? "Prefijo" : "Code"}
+            aria-label={tr(language, "Prefijo", "Code")}
             inputMode="numeric"
             placeholder="+00"
             value={custom}
@@ -165,11 +170,9 @@ const PhoneField = ({
       <input type="hidden" name={q.id} value={full} />
       <p className={`${HINT} ${invalid ? "text-destructive" : ""}`}>
         {invalid
-          ? es
-            ? "Revisa el prefijo y el número: tiene que ser un número completo de WhatsApp."
-            : "Check the code and the number: it has to be a full WhatsApp number."
+          ? tr(language, "Revisa el prefijo y el número: tiene que ser un número completo de WhatsApp.", "Check the code and the number: it has to be a full WhatsApp number.")
           : full && full.replace(/\D/g, "").length >= 8
-            ? `${es ? "Te escribiremos al" : "We will message"} ${full}`
+            ? `${tr(language, "Te escribiremos al", "We will message")} ${full}`
             : help}
       </p>
     </div>
@@ -190,12 +193,13 @@ const Field = ({
   required: boolean;
   hint?: string | null;
 }) => {
+  const { language } = useLanguage();
   const id = `sc-${q.id}`;
-  const label = es ? q.es : q.en || q.es;
-  const help = hint ?? (es ? q.ayudaEs : q.ayudaEn || q.ayudaEs);
-  const placeholder = (es ? q.placeholderEs : q.placeholderEn || q.placeholderEs) || undefined;
+  const label = pick(language, q);
+  const help = hint ?? (q.ayudaEs ? tr(language, q.ayudaEs, q.ayudaEn || q.ayudaEs) : q.ayudaEs);
+  const placeholder = (q.placeholderEs ? tr(language, q.placeholderEs, q.placeholderEn || q.placeholderEs) : "") || undefined;
   const common = { id, name: q.id, className: FIELD, ...(invalid ? { "aria-invalid": true as const } : {}) };
-  const choose = es ? "Selecciona" : "Select";
+  const choose = tr(language, "Selecciona", "Select");
 
   let control: React.ReactNode;
   switch (q.tipo) {
@@ -207,7 +211,7 @@ const Field = ({
         <select {...common} defaultValue="">
           <option value="" disabled={q.obligatoria}>{choose}</option>
           {q.opciones?.map((o) => (
-            <option key={o.es} value={o.es}>{es ? o.es : o.en || o.es}</option>
+            <option key={o.es} value={o.es}>{pick(language, o)}</option>
           ))}
         </select>
       );
@@ -215,9 +219,9 @@ const Field = ({
     case "country":
       control = (
         <select {...common} defaultValue="">
-          <option value="" disabled={q.obligatoria}>{es ? "Selecciona tu país" : "Select your country"}</option>
+          <option value="" disabled={q.obligatoria}>{tr(language, "Selecciona tu país", "Select your country")}</option>
           {COUNTRIES.map((c) => (
-            <option key={c} value={c}>{es ? c : COUNTRY_EN[c]}</option>
+            <option key={c} value={c}>{tr(language, c, COUNTRY_EN[c])}</option>
           ))}
         </select>
       );
@@ -363,18 +367,16 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <h3 className="mb-3 font-display text-2xl font-bold text-foreground sm:text-3xl">
-          {es ? "Inscripción recibida" : "Registration received"}
+          {tr(language, "Inscripción recibida", "Registration received")}
         </h3>
         <p className="mb-6 max-w-xl font-body text-base leading-relaxed text-muted-foreground">
-          {es
-            ? "El showcase es solo por invitación y hay 60 plazas. Revisamos cada perfil uno a uno; si encajas, te escribimos por WhatsApp o correo con la invitación y cómo pagar la inscripción (45 €)."
-            : "The Showcase is by invitation only and there are 60 places. We review every profile one by one; if you are a fit, we will write on WhatsApp or by email with your invitation and how to pay the registration fee (€45)."}
+          {tr(language, "El showcase es solo por invitación y hay 60 plazas. Revisamos cada perfil uno a uno; si encajas, te escribimos por WhatsApp o correo con la invitación y cómo pagar la inscripción (45 €).", "The Showcase is by invitation only and there are 60 places. We review every profile one by one; if you are a fit, we will write on WhatsApp or by email with your invitation and how to pay the registration fee (€45).")}
         </p>
         <LocaleLink
           to="/recursos"
           className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
-          {es ? "Mientras, lee las guías" : "Meanwhile, read the guides"}
+          {tr(language, "Mientras, lee las guías", "Meanwhile, read the guides")}
           <ArrowRight className="h-4 w-4" />
         </LocaleLink>
       </div>
@@ -384,12 +386,10 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
   /* Live hints for the questions the form knows about. */
   const hintFor = (q: FormQuestion) => {
     if (q.id === "birthDate" && age != null && age > 0) {
-      return es ? `Tendrás ${age} años en el showcase.` : `You will be ${age} at the Showcase.`;
+      return tr(language, "Tendrás {0} años en el showcase.", "You will be {0} at the Showcase.", [age]);
     }
     if (q.id === "guardianEmail" && minor) {
-      return es
-        ? "Como serás menor de edad en el showcase, necesitamos el contacto de tu familia."
-        : "You will be under 18 at the Showcase, so we need a family contact.";
+      return tr(language, "Como serás menor de edad en el showcase, necesitamos el contacto de tu familia.", "You will be under 18 at the Showcase, so we need a family contact.");
     }
     return null;
   };
@@ -414,7 +414,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
       </div>
 
       {/* Numbered steps. Steps already seen can be reopened. */}
-      <ol className="mb-8 flex items-center" aria-label={es ? "Pasos" : "Steps"}>
+      <ol className="mb-8 flex items-center" aria-label={tr(language, "Pasos", "Steps")}>
         {sections.map((s, i) => {
           const done = i < step;
           const current = i === step;
@@ -425,7 +425,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
                 onClick={() => i <= reached && goTo(i)}
                 disabled={i > reached}
                 aria-current={current ? "step" : undefined}
-                aria-label={`${es ? "Paso" : "Step"} ${i + 1}: ${es ? s.es : s.en || s.es}`}
+                aria-label={`${tr(language, "Paso", "Step")} ${i + 1}: ${pick(language, s)}`}
                 className="group flex shrink-0 items-center gap-2 disabled:cursor-default"
               >
                 <span
@@ -442,7 +442,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
                 <span
                   className={`hidden font-body text-[13px] font-semibold lg:inline ${current ? "text-foreground" : "text-muted-foreground"}`}
                 >
-                  {es ? s.es : s.en || s.es}
+                  {pick(language, s)}
                 </span>
               </button>
               {i < last && <span className={`mx-2 h-0.5 flex-1 rounded-full ${i < step ? "bg-primary/40" : "bg-border"}`} />}
@@ -453,7 +453,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
 
       {sections.map((s, i) => (
         <div key={s.id} hidden={i !== step}>
-          <Section n={i + 1} total={sections.length} title={es ? s.es : s.en || s.es} es={es}>
+          <Section n={i + 1} total={sections.length} title={pick(language, s)} es={es}>
             {s.preguntas.map((q) =>
               q.tipo === "tel" ? (
                 <PhoneField
@@ -462,7 +462,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
                   es={es}
                   invalid={invalid.includes(q.id)}
                   required={q.obligatoria}
-                  help={es ? q.ayudaEs : q.ayudaEn || q.ayudaEs}
+                  help={q.ayudaEs ? tr(language, q.ayudaEs, q.ayudaEn || q.ayudaEs) : q.ayudaEs}
                   country={country}
                 />
               ) : (
@@ -484,9 +484,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
         <div className="mt-7 space-y-5 border-t border-border pt-7">
           <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl bg-muted/60 px-4 py-3 font-body text-[14px] leading-relaxed text-muted-foreground">
             <span className="font-display text-xl font-bold text-foreground">45 €</span>
-            {es
-              ? "es la inscripción para jugadores de España (incluye equipación, sudadera y seguro). No pagas nada al enviar este formulario: primero te confirmamos si tienes plaza."
-              : "is the registration fee for players from Spain (kit, hoodie and insurance included). You pay nothing when you send this form: we first confirm whether you have a place."}
+            {tr(language, "es la inscripción para jugadores de España (incluye equipación, sudadera y seguro). No pagas nada al enviar este formulario: primero te confirmamos si tienes plaza.", "is the registration fee for players from Spain (kit, hoodie and insurance included). You pay nothing when you send this form: we first confirm whether you have a place.")}
           </p>
           <label
             htmlFor="sc-consent"
@@ -501,18 +499,16 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
               {...(invalid.includes("consent") ? { "aria-invalid": true as const } : {})}
             />
             <span className={invalid.includes("consent") ? "text-destructive" : undefined}>
-              {es ? "He leído y acepto la " : "I have read and accept the "}
+              {tr(language, "He leído y acepto la ", "I have read and accept the ")}
               <LocaleLink
                 to="/privacidad"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-primary underline underline-offset-4"
               >
-                {es ? "Política de privacidad" : "Privacy policy"}
+                {tr(language, "Política de privacidad", "Privacy policy")}
               </LocaleLink>
-              {es
-                ? " y consiento que FutbolUAgency trate mis datos para valorar mi inscripción y contactarme sobre el showcase (RGPD). Si soy menor de edad, cuento con el consentimiento de mi padre, madre o tutor. *"
-                : " and consent to FutbolUAgency processing my data to assess my registration and contact me about the Showcase (GDPR). If I am under 18, I have my parent's or guardian's consent. *"}
+              {tr(language, " y consiento que FutbolUAgency trate mis datos para valorar mi inscripción y contactarme sobre el showcase (RGPD). Si soy menor de edad, cuento con el consentimiento de mi padre, madre o tutor. *", " and consent to FutbolUAgency processing my data to assess my registration and contact me about the Showcase (GDPR). If I am under 18, I have my parent's or guardian's consent. *")}
             </span>
           </label>
         </div>
@@ -526,15 +522,9 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
         >
           {invalid.length > 0
             ? invalid.length === 1 && invalid[0] === "consent"
-              ? es
-                ? "Para enviarlo tienes que aceptar la política de privacidad."
-                : "You need to accept the privacy policy to send it."
-              : es
-                ? "Revisa los campos marcados en rojo."
-                : "Check the fields marked in red."
-            : es
-              ? "No hemos podido enviarlo. Inténtalo otra vez o escríbenos a futboluagency@gmail.com."
-              : "We could not send it. Try again or write to us at futboluagency@gmail.com."}
+              ? tr(language, "Para enviarlo tienes que aceptar la política de privacidad.", "You need to accept the privacy policy to send it.")
+              : tr(language, "Revisa los campos marcados en rojo.", "Check the fields marked in red.")
+            : tr(language, "No hemos podido enviarlo. Inténtalo otra vez o escríbenos a futboluagency@gmail.com.", "We could not send it. Try again or write to us at futboluagency@gmail.com.")}
         </p>
       )}
 
@@ -550,7 +540,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
             className="inline-flex items-center gap-2 rounded-lg px-4 py-3 font-body font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            {es ? "Atrás" : "Back"}
+            {tr(language, "Atrás", "Back")}
           </button>
         ) : (
           <span />
@@ -561,7 +551,7 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
             onClick={next}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
           >
-            {es ? "Siguiente" : "Next"}
+            {tr(language, "Siguiente", "Next")}
             <ArrowRight className="h-4 w-4" />
           </button>
         ) : (
@@ -573,11 +563,11 @@ const ShowcaseForm = ({ definition }: { definition: ShowcaseFormDefinition }) =>
             {status === "submitting" ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                {es ? "Enviando…" : "Sending…"}
+                {tr(language, "Enviando…", "Sending…")}
               </>
             ) : (
               <>
-                {es ? "Enviar inscripción" : "Send registration"}
+                {tr(language, "Enviar inscripción", "Send registration")}
                 <ArrowRight className="h-4 w-4" />
               </>
             )}

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import LocaleLink from "@/components/LocaleLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { tr } from "@/lib/i18n";
 /** Grey footballer silhouette, standing with a ball at his feet. */
 const Silhouette = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 200 320" className={className} aria-hidden="true">
@@ -35,7 +36,7 @@ const NextPlayerCard = () => {
   const es = language === "es";
   const [name, setName] = useState("");
 
-  const words = (name.trim() || (es ? "Tu nombre" : "Your name")).toUpperCase().split(/\s+/);
+  const words = (name.trim() || (tr(language, "Tu nombre", "Your name"))).toUpperCase().split(/\s+/);
   const first = words[0];
   const rest = words.slice(1).join(" ");
 
@@ -58,20 +59,20 @@ const NextPlayerCard = () => {
             ?
           </span>
           <span className="font-body text-[11px] font-bold uppercase tracking-[0.12em] text-neutral-400 sm:text-xs">
-            {es ? "Tu universidad en EE.UU." : "Your U.S. university"}
+            {tr(language, "Tu universidad en EE.UU.", "Your U.S. university")}
           </span>
         </div>
       </div>
 
       <div className="flex flex-col gap-3 border-t border-dashed border-primary/30 p-4">
         <label className="font-body text-[13px] font-semibold text-foreground" htmlFor="next-player-name">
-          {es ? "¿Y si el siguiente eres tú?" : "What if you're next?"}
+          {tr(language, "¿Y si el siguiente eres tú?", "What if you're next?")}
         </label>
         <input
           id="next-player-name"
           value={name}
           onChange={(e) => setName(e.target.value.slice(0, 28))}
-          placeholder={es ? "Escribe tu nombre" : "Type your name"}
+          placeholder={tr(language, "Escribe tu nombre", "Type your name")}
           autoComplete="name"
           className="w-full rounded-full border border-border bg-background px-4 py-2.5 font-body text-[16px] text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary sm:text-sm"
         />
@@ -79,7 +80,7 @@ const NextPlayerCard = () => {
           to="/apply"
           className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 font-body text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
         >
-          {es ? "Quiero ser parte de FUA" : "I want to join FUA"}
+          {tr(language, "Quiero ser parte de FUA", "I want to join FUA")}
           <ArrowRight className="h-4 w-4" />
         </LocaleLink>
       </div>
