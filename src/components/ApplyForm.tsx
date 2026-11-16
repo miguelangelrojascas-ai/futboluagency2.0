@@ -4,7 +4,7 @@ import { useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { BUDGETS, BUDGET_UNSURE, COUNTRIES, COUNTRY_EN, START_TERMS, termLabelEs } from "@/data/leadOptions";
+import { BUDGETS, BUDGET_UNSURE, COUNTRY_EN, countriesByLabel, START_TERMS, termLabelEs } from "@/data/leadOptions";
 import { termLabel } from "@/lib/i18n";
 
 import { tr } from "@/lib/i18n";
@@ -176,7 +176,7 @@ const ApplyForm = () => {
             <option value="" disabled>
               {tr(language, "Selecciona tu país", "Select your country")}
             </option>
-            {COUNTRIES.map((country) => (
+            {countriesByLabel((c) => tr(language, c, COUNTRY_EN[c]), language).map((country) => (
               <option key={country} value={country}>
                 {tr(language, country, COUNTRY_EN[country])}
               </option>

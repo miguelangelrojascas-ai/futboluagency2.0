@@ -128,3 +128,12 @@ export const termLabelEs = (term: string) =>
 export type Country = (typeof COUNTRIES)[number];
 export type Budget = (typeof BUDGETS)[number];
 export type StartTerm = (typeof START_TERMS)[number];
+
+/**
+ * Countries in the visitor's alphabetical order, "Otro" last. Values stay in
+ * Spanish (that is what the CRM stores); only the order follows the labels.
+ */
+export function countriesByLabel(label: (country: string) => string, locale: string): string[] {
+  const rest = COUNTRIES.filter((c) => c !== "Otro").sort((a, b) => label(a).localeCompare(label(b), locale));
+  return [...rest, "Otro"];
+}

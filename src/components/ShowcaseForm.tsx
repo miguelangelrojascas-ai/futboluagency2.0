@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { COUNTRIES, COUNTRY_EN } from "@/data/leadOptions";
+import { COUNTRY_EN, countriesByLabel } from "@/data/leadOptions";
 import { DIAL_CODES, dialCodeFor } from "@/data/dialCodes";
 import type { FormQuestion, ShowcaseFormDefinition } from "@/lib/showcaseForm";
 
@@ -220,7 +220,7 @@ const Field = ({
       control = (
         <select {...common} defaultValue="">
           <option value="" disabled={q.obligatoria}>{tr(language, "Selecciona tu país", "Select your country")}</option>
-          {COUNTRIES.map((c) => (
+          {countriesByLabel((x) => tr(language, x, COUNTRY_EN[x]), language).map((c) => (
             <option key={c} value={c}>{tr(language, c, COUNTRY_EN[c])}</option>
           ))}
         </select>
