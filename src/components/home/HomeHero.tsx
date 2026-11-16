@@ -134,7 +134,7 @@ const HomeHero = () => {
           <p data-src className="mt-5 max-w-2xl font-bebas text-[1.2rem] leading-snug tracking-[0.16em] text-white sm:text-[1.45rem]">
             <Chars
               text={
-                tr(language, "+250 futbolistas ya compiten en NCAA, NAIA y NJCAA · más de $10M en becas", "250+ players already compete in the NCAA, NAIA and NJCAA · over $10M in scholarships")
+                tr(language, "+350 futbolistas ya compiten en NCAA, NAIA y NJCAA · más de $10M en becas", "350+ players already compete in the NCAA, NAIA and NJCAA · over $10M in scholarships")
               }
             />
           </p>

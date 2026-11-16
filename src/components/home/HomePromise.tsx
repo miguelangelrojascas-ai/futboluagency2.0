@@ -24,7 +24,7 @@ const HomePromise = () => {
       ] });
 
   const proof = [
-    { value: "250+", label: tr(language, "Atletas en EE.UU.", "Athletes in the USA") },
+    { value: "350+", label: tr(language, "Atletas en EE.UU.", "Athletes in the USA") },
     { value: "$10M+", label: tr(language, "En becas conseguidas", "In scholarships secured") },
     { value: "4", label: tr(language, "Años a tu lado", "Years by your side") },
   ];

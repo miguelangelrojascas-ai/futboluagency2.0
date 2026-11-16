@@ -40,7 +40,7 @@ const HomeRoster = () => {
               <span className="block pr-[0.08em] italic text-primary">{tr(language, "universidad", "university")}</span>
             </h2>
             <p className="mt-4 font-bebas text-[15px] tracking-[0.26em] text-ink/50 sm:text-base">
-              {tr(language, "Más de 250 casos de éxito", "Over 250 success stories")}
+              {tr(language, "Más de 350 casos de éxito", "Over 350 success stories")}
             </p>
           </div>
           <p className="max-w-sm font-body text-base leading-relaxed text-muted-foreground lg:pb-3">
