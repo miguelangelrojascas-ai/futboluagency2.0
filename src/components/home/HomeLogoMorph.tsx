@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import logoDark from "@/assets/logo-fua-dark.png";
+import logoFrame from "@/assets/logo-fua-frame.png";
+import logoLetters from "@/assets/logo-fua-letters.png";
 
 /* The name the hero copy spells out on scroll; F, U and A in red as in the logo. */
 const WORD = "FUTBOLUAGENCY";
@@ -15,10 +16,13 @@ const RED = new Set(FUA);
  * itself shows.
  */
 const SLOTS = [
-  { x: 0.049, y: 0.204, w: 0.254, h: 0.43 },
-  { x: 0.34, y: 0.189, w: 0.301, h: 0.5 },
-  { x: 0.678, y: 0.204, w: 0.258, h: 0.43 },
+  { x: 0.0488, y: 0.2037, w: 0.2539, h: 0.5271 },
+  { x: 0.3398, y: 0.1888, w: 0.3027, h: 0.6523 },
+  { x: 0.6777, y: 0.2037, w: 0.2578, h: 0.5888 },
 ];
+/* Breathing room kept under the logo while it rides down the hero. */
+const PAD = 24;
+const INSET = 0.93;
 /* Logo red, to blend the letters into the artwork. */
 const FROM = [235, 22, 41];
 const TO = [175, 7, 23];
@@ -55,13 +59,17 @@ type Box = { x: number; y: number; w: number; h: number };
 
 /**
  * The hero's scroll story. Nothing is pinned: it plays while the hero scrolls
- * away and is over when half of it has left the screen.
+ * away, everything riding down the middle of what is left of it.
  *  1. the copy fades, except the letters that spell FUTBOLUAGENCY, which glide
- *     into the word in the middle of what is left of the hero (letters the copy
- *     lacks, like the G, simply appear);
- *  2. UTBOL and GENCY fade, and F slides over to U and A: FUA;
- *  3. the three letters stretch into the shapes of the logo's letters, the logo
- *     shows around them and blurs out in place.
+ *     into the word (letters the copy lacks, like the G, simply appear);
+ *  2. the word holds and keeps travelling down;
+ *  3. UTBOL and GENCY go, and F slides over to U and A: FUA;
+ *  4. the three letters stretch into the logo's letter shapes. The logo comes in
+ *     in two layers: first its frame (wordmark and swoosh) around the letters,
+ *     then its own F, U and A take over from the stretched ones at the same spot,
+ *     so the two sets never show side by side. The logo then stays until the
+ *     hero has scrolled away.
+ * Scroll is eased, so wheel steps glide instead of jumping.
  * The original letters move themselves (no copies), so nothing can drift out of
  * size on any screen. Off when motion is reduced.
  */
@@ -77,6 +85,8 @@ const HomeLogoMorph = ({
   const layerRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLImageElement>(null);
+  const lettersRef = useRef<HTMLImageElement>(null);
   const washRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,7 +96,9 @@ const HomeLogoMorph = ({
     const word = wordRef.current;
     const logo = logoRef.current;
     const wash = washRef.current;
-    if (!enabled || !wrap || !stage || !layer || !word || !logo || !wash) return;
+    const frameImg = frameRef.current;
+    const lettersImg = lettersRef.current;
+    if (!enabled || !wrap || !stage || !layer || !word || !logo || !wash || !frameImg || !lettersImg) return;
 
     const sources = [...stage.querySelectorAll<HTMLElement>("[data-src] [data-ch]")];
     const targets = [...word.querySelectorAll<HTMLElement>("[data-ch]")];
@@ -105,7 +117,14 @@ const HomeLogoMorph = ({
     /* Per F/U/A: the slide into "FUA", then the stretch into the logo. */
     let fua: { cx: number; tx: number; ty: number; sx: number; sy: number }[] = [];
     let run = 1;
+    /* How far the layer may ride down before the logo would leave the hero. */
+    let maxRide = 0;
+    /* Height of the docked navbar, which covers the top of the hero. */
+    let navH = 0;
     let frame = 0;
+    /* Eased scroll position and the time of the last frame. */
+    let cur = -1;
+    let last = 0;
 
     const docBox = (el: Element): Box => {
       const r = el.getBoundingClientRect();
@@ -134,7 +153,12 @@ const HomeLogoMorph = ({
       [...pairs, ...targets].forEach((el) => el && (el.style.transform = ""));
       layer.style.transform = "";
       logo.style.transform = "";
-      run = Math.max(1, wrap.offsetHeight * 0.5);
+      const lgH = logo.offsetHeight;
+      const H = wrap.offsetHeight;
+      navH = (document.querySelector("nav")?.getBoundingClientRect().bottom ?? 0) + 8;
+      maxRide = Math.max(0, (H - lgH) / 2 - PAD);
+      /* The story ends when the space left below the navbar just fits the logo. */
+      run = Math.max(1, H - lgH - navH - 2 * PAD);
 
       glide = pairs.map((s, i) => {
         if (!s) return null;
@@ -161,8 +185,9 @@ const HomeLogoMorph = ({
         const slot = SLOTS[j];
         const sw = slot.w * lg.w;
         const sh = slot.h * lg.h;
-        const sx = sw / k.w;
-        const sy = sh / k.h;
+        /* A touch inside the slot, so the logo's own letters cover them at the swap. */
+        const sx = (sw / k.w) * INSET;
+        const sy = (sh / k.h) * INSET;
         const ox = k.x + k.w / 2 - (b.x + b.w / 2);
         const oy = k.y + k.h / 2 - (b.y + b.h / 2);
         return {
@@ -175,62 +200,81 @@ const HomeLogoMorph = ({
       });
     };
 
-    const paint = () => {
+    const paint = (now: number) => {
       frame = 0;
-      const s = Math.max(0, window.scrollY - wrap.offsetTop);
+      const target = Math.max(0, window.scrollY - wrap.offsetTop);
+      if (cur < 0) cur = target;
+      const dt = last ? Math.min(64, now - last) : 16;
+      last = now;
+      /* Ease toward the real scroll position; about 90% of the way in 160 ms. */
+      cur += (target - cur) * (1 - Math.exp(-dt / 70));
+      if (Math.abs(target - cur) < 0.3) cur = target;
+      const s = cur;
       const t = clamp01(s / run);
+      /* Centre of what is visible of the hero below the navbar. */
+      const ride = Math.min((s + Math.min(s, navH)) / 2, maxRide);
 
       /* The word and logo hold the middle of whatever is left of the hero. */
-      layer.style.transform = `translate3d(0, ${(s / 2).toFixed(1)}px, 0)`;
+      layer.style.transform = `translate3d(0, ${ride.toFixed(1)}px, 0)`;
 
       /* 1. Everything but the chosen letters goes; the photo darkens. */
-      const restO = String(1 - seg(t, 0, 0.12));
+      const restO = String(1 - seg(t, 0, 0.1));
       rest.forEach((el) => (el.style.opacity = restO));
       fades.forEach((el) => (el.style.opacity = restO));
-      wash.style.opacity = String(0.6 * seg(t, 0, 0.3));
+      wash.style.opacity = String(0.65 * seg(t, 0, 0.25));
 
-      /* The chosen letters ride the page at first, then glide into the word. */
-      /* Staggered by place in the word, so it assembles left to right. */
-      const arrive = (i: number) => 0.04 + i * 0.016;
+      /* The chosen letters glide into the word, left to right. */
+      const arrive = (i: number) => 0.02 + i * 0.014;
+      const FLY = 0.12;
       pairs.forEach((el, i) => {
         const g = glide[i];
         if (!el || !g) return;
-        const m = easeInOut(seg(t, arrive(i), arrive(i) + 0.13));
-        el.style.transform = `translate3d(${(g.dx * m).toFixed(1)}px, ${(g.dy * m + (s / 2) * m).toFixed(1)}px, 0) scale(${1 + (g.k - 1) * m})`;
+        const m = easeInOut(seg(t, arrive(i), arrive(i) + FLY));
+        el.style.transform = `translate3d(${(g.dx * m).toFixed(1)}px, ${(g.dy * m + ride * m).toFixed(1)}px, 0) scale(${(1 + (g.k - 1) * m).toFixed(3)})`;
         /* In flight the letters soften, so crossing paths read as motion, not clutter. */
         const fly = Math.sin(Math.PI * m);
-        el.style.filter = fly > 0.01 ? `blur(${(5 * fly).toFixed(1)}px)` : "";
-        el.style.opacity = String((1 - 0.55 * fly) * (1 - seg(t, arrive(i) + 0.12, arrive(i) + 0.15)));
+        el.style.filter = fly > 0.01 ? `blur(${(4 * fly).toFixed(1)}px)` : "";
+        el.style.opacity = String((1 - 0.5 * fly) * (1 - seg(t, arrive(i) + FLY - 0.015, arrive(i) + FLY)));
       });
 
-      /* 2. UTBOL and GENCY go; F joins U and A. */
-      const gone = seg(t, 0.4, 0.5);
-      const join = easeInOut(seg(t, 0.42, 0.56));
-      /* 3. FUA stretches into the logo's letters, the logo takes over and blurs out. */
-      const fit = easeInOut(seg(t, 0.56, 0.7));
-      const lettersOut = seg(t, 0.7, 0.76);
+      /* 3. UTBOL and GENCY go; F joins U and A. */
+      const gone = easeInOut(seg(t, 0.5, 0.6));
+      const join = easeInOut(seg(t, 0.52, 0.66));
+      /* 4. FUA stretches into the logo's letters; the logo takes over. */
+      const fit = easeInOut(seg(t, 0.62, 0.8));
+      /* The logo's letters land on top first, then the stretched ones leave beneath them. */
+      const logoLetters = easeInOut(seg(t, 0.77, 0.81));
+      const swap = easeInOut(seg(t, 0.78, 0.81));
       const red = FROM.map((c, n) => Math.round(lerp(c, TO[n], fit))).join(",");
 
       targets.forEach((el, i) => {
-        const shown = pairs[i] ? seg(t, arrive(i) + 0.12, arrive(i) + 0.15) : seg(t, arrive(i) + 0.05, arrive(i) + 0.15);
+        const shown = pairs[i]
+          ? seg(t, arrive(i) + FLY - 0.015, arrive(i) + FLY)
+          : seg(t, arrive(i) + 0.04, arrive(i) + FLY);
         const j = FUA.indexOf(i);
         if (j < 0) {
+          /* They shrink toward the middle of the word as they go. */
           el.style.opacity = String(shown * (1 - gone));
-          el.style.filter = gone > 0 ? `blur(${(6 * gone).toFixed(1)}px)` : "";
+          el.style.transform = gone > 0 ? `scale(${(1 - 0.35 * gone).toFixed(3)})` : "";
+          el.style.filter = gone > 0 ? `blur(${(5 * gone).toFixed(1)}px)` : "";
           return;
         }
         const f = fua[j];
         if (!f) return;
-        el.style.opacity = String(shown * (1 - lettersOut));
+        el.style.opacity = String(shown * (1 - swap));
         el.style.color = `rgb(${red})`;
         el.style.transform = `translate3d(${lerp(f.cx * join, f.tx, fit).toFixed(1)}px, ${(f.ty * fit).toFixed(1)}px, 0) scale(${lerp(1, f.sx, fit).toFixed(3)}, ${lerp(1, f.sy, fit).toFixed(3)})`;
       });
 
-      const logoIn = easeInOut(seg(t, 0.64, 0.74));
-      const logoOut = seg(t, 0.8, 1);
-      logo.style.opacity = String(logoIn * (1 - logoOut));
-      logo.style.transform = `scale(${1 + 0.08 * logoOut})`;
-      logo.style.filter = logoOut ? `blur(${(16 * logoOut).toFixed(1)}px)` : "";
+      const frameIn = easeInOut(seg(t, 0.7, 0.86));
+      frameImg.style.opacity = String(frameIn);
+      frameImg.style.transform = `scale(${(1.06 - 0.06 * frameIn).toFixed(4)})`;
+      frameImg.style.filter = frameIn < 1 ? `blur(${(8 * (1 - frameIn)).toFixed(1)}px)` : "";
+      lettersImg.style.opacity = String(logoLetters);
+      logo.style.opacity = t > 0.6 ? "1" : "0";
+
+      if (cur !== target) frame = requestAnimationFrame(paint);
+      else last = 0;
     };
     const kick = () => {
       if (!frame) frame = requestAnimationFrame(paint);
@@ -241,7 +285,7 @@ const HomeLogoMorph = ({
     };
 
     measure();
-    paint();
+    paint(performance.now());
     /* Anton may land after the first measure; the ink boxes depend on it. */
     document.fonts?.ready.then(onResize);
     window.addEventListener("scroll", kick, { passive: true });
@@ -284,8 +328,16 @@ const HomeLogoMorph = ({
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center">
-          <div ref={logoRef} className="w-[min(62vw,34svh)] will-change-transform" style={{ opacity: 0 }}>
-            <Image src={logoDark} alt="" sizes="(min-width: 1024px) 22rem, 62vw" className="h-auto w-full" />
+          <div ref={logoRef} className="relative w-[min(62vw,34svh)] lg:w-[min(24vw,28svh)]" style={{ opacity: 0 }}>
+            <Image ref={lettersRef} src={logoLetters} alt="" sizes="(min-width: 1024px) 18rem, 62vw" className="h-auto w-full" style={{ opacity: 0 }} />
+            <Image
+              ref={frameRef}
+              src={logoFrame}
+              alt=""
+              sizes="(min-width: 1024px) 18rem, 62vw"
+              className="absolute inset-0 h-auto w-full will-change-[opacity,transform,filter]"
+              style={{ opacity: 0 }}
+            />
           </div>
         </div>
       </div>

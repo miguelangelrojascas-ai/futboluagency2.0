@@ -241,7 +241,7 @@ const Navbar = ({ tone = "light" }: { tone?: "light" | "dark" }) => {
             }`}
           >
             <div className="px-4 py-4 flex flex-col gap-1">
-              {dark && <LanguageSwitcher dark className="mb-2 justify-center" />}
+              {dark && <LanguageSwitcher dark className="mb-2 self-center" />}
 
               {/* Inicio */}
               <LocaleLink to="/" onClick={() => setIsOpen(false)} className={mobileNavLinkClass(isActive("/"))}>
