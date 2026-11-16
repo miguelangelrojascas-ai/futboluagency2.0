@@ -52,7 +52,7 @@ const Players = () => {
               </span>
               <h1 className="mb-6 font-display text-4xl font-bold leading-[1.05] text-white sm:text-5xl md:text-6xl">
                 {tr(language, "Más de ", "More than ")}
-                <span className="italic text-red-500">{tr(language, "250 atletas", "250 athletes")}</span>
+                <span className="italic text-red-500">{tr(language, "350 atletas", "350 athletes")}</span>
                 {tr(language, " han confiado en nosotros", " have trusted us")}
               </h1>
               <p className="mx-auto max-w-2xl font-body text-base leading-relaxed text-white/90 sm:text-lg">
