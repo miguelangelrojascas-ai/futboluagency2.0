@@ -12,6 +12,7 @@ import sabadellCrest from "@/assets/spain-clubs/sabadell-crest.svg";
 import extremaduraCrest from "@/assets/spain-clubs/sport-extremadura-crest.webp";
 import marialvasCrest from "@/assets/spain-clubs/marialvas-crest.webp";
 import primePlayMark from "@/assets/primeplay-wordmark.jpg";
+import fuaLogo from "@/assets/logo-fua-dark.png";
 import talaveraTraining from "@/assets/spain-clubs/talavera.jpg";
 import tunnelPhoto from "@/assets/spain-academy.jpg";
 import warmupPhoto from "@/assets/spain-warmup.jpg";
@@ -132,13 +133,6 @@ const Label = ({ children, dark = false }: { children: React.ReactNode; dark?: b
 const Spain = () => {
   const { language } = useLanguage();
   const t = (es: string, en: string) => tr(language, es, en);
-
-  const facts = [
-    { k: t("Duración", "Length"), v: t("Temporada completa", "A full season") },
-    { k: t("Edad", "Age"), v: t("16 a 23 años", "16 to 23") },
-    { k: t("Base", "Base"), v: t("Talavera de la Reina, a 1 h de Madrid", "Talavera de la Reina, 1 h from Madrid") },
-    { k: t("Red de clubes", "Club network"), v: t("España y Portugal", "Spain and Portugal") },
-  ];
 
   const clubs: { name: string; place: string; crest: StaticImageData }[] = [
     { name: "CF Talavera de la Reina", place: t("Talavera de la Reina · España", "Talavera de la Reina · Spain"), crest: talaveraCrest },
@@ -278,11 +272,10 @@ const Spain = () => {
             }}
           />
           <div className="container-wide w-full px-4 pb-10 pt-24 sm:pb-14">
-            <h1 className="max-w-5xl leading-[0.9] text-white text-[clamp(3.25rem,10vw,8.5rem)]">
-              {t("Una temporada", "A season")}
+            <h1 className="max-w-5xl leading-[0.9] text-white text-[clamp(2.75rem,8.2vw,7rem)]">
+              {t("Vive una temporada completa", "Live a full season")}
               <span className="block pr-[0.08em] italic text-red-bright">{t("en el fútbol español", "in Spanish football")}</span>
             </h1>
-            <Label dark>{t("Con Prime Play", "With Prime Play")}</Label>
             <p className="mt-5 max-w-md font-body text-base leading-relaxed text-white/80 sm:hidden">
               {t("Entrena, compite y vive una temporada en un club real de España o Portugal.", "Train, compete and live a full season at a real club in Spain or Portugal.")}
             </p>
@@ -294,14 +287,13 @@ const Spain = () => {
             </p>
             <ApplyButton label={t("Aplica al programa", "Apply to the programme")} className="mt-8" />
 
-            <dl className="mt-10 grid sm:mt-14 grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-4">
-              {facts.map((f) => (
-                <div key={f.k} className="bg-ink/80 px-4 py-4 backdrop-blur-sm sm:px-5 sm:py-5">
-                  <dt className="label-bebas text-sm text-white/50">{f.k}</dt>
-                  <dd className="mt-1 font-body text-sm font-semibold text-white sm:text-[15px]">{f.v}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-12 flex items-center gap-5 border-t border-white/15 pt-6 sm:mt-16 sm:gap-7">
+              <Image src={fuaLogo} alt="FutbolUAgency" sizes="56px" className="h-11 w-auto sm:h-14" />
+              <span aria-hidden="true" className="font-bebas text-2xl text-white/50 sm:text-3xl">×</span>
+              {/* The wordmark sits on black; screen blending drops that black over the video. */}
+              <Image src={primePlayMark} alt="Prime Play" sizes="220px" className="h-auto w-36 mix-blend-screen sm:w-52" />
+              <span className="label-bebas hidden text-sm text-white/50 md:block">{t("Programa oficial en alianza", "Official partnership programme")}</span>
+            </div>
           </div>
         </section>
 
@@ -310,15 +302,15 @@ const Spain = () => {
           <div className="container-wide grid gap-12 px-4 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
               <h2 className="leading-[0.92] text-ink text-[clamp(2.75rem,7.5vw,6rem)]">
-                {t("Mismo vestuario.", "Same dressing room.")}
-                <span className="block">{t("Misma liga.", "Same league.")}</span>
-                <span className="block pr-[0.08em] italic text-primary">{t("Mismo nivel.", "Same level.")}</span>
+                {t("Entrena como", "Train like")}
+                <span className="block">{t("un profesional.", "a professional.")}</span>
+                <span className="block pr-[0.08em] italic text-primary">{t("Compite como uno.", "Compete like one.")}</span>
               </h2>
-              <Label>{t("Una temporada completa, no un campus de verano", "A full season, not a summer camp")}</Label>
+              <Label>{t("Mismo vestuario y misma liga que los profesionales", "The same dressing room and league as the professionals")}</Label>
               <p className="mt-8 max-w-[60ch] font-body text-lg leading-relaxed text-ink/70">
                 {t(
-                  "No es un campus ni una prueba de una semana. Te incorporas a la plantilla de un club, compites en partidos oficiales cada fin de semana y te ven ojeadores en cada jornada. Así se mide de verdad tu nivel, y así se mejora.",
-                  "This is not a camp or a one-week trial. You join a club's squad, play official matches every weekend and scouts watch every round. That is how your level is really measured, and how it improves.",
+                  "Incorpórate a la plantilla de un club español, entrena cada día con su cuerpo técnico y compite en partidos oficiales cada fin de semana, con ojeadores en la grada. No es un campus ni una prueba de una semana: es una temporada entera para demostrar de qué estás hecho y dar el salto.",
+                  "Join the squad of a Spanish club, train every day with its coaching staff and play official matches every weekend, with scouts in the stands. This is not a camp or a one-week trial: it is a whole season to show what you are made of and take the next step.",
                 )}
               </p>
             </div>
