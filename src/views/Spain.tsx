@@ -1,12 +1,12 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { ArrowRight, ArrowUpRight, Check, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, ArrowUpRight, Check, Play, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { tr } from "@/lib/i18n";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnderStoryCard from "@/components/AnderStoryCard";
 import talaveraCrest from "@/assets/spain-clubs/talavera-logo.png";
 import sabadellCrest from "@/assets/spain-clubs/sabadell-crest.svg";
 import extremaduraCrest from "@/assets/spain-clubs/sport-extremadura-crest.webp";
@@ -15,11 +15,103 @@ import primePlayMark from "@/assets/primeplay-wordmark.jpg";
 import talaveraTraining from "@/assets/spain-clubs/talavera.jpg";
 import tunnelPhoto from "@/assets/spain-academy.jpg";
 import warmupPhoto from "@/assets/spain-warmup.jpg";
+import stadiumPhoto from "@/assets/spain-stadium.jpg";
+import coachingPhoto from "@/assets/spain-training.jpg";
+import primePlayEvent from "@/assets/primeplay-usa-event.jpg";
 
 /* The Spain programme's own application form. */
 const APPLY_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLScXOeAxT7cjKKWiEql7DgAqDNdYJGLzASHtO_b_dLnYOKdcVA/viewform";
 const PRIME_PLAY_URL = "https://primeplay.es/en/about-us/";
+const LIFE_VIDEO_ID = "bSJDji1pLPA";
+
+/* Photos for "Cómo entrenamos": one fades into the next every few seconds. */
+const TRAINING_SLIDES: { src: StaticImageData | string; es: string; en: string }[] = [
+  { src: warmupPhoto, es: "Calentamiento antes del entrenamiento", en: "Warm-up before training" },
+  { src: stadiumPhoto, es: "Charla técnica en el estadio", en: "Team talk in the stadium" },
+  { src: "/images/showcase/campo-principal.jpg", es: "Campo principal de la Ciudad Deportiva", en: "Main pitch at the sports complex" },
+  { src: coachingPhoto, es: "Sesión con el cuerpo técnico", en: "Session with the coaching staff" },
+  { src: "/images/showcase/ciudad-deportiva-atardecer.jpg", es: "Ciudad Deportiva al atardecer", en: "The sports complex at sunset" },
+];
+
+const TrainingSlideshow = ({ language }: { language: string }) => {
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => setActive((i) => (i + 1) % TRAINING_SLIDES.length), 4500);
+    return () => window.clearInterval(id);
+  }, []);
+  return (
+    <div className="relative min-h-[22rem] overflow-hidden rounded-[1.75rem] bg-ink lg:col-span-5">
+      {TRAINING_SLIDES.map((slide, i) => (
+        <Image
+          key={i}
+          src={slide.src}
+          alt={tr(language as "es", slide.es, slide.en)}
+          fill
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          aria-hidden={i !== active}
+          className={`object-cover transition-[opacity,transform] duration-[1400ms] ease-out ${i === active ? "scale-100 opacity-100" : "scale-105 opacity-0"}`}
+        />
+      ))}
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+      <div className="absolute inset-x-6 bottom-5 flex items-end justify-between gap-4">
+        <p className="label-bebas text-sm text-white/85">{tr(language as "es", TRAINING_SLIDES[active].es, TRAINING_SLIDES[active].en)}</p>
+        <div className="flex shrink-0 gap-1.5">
+          {TRAINING_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`${i + 1} / ${TRAINING_SLIDES.length}`}
+              aria-current={i === active}
+              className={`h-1.5 rounded-full transition-all duration-500 ${i === active ? "w-6 bg-white" : "w-1.5 bg-white/45 hover:bg-white/80"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* YouTube loads only after the visitor presses play. */
+const LifeVideo = ({ language }: { language: string }) => {
+  const [playing, setPlaying] = useState(false);
+  const title = tr(language as "es", "Así se vive el programa desde dentro", "Life on the programme, from the inside");
+  return (
+    <figure>
+    <div className="relative aspect-video overflow-hidden rounded-[1.75rem] bg-ink">
+      {playing ? (
+        <iframe
+          className="absolute inset-0 h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${LIFE_VIDEO_ID}?autoplay=1&rel=0`}
+          title={title}
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen
+        />
+      ) : (
+        <button type="button" onClick={() => setPlaying(true)} className="group absolute inset-0 h-full w-full text-left" aria-label={title}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`https://i.ytimg.com/vi/${LIFE_VIDEO_ID}/maxresdefault.jpg`}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+          <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-red-bright text-white shadow-[0_12px_40px_-8px_hsl(354_86%_50%/0.9)] transition-transform duration-300 group-hover:scale-110 sm:h-24 sm:w-24">
+            <Play className="ml-1 h-8 w-8 fill-current" />
+          </span>
+        </button>
+      )}
+    </div>
+    <figcaption className="mt-5 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+      <span className="font-druk text-2xl uppercase leading-none text-ink sm:text-4xl">{title}</span>
+      <span className="label-bebas text-sm text-ink/50">{tr(language as "es", "Vídeo · La experiencia de un jugador", "Video · A player's experience")}</span>
+    </figcaption>
+    </figure>
+  );
+};
 
 const ApplyButton = ({ label, className = "" }: { label: string; className?: string }) => (
   <a
@@ -57,6 +149,7 @@ const Spain = () => {
 
   const primePlay = [
     {
+      image: "/images/showcase/estadio-el-prado.jpg",
       title: t("Clubes reales, no un campus", "Real clubs, not a camp"),
       body: t(
         "Prime Play invierte y gestiona clubes en España y Portugal. Por eso puedes entrar en una plantilla de verdad y competir en liga federada.",
@@ -64,6 +157,7 @@ const Spain = () => {
       ),
     },
     {
+      image: "/images/showcase/hotel.jpg",
       title: t("Residencia de élite", "Elite residence"),
       body: t(
         "Un entorno estructurado las 24 horas: alojamiento, comidas, estudio y descanso pensados para rendir.",
@@ -71,6 +165,7 @@ const Spain = () => {
       ),
     },
     {
+      image: primePlayEvent,
       title: t("Puente con Estados Unidos", "A bridge to the United States"),
       body: t(
         "Prime Play es una plataforma transatlántica, con una academia en Houston de más de 3.000 jugadores. Una red que une el fútbol europeo con Estados Unidos.",
@@ -78,6 +173,7 @@ const Spain = () => {
       ),
     },
     {
+      image: coachingPhoto,
       title: t("Desarrollo integral", "All-round development"),
       body: t(
         "Metodología deportiva, formación académica y seguimiento personalizado de cada jugador, dentro de un mismo modelo.",
@@ -186,8 +282,11 @@ const Spain = () => {
               {t("Una temporada", "A season")}
               <span className="block pr-[0.08em] italic text-red-bright">{t("en el fútbol español", "in Spanish football")}</span>
             </h1>
-            <Label dark>{t("Programa España · En alianza con Prime Play", "Spain programme · In partnership with Prime Play")}</Label>
-            <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-white/80">
+            <Label dark>{t("Con Prime Play", "With Prime Play")}</Label>
+            <p className="mt-5 max-w-md font-body text-base leading-relaxed text-white/80 sm:hidden">
+              {t("Entrena, compite y vive una temporada en un club real de España o Portugal.", "Train, compete and live a full season at a real club in Spain or Portugal.")}
+            </p>
+            <p className="mt-6 hidden max-w-2xl font-body text-lg leading-relaxed text-white/80 sm:block">
               {t(
                 "Entrenas, compites y vives dentro de un club real de España o Portugal durante toda la temporada, en uno de los entornos más exigentes del mundo para mejorar y ser visto.",
                 "You train, compete and live inside a real club in Spain or Portugal for the whole season, in one of the most demanding environments in the world to improve and be seen.",
@@ -195,11 +294,11 @@ const Spain = () => {
             </p>
             <ApplyButton label={t("Aplica al programa", "Apply to the programme")} className="mt-8" />
 
-            <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-4">
+            <dl className="mt-10 grid sm:mt-14 grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-4">
               {facts.map((f) => (
-                <div key={f.k} className="bg-ink/80 px-5 py-5 backdrop-blur-sm">
+                <div key={f.k} className="bg-ink/80 px-4 py-4 backdrop-blur-sm sm:px-5 sm:py-5">
                   <dt className="label-bebas text-sm text-white/50">{f.k}</dt>
-                  <dd className="mt-1 font-body text-[15px] font-semibold text-white">{f.v}</dd>
+                  <dd className="mt-1 font-body text-sm font-semibold text-white sm:text-[15px]">{f.v}</dd>
                 </div>
               ))}
             </dl>
@@ -240,17 +339,18 @@ const Spain = () => {
 
             <ul className="mt-14 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
               {clubs.map((c) => (
-                <li key={c.name} className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-white/25 sm:p-8">
-                  <div className="flex aspect-square items-center justify-center rounded-xl bg-white p-6 sm:p-8">
+                <li key={c.name} className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(70%_55%_at_50%_38%,rgba(255,255,255,0.09),transparent_70%)] px-4 pb-6 pt-10 text-center transition-colors duration-300 hover:border-red-bright/50 sm:px-6 sm:pb-8 sm:pt-14">
+                  <div className="relative h-28 w-28 sm:h-40 sm:w-40 lg:h-44 lg:w-44">
                     <Image
                       src={c.crest}
                       alt={t(`Escudo del ${c.name}`, `${c.name} crest`)}
-                      sizes="(min-width: 1024px) 14rem, 40vw"
-                      className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                      fill
+                      sizes="(min-width: 1024px) 11rem, 7rem"
+                      className="object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.55)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-[1.06]"
                     />
                   </div>
-                  <p className="mt-6 font-body text-base font-semibold text-white sm:text-lg">{c.name}</p>
-                  <p className="label-bebas mt-1 text-sm text-white/50">{c.place}</p>
+                  <p className="mt-8 font-body text-sm font-semibold text-white sm:text-lg">{c.name}</p>
+                  <p className="label-bebas mt-1 text-xs text-white/50 sm:text-sm">{c.place}</p>
                 </li>
               ))}
             </ul>
@@ -291,12 +391,31 @@ const Spain = () => {
                 </a>
               </div>
 
-              <ul className="grid gap-px self-start overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
-                {primePlay.map((p) => (
-                  <li key={p.title} className="bg-background p-7 sm:p-8">
-                    <span aria-hidden="true" className="block h-1 w-8 rounded-full bg-primary" />
-                    <h3 className="mt-5 text-xl font-bold text-ink">{p.title}</h3>
-                    <p className="mt-3 font-body text-[15px] leading-relaxed text-ink/65">{p.body}</p>
+              <ul className="grid gap-4 self-start sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
+                {primePlay.map((p, i) => (
+                  <li
+                    key={p.title}
+                    tabIndex={0}
+                    className="group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white outline-none ring-red-bright/70 transition-shadow duration-300 focus-visible:ring-2 sm:aspect-[3/4]"
+                  >
+                    <Image
+                      src={p.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
+                      className="-z-20 object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-focus-visible:scale-110"
+                    />
+                    <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/90 via-black/40 to-black/5 transition-colors duration-500 group-hover:from-black/95 group-hover:via-black/70" />
+                    <span aria-hidden="true" className="absolute left-6 top-5 font-bebas text-2xl tracking-[0.1em] text-white/60 transition-colors group-hover:text-red-bright">0{i + 1}</span>
+                    <div className="p-6">
+                      <span aria-hidden="true" className="block h-1 w-8 rounded-full bg-red-bright transition-all duration-500 group-hover:w-16" />
+                      <h3 className="mt-4 text-xl font-bold leading-tight text-white">{p.title}</h3>
+                      <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out [@media(hover:hover)]:grid-rows-[0fr] [@media(hover:hover)]:group-hover:grid-rows-[1fr] [@media(hover:hover)]:group-focus-visible:grid-rows-[1fr]">
+                        <p className="overflow-hidden font-body text-[15px] leading-relaxed text-white/80">
+                          <span className="block pt-3">{p.body}</span>
+                        </p>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -349,9 +468,7 @@ const Spain = () => {
                   </li>
                 ))}
               </ul>
-              <div className="relative min-h-[22rem] overflow-hidden rounded-[1.75rem] lg:col-span-5">
-                <Image src={warmupPhoto} alt={t("Calentamiento antes del entrenamiento", "Warm-up before training")} fill sizes="(min-width: 1024px) 40vw, 100vw" placeholder="blur" className="object-cover" />
-              </div>
+              <TrainingSlideshow language={language} />
             </div>
           </div>
         </section>
@@ -380,6 +497,9 @@ const Spain = () => {
                   </ol>
                 </div>
               ))}
+            </div>
+            <div className="mt-6">
+              <LifeVideo language={language} />
             </div>
           </div>
         </section>
@@ -433,8 +553,6 @@ const Spain = () => {
             </div>
           </div>
         </section>
-
-        <AnderStoryCard />
 
         {/* CLOSE */}
         <section className="relative isolate overflow-hidden bg-ink py-24 text-white sm:py-32">
