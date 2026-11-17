@@ -1,0 +1,38 @@
+# FutbolUAgency (FUA)
+
+> FutbolUAgency LLC is a recruitment agency that helps international football (soccer) players earn athletic scholarships at NCAA, NAIA and NJCAA universities in the United States, and runs a full-season programme with clubs in Spain and Portugal in partnership with Prime Play. Founded in 2020 by former players. The site is available in Spanish (default), English, Italian and German.
+
+Key facts:
+- 350+ athletes placed at U.S. universities; over $10M in scholarships secured.
+- Rated 5.0 on Google from 100 reviews.
+- Free, no-obligation profile evaluation.
+- FUA Showcase Talavera 2027: February 1–3, 2027 in Talavera de la Reina (Toledo, Spain), 60 players from Spain and the U.S. in front of U.S. college coaches. By invitation only.
+- Contact: futboluagency@gmail.com · +34 603 331 990 (Spain) · +57 333 706 4037 (Latin America).
+
+## Main pages (English)
+
+- [Home](https://futboluagency.com/en): soccer scholarships in the USA, how FUA works.
+- [College soccer in the USA](https://futboluagency.com/en/usa): NCAA, NAIA and JUCO, the process, student-athlete life and university network.
+- [A season in Spanish football](https://futboluagency.com/en/spain): full season at clubs such as CF Talavera, CE Sabadell, Sport Extremadura and OS Marialvas; ages 16 to 23.
+- [Showcase Talavera 2027](https://futboluagency.com/en/showcase): dates, venue, schedule and registration.
+- [Our players](https://futboluagency.com/en/players): players already competing at U.S. universities.
+- [About us](https://futboluagency.com/en/about): founders and team.
+- [Free evaluation](https://futboluagency.com/en/apply): admissions form.
+
+## Guides
+
+- [Scholarships & eligibility](https://futboluagency.com/en/resources/becas-y-elegibilidad)
+- [The divisions](https://futboluagency.com/en/resources/las-divisiones)
+- [Requirements & profile](https://futboluagency.com/en/resources/requisitos-y-perfil)
+- [Visa & paperwork](https://futboluagency.com/en/resources/visado-y-documentacion)
+- [Costs & funding](https://futboluagency.com/en/resources/costes-y-financiacion)
+- [College life in the U.S.](https://futboluagency.com/en/resources/vida-universitaria)
+
+## Optional
+
+- [Inicio (español)](https://futboluagency.com/es)
+- [Fútbol universitario en EE.UU.](https://futboluagency.com/es/usa)
+- [Temporada en España](https://futboluagency.com/es/espana)
+- [Showcase Talavera 2027](https://futboluagency.com/es/showcase)
+- [Guías (recursos)](https://futboluagency.com/es/recursos)
+- [Sitemap](https://futboluagency.com/sitemap.xml)

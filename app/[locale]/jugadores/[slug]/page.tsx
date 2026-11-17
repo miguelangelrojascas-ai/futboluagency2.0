@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { alternatesFor, socialFor } from "@/lib/pageMeta";
+import { alternatesFor, socialFor, withBrand } from "@/lib/pageMeta";
 import { LOCALES, href, isLocale, type Locale } from "@/lib/routes";
 import { breadcrumbSchema, jsonLd, playerSchema } from "@/lib/schema";
 import { findPlayerStory, playerStories } from "@/data/playerStories";
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const story = findPlayerStory(resolved.slug);
   if (!story || !isLocale(resolved.locale)) return {};
   const { locale } = resolved;
-  const title = `${story.name} — ${story.university} | FutbolUAgency`;
+  const title = withBrand(`${story.name} — ${story.university}`);
   const description = pick(locale, story.summary);
 
   return {

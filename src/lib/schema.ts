@@ -31,6 +31,17 @@ export function organizationSchema(locale: Locale) {
           "Agencia de reclutamiento que ayuda a futbolistas internacionales a conseguir becas deportivas en universidades NCAA, NAIA y NJCAA de Estados Unidos.",
           "Recruitment agency helping international footballers earn scholarships at NCAA, NAIA and NJCAA universities in the United States.",
         ),
+        foundingDate: "2020",
+        founder: { "@type": "Person", name: "Ignacio De Bejar", jobTitle: "CEO" },
+        knowsAbout: [
+          "College soccer scholarships",
+          "NCAA",
+          "NAIA",
+          "NJCAA",
+          "Student-athlete recruitment",
+          "F-1 student visa",
+          "Spanish football",
+        ],
         email: "futboluagency@gmail.com",
         address: {
           "@type": "PostalAddress",
@@ -75,6 +86,51 @@ export function organizationSchema(locale: Locale) {
         })),
       },
     ],
+  };
+}
+
+/** The Showcase, so Google can show its dates and place in results. */
+export function showcaseEventSchema(locale: Locale) {
+  const page = `${SITE}${href(locale, "showcase")}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "@id": `${page}#event`,
+    name: "FUA Showcase Talavera 2027",
+    description: tr(
+      locale,
+      "Tres días de partidos en Talavera de la Reina ante entrenadores universitarios de EE.UU. 60 jugadores de España y Estados Unidos. Solo por invitación.",
+      "Three days of matches in Talavera de la Reina in front of U.S. college coaches. 60 players from Spain and the United States. By invitation only.",
+    ),
+    startDate: "2027-02-01T09:00:00+01:00",
+    endDate: "2027-02-03T17:00:00+01:00",
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    sport: "Soccer",
+    inLanguage: locale,
+    url: page,
+    image: [`${SITE}/images/showcase/campo-principal.jpg`, `${SITE}/images/showcase/estadio-el-prado.jpg`],
+    location: {
+      "@type": "Place",
+      name: "Ciudad Deportiva, Talavera de la Reina",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Polígono Sector VI",
+        postalCode: "45683",
+        addressLocality: "Cazalegas",
+        addressRegion: "Toledo",
+        addressCountry: "ES",
+      },
+    },
+    organizer: { "@type": "Organization", "@id": `${SITE}/#organization`, name: "FutbolUAgency LLC", url: SITE },
+    offers: {
+      "@type": "Offer",
+      name: tr(locale, "Inscripción de jugador", "Player registration"),
+      price: "45",
+      priceCurrency: "EUR",
+      url: page,
+      availability: "https://schema.org/InStock",
+    },
   };
 }
 

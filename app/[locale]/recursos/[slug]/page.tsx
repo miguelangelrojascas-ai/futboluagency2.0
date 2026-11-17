@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { alternatesFor, metaCopy, socialFor } from "@/lib/pageMeta";
+import { alternatesFor, metaCopy, socialFor, withBrand } from "@/lib/pageMeta";
 import { LOCALES, href, isLocale, type Locale } from "@/lib/routes";
 import { articleSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { findGuide, guides } from "@/data/resources";
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const guide = findGuide(resolved.slug);
   if (!guide || !isLocale(resolved.locale)) return {};
   const { locale } = resolved;
-  const title = `${pick(locale, guide.seoTitle)} | FutbolUAgency`;
+  const title = withBrand(pick(locale, guide.seoTitle));
   const description = pick(locale, guide.summary);
 
   return {
@@ -64,7 +64,7 @@ export default async function Page({
     }),
     breadcrumbSchema([
       { name: tr(locale, "Inicio", "Home"), path: href(locale, "home") },
-      { name: metaCopy("resources", locale).title.split(" |")[0], path: href(locale, "resources") },
+      { name: pick(locale, { es: "Recursos", en: "Resources", it: "Risorse", de: "Ressourcen" }), path: href(locale, "resources") },
       { name: pick(locale, guide.title), path },
     ]),
   );

@@ -21,126 +21,204 @@ type Copy = { title: string; description: string; ogTitle?: string; ogDescriptio
  * components: metadata is emitted by the server route files, which read this.
  */
 export const PAGE_META: Record<RouteKey, Record<"es" | "en", Copy> & Partial<Record<Locale, Copy>>> = {
+  /* Titles stay within ~60 characters and descriptions within ~160, so Google
+     shows them whole. Each language is written out, not looked up. */
   home: {
     es: {
-      title: "FutbolUAgency LLC. | Becas Deportivas en Estados Unidos",
+      title: "Becas de fútbol en EE.UU. | FutbolUAgency",
       description:
-        "Ayudamos a futbolistas internacionales a obtener becas deportivas en universidades NCAA, NAIA y JUCO en Estados Unidos. Evaluación gratuita.",
-      ogDescription:
-        "Convierte tu talento en una beca deportiva. Ayudamos a futbolistas internacionales a entrar a universidades NCAA, NAIA y JUCO.",
+        "Agencia de becas de fútbol universitario en EE.UU. Más de 350 jugadores en NCAA, NAIA y NJCAA y más de $10M en becas. Evaluación gratuita y sin compromiso.",
     },
     en: {
-      title: "FutbolUAgency LLC. | Soccer Scholarships in the United States",
+      title: "Soccer Scholarships in the USA | FutbolUAgency",
       description:
-        "We help international footballers earn soccer scholarships at NCAA, NAIA and JUCO universities in the United States. Free evaluation.",
-      ogDescription:
-        "Turn your talent into a scholarship. We help international footballers reach NCAA, NAIA and JUCO universities.",
+        "College soccer scholarship agency for the USA. 350+ players placed in the NCAA, NAIA and NJCAA and over $10M in scholarships. Free, no-obligation evaluation.",
+    },
+    it: {
+      title: "Borse di studio calcio negli USA | FutbolUAgency",
+      description:
+        "Agenzia di borse di studio per il calcio universitario negli USA. Oltre 350 giocatori in NCAA, NAIA e NJCAA e più di 10 M$ in borse. Valutazione gratuita.",
+    },
+    de: {
+      title: "Fußball-Stipendien in den USA | FutbolUAgency",
+      description:
+        "Agentur für College-Fußball-Stipendien in den USA. Über 350 Spieler in NCAA, NAIA und NJCAA und mehr als 10 Mio. $ an Stipendien. Kostenlose Bewertung.",
     },
   },
   spain: {
     es: {
-      title: "Programa en España | Academias de Fútbol Élite – FutbolUAgency",
+      title: "Temporada en el fútbol español | FutbolUAgency",
       description:
-        "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales a una hora de Madrid. Para jugadores internacionales de 14 a 19 años.",
-      ogTitle: "Programa en España | FutbolUAgency",
-      ogDescription:
-        "Entrena en las mejores academias de fútbol de España. Programa élite con clubes profesionales a una hora de Madrid.",
+        "Entrena y compite una temporada completa en clubes de España y Portugal como el CF Talavera o el CE Sabadell, en alianza con Prime Play. De 16 a 23 años.",
     },
     en: {
-      title: "Spain Program | Elite Football Academies – FutbolUAgency",
+      title: "A Season in Spanish Football | FutbolUAgency",
       description:
-        "Train at top football academies in Spain. An elite program with professional clubs an hour from Madrid, for international players aged 14 to 19.",
-      ogTitle: "Spain Program | FutbolUAgency",
-      ogDescription:
-        "Train at top football academies in Spain. An elite program with professional clubs an hour from Madrid.",
+        "Train and compete for a full season at clubs in Spain and Portugal such as CF Talavera and CE Sabadell, in partnership with Prime Play. Ages 16 to 23.",
+    },
+    it: {
+      title: "Una stagione nel calcio spagnolo | FutbolUAgency",
+      description:
+        "Allenati e gioca un'intera stagione in club di Spagna e Portogallo come il CF Talavera e il CE Sabadell, in collaborazione con Prime Play. Dai 16 ai 23 anni.",
+    },
+    de: {
+      title: "Eine Saison im spanischen Fußball | FutbolUAgency",
+      description:
+        "Trainiere und spiele eine ganze Saison bei Vereinen in Spanien und Portugal wie CF Talavera und CE Sabadell, in Partnerschaft mit Prime Play. 16 bis 23 Jahre.",
     },
   },
   usa: {
     es: {
-      title: "Fútbol Universitario en USA | Becas NCAA, NAIA y JUCO – FutbolUAgency",
+      title: "Becas NCAA, NAIA y JUCO en EE.UU. | FutbolUAgency",
       description:
         "Descubre cómo conseguir una beca de fútbol en universidades americanas NCAA, NAIA y JUCO. Proceso, requisitos y casos de éxito reales.",
-      ogTitle: "Fútbol Universitario en USA | FutbolUAgency",
     },
     en: {
-      title: "College Soccer in the USA | NCAA, NAIA and JUCO Scholarships – FutbolUAgency",
+      title: "NCAA, NAIA & JUCO Soccer Scholarships | FutbolUAgency",
       description:
         "Find out how to earn a soccer scholarship at NCAA, NAIA and JUCO universities in the U.S. Process, requirements and real placements.",
-      ogTitle: "College Soccer in the USA | FutbolUAgency",
+    },
+    it: {
+      title: "Borse di studio NCAA, NAIA e JUCO | FutbolUAgency",
+      description:
+        "Come ottenere una borsa di studio per il calcio nelle università NCAA, NAIA e JUCO degli Stati Uniti: processo, requisiti e casi reali.",
+    },
+    de: {
+      title: "NCAA-, NAIA- & JUCO-Stipendien | FutbolUAgency",
+      description:
+        "So bekommst du ein Fußball-Stipendium an NCAA-, NAIA- und JUCO-Universitäten in den USA: Ablauf, Voraussetzungen und echte Platzierungen.",
     },
   },
   showcase: {
     es: {
-      title: "Showcase Talavera 2027 | Fútbol ante entrenadores universitarios de EE.UU. – FutbolUAgency",
+      title: "Showcase Talavera 2027 | FutbolUAgency",
       description:
-        "1, 2 y 3 de febrero de 2027 en Talavera de la Reina, a 1h30 de Madrid. 60 jugadores de España y EE.UU. jugando ante entrenadores universitarios. Solo por invitación.",
-      ogTitle: "Showcase Talavera 2027 | FutbolUAgency",
+        "1, 2 y 3 de febrero de 2027 en Talavera de la Reina, a 1h30 de Madrid. 60 jugadores de España y EE.UU. ante entrenadores universitarios. Solo por invitación.",
     },
     en: {
-      title: "Showcase Talavera 2027 | Play in front of U.S. college coaches – FutbolUAgency",
+      title: "Showcase Talavera 2027 | FutbolUAgency",
       description:
         "February 1–3, 2027 in Talavera de la Reina, 90 minutes from Madrid. 60 players from Spain and the U.S. evaluated live by college coaches. By invitation only.",
-      ogTitle: "Showcase Talavera 2027 | FutbolUAgency",
+    },
+    it: {
+      title: "Showcase Talavera 2027 | FutbolUAgency",
+      description:
+        "1, 2 e 3 febbraio 2027 a Talavera de la Reina, a 1h30 da Madrid. 60 giocatori di Spagna e USA davanti agli allenatori universitari. Solo su invito.",
+    },
+    de: {
+      title: "Showcase Talavera 2027 | FutbolUAgency",
+      description:
+        "1.–3. Februar 2027 in Talavera de la Reina, 90 Minuten von Madrid. 60 Spieler aus Spanien und den USA vor US-College-Trainern. Nur auf Einladung.",
     },
   },
   players: {
     es: {
-      title: "Nuestros Jugadores | FutbolUAgency",
+      title: "Nuestros jugadores en EE.UU. | FutbolUAgency",
       description:
-        "Los futbolistas de FutbolUAgency que ya estudian y compiten en universidades NCAA, NAIA y NJCAA de Estados Unidos.",
+        "Conoce a los futbolistas de FutbolUAgency que ya estudian y compiten con beca en universidades NCAA, NAIA y NJCAA de Estados Unidos.",
     },
     en: {
-      title: "Our Players | FutbolUAgency",
+      title: "Our Players in the USA | FutbolUAgency",
       description:
-        "The FutbolUAgency footballers already studying and competing at NCAA, NAIA and NJCAA universities in the United States.",
+        "Meet the FutbolUAgency footballers already studying and competing on scholarship at NCAA, NAIA and NJCAA universities in the United States.",
+    },
+    it: {
+      title: "I nostri giocatori negli USA | FutbolUAgency",
+      description:
+        "Scopri i calciatori di FutbolUAgency che già studiano e giocano con borsa di studio nelle università NCAA, NAIA e NJCAA degli Stati Uniti.",
+    },
+    de: {
+      title: "Unsere Spieler in den USA | FutbolUAgency",
+      description:
+        "Lerne die Fußballer von FutbolUAgency kennen, die bereits mit Stipendium an NCAA-, NAIA- und NJCAA-Universitäten in den USA studieren und spielen.",
     },
   },
   resources: {
     es: {
-      title: "Recursos | Guías sobre becas de fútbol en EE.UU. – FutbolUAgency",
+      title: "Guías sobre becas de fútbol en EE.UU. | FutbolUAgency",
       description:
         "Guías completas sobre becas de fútbol universitario en Estados Unidos: elegibilidad, requisitos, proceso, visado, costes y vida en el campus.",
     },
     en: {
-      title: "Resources | Guides on U.S. soccer scholarships – FutbolUAgency",
+      title: "Guides to U.S. Soccer Scholarships | FutbolUAgency",
       description:
-        "Complete guides on U.S. college soccer scholarships: eligibility, requirements, process, visa, costs and campus life.",
+        "Complete guides to U.S. college soccer scholarships: eligibility, requirements, the process, visas, costs and campus life.",
+    },
+    it: {
+      title: "Guide alle borse di studio negli USA | FutbolUAgency",
+      description:
+        "Guide complete sulle borse di studio per il calcio universitario negli USA: idoneità, requisiti, processo, visto, costi e vita nel campus.",
+    },
+    de: {
+      title: "Ratgeber zu US-Fußball-Stipendien | FutbolUAgency",
+      description:
+        "Umfassende Ratgeber zu College-Fußball-Stipendien in den USA: Berechtigung, Voraussetzungen, Ablauf, Visum, Kosten und Campusleben.",
     },
   },
   about: {
     es: {
-      title: "Sobre Nosotros | Quiénes Somos – FutbolUAgency",
+      title: "Quiénes somos | FutbolUAgency",
       description:
-        "Conoce al equipo detrás de FutbolUAgency. Exfutbolistas profesionales que ayudan a jóvenes talentos a obtener becas deportivas en universidades americanas.",
+        "Conoce al equipo de FutbolUAgency: exfutbolistas que hicieron el camino a EE.UU. y hoy acompañan a jóvenes talentos hasta una beca en una universidad americana.",
     },
     en: {
-      title: "About Us | Who We Are – FutbolUAgency",
+      title: "About Us | FutbolUAgency",
       description:
-        "Meet the team behind FutbolUAgency. Former professional footballers helping young talent earn scholarships at American universities.",
+        "Meet the FutbolUAgency team: former players who made the move to the U.S. themselves and now guide young talent to a scholarship at an American university.",
+    },
+    it: {
+      title: "Chi siamo | FutbolUAgency",
+      description:
+        "Conosci il team di FutbolUAgency: ex calciatori che hanno fatto il percorso verso gli USA e oggi accompagnano i giovani talenti fino a una borsa di studio.",
+    },
+    de: {
+      title: "Über uns | FutbolUAgency",
+      description:
+        "Lerne das Team von FutbolUAgency kennen: ehemalige Spieler, die selbst in die USA gegangen sind und junge Talente bis zum Stipendium begleiten.",
     },
   },
   apply: {
     es: {
-      title: "Evaluación gratuita | FutbolUAgency",
+      title: "Evaluación gratuita de tu perfil | FutbolUAgency",
       description:
-        "Rellena el formulario de admisiones de FutbolUAgency y descubre qué opciones reales de beca tienes.",
+        "Envía tu perfil a FutbolUAgency y descubre qué opciones reales de beca de fútbol tienes en universidades de EE.UU. Evaluación gratuita y sin compromiso.",
     },
     en: {
-      title: "Free evaluation | FutbolUAgency",
+      title: "Free Profile Evaluation | FutbolUAgency",
       description:
-        "Fill in the FutbolUAgency admissions form and find out what real scholarship options you have.",
+        "Send your profile to FutbolUAgency and find out what real soccer scholarship options you have at U.S. universities. Free, with no obligation.",
+    },
+    it: {
+      title: "Valutazione gratuita del profilo | FutbolUAgency",
+      description:
+        "Invia il tuo profilo a FutbolUAgency e scopri quali opzioni reali di borsa di studio hai nelle università degli USA. Valutazione gratuita e senza impegno.",
+    },
+    de: {
+      title: "Kostenlose Profilbewertung | FutbolUAgency",
+      description:
+        "Schick FutbolUAgency dein Profil und finde heraus, welche echten Stipendienchancen du an US-Universitäten hast. Kostenlos und unverbindlich.",
     },
   },
   privacy: {
     es: {
-      title: "Política de Privacidad | FutbolUAgency",
+      title: "Política de privacidad | FutbolUAgency",
       description:
-        "Qué datos recoge FutbolUAgency, para qué los usa, con quién los comparte y cómo ejercer tus derechos.",
+        "Política de privacidad de FutbolUAgency: qué datos recogemos, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos.",
     },
     en: {
       title: "Privacy Policy | FutbolUAgency",
       description:
-        "What data FutbolUAgency collects, what it is used for, who it is shared with and how to exercise your rights.",
+        "FutbolUAgency privacy policy: what data we collect, what we use it for, who we share it with and how you can exercise your rights.",
+    },
+    it: {
+      title: "Informativa sulla privacy | FutbolUAgency",
+      description:
+        "Informativa sulla privacy di FutbolUAgency: quali dati raccogliamo, per cosa li usiamo, con chi li condividiamo e come esercitare i tuoi diritti.",
+    },
+    de: {
+      title: "Datenschutzerklärung | FutbolUAgency",
+      description:
+        "Datenschutzerklärung von FutbolUAgency: welche Daten wir erheben, wofür wir sie nutzen, mit wem wir sie teilen und wie du deine Rechte ausübst.",
     },
   },
 };
@@ -218,7 +296,14 @@ export function socialFor({
   };
 }
 
-/** A page's title and description; Italian and German come from the dictionaries. */
+/**
+ * Adds the brand to a page title only when the whole thing still fits in about
+ * 60 characters; Google shows the site name on its own anyway.
+ */
+export const withBrand = (title: string) =>
+  title.length + " | FutbolUAgency".length <= 60 ? `${title} | FutbolUAgency` : title;
+
+/** A page's title and description in the language being built. */
 export function metaCopy(key: RouteKey, locale: Locale): Copy {
   return pick(locale, PAGE_META[key]);
 }
