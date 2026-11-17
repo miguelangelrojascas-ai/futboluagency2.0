@@ -577,22 +577,22 @@ const UniversityMap = () => {
                           }}
                           style={{
                             default: {
-                              fill: isZoomed ? "hsl(var(--primary) / 0.08)" : "#ffffff",
-                              stroke: isZoomed ? "hsl(var(--primary) / 0.6)" : "#c3c9d2",
+                              fill: isZoomed ? "#a9c0dc" : "#c5d5e8",
+                              stroke: isZoomed ? "hsl(var(--primary) / 0.7)" : "#ffffff",
                               strokeWidth: borderW,
                               outline: "none",
                               transition: `fill 0.4s, stroke-width ${ZOOM_EASE}`,
                             },
                             hover: {
-                              fill: "hsl(var(--secondary) / 0.07)",
-                              stroke: "#a9b1bd",
+                              fill: "#a9c0dc",
+                              stroke: "#ffffff",
                               strokeWidth: borderW,
                               outline: "none",
                               cursor: data ? "pointer" : "default",
                             },
                             pressed: {
-                              fill: "hsl(var(--secondary) / 0.1)",
-                              stroke: "#a9b1bd",
+                              fill: "#9db6d6",
+                              stroke: "#ffffff",
                               strokeWidth: borderW,
                               outline: "none",
                             },
@@ -681,7 +681,7 @@ const UniversityMap = () => {
         <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-body text-xs text-muted-foreground">
           <li className="flex items-center gap-2">
             <span aria-hidden="true" className="inline-block w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-white shadow-sm" />
-            {tr(language, "Universidad con programa de fútbol", "University with a soccer program")}
+            {tr(language, "Universidad de nuestra red", "University in our network")}
           </li>
           <li className="flex items-center gap-2">
             <span aria-hidden="true" className="inline-block w-3 h-3 rounded-full bg-primary ring-2 ring-white shadow-sm" />
