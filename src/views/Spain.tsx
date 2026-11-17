@@ -4,7 +4,7 @@ import Image, { type StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check, Play, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { tr } from "@/lib/i18n";
+import { pick, tr } from "@/lib/i18n";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import talaveraCrest from "@/assets/spain-clubs/talavera-logo.png";
@@ -14,7 +14,8 @@ import marialvasCrest from "@/assets/spain-clubs/marialvas-crest.webp";
 import primePlayMark from "@/assets/primeplay-wordmark.jpg";
 import fuaLogo from "@/assets/logo-fua-dark.png";
 import talaveraTraining from "@/assets/spain-clubs/talavera.jpg";
-import tunnelPhoto from "@/assets/spain-academy.jpg";
+import primePlayPoster from "@/assets/spain-primeplay-poster.jpg";
+import primePlayCelebration from "@/assets/spain-primeplay-celebration.jpg";
 import warmupPhoto from "@/assets/spain-warmup.jpg";
 import stadiumPhoto from "@/assets/spain-stadium.jpg";
 import coachingPhoto from "@/assets/spain-training.jpg";
@@ -28,6 +29,7 @@ const LIFE_VIDEO_ID = "bSJDji1pLPA";
 
 /* Photos for "Cómo entrenamos": one fades into the next every few seconds. */
 const TRAINING_SLIDES: { src: StaticImageData | string; es: string; en: string }[] = [
+  { src: primePlayCelebration, es: "Competición oficial", en: "Official competition" },
   { src: warmupPhoto, es: "Calentamiento antes del entrenamiento", en: "Warm-up before training" },
   { src: stadiumPhoto, es: "Charla técnica en el estadio", en: "Team talk in the stadium" },
   { src: "/images/showcase/campo-principal.jpg", es: "Campo principal de la Ciudad Deportiva", en: "Main pitch at the sports complex" },
@@ -315,7 +317,23 @@ const Spain = () => {
               </p>
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] lg:col-span-5">
-              <Image src={tunnelPhoto} alt={t("Jugadores saliendo al campo", "Players walking out onto the pitch")} fill sizes="(min-width: 1024px) 40vw, 100vw" placeholder="blur" className="object-cover" />
+              {/* Prime Play players in a match against a top Spanish academy (footage from Prime Play). */}
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src="/videos/spain-primeplay.mp4"
+                poster={primePlayPoster.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={pick(language, {
+                  es: "Jugadores del programa en un partido",
+                  en: "Programme players in a match",
+                  it: "Giocatori del programma in una partita",
+                  de: "Spieler des Programms in einem Spiel",
+                })}
+              />
             </div>
           </div>
         </section>

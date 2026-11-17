@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
 import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "react-simple-maps";
 import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { tr } from "@/lib/i18n";
+import { UNIVERSITY_COORDS } from "@/data/universityCoords";
 const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 type University = { name: string; division: string };
@@ -27,7 +28,7 @@ const universitiesByState: Record<string, StateData> = {
     { name: "Vanguard University", division: "NAIA" }, { name: "The Master's University", division: "NAIA" },
     { name: "Hope International", division: "NAIA" }, { name: "William Jessup", division: "NAIA" },
     { name: "Westmont College", division: "NAIA" }, { name: "Cal Baptist University", division: "D1" },
-    { name: "Grand Canyon University", division: "D1" }, { name: "Holy Names University", division: "D2" },
+    { name: "Holy Names University", division: "D2" },
     { name: "Academy of Art University", division: "NAIA" },
   ]},
   TX: { count: 28, universities: [
@@ -53,7 +54,6 @@ const universitiesByState: Record<string, StateData> = {
     { name: "FAU", division: "D1" }, { name: "FGCU", division: "D1" },
     { name: "Jacksonville University", division: "D1" }, { name: "Stetson University", division: "D1" },
     { name: "Bethune-Cookman", division: "D1" }, { name: "North Florida", division: "D1" },
-    { name: "Lipscomb University", division: "D1" }, { name: "Florida Gulf Coast", division: "D1" },
     { name: "Rollins College", division: "D2" }, { name: "Florida Southern", division: "D2" },
     { name: "Barry University", division: "D2" }, { name: "Nova Southeastern", division: "D2" },
     { name: "Lynn University", division: "D2" }, { name: "Palm Beach Atlantic", division: "D2" },
@@ -80,7 +80,7 @@ const universitiesByState: Record<string, StateData> = {
     { name: "La Salle University", division: "D1" }, { name: "Saint Joseph's", division: "D1" },
     { name: "Villanova University", division: "D1" }, { name: "Lehigh University", division: "D1" },
     { name: "Lafayette College", division: "D1" }, { name: "Bucknell University", division: "D1" },
-    { name: "Robert Morris", division: "D1" }, { name: "Rider University", division: "D1" },
+    { name: "Robert Morris", division: "D1" },
     { name: "Lock Haven", division: "D2" }, { name: "West Chester", division: "D2" },
     { name: "Bloomsburg University", division: "D2" }, { name: "Indiana University PA", division: "D2" },
     { name: "Millersville University", division: "D2" }, { name: "Shippensburg", division: "D2" },
@@ -133,8 +133,7 @@ const universitiesByState: Record<string, StateData> = {
   GA: { count: 10, universities: [
     { name: "Georgia Tech", division: "D1" }, { name: "Georgia State", division: "D1" },
     { name: "Georgia Southern", division: "D1" }, { name: "Mercer University", division: "D1" },
-    { name: "Kennesaw State", division: "D1" }, { name: "USC Upstate", division: "D1" },
-    { name: "Jacksonville State", division: "D1" }, { name: "Young Harris College", division: "D2" },
+    { name: "Kennesaw State", division: "D1" }, { name: "Young Harris College", division: "D2" },
     { name: "Emmanuel College", division: "NAIA" }, { name: "Berry College", division: "D3" },
   ]},
   WA: { count: 9, universities: [
@@ -205,7 +204,7 @@ const universitiesByState: Record<string, StateData> = {
   SC: { count: 5, universities: [
     { name: "Clemson", division: "D1" }, { name: "South Carolina", division: "D1" },
     { name: "Charleston Southern", division: "D1" }, { name: "Coastal Carolina", division: "D1" },
-    { name: "Wofford College", division: "D1" },
+    { name: "Wofford College", division: "D1" }, { name: "USC Upstate", division: "D1" },
   ]},
   MS: { count: 5, universities: [
     { name: "Ole Miss", division: "D1" }, { name: "Mississippi State", division: "D1" },
@@ -215,7 +214,7 @@ const universitiesByState: Record<string, StateData> = {
   AL: { count: 5, universities: [
     { name: "Alabama", division: "D1" }, { name: "Auburn", division: "D1" },
     { name: "UAB", division: "D1" }, { name: "Huntingdon College", division: "D3" },
-    { name: "Spring Hill College", division: "D2" },
+    { name: "Spring Hill College", division: "D2" }, { name: "Jacksonville State", division: "D1" },
   ]},
   LA: { count: 5, universities: [
     { name: "LSU", division: "D1" }, { name: "Tulane", division: "D1" },
@@ -248,7 +247,6 @@ const universitiesByState: Record<string, StateData> = {
   ]},
   NV: { count: 3, universities: [
     { name: "UNLV", division: "D1" }, { name: "Nevada Reno", division: "D1" },
-    { name: "Nevada Las Vegas", division: "D1" },
   ]},
   UT: { count: 3, universities: [
     { name: "Utah", division: "D1" }, { name: "BYU", division: "D1" },
@@ -275,6 +273,12 @@ const universitiesByState: Record<string, StateData> = {
   ]},
   NH: { count: 2, universities: [
     { name: "New Hampshire", division: "D1" }, { name: "Dartmouth", division: "D1" },
+  ]},
+  NM: { count: 8, universities: [
+    { name: "University of New Mexico", division: "D1" }, { name: "New Mexico State", division: "D1" },
+    { name: "New Mexico Highlands University", division: "D2" }, { name: "Eastern New Mexico University", division: "D2" },
+    { name: "Western New Mexico University", division: "D2" }, { name: "University of the Southwest", division: "NAIA" },
+    { name: "New Mexico Junior College", division: "NJCAA" }, { name: "New Mexico Military Institute", division: "NJCAA" },
   ]},
   MT: { count: 1, universities: [{ name: "Montana", division: "D1" }] },
   ND: { count: 1, universities: [{ name: "North Dakota State", division: "D1" }] },
@@ -322,6 +326,23 @@ for (const [abbr, list] of Object.entries(fuaCommitments)) {
   for (const uni of list) if (!state.universities.some((u) => u.name === uni.name)) state.universities.push(uni);
 }
 for (const state of Object.values(universitiesByState)) state.count = state.universities.length;
+
+const FUA_NAMES = new Set(Object.values(fuaCommitments).flat().map((u) => u.name));
+
+/* One dot per university at its campus. FUA placements go last so they sit on top. */
+type UniDot = University & { abbr: string; coords: [number, number]; fua: boolean };
+const UNIVERSITY_DOTS: UniDot[] = Object.entries(universitiesByState)
+  .flatMap(([abbr, data]) =>
+    data.universities.flatMap((u) => {
+      const coords = UNIVERSITY_COORDS[u.name];
+      return coords ? [{ ...u, abbr, coords, fua: FUA_NAMES.has(u.name) }] : [];
+    }),
+  )
+  .sort((a, b) => Number(a.fua) - Number(b.fua));
+
+/* The map is drawn in a 980-unit viewBox; this keeps dots a readable size on screen. */
+const VIEWBOX_WIDTH = 980;
+const ZOOM_EASE = "1.1s cubic-bezier(0.22, 1, 0.36, 1)";
 
 const FIPS_TO_STATE: Record<string, { abbr: string; name: string }> = {
   "01": { abbr: "AL", name: "Alabama" }, "02": { abbr: "AK", name: "Alaska" },
@@ -389,6 +410,26 @@ const UniversityMap = () => {
   const [zoomTarget, setZoomTarget] = useState<{ abbr: string; name: string } | null>(null);
   const [mapCenter, setMapCenter] = useState<[number, number]>([-97, 38]);
   const [mapZoom, setMapZoom] = useState<number>(1);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [mapWidth, setMapWidth] = useState(VIEWBOX_WIDTH);
+
+  useEffect(() => {
+    const el = mapRef.current;
+    if (!el) return;
+    const update = () => setMapWidth(el.clientWidth || VIEWBOX_WIDTH);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  /* Viewbox units per screen pixel; dots stay ~3–4px on screen at any width and zoom. */
+  const unitsPerPx = VIEWBOX_WIDTH / Math.max(mapWidth, 1);
+  const dotR = Math.min(Math.max(3.5, 3 * unitsPerPx), 7.5) / mapZoom;
+  /* Invisible hit area around each dot: easier to hover/tap, without swallowing neighbours. */
+  const hitR = dotR * 1.8;
+  const borderW = (0.8 * Math.min(unitsPerPx, 1.6)) / mapZoom;
+  const fuaLabel = tr(language, "Con jugadores de FUA", "With FUA players");
 
   const handleViewState = (abbr: string, name: string) => {
     const coords = STATE_CENTROIDS[abbr];
@@ -431,7 +472,7 @@ const UniversityMap = () => {
     if (!popover) return;
     const onDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest("[data-state-popover]") && !target.closest(".rsm-geography")) {
+      if (!target.closest("[data-state-popover]") && !target.closest(".rsm-geography") && !target.closest(".rsm-marker")) {
         setPopover(null);
       }
     };
@@ -471,8 +512,8 @@ const UniversityMap = () => {
           </p>
         </div>
 
-        <div className="block relative w-full max-w-6xl mx-auto" style={{ minHeight: 240 }}>
-          <style>{`.rsm-zoomable-group{transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);}`}</style>
+        <div ref={mapRef} className="block relative w-full max-w-6xl mx-auto" style={{ minHeight: 240 }}>
+          <style>{`.rsm-zoomable-group{transition: transform ${ZOOM_EASE};}`}</style>
           <ComposableMap
             projection="geoAlbersUsa"
             projectionConfig={{ scale: 1300 }}
@@ -536,23 +577,23 @@ const UniversityMap = () => {
                           }}
                           style={{
                             default: {
-                              fill: isZoomed ? "hsl(var(--primary))" : "#c5d5e8",
-                              stroke: "hsl(var(--background))",
-                              strokeWidth: 1.2,
+                              fill: isZoomed ? "hsl(var(--primary) / 0.08)" : "#ffffff",
+                              stroke: isZoomed ? "hsl(var(--primary) / 0.6)" : "#c3c9d2",
+                              strokeWidth: borderW,
                               outline: "none",
-                              transition: "fill 0.4s",
+                              transition: `fill 0.4s, stroke-width ${ZOOM_EASE}`,
                             },
                             hover: {
-                              fill: "hsl(var(--primary))",
-                              stroke: "hsl(var(--background))",
-                              strokeWidth: 1.2,
+                              fill: "hsl(var(--secondary) / 0.07)",
+                              stroke: "#a9b1bd",
+                              strokeWidth: borderW,
                               outline: "none",
                               cursor: data ? "pointer" : "default",
                             },
                             pressed: {
-                              fill: "hsl(var(--primary))",
-                              stroke: "hsl(var(--background))",
-                              strokeWidth: 1.2,
+                              fill: "hsl(var(--secondary) / 0.1)",
+                              stroke: "#a9b1bd",
+                              strokeWidth: borderW,
                               outline: "none",
                             },
                           }}
@@ -562,35 +603,37 @@ const UniversityMap = () => {
                 }
               </Geographies>
 
-              {Object.entries(universitiesByState).map(([abbr, data]) => {
-                const coords = STATE_CENTROIDS[abbr];
-                if (!coords) return null;
-                const count = data.count;
-                const baseRadius = count >= 20 ? 16 : count >= 10 ? 14 : 12;
-                const radius = baseRadius / Math.max(1, mapZoom * 0.9);
-                const fontSize = 10 / Math.max(1, mapZoom * 0.9);
+              {UNIVERSITY_DOTS.map((uni) => {
+                const r = uni.fua ? dotR * 1.25 : dotR;
+                const tip = `${uni.name} · ${uni.division}${uni.fua ? ` · ${fuaLabel}` : ""}`;
+                const showTip = (e: ReactMouseEvent) => {
+                  if (!popover) setTooltip({ x: e.clientX, y: e.clientY, text: tip });
+                };
                 return (
-                  <Marker key={abbr} coordinates={coords}>
-                    <g style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.25))", pointerEvents: "none" }}>
-                      <circle
-                        r={radius}
-                        fill="hsl(var(--background))"
-                        stroke="hsl(var(--foreground))"
-                        strokeWidth={1.2 / Math.max(1, mapZoom * 0.9)}
-                      />
-                      <text
-                        textAnchor="middle"
-                        dy={fontSize * 0.35}
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize,
-                          fontWeight: 800,
-                          fill: "hsl(var(--foreground))",
-                        }}
-                      >
-                        {count}
-                      </text>
-                    </g>
+                  <Marker
+                    key={uni.name}
+                    coordinates={uni.coords}
+                    aria-hidden="true"
+                    onMouseEnter={showTip}
+                    onMouseMove={showTip}
+                    onMouseLeave={() => setTooltip(null)}
+                    onClick={(e) => {
+                      const state = Object.values(FIPS_TO_STATE).find((st) => st.abbr === uni.abbr);
+                      if (!state) return;
+                      setTooltip(null);
+                      setPopover({ x: e.clientX, y: e.clientY, abbr: state.abbr, name: state.name });
+                    }}
+                    style={{ default: { cursor: "pointer" }, hover: { cursor: "pointer" }, pressed: { cursor: "pointer" } }}
+                  >
+                    <circle r={hitR} fill="transparent" />
+                    <circle
+                      r={r}
+                      fill={uni.fua ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
+                      fillOpacity={uni.fua ? 1 : 0.85}
+                      stroke="#ffffff"
+                      strokeWidth={r * 0.45}
+                      style={{ r, strokeWidth: r * 0.45, transition: `r ${ZOOM_EASE}, stroke-width ${ZOOM_EASE}`, pointerEvents: "none" } as CSSProperties}
+                    />
                   </Marker>
                 );
               })}
@@ -635,6 +678,16 @@ const UniversityMap = () => {
           )}
         </div>
 
+        <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-body text-xs text-muted-foreground">
+          <li className="flex items-center gap-2">
+            <span aria-hidden="true" className="inline-block w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-white shadow-sm" />
+            {tr(language, "Universidad con programa de fútbol", "University with a soccer program")}
+          </li>
+          <li className="flex items-center gap-2">
+            <span aria-hidden="true" className="inline-block w-3 h-3 rounded-full bg-primary ring-2 ring-white shadow-sm" />
+            {fuaLabel}
+          </li>
+        </ul>
       </div>
 
       {/* Side panel */}

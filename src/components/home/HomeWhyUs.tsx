@@ -28,10 +28,10 @@ const LEDE: Copy = {
 
 const PHOTO = "/images/showcase/presentacion-familias.jpg";
 const CAPTION: Copy = {
-  es: "Moha, cofundador de FUA, presenta el Showcase a las familias.",
-  en: "Moha, FUA co-founder, presenting the Showcase to families.",
-  it: "Moha, cofondatore di FUA, presenta lo Showcase alle famiglie.",
-  de: "Moha, Mitgründer von FUA, stellt den Familien das Showcase vor.",
+  es: "Presentación del Showcase a las familias.",
+  en: "Presenting the Showcase to families.",
+  it: "Presentazione dello Showcase alle famiglie.",
+  de: "Vorstellung des Showcase für die Familien.",
 };
 
 const STATS: { num: string; label: Copy }[] = [

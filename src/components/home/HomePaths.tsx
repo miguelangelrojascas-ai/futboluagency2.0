@@ -13,7 +13,6 @@ type Path = {
   photo: StaticImageData;
   position: string;
   title: Copy;
-  label: Copy;
   body: Copy;
   points: Copy<string[]>;
   link: Copy;
@@ -25,7 +24,6 @@ const PATHS: Path[] = [
     photo: usaPhoto,
     position: "50% 35%",
     title: { es: "Becas en EE.UU.", en: "Scholarships in the USA", it: "Borse di studio negli USA", de: "Stipendien in den USA" },
-    label: { es: "NCAA · NAIA · NJCAA", en: "NCAA · NAIA · NJCAA", it: "NCAA · NAIA · NJCAA", de: "NCAA · NAIA · NJCAA" },
     body: {
       es: "Compites en el fútbol universitario mientras estudias una carrera, con una beca que reduce el coste de los cuatro años.",
       en: "You compete in college soccer while you earn a degree, on a scholarship that cuts the cost of all four years.",
@@ -45,7 +43,6 @@ const PATHS: Path[] = [
     photo: spainPhoto,
     position: "50% 60%",
     title: { es: "Proyección en España", en: "Development in Spain", it: "Crescita in Spagna", de: "Entwicklung in Spanien" },
-    label: { es: "España · Portugal", en: "Spain · Portugal", it: "Spagna · Portogallo", de: "Spanien · Portugal" },
     body: {
       es: "Entrenas y compites en clubes de España y Portugal durante una temporada completa, con metodología española y visibilidad ante ojeadores.",
       en: "You train and compete with clubs in Spain and Portugal for a full season, with Spanish coaching methods and exposure to scouts.",
@@ -117,8 +114,7 @@ const HomePaths = () => {
                   }}
                 />
 
-                <p className="label-bebas text-base text-red-bright">{pick(language, p.label)}</p>
-                <h3 className="mt-2 font-druk text-[clamp(2.75rem,7vw,4.75rem)] uppercase leading-[0.92] text-white">
+                <h3 className="font-druk text-[clamp(2.75rem,7vw,4.75rem)] uppercase leading-[0.92] text-white">
                   {pick(language, p.title)}
                 </h3>
                 <p className="mt-4 max-w-[46ch] font-body text-base leading-relaxed text-white/75">

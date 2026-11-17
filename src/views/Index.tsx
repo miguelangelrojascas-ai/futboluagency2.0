@@ -1,6 +1,7 @@
 import HomeHero from "@/components/home/HomeHero";
 import HomePromise from "@/components/home/HomePromise";
 import HomeWhyUs from "@/components/home/HomeWhyUs";
+import HomeReviews from "@/components/home/HomeReviews";
 import HomeRoster from "@/components/home/HomeRoster";
 import HomePaths from "@/components/home/HomePaths";
 import HomeFinalCta from "@/components/home/HomeFinalCta";
@@ -23,6 +24,7 @@ const Index = () => (
       <HomePromise />
       <HomePaths />
       <HomeWhyUs />
+      <HomeReviews />
       <FaqSection />
       <HomeFinalCta />
       <Footer />

@@ -10,15 +10,13 @@ import { pick, tr } from "@/lib/i18n";
 const SLIDE_MS = 6500;
 
 /*
- * Photos: Unsplash License (free for commercial use, no attribution required).
- * Credited here anyway, in case they are ever replaced:
- *   hero-bengalas.jpg  Waldemar Brandt   unsplash.com/photos/0aLvDQ_Q6qk
- * hero-estudia.jpg (Grand Canyon University soccer stadium at dusk) and
+ * All three show the college game, supplied by FUA: hero-compite.jpg (Clemson
+ * against Wake Forest at night), hero-estudia.jpg (Grand Canyon University soccer stadium at dusk) and
  * hero-crece.jpg (Clemson celebrating a goal) were supplied by FUA.
  * They show the stage, not FUA clients, so no player is named on them.
  */
 const SLIDES = [
-  { src: "/images/home/hero-bengalas.jpg", w: 2400, h: 1600, position: "50% 18%", es: "Compite", en: "Compete", color: true },
+  { src: "/images/home/hero-compite.jpg", w: 1600, h: 1067, position: "58% 45%", es: "Compite", en: "Compete", color: true },
   { src: "/images/home/hero-estudia.jpg", w: 1600, h: 900, position: "62% 50%", es: "Estudia", en: "Study", color: true },
   { src: "/images/home/hero-crece.jpg", w: 1600, h: 1067, position: "55% 60%", es: "Crece", en: "Grow", color: true,
     /* Wide screens: enlarge from the left so the celebration clears the headline. */

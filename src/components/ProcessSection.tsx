@@ -377,6 +377,8 @@ const ProcessSection = ({
         background: "hsl(var(--background))",
         color: NAVY,
         padding: "120px 0 80px",
+        /* The goal drawn around the CTA is wider than a phone screen. */
+        overflowX: "clip",
       }}
     >
       {/* Header */}
