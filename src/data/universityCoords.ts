@@ -33,7 +33,6 @@ export const UNIVERSITY_COORDS: Record<string, [number, number]> = {
   "William Jessup": [-121.27, 38.83],
   "Westmont College": [-119.66, 34.45],
   "Cal Baptist University": [-117.43, 33.93],
-  "Holy Names University": [-122.18, 37.81],
   "Academy of Art University": [-122.41, 37.79],
   "Cal Poly Pomona": [-117.82, 34.06],
 
@@ -298,7 +297,6 @@ export const UNIVERSITY_COORDS: Record<string, [number, number]> = {
   "Milwaukee": [-87.88, 43.08],
   "Green Bay": [-87.92, 44.53],
   "Wisconsin-Parkside": [-87.86, 42.65],
-  "Cardinal Stritch": [-87.92, 43.15],
   "Wisconsin Lutheran": [-88.04, 43.04],
   "Wisconsin-Stout": [-91.92, 44.87],
   "Beloit College": [-89.03, 42.50],

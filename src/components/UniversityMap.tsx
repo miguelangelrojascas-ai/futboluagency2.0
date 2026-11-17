@@ -28,7 +28,6 @@ const universitiesByState: Record<string, StateData> = {
     { name: "Vanguard University", division: "NAIA" }, { name: "The Master's University", division: "NAIA" },
     { name: "Hope International", division: "NAIA" }, { name: "William Jessup", division: "NAIA" },
     { name: "Westmont College", division: "NAIA" }, { name: "Cal Baptist University", division: "D1" },
-    { name: "Holy Names University", division: "D2" },
     { name: "Academy of Art University", division: "NAIA" },
   ]},
   TX: { count: 28, universities: [
@@ -171,7 +170,7 @@ const universitiesByState: Record<string, StateData> = {
   WI: { count: 7, universities: [
     { name: "Wisconsin", division: "D1" }, { name: "Marquette", division: "D1" },
     { name: "Milwaukee", division: "D1" }, { name: "Green Bay", division: "D1" },
-    { name: "Wisconsin-Parkside", division: "D2" }, { name: "Cardinal Stritch", division: "NAIA" },
+    { name: "Wisconsin-Parkside", division: "D2" },
     { name: "Wisconsin Lutheran", division: "D3" },
   ]},
   CO: { count: 7, universities: [
@@ -429,7 +428,6 @@ const UniversityMap = () => {
   /* Invisible hit area around each dot: easier to hover/tap, without swallowing neighbours. */
   const hitR = dotR * 1.8;
   const borderW = (0.8 * Math.min(unitsPerPx, 1.6)) / mapZoom;
-  const fuaLabel = tr(language, "Con jugadores de FUA", "With FUA players");
 
   const handleViewState = (abbr: string, name: string) => {
     const coords = STATE_CENTROIDS[abbr];
@@ -604,8 +602,8 @@ const UniversityMap = () => {
               </Geographies>
 
               {UNIVERSITY_DOTS.map((uni) => {
-                const r = uni.fua ? dotR * 1.25 : dotR;
-                const tip = `${uni.name} · ${uni.division}${uni.fua ? ` · ${fuaLabel}` : ""}`;
+                const r = dotR;
+                const tip = `${uni.name} · ${uni.division}`;
                 const showTip = (e: ReactMouseEvent) => {
                   if (!popover) setTooltip({ x: e.clientX, y: e.clientY, text: tip });
                 };
@@ -628,8 +626,7 @@ const UniversityMap = () => {
                     <circle r={hitR} fill="transparent" />
                     <circle
                       r={r}
-                      fill={uni.fua ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
-                      fillOpacity={uni.fua ? 1 : 0.85}
+                      fill="hsl(var(--primary))"
                       stroke="#ffffff"
                       strokeWidth={r * 0.45}
                       style={{ r, strokeWidth: r * 0.45, transition: `r ${ZOOM_EASE}, stroke-width ${ZOOM_EASE}`, pointerEvents: "none" } as CSSProperties}
@@ -678,16 +675,9 @@ const UniversityMap = () => {
           )}
         </div>
 
-        <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-body text-xs text-muted-foreground">
-          <li className="flex items-center gap-2">
-            <span aria-hidden="true" className="inline-block w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-white shadow-sm" />
-            {tr(language, "Universidad de nuestra red", "University in our network")}
-          </li>
-          <li className="flex items-center gap-2">
-            <span aria-hidden="true" className="inline-block w-3 h-3 rounded-full bg-primary ring-2 ring-white shadow-sm" />
-            {fuaLabel}
-          </li>
-        </ul>
+        <p className="mt-4 text-center label-bebas text-sm text-muted-foreground">
+          {tr(language, "Jugando actualmente · Temporada 2026/27", "Currently playing · 2026/27 season")}
+        </p>
       </div>
 
       {/* Side panel */}

@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import HomeCta from "@/components/home/HomeCta";
 import teamHuddle from "@/assets/team-header-bg.jpg";
+import ignacioPhoto from "@/assets/team/ignacio.jpg";
 
 /*
  * Photos: only real ones. The studio portraits that used to be here were
@@ -33,6 +34,8 @@ const FOUNDERS: Person[] = [
   {
     name: "Ignacio De Bejar",
     initials: "ID",
+    photo: ignacioPhoto,
+    position: "50% 30%",
     role: { es: "Cofundador y CEO", en: "Co-founder & CEO", it: "Cofondatore e CEO", de: "Mitgründer & CEO" },
     instagram: "https://www.instagram.com/ignacio_futboluagency/",
     bio: {
