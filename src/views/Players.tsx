@@ -34,6 +34,7 @@ const Players = () => {
             alt=""
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-[center_30%]"
           />

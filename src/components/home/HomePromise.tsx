@@ -56,9 +56,11 @@ const HomePromise = () => {
             ))}
           </ul>
 
-          <dl className="mt-10 grid grid-cols-3 gap-6">
+          {/* Columns sized to their content and spread across the row, so the gap
+              between figures is the same even though "$10M+" is much wider than "4". */}
+          <dl className="mt-10 grid grid-cols-[repeat(3,minmax(0,auto))] justify-between gap-x-6">
             {proof.map((f) => (
-              <div key={f.label} className="flex flex-col-reverse">
+              <div key={f.label} className="flex flex-col-reverse justify-end">
                 <dt className="mt-2 font-bebas text-[13px] tracking-[0.2em] text-ink/50 sm:text-[15px]">{f.label}</dt>
                 <dd className="font-druk text-[clamp(2.25rem,7vw,3.75rem)] leading-none text-ink">{f.value}</dd>
               </div>

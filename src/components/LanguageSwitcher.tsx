@@ -54,12 +54,13 @@ const LanguageSwitcher = ({ className = "", dark = false }: { className?: string
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls={menuId}
-        aria-label={`${LABEL[current]}: ${NAME[current]}`}
         className={`flex items-center gap-1.5 rounded-full px-2.5 py-1.5 font-body text-xs font-bold uppercase tracking-[0.08em] transition-colors ${
           dark ? "text-white hover:bg-white/10" : "text-foreground hover:bg-muted"
         } ${open ? (dark ? "bg-white/10" : "bg-muted") : ""}`}
       >
         <Globe className={`h-4 w-4 ${dark ? "text-white/60" : "text-muted-foreground"}`} aria-hidden />
+        {/* Read as "Idioma: es"; the visible code stays part of the name. */}
+        <span className="sr-only">{LABEL[current]}: </span>
         {current}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>

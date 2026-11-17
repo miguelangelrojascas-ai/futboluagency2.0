@@ -91,6 +91,8 @@ const LogoCarousel = () => {
               <img
                 src={item.logo}
                 alt={item.name}
+                loading="lazy"
+                decoding="async"
                 className="h-12 md:h-16 w-auto object-contain"
               />
             </div>

@@ -171,7 +171,6 @@ const StudentAthleteExperience = () => {
                 className={`object-cover transition-transform [transition-duration:1600ms] ease-out ${
                   i === active ? "scale-100" : "scale-[1.06]"
                 }`}
-                priority={i === 0}
               />
               {/* Caption sits at the top: the sticky controls float over the bottom. */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/10 to-transparent" />

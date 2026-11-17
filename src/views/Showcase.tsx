@@ -219,6 +219,7 @@ const Showcase = ({ form }: { form: ShowcaseFormDefinition }) => {
             alt=""
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover opacity-50"
           />

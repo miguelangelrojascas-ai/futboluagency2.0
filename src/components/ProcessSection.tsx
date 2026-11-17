@@ -612,6 +612,8 @@ const ProcessSection = ({
                   <img
                     src={s.image}
                     alt={t(s.titleKey)}
+                    loading="lazy"
+                    decoding="async"
                     onError={() =>
                       setImgError((prev) => ({ ...prev, [i]: true }))
                     }
@@ -866,6 +868,8 @@ const ProcessSection = ({
                   <img
                     src={s.image}
                     alt={t(s.titleKey)}
+                    loading="lazy"
+                    decoding="async"
                     onError={() =>
                       setImgError((prev) => ({ ...prev, [i]: true }))
                     }

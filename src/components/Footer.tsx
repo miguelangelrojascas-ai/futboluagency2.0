@@ -90,14 +90,14 @@ const Footer = () => {
                 className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +34 603 331 990 <span className="text-white/40 text-xs">{tr(language, "España", "Spain")}</span>
+                +34 603 331 990 <span className="text-white/60 text-xs">{tr(language, "España", "Spain")}</span>
               </a>
               <a
                 href="tel:+573337064037"
                 className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +57 333 706 4037 <span className="text-white/40 text-xs">Latam</span>
+                +57 333 706 4037 <span className="text-white/60 text-xs">Latam</span>
               </a>
               <div className="flex items-center justify-center md:justify-start gap-2 font-body text-sm text-white/70">
                 <MapPin className="w-4 h-4" />

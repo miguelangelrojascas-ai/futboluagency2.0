@@ -84,6 +84,7 @@ const USA = () => {
             alt=""
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-[center_40%]"
           />
@@ -159,18 +160,23 @@ const USA = () => {
                 {carouselImages.map((_, i) => (
                   <button
                     key={i}
+                    type="button"
                     onClick={() => setActiveImage(i)}
-                    style={{
-                      width: activeImage === i ? "24px" : "8px",
-                      height: "8px",
-                      borderRadius: "4px",
-                      background: activeImage === i ? "hsl(var(--background))" : "rgba(255,255,255,0.5)",
-                      border: "none",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      padding: 0,
-                    }}
-                  />
+                    aria-label={tr(language, "Imagen {0} de {1}", "Image {0} of {1}", [i + 1, carouselImages.length])}
+                    aria-pressed={activeImage === i}
+                    className="flex h-6 min-w-6 items-center justify-center"
+                  >
+                    <span
+                      style={{
+                        display: "block",
+                        width: activeImage === i ? "24px" : "8px",
+                        height: "8px",
+                        borderRadius: "4px",
+                        background: activeImage === i ? "hsl(var(--background))" : "rgba(255,255,255,0.5)",
+                        transition: "all 0.3s ease",
+                      }}
+                    />
+                  </button>
                 ))}
               </div>
             </div>

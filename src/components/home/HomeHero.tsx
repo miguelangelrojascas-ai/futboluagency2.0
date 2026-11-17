@@ -40,6 +40,9 @@ const HomeHero = () => {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [still, setStill] = useState(false);
+  /* Slides 2 and 3 are only requested once the page has loaded, so the first
+     photo and the text get the connection to themselves. */
+  const [rest, setRest] = useState(false);
   const wrapRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
 
@@ -52,10 +55,17 @@ const HomeHero = () => {
   }, []);
 
   useEffect(() => {
-    if (paused || still) return;
+    if (document.readyState === "complete") return setRest(true);
+    const onLoad = () => setRest(true);
+    window.addEventListener("load", onLoad, { once: true });
+    return () => window.removeEventListener("load", onLoad);
+  }, []);
+
+  useEffect(() => {
+    if (paused || still || !rest) return;
     const t = window.setTimeout(() => setActive((i) => (i + 1) % SLIDES.length), SLIDE_MS);
     return () => window.clearTimeout(t);
-  }, [active, paused, still]);
+  }, [active, paused, still, rest]);
 
   return (
     /* Nothing is pinned: the scroll story (HomeLogoMorph) plays while the hero
@@ -64,13 +74,14 @@ const HomeHero = () => {
       <div ref={stageRef} className="relative isolate min-h-[100svh] overflow-hidden">
       {/* Photos: cross-fade, each pushing in very slightly while it is on screen. */}
       <div aria-hidden="true" className="absolute inset-0 -z-20">
-        {SLIDES.map((s, i) => (
+        {SLIDES.map((s, i) => (i > 0 && !rest ? null : (
           <Image
             key={s.src}
             src={s.src}
             alt=""
             fill
             priority={i === 0}
+            fetchPriority={i === 0 ? "high" : "low"}
             sizes="100vw"
             className={`object-cover transition-[opacity,transform] ease-out ${"wide" in s ? s.wide : ""} ${
               /* The flares keep their colour: the one red moment; the rest is black and white. */
@@ -86,7 +97,7 @@ const HomeHero = () => {
               transitionTimingFunction: i === active ? "ease-out, linear" : "ease-out, linear",
             }}
           />
-        ))}
+        )))}
       </div>
 
       {/* Wash: near-black behind the copy, opening up towards the image. */}
@@ -159,7 +170,10 @@ const HomeHero = () => {
               <button
                 key={s.src}
                 type="button"
-                onClick={() => setActive(i)}
+                onClick={() => {
+                  setRest(true);
+                  setActive(i);
+                }}
                 aria-label={tr(language, "Imagen {0} de {1}", "Image {0} of {1}", [i + 1, SLIDES.length])}
                 aria-pressed={i === active}
                 className="group flex h-6 w-12 items-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"

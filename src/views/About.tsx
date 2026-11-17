@@ -258,6 +258,7 @@ const About = () => {
             alt=""
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             placeholder="blur"
             className="-z-20 object-cover grayscale"
@@ -299,7 +300,7 @@ const About = () => {
                   </h2>
                   <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/10 pt-8">
                     {STATS.map((s) => (
-                      <div key={s.num}>
+                      <div key={s.num} className="flex flex-col justify-between">
                         <dt className="label-bebas text-sm text-ink/50">{pick(language, s.label)}</dt>
                         <dd className="mt-1 font-druk text-4xl text-primary">{s.num}</dd>
                       </div>

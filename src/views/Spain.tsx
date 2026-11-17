@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check, Play, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { pick, tr } from "@/lib/i18n";
@@ -28,6 +28,42 @@ const PRIME_PLAY_URL = "https://primeplay.es/en/about-us/";
 const LIFE_VIDEO_ID = "bSJDji1pLPA";
 
 /* Photos for "Cómo entrenamos": one fades into the next every few seconds. */
+/**
+ * A muted loop that only downloads and plays once it is near the screen, so a
+ * video far down the page does not slow the first load. Shows the poster for
+ * visitors who prefer reduced motion.
+ */
+const LazyLoop = ({ src, poster, label }: { src: string; poster: string; label: string }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!video.src) video.src = src;
+          video.play().catch(() => {});
+        } else video.pause();
+      },
+      { rootMargin: "300px 0px" },
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, [src]);
+  return (
+    <video
+      ref={ref}
+      className="absolute inset-0 h-full w-full object-cover"
+      poster={poster}
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-label={label}
+    />
+  );
+};
+
 const TRAINING_SLIDES: { src: StaticImageData | string; es: string; en: string }[] = [
   { src: primePlayCelebration, es: "Competición oficial", en: "Official competition" },
   { src: warmupPhoto, es: "Calentamiento antes del entrenamiento", en: "Warm-up before training" },
@@ -68,8 +104,13 @@ const TrainingSlideshow = ({ language }: { language: string }) => {
               onClick={() => setActive(i)}
               aria-label={`${i + 1} / ${TRAINING_SLIDES.length}`}
               aria-current={i === active}
-              className={`h-1.5 rounded-full transition-all duration-500 ${i === active ? "w-6 bg-white" : "w-1.5 bg-white/45 hover:bg-white/80"}`}
-            />
+              className="group flex h-6 min-w-6 items-center justify-center"
+            >
+              {/* The dot is small; the button around it is a full 24px tap target. */}
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-500 ${i === active ? "w-6 bg-white" : "w-1.5 bg-white/45 group-hover:bg-white/80"}`}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -110,7 +151,7 @@ const LifeVideo = ({ language }: { language: string }) => {
     </div>
     <figcaption className="mt-5 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
       <span className="font-druk text-2xl uppercase leading-none text-ink sm:text-4xl">{title}</span>
-      <span className="label-bebas text-sm text-ink/50">{tr(language as "es", "Vídeo · La experiencia de un jugador", "Video · A player's experience")}</span>
+      <span className="label-bebas text-sm text-ink/60">{tr(language as "es", "Vídeo · La experiencia de un jugador", "Video · A player's experience")}</span>
     </figcaption>
     </figure>
   );
@@ -129,7 +170,7 @@ const ApplyButton = ({ label, className = "" }: { label: string; className?: str
 );
 
 const Label = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
-  <p className={`label-bebas mt-4 text-base ${dark ? "text-white/55" : "text-ink/50"}`}>{children}</p>
+  <p className={`label-bebas mt-4 text-base ${dark ? "text-white/65" : "text-ink/60"}`}>{children}</p>
 );
 
 const Spain = () => {
@@ -263,6 +304,7 @@ const Spain = () => {
             playsInline
             aria-hidden="true"
             className="absolute inset-0 -z-20 h-full w-full object-cover"
+            poster="/videos/spain-hero-poster.jpg"
             src="/videos/spain-hero.mp4"
           />
           <div
@@ -318,16 +360,10 @@ const Spain = () => {
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] lg:col-span-5">
               {/* Prime Play players in a match against a top Spanish academy (footage from Prime Play). */}
-              <video
-                className="absolute inset-0 h-full w-full object-cover"
+              <LazyLoop
                 src="/videos/spain-primeplay.mp4"
                 poster={primePlayPoster.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={pick(language, {
+                label={pick(language, {
                   es: "Jugadores del programa en un partido",
                   en: "Programme players in a match",
                   it: "Giocatori del programma in una partita",
