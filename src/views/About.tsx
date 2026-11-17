@@ -28,6 +28,8 @@ type Person = {
   role: Copy;
   photo?: string | StaticImageData;
   position?: string;
+  /* Show the whole cut-out figure, standing on the bottom edge, instead of cropping it. */
+  contain?: boolean;
   instagram?: string;
   bio?: Copy<string[]>;
 };
@@ -37,7 +39,8 @@ const FOUNDERS: Person[] = [
     name: "Ignacio De Bejar",
     initials: "ID",
     photo: ignacioPhoto,
-    position: "50% 8%",
+    position: "50% 100%",
+    contain: true,
     role: { es: "Cofundador y CEO", en: "Co-founder & CEO", it: "Cofondatore e CEO", de: "Mitgründer & CEO" },
     instagram: "https://www.instagram.com/ignacio_futboluagency/",
     bio: {
@@ -226,7 +229,7 @@ const Portrait = ({ person, sizes }: { person: Person; sizes: string }) =>
       alt={person.name}
       fill
       sizes={sizes}
-      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+      className={`${person.contain ? "object-contain" : "object-cover"} transition-transform duration-700 group-hover:scale-[1.03]`}
       style={{ objectPosition: person.position ?? "50% 20%" }}
     />
     </>
