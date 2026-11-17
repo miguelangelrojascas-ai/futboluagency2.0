@@ -10,12 +10,14 @@ import Footer from "@/components/Footer";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import HomeCta from "@/components/home/HomeCta";
 import teamHuddle from "@/assets/team-header-bg.jpg";
-import ignacioPhoto from "@/assets/team/ignacio.jpg";
+import ignacioPhoto from "@/assets/team/ignacio.webp";
+import miguelPhoto from "@/assets/team/miguel.webp";
 
 /*
  * Photos: only real ones. The studio portraits that used to be here were
  * AI-generated and are gone; each person shows their initials until a real
- * photo is added as `photo` (put the file in src/assets/team/).
+ * photo is added as `photo` (put the file in src/assets/team/). Ignacio's and
+ * Miguel's are real photos with the background removed (from FUA's Canva files).
  * Moha's photo is from the FUA Showcase presentation to families.
  */
 const MOHA_SHOWCASE = "/images/showcase/presentacion-familias.jpg";
@@ -35,7 +37,7 @@ const FOUNDERS: Person[] = [
     name: "Ignacio De Bejar",
     initials: "ID",
     photo: ignacioPhoto,
-    position: "50% 30%",
+    position: "50% 8%",
     role: { es: "Cofundador y CEO", en: "Co-founder & CEO", it: "Cofondatore e CEO", de: "Mitgründer & CEO" },
     instagram: "https://www.instagram.com/ignacio_futboluagency/",
     bio: {
@@ -96,6 +98,8 @@ const TEAM: Person[] = [
   {
     name: "Miguel Rojas",
     initials: "MR",
+    photo: miguelPhoto,
+    position: "50% 100%",
     role: { es: "Director Fútbol Latinoamérica", en: "Director, Soccer Latin America", it: "Direttore Calcio America Latina", de: "Direktor Fußball Lateinamerika" },
     instagram: "https://www.instagram.com/futboluagency.latam/",
   },
@@ -210,8 +214,13 @@ const STATS: { num: string; label: Copy }[] = [
   { num: "98%", label: { es: "Satisfacción de familias", en: "Family satisfaction", it: "Famiglie soddisfatte", de: "Zufriedene Familien" } },
 ];
 
+/* Backdrop behind each portrait; the cut-out photos (no background) sit on it. */
+const BACKDROP = "absolute inset-0 bg-[radial-gradient(120%_90%_at_30%_10%,#2a2a2a_0%,#0a0a0a_70%)]";
+
 const Portrait = ({ person, sizes }: { person: Person; sizes: string }) =>
   person.photo ? (
+    <>
+    <div aria-hidden="true" className={BACKDROP} />
     <Image
       src={person.photo}
       alt={person.name}
@@ -220,8 +229,9 @@ const Portrait = ({ person, sizes }: { person: Person; sizes: string }) =>
       className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       style={{ objectPosition: person.position ?? "50% 20%" }}
     />
+    </>
   ) : (
-    <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(120%_90%_at_30%_10%,#2a2a2a_0%,#0a0a0a_70%)]">
+    <div aria-hidden="true" className={`${BACKDROP} flex items-center justify-center`}>
       <span className="font-druk text-[5.5rem] leading-none text-white/15">{person.initials}</span>
     </div>
   );

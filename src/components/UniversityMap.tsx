@@ -402,6 +402,7 @@ const divisionColor = (div: string) => {
 const UniversityMap = () => {
   const { language } = useLanguage();
   const es = language === "es";
+  const playingLabel = tr(language, "Compitiendo actualmente", "Currently competing");
   const unis = tr(language, "universidades", "universities");
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null);
   const [selected, setSelected] = useState<{ abbr: string; name: string } | null>(null);
@@ -602,8 +603,8 @@ const UniversityMap = () => {
               </Geographies>
 
               {UNIVERSITY_DOTS.map((uni) => {
-                const r = dotR;
-                const tip = `${uni.name} · ${uni.division}`;
+                const r = uni.fua ? dotR * 1.25 : dotR;
+                const tip = `${uni.name} · ${uni.division}${uni.fua ? ` · ${playingLabel}` : ""}`;
                 const showTip = (e: ReactMouseEvent) => {
                   if (!popover) setTooltip({ x: e.clientX, y: e.clientY, text: tip });
                 };
@@ -626,7 +627,8 @@ const UniversityMap = () => {
                     <circle r={hitR} fill="transparent" />
                     <circle
                       r={r}
-                      fill="hsl(var(--primary))"
+                      fill={uni.fua ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
+                      fillOpacity={uni.fua ? 1 : 0.85}
                       stroke="#ffffff"
                       strokeWidth={r * 0.45}
                       style={{ r, strokeWidth: r * 0.45, transition: `r ${ZOOM_EASE}, stroke-width ${ZOOM_EASE}`, pointerEvents: "none" } as CSSProperties}
@@ -675,9 +677,16 @@ const UniversityMap = () => {
           )}
         </div>
 
-        <p className="mt-4 text-center label-bebas text-sm text-muted-foreground">
-          {tr(language, "Jugando actualmente · Temporada 2026/27", "Currently playing · 2026/27 season")}
-        </p>
+        <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-body text-xs text-muted-foreground">
+          <li className="flex items-center gap-2">
+            <span aria-hidden="true" className="inline-block w-3 h-3 rounded-full bg-primary ring-2 ring-white shadow-sm" />
+            {playingLabel}
+          </li>
+          <li className="flex items-center gap-2">
+            <span aria-hidden="true" className="inline-block w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-white shadow-sm" />
+            {tr(language, "Nuestra red", "Our network")}
+          </li>
+        </ul>
       </div>
 
       {/* Side panel */}
