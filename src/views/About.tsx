@@ -11,13 +11,12 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import HomeCta from "@/components/home/HomeCta";
 import teamHuddle from "@/assets/team-header-bg.jpg";
 import ignacioPhoto from "@/assets/team/ignacio.webp";
-import miguelPhoto from "@/assets/team/miguel.webp";
 
 /*
  * Photos: only real ones. The studio portraits that used to be here were
  * AI-generated and are gone; each person shows their initials until a real
- * photo is added as `photo` (put the file in src/assets/team/). Ignacio's and
- * Miguel's are real photos with the background removed (from FUA's Canva files).
+ * photo is added as `photo` (put the file in src/assets/team/). Ignacio's is a
+ * real photo with the background removed (from FUA's Canva files).
  * Moha's photo is from the FUA Showcase presentation to families.
  */
 const MOHA_SHOWCASE = "/images/showcase/presentacion-familias.jpg";
@@ -101,8 +100,6 @@ const TEAM: Person[] = [
   {
     name: "Miguel Rojas",
     initials: "MR",
-    photo: miguelPhoto,
-    position: "50% 100%",
     role: { es: "Director Fútbol Latinoamérica", en: "Director, Soccer Latin America", it: "Direttore Calcio America Latina", de: "Direktor Fußball Lateinamerika" },
     instagram: "https://www.instagram.com/futboluagency.latam/",
   },
